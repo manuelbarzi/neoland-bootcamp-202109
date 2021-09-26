@@ -1,4 +1,4 @@
-#Git Commands
+#Git Commands.
 
 - git status (show the current branch status)
 
