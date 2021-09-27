@@ -1,52 +1,59 @@
-# Bash command
-
-- pwd
-
+# Bash commands
+- pwd (path to working directory)
 ```sh
-
 $ pwd
-
-/User/riccardomontanari
+/Users/riccardomontanari
 ```
-
-- ls (list)
+- ls (list files & folders)
 ```sh
 $ ls
-
-- cd (enter to file)
-
+Applications				
+Music
+Creative Cloud Files			
+Pictures
+Desktop	
+```
+- cd (change directory)
 ```sh
 $ cd cli-demo
-
-Change to user directory
-
-```sh
-$ cd ..
 ```
-
- - touch ( to create a file)
-
- ```sh
- $ touch README.md
-
- - mkdir (make directory)
-
+    change to parent directory
+```sh
+cd ..
+```
+    change to user directory
+```sh
+cd
+```
+- touch (create a file from scratch)
+```sh
+$ touch README.md
+```
+- mkdir (make directory)
 ```sh
 $ mkdir bootcamp
-
-- mv (delete folder)
-
+```
+- mv (move / rename file or folder)
+```sh
+$ mv cli cli-demo
+```
+- rm (remove file)
 ```sh
 $ rm README.md
 ```
-
-- clear (clears screen = CTRL + L)
-
+- history (command history)
+```sh
+$ history
+  989  ls
+  990  ls
+  991  cd cli-demo
+  992  ls
+  993  cd ..
+```
+- clear (clear screen = CTRL + L)
 ```sh
 $ clear
 ```
-
-
 
 
 
