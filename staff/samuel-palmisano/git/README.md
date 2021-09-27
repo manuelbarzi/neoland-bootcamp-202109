@@ -31,11 +31,14 @@ $ git commit -m 'add my folder and my doc'
 ```sh
 $ git push
 ```
-git push -u origin branch-name (link local branch to remote and push changes)
+- git push -u origin branch-name (link local branch to remote and push changes)
 ```sh
 $ git push -u origin feature/landing
 ```
-
+- git merge to integrate into a single branch
+```sh
+$ git merge C2 C4
+```
 
 
 
