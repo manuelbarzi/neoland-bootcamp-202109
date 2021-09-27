@@ -2,60 +2,60 @@ Bash comands
 
 - pwd (path to working directory)
 ```sh
-$pwd
+$ pwd
 /Users/noeli
 ```
 - ls(list files & folders)
 ```sh
-$ls
+$ ls
 ver la carpeta
 ```
 
 - cd(change directory)
 
 ```sh
-$cd cli-demo
+$ cd cli-demo
 ```
 
 - cd .. change to past directory
 ```sh
-$cd ..
+$ cd ..
 ```
 - cd (sin espacio)- entra en la carpeta incial
 ```sh
-$cd 
+$ cd 
 ```
 - change to parent directory
 ```sh
-$cd .. 
+$ cd .. 
 ```
 
 - touch crear fichero
 ```sh
-$touch README.md
+$ touch README.md
 ```
 
 - mkdir crear archivos
 ```sh
-$mkdir bootcamp
+$ mkdir bootcamp
 ```
 - rm remove archivos
 
 ```sh
-$rm README.md
+$ rm README.md
 ```
 - history(command history)
 ```sh
-$history
+$ history
 ```
 - clear (clear screen= CTRL+l)
 
 ```sh
-$clear
+$ clear
 ```
 - mv change name 
 ```sh
-$mv x x-y
+$ mv x x-y
 ```
 
 
