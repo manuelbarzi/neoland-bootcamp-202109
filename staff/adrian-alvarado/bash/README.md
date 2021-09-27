@@ -1,47 +1,72 @@
-# Git commands
+# Bash Commands
 
-- git status
+- pwd (path to working directory)
 
 ```sh
-$git status
+$ pwd
+/Users/manuelbarzi
 ```
 
-- git branch (show the branch list)
-
+- ls (list files & folders)
 ```sh
-$git branch
+$ ls
+Applications				
+Music
+Creative Cloud Files			
+Pictures
+Desktop	
 ```
 
-- git branch -a (show hidden branches)
+- cd (change directory)
+```sh
+$ cd cli-demo
+```
+ 
+- change to parent directory
 
 ```sh
-$git branch -a
+cd ..
 ```
 
-- git checkout (change branch)
-
+- change to user directory
 ```sh
-$git checkout
+cd
 ```
 
-- git config --list
-
+- touch (create a file from scratch)
 ```sh
-$git config --list
+$ touch README.md
 ```
 
-- git push ()
-
+- mkdir (make directory)
 ```sh
-$git push
+$ mkdir bootcamp
 ```
 
+- mv (move / rename file or folder)
 ```sh
-$git push -u origin feature/landing
+$ mv cli cli-demo
 ```
 
-- git add
+- rm (remove file)
 
 ```sh
-$git add
+$ rm README.md
+```
+
+- history (command history)
+
+```sh
+$ history
+  989  ls
+  990  ls
+  991  cd cli-demo
+  992  ls
+  993  cd ..
+```
+
+- clear (clear screen = CTRL + L)
+
+```sh
+$ clear
 ```
