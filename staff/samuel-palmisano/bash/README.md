@@ -54,9 +54,6 @@ $ history
 ```sh
 $ clear
 ```
-marca_de_verificación_blanca
-ojos
-manos_levantadas
 
 
 
