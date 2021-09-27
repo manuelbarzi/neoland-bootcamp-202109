@@ -20,3 +20,6 @@ git branch -a
 
 git add .(adds files to be comited)
 
+$ git commit -n message
+$ git push
+$ git push -u origin
