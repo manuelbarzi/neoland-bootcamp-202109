@@ -26,9 +26,10 @@ $cd
 ```sh
 $touch README.md
 ```
-- kdir (make directory)
+- mkdir (make directory)
 ```sh
-$make directory bootcamp
+$mkdir bootcamp
+```
 -move (move file or folder)
 ```sh 
 $move cli cli-demo 
