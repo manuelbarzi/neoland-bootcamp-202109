@@ -3,7 +3,7 @@
 ```sh
 $ git status 
 ```
--git branch (shows the branch list)
+git branch (shows the branch list)
 ```sh 
 $ git branch
 ```
@@ -26,7 +26,7 @@ $ git add
 - git commit -m message (consolidates change in current branch)
 ```sh
 $ git commit -m 'add my folder to my doc'
-´´´
+```
 - git push (upload changes to remote)
 ```sh 
 $ git push
