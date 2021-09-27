@@ -2,45 +2,45 @@
 
 - pwd (path to working directory) 
 ```sh
- $pwd 
+ $ pwd 
 /Users/gerar
 ```
 - ls (list folders)
 ```sh
-$ls 
+$ ls 
 bootcamp
 ```
 - cd (change directory)
 ```sh 
-$cd cli-demo
+$ cd cli-demo
 ```
 change to parent directory
 ```sh 
-$cd ..
+$ cd ..
 ```
 change to user directory´
 ```sh 
-$cd
+$ cd
 ```
 - touch (create a file from scrach)
 ```sh
-$touch README.md
+$ touch README.md
 ```
 - mkdir (make directory)
 ```sh
-$mkdir bootcamp
+$ mkdir bootcamp
 ```
 -move (move file or folder)
 ```sh 
-$move cli cli-demo 
+$ move cli cli-demo 
 ```
 - rm (remove file)
 ```sh 
-$rm README.md 
+$ rm README.md 
 ```
 - history (comeand history)
 ```sh
-$history 
+$ history 
  1  pwd
  2  ls
  3  ls -a
@@ -48,5 +48,5 @@ $history
 ```
 - clear (clear screen = CTRL+L)
 ```sh
-$clear
+$ clear
 ```
