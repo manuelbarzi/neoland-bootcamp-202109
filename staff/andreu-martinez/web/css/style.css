@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@300&display=swap');
+
+.search{
+    display: inline-block;
+    margin-top: 10px;
+}
+
+h1{
+    color: blueviolet;
+    font-family: 'Gemunu Libre';
+    font-size: xx-large;
+    text-align: center;
+}
+
+red-box{
+    background-color: red;
+}
+
+.cool{
+    background-color: yellow;
+}
+
+.nice{
+    color: pink;
+}
+
+/*BEM*/
+
+/*SEARCH*/
+.search__body{
+    border-radius: 10px;
+    border-style: dotted;
+    background-color: lightgray;
+}
+
+.search__title{
+    background-color: black;
+    border-radius: 10px;
+    color: white;
+    border-style: solid;
+    border-color: darkgray;
+}
+
+/*BUTTON*/
+
+.button{
+    border-radius: 5px;
+    border-style: solid;
+    border-color: black;
+}
+
+.field{
+    border-radius: 5px;
+    border-style: solid;
+    margin: 5px;
+}
+
+.register{
+    background-color: yellow;
+    display: inline-block;
+    border-style: solid;
+    border-width: 2px;
+    border-color: orange;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+/*LIST*/
+
+.list{
+    list-style: none;
+    background-color: rgb(216, 148, 45);
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.list__item{
+    color: white;
+}
+
+/*CART*/
+
+.cart{
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.cart__header{
+    background-color: lightgray;
+}
+
+.cart__footer{
+    background-color: lime;
+}
