@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello Word</h1>
+    <h2>Introduction to HTML</h2>
+    <h3>Paragraph</h3>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit dolores nam autem non officiis! Officiis sequi recusandae tempore minima debitis dolorem omnis sit pariatur excepturi quisquam, officia, necessitatibus fugit adipisci.</p>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit dolores nam autem non officiis! Officiis sequi recusandae tempore minima debitis dolorem omnis sit pariatur excepturi quisquam, officia, necessitatibus fugit adipisci.</p>
+    <hr>
+
+    <h3>Titles</h3>
+    <h1>Hello World</h1>
+    <h2>Hello World</h2>
+    <h3>Hello World</h3>
+    <h4>Hello World</h4>
+    <h5>Hello World</h5>
+    <h6>Hello World</h6>
+    <hr>
+
+    <h3>List</h3>
+    <h4>Unordered List</h4>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+    </ul>
+    <ol>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+    </ol>
+    <hr>
+
+    <h3>Links</h3>
+    <a href="https://www.google.com/">Google</a><br>
+    <a href="https://www.ecosia.org/">Ecosia</a><br>
+    <a href="https://www.bing.com/">Bing</a>
+    <hr>
+
+    <h3>Images</h3>
+    <img src="https://placeimg.com/640/480/any" alt="Any">
+    <hr>
+    
+    <form>
+        <input type="text" placeholder="Ingrese su usuario">
+        <input type="email" placeholder="Ingrese su email">
+        <input type="checkbox" id="choose"><label for="choose">Es mayor de edad</label>
+    </form>
+    
+    <p>Choose your favorite Web language:</p>
+    <form>
+      <input type="radio" id="html" value="HTML">
+      <label for="html">HTML</label><br>
+      <input type="radio" id="css" value="CSS">
+      <label for="css">CSS</label><br>
+      <input type="radio" id="javascript" value="JavaScript">
+      <label for="javascript">JavaScript</label>
+    </form>
+    
+    <form action="https://www.google.com/search">
+        <fieldset>
+            <legend>Search in Google</legend>
+            <label for="query">Query</label>
+            <input type="text" id="query" name="q" placeholder="Escribe tu busqueda">
+            <input type="submit" value="Enviar">
+        </fieldset>
+    </form>
+
+    <form action="https://www.ecosia.org/search">
+        <fieldset>
+            <legend>Search in Ecosia</legend>
+            <label for="query">Query</label>
+            <input type="text" id="query" name="q" placeholder="Escribe tu busqueda">
+            <input type="submit" value="Enviar">
+        </fieldset>   
+    </form>
+
+    <form action="https://www.bing.com/search">
+        <fieldset>
+            <legend>Search in Bing</legend>
+            <label for="query">Query</label>
+            <input type="text" id="query" name="q" placeholder="Escribe tu busqueda">
+            <!-- <input type="submit" value="Enviar"> -->
+            <button>Enviar</button>
+        </fieldset>   
+    </form>
+
+    <form>
+        <label for="name">Name </label><input type="text" name="name" id="name" placeholder="Write your name"><br>
+        <label for="lastName">Last name </label><input type="text" name="lastName" id="lastName" placeholder="Write your last name"><br>
+        <label for="birthday">Birth </label><input type="date" name="birth" id="birthday"><br>
+        <label for="password">Password </label><input type="password" name="password" id="password">
+        <button type="button">Registrarse</button>
+        <button type="reset">Clear</button>
+    </form>
+    <hr>
+
+    <h3>Tables</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Contact</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+                <td>Alfreds Futterkiste</td>
+                <td>Maria Anders</td>
+                <td>Germany</td>
+              </tr>
+              <tr>
+                <td>Centro comercial Moctezuma</td>
+                <td>Francisco Chang</td>
+                <td>Mexico</td>
+              </tr>
+              <tr>
+                <td>Ernst Handel</td>
+                <td>Roland Mendel</td>
+                <td>Austria</td>
+            </tr>
+              <tr>
+                <td>Island Trading</td>
+                <td>Helen Bennett</td>
+                <td>UK</td>
+              </tr>
+              <tr>
+                <td>Laughing Bacchus Winecellars</td>
+                <td>Yoshi Tannamuri</td>
+                <td>Canada</td>
+              </tr>
+              <tr>
+                <td>Magazzini Alimentari Riuniti</td>
+                <td>Giovanni Rovelli</td>
+                <td>Italy</td>
+              </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Total 1</td>
+                <td>Total 2</td>
+                <td>Total 3</td>
+            </tr>
+        </tfoot>
+      </table>
+      <hr>
+
+      <audio controls>
+        <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg">
+        <source src="horse.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+      </audio>
+      
+      <hr>
+      <video width="400" controls>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML video.
+      </video>
+      <hr>
+
+      <h3>Iframes</h3>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2992.87351779426!2d2.2011485!3d41.3985531!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a315a4635b9f%3A0xf8f0b711cb364e5!2sCarrer%20de%20Ramon%20Turr%C3%B3%2C%20169%2C%2008005%20Barcelona!5e0!3m2!1ses!2ses!4v1632753923600!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      
+      <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/156172782&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/es" title="Call me eS" target="_blank" style="color: #cccccc; text-decoration: none;">Call me eS</a> · <a href="https://soundcloud.com/es/cloud-murmurs-remixed" title="Cloud Murmurs (Remixed)" target="_blank" style="color: #cccccc; text-decoration: none;">Cloud Murmurs (Remixed)</a></div>
+
+      <iframe src="https://open.spotify.com/embed/playlist/5fBKQ0CHfUIIaluTdzMHbV" width="100%" height="480" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/jSJ8xhKtfP4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</body>
+</html>
