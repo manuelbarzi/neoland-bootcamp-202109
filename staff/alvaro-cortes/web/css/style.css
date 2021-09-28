@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+h1 {
+    color: blueviolet;
+    font-family: 'Bebas Neue', cursive;
+    text-align: center;
+}
+
+red-box {
+    background-color: red;
+}
+
+.cool {
+    background-color: yellow;
+}
+
+.nice {
+    color: dodgerblue;
+}
+
+.search {
+    display: inline-block;
+    margin: 10px;
+}
+
+.search__body {
+    border: 10px;
+    border-style: solid;
+    background-color: lightslategray;
+}
+
+.search__title {
+    background-color: black;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: darkgray;
+    color: white;
+}
+
+fieldset {
+    border-radius: 10px;
+    border-style: solid;
+}
+
+legend {
+    background-color: lightslategray;
+    border-radius: 5px;
+    color: white;
+}
+
+input, button {
+    border-style: solid;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.button {
+    border-style: solid;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.field {
+    border-radius: 5px;
+    border-style: solid;
+    margin: 5px;
+}
+
+.register {
+    display: inline-block;
+    background-color: yellow;
+    display: inline-block;
+    border-color: orange;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.login {
+    display: inline-block;
+    background-color: yellow;
+    display: inline-block;
+    border-color: orange;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.list {
+    list-style: none;
+    background-color: aquamarine;
+    border-color: plum;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.list__item {
+    color: green;
+}
+
+.cart {
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.cart__header {
+    background-color: lightslategray;
+}
+
+.cart__footer {
+    display: block;
+    border-style: solid none none none;
+    border-color: black;
+    border-width: 2px;
+}
+
+
+
+
