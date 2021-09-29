@@ -1,0 +1,96 @@
+/* Selector de etiqueta */
+h1 {
+    color: brown;
+    font-family: 'Gemunu Libre', sans-serif;
+    font-size: 70px;
+    background-color: cornsilk;
+}
+
+/* Selector de clase */
+.title {
+    font-size: 40px;
+    color: burlywood;
+}
+
+.emoji {
+    color: blue;
+}
+
+/* fieldset {
+    border-radius: 10px;
+    border-style: dotted;
+    border-color: black;
+    background-color: lightblue;
+}
+
+legend {
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+}
+
+input, button {
+    border-radius: 3px;
+    border: 2px solid ;
+} */
+
+/* BEM Methodology */
+.search {
+
+}
+
+.search__body {
+    border-radius: 10px;
+    border-style: dotted;
+    border-color: black;
+    background-color: lightblue;
+}
+
+.search__title {
+    background-color: blue;
+    color: white;
+    border-radius: 5px;
+}
+
+.button {
+    border-radius: 3px;
+    border: 2px solid ;
+}
+
+.register {
+    background-color: burlywood;
+    margin-top: 20px;
+    border: 2px solid violet;
+    padding: 20px;
+}
+
+.register__label {
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+/* Lista */
+.list {
+    list-style: none;
+    background-color: yellowgreen;
+    border: 5px dashed green;
+    padding: 30px;
+}
+
+.list__item {
+    color: antiquewhite;
+}
+
+/* Cart */
+.cart {
+    border: 1px solid burlywood;
+}
+
+.cart__header {
+    background-color: lightgray;
+}
+
+.cart__footer {
+    border-top: 1px solid black;
+}
