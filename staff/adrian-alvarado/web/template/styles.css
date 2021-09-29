@@ -1,0 +1,56 @@
+.form {
+    border: 1px solid white; /* border-width | border-style | border-color */
+    background-color: lightgray;
+    border-radius: 5px;
+    padding: 20px;
+    color: gray;
+    width: 500px;
+    height: 500px;
+    margin: 0 auto;
+}
+
+.form__title {
+    font-size: 3rem;
+    color: darkred;
+    text-align: center;
+}
+
+.form__subtitle {
+    color: rgb(27, 30, 34);
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.form__inputname {
+    margin-left: 96px;
+}
+
+.form__inputinline {
+    display: inline-block;
+    height: 25px;
+}
+
+.form__input {
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20px;
+    height: 25px;
+}
+
+.form__terms {
+    margin-left: 90px;
+    margin-top: 20px;
+}
+
+.button {
+    display: block;
+    height: 50px;
+    margin: 0 auto;
+    padding: 0 10px;
+    margin-top: 20px;
+    background-color: mediumseagreen;
+    border-radius: 5px;
+    color: white;
+}
+
