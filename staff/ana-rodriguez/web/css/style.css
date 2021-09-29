@@ -83,3 +83,43 @@ color: blue;
 .cart__footer{
     background-color: lightpink;
 }
+
+/* CUSTOM */
+
+
+/*REGISTRER */
+
+.register{
+  background-color: white;
+  border-color: black;
+}
+
+/*login*/
+
+.login{
+    background-color: black;
+    color: white;
+    border-color: white;
+}
+
+/*search*/
+
+.search{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.search__body{
+    margin: 0;
+}
+
+.search__title{
+    background-color: black;
+    border-radius:5px ;
+    border-style:  solid;
+    border-color: darckgray;
+    color: white;
+}
+
