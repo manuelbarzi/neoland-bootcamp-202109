@@ -1,0 +1,69 @@
+body {
+    background-color: beige
+}
+
+.size  {
+    padding: 10px;
+
+}
+
+.header {
+    margin-top: 50px;
+    text-align: center;
+}
+.title {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color:crimson;
+}
+
+.nav {
+    padding: 10px;
+    height: 120px;
+    width: 50%;
+    background-color: aqua;
+    display: inline-block;
+    
+}
+
+.nav_link {
+    text-decoration: none;
+    color: blue;
+    padding: 8px;
+    margin-inline: 10px;
+}
+
+.nav__link--home {
+    color: black;
+}
+
+.form {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 10px;
+    background-color: aqua;
+    text-align: center;
+    padding: 50px;
+    box-shadow: 10px 10px 10px lightgray
+}
+
+.form__datos {
+    margin: 20px;
+}
+
+.form__dato {
+    margin-block: 10px;
+    color: green;
+}
+.form__send--reg {
+    color: blue;
+}
+
+
+.form__send--log {
+    color: blue;
+}
+
+.form__datos--age {
+    color: red
+}
