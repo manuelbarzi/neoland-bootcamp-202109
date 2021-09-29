@@ -1,0 +1,103 @@
+/*General*/
+
+.body{
+    background-color:peachpuff
+}
+
+.linea{
+    border-style: solid;
+}
+.social{
+    text-align: center;
+}
+/*HOME*/
+
+.font{
+    font-family:'Courier New', Courier, monospace;
+    font-size: 400%;
+    font-style: italic;
+}
+
+.font__lorem{
+    font-size: 150%;
+}
+
+.blog{
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+    text-decoration: underline;
+
+}
+
+.image{
+    width: 400px;
+    height: 400px;
+}
+
+.table{
+    border-radius: 5px;
+    border-style: solid;
+    margin: 5px;
+    background-color: rgb(168, 184, 201);
+}
+
+.table__size{
+    width: 100%;
+    height: 200px;
+}
+
+.number{
+    text-align:left;
+    margin:3px 3px 0px 2px;
+}
+
+.video{
+    text-align: center;
+
+}
+
+/*LOGIN+REGISTER*/
+.center{
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: italic;
+}
+
+.center__border{
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    border-radius: 10px;
+    padding: 50px;
+    display: inline-block;
+    background-color: black;
+    color: white;
+    
+}
+
+.field{
+    border-radius: 5px;
+    border-style: solid;
+    margin: 5px;
+    
+}
+
+.button{
+    border-radius: 5px;
+    border-style: solid;
+    margin: 5px;
+}
+/*flexbox*/
+.box{
+    display: block;
+}
+
+.header-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box {
+    margin-top: 2rem;
+}
