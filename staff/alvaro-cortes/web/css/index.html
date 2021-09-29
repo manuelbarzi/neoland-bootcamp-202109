@@ -17,16 +17,17 @@
     <span>:)</span><span class="cool nice">:)</span><span class="nice">:)</span>
     
     <br><br><br>
-    <form action="https://www.google.com/search">
-        <fieldset>
-            <legend>Search in Google</legend>
+    <form class="search" action="https://www.google.com/search">
+        <fieldset class="search__body">
+            <legend class="search__title">Search in Google</legend>
             <label for="query">Query</label>
-            <input type="text" id="query" name="q" placeholder="query">
-            <input type="submit" value="Buscar">
+            <input class="field" type="text" id="query" name="q" placeholder="query">
+            <button class="button" type="submit" value="Buscar">
         </fieldset>
     </form>
     <br><br>
     <form class="register" action="">
+        <h1>Register</h1>
         <label for="name"> Name </label><input type="text" name="name" id="name" placeholder="name"><br>
         <label for="birthdate"> Birth </label><input type="date" name="birth" id="birthdate"><br>
         <label for="username">Username</label><input type="text" name="username" id="username"
@@ -38,6 +39,7 @@
     </form>
     <br>
     <form class="login" action="">
+        <h1>Login</h1>
         <label for="name"> Name </label><input type="text" name="name" id="name" placeholder="name"><br>
         <label for="password"> Password </label><input type="password" name="password" id="password"><br>
         <button class="button" type="submit">Register</button>
