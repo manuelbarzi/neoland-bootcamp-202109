@@ -1,36 +1,38 @@
 <html>
   <head>
     <title>Mi curriculum</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <img
+      class="image"
       src="https://placeimg.com/640/480/people"
       width="350"
       alt="Foto Jessica Guillen"
     />
-    <h1>Jessica Guillen</h1>
-    <p><strong>Reportera Internacional</strong></p>
+    <h1 class="title">Jessica Guillen</h1>
+    <p class="subtitle"><strong>Reportera Internacional</strong></p>
 
     <h2>Habilidades</h2>
-    <ul>
-      <li>
+    <ul class="list">
+      <li class="list_item">
         Lorem ipsum dolor sit amet consectetur
         <strong>adipisicing</strong> elit.
-      </li>
+      </li class="list_item">
       <li>Lorem ipsum dolor sit amet consectetur <em>adipisicing</em> elit.</li>
-      <li>
+      <li class="list_item">
         Lorem ipsum dolor sit amet consectetur <mark>adipisicing</mark> elit.
       </li>
-      <li>
+      <li class="list_item"> 
         Lorem ipsum dolor sit amet consectetur <small>adipisicing</small> elit.
       </li>
-      <li>
+      <li class="list_item">
         Lorem ipsum dolor sit amet consectetur <del>adipisicing</del> elit.
       </li>
     </ul>
 
     <h2>Experiencia Laboral</h2>
-    <ul>
+    <ul class="list2">
       <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
       <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
       <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
@@ -53,6 +55,7 @@
     </p>
 
     <iframe
+      class="video"
       width="350"
       src="https://www.youtube.com/embed/KVakLLMBQxg"
       title="YouTube video player"
@@ -62,13 +65,23 @@
     ></iframe>
 
     <h2>Contacto</h2>
-    <ul>
-      <li>Calle Madrid 1</li>
+    <ul class="list">
+      <li class="list_item">Calle Madrid 1</li>
       <li>tlf: 91333333333</li>
       <li><a href="#">Email: jessicaguillen@gmail.com</a></li>
     </ul>
 
-    <h2>Voluntariados</h2>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <form class="form" action="">
+      <fieldset class="form_set">
+        <legend class="form_title">Información de contacto</legend>
+        <label class="form_label" for="name">Su nombre</label>
+        <input class="form_input" type="text" name="name" id="name">
+        <label class="form_label" for="email">Su E-mail</label>
+        <input class="form_input" type="email" name="email" id="email">
+        <label class="form_label" for="message">Deje un mensaje</label>
+        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+        <button class="btn">Contactar</button>
+      </fieldset>
+    </form>
   </body>
 </html>
