@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,26 +8,16 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <h1>Hello, World!</h1>
 
-    <red-box>:)</red-box><red-box>:)</red-box><red-box>:)</red-box>
+    <button class="button" id="switch">🌚</button>
 
-    <div class="cool">:)</div>
+    <br>
 
-    <span>:)</span><span class="cool nice">:)</span><span class="nice">:)</span>
-
-    <form class="search" action="https://www.google.com/search">
-        <fieldset class="search__body">
-            <legend class="search__title">Search in Google</legend>
-            <label for="query">Query</label>
-            <input class="field" type="text" id="query" name="q" placeholder="query">
-            <!-- input type="submit" value="🔍️" -->
-            <button class="button">🔍️</button>
-        </fieldset>
-    </form>
-
-    <form class="register" action="">
+    <form class="panel panel--light" action="" id="register">
+        <h1 class="panel__title">Register</h1>
         <label for="name">Name</label> <input class="field" type="text" name="name" id="name" placeholder="name"><br>
         <label for="birthdate">Birth</label> <input class="field" type="date" name="birth" id="birthdate"><br>
         <label for="username">Username</label> <input class="field" type="text" name="username" id="username"
@@ -39,52 +30,39 @@
 
     <br>
 
-    <form class="login" action="">
+    <form class="panel panel--dark" action="">
+        <h1 class="panel__title">Login</h1>
         <label for="username">Username</label> <input class="field" type="text" name="username" id="username"
             placeholder="username"><br>
         <label for="password">Password</label> <input class="field" type="password" name="password" id="password"
             placeholder="password"><br>
-        <button class="button" type="submit">Register</button>
+        <button class="button" type="submit">Login</button>
         <button class="button" type="reset">Clear</button>
     </form>
 
     <br>
 
-    <button class="button">Hello, World!</button>
+    <form class="search" action="https://www.google.com/search">
+        <fieldset class="search__body panel">
+            <legend class="search__title">Search in Google</legend>
+            <label for="query">Query</label>
+            <input class="field" type="text" id="query" name="q" placeholder="query">
+            <!-- input type="submit" value="🔍️" -->
+            <button class="button">🔍️</button>
+        </fieldset>
+    </form>
 
-    <ul class="list">
-        <li class="list__item">HTML</li>
-        <li class="list__item">CSS</li>
-        <li class="list__item">JavaScript</li>
-    </ul>
+    <br>
 
-    <table class="cart">
-        <thead class="cart__header">
-            <tr>
-                <th>Product</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Socks</td>
-                <td>10 €</td>
-            </tr>
-            <tr>
-                <td>Pants</td>
-                <td>20 €</td>
-            </tr>
-            <tr>
-                <td>T-Shirt</td>
-                <td>15 €</td>
-            </tr>
-        </tbody>
-        <tfoot class="cart__footer">
-            <tr>
-                <th>Total</th>
-                <td>45 €</td>
-            </tr>
-        </tfoot>
-    </table>
+    <div class="panel panel--light">
+        Hello, world!
+    </div>
+
+    <div class="panel panel--dark">
+        Hello, world!
+    </div>
+
+    <script src="main.js"></script>
 </body>
+
 </html>
