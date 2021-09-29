@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap');
+
+h1{
+    color: blueviolet;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    font-family: 'Scheherazade New', serif;
+}
+
+.cool{
+    background-color: chartreuse;
+}
+
+.nice{
+    color: #be710d;;
+}
+
+/*BEM*/
+.search {
+    display: inline-block;
+    margin: 20px;
+}
+.search_body{
+    border-radius: 10px;
+    border-color: salmon;
+    border-style: double;
+    background-color: lightgray;
+}
+.search_title {
+    background-color: gray;
+    border-radius: 5px;
+    border-style: solid;
+    color: white;
+}
+.button{
+    border-radius: 5px;
+    border-style: solid;
+    margin: 5px;
+}
+.input { 
+    border-radius: 5px;
+    border-style: solid;
+}
+/*field*/
+.field{
+    border-radius: 5px;
+    border-style: solid;
+    margin: 5px;
+}
+
+.register {
+    background-color: yellow;
+    border-color: salmon;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    padding: 5px;
+}
+/*list*/
+.list{
+    list-style: none;
+    background-color: beige;
+    border-color: salmon;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.list__item{
+color: blue;
+}
+
+/*Cart*/
+.cart{
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+.cart__header{
+    background-color: lightgray;
+
+}
+.cart__footer{
+    background-color: lightpink;
+}
