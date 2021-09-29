@@ -1,0 +1,63 @@
+body {
+    background-color: royalblue;
+}
+
+h1, h2 {
+    color:blue;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table {
+    background-color: rgb(25, 0, 255);
+    border: rgb(0, 204, 255) 5px solid;
+}
+
+th, td {
+    width: 25%;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid #000;
+ }
+
+ th {
+     background-color: turquoise;
+ }
+
+ td {
+    background-color:rgb(33, 9, 170);
+}
+
+
+
+
+/*TEMPLATE*/
+
+.exp {
+    background-color: lime;
+    display: inline-block;
+    inset-block:inherit;
+}
+
+
+.titu {
+    background-color: magenta;
+    display:inline-block;
+    inset-block:inherit;
+}
+
+.perm {
+    background-color: gold;
+    display: inline-block;
+    inset-block:inherit;
+}
+
+.lang {
+    background-color:darkred;
+    display: inline-block;
+    inset-block:inherit;
+}
