@@ -1,0 +1,30 @@
+.title{
+    text-align: center;    
+}
+.nombre{
+    text-align: center;
+}
+.image {
+    display: block;
+    margin:auto;
+    border-style: solid;
+    border-color: grey; 
+
+}
+table{
+    margin: auto;
+    border-style: solid;
+    padding: 5px;
+    border-color: grey;   
+}
+.datos {
+    background-color: yellow;
+    
+}
+
+.box {
+    padding: 15px;
+    border-style: solid;
+    margin: 50px; 
+    border-color: grey;  
+}
