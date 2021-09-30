@@ -20,9 +20,6 @@ body {
     font: inherit;
 }
 
-    .input::placeholder {
-    }
-
 .btn {
     display: block;
     background-color: #007bff;
@@ -61,7 +58,7 @@ body {
     background-color: #5d8fc9;
 }
 
-.registerForm {
+.register {
     background-color: #ffffff;
     width: 500px;
     padding: 20px 40px 50px;
@@ -69,39 +66,39 @@ body {
     margin: 50px auto;
 }
 
-.registerForm__title {
+.register__title {
     font-size: 2.5rem;
     text-align: center;
 }
 
-.registerForm__title::before {
+.register__title::before {
     content: '🙬 ';
 }
 
-.registerForm__title::after {
+.register__title::after {
     content: ' 🙮';
 }
 
-.registerForm__subtitle {
+.register__subtitle {
     text-align: center;
     font-size: 1.4rem;
 }
 
-.registerForm__inputInline {
+.register__inputInline {
     display: inline-block;
     width: 200px;
     margin-bottom: 20px;
 }
 
-.registerForm__inputInline + .registerForm__inputInline {
+.register__inputInline + .register__inputInline {
     margin-left: 16px;
 }
 
-.registerForm__input {
+.register__input {
     margin-bottom: 20px;
 }
 
-.registerForm__inputCheck {
+.register__inputCheck {
     text-align: center;
     margin-top: 30px;
     margin-bottom: 30px;
