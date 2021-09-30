@@ -1,0 +1,109 @@
+/* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Exo 2', sans-serif;
+}
+
+/* Components */
+.input {
+    display: block;
+    background-color: #ebf0fc;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    font: inherit;
+}
+
+    .input::placeholder {
+    }
+
+.btn {
+    display: block;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    font: inherit;
+}
+
+/* loginForm */
+.body--login {
+    background-color: #5d8fc9;
+}
+
+.login {
+    background-color: #ffffff;
+    width: 400px;
+    padding: 10px 20px 50px;
+    border-radius: 20px;
+    margin: 50px auto;
+}
+
+.login__title {
+    text-align: center;
+    font-size: 2.3rem;
+}
+
+.login__input {
+    margin-bottom: 20px;
+}
+
+/* registerForm */
+.body--registerForm {
+    background-color: #5d8fc9;
+}
+
+.registerForm {
+    background-color: #ffffff;
+    width: 500px;
+    padding: 20px 40px 50px;
+    border-radius: 20px;
+    margin: 50px auto;
+}
+
+.registerForm__title {
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.registerForm__title::before {
+    content: '🙬 ';
+}
+
+.registerForm__title::after {
+    content: ' 🙮';
+}
+
+.registerForm__subtitle {
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.registerForm__inputInline {
+    display: inline-block;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.registerForm__inputInline + .registerForm__inputInline {
+    margin-left: 16px;
+}
+
+.registerForm__input {
+    margin-bottom: 20px;
+}
+
+.registerForm__inputCheck {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
