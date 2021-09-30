@@ -22,10 +22,11 @@ html, body {
 }
 .btn {
     border-radius: 10px;
-    background-color: lightgreen;
-    border-color: green;
+    background-color: black;
+    border-color: white;
     border-width: 3px;
     margin: 10px 0px 0px 0px;
+    color: white;
 }
 
 .panel {
@@ -36,7 +37,6 @@ html, body {
     padding: 10px;
     align-content: center;
     font-family: roboto condensed;
-    background-color: lightgray;
 }
 .panel__title {
     text-align: center;
@@ -53,7 +53,6 @@ html, body {
 .area-panel {
     border-radius: 10px;
     display: block;
-    background-color: lightpink;
     padding: 10px 10px 40px 10px;
     text-align: center;
     width: fit-content;
@@ -69,14 +68,14 @@ html, body {
 
     display: inline-block;
 }
-.menu__button {
-    background-color: black;
-    border-color: white;
+.menu__item {
     color: white;
     margin: 0px 10px 0px 10px;
+    text-decoration: none;
+
 }
 .menu {
-    background-color: lightskyblue;
+    background-color: black;
     padding: 10px;
     text-align: center;
     margin: 0px;
@@ -89,49 +88,49 @@ html, body {
 .columns__left {
     display: flex;
     flex-direction: column;
-    flex-basis: 70%;
-    font-family: roboto condensed;
+    flex-basis: 85%;
     margin: 0px 10px 0px 10px;
 }
-.r-column {
+.column__right {
     text-align: center;
-    background-color: grey;
+    background-color: wheat;
     width: fit-content;
     padding: 10px;
     height: fit-content;
     margin: 0px 10px 0px 10px;
     border-radius: 5px; 
-    flex-basis: 30%;
+    flex-basis: 12%;
+
 }
-.r-column__sm{
+.column__right--item {
     margin: 10px 5px 10px 5px;
     padding: 10px;
-    background-color: aqua;
+    background-color: black;
+    color: white;
     border-radius: 10px;
+    border: black solid 1px;
+    height: fit-content;
 }
 
 .footer{
-background-color: lightgray;
-
+    background-color: black;
+    height: 300px;
+    margin-top: 20px;
+}
+.area-panel {
+    background-color: wheat;
 }
 
 /* custom */
 
 .register {
-    font-family: oswald;
-    background-color: orange;
-    border-color: red;
-}
-.login {
-    background-color: red;
-    border-color: orange;
+    background-color: white;
+    border-color: black;
 }
 .links {
     padding-top: 20px;
     text-decoration: none;
-}
-.area-panel__register {
-    background-color: lightblue;
+    color: black;
 }
 .columns__left-video {
     margin: 20px 0px 0px 0px ;
@@ -142,16 +141,30 @@ background-color: lightgray;
 
 .columns__left-text {
     flex-basis: 30%;
+    font-family: oswalld;
 } 
-.footer {
-    height: 300px;
-}
+
 .footer__list {
     display: flex;
     flex-direction: column;
     list-style: none;
     align-items: center;
+    margin: 0;
+    padding: 25px;
+    justify-content: space-between;
+    height: 250px;
 }
 .footer__list-item {
-    margin: 30px;
+   display: inline-block;
+   text-decoration: none;
+   color: white;
+}   
+.column__right-item-light {
+    background-color: white;
+    color: black;
+}
+.btn__light {
+    background-color: white;
+    color: black;
+    border: black;
 }
