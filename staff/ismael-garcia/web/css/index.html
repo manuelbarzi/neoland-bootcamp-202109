@@ -5,42 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
     <h1>Hello, World!</h1>
 
-    <div class="cool">:)</div>
+    <button class="button" id="switch">🌚</button>
 
-    <span class="cool nice">:)</span><span class="nice">:)</span><span>:)</span>
+    <br />
 
-    <form class="search" action="https://www.google.es/search">
-      <fieldset class="search_body">
-        <legend class="search_title">Search in Google</legend>
-        <label for="query">Query</label>
-        <input
-          class="field"
-          type="text"
-          name="q"
-          id="query"
-          placeholder="query"
-        />
-        <!-- input type="submit" value="" -->
-        <button class="button"></button>
-      </fieldset>
-    </form>
-
-    <form action="https://www.google.es/search">
-      <fieldset>
-        <legend>Search in Google</legend>
-        <label for="query">Query</label>
-        <input type="text" name="q" id="query" placeholder="query" />
-        <!-- input type="submit" value="" -->
-        <button></button>
-      </fieldset>
-    </form>
-
-    <form class="register" action="">
+    <form class="panel panel--light" action="" id="register">
+      <h1 class="panel__title">Register</h1>
       <label for="name">Name</label>
       <input
         class="field"
@@ -58,7 +34,7 @@
         name="username"
         id="username"
         placeholder="username"
-      />
+      /><br />
       <label for="password">Password</label>
       <input
         class="field"
@@ -66,42 +42,59 @@
         name="password"
         id="password"
         placeholder="password"
-      />
+      /><br />
       <button class="button" type="submit">Register</button>
       <button class="button" type="reset">Clear</button>
     </form>
 
-    <button class="button">Hello, World!</button>
+    <br />
 
-    <ul class="list">
-      <li class="list_item">HTML</li>
-      <li class="list_item">CSS</li>
-      <li class="list_item">JavaScript</li>
-    </ul>
+    <form class="panel panel--dark" action="">
+      <h1 class="panel__title">Login</h1>
+      <label for="username">Username</label>
+      <input
+        class="field"
+        type="text"
+        name="username"
+        id="username"
+        placeholder="username"
+      /><br />
+      <label for="password">Password</label>
+      <input
+        class="field"
+        type="password"
+        name="password"
+        id="password"
+        placeholder="password"
+      /><br />
+      <button class="button" type="submit">Login</button>
+      <button class="button" type="reset">Clear</button>
+    </form>
 
-    <table class="cart">
-      <thead class="cart_header">
-        <tr>
-          <th>Product</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>T-Shirt</td>
-          <td>15$</td>
-        </tr>
-        <tr>
-          <td>Pants</td>
-          <td>10$</td>
-        </tr>
-      </tbody>
-      <tfoot class="cart_footer">
-        <tr>
-          <td>Total</td>
-          <td>25$</td>
-        </tr>
-      </tfoot>
-    </table>
+    <br />
+
+    <form class="search" action="https://www.google.com/search">
+      <fieldset class="search__body panel">
+        <legend class="search__title">Search in Google</legend>
+        <label for="query">Query</label>
+        <input
+          class="field"
+          type="text"
+          id="query"
+          name="q"
+          placeholder="query"
+        />
+        <!-- input type="submit" value="🔍️" -->
+        <button class="button">🔍️</button>
+      </fieldset>
+    </form>
+
+    <br />
+
+    <div class="panel panel--light">Hello, world!</div>
+
+    <div class="panel panel--dark">Hello, world!</div>
+
+    <script src="main.js"></script>
   </body>
 </html>

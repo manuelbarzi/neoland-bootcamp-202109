@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Ephesis&display=swap");
+
+/* REGISTER PAGE */
+
+.form {
+  border: 1px solid white; /* border-width | border-style | border-color */
+  background-color: lightgray;
+  border-radius: 5px;
+  padding: 20px;
+  color: gray;
+  width: 500px;
+  height: 500px;
+  margin: 0 auto;
+}
+
+.form__title {
+  font-size: 3rem;
+  color: darkred;
+  text-align: center;
+}
+
+.form__subtitle {
+  color: rgb(27, 30, 34);
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.form__inputname {
+  margin-left: 96px;
+}
+
+.form__inputinline {
+  display: inline-block;
+  height: 25px;
+}
+
+.form__input {
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 20px;
+  height: 25px;
+}
+
+.form__terms {
+  margin-left: 90px;
+  margin-top: 20px;
+}
+
+.button {
+  display: block;
+  height: 50px;
+  margin: 0 auto;
+  padding: 0 10px;
+  margin-top: 20px;
+  background-color: mediumseagreen;
+  border-radius: 5px;
+  color: white;
+}
+
+/*lOGIN PAGE*/
+
+.background__login {
+  background-color: teal;
+}
+.login {
+  background-color: white;
+  border-radius: 20px;
+  padding: 20px;
+  width: 50%;
+  margin: 300px auto;
+}
+
+.login__title {
+  color: black;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.login__input {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  margin-bottom: 30px;
+  height: 35px;
+  border-radius: 20px;
+  font-size: large;
+  border-style: none;
+  background-color: silver;
+  padding-left: 10px;
+}
+.login__input::placeholder {
+  color: slateblue;
+}
+
+.login__button {
+  font-family: Arial, Helvetica, sans-serif;
+  width: 300px;
+  height: 35px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 20px;
+  background-color: rgb(99, 99, 233);
+  margin-bottom: 25px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* HOME PAGE */
+
+.background-img {
+  background-image: url(https://fondosmil.com/fondo/17010.jpg);
+  height: 100vw;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+}
+
+.home {
+  font-family: "Ephesis", cursive;
+  text-align: center;
+  color: white;
+  margin-top: 200px;
+}
+
+.home__title {
+  font-size: 5rem;
+}
+
+.home__subtitle {
+  font-size: 3rem;
+}
+
+.home__description {
+  font-size: 1.9rem;
+}
+
+.home__button {
+  padding: 15px 20px;
+  background-color: rgb(206, 111, 74);
+  border-style: none;
+  border-radius: 20px;
+  color: white;
+}
