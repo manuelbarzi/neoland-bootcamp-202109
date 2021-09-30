@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+/* Resets */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%; 
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+/* RESUSABLES */
+
+/* Button */
+
+.button {
+  display: flex;
+  justify-content: center;;
+}
+
+.button__prop {
+    border-radius: 16px;
+    border-style: solid;
+    margin: 5px;
+    background-color: #D9CAB3;
+    
+    
+}
+
+/* Field */
+
+.field {
+    border-radius: 16px;
+    border-style: solid;
+    border-color: #D9CAB3;
+    margin: 5px;
+}
+
+/* Panel */
+
+.panel {
+    display: inline-block;
+    background-color: #6D9886;
+    border-color: #D9CAB3;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 2px 2px 8px grey;
+
+}
+
+.panel__title {
+    font-family: 'Bebas Neue';
+    font-size: 1rem;
+    text-align: center;
+    border-style: solid;
+    border-radius: 16px;
+    background-color:#D9CAB3;
+    box-shadow: 2px 2px 8px grey;
+}
+
+.panel--light {
+    background-color: #6D9886;
+    border-color: #D9CAB3;
+    border-color:black;
+    box-shadow: 2px 2px 8px grey;
+}
+
+.panel--dark {
+    background-color:#D9CAB3;
+    color: #212121;;
+    border-color: #6D9886;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CUSTOM */
+
+/* Search */
+
+label {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: bold;
+  text-shadow: 2px 2px 6px grey;
+} 
+
+.search {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.search__body {
+    margin: 0;
+}
+
+.search__title {
+    background-color: black;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: darkgray;
+    color: white;
+}
+
+.central {
+    display: flex;
+    height: 80%;
+    background-color: aqua;
+}
+
+.central__aside {
+    flex-basis: 10%;
+    background-color: aquamarine;
+}
+
+.central__main {
+    flex-basis: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.central__main-title {
+    flex-basis: 10%;
+    background-color: darkgoldenrod;
+    margin: 0;
+}
+
+.central__main-body {
+    flex-basis: 90%;
+    background-color: hotpink;
+    margin: 0;
+}
+
+.header, .footer {
+    height: 10%;
+    background-color: burlywood;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-bar {
+    width: 50%;
+    background-color: cornflowerblue;
+}
+
