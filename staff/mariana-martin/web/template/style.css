@@ -135,13 +135,29 @@ input:hover{
     display: inline-block;
     width: 20%;
     margin-right: 23%;
+   
+}
+
+.information__aboutus{
+    text-align: center;
+    background-color: lightseagreen;
+    color: whitesmoke;
+    border-radius: 20px;
+    margin-left: 23%;
+    margin-bottom: 20%;
+    
 }
 
 .information__products{ 
     background: lightgray;
+    height: 100%;
+    width: 100%;
+    margin-left: 50%;
+    margin-top: 20%;
+    
+  
 }
  
-
 
 /*register container*/
 
