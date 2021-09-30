@@ -1,7 +1,7 @@
 /*General*/
 
 .body{
-    background-color:peachpuff
+    background-color:white
 }
 
 .linea{
@@ -26,7 +26,6 @@
     font-family: 'Courier New', Courier, monospace;
     font-style: italic;
     text-decoration: underline;
-
 }
 
 .image{
@@ -53,7 +52,6 @@
 
 .video{
     text-align: center;
-
 }
 
 /*LOGIN+REGISTER*/
@@ -72,14 +70,12 @@
     display: inline-block;
     background-color: black;
     color: white;
-    
 }
 
 .field{
     border-radius: 5px;
     border-style: solid;
     margin: 5px;
-    
 }
 
 .button{

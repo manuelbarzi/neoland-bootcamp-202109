@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+
+/*Head*/
+.header{
+    padding: 2px;
+    margin-bottom: 20px;
+    border-bottom: 2px dashed #504f4f;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__img{
+    display: flex;
+    
+}
+.img__letter{
+    padding-top: 20px;
+}
+.head__button{
+    float: right;
+    display: block;
+    padding-top: 2rem;
+}
+
+.button{
+    font-family: 'Comfortaa', cursive;
+    text-decoration:none;
+    font-weight: 600;
+    font-size: 20px;
+    color:#333333;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-left:40px;
+    padding-right:40px;
+    background-color:#FFD27D;
+    border-color: #504f4f;
+    border-width: 2px;
+    border-style: solid;
+    border-radius:35px;
+    margin-top: 10px;
+}
+
+.button:hover{
+    background-color:#c4a56c ;
+}
+
+
+/*content*/
+
+.body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family:'Comfortaa', cursive ;
+}
+
+.body__content{
+    width: 60%;
+    min-height: 800px;
+    background-color:#fde3b3;
+    border-radius: 20px;
+    
+}
+.description{
+    display: flex;
+    width: auto;
+
+}
+.img{
+    padding: 20px;
+    border-radius: 35px;
+    
+}
+
+.margin__text{
+    margin-top: 100px;
+}
+
+/*Footer*/
+.footer{
+    padding: 2px;
+    margin-top: 20px;
+    border-top:2px dashed #504f4f;
+
+}
+
+.footer__flex{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.footer__flex-media{
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 4px;
+}
+.media{
+    margin-right: 20px;
+}
+/*Login*/
+.body__content-login{
+    background-image: url('IMG_login.jpg');
+	text-align: center;
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: static;
+    width: 1600px;
+    height: 100%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    
+}
+
+.body__content-text{
+    width: 60%;
+    min-height: 500px;
+    background-color:#fde3b3;
+    border-radius: 20px;
+    display: block;
+    align-items: center;
+    justify-content: center;
+    font-family:'Comfortaa', cursive ;
+    margin-top: 40px;
+    margin-bottom: 100px;
+    margin-left: 600px;
+    margin-right: 600px;
+}
+.body__content-check{
+    margin-top: 90px;
+    }
+.body__content-register{
+    font-size: x-large;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.field{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0px;
+    box-sizing: border-box;
+}
+
+/*register*/
+.body__content-checkregister{
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+}
+.body__content-register-img{
+    background-image: url('IMG_ovillo.jpg');
+	text-align: center;
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	position: static;
+    width: 1600px;
+    height: 100%;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+}
