@@ -1,30 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-</head>
-<body>
 
-
-    <form class="form" id="login">
-        <div class="title">
-            <h1>LOGIN</h1>
-        </div>
-        <div class="form__datos">
-        <label class="form__dato" for="username">Username</label>
-        <input class="form__dato" type="text" name="username" id="username" placeholder="username"><br>
-        <label class="form__dato" for="password">Password</label>
-        <input class="form__dato" type="password" name="password" id="password" placeholder="password"><br>
-        
-        <button type="submit" class="form__send form__send--log">Login</button>
-        <button type="reset" class="form__send">Clear</button>
-        </div>
-
-        <button class="size"><a href="index.html" class="nav_link nav__link--home">🏠</a></button>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="container">
+    <form class="panel panel--login" action="">
+      <h1 class="panel__title">Login</h1>
+      <label for="username">Username</label>
+      <input
+        class="field"
+        type="text"
+        name="username"
+        id="username"
+        placeholder="username"
+      /><br />
+      <label for="password">Password</label>
+      <input
+        class="field"
+        type="password"
+        name="password"
+        id="password"
+        placeholder="password"
+      /><br />
+      <div class="button">
+        <button class="button__prop" type="submit">Login</button>
+        <button class="button__prop" type="reset">Clear</button>
+        <button class="button__prop" ><a href="./index.html">🏠<s/a></button>
+      </div>
     </form>
-</body>
+  </body>
 </html>

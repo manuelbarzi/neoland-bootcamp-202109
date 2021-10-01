@@ -4,28 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Register</title>
-</head>
-<body>
-    <form class="form" id="register">
-        <div class="title">
-            <h1>REGISTER</h1>
-        </div>
-            <div class="form__datos">
-            <label class="form__dato" for="name">Name</label>
-            <input class="form__dato" type="text" name="name" id="name" placeholder="name"><br>
-            <label class="form__dato" for="birthdate">Birth</label>
-            <input class="form__dato form__datos--age" type="date" name="birth" id="birthdate"><br>
-            <label class="form__dato" for="username">Username</label>
-            <input class="form__dato" type="text" name="username" id="username" placeholder="username"><br>
-            <label class="form__dato" for="password">Password</label>
-            <input class="form__dato" type="password" name="password" id="password" placeholder="password"><br>
 
-            <button type="submit" class="form__send--reg">Register</button>
-            <button type="reset">Clear</button><br>
-        </div>
-        <button class="size"><a href="index.html" class="nav_link nav__link--home">🏠</a></button>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="container">
+    <form class="panel panel--register" action="" id="register">
+        <h1 class="panel__title">Register</h1>
+        <label for="name">Name</label> <input class="field" type="text" name="name" id="name" placeholder="name"><br>
+        <label for="birthdate">Birth</label> <input class="field" type="date" name="birth" id="birthdate"><br>
+        <label for="username">Username</label> <input class="field" type="text" name="username" id="username"
+            placeholder="username"><br>
+        <label for="password">Password</label> <input class="field" type="password" name="password" id="password"
+            placeholder="password"><br>
+            <div class="button">
+        <button class="button__prop" type="submit">Register</button>
+        <button class="button__prop" type="reset">Clear</button>
+        <button class="button__prop" ><a href="./index.html">🏠</a></button>
+    </div>
     </form>
 </body>
-</html>
+</html> 

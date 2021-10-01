@@ -1,69 +1,205 @@
-body {
-    background-color: beige
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@500&display=swap');
+/* Resets */
+
+* {
+    box-sizing: border-box;
 }
 
-.size  {
-    padding: 10px;
-
+html, body {
+    height: 100%; 
+    padding: 0;
+    margin: 0;
+    border: 0;
 }
 
-.header {
-    margin-top: 50px;
-    text-align: center;
-}
-.title {
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color:crimson;
+/* RESUSABLES */
+
+/* Button */
+
+.button {
+  display: flex;
+  justify-content: center;;
 }
 
-.nav {
-    padding: 10px;
-    height: 120px;
-    width: 50%;
-    background-color: aqua;
-    display: inline-block;
+.button__prop {
+    font-family: 'Teko', sans-serif;
+    font-size: 14px;
+    border-radius: 14px;
+    border-style: solid;
+    margin: 5px;
+    background-color: #D9CAB3;
+    
+    
     
 }
 
-.nav_link {
-    text-decoration: none;
-    color: blue;
-    padding: 8px;
-    margin-inline: 10px;
+/* Field */
+
+.center {
+  display: flex;
+  justify-content: center;
 }
 
-.nav__link--home {
-    color: black;
+.field {
+    border-radius: 16px;
+    border-style: solid;
+    border-color: #D9CAB3;
+    margin: 5px;
 }
 
-.form {
-    display: block;
-    width: fit-content;
-    margin: 0 auto;
-    margin-top: 10px;
-    background-color: aqua;
+.field:focus {
+  outline: 3px solid #212121;
+}
+
+/* Panel */
+
+.panel {
+    display: inline-block;
+    background-color: #6D9886;
+    border-color: #D9CAB3;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 2px 2px 8px grey;
+
+}
+
+.panel__title {
+    font-family: 'Bebas Neue';
+    font-size: 1rem;
     text-align: center;
-    padding: 50px;
-    box-shadow: 10px 10px 10px lightgray
+    border-style: solid;
+    border-radius: 16px;
+    background-color:#D9CAB3;
+    box-shadow: 2px 2px 8px grey;
 }
 
-.form__datos {
-    margin: 20px;
+.panel--register {
+    background-color: #6D9886;
+    border-color: #D9CAB3;
+    border-color:black;
+    box-shadow: 2px 2px 8px grey;
 }
 
-.form__dato {
-    margin-block: 10px;
-    color: green;
+.panel--login {
+    background-color:#D9CAB3;
+    color: #212121;;
+    border-color: #212121;
 }
-.form__send--reg {
-    color: blue;
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CUSTOM */
+
+/* Search */
+
+label {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-style: bold;
+  text-shadow: 2px 2px 6px grey;
+} 
+
+.nav-bar__link:hover {
+    border-radius: 30%;
+    box-shadow: 0 0 30px black;
+  
+  
+}
+
+.central__main-title {
+    font-family: 'Teko', sans-serif;
+    text-align: center;
+    text-shadow: 2px 2px 5px goldenrod;
+}
+
+.search {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.search__body {
+    margin: 0;
+}
+
+.search__title {
+    background-color: black;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: darkgray;
+    color: white;
+}
+
+.central {
+    display: flex;
+    height: 80%;
+    background-color:#6D9886;
+}
+
+.central__aside {
+    flex-basis: 10%;
+    background-color: #f6f6f6;
+}
+
+.central__main {
+    flex-basis: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.central__main-title {
+    flex-basis: 10%;
+    background-color:#f6f6f6;
+    margin: 0;
+}
+
+.central__main-body {
+    flex-basis: 90%;
+    background-color:#D9CAB3;
+    margin: 0;
+}
+
+.header {
+    height: 10%;
+    background-color: #6D9886;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    height: 10%;
+    background-color: #6D9886;
+    display: flex;
+    justify-content: end; 
+}
+
+.nav-bar {
+    font-family: 'Teko', sans-serif;
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    background-color: #212121;
+    border-radius: 15px;
+    box-shadow: 2px 2px 5px #212121;
+    border:solid #D9CAB3
+
+
+}
+.nav-bar__link {
+  text-decoration: none;
+  color: #D9CAB3;
 }
 
 
-.form__send--log {
-    color: blue;
-}
-
-.form__datos--age {
-    color: red
+.nav-social__icon {
+    height: 35px;
+    margin: 10px;
 }
