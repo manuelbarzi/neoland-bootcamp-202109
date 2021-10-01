@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Birthstone&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+.montaña{
+    background-image: url(https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimagenes.4ever.eu%2Fdata%2Fdownload%2Fnaturaleza%2Fpaisajes%2Flago-de-montana%2C-montana-rocosa%2C-bosques-de-coniferas-213037.jpg&f=1&nofb=1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+.form{
+    width: 600px;
+    background-color: cadetblue;
+    display:flex;
+    flex-direction: column;
+    border-radius: 30px;
+    padding: 50px;
+
+}
+
+.form__title {
+    text-align: center; 
+    font-family: 'Birthstone', cursive;
+    font-size: 3rem;
+
+}
+
+.form__subtitle{
+    text-align: center;
+    font-size: 1.2rem;
+}
+.form__input-register{
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.form__input{
+    margin: 5px;
+    height: 50px;
+    width: 300px;
+    border-radius: 20px;
+    border:none;
+    padding: 15px;   
+    
+}
+
+.form__terms{
+    justify-content: center;
+    display: flex;
+}
+
+.link {
+    text-decoration: none;
+}
+ 
+.button {
+    height: 40px;
+    width: 100px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(157, 238, 103);
+    align-self: center;
+    margin-top: 20px;
+
+}
