@@ -11,6 +11,7 @@ html, body {
     padding: o;
     border: 0;
     margin: 0;
+    width: 100% ;
 }
 /* reusable */
 
@@ -164,4 +165,59 @@ html, body {
     background-color: white;
     color: black;
     border: black;
+}
+.main {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "product-1"
+    "product-2"
+    "product-3"
+    "product-4"
+    ;
+
+}
+ .menu-products {
+    position: initial;
+}
+
+@media screen and (min-width: 512px) {
+    .main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 50% auto;
+        grid-template-areas: 
+        "product-1 product-1"
+        "product-2 product-3"
+        "product-2 product-4"
+        ;
+    }
+.product-1 {
+    grid-area: product-1;
+}
+.product-2 {
+    grid-area: product-2;
+}.product-3 {
+    grid-area: product-3;
+}.product-4 {
+    grid-area: product-4;
+}
+/* @media screen and (min-width: 960px;) {
+    .main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 50% auto;
+        grid-template-areas: 
+        "product-1 product-1"
+        "product-2 product-3"
+        "product-2 product-4"
+        ;
+    }  */
+    
+
+}
+.product {
+    border: black dotted 1px;
 }
