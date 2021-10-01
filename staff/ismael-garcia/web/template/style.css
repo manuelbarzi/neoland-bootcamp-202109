@@ -2,65 +2,77 @@
 
 /* REGISTER PAGE */
 
+* {
+  box-sizing: border-box;
+}
+
+.register-img {
+  background-image: url(https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimagenes.4ever.eu%2Fdata%2Fdownload%2Fnaturaleza%2Fpaisajes%2Flago-de-montana%2C-montana-rocosa%2C-bosques-de-coniferas-213037.jpg&f=1&nofb=1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
 .form {
-  border: 1px solid white; /* border-width | border-style | border-color */
-  background-color: lightgray;
-  border-radius: 5px;
-  padding: 20px;
-  color: gray;
-  width: 500px;
-  height: 500px;
-  margin: 0 auto;
+  width: 600px;
+  background-color: cadetblue;
+  display: flex;
+  flex-direction: column;
+  border-radius: 30px;
+  padding: 50px;
 }
 
 .form__title {
-  font-size: 3rem;
-  color: darkred;
   text-align: center;
+  font-family: "Birthstone", cursive;
+  font-size: 3rem;
 }
 
 .form__subtitle {
-  color: rgb(27, 30, 34);
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
-.form__inputname {
-  margin-left: 96px;
-}
-
-.form__inputinline {
-  display: inline-block;
-  height: 25px;
+.form__input-register {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .form__input {
-  display: block;
-  width: 50%;
-  margin: 0 auto;
-  margin-top: 20px;
-  height: 25px;
+  margin: 5px;
+  height: 50px;
+  width: 300px;
+  border-radius: 20px;
+  border: none;
+  padding: 15px;
 }
 
 .form__terms {
-  margin-left: 90px;
-  margin-top: 20px;
+  justify-content: center;
+  display: flex;
+}
+
+.link {
+  text-decoration: none;
 }
 
 .button {
-  display: block;
-  height: 50px;
-  margin: 0 auto;
-  padding: 0 10px;
+  height: 40px;
+  width: 100px;
+  border-radius: 20px;
+  border: none;
+  background-color: rgb(157, 238, 103);
+  align-self: center;
   margin-top: 20px;
-  background-color: mediumseagreen;
-  border-radius: 5px;
-  color: white;
 }
 
 /*lOGIN PAGE*/
 
-.background__login {
+.background-login {
   background-color: teal;
 }
 .login {
@@ -108,19 +120,55 @@
 
 /* HOME PAGE */
 
+/* Resets */
+
+* {
+  /* border: 1px dashed black; */
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
 .background-img {
   background-image: url(https://fondosmil.com/fondo/17010.jpg);
-  height: 100vw;
+  /*height: 100vw;*/
   background-size: cover;
   background-repeat: no-repeat;
   margin: 0;
+  display: flex;
+  flex-flow: column;
+  /*justify-content: center;
+  align-items: center;*/
+}
+
+.header {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  flex-flow: column;
+}
+
+.nav-bar {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
 }
 
 .home {
   font-family: "Ephesis", cursive;
-  text-align: center;
   color: white;
-  margin-top: 200px;
+  /*margin-top: 200px;*/
+  height: 90%;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
 
 .home__title {
