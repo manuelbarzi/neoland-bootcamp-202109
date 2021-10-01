@@ -7,13 +7,14 @@
 }
 
 .register-img {
-  background-image: url(https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimagenes.4ever.eu%2Fdata%2Fdownload%2Fnaturaleza%2Fpaisajes%2Flago-de-montana%2C-montana-rocosa%2C-bosques-de-coniferas-213037.jpg&f=1&nofb=1);
+  background-image: url(https://fondosmil.com/fondo/17010.jpg);
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
 }
+
 .form {
   width: 600px;
   background-color: cadetblue;
