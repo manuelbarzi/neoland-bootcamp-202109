@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@500&display=swap');
 /* Resets */
 
 * {
@@ -23,21 +23,33 @@ html, body {
 }
 
 .button__prop {
-    border-radius: 16px;
+    font-family: 'Teko', sans-serif;
+    font-size: 14px;
+    border-radius: 14px;
     border-style: solid;
     margin: 5px;
     background-color: #D9CAB3;
+    
     
     
 }
 
 /* Field */
 
+.center {
+  display: flex;
+  justify-content: center;
+}
+
 .field {
     border-radius: 16px;
     border-style: solid;
     border-color: #D9CAB3;
     margin: 5px;
+}
+
+.field:focus {
+  outline: 3px solid #212121;
 }
 
 /* Panel */
@@ -64,17 +76,17 @@ html, body {
     box-shadow: 2px 2px 8px grey;
 }
 
-.panel--light {
+.panel--register {
     background-color: #6D9886;
     border-color: #D9CAB3;
     border-color:black;
     box-shadow: 2px 2px 8px grey;
 }
 
-.panel--dark {
+.panel--login {
     background-color:#D9CAB3;
     color: #212121;;
-    border-color: #6D9886;
+    border-color: #212121;
 }
 
 .container {
@@ -92,6 +104,19 @@ label {
   font-style: bold;
   text-shadow: 2px 2px 6px grey;
 } 
+
+a:hover {
+  border-bottom: #6D9886;
+  border-bottom-style:ridge;
+  border-color: goldenrod;
+  
+}
+
+.central__main-title {
+    font-family: 'Teko', sans-serif;
+    text-align: center;
+    text-shadow: 2px 2px 5px goldenrod;
+}
 
 .search {
     display: inline-block;
@@ -115,12 +140,12 @@ label {
 .central {
     display: flex;
     height: 80%;
-    background-color: aqua;
+    background-color:#6D9886;
 }
 
 .central__aside {
     flex-basis: 10%;
-    background-color: aquamarine;
+    background-color: #f6f6f6;
 }
 
 .central__main {
@@ -131,26 +156,37 @@ label {
 
 .central__main-title {
     flex-basis: 10%;
-    background-color: darkgoldenrod;
+    background-color:#f6f6f6;
     margin: 0;
 }
 
 .central__main-body {
     flex-basis: 90%;
-    background-color: hotpink;
+    background-color:#D9CAB3;
     margin: 0;
 }
 
 .header, .footer {
     height: 10%;
-    background-color: burlywood;
+    background-color: #6D9886;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .nav-bar {
+    font-family: 'Teko', sans-serif;
+    display: flex;
+    justify-content: space-around;
     width: 50%;
-    background-color: cornflowerblue;
-}
+    background-color: #212121;
+    border-radius: 15px;
+    box-shadow: 2px 2px 5px #212121;
+    border:solid #D9CAB3
 
+
+}
+.nav-bar__link {
+  text-decoration: none;
+  color: #D9CAB3;
+}

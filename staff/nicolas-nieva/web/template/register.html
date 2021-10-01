@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="container">
-    <form class="panel panel--light" action="" id="register">
+    <form class="panel panel--register" action="" id="register">
         <h1 class="panel__title">Register</h1>
         <label for="name">Name</label> <input class="field" type="text" name="name" id="name" placeholder="name"><br>
         <label for="birthdate">Birth</label> <input class="field" type="date" name="birth" id="birthdate"><br>
@@ -17,8 +17,11 @@
             placeholder="username"><br>
         <label for="password">Password</label> <input class="field" type="password" name="password" id="password"
             placeholder="password"><br>
-        <button class="button" type="submit">Register</button>
-        <button class="button" type="reset">Clear</button>
+            <div class="button">
+        <button class="button__prop" type="submit">Register</button>
+        <button class="button__prop" type="reset">Clear</button>
+        <button class="button__prop" ><a href="./index.html">🏠</a></button>
+    </div>
     </form>
 </body>
 </html> 
