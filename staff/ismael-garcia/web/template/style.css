@@ -161,7 +161,6 @@ body {
 .home {
   font-family: "Ephesis", cursive;
   color: white;
-  /*margin-top: 200px;*/
   height: 90%;
   display: flex;
   flex-flow: column;
