@@ -37,6 +37,7 @@ html, body {
     padding: 10px;
     align-content: center;
     font-family: roboto condensed;
+    background-color: white;
 }
 .panel__title {
     text-align: center;
@@ -123,10 +124,7 @@ html, body {
 
 /* custom */
 
-.register {
-    background-color: white;
-    border-color: black;
-}
+
 .links {
     padding-top: 20px;
     text-decoration: none;
