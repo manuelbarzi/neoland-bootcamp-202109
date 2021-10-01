@@ -39,15 +39,8 @@ html, body {
     font-family: roboto condensed;
     background-color: white;
 }
-.panel__title {
-    text-align: center;
-}
-
 
 .panel__field {
-    border-radius: 15px;
-    border-style: solid;
-    border-color: darkgray;
     margin: 2.5px 0px 2.5px 10px;
 }
 
@@ -58,7 +51,8 @@ html, body {
     text-align: center;
     width: fit-content;
     margin: 0 auto;
-    box-shadow: 20px 20px 30px grey;
+    box-shadow: 20px 20px 30px gray;
+    background-color: wheat;
 }
 
 .title {
@@ -69,12 +63,7 @@ html, body {
 
     display: inline-block;
 }
-.menu__item {
-    color: white;
-    margin: 0px 10px 0px 10px;
-    text-decoration: none;
 
-}
 .menu {
     background-color: black;
     padding: 10px;
@@ -83,34 +72,14 @@ html, body {
     position: sticky;
     top: 0;
 }
-.columns {
-    display: flex;
-}
-.columns__left {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 85%;
+.menu__item {
+    color: white;
     margin: 0px 10px 0px 10px;
-}
-.column__right {
-    text-align: center;
-    background-color: wheat;
-    width: fit-content;
-    padding: 10px;
-    height: fit-content;
-    margin: 0px 10px 0px 10px;
-    border-radius: 5px; 
-    flex-basis: 12%;
+    text-decoration: none;
 
 }
-.column__right--item {
-    margin: 10px 5px 10px 5px;
-    padding: 10px;
-    background-color: black;
-    color: white;
-    border-radius: 10px;
-    border: black solid 1px;
-    height: fit-content;
+.columns {
+    display: flex;
 }
 
 .footer{
@@ -118,14 +87,16 @@ html, body {
     height: 300px;
     margin-top: 20px;
 }
-.area-panel {
-    background-color: wheat;
-}
+
 
 /* custom */
 
 
-.links {
+.panel__title {
+    text-align: center;
+}
+
+.panel__links {
     padding-top: 20px;
     text-decoration: none;
     color: black;
@@ -157,9 +128,37 @@ html, body {
    text-decoration: none;
    color: white;
 }   
+.columns__left {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 85%;
+    margin: 0px 10px 0px 10px;
+}
+.column__right {
+    text-align: center;
+    background-color: wheat;
+    width: fit-content;
+    padding: 10px;
+    height: fit-content;
+    margin: 0px 10px 0px 10px;
+    border-radius: 5px; 
+    flex-basis: 12%;
+
+}
+.column__right--item {
+    margin: 10px 5px 10px 5px;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    border: white 2px solid;
+    height: fit-content;
+}
+
 .column__right-item-light {
     background-color: white;
     color: black;
+    border: black 2px solid;
 }
 .btn__light {
     background-color: white;
