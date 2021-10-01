@@ -105,10 +105,9 @@ label {
   text-shadow: 2px 2px 6px grey;
 } 
 
-a:hover {
-  border-bottom: #6D9886;
-  border-bottom-style:ridge;
-  border-color: goldenrod;
+ .nav-bar__link:hover {
+    border-radius: 30%;
+    box-shadow: 0 0 30px #212121;
   
 }
 
@@ -118,60 +117,55 @@ a:hover {
     text-shadow: 2px 2px 5px goldenrod;
 }
 
-.search {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    border: 0;
-}
-
-.search__body {
-    margin: 0;
-}
-
-.search__title {
-    background-color: black;
-    border-radius: 5px;
-    border-style: solid;
-    border-color: darkgray;
-    color: white;
-}
-
 .central {
     display: flex;
-    height: 80%;
+    height: 90%;
     background-color:#6D9886;
 }
 
 .central__aside {
-    flex-basis: 10%;
-    background-color: #f6f6f6;
+    flex-basis: 5%;
+    background-color: #6D9886;
 }
 
 .central__main {
-    flex-basis: 80%;
+    flex-basis: 95%;
     display: flex;
     flex-direction: column;
+    background-color: #e5e5f7;
+    
 }
 
 .central__main-title {
-    flex-basis: 10%;
-    background-color:#f6f6f6;
+    flex-basis: 5%;
+    text-align: center;
+    font-size: 25px;
+    background-color:#6D9886;
     margin: 0;
 }
 
 .central__main-body {
-    flex-basis: 90%;
+    flex-basis: 95%;
     background-color:#D9CAB3;
     margin: 0;
+    opacity: 0.8;
+    background-image: radial-gradient(circle at center center, #d9cab3, #6d9886), repeating-radial-gradient(circle at center center, #6d9886, #212121, 10px, transparent 20px, transparent 10px);
+    background-blend-mode: multiply;
 }
 
-.header, .footer {
-    height: 10%;
+.header {
+    height:5%;
     background-color: #6D9886;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.footer {
+    height: 5%;
+    background-color: #6D9886;
+    display: flex;
+    justify-content: end; 
 }
 
 .nav-bar {
@@ -189,4 +183,14 @@ a:hover {
 .nav-bar__link {
   text-decoration: none;
   color: #D9CAB3;
+}
+
+.nav-social__icon {
+    height: 28px;
+    margin: 7px;
+} 
+
+.nav-social__icon:hover{
+    background: #eee;
+    box-shadow: 0 8px 8px -4px lightblue;
 }
