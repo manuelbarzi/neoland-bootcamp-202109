@@ -1,0 +1,50 @@
+/*BLOG*/
+@import url('https://fonts.googleapis.com/css2?family=Birthstone&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+.blog__container{
+    font-family: "Ephesis", cursive;
+    height: 90%;
+    width: 100%;
+}
+
+/* .blog__post{
+
+} */
+
+.blog__image{
+    width: 100%;
+}
+
+.blog__text{
+    padding: 15px;
+}
+
+.copy{
+    text-align: center;
+}
+
+.social{
+    padding:15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+footer .social img{
+    margin:0 auto;
+    width:30px;
+    height: 30px;
+}
+
+/* Tablet */
+@media screen and (max-width: 992px) {
+
+}
+
+/* Mobile */
+@media screen and (max-width: 600px) {
+
+}
