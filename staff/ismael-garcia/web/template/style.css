@@ -1,23 +1,35 @@
 @import url("https://fonts.googleapis.com/css2?family=Ephesis&display=swap");
 
-/* REGISTER PAGE */
+/*resets*/
 
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
+
+html,
+body {
+  height: 100%;
+}
+
+/* REGISTER PAGE */
 
 .register-img {
   background-image: url(https://fondosmil.com/fondo/17010.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
 }
 
 .form {
   width: 600px;
-  background-color: cadetblue;
+  background-color: transparent;
+  border: 2px solid white;
   display: flex;
   flex-direction: column;
   border-radius: 30px;
@@ -25,12 +37,14 @@
 }
 
 .form__title {
+  color: white;
   text-align: center;
   font-family: "Birthstone", cursive;
   font-size: 3rem;
 }
 
 .form__subtitle {
+  color: white;
   text-align: center;
   font-size: 1.2rem;
 }
@@ -57,8 +71,13 @@
   display: flex;
 }
 
+.form__label {
+  color: white;
+}
+
 .link {
   text-decoration: none;
+  color: rgb(206, 111, 74);
 }
 
 .button {
@@ -66,7 +85,8 @@
   width: 100px;
   border-radius: 20px;
   border: none;
-  background-color: rgb(157, 238, 103);
+  color: white;
+  background-color: rgb(206, 111, 74);
   align-self: center;
   margin-top: 20px;
 }
@@ -74,32 +94,42 @@
 /*lOGIN PAGE*/
 
 .background-login {
-  background-color: teal;
+  background-image: url(https://fondosmil.com/fondo/17010.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .login {
   width: 500px;
-  height: 300px;
-  background-color: cadetblue;
+  height: 400px;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 30px;
   display: flex;
   flex-direction: column;
-  border-radius: 30px;
+  justify-content: space-around;
+  align-items: center;
   padding: 30px;
-  box-sizing: border-box;
 }
 
 .login__title {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Birthstone", cursive;
   text-align: center;
+  color: white;
 }
 
 .login__input {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  text-align: center;
-}
-
-.login__input::placeholder {
-  color: slateblue;
+  /*font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;*/
+  height: 50px;
+  width: 300px;
+  border-radius: 20px;
+  border: none;
+  padding: 15px;
 }
 
 .login__button {
@@ -108,29 +138,15 @@
   height: 35px;
   margin: 0 auto;
   display: block;
+  border-style: none;
   border-radius: 20px;
-  background-color: rgb(99, 99, 233);
+  background-color: rgb(206, 111, 74);
   margin-bottom: 25px;
   font-size: 1.2rem;
   color: white;
 }
 
 /* HOME PAGE */
-
-/* Resets */
-
-* {
-  /* border: 1px dashed black; */
-  box-sizing: border-box;
-}
-
-html,
-body {
-  height: 100%;
-  padding: 0;
-  margin: 0;
-  border: 0;
-}
 
 .background-img {
   background-image: url(https://fondosmil.com/fondo/17010.jpg);
@@ -150,12 +166,23 @@ body {
   display: flex;
   align-items: flex-end;
   flex-flow: column;
+  border-bottom: 1px solid white;
+  /*height: 40px;*/
+  font-family: "Ephesis", cursive;
+  font-size: 1.4rem;
 }
 
 .nav-bar {
-  width: 50%;
+  /*width: 50%;*/
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.nav-bar__item {
+  color: white;
+  text-decoration: none;
+  margin-right: 20px;
 }
 
 .home {
@@ -187,21 +214,103 @@ body {
   color: white;
 }
 
-.header {
+/* BLOG PAGE */
+
+.blog-body {
+  background-color: rgb(206, 111, 74);
+}
+
+.blog-grid {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 75px auto auto auto auto 50px;
+  grid-template-areas:
+    "blog-grid__header"
+    "blog-grid__title"
+    "div-img-1"
+    "div-img-2"
+    "div-img-3"
+    "div-img-4"
+    "blog-grid__footer";
+}
+
+@media screen and (min-width: 960px) {
+  .blog-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 75px 100px auto auto 75px;
+    grid-template-areas:
+      "blog-grid__header blog-grid__header"
+      "blog-grid__title blog-grid__title"
+      "div-img-1 div-img-2"
+      "div-img-3 div-img-4"
+      "blog-grid__footer blog-grid__footer";
+  }
+}
+
+.blog-grid__header {
+  /*height: 10%;*/
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  flex-flow: column;
   border-bottom: 1px solid white;
-  height: 40px;
+  /*height: 40px;*/
+  font-family: "Ephesis", cursive;
+  font-size: 1.4rem;
+  grid-area: blog-grid__header;
+}
+
+.blog-grid__title {
+  grid-area: blog-grid__title;
+  display: flex;
+  justify-content: center;
+  font-family: "Ephesis", cursive;
+  font-size: 3rem;
+  color: white;
+}
+
+.img {
+  max-width: 100%;
+  height: auto;
+}
+
+.div-img-1 {
+  grid-area: div-img-1;
+  color: white;
+}
+
+.div-img-2 {
+  grid-area: div-img-2;
+  color: white;
+}
+
+.div-img-3 {
+  grid-area: div-img-3;
+  color: white;
+}
+
+.div-img-4 {
+  grid-area: div-img-4;
+  color: white;
+}
+
+.blog-grid__footer {
+  grid-area: blog-grid__footer;
+  /*height: 10%;*/
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-flow: column;
+  border-top: 1px solid white;
+  /*height: 40px;*/
   font-family: "Ephesis", cursive;
   font-size: 1.4rem;
 }
 
-.nav-bar {
+.nav-bar-footer {
+  /*width: 50%;*/
   display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-}
-
-.nav-bar__item {
-  color: white;
-  text-decoration: none;
-  margin-right: 20px;
+  justify-content: flex-start;
+  margin-bottom: 10px;
 }
