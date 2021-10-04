@@ -1,0 +1,136 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+
+body {
+	background: black;
+	color: whitesmoke;
+
+	;
+	font-family: 'Roboto', sans-serif;
+}
+
+.banner__titles {
+	height: 100%;
+	font-size: 5em;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.menu {
+    position: sticky;
+    top: 0;
+    background: yellowgreen;
+    padding: 20px 0;
+}
+
+.menu__list {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.menu__item {
+    display: inline;
+}
+
+.menu__link {
+    color: black;
+    font-size: 1em;
+    line-height: 1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 20px;
+    display: inline-block;
+    font-weight: 500;
+}
+
+
+.menu__link:hover {
+	border-radius: 10px;
+    background: black;
+	color: whitesmoke;
+}
+
+
+.contenedor {
+	width: 90%;
+	max-width: 1200px;
+	margin: auto;
+	padding: 40px 0;
+	display: grid;
+	grid-template-rows: 1fr 3fr;
+	gap: 20px;
+}
+
+.titulo {
+	font-size: 24px;
+	padding: 20px 0;
+}
+
+.contenedor-conciertos {
+	
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+
+}
+
+.card {
+	border-radius: 10px;
+	min-height: 200px;
+	font-weight: bold;
+	padding: 20px;
+	position: relative;
+	overflow: hidden;
+	background-size: cover;
+	background-position: center;
+
+	
+}
+
+.card__textos {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+	
+}
+
+
+.card__button {
+	background: yellowgreen;
+	height: 30px;
+	font-weight: bold;
+	font-size: 14px;
+	text-align: center;
+	border: none;
+	border-radius: 100px;
+	font-family: 'Roboto', sans-serif;
+	cursor:pointer;
+	align-items: flex-end;
+
+}
+
+.banner {
+	border-radius: 10px;
+	text-align: center;
+	padding: 20px;
+	background-size: cover;
+	background-position: center;
+	display: grid;
+	flex-direction: column;
+	justify-content: center
+
+}
+
+
+
+
+@media screen and (max-width: 600px) {
+
+}
