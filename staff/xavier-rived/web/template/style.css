@@ -1,0 +1,24 @@
+.register__box{
+    border-radius: 2px;
+    border-color: black;
+    border-style: solid;
+    margin-inline: 30%;
+    background-color: white;
+    height: 500px;
+
+}
+.body{
+    background-color: burlywood;
+}
+
+.register{
+text-align: center;
+
+}
+
+.content{
+display: flex;
+justify-content: center;
+height: 50%;
+align-items: center;
+}
