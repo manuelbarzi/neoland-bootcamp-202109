@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+
+
+h1, h2{
+    font-family: Oswald;
+
+}
+
+p{
+    font-family: Arial, Helvetica, sans-serif;
+    color:rgb(33, 68, 134);
+}
+
+.header{
+background-color: rgb(33, 68, 134);
+padding: 20px; 
+text-align: center;
+color: white;
+}
+
+.middle__form{
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(33, 68, 134);;
+}
+.nav__bar{
+    display: inline;
+    list-style-type: none;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+}
+
+.middle__form{
+    background-color: rgb(233, 229, 229);
+    padding: 10%;
+}
+
+.aboutus{
+    color: rgb(33, 68, 134);
+    padding: 5%;
+}
+
+.products{
+    color: rgb(33, 68, 134);
+    padding: 5%;
+}
+
+.feature1{
+    background-color: rgb(33, 68, 134);
+    padding: 5%;
+    color: white;
+}
+.feature1__info{
+    color: white;
+}
+
+.feature2 {
+    background-color: rgb(236, 158, 56);
+    color: white;
+    padding: 5%;
+}
+
+.feature2__info{
+    color: white;
+}
+
+.feature3{
+    background-color: rgb(33, 68, 134);
+    padding: 5%;
+    color: white;
+}
+
+.feature3__info{
+    color: white;
+}
+
+.footer{
+    background-color: lightsteelblue;
+    padding: 2%;
+    color: white;
+    
+}
+.footer_copy{
+    align-content: center;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+}
+
+/*@media only screen and (max-width: 768px) */
+@media only screen and (min-width: 768px) {
+
+    .header {background-color: lightsteelblue;
+    } 
+    .content {
+        display: grid;
+    }
+
+    .middle{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+   
+    
+.features{
+    display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+}
+
+    
+/*@media only screen and (max-width: 768px) {*/   
+    
+}

@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+
+
+/* Resets */
+
+* {
+    /* border: 1px dashed black; */
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%; 
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+/* REUSABLES */
+
+h1{
+    font-family: Oswald;
+    font-size: 50px;
+    color: lightseagreen;
+    letter-spacing: 2px;
+}
+
+h2{
+    font-family: Oswald;
+    font-size: 35px;
+    letter-spacing: 4px;
+}
+
+h3{
+    font-family: Oswald;
+    font-size: 20px;
+    letter-spacing: 4px;
+    }
+
+/* button*/
+
+a{
+    text-decoration: none;
+    color: rgb(33, 68, 134);
+    
+}
+
+button{
+    color: rgb(33, 68, 134);
+    text-decoration: none;
+    border: none;
+    height: 60px;
+    width: 150px;
+    background: whitesmoke;
+    border-radius: 18px;
+    transition: all 0.3s;   
+}
+
+button :hover{
+    background-color: rgb(107, 151, 179);
+    color: white;
+    border: 2px solid;
+   
+}
+
+
+/* CUSTOM */
+
+/* Home Section */
+
+
+.central {
+    display: flex;
+    height: 60%;
+    background-color: white;
+}
+
+.central__main {
+    flex-basis: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.central__main-body{
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(33, 68, 134);
+    text-align: center;
+    
+}
+
+.central__main-title {
+    flex-basis: 10%;
+    background-color: rgb(33, 68, 134);
+    margin: 0;
+    color: white;
+    text-align: center;
+    
+
+}
+
+.central__main-body {
+    flex-basis: 70%;
+    background-color:rgb(231, 231, 231);
+    margin: 0;
+}
+
+
+.central__information{
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(33, 68, 134);
+    margin-left: 3%;
+    margin-top: px;
+}
+
+
+.header{
+    background-color: rgb(107, 151, 179);
+    margin-bottom: 20px;
+}
+
+.footer {
+    display: flex;
+    height: 10%;
+    background-color:rgb(107, 151, 179);
+    justify-content: center;
+    align-items: center;
+}
+
+/* nav-bar */
+
+.nav-bar {
+    
+    width: 100%;
+    height: 10px;;
+    background-color: rgb(236, 158, 56);
+    
+}
+
+.nav-bar__general{
+    background-color: rgb(33, 68, 134);
+    height: 50px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.nav-bar__item {
+    align-content: center;
+    color: white;
+    
+}
+
+.features{
+    height: 30%;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex: space-around;
+    box-sizing: border-box;
+    justify-content: space-between;
+
+}
+
+.features__con1{
+    color: white;
+    padding: 20px;
+    margin-left: 20px;
+    background-color: rgb(33, 68, 134);
+    
+}
+
+.features__con2{
+    color: white;
+    padding: 20px;
+    margin-left: 20px;
+    background-color: rgb(236, 158, 56);
+
+}
+
+.features__con3{
+    color: white;
+    padding: 20px;
+    margin-left: 20px;
+    background-color: rgb(33, 68, 134);
+
+}
+
+/* Login Section */
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows:100px auto 100px ;
+    grid-column-gap: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    grid-template-areas:
+                         "header header"
+                         "form content"
+                         "footer footer"
+    
+    
+}
+
+.grid__header {
+    background-color: rgb(33, 68, 134);
+    grid-area: header;
+    margin-bottom: 20px;
+    color: white;
+
+}
+
+.grid__footer-log{
+    align-self: center;
+}
+
+
+.grid__form { 
+   justify-content: center;
+    padding: 50px;
+    background-color: rgb(33, 68, 134);
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    
+}
+.grid__content {
+    background-color: rgb(236, 158, 56);
+    grid-area: content;
+    color: white;
+    padding: 40px;
+}
+
+.grid__footer {
+    background-color: rgb(33, 68, 134);
+    grid-area: footer;
+    margin-top: 20px;
+    color: white;
+    margin-top: 10px;
+  
+}
+.grid__footer-copy{
+    background-color:rgb(236, 158, 56);
+   
+
+}
+
+/* Register Section */
+
+
+
+/* Responsive */
+
+
+/* Extra small devices (phones, 600px and down) */
+
+@media only screen and (min-width: 768px) {
+    /* For desktop: */
+        
+      
+  
