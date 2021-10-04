@@ -243,19 +243,6 @@ html, body {
     row-gap: 20px;
 }
 
-
-    .product-1 {
-    grid-area: product-1;
-    }
-    .product-2 {
-    grid-area: product-2;
-    }
-    .product-3 {
-    grid-area: product-3;
-    }
-    .product-4 {
-    grid-area: product-4;
-    }
 }
 .product {
 border: 1px solid black;
