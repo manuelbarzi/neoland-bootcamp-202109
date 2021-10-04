@@ -8,10 +8,25 @@ body, html {
     height: 100%;
     margin: 0;
     border: 0;
-    padding: 0;
     text-align: center;
-    background-color: #CFDBD5;
+    background: linear-gradient(to right, #ffffff, #eebc8d 22%, #ecbe92 50%, #eebc8d 75%, #ffffff);;
     font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+    font-family: 'Nosifer', cursive;
+    color: rgb(134, 92, 92);
+}
+
+img {
+    opacity: 0.3;
+    border-top-left-radius: 300px;
+    border-top-right-radius: 300px;
+    border-bottom-left-radius: 300px;
+    border-bottom-right-radius: 300px;
+    z-index: 0;
+    transform: translate(-80px, -40px);
+    margin-bottom: -18px;
 }
 
 .center {
@@ -58,16 +73,21 @@ a {
 legend {
     font-size: 20px;
     text-decoration: underline;
-    color: rgb(80, 105, 78);
+    color: rgb(59, 95, 100);
 }
 
 input {
     width: 150px;
+    height: 25px;
     margin: 10px 0 10px 0;
-    border: rgb(80, 105, 78) solid 1px;
+    border: none;
     border-radius: 10px;
     padding: 3px;
     transition: all 0.4s;
+}
+
+input:hover {
+    border: 2px solid rgb(59, 95, 100);
 }
 
 /*BUTTONS*/
@@ -75,7 +95,7 @@ input {
 button {
     border: none;
     border-radius: 10px;
-    background-color: rgb(80, 105, 78);
+    background-color: rgb(59, 95, 100);
     transition: all 0.3s;
     width: 150px;
     height: 20px;
@@ -88,7 +108,7 @@ button {
 
 button:hover {
     background-color: white ;
-    color: rgb(80, 105, 78);
+    color: rgb(59, 95, 100);
 }
 
 /*GRID*/
@@ -127,10 +147,11 @@ button:hover {
     flex-basis: 70%;
     padding: 0 5% 0 5%;
     font-family: 'Raleway', sans-serif;   
-    border-top: 2px solid rgb(180, 180, 180); 
-    border-bottom: 2px solid rgb(180, 180, 180);
+    border-top: none; 
+    border-bottom: none;
     margin-top: 5%;
     margin-bottom: 5%;
+    z-index: 2;
 }
 
 /* Tablet */
@@ -139,26 +160,23 @@ button:hover {
     .grid__center {
         display: grid;
         grid-template-columns: 1fr 3fr;
-        grid-template-rows: 80% auto;
+        grid-template-rows: 50% 50%;
         grid-template-areas: 
         "aside main"
         "aside-2 aside-2";
     }
     .grid__center-main {
         border-bottom: none; 
-        border-left: 2px solid rgb(180, 180, 180);
         border-top: none;
         border-right: none;
         
     }
-    .grid__center-aside {
-        
-    }
     .grid__center-aside-2 {
-        margin-top: -19%;
-        border-top: solid rgb(180, 180, 180) 2px;
-        margin-left: 2%;
-        margin-right: 2%;
+        /*padding: 40px 0 40px 0;*/
+        align-items:flex-start;
+        border-top: solid rgb(134, 92, 92) 1px;
+        margin-left: 20px;
+        margin-right: 20px;
     }
     .nav-bar {
         flex-basis: 70%;
@@ -167,7 +185,7 @@ button:hover {
         font-family: 'Raleway', sans-serif;
         font-weight: 800;
         letter-spacing: 4px;
-        padding: 1% 0 1% 0;
+        padding: 20px 0 20px 0;
     }
     a {
         text-decoration: none;
@@ -175,7 +193,17 @@ button:hover {
         display:contents;
         font-family: 'Raleway', sans-serif;
         border: none;  
-        padding: 0 3% 0 3%;
+        padding: 0 40px 0 40px;
+    }
+    img {
+        opacity: 0.3;
+        border-top-left-radius: 300px;
+        border-bottom-left-radius: 300px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        z-index: 0;
+        transform: translateY(-40px);
+        margin-bottom: -18px;
     }
 }
 
@@ -197,31 +225,36 @@ button:hover {
     .grid__center {
         display: flex;
         flex-direction: row;
+        height: 50%;
     }
     .grid__center-main {
-        border-left: 2px solid rgb(180, 180, 180); 
-        border-right: 2px solid rgb(180, 180, 180);
+        border-left: none;
         border-top: none;
         border-bottom: none;
-        margin-top: 5%;
-        margin-bottom: 5%;
+        margin-top: 0;
+        margin-bottom: 0;
+
     }
     .grid__center-aside {
-        margin-top: 5%;
+        margin-top: 50px;
     }
     .grid__center-aside-2 {
-        margin-top: 0;
+        align-items: center;
+        border-top: none;
     }
     .grid__head {
         font-size: 1px;
         display: flex;
+    }
+    .grid__foot {
+        z-index: 2;
     }
     .nav-bar {
         color: white;
         font-size: 14px;
         font-family: 'Raleway', sans-serif;
         font-weight: 800;
-        padding-top: 1%8
+        padding-top: 1;
         letter-spacing: 4px;
     }
     a {
@@ -229,5 +262,15 @@ button:hover {
         color: white;
         font-family: 'Raleway', sans-serif;
         border: none;  
+    }
+    img {
+        opacity: 0.3;
+        border-top-left-radius: 300px;
+        border-top-right-radius: 300px;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        z-index: 0;
+        transform: translateY(-40px);
+        margin-bottom: -18px;
     }
 }
