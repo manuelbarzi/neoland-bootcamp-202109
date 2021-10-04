@@ -1,4 +1,4 @@
-/*General*/
+/* General
 
 .body{
     background-color:white
@@ -11,7 +11,7 @@
     text-align: center;
 }
 /*HOME*/
-
+/* 
 .font{
     font-family:'Courier New', Courier, monospace;
     font-size: 400%;
@@ -52,10 +52,10 @@
 
 .video{
     text-align: center;
-}
+} */
 
 /*LOGIN+REGISTER*/
-.center{
+/* .center{
     text-align: center;
     font-family: 'Courier New', Courier, monospace;
     font-style: italic;
@@ -82,9 +82,9 @@
     border-radius: 5px;
     border-style: solid;
     margin: 5px;
-}
+} */
 /*flexbox*/
-.box{
+/* .box{
     display: block;
 }
 
@@ -96,4 +96,4 @@
 
 .login-box {
     margin-top: 2rem;
-}
+} */ 
