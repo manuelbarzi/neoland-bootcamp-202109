@@ -1,3 +1,71 @@
+@media only screen and (max-width:667px){
+  .header{
+    display: flex;
+    flex-direction: column;
+    ;
+  }
+  
+  .header__img{
+    display: grid;
+  }
+  .img__logo{
+    width: 50px;
+    height: 50px;
+  }
+.img__letter{
+  width: 80%;
+  height: 70%;
+}
+.dropdown__button{
+  font-family: "Comfortaa", cursive;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 20px;
+  color: #333333;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 40px;
+  padding-right: 40px;
+  background-color: #ffd27d;
+  border-color: #504f4f;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 35px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown__button-content{
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  z-index: 1;
+}
+.button{
+  font-family: "Comfortaa", cursive;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 20px;
+  color: #333333;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 40px;
+  padding-right: 40px;
+  background-color: #ffd27d;
+  border-color: #504f4f;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 35px;
+  margin-top: 10px;
+
+}
+.body{
+  display: flex;
+  flex-direction: column
+}
+}
+
 @import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap");
 
 /*Head*/
@@ -207,3 +275,28 @@
   justify-content: center;
 }
 
+@media only screen and (max-width:599px){
+  .header{
+    display: grid;
+    grid-template-areas: 
+    "head"
+    "empty"
+    "main"
+    "other-main"
+    "empty"
+    "footer";
+  }
+  
+  .header__img{
+    display: grid;
+  }
+  .img__logo{
+    width: 50px;
+    height: 50px;
+  }
+.img__letter{
+  width: 80%;
+  height: 70%;
+}
+
+}
