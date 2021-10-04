@@ -1,40 +1,39 @@
-/* resets */
+/* presets */
 
-html, body {
-    height: 100%;
+body {
+    background-color: rgba(59, 114, 84, 0.651);
 }
 
-/* blocks */
+/* BLOCKS */
 
-.body{
+.centered-body {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: rgba(59, 114, 84, 0.651);
 }
+
+/* box */
 
 .box {
     display: inline-block;
     border-radius: 20px;
     border-color: black;
     border-style: solid;
-    /* margin-inline: 40%; */
     background-color: white;
     height: 300px;
     padding: 20px;
-    ;
 }
 
-/*.box__title {
+.box__title {
     text-align: center;
 } 
+
 .box__area{
     text-align: center;
 }
-*/
 
-.box__content{
+.box__content {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -67,15 +66,7 @@ html, body {
     border-radius: 20px;
 }
 
- .title__comments{
-     background-color: rgb(202, 202, 167);
-     
- }
- 
-.text__comments{
-    background-color: rgb(71, 172, 255);
-    height: 200px;
-}
+/* social */
 
 .social{
     padding: 50px;
@@ -88,9 +79,84 @@ html, body {
     
 }
 
+/* head */
+
+.head {
+    width: 100%;
+    text-align: right;
+    margin-bottom: 1rem;
+}
+
+.head__title {
+    text-align: center;
+}
+
+.head__menu {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.head__menu-item {
+    text-decoration: none;
+    margin-bottom: .25rem;
+}
+
+.head__menu-item:visited {
+    color: black;
+}
+
+/* central */
+
+.central {
+    display: flex;
+}
+
+.central__comments {
+    flex-basis: 60%;
+}
+
+.central__comments-title {
+    color: white;
+}
+
+.central__comments-list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.central__comments-item {
+    text-align: right;
+}
+
+.central__comments-comment-text {
+    border: 1px solid black;
+    border-radius: 1rem;
+    background-color: white;
+    padding: .5rem;
+    display: inline-block;
+    margin: .1rem;
+}
+
+.central__comments-comment-author {
+    color: red;
+}
+
+.central__courses {
+    flex-basis: 40%;
+}
+
+.central__courses-title {
+    color: darkgray;
+}
+
+/* todo (arreglar) */
+
 .copyright{
     margin-bottom: 100%;
 }
-
-
 
