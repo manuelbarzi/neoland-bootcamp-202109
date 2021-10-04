@@ -15,6 +15,8 @@ html, body {
 }
 /* reusable */
 
+
+
 .body-flex {
     display: flex;
     align-items: center;
@@ -29,7 +31,6 @@ html, body {
     margin: 10px 0px 0px 0px;
     color: white;
 }
-
 .panel {
     margin: 2px;
     border: black;
@@ -40,11 +41,9 @@ html, body {
     font-family: roboto condensed;
     background-color: white;
 }
-
 .panel__field {
     margin: 2.5px 0px 2.5px 10px;
 }
-
 .area-panel {
     border-radius: 10px;
     display: block;
@@ -55,7 +54,6 @@ html, body {
     box-shadow: 20px 20px 30px gray;
     background-color: wheat;
 }
-
 .title {
     font-family: birthstone;
     text-align: center;
@@ -64,7 +62,6 @@ html, body {
 
     display: inline-block;
 }
-
 .menu {
     background-color: black;
     padding: 10px;
@@ -167,7 +164,7 @@ html, body {
     border: black;
 }
 
-
+/* Mobile first */
 
 
 
@@ -176,6 +173,8 @@ html, body {
     flex-direction: column;
     height: 100%;
     margin: 20px;
+    justify-content: space-between;
+    gap: 20px;
 }
 .product-1 {
     display: flex;
@@ -212,11 +211,8 @@ html, body {
     "product-2 product-4"
     ;
     column-gap: 20px;
-    row-gap: 20px;
-    
-}
-
-
+    row-gap: 20px;   
+    }
     .product-1 {
     grid-area: product-1;
     }
@@ -241,8 +237,7 @@ html, body {
     ;
     column-gap: 20px;
     row-gap: 20px;
-}
-
+    }
 }
 .product {
 border: 1px solid black;
