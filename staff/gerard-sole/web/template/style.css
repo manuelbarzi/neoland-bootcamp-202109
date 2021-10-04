@@ -166,58 +166,97 @@ html, body {
     color: black;
     border: black;
 }
-.main {
+
+
+
+
+
+.main { 
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-template-areas: 
-    "product-1"
-    "product-2"
-    "product-3"
-    "product-4"
-    ;
-
+    margin: 20px;
 }
- .menu-products {
-    position: initial;
-}
-
-@media screen and (min-width: 512px) {
-    .main {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 50% auto;
-        grid-template-areas: 
-        "product-1 product-1"
-        "product-2 product-3"
-        "product-2 product-4"
-        ;
-    }
 .product-1 {
-    grid-area: product-1;
+    display: flex;
+    flex-basis: 25%;
+    justify-content: center;
+    align-items: center;
 }
 .product-2 {
-    grid-area: product-2;
-}.product-3 {
-    grid-area: product-3;
-}.product-4 {
-    grid-area: product-4;
+    display: flex;
+    flex-basis: 25%;
+    justify-content: center;
+    align-items: center;
 }
-/* @media screen and (min-width: 960px;) {
+.product-3 {
+    display: flex;
+    flex-basis: 25%;
+    justify-content: center;
+    align-items: center;
+}
+.product-4 {
+    display: flex;
+    flex-basis: 25%;
+    justify-content: center;
+    align-items: center;
+}
+@media screen and (min-width: 580px) {
     .main {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 50% auto;
-        grid-template-areas: 
-        "product-1 product-1"
-        "product-2 product-3"
-        "product-2 product-4"
-        ;
-    }  */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "product-1 product-1"
+    "product-2 product-3"
+    "product-2 product-4"
+    ;
+    column-gap: 20px;
+    row-gap: 20px;
     
+}
 
+
+    .product-1 {
+    grid-area: product-1;
+    }
+    .product-2 {
+    grid-area: product-2;
+    }
+    .product-3 {
+    grid-area: product-3;
+    }
+    .product-4 {
+    grid-area: product-4;
+    }
+}
+@media screen and (min-width: 960px) {
+    .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 55% auto;
+    grid-template-areas: 
+    "product-1 product-1 product-1"
+    "product-2 product-3 product-4"
+    ;
+    column-gap: 20px;
+    row-gap: 20px;
+}
+
+
+    .product-1 {
+    grid-area: product-1;
+    }
+    .product-2 {
+    grid-area: product-2;
+    }
+    .product-3 {
+    grid-area: product-3;
+    }
+    .product-4 {
+    grid-area: product-4;
+    }
 }
 .product {
-    border: black dotted 1px;
+border: 1px solid black;
 }
