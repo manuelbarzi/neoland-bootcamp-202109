@@ -7,27 +7,36 @@
     <title>Home Page</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body class="background-img">
+  <body class="home">
     <header class="header">
-      <nav class="nav-bar nav-bar--dark nav-bar--top">
-        <a class="nav-bar__item" href="http://home.com">Home</a>
-        <a class="nav-bar__item nav-bar__item--active" href="http://blog.com"
-          >Blog</a
-        >
-        <a
-          class="nav-bar__item"
-          href="/staff/ismael-garcia/web/template/register.html"
-          >Register</a
-        >
-        <a
-          class="nav-bar__item"
-          href="/staff/ismael-garcia/web/template/login.html"
-          >Login</a
-        >
-      </nav>
+      <div class="header-menu">
+        <button class="menu__button pointer">☰</button>
+        <nav class="nav-bar">
+          <a
+            class="nav-bar__item"
+            href="/staff/ismael-garcia/web/template/home.html"
+            >Home</a
+          >
+          <a
+            class="nav-bar__item"
+            href="/staff/ismael-garcia/web/template/blog.html"
+            >Blog</a
+          >
+          <a
+            class="nav-bar__item"
+            href="/staff/ismael-garcia/web/template/register.html"
+            >Register</a
+          >
+          <a
+            class="nav-bar__item"
+            href="/staff/ismael-garcia/web/template/login.html"
+            >Login</a
+          >
+        </nav>
+      </div>
     </header>
 
-    <div class="home">
+    <div class="home__center">
       <h1 class="home__title">Dramatically Engage</h1>
 
       <h2 class="home__subtitle">Blog</h2>
@@ -38,5 +47,6 @@
 
       <button class="home__button">Engage Now</button>
     </div>
+    <script src="main.js"></script>
   </body>
 </html>

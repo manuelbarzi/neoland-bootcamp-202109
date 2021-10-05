@@ -8,18 +8,56 @@
     <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body class="background-login">
-    <form class="login">
-      <h1 class="login__title">LOGIN</h1>
+  <body class="login">
+    <header class="header">
+      <div class="header-menu">
+        <button class="menu__button pointer">☰</button>
+        <nav class="nav-bar">
+          <a
+            class="nav-bar__item"
+            href="/staff/ismael-garcia/web/template/home.html"
+            >Home</a
+          >
+          <a
+            class="nav-bar__item"
+            href="/staff/ismael-garcia/web/template/blog.html"
+            >Blog</a
+          >
+          <a
+            class="nav-bar__item"
+            href="/staff/ismael-garcia/web/template/register.html"
+            >Register</a
+          >
+          <a
+            class="nav-bar__item"
+            href="/staff/ismael-garcia/web/template/login.html"
+            >Login</a
+          >
+        </nav>
+      </div>
+    </header>
 
-      <input class="login__input" type="email" placeholder="Enter email" />
-      <input
-        class="login__input"
-        type="password"
-        placeholder="Enter password"
-      />
+    <div class="login__main">
+      <form class="login__form">
+        <h1 class="login__form-title">LOGIN</h1>
 
-      <button class="login__button">Submit</button>
-    </form>
+        <input
+          class="login__form-input"
+          type="email"
+          placeholder="Enter email"
+        />
+        <input
+          class="login__form-input"
+          type="password"
+          placeholder="Enter password"
+        />
+
+        <button class="login__button">Submit</button>
+      </form>
+    </div>
+
+    <footer></footer>
+
+    <script src="main.js"></script>
   </body>
 </html>
