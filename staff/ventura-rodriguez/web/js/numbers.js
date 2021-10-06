@@ -7,7 +7,7 @@ function numbers(values) { // values es de tipo array
     //
     //
 
-    var arrCount = [totalItems, totalTrue, totalFalse];
+    var arrCount = [totalPositives, totalNegatives, balance];
     return arrCount;
 }
 
