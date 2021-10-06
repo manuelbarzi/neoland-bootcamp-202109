@@ -67,8 +67,8 @@ html, body {
     padding: 10px;
     text-align: center;
     margin: 0px;
-    position: sticky;
     top: 0;
+    visibility: hidden;
 }
 .menu__item {
     color: white;
@@ -225,6 +225,16 @@ html, body {
     .product-4 {
     grid-area: product-4;
     }
+    .menu {
+     visibility: initial;   
+     position: sticky;
+     top: 0;
+    }
+    .hamburguer {
+   display: none;
+   
+    }
+   
 }
 @media screen and (min-width: 960px) {
     .main {
@@ -241,4 +251,12 @@ html, body {
 }
 .product {
 border: 1px solid black;
+}
+.menu-on {
+    background-color: black;
+    padding: 10px;
+    text-align: center;
+    margin: 0px;
+    top: 0;
+    visibility: initial;
 }
