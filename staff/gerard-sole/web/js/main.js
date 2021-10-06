@@ -13,7 +13,12 @@ var uvas = {
     quantity: 2,
     price: 6
 }
-var frutas = [manzana, melon, uvas];
+var melocoton = {
+    name: "melocoton",
+    quantity: 3,
+    price: 2
+}
+var frutas = [manzana, melon, uvas, melocoton];
 var createRows = function(arr) {
     var rows = "";
     for(var i = 0; i < arr.length; i++) {
