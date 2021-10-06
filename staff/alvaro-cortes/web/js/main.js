@@ -12,8 +12,8 @@ function createTable(array){
 
     for(let i = 0; i < array.length; i++){
         table += "<tr class='table'><td>" + array[i].name + "</td>" +
-                 "<td>" + array[i].quantity + "</td>" +
-                 "<td>" + array[i].price + "</td></tr>"
+                                "<td>" + array[i].quantity + "</td>" +
+                                "<td>" + array[i].price + "</td></tr>"
     }
 
     // Generamos la suma total //
