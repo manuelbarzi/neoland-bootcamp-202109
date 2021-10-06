@@ -1,80 +1,187 @@
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre&display=swap');
 
-/*ELEMENTS*/
+* {
+    border: 0px dashed white;
+    border-style: solid;
+    box-sizing:border-box;
+}
+
+html,body,p {
+    height: 100%; 
+    width: 100%;
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+body {
+    background-color:rgb(43, 45, 49);
+    color: #fff;
+    padding: 50px 0;
+    font-family: Gemunu Libre;
+}
 
 h1 {
-    color:blue;
+    font-size:100px;
+    color: white;
+    margin: 0%;
     text-align: center;
 }
 
-h2 {
-    color:white;
-    -webkit-text-stroke: 2px black;
-    font-size: 3em;
+/* GRID */
+
+.grid-container {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto auto;
+    grid-template-areas:
+    "header"
+    "aside"
+    "main"
+    "aside2"
+    "footer"
+    ;
 }
 
-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-table {
-    background-color: rgb(25, 0, 255);
-    border: rgb(0, 204, 255) 5px solid;
-}
-
-th, td {
-    width: 25%;
-    text-align: left;
-    vertical-align: top;
-    border: 1px solid #000;
- }
-
- th {
-     background-color: turquoise;
- }
-
- td {
-    background-color:rgb(80, 54, 230);
+.grid-sidebar {
+    grid-area: aside;
+    align-self: center;
+    background-color: rgb(27, 27, 27);
+    font-family: Gemunu Libre;
+    font-size: x-large;
+    
 }
 
 
-/* BEM */
-
-/* BODY */
-
-.body__home {
-    background-color: royalblue;
+@media screen and (min-width: 960px) {
+    .grid-container {
+    grid-template-columns: 10% 80% 10%;
+    grid-template-rows: 20% auto 2%;
+    grid-template-areas:    'header header header'
+                            'aside main aside2'
+                            'footer footer footer';
+    }
+    .grid-sidebar {
+        grid-area: aside;
+        justify-content: space-around;
+        background-color: rgb(27, 27, 27);
+        font-family: Gemunu Libre;
+        font-size: x-large;
+        display: flex;
+        flex-direction: column;
+    }
 }
 
-.body__register {
-    background-image: url('https://i1.wp.com/esferacreativa.com/wp-content/uploads/2020/05/imagenes-para-redes-sociales-medidas-MadridNYC.png?fit=1024%2C512&ssl=1');
-    color: #fff;
-    padding: 50px 0;
+/* HEADER */
+
+.grid-top {
+    grid-area: header;
+    background-color:rgb(43, 45, 49);
+    text-align: center;
+    height: 20%;
+}
+
+.menu__list{
+    display: none;
+}
+
+.menu__list--on{
+    display: flex;
+    flex-direction: column;
+    font-size: x-large;
+}
+
+@media screen and (min-width: 960px) {
+    .menu__list{
+        display: flex;
+        justify-content: center; 
+        flex-basis: 80%;
+        font-size: x-large;
+    }
+
+    .menu__button {
+        display: none;
+    }
 
 }
 
-.body__login {
-    background-image: url('https://i1.wp.com/esferacreativa.com/wp-content/uploads/2020/05/imagenes-para-redes-sociales-medidas-MadridNYC.png?fit=1024%2C512&ssl=1');
-    color: #fff;
-    padding: 50px 0;
+/* CENTRAL */
 
+.grid-content {
+    grid-area: main;
+    background-color: rgb(32, 32, 32);
+    justify-content: center;
+    align-items: center;
+}
+
+.grid-commercial {
+    grid-area: aside2;
+    background-color:rgb(27, 27, 27);
+    box-sizing: border-box;
+
+}
+
+.post{
+    background-color: black;
+    margin: auto;
+    margin-top: 10px;
+    max-width: 560px;
+}
+
+.post__header{
+    background-color: darkgrey;
+}
+
+.post__header__info{
+    display: flex;
+}
+
+.post__header-info-name{
+    align-self: baseline;
+    flex-basis: 100%;
+}
+.post_header_info_time{
+    flex-basis: 100%;
+}
+
+.post__bottom{
+    background-color: rgb(78, 78, 78);
+}
+
+.post__buttons{
+    display: flex;
+    justify-content: space-evenly;
+    font-weight: bolder;    
+}
+
+.post-style{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+}
+
+/* FOOTER */
+
+.grid-bottom {
+    grid-area: footer;
+    background-color:rgb(43, 45, 49);
+    align-items: center;
+    height: 5%;
 }
 
 /* FORM */
 
 .form {
-    background-color: rgb(154, 181, 255);
+    background-color: rgb(27, 27, 27);
     font-family: fantasy;
     display: inline-block;
     inset-block:inherit;
     display: grid;
     width: auto;
-    max-width: 800px;
+    max-width:800px;
+    max-height:270px;
     margin: 0 auto;
-    align: center;
 }
-
 .form__line {
     display: flex;
     flex-direction: column;
@@ -85,22 +192,58 @@ th, td {
     width: 40%;
 }
 
-.form__align{
-    display: block;
+/*NAV BAR*/
+
+.nav-bar__item {
+    color: white;
+    text-decoration: none;
+    transition: font-size .2s ease;
+}
+
+.nav-bar__item:hover {
+    text-shadow: 0px 0px 10px rgb(129, 197, 253), 0px 0px 10px rgb(251, 255, 189), 0px 0px 10px rgb(255, 230, 117);
+    font-size: 1.2em;
+}
+
+.topbar-div1{
+    width: 20%;
+}
+
+
+.sidebar-div2{
+    height: 80%;
+}
+
+
+/* PICTURES */
+
+.aside__img--blackf {
+    max-width: 100%;
+    display: flex;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* CONTENT */
+/* TITLES */
 
-.tab {
-    background-color:salmon;
-    display: inline-block;
-    inset-block:inherit;
+.bottomtitle {
+    color:darkorange;
 }
 
-.contacts {
-    background-color:turquoise;
-    display: inline-block;
-    inset-block:inherit;
+/* #ID */
+#priv {
+    font-size:20px;
+    text-align: center;
+    color: white;
+    
+}
+
+/* JAVA SCRIPT */
+
+.pointer:hover {
+    cursor: pointer;
+}
+
+.menu__button{
+    width: fit-content;
 }
