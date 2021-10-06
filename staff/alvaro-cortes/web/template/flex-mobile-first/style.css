@@ -261,6 +261,7 @@ button:hover {
         border-top: none;
     }
     .grid__head {
+        padding-right: 50px;
         font-size: 1px;
         display: flex;
         align-content: center;
