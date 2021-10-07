@@ -1,44 +1,3 @@
-function print(values) {
-
-    for(var i = 0; i < values.length; i++) {
-        console.log(values[i])
-    }
-}
-
-
-function printObj(object, value) {
-
-    for(let i = 0; i < object.length; i++) {
-        var print = object[i][value]
-        console.log(print)
-    }
-}
-
-
-function printReverseValues(values) {
-
-    for(var i = values.length - 1; i >= 0; i--){
-        console.log(values[i])
-    }
-}
-
-
-
-function invertText(word) {
-    var newWord = ""
-    var position;
-
-    // Mejor metodo //
-    for(let i = 0; i < word.length; i++) {
-        position = word.length -1 - i;
-        newWord += word[position] 
-    }
-    for(let i = word.length -1; i >= 0; i--) {
-        newWord += word[i]
-    }
-    console.log(newWord)
-}
-
 function hiFriends(friends) {
     var hello = "Hello ";
 
@@ -51,6 +10,7 @@ function hiFriends(friends) {
     }
     return hello;
 }
+
 /*
 Se crea una funcion con nombre "hiFriends", dentro de sus parentisis se denomina un parametro que luego será cambiado por el usuario cuando haga uso de la función.
 Se ingesa al contenido de dicha función que contiene de inmediato una variable la cual mediante su nombre declarado "hello" se puede obtener su contenido que es "Hello ".
@@ -61,43 +21,3 @@ Empieza la segunda iteración, se vuelve a comparar el valor de i con la longitu
 Comienza de nuevo el proceso de cada iteración, y se agregará a la variable hello uno de los dos valores dependiendo de si ingresa al IF o ELSE. 
 Cuando no se cumpla más la regla de que i es menor a la longitud del parametro, automaticamente se sale del loop y se imprimirá mediante la palabra RETURN la variable hello.
 */
-
-function countValues(values) { // values es de tipo array
-    var totalItems = 0;
-    var totalTrue = 0;
-    var totalFalse = 0;
-
-    for(let i = 0; i < values.length; i++) {
-        totalItems++
-        if(values[i] === true) {
-            totalTrue++
-        } else {
-            totalFalse++
-        }
-    }
-    var arrCount = [totalItems, totalTrue, totalFalse];
-    return arrCount;
-}
-
-function numbers(values) { // values es de tipo array
-    var totalPositives = 0;
-    var totalNegatives = 0;
-    var balance = 0;
-
-    for(let i = 0; i < values.length; i++) {
-        if(Math.sign(values[i]) == 1) {
-            totalPositives += values[i]
-        } if(Math.sign(values[i]) == -1) {
-            totalNegatives += values[i]
-        } if(Math.sign(values[i]) == 0) {
-            totalPositives += values[i]
-        }
-    }
-        balance = totalPositives - totalNegatives
-
-    var arrCount = [totalPositives, totalNegatives, balance];
-    return arrCount;
-}
-
-
-
