@@ -1,4 +1,4 @@
-console.log(numbers([
+console.log(countNumbers([
     -20,  -73,   13,  52, -19,
     -34,   23,   23,  86, 103,
     -23, -421,   82, 271, -57,
