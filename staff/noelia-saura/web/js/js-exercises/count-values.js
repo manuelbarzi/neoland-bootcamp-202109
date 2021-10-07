@@ -2,6 +2,17 @@ function countValues(values) { // values es de tipo array
     var totalItems = 0;
     var totalTrue = 0;
     var totalFalse = 0;
+for (var i = 0; i < values.length; i++) {
+    if(values[i]==true){
+        totalTrue = totalTrue + 1
+    } 
+    if(values[i]==false){
+        totalFalse = totalFalse + 1
+    }
+
+}
+
+totalItems=values.length
 
     //
     //
