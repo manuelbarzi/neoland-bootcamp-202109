@@ -3,15 +3,16 @@ function numbers(numbers) {
     var totalNegatives = 0;
     var balance = 0;
     
-    for(var i=0; i < values.length; i++) {
-        if(value > 0) {
-        totalPositives++
+    for(var i=0; i < numbers.length; i++) {
+        if(numbers[i] > 0) {
+        totalPositives = totalPositives + numbers[i]
         }
         else {
 
         totalNegatives++
         }
     }
+    balance = totalPositives -totalNegatives
     var arrCount = [totalPositives, totalNegatives, balance];
     return arrCount; 
       

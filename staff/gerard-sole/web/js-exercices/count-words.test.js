@@ -1,0 +1,31 @@
+if (res === 6)
+    console.log('test ok')
+else
+    console.error('test failed')
+
+// CASE 4
+
+var res = countWords('luego de aprender un poco de js, andreu se despide: adiós mundo cruel 😭')
+
+if (res === 14)
+    console.log('test ok')
+else
+    console.error('test failed')
+
+// CASE 5
+
+var res = countWords('a riccardo le encanta programar js, se lo pasa bomba, bombísima')
+
+if (res === 11)
+    console.log('test ok')
+else
+    console.error('test failed')
+
+// CASE 6
+
+var res = countWords('dice nico que hoy es su cumpleaños y nos invita a todos a unas cervezas 🍻')
+
+if (res === 16)
+    console.log('test ok')
+else
+    console.error('test failed')
