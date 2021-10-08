@@ -6,12 +6,14 @@ function getMostSoldProducts(products) {
     
     var quantities = [];
 
-    /*for (var quantity of products) {
-        quantities.push(quantity);
-    }*/
     for (var i = 0; i < products.length; i++) {
         quantities.push(products[i].quantity);
     }
+
+    /* Another possibility here could be using the for ... of?
+    for (var quantity of products) {
+        quantities.push(quantity);
+    }*/
 
     higherQuantity = Math.max.apply(null, quantities);
 
