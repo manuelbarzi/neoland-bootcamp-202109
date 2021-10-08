@@ -9,7 +9,7 @@ let compra = [manzana, solomillo, pasta];
 let carrito = function(arr) {
     let cajas = '';
 
-    for (let i = 0; i < arr.length; i++) {
+    for (var i = values.length-1; i >= 0; i--) {
 
         let caja =
         '<tr>' +
