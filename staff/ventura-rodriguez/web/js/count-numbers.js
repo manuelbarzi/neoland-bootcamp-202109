@@ -5,7 +5,7 @@ function countNumbers(values) { // values es de tipo array
     var totalNegatives = 0;
     var balance = 0;
 
-    for (let i = 0; i < copyValues.length; i++) {
+    for (var i = 0; i < copyValues.length; i++) {
         var element = copyValues[i];
         if (element > 0)
             totalPositives += element;
