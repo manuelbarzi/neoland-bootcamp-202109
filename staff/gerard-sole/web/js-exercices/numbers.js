@@ -9,7 +9,7 @@ function numbers(numbers) {
         }
         else {
 
-        totalNegatives++
+        totalNegatives = totalNegatives + numbers[i]
         }
     }
     balance = totalPositives -totalNegatives

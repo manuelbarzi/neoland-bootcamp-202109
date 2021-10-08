@@ -1,3 +1,27 @@
+console.log('TEST countWords')
+
+// CASE 1
+
+var res = countWords('hola mundo')
+
+if (res === 2)
+    console.log('test ok')
+else
+    console.error('test failed')
+
+// CASE 2
+
+var res = countWords('hello')
+
+if (res === 1)
+    console.log('test ok')
+else
+    console.error('test failed')
+
+// CASE 3
+
+var res = countWords('noelia dice: abracadabra pata de cabra')
+
 if (res === 6)
     console.log('test ok')
 else
