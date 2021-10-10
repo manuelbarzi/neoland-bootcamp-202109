@@ -1,11 +1,9 @@
 function randomNumbers(n, m) {
     var arr = [];
 
-    for (let i = 0; i < n; i++) {
-    arr.push(Math.round(Math.random() * m))        
-    }
+    // Implementa tu código aquí
 
-    return arr;
+    return null;
 }
 
 // Debemos generar un vector (array) de números aleatorios
