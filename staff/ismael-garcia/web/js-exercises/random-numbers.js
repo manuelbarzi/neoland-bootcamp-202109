@@ -1,7 +1,14 @@
 function randomNumbers(n, m) {
-    var arr = [];
+    let arr = [];
 
     // Implementa tu código aquí!
+    let counter = n;
+
+    while (counter > 0) {
+        let randomNum = Math.floor(Math.random() * m);
+        arr.push(randomNum);
+        counter--;
+      }
 
     return arr;
 }
