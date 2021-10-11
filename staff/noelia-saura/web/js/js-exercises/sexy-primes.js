@@ -31,3 +31,4 @@ function sexyPrimes(a, b) {
 //     if(b==1 || a==1)
 //     return false;
 //    return Math.abs(a-b)==6
+
