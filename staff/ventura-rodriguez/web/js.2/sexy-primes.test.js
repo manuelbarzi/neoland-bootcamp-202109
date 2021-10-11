@@ -12,6 +12,7 @@ if (
 else
     fail('test failed')
 
+
 // CASE 2
 
 res = sexyPrimes(1, 7);
@@ -24,9 +25,47 @@ if (
 else
     fail('test failed')
 
-// Case 3
+
+// CASE 3
 
 res = sexyPrimes(5, 11);
+
+if (
+    typeof res === "boolean"
+    && res === true
+    )
+    success('test ok')
+else
+    fail('test failed')
+
+
+// CASE 4
+
+res = sexyPrimes(-5, -11);
+
+if (
+    typeof res === "boolean"
+    && res === false
+    )
+    success('test ok')
+else
+    fail('test failed')
+
+// CASE 5
+
+res = sexyPrimes(29, 35);
+
+if (
+    typeof res === "boolean"
+    && res === false
+    )
+    success('test ok')
+else
+    fail('test failed')
+
+// CASE 6
+
+res = sexyPrimes(11, 5);
 
 if (
     typeof res === "boolean"
