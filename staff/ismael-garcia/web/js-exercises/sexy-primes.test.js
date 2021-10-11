@@ -1,32 +1,76 @@
-// Implementar los tests que consideréis necesarios
-describe('TEST sexyPrimes');
+describe('TEST checkSexyPrimes');
 
 // CASE 1
 
-var res = sexyPrimes(7, 13);
+var res = checkSexyPrimes(3, 50);
 
-if (typeof res === 'boolean'
-    && res === true)
+if (
+    typeof res === "boolean"
+    && res === false
+    )
     success('test ok')
 else
     fail('test failed')
+
 
 // CASE 2
 
-var res = sexyPrimes(26, 32);
+res = checkSexyPrimes(1, 7);
 
-if (typeof res === 'boolean'
-    && res === false)
+if (
+    typeof res === "boolean"
+    && res === false
+    )
     success('test ok')
 else
     fail('test failed')
 
+
 // CASE 3
 
-var res = sexyPrimes(11, 19);
+res = checkSexyPrimes(5, 11);
 
-if (typeof res === 'boolean'
-    && res === false)
+if (
+    typeof res === "boolean"
+    && res === true
+    )
+    success('test ok')
+else
+    fail('test failed')
+
+
+// CASE 4
+
+res = checkSexyPrimes(-5, -11);
+
+if (
+    typeof res === "boolean"
+    && res === false
+    )
+    success('test ok')
+else
+    fail('test failed')
+
+// CASE 5
+
+res = checkSexyPrimes(29, 35);
+
+if (
+    typeof res === "boolean"
+    && res === false
+    )
+    success('test ok')
+else
+    fail('test failed')
+
+// CASE 6
+
+res = checkSexyPrimes(11, 5);
+
+if (
+    typeof res === "boolean"
+    && res === true
+    )
     success('test ok')
 else
     fail('test failed')

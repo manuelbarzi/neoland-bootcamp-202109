@@ -1,4 +1,4 @@
-function randomNumbers(n, m) {
+function createRandomNum(n, m) {
     let arr = [];
 
     // Implementa tu código aquí!

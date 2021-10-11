@@ -1,9 +1,9 @@
 // Implementar los tests que consideres necesarios
-describe('TEST randomNumbers')
+describe('TEST createRandomNum')
 
 // CASE 1
 
-var res = randomNumbers(4, 7)
+var res = createRandomNum(4, 7)
 
 if (res instanceof Array
     && res.length === 4
@@ -17,7 +17,7 @@ else
 
 // CASE 2
 
-var res = randomNumbers(7, 4)
+var res = createRandomNum(7, 4)
 
 if (res instanceof Array
     && res.length === 7
@@ -34,7 +34,7 @@ else
 
 // CASE 3
 
-var res = randomNumbers(3, 6)
+var res = createRandomNum(3, 6)
 
 if (res instanceof Array
     && res.length === 3
