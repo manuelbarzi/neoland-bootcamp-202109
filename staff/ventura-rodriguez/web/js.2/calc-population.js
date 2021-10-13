@@ -1,6 +1,6 @@
 const calcPopulation = (natalidad, inmigracion, mortalidad, ayosEstimados, poblacionActual) => {
-    let nuevaPoblacion = poblacionActual;
-    for (let i = 0; i < ayosEstimados; i++) {
+    var nuevaPoblacion = poblacionActual;
+    for (var i = 0; i < ayosEstimados; i++) {
         nuevaPoblacion += (nuevaPoblacion * natalidad / 100);
         nuevaPoblacion += inmigracion;
         nuevaPoblacion -= mortalidad;   

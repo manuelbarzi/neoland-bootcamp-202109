@@ -1,10 +1,10 @@
 function generateMatrix(n, m, k) {
-    let matrix = [];
+    var matrix = [];
 
-    for (let i = 0; i < n; i++) {
-        let arr = [];
+    for (var i = 0; i < n; i++) {
+        var arr = [];
 
-        for (let j = 0; j < m; j++) {
+        for (var j = 0; j < m; j++) {
             arr.push(Math.round(Math.random() * k));
         }
         
