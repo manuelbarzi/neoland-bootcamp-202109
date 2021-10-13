@@ -1,15 +1,23 @@
 function indexOf(string, searchElement, fromIndex = 0) {
     // El método indexOf() retorna el primer índice en el que se puede encontrar un elemento dado en el array, o retorna -1 si el elemento no esta presente.
-    var index = 0;
+    
+    var j = 0;
 
     for (var i = fromIndex; i < string.length; i++) {
-        if (string[i] === searchElement) {
-            index = i;
-            break;
+        var character = string[i];
+
+        if (character === searchElement[j]) {
+            j++;
+
+            if (j === searchElement.length) {
+                return i - j + 1
+            }
+
         } else {
-            index = -1;
+            j = 0;
+
         }
     }
 
-    return index;
+    return -1;
 }

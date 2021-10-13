@@ -48,3 +48,15 @@ if (res instanceof Array
     success('test ok')
 else
     fail('test failed')
+
+// CASE 4
+
+var testArray = []
+var res = pop(testArray)
+
+if (typeof res === 'undefined'
+    && res === 'undefined'
+    && testArray.length === 0)
+    success('test ok')
+else
+    fail('test failed')

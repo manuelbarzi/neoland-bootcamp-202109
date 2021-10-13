@@ -1,29 +1,34 @@
-function split(string, separator) {
-    var parts = []
-
-    if (separator === '') {
-        for (var i = 0; i < string.length; i++) {
-            var character = string[i]
-
-            parts[i] = character
-        }
-    } else {
-        var part = ''
-
-        for (var i = 0; i < string.length; i++) {
-            var character = string[i]
-
-            if (character === separator) {
-                parts[parts.length] = part
-
-                part = ''
+function split(str, separator) {
+    var parts = [];
+    var part = '';
+    
+    if (separator === undefined) {
+        parts.push(str);
+    }
+    else {
+        for (var i = 0; i < str.length; i++) {
+            if (separator === '') {
+                parts.push(str[i]);
             } else {
-                part += character // part = part + character
+                var characters = '';
+
+                for (var j = 0; j < separator.length; j++) {
+                    characters += (str[i + j])? str[i + j]: '';
+                }
+
+                if (separator === characters) {
+                    if (part !== '') {
+                        parts.push(part);
+                    }
+                    part = '';
+                    i += (separator.length - 1);
+                }
+                else {
+                    part += characters[0];
+                    if (i === str.length - 1) parts.push(part);
+                }
             }
         }
-
-        parts[parts.length] = part
     }
-
-    return parts
+    return parts;
 }

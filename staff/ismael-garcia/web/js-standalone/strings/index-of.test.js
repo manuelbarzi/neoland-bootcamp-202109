@@ -32,3 +32,25 @@ if (typeof res === 'number'
     success('test ok')
 else
     fail('test failed')
+
+// CASE 4
+
+var testString = 'hey friends, how are you?'
+var res = indexOf(testString, 'ri')
+
+if (typeof res === 'number'
+    && res === 5)
+    success('test ok')
+else
+    fail('test failed')
+
+// CASE 5
+
+var testString = 'hola mundo holamundo'
+var res = indexOf(testString, 'olam')
+
+if (typeof res === 'number'
+    && res === 12)
+    success('test ok')
+else
+    fail('test failed')

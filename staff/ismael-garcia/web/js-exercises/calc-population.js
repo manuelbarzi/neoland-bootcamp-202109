@@ -1,9 +1,14 @@
 const calcPopulation = (natality, inmigration, mortality, estimatedYears, currentPopulation) => {
-
     // Implementa tu código aquí
-    
+        var newPopulation = currentPopulation;
 
-    return null;
+        for (var i = 0; i < estimatedYears; i++) {
+            newPopulation += (newPopulation * natality / 100);
+            newPopulation += inmigration;
+            newPopulation -= mortality;   
+        }
+
+        return Math.round(newPopulation);
 }
 
 // En este ejercicio debemos crear un pequeño programa para calcular el aumento
