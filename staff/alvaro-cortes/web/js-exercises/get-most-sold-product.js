@@ -7,7 +7,7 @@ function getMostSoldProducts(products) {
         && products[i]["quantity"] >= products[2]["quantity"]
         && products[i]["quantity"] >= products[3]["quantity"]
         && products[i]["quantity"] >= products[4]["quantity"]) {
-        mostSoldProducts.push(products[i])
+        mostSoldProducts.push(products[i].name)
         }
     }
     return mostSoldProducts

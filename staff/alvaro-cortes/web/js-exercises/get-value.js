@@ -3,6 +3,7 @@ function getValue(numbers, target) {
     let max = 0
     let min = 0
     let valueSum = 0
+    let value = 0
 
     if(target === "max"){
         for(let i = 0; i < numbers.length; i++) {
@@ -10,12 +11,12 @@ function getValue(numbers, target) {
                 max = numbers[i]
             } 
         }
-        return max
+        value = max
     }
 
     if(target === "min") {
         min = Math.min.apply(null, numbers)
-        return min
+        value = min
     }
 
     if(target === "asc") {
@@ -27,6 +28,7 @@ function getValue(numbers, target) {
             valueSum += num;
         })
         asc = valueSum / numbers.length
-        return asc
+        value = asc
     }
+    return value
 }

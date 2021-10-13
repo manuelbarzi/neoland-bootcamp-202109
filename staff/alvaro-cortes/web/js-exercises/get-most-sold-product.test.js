@@ -15,9 +15,7 @@ var res = getMostSoldProducts(soldProducts)
 if (res instanceof Array
     && res.length === 2
     && res[0]["name"] === "kiwi"
-    && res[1]["name"] === "melon"
-    && res[0]["quantity"] === 301
-    && res[1]["quantity"] === 301)
+    && res[1]["name"] === "melon")
     console.log('Test correct')
 else
     console.error('Test failed')
@@ -36,8 +34,7 @@ var res = getMostSoldProducts(soldProductsCars)
 
 if (res instanceof Array
     && res.length === 1
-    && res[0]["name"] === "renault"
-    && res[0]["quantity"] === 30) {
+    && res[0]["name"] === "renault") {
         console.log("Test correct")
     } else {
         console.error("Test failed")

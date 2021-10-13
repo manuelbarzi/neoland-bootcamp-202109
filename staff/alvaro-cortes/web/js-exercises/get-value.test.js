@@ -8,7 +8,7 @@ if (typeof res === 'number'
     && res === 4)
     success('Test correct')
 else
-    fail('Test failed')
+    console.error('Test failed')
 
 // CASE 2
 
@@ -18,7 +18,7 @@ if (typeof res === 'number'
     && res === 1)
     success('Test correct')
 else
-    fail('Test failed')
+    console.error('Test failed')
 
 // CASE 3
 
@@ -28,4 +28,4 @@ if (typeof res === 'number'
     && res === 2.5)
     success('Test correct')
 else
-    fail('Test failed')
+    console.error('Test failed')
