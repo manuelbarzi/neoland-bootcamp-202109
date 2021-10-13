@@ -1,0 +1,54 @@
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows:100px auto 100px ;
+    grid-column-gap: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    grid-template-areas:
+                        "header header"
+                        "form content"
+                        "footer footer"
+}
+
+.grid__header {
+    background-color: rgb(33, 68, 134);
+    grid-area: header;
+    margin-bottom: 20px;
+    color: white;
+
+}
+
+.grid__footer-log{
+    align-self: center;
+}
+
+
+.grid__form { 
+   justify-content: center;
+    padding: 50px;
+    background-color: rgb(33, 68, 134);
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    
+}
+.grid__content {
+    background-color: rgb(236, 158, 56);
+    grid-area: content;
+    color: white;
+    padding: 40px;
+}
+
+.grid__footer {
+    background-color: rgb(33, 68, 134);
+    grid-area: footer;
+    margin-top: 20px;
+    color: white;
+    margin-top: 10px;
+  
+}
+.grid__footer-copy{
+    background-color:rgb(236, 158, 56);
+   
+
+}
+

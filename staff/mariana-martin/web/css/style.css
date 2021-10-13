@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+
+h1 {
+    color: blueviolet;
+   font-family:'Bebas Neue';
+    text-align: center;
+}
+
+red box {   
+    background-color: red;
+
+}
+
+.cool{
+    background-color: greenyellow;
+}
+
+.nice {
+    color: dodgerblue;
+}
+
+f.search{
+    display: inline-block;
+    margin: 10px;
+}
+
+
+.search_body{
+    border-radius: 10px;
+    border-style: dotted;
+    background-color: solid;
+}
+
+.search_titleegend{
+    background-color: black;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: darkgray;
+    color: white
+}
+
+/* Button */
+
+.button{
+    border-radius: 5px;
+    border-style: solid;
+}
+
+.input{
+    border-radius: 5px;
+    border-style: solid;
+}
+
+/* List */
+
+.list{
+    
+    list-style: none;
+    background-color: aquamarine;
+    border-color: aqua;
+    border-width: 2px;
+    border-style:  solid;
+    border-radius: 10px;
+}
+
+.list_item{
+    color: brown;
+}
+
+/* Cart*/
+
+.cart{
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.cart_header{
+    background-color: lightgray;
+
+}
+
+.cart_footer{
+    
+    border-style: solid none none none;
+    border-color:black;
+    border-width: 2px;
+    background-color: lightblue;
+
+}

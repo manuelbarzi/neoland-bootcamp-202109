@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto:wght@100&display=swap');
+
+.main__title, .second__title, .third__title {
+
+    font-family: Fjalla One;
+    background-color: blueviolet;
+    text-align: center;
+
+}
+
+.text__block{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: lightgray;
+    text-align: justify;
+    padding: 5px;
+
+}
+.date {
+
+align-content: center;
+
+}
+.lang__list {
+    list-style: none;
+    text-align: center ;
+}
+
+.contact{
+    
+
+}

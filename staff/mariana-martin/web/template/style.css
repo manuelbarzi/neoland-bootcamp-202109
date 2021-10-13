@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+
+/*headers*/
+
+h1{
+    font-family: Oswald;
+    font-size: 50px;
+    color: lightseagreen;
+    letter-spacing: 2px;
+}
+
+h2{
+    font-family: Oswald;
+    font-size: 35px;
+    letter-spacing: 4px;
+}
+
+h3{
+    font-family: Oswald;
+    font-size: 35px;
+    letter-spacing: 4px;
+}
+
+/*all text*/
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/*nav-bar*/
+
+.nav-bar{
+    padding: .5rem;
+    background-color: white;
+    border-top: 1px solid lightseagreen;
+    border-bottom: 1px solid lightseagreen;
+    
+}
+
+.nav-bar__item{
+
+
+}
+
+/*forms*/
+
+.forms {
+
+    color: white;
+    background-color: lightseagreen;
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    margin-left: 33%;
+    display: inline-block;
+
+}
+
+.title{
+    font-family: Oswald;
+    padding-bottom: 20px;
+    font-size: 20px;
+}
+
+/*buttons*/
+
+a{
+    text-decoration: none;
+    color: lightseagreen;
+}
+
+button{
+    color: lightseagreen;
+    text-decoration: none;
+    border: none;
+    height: 20px;
+    width: 150px;
+    background: whitesmoke;
+    border-radius: 7px;
+    transition: all 0.3s;   
+}
+
+
+button:hover{
+    background: lightgray;
+    color: whitesmoke;
+}
+
+a:hover{
+    color: whitesmoke;
+}
+input{
+    margin-left: 5px;
+}
+
+input{
+  border-radius: 10px;
+  border: white solid 1px;
+  height: 30px;
+  width: 400px;
+}
+
+input:hover{
+    border:gray solid 1px;
+}
+
+/*home container*/
+
+.container{
+    text-align: center;
+    margin: 0 auto;
+}
+
+
+.information{ 
+    text-align: center;
+    background: lightseagreen;
+    color: whitesmoke;
+    width: 40%;
+    margin-left: 23%;
+    height: 200px;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-right: 70%;
+    padding-top: 15px;
+    border-radius: 30px;
+    margin-top: 30px;
+}
+
+.information__access{
+    color: whitesmoke;
+    display: inline;
+    background-color: lightseagreen;
+    border-radius: 20px;
+    padding: 40px;
+    display: inline-block;
+    width: 20%;
+    margin-right: 23%;
+   
+}
+
+.information__aboutus{
+    text-align: center;
+    background-color: lightseagreen;
+    color: whitesmoke;
+    border-radius: 20px;
+    margin-left: 23%;
+    margin-bottom: 20%;
+    
+}
+
+.information__products{ 
+    background: lightgray;
+    height: 100%;
+    width: 100%;
+    margin-left: 50%;
+    margin-top: 20%;
+    
+  
+}
+ 
+
+/*register container*/
+
+.example{
+    background: lightseagreen;
+    border-radius: 30px;
+    color: whitesmoke;
+    margin-top: 15px;
+    width: 40%;
+    padding: 30px;
+    margin-left: 400px;
+}
+
+
+/*rows*/
+
+.row{
+    display: flex;
+  
+}
+
+.col__first{
+    margin-left: 10%;
+
+}
+
+.col__second{
+    width: 200px;
+    height: 300px;
+    margin-left: 8%;
+    background: lightslategrey;
+    padding: 20px;
+    color: white;
+    border-radius: 20px;
+}
+
+.col__third{
+    width: 200px;
+    height: 300px;
+    margin-left: 8%;
+    background: lightsalmon;
+    padding: 20px;
+    color: white;
+    border-radius: 20px;
+    margin-top: 0;
+ 
+}
