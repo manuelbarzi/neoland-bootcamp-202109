@@ -1,14 +1,27 @@
-// Los primos sexy son pares de dos primos que están
-// separados por 6
-function sexyPrimes(a, b) {
-    let itsPrime
-    if (a - b === 6)
-    for (let i = 2; i < number; i++) {
-        if (number % i == 0) {
-            isPrime = false;
-            break;
-    
+function sexyPrimes(x, y) { // x es 11, y es 5 
+    var bool = true;
 
+    if(x - y !== 6 && y - x !== 6) bool = false;
 
-    return itsPrime 
+    // En 2 pasos
+    if(x < 0 && y < 0) bool = false;
+    if(x === 1 || y === 1) bool = false;
+
+    // Los 2 pasos anteriores juntos
+    if(x <= 1 || y <= 1) bool = false;
+
+    if(
+        (x === 2 && x % 2 === 0) &&
+        (y === 2 && y % 2 === 0)
+    ) bool = false;
+
+    for(var i = 2; i < (x / 2); i++) {
+        if(x % i === 0) bool = false;
+    }
+
+    for(var i = 2; i < (y / 2); i++) {
+        if(y % i === 0) bool = false;
+    }
+
+    return bool;
 }
