@@ -1,4 +1,4 @@
-function lightGreen(person = "cross", light = "green", cars = "wait") {
+function semaphore(person = "cross", light = "green", cars = "wait") {
 
 }
 
