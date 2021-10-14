@@ -13,7 +13,7 @@ function slice(arr = [], init = 0, end = arr.length) {
     var arrReturn = [];
 
     for (let i = copyInit; i < copyEnd; i++) {
-        var element = arr[i];
+        var element = copyArr[i];
         arrReturn[arrReturn.length] = element;
     }
 

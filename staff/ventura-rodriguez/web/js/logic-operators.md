@@ -3,7 +3,7 @@ valores booleanos y devuelven un valor booleano dependiendo de si se cumple
 o no la condición dada.
 
 
-Operador lógico `!` esepra un parámetro `!bool`, devuelve el valor contrario
+Operador lógico NOT `!` esepra un parámetro `!bool`, devuelve el valor contrario
 a bool.
 
 `!false` devuelve `true`.
@@ -11,8 +11,8 @@ a bool.
 `!true` devuelve `false`.
 
 
-Operador lógico `&&` espera 2 parámetros `(bool && bool)`, devuelve `true` si
-los 2 parámetros son `true`, en cualquier otro caso será `false`.
+Operador lógico AND `&&` espera 2 parámetros `(bool && bool)`, devuelve `true`
+si los 2 parámetros son `true`, en cualquier otro caso será `false`.
 
 `(true && true)` devuelve `true`.
 
@@ -50,8 +50,8 @@ los 2 parámetros son `true`, en cualquier otro caso será `false`.
 `(!false && !false)` devuelve `true`.
 
 
-Operador lógico `false` espera 2 parámetros `(bool || bool)`, devuelve `true` si
-1 de los parámetros son `true`, si ambos parámetros son `false` devuelve `false`.
+Operador lógico OR `false` espera 2 parámetros `(bool || bool)`, devuelve `true`
+si 1 de los parámetros son `true`, si ambos parámetros son `false` devuelve `false`.
 
 `(true || true)` devuelve `true`.
 

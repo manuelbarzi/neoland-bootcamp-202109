@@ -85,6 +85,7 @@ var res = slice([1, 2, 3, 4, 5], 10, -1);
 if (
     res instanceof Array
     && res.length === 0
+    && res === []
     )
     success('test ok')
 else
@@ -130,6 +131,7 @@ var res = slice([1, 2, 3, 4, 5], 1, -20);
 if (
     res instanceof Array
     && res.length === 0
+    && res === []
     )
     success('test ok')
 else
