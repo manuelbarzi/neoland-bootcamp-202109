@@ -36,3 +36,27 @@ if (typeof res === 'string'
     success('test ok')
 else
     fail('test fail')
+
+// CASE 4
+
+var string = 'adiós'
+var res = repeat(string, 4.5)
+
+if (typeof res === 'string'
+    && res.length === 20
+    && res === string + string + string + string) // adiósadiósadiósadiós
+    success('test ok')
+else
+    fail('test fail')
+
+// CASE 4
+
+var string = 'adiós'
+var res = repeat(string, -1)
+
+if (typeof res === 'string'
+    && res.length === 0
+    && res === 'rangeError')
+    success('test ok')
+else
+    fail('test fail')

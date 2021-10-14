@@ -5,10 +5,12 @@ function repeat(string, count) {
 
     count = Math.floor(count);
 
-    while (count > 0) {
+    while (count > 0 && count !== Infinity) {
         res += string;
         count--;
     }
+
+    res = count === 0 ? res : 'rangeError'
 
     return res;
 }

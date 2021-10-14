@@ -1,47 +1,54 @@
 describe('TEST startsWith')
 
-// CASE 1
+describe('CASE 1')
 
-var string = 'hola'
+var string = 'hola mundo'
 var string2 = 'ho'
 
 var res = startsWith(string, string2)
 
-if (typeof res === 'string'
-    && res.length === string.length + string2.length
-    && res === string + string2) // hola
+if (typeof res === 'boolean'
+    && res === true)
     success('test ok')
 else
     fail('test fail')
 
-// CASE 2
+describe('CASE 2')
 
-var string = 'hola'
+var string = 'hola mundo'
 var string2 = ' '
-var string3 = 'mundo'
 
-var res = startsWith(string, string2, 3)
+var res = startsWith(string, string2, 4)
 
-if (typeof res === 'string'
-    && res.length === string.length + string2.length + string3.length
-    && res === string + string2 + string3) // hola mundo
+if (typeof res === 'boolean'
+    && res === true)
     success('test ok')
 else
     fail('test fail')
 
 
-// CASE 3
+describe('CASE 3')
 
 var string = 'adios'
-var string2 = ' '
-var string3 = 'mundo'
-var string4 = 'cruel'
+var string2 = 'di'
 
 var res = startsWith(string, string2)
 
-if (typeof res === 'string'
-    && res.length === string.length + string2.length + string3.length + string2.length + string4.length
-    && res === string + string2 + string3 + string2 + string4) // adios mundo cruel
+if (typeof res === 'boolean'
+    && res === false)
+    success('test ok')
+else
+    fail('test fail')
+
+describe('CASE 4')
+
+var string = 'adios'
+var string2 = 'ai'
+
+var res = startsWith(string, string2)
+
+if (typeof res === 'boolean'
+    && res === false)
     success('test ok')
 else
     fail('test fail')
