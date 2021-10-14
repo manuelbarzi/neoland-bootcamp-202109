@@ -8,8 +8,17 @@
   //si el indice es mayor o igual a la longitud de la array devuelve -1
   // si es negativo se toma restando posiciones desde el final del array
 
-function index(array,element) {
+/*function index(array,element) {
     var idxOf = array.indexOf(element);
     return idxOf;
-}
+}*/
 
+function indexOf(array, element, fromIndex){
+  for (let i = fromIndex? fromIndex :0; i < array.length; i++) {
+    var item = array[i];
+      if (item === element) {
+        return i
+      }
+  }
+  return -1
+}

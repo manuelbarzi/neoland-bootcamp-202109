@@ -4,11 +4,9 @@ describe ("TEST concat")
 var example1 = [1,2,3,4]
 var example2 = ['a','b','c','d']
 var res = concatArrays(example1, example2)
-var array= res
 
 if (res instanceof Array
-    && res.length === array.length
-    && res === array
+    && res.length === 8
     && res[0] === 1
     && res[1] === 2
     && res[2] === 3
@@ -26,11 +24,9 @@ else
 var example1 = [1,3,5,7]
 var example2 = [2,4,6,8]
 var res= concatArrays(example1, example2)
-var array=res
 
 if(res instanceof Array
-    && res.length === array.length
-    && res === array
+    && res.length === 8
     && res[0] === 1
     && res[1] === 3
     && res[2] === 5
@@ -48,11 +44,10 @@ else
 var example1 = ['Noelia', 'Ana', 'Carlos', 'Sergio']
 var example2 = ['tienen', 'un', 'grup', 'juntos']
 var res= concatArrays(example1, example2)
-var array=res
+
 
 if(res instanceof Array
-    && res.length === array.length
-    && res === array
+    && res.length === 8
     && res[0] === 'Noelia'
     && res[1] === 'Ana'
     && res[2] === 'Carlos'
