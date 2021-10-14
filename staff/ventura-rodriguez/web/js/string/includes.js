@@ -11,7 +11,7 @@ function includes(str = "", searchStr = "", position = 0) {
         let i = copyPosition;
         (i < copyStr.length && (i <= (copyStr.length - copySearchString.length)) && !bool);
         i++
-        ) {
+    ) {
 
         var subStr = "";
         for (let j = 0; j < copySearchString.length; j++) {
