@@ -1,43 +1,41 @@
 describe('TEST repeat')
 
-// CASE 1
+ //CASE 1
 
 var string = 'hola'
-var count = 0
 
-var res = repeat(string, count)
+
+var res = repeat(string, 2)
 
 if (typeof res === 'string'
-    && res.length === 0
-    && res === '')
+    && res.length === 8
+    && res === 'holahola')
     success('test ok')
 else
     fail('test failed')
 
-// CASE 2
+ //CASE 2
 
-var string = 'hola'
-var count = 1
+ var string = '1,2,3,4'
+ 
+ var res = repeat(string, 3)
 
-var res = repeat(string, count)
+ if (typeof res === 'string'
+     && res.length === 21
+     && res === '1,2,3,41,2,3,41,2,3,4')
+     success('test ok')
+ else
+     fail('test failed')
 
-if (typeof res === 'string'
-    && res.length === string.length
-    && res === string)
-    success('test ok')
-else
-    fail('test failed')
+  //CASE 3
 
-// CASE 3
+ var string = 'Adrian y Ana'
 
-var string = 'hola'
-var count = 10
+ var res = repeat(string, 2)
 
-var res = repeat(string, count)
-
-if (typeof res === 'string'
-    && res.length === string.length * count
-    && res === string.repeat(10))
-    success('test ok')
-else
-    fail('test failed')
+ if (typeof res === 'string'
+     && res.length === 24
+     && res === 'Adrian y AnaAdrian y Ana')
+     success('test ok')
+ else
+     fail('test failed')

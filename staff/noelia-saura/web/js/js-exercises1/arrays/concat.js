@@ -5,7 +5,7 @@
     return array
     
 }*/
-
+//si son mas examples es necesario utilizar arguments dejando los parametros de la function vacia
 function concatArrays(example1, example2) {
     var array = []
     for (let i = 0; i < example1.length; i++) {
