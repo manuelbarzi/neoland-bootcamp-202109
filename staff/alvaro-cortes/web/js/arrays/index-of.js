@@ -1,11 +1,10 @@
-function indexOf(array, num) {
-    var index = 0;
-    var count = 0;
+function indexOf(array, element, fromIndex) {
 
-    for(let i = 0; i < array.length; i++) {
-        count = i
-        if (num === array[i])
-        index = count
+    for(let i = fromIndex? fromIndex : 0; i < array.length; i++) {
+        var item = array[i]
+
+        if (item === element)
+        return i
     }
-    return index
+    return -1
 }

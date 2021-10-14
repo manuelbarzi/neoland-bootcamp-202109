@@ -3,10 +3,10 @@ describe("TEST push")
 // CASE 1 //
 
 var array1 = ["buen", "dia", "hola", "arreglo", "bienvenido"]
-var res = pop(array1, "push")
+var res = push(array1, "push")
 
 if(res instanceof Array
-   && res.lenght === 6
+   && res.length === 6
    && res[0] === "buen" 
    && res[1] === "dia"
    && res[2] === "hola"
@@ -20,10 +20,10 @@ else
 // CASE 2 //
 
 var array1 = ["buen", "dia", "hola"]
-var res = pop(array1, "noche")
+var res = push(array1, "noche")
 
 if(res instanceof Array
-   && res.lenght === 4
+   && res.length === 4
    && res[0] === "buen" 
    && res[1] === "dia"
    && res[2] === "hola"
@@ -35,14 +35,31 @@ else
 // CASE 3 //
 
 var array1 = ["buen", "dia", "hola"]
-var res = pop(array1, "ultimo")
+var res = push(array1, "ultimo")
 
 if(res instanceof Array
-   && res.lenght === 4
+   && res.length === 4
    && res[0] === "buen" 
    && res[1] === "dia"
    && res[2] === "hola"
    && res[3] === "ultimo")
+    success("Test correct")
+else 
+    fail("Test failed")
+
+// CASE 4 //
+
+var array1 = ["buen", "dia", "hola"]
+var res = push(array1, "ultimo", "mono", "sideral")
+
+if(res instanceof Array
+   && res.length === 6
+   && res[0] === "buen" 
+   && res[1] === "dia"
+   && res[2] === "hola"
+   && res[3] === "ultimo"
+   && res[4] === "mono"
+   && res[5] === "sideral")
     success("Test correct")
 else 
     fail("Test failed")

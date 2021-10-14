@@ -12,7 +12,8 @@ function split(text, separator) {
         for(let i = 0; i < separator.length; i++) {
             count++  
             if(count === separator[i])
-            
+        // borrar count de abajo//    
+        count
         }
         
 

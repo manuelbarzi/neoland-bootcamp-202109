@@ -1,4 +1,4 @@
-describe('TEST Concat')
+describe('TEST concat')
 
 // CASE 1 //
 

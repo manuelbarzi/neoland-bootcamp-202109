@@ -25,7 +25,27 @@ if(typeof res === "number"
 var res = indexOf("Buenos dias", "s")
 
 if(typeof res === "number"
-    && res === 10)
+    && res === 5)
         success("Test correct")
     else 
         fail("Test failed")
+
+// CASE 4 //
+
+var res = indexOf("Buenos dias", "ue")
+
+if(typeof res === "number"
+    && res === 1)
+        success("Test correct")
+    else 
+        fail("Test failed")  
+        
+// CASE 5 //
+
+var res = indexOf("Buenos dias, nosdias", "nosd")
+
+if(typeof res === "number"
+    && res === 13)
+        success("Test correct")
+    else 
+        fail("Test failed")  

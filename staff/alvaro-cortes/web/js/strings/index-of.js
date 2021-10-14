@@ -1,11 +1,18 @@
-function indexOf(string, element) {
-    var index = 0;
-    var count = 0;
+function indexOf(string, element, fromIndex) {
+    var j = 0;
 
-    for(let i = 0; i < string.length; i++) {
-        count = i
-        if (element === string[i])
-        index = count
+    for(let i = fromIndex? fromIndex : 0; i < string.length; i++) {
+        var character = string[i]
+
+        if (character === element[j]) {
+            j++ 
+
+            if(j === element.length) {
+                return i - j + 1
+        }
+        } else {
+            j = 0
+        }     
     }
-    return index
+    return -1
 }

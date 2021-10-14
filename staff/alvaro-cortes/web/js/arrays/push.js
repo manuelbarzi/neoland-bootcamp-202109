@@ -1,6 +1,11 @@
-function push(arr, element) {
+function push(arr) {
 
-    for(let i = 0; i <= arr.length; i++) {
+    for (var i = 1; i < arguments.length; i++) {
+
+        arr[arr.length] = arguments[i]
+    }
+    
+    /*for(let i = 0; i <= arr.length; i++) {
         var temp;
 
         if(arr[i] === arr[0]) {
@@ -13,7 +18,7 @@ function push(arr, element) {
             temp[arr.length] = element
         }
 }
-    arr = temp
+    arr = temp*/
 
     return arr
 }
