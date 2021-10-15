@@ -4,8 +4,8 @@ describe('case 1')
 
 var array = [10, 20, 30, 40, 50]
 var items = []
-var res = find(array, function (element, i) {
-    items[i] = element
+var res = find(array, function (element, index) {
+    items[index] = element
 
     return element > 30
 })
