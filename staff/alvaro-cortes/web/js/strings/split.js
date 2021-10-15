@@ -1,12 +1,12 @@
 function split(str, pattern) {
-    let parts = [];
+    let parts = "";
     let part = "";
     if (pattern === undefined) {
-        parts.push(str);
+        parts += str;
     }
     else {
         for (let i = 0; i < str.length; i++) {
-            if (pattern === "") parts.push(str[i]);
+            if (pattern === "") parts += str[i];
             else {
                 let characters = "";
 
@@ -16,14 +16,14 @@ function split(str, pattern) {
 
                 if (pattern === characters) {
                     if(part !== "") {
-                        parts.push(part);
+                        parts += part;
                     }
                     part = "";
                     i += (pattern.length - 1);
                 }
                 else {
                     part += characters[0];
-                    if (i === str.length - 1) parts.push(part);
+                    if (i === str.length - 1) parts += part;
                 }
             }
         }
