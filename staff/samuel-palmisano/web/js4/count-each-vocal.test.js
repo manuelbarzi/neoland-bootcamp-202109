@@ -2,13 +2,13 @@ describe('TEST countEachVocal')
 
 // CASE 1
 
-var res = countEachVocal('hola mundo')
+var res = countEachVocal('umbrella academy')
 
 if (res instanceof Object
-    && res.a === 1
-    && res.e === 0
+    && res.a === 3
+    && res.e === 2
     && res.i === 0
-    && res.o === 2
+    && res.o === 0
     && res.u === 1)
     success('test ok')
 else

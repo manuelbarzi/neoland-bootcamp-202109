@@ -1,7 +1,6 @@
 function convertTextToArray(text) {
     var array = []
-
-    // TODO implement me
+    var array = text.split(" ") //Quitar espacio para el otro TEST
 
     return array
 }

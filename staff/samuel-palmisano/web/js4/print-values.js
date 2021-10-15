@@ -3,5 +3,5 @@ function printValues(values) {
         var value = values[i]
 
         console.log(value)
-    }    
+    }  
 }

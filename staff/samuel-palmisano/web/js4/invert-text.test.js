@@ -2,18 +2,19 @@ describe('TEST invertText')
 
 // CASE 1
 
-var res = invertText('hola')
+var res = invertText('calamar')
 
-if (res === 'aloh')
+if (res === 'ramalac')
     console.log('test ok')
 else
     console.error('test failed')
 
 // CASE 2
 
-var res = invertText('mundo')
+var res = invertText('raton')
 
-if (res === 'odnum')
+if (res === 'notar')
     console.log('test ok')
 else
     console.error('test failed')
+

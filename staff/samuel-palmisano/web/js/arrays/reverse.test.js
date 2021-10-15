@@ -11,9 +11,9 @@ if (res instanceof Array
     && res[0] === 3
     && res[1] === 2
     && res[2] === 1)
-    success('test ok')
+    success('test 1 ok')
 else
-    fail('test failed')
+    fail('test 1 failed')
 
 // CASE 2
 
@@ -28,9 +28,9 @@ if (res instanceof Array
     && res[2] === 'c'
     && res[3] === 'b'
     && res[4] === 'a')
-    success('test ok')
+    success('test 2 ok')
 else
-    fail('test failed')
+    fail('test 2 failed')
 
 // CASE 3
 
@@ -42,8 +42,8 @@ if (res instanceof Array
     && res === array
     && res[0] === false
     && res[1] === true)
-    success('test ok')
+    success('test 3 ok')
 else
-    fail('test failed')
+    fail('test 3 failed')
 
 // TODO add more test cases

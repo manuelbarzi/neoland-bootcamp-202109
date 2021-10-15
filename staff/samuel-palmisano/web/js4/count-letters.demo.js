@@ -10,3 +10,4 @@ console.log(countLetters('mundo'))
 // 5
 
 console.log(countLetters('adios mundo cruel'))
+//15

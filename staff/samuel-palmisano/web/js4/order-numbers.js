@@ -1,25 +1,29 @@
 function orderNumbers(numbers, order) {
-    // TODO implement me
+    // Numbers es tipo [] y order es de tipo String
 
-    /*
-    funcion recibe 2 parametros: el array con numeros, y el order que hay que aplicar (asc o desc)
-    devuelve un array con los numeros que se han pasado como parametro, ordenadors segun el parametro orden
+    var ordered = [];   // El [] que vamos a devolver en la función
 
-    iterar en los numeros y buscar el mas grande
-    ponerlo en primer lugar en el nuevo array
-    volver a iterar para buscar el siguiente mas grande
-    repeat 
-    */
-
-    for (var i = 0; i < numbers.length; i++) {
-        var number = numbers[i]
-
-        for (var j = i + 1; j < numbers.length; j++) {
-            // TODO
-        }
+    if (order === "asc") {  // Si ocurre esto
+                                // hacemos esto
+        ordered = numbers.sort(function(a, b) {
+            return a - b;
+        });
     }
-    
-    var ordered = []
+    else if (order === "desc") {    // Si no pero ocurre esto
+                                        // hacemos esto
+        ordered = numbers.sort(function(a, b) {
+            return b - a;
+        });
+    }
+    else {  // Si no en último caso
+            // hacemos esto
+        console.log("El parámetro order debe ser 'asc' o 'desc'")
+        ordered = numbers;
+    }
 
-    return ordered
+    return ordered;
+    // Debo devolver un array de números ordenados
+    // De forma ascendente o descendente según el
+    // valor pasado por el parámetro order
+
 }

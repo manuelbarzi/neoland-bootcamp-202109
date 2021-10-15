@@ -9,9 +9,9 @@ if (res instanceof Array
     && res[0] === 6
     && res[1] === 0
     && res[2] === 6)
-    console.log('test ok')
+    success('test ok')
 else
-    console.error('test failed')
+    fail('test failed')
 
 // CASE 2
 
@@ -22,9 +22,9 @@ if (res instanceof Array
     && res[0] === 4
     && res[1] === -2
     && res[2] === 2)
-    console.log('test ok')
+    success('test ok')
 else
-    console.error('test failed')
+    fail('test failed')
 
 // CASE 3
 
@@ -35,6 +35,6 @@ if (res instanceof Array
     && res[0] === 3
     && res[1] === -3
     && res[2] === 0)
-    console.log('test ok')
+    success('test ok')
 else
-    console.error('test failed')
+    fail('test failed')
