@@ -1,6 +1,7 @@
 describe('TEST indexOf')
 
-// CASE 1
+// ______________________________________________________________________________
+
 
 var res = indexOf('hola mundo', 'a')
 
@@ -10,7 +11,8 @@ if (typeof res === 'number'
 else
     fail('test 1 failed')
 
-// CASE 2
+// ______________________________________________________________________________
+
 
 var res = indexOf('hola mundo', 'o')
 
@@ -20,7 +22,8 @@ if (typeof res === 'number'
 else
     fail('test 2 failed')
 
-// CASE 3
+// ______________________________________________________________________________
+
 
 var res = indexOf('hola mundo', 'i')
 
@@ -30,7 +33,8 @@ if (typeof res === 'number'
 else
     fail('test 3 failed')
 
-// CASE 4
+// ______________________________________________________________________________
+
 
 var res = indexOf('hola mundo', 'mu')
 
@@ -40,7 +44,8 @@ if (typeof res === 'number'
 else
     fail('test 4 failed')
 
-// CASE 5
+// ______________________________________________________________________________
+
 
 var res = indexOf('hola mundo', 'ola')
 
@@ -50,7 +55,8 @@ if (typeof res === 'number'
 else
     fail('test 5 failed')
 
-// CASE 6
+// ______________________________________________________________________________
+
 
 var res = indexOf('hola mundo', 'olam')
 
@@ -60,7 +66,8 @@ if (typeof res === 'number'
 else
     fail('test 6 failed')
 
-// CASE 7
+// ______________________________________________________________________________
+
 
 var res = indexOf('hola mundo holamundo', 'olam')
 
@@ -70,7 +77,8 @@ if (typeof res === 'number'
 else
     fail('test 7 failed')
 
-// CASE 8
+// ______________________________________________________________________________
+
 
 var res = indexOf('holamundo holamundo', 'olam', 5)
 

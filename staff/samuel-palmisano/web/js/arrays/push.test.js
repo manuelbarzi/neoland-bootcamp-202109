@@ -1,5 +1,6 @@
 describe('TEST push')
 
+// ______________________________________________________________________________
 
 var array = ['pigs', 'goats', 'sheep']
 var res = push(array, 'cows')
@@ -15,6 +16,7 @@ if (typeof res === 'number'
 else
     fail('test 1 fail')
 
+// ______________________________________________________________________________
 
 var array = ['pigs', 'goats', 'sheep']
 var res = push(array, 'cows', 'chickens', 'cats', 'dogs', 'mouses')

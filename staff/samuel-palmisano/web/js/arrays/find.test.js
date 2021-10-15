@@ -1,6 +1,8 @@
 describe('TEST find')
 
-describe('case 1')
+// ______________________________________________________________________________
+
+
 
 var array = [10, 20, 30, 40, 50]
 var items = []
@@ -16,11 +18,13 @@ if (res === 40
     && items[1] === array[1]
     && items[2] === array[2]
     && items[3] === array[3])
-    success('test ok')
+    success('test 1 ok')
 else
-    fail('test ko')
+    fail('test 2 fail')
 
-describe('case 2')
+// ______________________________________________________________________________
+
+
 
 var array = ['one', 'two', 'three', 'four']
 var items = []
@@ -35,11 +39,13 @@ if (res === 'three'
     && items[0] === array[0]
     && items[1] === array[1]
     && items[2] === array[2])
-    success('test ok')
+    success('test 2 ok')
 else
-    fail('test ko')
+    fail('test 2 fail')
 
-    describe('case 3')
+// ______________________________________________________________________________
+
+
 
 var array = ['one', 'two', 'three', 'four']
 var items = []
@@ -55,6 +61,6 @@ if (res === undefined
     && items[1] === array[1]
     && items[2] === array[2]
     && items[3] === array[3])
-    success('test ok')
+    success('test 3 ok')
 else
-    fail('test ko')
+    fail('test 3 fail')

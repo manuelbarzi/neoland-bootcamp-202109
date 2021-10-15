@@ -3,7 +3,8 @@ describe('TEST starts-with')
 
 var texto = 'Esta noche estamos de fiesta'
 
-// CASE 1
+// ______________________________________________________________________________
+
 
 var res = startsWith(texto, 'Esta')
 
@@ -13,7 +14,8 @@ if (typeof res === 'boolean'
 else
     fail('test 1 failed')
 
-// CASE 2
+// ______________________________________________________________________________
+
 
 var res = startsWith(texto, 'noche')
 
@@ -22,8 +24,8 @@ if (typeof res === 'boolean'
     success('test 2 ok')
 else
     fail('test 2 failed')
+// ______________________________________________________________________________
 
-// CASE 3
 var res = startsWith(texto, 'esta', 11)
 
 if (typeof res === 'boolean'

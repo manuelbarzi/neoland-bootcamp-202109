@@ -1,6 +1,5 @@
 describe('TEST some')
 
-describe('case 1')
 
 var numbers = [1, 1, 1, 1, 1, 0, 1, 1]
 
@@ -23,12 +22,11 @@ if (typeof res === 'boolean'
     && items[3] === 1
     && items[4] === 1
     && items[5] === 0)
-    success('test ok')
+    success('test 1 ok')
 else
-    fail('test ko')
+    fail('test 1 fail')
 
-
-describe('case 2')
+//____________________________________________________________
 
 var bananas = { name: 'banana', quantity: 10 }
 var oranges = { name: 'orange', quantity: 14 }
@@ -61,12 +59,12 @@ if (typeof res === 'boolean'
     && items[1] === oranges
     && items[2] === lemons
     && items[3] === melons)
-    success('test ok')
+    success('test 1 ok')
 else
-    fail('test ko')
+    fail('test 2 fail')
 
+//_________________________________________________________________
 
-    describe('case 3')
 
     var numbers = [14, 36, 98, 62, 4, 53]
     
@@ -89,7 +87,7 @@ else
         && items[3] === 62
         && items[4] === 4
         && items[5] === 53)
-        success('test ok')
+        success('test 3 ok')
     else
-        fail('test ko')
+        fail('test 3 fail')
     

@@ -1,6 +1,5 @@
 describe('TEST forEach')
 
-describe('case 1')
 
 var array = ['a', 'b', 'c']
 var res = []
@@ -13,11 +12,12 @@ if (res.length === array.length
     && res[0] === array[0]
     && res[1] === array[1]
     && res[2] === array[2])
-    success('test ok')
+    success('test 1 ok')
 else
-    fail('test ko')
+    fail('test 1 fail')
 
-describe('case 2')
+//________________________________________________________________________
+
 
 var array = [1, 2, 3]
 var res = []
@@ -30,12 +30,13 @@ if (res.length === array.length
     && res[0] === array[0] * 10
     && res[1] === array[1] * 10
     && res[2] === array[2] * 10)
-    success('test ok')
+    success('test 2 ok')
 else
-    fail('test ko')
+    fail('test 2 fail')
 
 
-    describe('case 3')
+// ______________________________________________________________________________
+
 
 var array = [2, 3, 4]
 var res = []
@@ -47,6 +48,6 @@ if (res.length === array.length
     && res[0] === array[0] **3
     && res[1] === array[1] **3
     && res[2] === array[2] **3)
-    success('test ok')
+    success('test 3 ok')
 else
-    fail('test ko')
+    fail('test 3 fail')

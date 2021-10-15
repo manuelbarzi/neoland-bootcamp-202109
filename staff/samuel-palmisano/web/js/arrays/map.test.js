@@ -1,6 +1,7 @@
 describe('TEST map')
 
-describe('case 1')
+// ______________________________________________________________________________
+
 
 var array = [1, 2, 3]
 
@@ -14,11 +15,11 @@ if (res instanceof Array
     && res[1] === array[1] * 10 + 1  //21
     && res[2] === array[2] * 10 + 2) //32
     //[10, 21, 32]
-    success('test ok')
+    success('test 1 ok')
 else
-    fail('test ko')
+    fail('test 1 fail')
 
-describe('case 2')
+// ______________________________________________________________________________
 
 var array = ['a', 'b', 'c']
 
@@ -31,6 +32,6 @@ if (res instanceof Array
     && res[0] === array[0] + 0
     && res[1] === array[1] + 1
     && res[2] === array[2] + 2)
-    success('test ok')
+    success('test 2 ok')
 else
-    fail('test ko')
+    fail('test 2 fail')

@@ -1,6 +1,8 @@
 describe ('TEST filter')
 
-describe ('case 1')
+// ______________________________________________________________________________
+
+
 
 var words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
 
@@ -19,7 +21,7 @@ if (res instanceof Array
     && res[0] === words[2]
     && res[1] === words[3])
    
-    success('test ok')
+    success('test 1 ok')
 else
-    fail('test ko')
+    fail('test 1 fail')
 

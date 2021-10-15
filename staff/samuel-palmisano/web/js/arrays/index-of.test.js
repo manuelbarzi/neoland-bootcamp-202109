@@ -1,6 +1,6 @@
 describe('TEST indexOf')
 
-// CASE 1
+// ______________________________________________________________________________
 
 
 var array = ['ant', 'bison', 'camel', 'duck', 'cat']
@@ -12,7 +12,8 @@ if (typeof res === 'number'
 else
     fail('test 1 failed')
 
-// CASE 2
+// ______________________________________________________________________________
+
 
 
 var array = ['ant', 'bison', 'camel', 'duck', 'cat']
@@ -24,7 +25,8 @@ if (typeof res === 'number'
 else
     fail('test 2 failed')
 
-// CASE 3
+// ______________________________________________________________________________
+
 
 
 var array = ['ant', 'bison', 'camel', 'duck', 'cat']
@@ -36,7 +38,8 @@ if (typeof res === 'number'
 else
     fail('test 3 failed')
 
-// CASE 4
+// ______________________________________________________________________________
+
 
 
 var array = [true, 'hola mundo', 10, { name: 'Peter'}, null, undefined, function() {}, [1, 2, 3], NaN, Infinity, Math.PI]
@@ -48,7 +51,8 @@ if (typeof res === 'number'
 else
     fail('test 4 failed')
 
-// CASE 5
+// ______________________________________________________________________________
+
 
 
 var object = { name: 'Peter'}
@@ -61,7 +65,8 @@ if (typeof res === 'number'
 else
     fail('test 5 failed')
 
-// CASE 6
+// ______________________________________________________________________________
+
 
 
 var object = [1, 2, 3]

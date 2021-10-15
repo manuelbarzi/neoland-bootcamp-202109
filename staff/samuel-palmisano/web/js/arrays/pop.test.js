@@ -1,6 +1,6 @@
 describe('TEST pop')
 
-//CASE 1
+// ______________________________________________________________________________
 
 var array = ['broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato']
 var res = pop(array)
@@ -16,7 +16,7 @@ if (typeof res === 'string'
 else
     fail('test 1 fail')
 
-//CASE 2
+// ______________________________________________________________________________
 
 var array = []
 var res = pop(array)
@@ -28,7 +28,7 @@ if (typeof res === 'undefined'
 else
     fail('test 2 fail')
 
-//CASE 3
+// ______________________________________________________________________________
 
 var object = { name: 'Peter' }
 var func = function() {}
