@@ -1,6 +1,6 @@
 describe ('Test split')
 
-// CASE 1
+// case1
 
 var res = split ('hola mundo', ' ')
 

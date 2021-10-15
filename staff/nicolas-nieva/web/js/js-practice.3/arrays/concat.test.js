@@ -1,6 +1,6 @@
 describe ('Test Concat')
 
-//CASE 1 
+//case1 
 
 var array1 = [1,2,3]
 var array2 = [8,6,4]
@@ -21,7 +21,7 @@ if (res instanceof Array
     else fail('test fail')
 
     
-//CASE 2
+//case2
 
 describe ('Test Concat')
 

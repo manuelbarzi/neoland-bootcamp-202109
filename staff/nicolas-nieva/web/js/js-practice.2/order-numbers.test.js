@@ -1,6 +1,6 @@
 console.log('TEST orderNumbers')
 
-// CASE 1
+// case1
 
 var res = orderNumbers([1, 2, 3, 4],'desc')
 
@@ -14,7 +14,7 @@ if (res instanceof Array
 else
     console.log('test failed')
 
-// CASE 2
+// case2
 
 var res = orderNumbers([4, 3, 2, 1],'asc')
 
@@ -28,7 +28,7 @@ if (res instanceof Array
 else
     console.log('test failed')
 
-    // CASE 3
+    // case3
 
 var res = orderNumbers([5, 3, 1, 8],'asc')
 
@@ -42,7 +42,7 @@ if (res instanceof Array
 else
     console.log('test failed')
 
-    // CASE 4
+    // case4
 
 var res = orderNumbers([8, 3, 7, 1],'nada')
 

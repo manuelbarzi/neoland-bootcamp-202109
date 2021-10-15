@@ -1,6 +1,6 @@
 describe('TEST getValue')
 
-// CASE 1
+// case1
 
 var res = getValue([1, 2, 3, 4], 'max')
 
@@ -10,7 +10,7 @@ if (typeof res === 'number'
 else
     fail('test failed')
 
-// CASE 2
+// case2
 
 var res = getValue([1, 2, 3, 4], 'min')
 
@@ -20,7 +20,7 @@ if (typeof res === 'number'
 else
     fail('test failed')
 
-// CASE 3
+// case3
 
 var res = getValue([1, 2, 3, 4], 'avg') // promedio
 

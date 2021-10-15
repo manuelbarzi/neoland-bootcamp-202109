@@ -1,6 +1,6 @@
 describe('TEST repeat')
 
-// CASE 1
+describe ('Case 1')
 
 var string = 'hola'
 var count = 0
@@ -14,7 +14,7 @@ if (typeof res === 'string'
 else
     fail('test failed')
 
-// CASE 2
+    describe ('Case 2')
 
 var string = 'hola'
 var count = 1
@@ -28,16 +28,17 @@ if (typeof res === 'string'
 else
     fail('test failed')
 
-// CASE 3
+    describe ('Case 3')
+
 
 var string = 'hola'
-var count = 10
+var count = 2
 
 var res = repeat(string, count)
 
 if (typeof res === 'string'
     && res.length === string.length * count
-    && res === string.repeat(10))
+    && res === string.repeat(2))
     success('test ok')
 else
     fail('test failed')

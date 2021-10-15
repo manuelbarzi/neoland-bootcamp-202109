@@ -1,10 +1,37 @@
 describe ('Test Char-At')
 
-var mystring = 'hello';
+describe ('Case 1')
 
-var res = charAt ('e')
+var string = 'hello';
+var res = charAt(string, 4)
 
-if (res === 1)
- success ('test ok')
- else ('test fail')
+if (typeof res === 'string'
+    && res === 'o')
+    success ('test ok')
+    else
+    fail('test fail')
+
+describe ('Case 2')
+
+var string = 'hello luis';
+var res = charAt(string, 6)
+
+if (typeof res === 'string'
+    && res === 'l')
+    success ('test ok')
+    else
+    fail('test fail')
+
+    describe ('Case 3')
+
+var string = 'hello luis';
+var res = charAt(string, 30)
+
+if (typeof res === 'string'
+    && res === '')
+    success ('test ok')
+    else
+    fail('test fail')
+
+
 

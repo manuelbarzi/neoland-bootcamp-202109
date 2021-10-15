@@ -2,7 +2,7 @@ describe('TEST indexOf')
 
 
 
-//CASE 1 
+//case1 
 
 var array = ['ant', 'bison', 'camel', 'duck', 'bison'];
 var res = indexOf(array, 'bison')
@@ -15,7 +15,7 @@ else
     fail('test fail')
 
 
-//CASE 2 
+//case2 
 
 var array = ['ant', 'bison', 'camel', 'duck', 'bison'];
 var res = indexOf(array, 'bison', 2)
@@ -27,7 +27,7 @@ if (typeof res === 'number'
 else
     fail('test fail')
 
-//CASE 3 
+//case3 
 
 var array = ['ant', 'bison', 'camel', 'duck', 'bison'];
 var res = indexOf(array, 'giraffe')

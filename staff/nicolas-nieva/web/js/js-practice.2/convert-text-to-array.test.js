@@ -1,6 +1,6 @@
 console.log('TEST convertTextToArray')
 
-// CASE 1
+// case1
 
 var res = convertTextToArray('hola')
 
@@ -15,7 +15,7 @@ if (res instanceof Array
     console.error('test failed')
 }
 
-// CASE 2
+// case2
 
 var res = convertTextToArray('mundo')
 

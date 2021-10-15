@@ -1,6 +1,6 @@
 describe ('Test push')
 
-describe ('CASE 1')
+describe ('case1')
 
 var array = ['pigs', 'goats', 'sheep']
 var res = push(array, 'cows')
@@ -16,7 +16,7 @@ success ('test ok')
 
 else fail ('test fail')
 
-describe ('CASE 2')
+describe ('case2')
 
 var array = ['pigs', 'goats', 'sheep']
 var res = push(array, 'cows', 'pigs', 'goats')

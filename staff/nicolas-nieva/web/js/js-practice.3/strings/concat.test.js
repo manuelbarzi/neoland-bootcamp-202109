@@ -2,7 +2,7 @@ describe('TEST concat')
 
 // HINT pay attention to the keyword "arguments" (Seach in Google)
 
-// CASE 0
+// case0
 
 var string = 'ho'
 var string2 = 'la'
@@ -16,7 +16,7 @@ if (typeof res === 'string'
 else
     fail('test fail')
 
-// CASE 1
+// case1
 
 var string = 'hola'
 var string2 = ' '
@@ -32,7 +32,7 @@ else
     fail('test fail')
 
 
-// CASE 2
+// case2
 
 var string = 'adios'
 var string2 = ' '
@@ -48,7 +48,7 @@ if (typeof res === 'string'
 else
     fail('test fail')
 
-// CASE 3
+// case3
 
 var string = 'banana'
 var string2 = ' '

@@ -1,7 +1,7 @@
 describe('TEST (array) include')
 
-// CASE 1
-describe('CASE 1')
+// case1
+describe('case1')
 
 var array = ['naranja', 'uva', 'fresa', 'mango', 'kiwi'];
 
@@ -9,7 +9,7 @@ var res = include(array, 'fresa')
 
 // true y 'true' no es la misma cosa, true es de tipo boolean y 'true' es de tipo string
 
-// CASE 1
+// case1
 
 if (typeof res === "boolean"
     && res === true)      //el resultado debe de ser true por que si hay un string fresa
@@ -18,7 +18,7 @@ if (typeof res === "boolean"
 else
     fail('test failed')
 
-//CASE 2
+//case2
 
 var array = ['Mariana y Noelia están platicando con Ventu', 'Mariana', 'y', 'Noelia', 'están', 'platicando', 'con', 'Ventu'];
 
@@ -31,7 +31,7 @@ if (typeof res === "boolean"
 else
     fail('test failed')
 
-// CASE 3
+// case3
 
 // 1 y '1' no es la misma cosa, 1 es de tipo number y '1' es de tipo string
 
