@@ -40,7 +40,7 @@ var array = ['hola', 5, 'adios', 1, 4];
 var items = [];
 var res = some(array, function (element, index) {
     items[index] = element
-    
+
     return element === 'hola'
 })
 

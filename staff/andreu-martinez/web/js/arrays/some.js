@@ -1,9 +1,8 @@
-function some(array, callback){
-    for (let i = 0; i < array.length; i++) {
+function some(array, callback) {
+    var found = false
+    for (let i = 0; i < array.length && !found; i++) {
         var element = array[i];
-
-       if(callback(element, i)) return true
-        
+        if (callback(element, i)) found = true
     }
-    return false
+    return found
 }
