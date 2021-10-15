@@ -1,6 +1,6 @@
 describe('TEST semaphore');
 
-// CASE 1
+describe('CASE 1')
 
 var res = semaphore("cross", "green", "pass");
 
@@ -13,7 +13,7 @@ else
     fail('test failed')
 
 
-// CASE 2
+describe('CASE 2')
 
 var res = semaphore("cross", "red", "pass");
 
@@ -26,7 +26,7 @@ else
     fail('test failed')
 
 
-// CASE 3
+describe('CASE 3')
 
 var res = semaphore("cross", "red", "wait");
 
@@ -39,7 +39,7 @@ else
     fail('test failed')
 
 
-// CASE 4
+describe('CASE 4')
 
 var res = semaphore("stop", "green", "pass");
 

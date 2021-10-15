@@ -1,5 +1,5 @@
 function describe(text) {
-    console.log('%c' + text, 'font-weight: bold')
+    console.log('%c' + text, 'font-weight: bold; color: orange')
 }
 
 function success(text) {
