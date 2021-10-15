@@ -9,7 +9,7 @@ function slice(string, init, end) {
     for (let i = start; i < finish; i++) {
         var char = string[i]
 
-        slice += char
+        newSlice += char
     }
 
     return newSlice

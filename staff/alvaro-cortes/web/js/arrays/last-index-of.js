@@ -1,14 +1,18 @@
 function lastIndexOf(array, value, fromIndex) {
+   var indexFinal;
 
     if (fromIndex < 0) {
-        for(let i = array.length - 1; i >= 0; i--) {
+        for(let i = array.length + fromIndex; i >= 0; i--) {
             if (array[i] === value)
-            return i
+            indexFinal = i
         }
     } else {
         for (let i = fromIndex? fromIndex : 0; i < array.length; i++) {
             if (array[i] === value)
-            return i
+            indexFinal = i
         }
     } 
+
+    if(indexFinal !== undefined) return indexFinal
+    else return -1
 }

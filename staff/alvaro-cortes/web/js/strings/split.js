@@ -1,34 +1,32 @@
-function split(text, separator) {
-    var parts = []
+function split(str, pattern) {
+    let parts = [];
+    let part = "";
+    if (pattern === undefined) {
+        parts.push(str);
+    }
+    else {
+        for (let i = 0; i < str.length; i++) {
+            if (pattern === "") parts.push(str[i]);
+            else {
+                let characters = "";
 
-    if(separator === "") {
-        for(let i = 0; i < text.length; i++) {
-            parts.push(text[i])
-        }
-    } else if (separator === separator && separator != "") {
-        var part = ""
-        var count;
-        var countSep = 0
-        for(let i = 0; i < separator.length; i++) {
-            count++  
-            if(count === separator[i])
-        // borrar count de abajo//    
-        count
-        }
-        
+                for (let j = 0; j < pattern.length; j++) {
+                    characters += (str[i + j])? str[i + j]: "";
+                }
 
-    } else {
-        var part = ""
-        for(let i = 0; i < text.length; i++) {
-            if(text[i] == separator) {
-                parts.push(part)
-                part = ""
-            } else {
-                part += text[i]
+                if (pattern === characters) {
+                    if(part !== "") {
+                        parts.push(part);
+                    }
+                    part = "";
+                    i += (pattern.length - 1);
+                }
+                else {
+                    part += characters[0];
+                    if (i === str.length - 1) parts.push(part);
+                }
             }
         }
-        parts.push(part)
     }
-    return parts
-
+    return parts;
 }

@@ -6,7 +6,7 @@ var arreglo = ["Juan", undefined, "hola", "Moña", 15, "hola"]
 var res = lastIndexOf(arreglo, "hola")
 
 if (typeof res === "number"
-&& res === 2
+&& res === 5
 && arreglo[0] === "Juan"
 && arreglo[1] === undefined
 && arreglo[2] === "hola"
@@ -40,7 +40,7 @@ var arreglo = ["Juan", undefined, "hola", "Moña", 15, "hola"]
 var res = lastIndexOf(arreglo, "hola", -1)
 
 if (typeof res === "number"
-&& res === 5
+&& res === 2
 && arreglo[0] === "Juan"
 && arreglo[1] === undefined
 && arreglo[2] === "hola"

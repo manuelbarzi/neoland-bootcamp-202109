@@ -6,7 +6,7 @@ var string = 'The quick brown fox jumps over the lazy dog.'
 var res = slice(string, 31)
 
 if (typeof res === "string"
-&& res === "the lazy dog")
+&& res === "the lazy dog.")
     success("Test correct")
 else
     fail("Test failed")
