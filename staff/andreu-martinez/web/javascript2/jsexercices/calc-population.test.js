@@ -1,8 +1,7 @@
 describe('TEST calcPopulation');
 
 // CASE 1
-
-let res = calcPopulation(2, 80, 50, 5, 1000)
+res = calcPopulation(2, 80, 50, 5, 1000)
 
 if (
     typeof res === "number"

@@ -1,4 +1,4 @@
-function semaphore(person = "pass", light = "green", cars ="wait") {
+function semaphore(person = "cross", light = "green", cars ="wait") {
 
     heart = (person === 'cross' && cars === 'pass') ? false : true
 
