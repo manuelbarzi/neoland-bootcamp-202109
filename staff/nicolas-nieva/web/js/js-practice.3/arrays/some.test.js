@@ -28,45 +28,44 @@ else
     fail('test ko')
 
 
-// describe('case 2')
+describe('case 2')
 
-// var bananas = { name: 'bananas', quantity: 10 }
-// var oranges = { name: 'oranges', quantity: 14 }
-// var lemons = { name: 'lemons', quantity: 4 }
-// var melons = { name: 'melons', quantity: 1 }
-// var mangos = { name: 'mangos', quantity: 0 }
+var bananas = { name: 'banana', quantity: 10 }
+var oranges = { name: 'orange', quantity: 14 }
+var lemons = { name: 'lemon', quantity: 4 }
+var melons = { name: 'melon', quantity: 1 }
+var mangos = { name: 'mango', quantity: 0 }
 
-// var fruits = [
-//     bananas,
-//     oranges,
-//     lemons,
-//     melons,
-//     mangos
-// ]
+var fruits = [
+    bananas,
+    oranges,
+    lemons,
+    melons,
+    mangos
+]
 
-// var items = []
+var items = []
 
-// var hasLessThan3Units = function (fruit, index) {
-//     items[index] === fruit
+var hasLessThan3Units = function (fruit, index) {
+    items[index] = fruit
 
-//     return fruit.quantity < 3
-// }
+    return fruit.quantity < 3
+}
 
-// var res = some(fruits, hasLessThan3Units)
+var res = some(fruits, hasLessThan3Units)
 
-// if (typeof res === 'boolean'
-//     && res === true
-//     && items[0] === bananas
-//     && items[1] === oranges
-//     && items[2] === lemons
-//     && items [3] === melons)
-//     success('test ok')
-// else
-//     fail('test ko')
+if (typeof res === 'boolean'
+    && res === true
+    && items.length === 4
+    && items[0] === bananas
+    && items[1] === oranges
+    && items[2] === lemons
+    && items[3] === melons)
+    success('test ok')
+else
+    fail('test ko')
 
-describe("TEST every")
-
-// CASE 1
+describe ('case 2')
 
 var array = [2, 5, 8, 1, 4];
 var items = [];
@@ -83,7 +82,7 @@ if (typeof res === 'boolean'
     success('test ok')
 else fail('test ko')
 
-// CASE 2
+describe ('case 3')
 
 var array = [12, 5, 8, 1, 4];
 var items = [];
@@ -100,7 +99,7 @@ if (typeof res === 'boolean'
 else fail('test ko')
 
 
-// CASE 3
+describe ('case 4')
 
 var array = ['hola', 5, 'adios', 1, 4];
 var items = [];
