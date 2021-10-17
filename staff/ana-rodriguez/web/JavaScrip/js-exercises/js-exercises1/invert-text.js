@@ -2,9 +2,8 @@ function invertText(text) {
      var result = "";
      var revertText = text;
       
-     for (var i = 0; i < revertText.length; i++) {
-        var position = revertTex.length -1 - i;
-        result += revertText[position];
+     for (var i =text.length-1; i >=0; i--) {
+        result=result + text[i]
       }
      return result;
 

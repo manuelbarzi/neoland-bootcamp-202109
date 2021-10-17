@@ -8,13 +8,13 @@ function numbers(values) { // values es de tipo array
 
      for(var  i = 0; i < values.length; i++){
          if ( values[i] > 0 ){
-            totalPositives ++
+            totalPositives = totalPositives + values[i]
          } else {
-             totalNegatives ++
+             totalNegatives =totalNegatives + values[i]
          }
     }
     
-    balance= totalPositives - totalNegatives
+    balance= totalPositives + totalNegatives
     
     arrCount = [totalPositives, totalNegatives, balance];
 
