@@ -1,20 +1,26 @@
-
 function orderNumbers(numbers, order) {
+
+    let copyNumbers = numbers
+    let copyOrder = order
+
     let ordered = []
 
-    if ( order == 'desc' ) {
-        for( let i = 0; i < numbers.length; i++ ) {
-            numbersValue = numbers[ numbers.length - 1 - i ]
-            ordered += numbersValue
-        }
-    } else if ( order === 'asc' ) {
-        for( let i = 0; i < numbers.length; i++ ) {
-            numbersValue = numbers[i]
-            ordered += numbersValue
-        }
+    if (copyOrder === "asc") {
+        ordered = copyNumbers.sort(function (a, b) {
+            return a - b
+        })
+    }
+
+    else if (copyOrder === "desc") {
+        ordered = copyNumbers.sort(function (a, b) {
+            return b - a
+        })
+    }
+
+    else {
+        console.log("El parámetro order debe ser 'asc' o 'desc'")
+        ordered = copyNumbers
     }
 
     return ordered
 }
-
-// Corregir no devuelve un array

@@ -1,6 +1,6 @@
 describe('TEST indexOf')
 
-let arr = ['ant', 'bison', 'camel', 'duck', 'bison']
+var arr = ['ant', 'bison', 'camel', 'duck', 'bison']
 
 
 // CASE 1

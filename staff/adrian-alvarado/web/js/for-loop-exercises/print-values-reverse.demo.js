@@ -1,4 +1,4 @@
-demoDescribe('DEMO printValuesReverse')
+describe('DEMO printValuesReverse')
 
 printValuesReverse([1, 2, 3, 4, 5])
 

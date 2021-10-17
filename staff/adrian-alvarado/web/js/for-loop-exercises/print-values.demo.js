@@ -1,4 +1,4 @@
-demoDescribe('Demo printValues')
+describe('Demo printValues')
 
 printValues([1, 2, 3, 4, 5])
 

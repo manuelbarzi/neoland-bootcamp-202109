@@ -1,4 +1,4 @@
-demoDescribe('TEST countNumbers')
+describe('TEST countNumbers')
 
 // CASE 1
 

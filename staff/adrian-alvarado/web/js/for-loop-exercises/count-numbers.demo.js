@@ -1,4 +1,4 @@
-console.log('DEMO countNumbers')
+describe('DEMO countNumbers')
 
 // DEMO 1
 

@@ -1,4 +1,4 @@
-demoDescribe('DEMO countLetters')
+describe('DEMO countLetters')
 
 console.log(countLetters('hola mundo'))
 

@@ -20,6 +20,7 @@ if (res === 40
 else
     fail('test ko')
 
+
 describe('case 2')
 
 var array = ['one', 'two', 'three', 'four']

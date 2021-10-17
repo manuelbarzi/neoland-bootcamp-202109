@@ -50,7 +50,7 @@ else
 var res = orderNumbers([42, 31.15, 12, 31.01, 11, 33], 'asc')
 
 if (res instanceof Array
-    && res.length === 5
+    && res.length === 6
     && res[0] === 11
     && res[1] === 12
     && res[2] === 31.01

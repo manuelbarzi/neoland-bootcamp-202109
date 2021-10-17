@@ -1,4 +1,4 @@
-demoDescribe('DEMO convertTextToArray')
+describe('DEMO convertTextToArray')
 
 // DEMO 1
 

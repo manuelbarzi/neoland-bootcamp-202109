@@ -1,4 +1,4 @@
-demoDescribe('DEMO invertText')
+describe('DEMO invertText')
 
 console.log(invertText('hola mundo'))
 
