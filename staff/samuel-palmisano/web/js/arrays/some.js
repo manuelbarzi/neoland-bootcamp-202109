@@ -1,35 +1,38 @@
-/*function some(array, callback) {
-    var result = false
+// function some(array, callback) {
+//     var result = false
 
-    for (var i = 0; i < array.length; i++) {
-        var element = array[i]
+//     for (var i = 0; i < array.length; i++) {
+//         var element = array[i]
 
-        if (callback(element, i) === true) {
-            result = true
-            return result
-        }
+//         if (callback(element, i) === true) {
+//             result = true
+//             return result
+//         }
 
-    }
+//     }
 
-    return result
-}*/
-/*
-function some(array, callback) {
-    var result = false
+//     return result
+// }
 
-    for (var i = 0; (i < array.length && !result); i++) {
-        var element = array[i]
+// ________________________________________________________________________
 
-        if (callback(element, i)) {
-            result = true
+// function some(array, callback) {
+//     var result = false
+
+//     for (var i = 0; (i < array.length && !result); i++) {
+//         var element = array[i]
+
+//         if (callback(element, i)) {
+//             result = true
         
-        }
+//         }
 
-    }
+//     }
 
-    return result
-}
-*/
+//     return result
+// }
+
+// ________________________________________________________________________
 
 function some(array, callback) {
     var result = false

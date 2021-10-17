@@ -11,9 +11,9 @@ if (
     && res[1] === 4
     && res[2] === 5
     )
-    success('test ok')
+    success('test 1 ok')
 else
-    fail('test failed')
+    fail('test 1 failed')
 
 
 // _______________________________________________________________
@@ -26,9 +26,9 @@ if (
     && res[0] === 2
     && res[1] === 3
     )
-    success('test ok')
+    success('test 2 ok')
 else
-    fail('test failed')
+    fail('test 2 failed')
 
 
 // _____________________________________________________________________
@@ -44,9 +44,9 @@ if (
     && res[3] === 4
     && res[4] === 5
     )
-    success('test ok')
+    success('test 3 ok')
 else
-    fail('test failed')
+    fail('test 3 failed')
 
 // ____________________________________________________________________________
 
@@ -59,9 +59,9 @@ if (
     && res[1] === 4
     && res[2] === 5
     )
-    success('test ok')
+    success('test 4 ok')
 else
-    fail('test failed')
+    fail('test 4 failed')
 
 // ___________________________________________________________________
 
@@ -74,9 +74,9 @@ if (
     && res[1] === 3
     && res[2] === 4
     )
-    success('test ok')
+    success('test 5 ok')
 else
-    fail('test failed')
+    fail('test 5 failed')
 
 // _________________________________________________________________
 
@@ -86,9 +86,9 @@ if (
     res instanceof Array
     && res.length === 0
     )
-    success('test ok')
+    success('test 6 ok')
 else
-    fail('test failed')
+    fail('test 6 failed')
 
 // ______________________________________________________________________________
 
@@ -103,9 +103,9 @@ if (
     && res[3] === 4
     && res[4] === 5
     )
-    success('test ok')
+    success('test 7 ok')
 else
-    fail('test failed')
+    fail('test 7 failed')
 
 // __________________________________________________________________
 
@@ -119,9 +119,9 @@ if (
     && res[2] === 3
     && res[3] === 4
     )
-    success('test ok')
+    success('test 8 ok')
 else
-    fail('test failed')
+    fail('test 8 failed')
 
 // ______________________________________________________________________________
 
@@ -131,6 +131,6 @@ if (
     res instanceof Array
     && res.length === 0
     )
-    success('test ok')
+    success('test 9 ok')
 else
-    fail('test failed')
+    fail('test 9 failed')

@@ -23,5 +23,5 @@ if (res instanceof Array
    
     success('test 1 ok')
 else
-    fail('test 1 fail')
+    fail('test 1 failed')
 

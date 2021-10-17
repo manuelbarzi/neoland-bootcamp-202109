@@ -14,7 +14,7 @@ if (typeof res === 'string'
     && array[3] === 'kale')
     success('test 1 ok')
 else
-    fail('test 1 fail')
+    fail('test 1 failed')
 
 // ______________________________________________________________________________
 
@@ -26,7 +26,7 @@ if (typeof res === 'undefined'
     && array.length === 0)
     success('test 2 ok')
 else
-    fail('test 2 fail')
+    fail('test 2 failed')
 
 // ______________________________________________________________________________
 
@@ -50,4 +50,4 @@ if (typeof res === 'object'
     && array[8] === Math.PI) // this doesn't work => array[6] === NaN
     success('test 3 ok')
 else
-    fail('test 3 fail')
+    fail('test 3 failed')

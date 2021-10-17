@@ -24,7 +24,7 @@ if (typeof res === 'boolean'
     && items[5] === 0)
     success('test 1 ok')
 else
-    fail('test 1 fail')
+    fail('test 1 failed')
 
 //____________________________________________________________
 
@@ -61,7 +61,7 @@ if (typeof res === 'boolean'
     && items[3] === melons)
     success('test 1 ok')
 else
-    fail('test 2 fail')
+    fail('test 2 failed')
 
 //_________________________________________________________________
 
@@ -89,5 +89,5 @@ else
         && items[5] === 53)
         success('test 3 ok')
     else
-        fail('test 3 fail')
+        fail('test 3 failed')
     

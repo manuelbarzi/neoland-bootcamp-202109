@@ -1,1 +1,1 @@
-describe('FUNCIONES PARA ARRAYS')
+describe('ARRAY METHODS')

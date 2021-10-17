@@ -1,5 +1,3 @@
-// TODO implement the standalone version of String.prototype.split()
-
 function split(string, separator) {
     var parts = []
 

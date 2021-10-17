@@ -14,7 +14,7 @@ if (typeof res === 'number'
     && array[3] === 'cows')
     success('test 1 ok')
 else
-    fail('test 1 fail')
+    fail('test 1 failed')
 
 // ______________________________________________________________________________
 
@@ -34,4 +34,4 @@ if (typeof res === 'number'
     && array[7] === 'mouses')
     success('test 2 ok')
 else
-    fail('test 2 fail')
+    fail('test 2 failed')

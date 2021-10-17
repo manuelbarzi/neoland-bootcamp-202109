@@ -1,5 +1,3 @@
-// TODO implement the standalone version of String.prototype.indexOf()
-
 function indexOf(string, value, fromIndex) {
     var j = 0
 

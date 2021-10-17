@@ -14,7 +14,7 @@ if (res.length === array.length
     && res[2] === array[2])
     success('test 1 ok')
 else
-    fail('test 1 fail')
+    fail('test 1 failed')
 
 //________________________________________________________________________
 
@@ -32,7 +32,7 @@ if (res.length === array.length
     && res[2] === array[2] * 10)
     success('test 2 ok')
 else
-    fail('test 2 fail')
+    fail('test 2 failed')
 
 
 // ______________________________________________________________________________

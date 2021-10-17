@@ -1,1 +1,1 @@
-describe('FUNCIONES PARA STRINGS')
+describe('STRING METHODS')

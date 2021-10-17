@@ -1,5 +1,3 @@
-// TODO implement the standalone version of String.prototype.indexOf()
-
 function indexOf(string, value) {
     for (var i = 0; i < string.length && index === -1; i++) {
         var character = string[i]

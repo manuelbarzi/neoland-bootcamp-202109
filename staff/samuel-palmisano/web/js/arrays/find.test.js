@@ -20,7 +20,7 @@ if (res === 40
     && items[3] === array[3])
     success('test 1 ok')
 else
-    fail('test 2 fail')
+    fail('test 1 failed')
 
 // ______________________________________________________________________________
 
@@ -41,7 +41,7 @@ if (res === 'three'
     && items[2] === array[2])
     success('test 2 ok')
 else
-    fail('test 2 fail')
+    fail('test 2 failed')
 
 // ______________________________________________________________________________
 
@@ -63,4 +63,4 @@ if (res === undefined
     && items[3] === array[3])
     success('test 3 ok')
 else
-    fail('test 3 fail')
+    fail('test 3 failed')
