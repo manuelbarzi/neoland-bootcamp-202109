@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@800&display=swap" rel="stylesheet"> 
+    <title>Ejemplo CSS</title>
+</head>
+<body>
+    <h1>Hello Earth</h1>
+
+    <h2 class="title">Hello People</h2>
+
+    <span class="emoji">I'm a emoji 😇</span>
+
+    <form class="search" action="https://www.google.com/search">
+        <fieldset class="search__body">
+            <legend class="search__title">Search in Google</legend>
+            <label for="query">Query</label>
+            <input type="text" id="query" name="q" placeholder="Escribe tu busqueda">
+            <input class="button" type="submit" value="Enviar">
+        </fieldset>
+    </form>
+
+    <form class="register">
+        <label class="register__label" for="name">Name </label><input class="field" type="text" name="name" id="name" placeholder="Write your name"><br>
+        <label class="register__label" for="lastName">Last name </label><input class="field" type="text" name="lastName" id="lastName" placeholder="Write your last name"><br>
+        <label class="register__label" for="birthday">Birth </label><input class="field" type="date" name="birth" id="birthday"><br>
+        <label class="register__label" for="password">Password </label><input class="field" type="password" name="password" id="password">
+        <button class="button" type="button">Registrarse</button>
+        <button class="button" type="reset">Clear</button>
+    </form>
+
+    <ul class="list">
+        <li class="list__item">HTML</li>
+        <li class="list__item">CSS</li>
+        <li class="list__item">JavaScript</li>
+    </ul>
+
+    <table class="cart">
+        <thead class="cart__header">
+            <tr>
+                <th>Products</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Sucks</th>
+                <th>10 €</th>
+            </tr>
+            <tr>
+                <th>Shirt</th>
+                <th>20 €</th>
+            </tr>
+            <tr>
+                <th>Pants</th>
+                <th>25 €</th>
+            </tr>
+        </tbody>
+        <tfoot class="cart__footer">
+            <tr>
+                <th>Total</th>
+                <th>55 €</th>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+</html>

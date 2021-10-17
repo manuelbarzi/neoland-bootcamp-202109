@@ -1,3 +1,0 @@
-function repeat (str, count) {
-
-}
