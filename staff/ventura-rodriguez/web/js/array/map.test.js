@@ -8,8 +8,6 @@ var res = map(array, function(element, index) {
     return element * 10 + index
 })
 
-var res = map(array, mul)
-
 if (res instanceof Array
     && res.length === array.length
     && res[0] === array[0] * 10 + 0

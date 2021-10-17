@@ -8,8 +8,6 @@ var res = filter(array, function(element, index) {
     return element > 10;
 })
 
-var res = filter(array, mul)
-
 if (res instanceof Array
     && res.length === 2
     && res[0] === array[3]
@@ -19,5 +17,18 @@ if (res instanceof Array
 else
     fail('test failed');
 
+
 describe('case 2');
 
+var array = [1, 2, 3, 11, 4, 7, 20];
+
+var res = filter(array, function(element, index) {
+    return element < 0;
+})
+
+if (res instanceof Array
+    && res.length === 0
+    )
+    success('test ok');
+else
+    fail('test failed');

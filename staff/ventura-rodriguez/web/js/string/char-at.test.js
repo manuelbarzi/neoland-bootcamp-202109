@@ -1,8 +1,8 @@
-describe('TEST cahrAt');
+describe('TEST charAt');
 
 // CASE 1
 
-var res = cahrAt("12345", 2);
+var res = charAt("12345", 2);
 
 if (
     typeof res === "string"
@@ -15,7 +15,7 @@ else
 
 // CASE 2
 
-var res = cahrAt("12345", 3);
+var res = charAt("12345", 3);
 
 if (
     typeof res === "string"
@@ -28,7 +28,7 @@ else
 
 // CASE 3
 
-var res = cahrAt("12345");
+var res = charAt("12345");
 
 if (
     typeof res === "string"
@@ -41,7 +41,7 @@ else
 
 // CASE 4
 
-var res = cahrAt("12345", -2);
+var res = charAt("12345", -2);
 
 if (
     typeof res === "string"

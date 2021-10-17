@@ -2,7 +2,7 @@ describe('TEST split');
 
 // CASE 1
 
-let res = split("hola mundo", " ");
+var res = split("hola mundo", " ");
 
 if (
     res instanceof Array
@@ -17,7 +17,7 @@ else
 
 // CASE 2
 
-res = split("1 2 3 4 5", " ");
+var res = split("1 2 3 4 5", " ");
 
 if (
     res instanceof Array
@@ -35,7 +35,7 @@ else
 
 // CASE 3
 
-res = split("abcde", "");
+var res = split("abcde", "");
 
 if (
     res instanceof Array
@@ -53,7 +53,7 @@ else
 
 // CASE 4
 
-res = split("Adiós mundo cruel");
+var res = split("Adiós mundo cruel");
 
 if (
     res instanceof Array
@@ -67,7 +67,7 @@ else
 
 // CASE 5
 
-res = split("Hello", "ll");
+var res = split("Hello", "ll");
 
 if (
     res instanceof Array
@@ -82,7 +82,7 @@ else
 
 // CASE 6
 
-res = split("World", "ld");
+var res = split("World", "ld");
 
 if (
     res instanceof Array
@@ -96,8 +96,8 @@ else
 
 // CASE 7
 
-res = split("World       ", " ");
-console.log(res);
+var res = split("World       ", " ");
+
 if (
     res instanceof Array
     && res.length === 1
@@ -110,7 +110,7 @@ else
 
 // CASE 8
 
-res = split("Step by step", " by ");
+var res = split("Step by step", " by ");
 
 if (
     res instanceof Array

@@ -10,13 +10,15 @@ var res = find(array, function (element, index) {
     return element > 30
 })
 
-if (res === 40
+if (
+    res === 40
     && items.length === 4
     && items[0] === array[0]
     && items[1] === array[1]
     && items[2] === array[2]
-    && items[3] === array[3])
-    sucess('test ok')
+    && items[3] === array[3]
+    )
+    success('test ok')
 else
     fail('test ko')
 
@@ -30,11 +32,13 @@ var res = find(array, function (element, index) {
     return element.startsWith('th')
 })
 
-if (res === 'three'
+if (
+    res === 'three'
     && items.length === 3
     && items[0] === array[0]
     && items[1] === array[1]
-    && items[2] === array[2])
-    sucess('test ok')
+    && items[2] === array[2]
+    )
+    success('test ok')
 else
     fail('test ko')
