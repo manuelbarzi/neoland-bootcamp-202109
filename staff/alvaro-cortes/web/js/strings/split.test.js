@@ -16,7 +16,7 @@ else
 
 // CASE 2 //
 
-var res = split("hola", "ol")
+res = split("hola", "ol")
 
 if (typeof res === "string"
     && res.length === 2
@@ -28,7 +28,7 @@ else
 
 // CASE 3 //
 
-let res = split("hola mundo", " ");
+res = split("hola mundo", " ");
 
 if (
     res instanceof Array
