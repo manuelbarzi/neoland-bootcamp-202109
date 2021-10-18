@@ -1,5 +1,3 @@
-// falta adaptarla para arrays
-
 function includes(string, searchElement, position) {
     var res = false;
     var position = position ? position : 0;
