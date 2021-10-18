@@ -9,27 +9,13 @@ function Pen(color, size, material, ink, personName) {
 }
 
 
-
-
-
-
-
 // Propiedades de objetos bolis
 //  Colo    =)
 //  Tamaño  =)
 //  Material    =)
 //  Color de tinta  =)
-
-// Acciones que podemos realizar con los bolis
-//  Escribir
-//  Lanzarlo
-//  Recargarlo
-//  Apuñalar
-
+//  Nombre persona  =)
 
 // llamar a una propiedad de boli
 //  Pen.color
 //  Pen.color = "red"
-
-// Llamar a un método de boli
-//  Pen.write()
