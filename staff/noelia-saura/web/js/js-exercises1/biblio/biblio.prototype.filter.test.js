@@ -2,12 +2,12 @@ describe('TEST filter')
 
 describe('case 1')
 
-var words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present']
-var res = filter(words, function (word) {
-    return word.length > 6
+var words = new Biblio('spray', 'limit', 'elite', 'exuberant', 'destruction', 'present')
+var res = words.filter(function(condition) {
+    return condition.length > 6
 })
 
-if (res instanceof Array
+if (res instanceof Biblio
     && res.length === 3
     && res[0] === words[3]
     && res[1] === words[4]
@@ -26,12 +26,12 @@ else
 
 describe('case 2')
 
-var numbers = [10, -10, 20, -20, 30, -30, 40, -40]
-var res = filter(numbers, function (number) {
-    return number > 0
+var numbers = new Biblio(10, -10, 20, -20, 30, -30, 40, -40)
+var res = numbers.filter(function(condition) {
+    return condition > 0
 })
 
-if (res instanceof Array
+if (res instanceof Biblio
     && res.length === 4
     && res[0] === numbers[0]
     && res[1] === numbers[2]

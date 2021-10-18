@@ -1,24 +1,24 @@
-function slice(arr = [], init = 0, end = arr.length) {
+// function slice(arr = [], init = 0, end = arr.length) {
 
-    var copyArr = arr;
-    var copyInit = init;
-    var copyEnd = end;
+//     var copyArr = arr;
+//     var copyInit = init;
+//     var copyEnd = end;
 
-    copyInit = (copyInit < 0) ? copyArr.length + copyInit : copyInit;
-    copyInit = (copyInit < 0) ? 0 : copyInit;
-    copyInit = (copyInit > copyArr.length) ? copyArr.length : copyInit;
-    copyEnd = (copyEnd < 0) ? copyArr.length + copyEnd : copyEnd;
-    copyEnd = (copyEnd > copyArr.length) ? copyArr.length : copyEnd;
+//     copyInit = (copyInit < 0) ? copyArr.length + copyInit : copyInit;
+//     copyInit = (copyInit < 0) ? 0 : copyInit;
+//     copyInit = (copyInit > copyArr.length) ? copyArr.length : copyInit;
+//     copyEnd = (copyEnd < 0) ? copyArr.length + copyEnd : copyEnd;
+//     copyEnd = (copyEnd > copyArr.length) ? copyArr.length : copyEnd;
 
-    var arrReturn = [];
+//     var arrReturn = [];
 
-    for (let i = copyInit; i < copyEnd; i++) {
-        var element = arr[i];
-        arrReturn[arrReturn.length] = element;
-    }
+//     for (let i = copyInit; i < copyEnd; i++) {
+//         var element = arr[i];
+//         arrReturn[arrReturn.length] = element;
+//     }
 
-    return arrReturn;
-}
+//     return arrReturn;
+// }
 
 // Casos de uso
 
@@ -28,3 +28,12 @@ function slice(arr = [], init = 0, end = arr.length) {
 // Si end es negativo entonces arr.length + end, siendo end negativo.   =)
 // si end es omitido entonces end = arr.length      =)
 // si end es mayor a arr.length entonces end = arr.length   =)
+function slice(array, start, end) {
+    var sliced = []
+    start = start < 0? array.length + start : start
+    end = end? (end < 0? array.length + end: end) : array.length
+    for (var i = start; i < end; i++) {
+        sliced[sliced.length] = array[i]
+    }
+    return sliced
+}

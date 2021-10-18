@@ -35,23 +35,6 @@ else
 
 // CASE 3
 
-var res = slice([1, 2, 3, 4, 5]);
-
-if (
-    res instanceof Array
-    && res.length === 5
-    && res[0] === 1
-    && res[1] === 2
-    && res[2] === 3
-    && res[3] === 4
-    && res[4] === 5
-    )
-    success('test ok')
-else
-    fail('test failed')
-
-// CASE 4
-
 var res = slice([1, 2, 3, 4, 5], -3);
 
 if (
@@ -92,40 +75,9 @@ if (
 else
     fail('test failed')
 
-// CASE 7
 
-var res = slice([1, 2, 3, 4, 5], 0, 40);
 
-if (
-    res instanceof Array
-    && res.length === 5
-    && res[0] === 1
-    && res[1] === 2
-    && res[2] === 3
-    && res[3] === 4
-    && res[4] === 5
-    )
-    success('test ok')
-else
-    fail('test failed')
-
-// CASE 8
-
-var res = slice([1, 2, 3, 4, 5], -10, 4);
-
-if (
-    res instanceof Array
-    && res.length === 4
-    && res[0] === 1
-    && res[1] === 2
-    && res[2] === 3
-    && res[3] === 4
-    )
-    success('test ok')
-else
-    fail('test failed')
-
-// CASE 9
+// CASE 6
 
 var res = slice([1, 2, 3, 4, 5], 1, -20);
 
@@ -136,3 +88,23 @@ if (
     success('test ok')
 else
     fail('test failed')
+
+
+// CASE 7
+
+    var animals = ['ant','bison','camel','duck','elephant']
+    var res = slice(animals,2)
+ if( res instanceof Array
+    && res.length === 3
+    && res[0]=== animals[2]
+    && res[1]=== animals[3]
+    && res[2]=== animals[4]
+    &&animals.length === 5
+    &&animals[0]==='ant'
+    &&animals[1]=== 'bison'
+    &&animals[2]=== 'camel'
+    &&animals[3]=== 'duck'
+    &&animals[4]=== 'elephant')
+    success('test ok')
+else
+    fail('test ok')
