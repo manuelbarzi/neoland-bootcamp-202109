@@ -56,3 +56,14 @@ if ( typeof res === 'number'&& res === -1)
 success('test ok')
 else 
 fail('test failed')
+
+describe('case 6')
+
+var str = ""
+var char = 'w'
+var res = lastIndexOf(str, char)
+
+if ( typeof res === 'number'&& res === 10)
+success('test ok')
+else 
+fail('test failed')
