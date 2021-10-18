@@ -14,6 +14,12 @@ if (res instanceof Array
     && res.length === 2
     && res[0] === 40
     && res[1] === 50
+    && array.length === 5
+    && array[0] === 10
+    && array[1] === 20
+    && array[2] === 30
+    && array[3] === 40
+    && array[4] === 50
     && items.length === 5
     && items[0] === array[0]
     && items[1] === array[1]
@@ -38,6 +44,11 @@ if (res instanceof Array
     && res.length === 2
     && res[0] === 'three'
     && res[1] === 'thirteen'
+    && array.length === 4
+    && array[0] === 'two'
+    && array[1] === 'three'
+    && array[2] === 'four'
+    && array[3] === 'thirteen'
     && items.length === 4
     && items[0] === array[0]
     && items[1] === array[1]

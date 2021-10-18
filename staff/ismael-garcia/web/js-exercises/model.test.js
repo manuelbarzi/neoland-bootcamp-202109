@@ -1,8 +1,11 @@
-console.log('TEST orderNumbers')
+console.log('TEST orderNumbers') // Esto sirve para imprimir en la consola 'Test orderNumbers' y así identificar mejor estos tests en la consola, sobre todo en caso de que estos no sean los únicos tests que se estén imprimiendo en la consola.
+
 
 // CASE 1
 
-var res = orderNumbers([1, 2, 3, 4], 'desc')
+
+
+var res = orderNumbers([1, 2, 3, 4], 'desc') 
 
 if (res instanceof Array
     && res.length === 4

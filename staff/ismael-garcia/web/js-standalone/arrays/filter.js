@@ -1,17 +1,15 @@
 function filter(array, callback) {
-    var result = [];
-    var j = 0;
+    var filtered = [];
 
     for (var i = 0; i < array.length; i++) {
         var element = array[i];
         
         if (callback(element, i)) {
-            result[j] = element;
-            j++;
+            filtered[filtered.length] = element;
         }
     }
 
-    return result;
+    return filtered;
 }
 
 

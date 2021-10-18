@@ -4,14 +4,21 @@ describe('TEST slice')
 
 // CASE 1
 
-var res = slice([1, 2, 3, 4, 5], 2);
+var test = [1, 2, 3, 4, 5];
+var res = slice(test, 2);
 
 if (
     res instanceof Array
     && res.length === 3
     && res[0] === 3
     && res[1] === 4
-    && res[2] === 5)
+    && res[2] === 5
+    && test.length === 5
+    && test[0] === 1
+    && test[1] === 2
+    && test[2] === 3
+    && test[3] === 4
+    && test[4] === 5)
     success ('test ok')
 else
     fail('test failed')
