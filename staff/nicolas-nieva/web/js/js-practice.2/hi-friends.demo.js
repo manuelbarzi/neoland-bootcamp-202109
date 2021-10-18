@@ -1,1 +1,1 @@
-console.log(hiFriends(["Ventu", "Manu", "Zoraida"]));
+console.log(hiFriends(["Ventu", "Manu", "Zoraida", 'pedro', 'maria']));

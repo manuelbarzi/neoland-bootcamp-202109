@@ -75,16 +75,18 @@
 
 // Hacer el seguimiento de forma escrita, como sifuésemos el compilador del navegador
 
-function hiFriends(friends) {
-    var hello = "Hello "; // Hello Ventu, // Hello Ventu, Manu, // Hello Ventu, Manu, Zoraida
-// 3 pasos de un for, comprobar, hacer lo entre llaves y por 'ultimo i++ es i = i + 1
-    for(var i = 0; i < friends.length; i++) {
-        if(friends.length - 1 === i) {
-            hello = hello + friends[i];
-        } else {
-            ;
-        }
+function hiFriends(friends){
+var hello = 'Hello '
+
+for (let i = 0; i< friends.length; i++) {
+      if (i < friends.length -1){
+        hello += friends[i] + ', '}
+        else 
+        hello += friends[i] + '.'
+      
     }
-    return hello;
+    return hello
+    
+
 }
 

@@ -13,7 +13,8 @@ if (res instanceof Array
     && res[0] === array[1]
     && res[1] === array[3]
     && res[2] === array[4]
-    && res[3] === array[5])
+    && res[3] === array[5]
+    & array.length ===6)
     success('test ok')
 else
     fail('test ko')

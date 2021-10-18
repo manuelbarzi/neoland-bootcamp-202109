@@ -1,13 +1,24 @@
 function filter (array, callback){
-    var res = []
+    var filtered = []
     var k = false
 
     for (var i = 0;(i < array.length); i++) {
         var element = array[i];
         k = callback (element, i)
         if (k === true)
-        res[res.length] = element 
+        filtered.push = element 
         
     }
-    return res
+    return filtered
+}
+
+function filter (array, condition) {
+    var filtered = []
+    for (var i = 0; i < array.length); i++{
+        var array = array[i]
+        if (condition (element)){
+
+        }
+    }
+    return filtered
 }
