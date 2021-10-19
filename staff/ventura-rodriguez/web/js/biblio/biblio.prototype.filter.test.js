@@ -4,11 +4,12 @@ describe("Case 1");
 
 var words = new Biblio("Spray", "Limit", "Elite", "Exuberant", "Destruction", "Present");
 var items = new Biblio;
-var res = words.filter(function(element, index) {
+function condition(element, index) {
     items[index] = element;
     items.length++;
     return element.length > 6;
-})
+}
+var res = words.filter(condition);
 
 if(
     res instanceof Biblio &&
@@ -41,87 +42,3 @@ if(
     success('test ok');
 else
     fail('test ko');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// describe("Test method filter");
-
-// var biblio = new Biblio(1, 2, 3, 4, 5);
-// var items = new Biblio;
-
-// var res = biblio.filter(function(element, index) {
-//     items[index] = element;
-//     items.length++;
-//     return element > 3;
-// });
-
-// if (
-//     res instanceof Biblio &&
-//     res.length === 2 &&
-//     res[0] === biblio[3] &&
-//     res[1] === biblio[4] &&
-//     items.length === biblio.length &&
-//     items[0] === biblio[0] &&
-//     items[1] === biblio[1] &&
-//     items[2] === biblio[2] &&
-//     items[3] === biblio[3] &&
-//     items[4] === biblio[4]
-// )
-//     success('test ok');
-// else
-//     fail('test ko');
