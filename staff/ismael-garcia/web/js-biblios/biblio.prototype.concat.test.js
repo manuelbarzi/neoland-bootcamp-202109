@@ -1,15 +1,14 @@
-describe('TEST Biblio concat')
+describe('TEST Biblio.concat()')
 
-// HINT pay attention to the keyword "arguments" (Search in Google)
 
-// CASE 1
+describe('case 1')
 
-var array1 = [1, 2, 3]
-var array2 = [8, 6, 4]
+var array1 = new Biblio(1, 2, 3);
+var array2 = new Biblio(8, 6, 4);
 
-var res = concat(array1, array2) // [1, 2, 3, 8, 6, 4]
+var res = array1.concat(array2); // [1, 2, 3, 8, 6, 4]
 
-if (res instanceof Array 
+if (res instanceof Biblio 
     && res.length === array1.length + array2.length
     && res[0] === array1[0] // 1
     && res[1] === array1[1] // 2
@@ -21,14 +20,15 @@ if (res instanceof Array
 else
     fail('test fail')
 
-// CASE 2
 
-var array1 = [100, 3]
-var array2 = [800, 26, 45]
+describe('case 2')
 
-var res = concat(array1, array2) // [100, 3, 800, 26, 45]
+var array1 = new Biblio(100, 3);
+var array2 = new Biblio(800, 26, 45)
 
-if (res instanceof Array 
+var res = array1.concat(array2) // [100, 3, 800, 26, 45]
+
+if (res instanceof Biblio 
     && res.length === array1.length + array2.length
     && res[0] === array1[0] // 100
     && res[1] === array1[1] // 3
@@ -39,15 +39,16 @@ if (res instanceof Array
 else
     fail('test fail')
 
-// CASE 3
 
-var array1 = [10, 20, 30]
-var array2 = [8, 46, 204]
-var array3 = [19, 1]
+describe('case 3')
 
-var res = concat(array1, array2, array3) // [10, 20, 30, 8, 46, 204, 19, 1]
+var array1 = new Biblio(10, 20, 30);
+var array2 = new Biblio(8, 46, 204);
+var array3 = new Biblio(19, 1);
 
-if (res instanceof Array 
+var res = array1.concat(array2, array3) // [10, 20, 30, 8, 46, 204, 19, 1]
+
+if (res instanceof Biblio 
     && res.length === array1.length + array2.length + array3.length
     && res[0] === array1[0] // 10
     && res[1] === array1[1] // 20

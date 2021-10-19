@@ -1,20 +1,15 @@
-function includes(string, searchElement, position) {
+Biblio.prototype.includes = function(searchElement, position) {
+    
     var res = false;
     var position = position ? position : 0;
-    var j = 0;
 
-    for (var i = position; (i < string.length && j < searchElement.length); i++) {
-        var char = string[i];
+    for (var i = position; (i < this.length && res === false); i++) {
+        var char = this[i];
 
-        if (char === searchElement[j]) {
-            j++;
-
+        if (char === searchElement) {
             res = true;
-        } else {
-            j = 0;
-
-            res = false;
         }
+
     }
 
     return res;

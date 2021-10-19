@@ -1,34 +1,33 @@
-describe('TEST slice')
+describe('TEST Biblio.slice()')
 
-// Falta completar los casos
 
-// CASE 1
+describe('case 1')
 
-var test = [1, 2, 3, 4, 5];
-var res = slice(test, 2);
+var instance = new Biblio(1, 2, 3, 4, 5);
+var res = instance.slice(2);
 
-if (
-    res instanceof Array
+if (res instanceof Biblio
     && res.length === 3
     && res[0] === 3
     && res[1] === 4
     && res[2] === 5
-    && test.length === 5
-    && test[0] === 1
-    && test[1] === 2
-    && test[2] === 3
-    && test[3] === 4
-    && test[4] === 5)
+    && instance.length === 5
+    && instance[0] === 1
+    && instance[1] === 2
+    && instance[2] === 3
+    && instance[3] === 4
+    && instance[4] === 5)
     success ('test ok')
 else
     fail('test failed')
 
-// CASE 2
 
-var res = slice([1, 2, 3, 4, 5], 1, 3);
+describe('case 2')
 
-if (
-    res instanceof Array
+var instance = new Biblio(1, 2, 3, 4, 5);
+var res = instance.slice(1, 3);
+
+if (res instanceof Biblio
     && res.length === 2
     && res[0] === 2
     && res[1] === 3)
@@ -36,12 +35,13 @@ if (
 else
     fail('test failed')
 
-// CASE 3
 
-var res = slice([1, 2, 3, 4, 5]);
+describe('case 3')
 
-if (
-    res instanceof Array
+var instance = new Biblio(1, 2, 3, 4, 5);
+var res = instance.slice();
+
+if (res instanceof Biblio
     && res.length === 5
     && res[0] === 1
     && res[1] === 2
@@ -52,89 +52,89 @@ if (
 else
     fail('test failed')
 
-// CASE 4
 
-var res = slice([1, 2, 3, 4, 5], -3);
+describe('case 4')
 
-if (
-    res instanceof Array
+var instance = new Biblio(1, 2, 3, 4, 5);
+var res = instance.slice(-3);
+
+if (res instanceof Biblio
     && res.length === 3
     && res[0] === 3
     && res[1] === 4
-    && res[2] === 5
-    )
+    && res[2] === 5)
     success('test ok')
 else
     fail('test failed')
 
-// CASE 5
 
-var res = slice([1, 2, 3, 4, 5], -4, -1);
+describe('case 5')
 
-if (
-    res instanceof Array
+var instance = new Biblio(1, 2, 3, 4, 5);
+var res = instance.slice(-4, -1);
+
+if (res instanceof Biblio
     && res.length === 3
     && res[0] === 2
     && res[1] === 3
-    && res[2] === 4
-    )
+    && res[2] === 4)
     success('test ok')
 else
     fail('test failed')
 
-// CASE 6
 
-var res = slice([1, 2, 3, 4, 5], 10, -1);
+describe('case 6')
 
-if (
-    res instanceof Array
-    && res.length === 0
-    )
+var instance = new Biblio(1, 2, 3, 4, 5);
+var res = instance.slice(10, -1);
+
+if (res instanceof Biblio
+    && res.length === 0)
     success('test ok')
 else
     fail('test failed')
 
-// CASE 7
 
-var res = slice([1, 2, 3, 4, 5], 0, 40);
+describe('case 7')
 
-if (
-    res instanceof Array
+var instance = new Biblio(1, 2, 3, 4, 5);
+var res = instance.slice(0, 40);
+
+if (res instanceof Biblio
     && res.length === 5
     && res[0] === 1
     && res[1] === 2
     && res[2] === 3
     && res[3] === 4
-    && res[4] === 5
-    )
+    && res[4] === 5)
     success('test ok')
 else
     fail('test failed')
 
-// CASE 8
 
-var res = slice([1, 2, 3, 4, 5], -10, 4);
+describe('case 8')
 
-if (
-    res instanceof Array
+var instance = new Biblio(1, 2, 3, 4, 5);
+var res = instance.slice(-10, 4);
+
+if (res instanceof Biblio
     && res.length === 4
     && res[0] === 1
     && res[1] === 2
     && res[2] === 3
-    && res[3] === 4
-    )
+    && res[3] === 4)
     success('test ok')
 else
     fail('test failed')
 
-// CASE 9
 
-var res = slice([1, 2, 3, 4, 5], 1, -20);
+describe('case 9')
 
-if (
-    res instanceof Array
-    && res.length === 0
-    )
+var instance = new Biblio(1, 2, 3, 4, 5);
+var res = instance.slice(1, -20);
+
+if (res instanceof Biblio
+    && res.length === 0)
     success('test ok')
 else
     fail('test failed')

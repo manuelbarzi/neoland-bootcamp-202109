@@ -1,7 +1,7 @@
-function find(array, callback) {
+Biblio.prototype.find = function(callback) {
 
-    for (let i = 0; i < array.length; i++) {
-        var element = array[i];
+    for (let i = 0; i < this.length; i++) {
+        var element = this[i];
         
         if (callback(element, i)) {
             
