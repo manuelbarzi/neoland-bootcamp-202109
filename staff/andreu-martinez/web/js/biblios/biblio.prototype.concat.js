@@ -1,10 +1,15 @@
 Biblio.prototype.concat = function() {
-    var temp = new Biblio();
+    
 
-    for (let i = 0; i < this.length; i++) {
-        temp[this.length] = this[i] 
+    for (let i = 0; i < arguments.length; i++) {
 
-        console.log(temp)
+        for (let j = 0; j < arguments[i].length; j++) {
+            
+            
+        }
+        this[i] = arguments[i] 
+
+        console.log(this)
         
     }
     
@@ -12,5 +17,5 @@ Biblio.prototype.concat = function() {
     //     temp[temp.length]= arguments[i] 
     // }
 
-    return temp
+    return this
 }

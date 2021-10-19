@@ -2,7 +2,7 @@ describe('TEST filter')
 
 var words = new Biblio('spray', 'limitless', 'elite', 'exuberant', 'destruction', 'present')
 var items = new Biblio()
-var res = Biblio.filter(function (element, index) {
+var res = words.filter(function (element, index) {
     items[index] = element
 
     return element.length > 6

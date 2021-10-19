@@ -15,18 +15,18 @@ else
     fail('test failed')
 
 
-    // CASE 2
+//     // CASE 2
 
-var group1 = [1, 2, 3]
-var group2 = ['hola','adios']
-var array3 = ['mundo','cruel']
-var res = concat(group1, group2, array3)
+// var group1 = [1, 2, 3]
+// var group2 = ['hola','adios']
+// var array3 = ['mundo','cruel']
+// var res = concat(group1, group2, array3)
 
-if (res instanceof Array
-    && res.length === 3
-    && JSON.stringify(group1) === JSON.stringify([1,2,3])
-    && JSON.stringify(group2) === JSON.stringify(['hola','adios'])
-    && JSON.stringify(array3) === JSON.stringify(['mundo','cruel']))
-    success('test ok')
-else
-    fail('test failed')
+// if (res instanceof Array
+//     && res.length === 3
+//     && JSON.stringify(group1) === JSON.stringify([1,2,3])
+//     && JSON.stringify(group2) === JSON.stringify(['hola','adios'])
+//     && JSON.stringify(array3) === JSON.stringify(['mundo','cruel']))
+//     success('test ok')
+// else
+//     fail('test failed')
