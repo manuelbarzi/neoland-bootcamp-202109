@@ -4,8 +4,9 @@
     var pop = things.pop()
     return pop
 }*/
-function pop(arr = []) {
-    var res = (arr.length) ? arr[arr.length -1] : undefined;
-    (arr.length) ? arr.length-- : null;
+
+Biblio.prototype.pop = function () {
+    var res = (this.length) ? this[this.length -1] : undefined;
+    (this.length) ? this.length-- : null;
     return res;
 }

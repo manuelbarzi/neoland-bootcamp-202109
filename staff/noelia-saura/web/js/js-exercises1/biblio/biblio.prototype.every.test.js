@@ -7,8 +7,7 @@ var res = array.every(function (element, index) {
     return element > 30;
 })
 
-if (res instanceof Biblio
-    &&typeof res === "boolean"
+if (typeof res === "boolean"
     && res === false
 )
     success('test ok');
@@ -22,8 +21,7 @@ var res = array.every(function (element, index) {
     return element.length > 1;
 })
 
-if (res instanceof Biblio
-    && typeof res === "boolean"
+if (typeof res === "boolean"
     && res === true
 )
     success('test ok');

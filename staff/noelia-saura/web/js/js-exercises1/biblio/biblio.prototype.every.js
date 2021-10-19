@@ -1,13 +1,9 @@
 Biblio.prototype.every = function(callback) {
-    var res = true;
+    var bool = true;
 
-    for (let i = 0;(i < this.length && res); i++) {
+    for (let i = 0;(i < this.length && bool); i++) {
         var element = this[i]
-        if(res !== callback(element, i)){
-            return false
-        };
-        
+        bool = (callback(element,i))? true : false
     }
-
-    return res;
+    return bool;
 }

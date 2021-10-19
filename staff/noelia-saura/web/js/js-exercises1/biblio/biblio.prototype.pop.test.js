@@ -4,8 +4,8 @@ describe('TEST pop')
 
 describe('case 1')
 
-var array = ['broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato']
-var res = pop(array)
+var array = new Biblio('broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato')
+var res = array.pop()
 
 if (
     typeof res === 'string'
@@ -22,8 +22,8 @@ else
 
 describe('case 2')
 
-var array = []
-var res = pop(array)
+var array = new Biblio()
+var res = array.pop()
 
 if (typeof res === 'undefined'
     && res === undefined
@@ -37,8 +37,8 @@ describe('case 3')
 var object = { name: 'Peter' }
 var func = function() {}
 var arr = [1, 2, 3]
-var array = [null, undefined, true, 1, func, arr, NaN, Infinity, Math.PI, object]
-var res = pop(array)
+var array = new Biblio(null, undefined, true, 1, func, arr, NaN, Infinity, Math.PI, object)
+var res = array.pop()
 
 if (typeof res === 'object'
     && res === object
