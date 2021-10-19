@@ -49,18 +49,18 @@ console.log(o[key])
 console.log(o[key])
 
 var o = {
-    a: 1, b: 2, c: 3, 10:{
-        d: function(){
-            return{
-                e:['hola mundo', true, 1, null, undefined {
-                    f: function (){
+    a: 1, b: 2, c: 3, 10: {
+        d: function () {
+            return {
+                e: ['hola mundo', true, 1, null, undefined, {
+                    f: function () {
                         return {
-                            h:[0,1,2,{
-                                hello:'world'
+                            h: [0, 1, 2, {
+                                hello: 'world'
                             }]
                         }
                     }
-                }
+                }]
             }
         }
     }
