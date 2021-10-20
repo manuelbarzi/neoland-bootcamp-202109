@@ -1,4 +1,13 @@
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .form {
+    margin-bottom: 20px;
     border: 2px solid rgb(170, 45, 45);
     border-radius: 5px;
     display: inline-block;
