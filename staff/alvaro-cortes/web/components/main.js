@@ -1,44 +1,44 @@
 // FORM //
 
-var form = document.createElement("form")
-document.body.append(form)
-form.classList.add("form")
+var formLogin = document.createElement("form")
+document.body.append(formLogin)
+formLogin.classList.add("form")
 
 // TITULO LOGIN
 
 var titleLogin = document.createElement("h2")
 titleLogin.innerText = "Login"
-form.append(titleLogin)
+formLogin.append(titleLogin)
 
 // LABEL E INPUT DE USUARIO
 
-var label = document.createElement("label")
-label.htmlFor = "Usuario"
-label.innerText = "Usuario"
-form.append(label)
+var labelUser = document.createElement("label")
+labelUser.htmlFor = "usuario"
+labelUser.innerText = "Usuario"
+formLogin.append(labelUser)
 
-var inputNombre = document.createElement("input")
-inputNombre.id = "Usuario"
-inputNombre.placeholder = "Usuario"
-inputNombre.type = "text"
-form.append(inputNombre)
-form.append(document.createElement("br"))
-form.append(document.createElement("br"))
+var inputUser = document.createElement("input")
+inputUser.id = "usuario"
+inputUser.placeholder = "Usuario"
+inputUser.type = "text"
+formLogin.append(inputUser)
+formLogin.append(document.createElement("br"))
+formLogin.append(document.createElement("br"))
 
 // LABEL E INPUT DE PASSWORD
 
-var label = document.createElement("label")
-label.htmlFor = "password"
-label.innerText = "Contraseña"
-form.append(label)
+var labelPasswordLogin = document.createElement("label")
+labelPasswordLogin.htmlFor = "password"
+labelPasswordLogin.innerText = "Contraseña"
+formLogin.append(labelPasswordLogin)
 
-var inputPassword = document.createElement("input")
-inputPassword.id = "password"
-inputPassword.placeholder = "Contraseña"
-inputPassword.type = "password"
-form.append(inputPassword)
-form.append(document.createElement("br"))
-form.append(document.createElement("br"))
+var inputPasswordLogin = document.createElement("input")
+inputPasswordLogin.id = "password"
+inputPasswordLogin.placeholder = "Contraseña"
+inputPasswordLogin.type = "password"
+formLogin.append(inputPasswordLogin)
+formLogin.append(document.createElement("br"))
+formLogin.append(document.createElement("br"))
 
 // BOTONES
 
@@ -46,14 +46,13 @@ var buttonSumbit = document.createElement("button")
 buttonSumbit.innerText = "Enviar"
 buttonSumbit.type = "submit"
 buttonSumbit.classList.add("button")
-form.append(buttonSumbit)
+formLogin.append(buttonSumbit)
 
 var buttonReset = document.createElement("button")
 buttonReset.innerText = "Limpiar"
 buttonReset.type = "reset"
 buttonReset.classList.add("button")
-form.append(buttonReset)
-
+formLogin.append(buttonReset)
 
 // REGISTRO
 
@@ -117,12 +116,12 @@ formRegister.append(document.createElement("br"))
 // LABEL E INPUT DE NOMBRE USUARIO
 
 var labelUsuario = document.createElement("label")
-labelUsuario.htmlFor = "Usuario"
+labelUsuario.htmlFor = "usuario"
 labelUsuario.innerText = "Nombre de Usuario"
 formRegister.append(labelUsuario)
 
 var inputUsuario = document.createElement("input")
-inputUsuario.id = "Usuario"
+inputUsuario.id = "usuario"
 inputUsuario.placeholder = "Usuario"
 inputUsuario.type = "text"
 formRegister.append(inputUsuario)
@@ -138,7 +137,7 @@ formRegister.append(labelPassword)
 
 var inputPassword = document.createElement("input")
 inputPassword.id = "password"
-inputPassword.placeholder = "password"
+inputPassword.placeholder = "Password"
 inputPassword.type = "Password"
 formRegister.append(inputPassword)
 formRegister.append(document.createElement("br"))

@@ -1,9 +1,10 @@
 body {
-    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: rgb(27, 16, 75);
+    font-family: 'Ubuntu', sans-serif;
 }
 
 .form {
@@ -36,10 +37,23 @@ input {
     border: 2px rgb(170, 45, 45) solid;
     border-radius: 10px;
     background-color: rgb(27, 16, 75);
-    transition: all 0.3s;
     width: 100px;
     height: 30px;
     color: white;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-style: oblique;
+}
+
+.button2 {
+    margin: 0 5px 0 5px;
+    border: 2px rgb(170, 45, 45) solid;
+    border-radius: 10px;
+    background-color: white;
+    width: 100px;
+    height: 30px;
+    color: rgb(27, 16, 75);
     font-size: 13px;
     font-weight: 500;
     letter-spacing: 1px;
