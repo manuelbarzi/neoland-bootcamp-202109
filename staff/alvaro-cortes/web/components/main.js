@@ -43,7 +43,7 @@ formLogin.append(document.createElement("br"))
 // BOTONES
 
 var buttonSumbit = document.createElement("button")
-buttonSumbit.innerText = "Enviar"
+buttonSumbit.innerText = "Iniciar Sesión"
 buttonSumbit.type = "submit"
 buttonSumbit.classList.add("button")
 formLogin.append(buttonSumbit)
