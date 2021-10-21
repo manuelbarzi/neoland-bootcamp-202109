@@ -15,8 +15,6 @@ divLoginInputs.classList.add('divreg__inputs')
 var divLoginButtons = document.createElement('div')
 divLoginButtons.classList.add('divreg__buttons')
 
-
-
 var login = document.createElement('form')
 //login.classList.add('panel', 'panel--dark')
 login.classList.add('panel')
