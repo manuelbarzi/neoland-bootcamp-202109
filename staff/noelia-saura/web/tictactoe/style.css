@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
+
+/* Resets */
+
+* {
+    /* border: 1px dashed black; */
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%; 
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.header{
+    font-family: 'Rampart One';
+    font-size: 40px;
+    display: block;
+    text-align: center;
+}
+
+.img{
+    width: 400px;
+}
+
+.gameBoard{
+    display: flex;
+    justify-content: center;
+    flex-basis: 80%;
+}
+
+.footer{
+    display: flex;
+    flex-basis: 10%;
+}
+
+.button {
+    width: 200px;
+    height: 200px;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 100px;
+}
+
+.button:hover {
+    background-color: #b7f5fa;
+    color: white;
+  }

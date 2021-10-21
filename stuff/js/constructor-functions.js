@@ -136,3 +136,38 @@ console.log(a)
 b.push='hola','mundo'
 console.log(b)
 
+//
+var socks1 = {type:'socks', brand:'adidas', quantity :100}
+var socks2 = {type:'socks', brand:'nike', quantity :100}
+var socks3 = {type:'socks', brand:'puma', quantity :100}
+var tshirts1 ={type:'t-shirt', brand:'adidas', quantity :100}
+var tshirts2 ={type:'t-shirt', brand:'nike', quantity :100}
+var tshirts3 ={type:'t-shirt', brand:'puma', quantity :100}
+
+var products= [socks1,socks2,socks3,tshirts1,tshirts2,tshirts3]
+console.log(products.filter(function(product){
+    return product.brand==='adidas'
+}))
+
+function Product (type, brand, quantity){
+    this.type= type
+    this.brand = brand
+    this.quantity = quantity
+}
+
+Product.prototype.toString= function(){
+    return '>'+ this.type +','+ this.brand + ','+ this.quantity
+}
+
+var socks1 = new Product('socks', 'adidas', 100)
+var socks2 = new Product('socks', 'nike', 100)
+var socks3 = new Product('socks', 'puma', 100)
+var tshirts1 = new Product('t-shirt', 'adidas', 100)
+var tshirts2 = new Product('t-shirt', 'nike', 100)
+var tshirts3 = new Product('t-shirt', 'puma', 100)
+
+var products= [socks1,socks2,socks2,tshirts1,tshirts2,tshirts3]
+
+products.forEach(function(product){
+    console.log(product.toString())
+})
