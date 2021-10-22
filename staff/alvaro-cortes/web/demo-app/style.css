@@ -59,3 +59,7 @@ input {
 .container--off {
     display: none;
 }
+
+.welcome {
+    font-family: 'Noto Sans', sans-serif;
+}

@@ -1,7 +1,7 @@
 // DATA
 
-//var users = []
-var newUser = new UsersCollection
+var users = []
+//var newUser = new UsersCollection
 
 // INICIALES
 
@@ -71,28 +71,50 @@ loginContainer.onsubmit = function (event) {
     event.preventDefault();
 
     var inputs = loginContainer.querySelectorAll("input");
-    var user = new User("", "", "", inputs[0].value, inputs[1].value);
+    /*var user = new User("", "", "", inputs[0].value, inputs[1].value);
     var userLogin = newUser.login(user);
 
-    if (userLogin.username === undefined)
+    if (userLogin.username === undefined) {
         alert("Este usuario no está registrado")
+        loginContainer.classList.add("container--off")
+        signedup.classList.remove("container--off")
+    }
+        
     else
         alert("Has iniciado sesión como " + userLogin.username)
-    loginContainer.reset();
+    loginContainer.reset();*/
 
-    loginContainer.classList.add("container--off")
-    signedup.classList.remove("container--off")
-
-    /*var userInput = inputs[0];
+    var userInput = inputs[0];
     var passwordInput = inputs[1];
 
-    var user = userInput.value;
-    var password = passwordInput.value;
+    var userValue = userInput.value;
+    var passwordValue = passwordInput.value;
 
-    for (var i = 0; i < users.length; i++) {
-        if (users[i].user === user && users[i].password === password && user !== "" && password !== "") {
+    if (!userValue.length) return alert("Username is empty")
+    if (!passwordValue.length) return alert("Password is empty")
+
+    var user = users.find(function (user) {
+        return user.username === userValue && user.password === passwordValue
+    })
+
+    if (!user) return alert("Wrong credential");
+    loginContainer.reset();
+
+    loginContainer.classList.add("container--off");
+
+    var nameSpan = signedup.querySelector(".name")
+
+    nameSpan.innerText = " " + user.name + "."
+
+    signedup.classList.remove("container--off");
+    
+
+    /*for (var i = 0; i <= users.length; i++) {
+        if ((users[i].username === userValue) && (users[i].password === passwordValue) && (users[i].username !== "" && users[i].password !== "")) {
             loginContainer.classList.add("container--off")
             signedup.classList.remove("container--off")
+        } else {
+            alert("Error")
         }
     }*/
 
@@ -105,7 +127,7 @@ registerContainer.onsubmit = function (event) {
 
     var inputs = registerContainer.querySelectorAll("input")
 
-    /*var nameInput = inputs[0];
+    var nameInput = inputs[0];
     var surnameInput = inputs[1];
     var emailInput = inputs[2];
     var userInput = inputs[3];
@@ -117,18 +139,24 @@ registerContainer.onsubmit = function (event) {
     var user = userInput.value;
     var password = passwordInput.value;
 
+    if(!name.length) return alert("Name is empty")
+    if(!surname.length) return alert("Surname is empty")
+    if(!email.length) return alert("Email is empty")
+    if(!user.length) return alert("User is empty")
+    if(!password.length) return alert("Password is empty")
+
     var user = {
         name: name,
         surname: surname,
         email: email,
-        user: user,
+        username: user,
         password: password,
     };
 
-    users.push(user);*/
+    users.push(user);
 
-    var user = new User(inputs[0].value, inputs[1].value, inputs[2].value, inputs[3].value, inputs[4].value);
-    newUser.register(user);
+    /*var user = new User(inputs[0].value, inputs[1].value, inputs[2].value, inputs[3].value, inputs[4].value);
+    newUser.register(user);*/
 
     registerContainer.reset();
 
