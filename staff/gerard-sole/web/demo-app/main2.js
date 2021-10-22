@@ -10,7 +10,7 @@ var signupContainer = document.querySelector('.signup')
 var signinContainer = document.querySelector('.signin')
 var postSignupContainer = document.querySelector('.post-signup')
 var homepage = document.querySelector('.homepage')
-var nameSpan = homepage.querySelector('.name')
+var name = homepage.querySelector('.name')
 
 var landingButtons = landingContainer.querySelectorAll('button')
 
@@ -66,47 +66,29 @@ signinContainer.onsubmit =function(event){
     if (!username.length) return alert('username is empty')
     if (!password.length) return alert('password is empty')
 
-    var xhr = new XMLHttpRequest
+    var userlogin = {
+        username: username,
+        password: password
+    }
+    
+    signinContainer.reset()
 
-    xhr.onload = function () {
-        var status = xhr.status
+    signinContainer.classList.add('container--off')
 
-        if (status === 401) return alert ('wrong credentials')
+    var validate=false
 
-        if (status === 200) {
-            var response = xhr.responseText
-
-            var token = response.slice(10, -2)
-
-            var xhr2 = new XMLHttpRequest
-
-            xhr2.onload = function() {
-                var response = xhr2.responseText
-
-                var name = response.slice(9, response.indexOf(',') -1)
-
-                signinContainer.reset()
-
-                signinContainer.classList.add('container--off')
-
-                nameSpan.innerText = name 
-                
-                homepage.classList.remove('container--off')
-            }
-            xhr2.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-            xhr2.setRequestHeader('Authorization', 'Bearer ' + token)
-
-            xhr2.send()
+    for (var i = 0; i < users.length; i++) {
+        if((users[i].username===userlogin.username) && (users[i].password===userlogin.password)){
+            name.innerText = users.name
+            homepage.classList.remove('container--off')
+            validate=true
         }
     }
-
-    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users/auth')
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    var body = '{ "username": "' + username + '", "password": "' + password + '" }'
-
-    xhr.send(body)
+    if(!validate){
+        alert('username or password incorrect!')
+        signinContainer.classList.remove ('container--off')
+    }
+    
 }
 
 
@@ -130,30 +112,24 @@ signupContainer.onsubmit = function(event) {
     if (!password.length) return alert('password is empty')
     if (!email.length) return alert('email is empty')
 
-    var xhr = new XMLHttpRequest
-
-    xhr.onload = function () {
-        var status = xhr.status
-
-        if (status === 409) return alert('user already exists')
-
-        if (status === 201) {
-            signupContainer.reset()
-
-            signupContainer.classList.add('container--off')
-
-            postSignupContainer.classList.remove('container--off')
-        }
+    var user = {
+        name: name,
+        username: username,
+        password: password,
+        email: email
     }
 
+    users.push(user)
 
-   xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users') 
+    // nameInput.value = ''
+    // usernameInput.value = ''
+    // passwordInput.value = ''
 
-   xhr.setRequestHeader('Content-Type', 'application/json')
+    signupContainer.reset()
 
-   var body = '{ "name": "' + name + '", "username": "' + username + '", "password": "' + password + '" }'
+    signupContainer.classList.add('container--off')
 
-   xhr.send(body)
+    postSignupContainer.classList.remove('container--off')
 }
 
 var postSignupSigninButton = postSignupContainer.querySelector('button')
@@ -163,4 +139,3 @@ postSignupSigninButton.onclick = function() {
 
     signinContainer.classList.remove('container--off')
 }
-
