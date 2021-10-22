@@ -1,5 +1,9 @@
 //data
-var users = []
+var users = [{
+    name:'Noelia',
+    username:'noelia@gmail.com',
+    password:'123123123'
+}]
 
 
 
@@ -9,7 +13,7 @@ var landingContainer = document.querySelector('.landing')
 var signupContainer = document.querySelector('.signup')
 var signinContainer = document.querySelector('.signin')
 var postSignupContainer = document.querySelector('.post-signup')
-var homepage = document.querySelector('.homepage')
+var homeContainer = document.querySelector('.home')
 
 
 var landingButtons = landingContainer.querySelectorAll('button')
@@ -65,28 +69,39 @@ signinContainer.onsubmit =function(event){
 
     if (!username.length) return alert('username is empty')
     if (!password.length) return alert('password is empty')
+//desde aqui esta comentado 
+    var user=users.find(function(user){
+        return user.username=== username && user.password === password
+    })
 
-    var userlogin = {
-        username: username,
-        password: password
-    }
-    
+    if(!user)return alert('wrong credentials')
+
     signinContainer.reset()
 
     signinContainer.classList.add('container--off')
 
-    var validate=false
+    homeContainer.classList.remove('container--off')
+    // var userlogin = {
+    //     username: username,
+    //     password: password
+    // }
+    
+    // signinContainer.reset()
 
-    for (var i = 0; i < users.length; i++) {
-        if((users[i].username===userlogin.username) && (users[i].password===userlogin.password)){
-            homepage.classList.remove('container--off')
-            validate=true
-        }
-    }
-    if(!validate){
-        alert('username or password incorrect!')
-        signinContainer.classList.remove ('container--off')
-    }
+    // signinContainer.classList.add('container--off')
+
+    // var validate=false
+
+    // for (var i = 0; i < users.length; i++) {
+    //     if((users[i].username===userlogin.username) && (users[i].password===userlogin.password)){
+    //         homepage.classList.remove('container--off')
+    //         validate=true
+    //     }
+    // }
+    // if(!validate){
+    //     alert('username or password incorrect!')
+    //     signinContainer.classList.remove ('container--off')
+    // }
     
 }
 
