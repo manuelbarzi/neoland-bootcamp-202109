@@ -1,6 +1,6 @@
 // DATA
 
-var users = []
+//var users = []
 //var newUser = new UsersCollection
 
 // INICIALES
@@ -93,11 +93,59 @@ loginContainer.onsubmit = function (event) {
     if (!userValue.length) return alert("Username is empty")
     if (!passwordValue.length) return alert("Password is empty")
 
-    var user = users.find(function (user) {
+    /*var user = users.find(function (user) {
         return user.username === userValue && user.password === passwordValue
-    })
+    })*/
 
-    if (!user) return alert("Wrong credential");
+    var xhr = new XMLHttpRequest
+
+    xhr.onload = function () {
+        var status = xhr.status
+
+        if (status === 401) return alert("wrong credentials")
+
+        if (status === 200) {
+            var response = xhr.responseText
+
+            var token = response.slice(10, -2)
+
+            var xhr2 = new XMLHttpRequest
+
+            xhr2.onload = function () {
+                var response = xhr2.responseText
+
+                var name = response.slice(9, response.indexOf(',') - 1)
+
+                loginContainer.reset();
+
+                loginContainer.classList.add("container--off");
+
+                var nameSpan = signedup.querySelector(".name")
+
+                nameSpan.innerText = name
+
+                signedup.classList.remove("container--off");
+            }
+        }
+
+        xhr2.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')  
+        
+        xhr2.setRequestHeader('Authorization', 'Bearer ' + token)
+
+        xhr2.send()
+    }
+
+    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users/auth')
+
+    xhr.setRequestHeader('Content-Type', 'application/json')
+
+    var body = '{ "username": "' + userValue + '", "password": "' + passwordValue + '" }'
+
+    xhr.send(body)
+
+
+
+    /*
     loginContainer.reset();
 
     loginContainer.classList.add("container--off");
@@ -106,18 +154,7 @@ loginContainer.onsubmit = function (event) {
 
     nameSpan.innerText = " " + user.name + "."
 
-    signedup.classList.remove("container--off");
-    
-
-    /*for (var i = 0; i <= users.length; i++) {
-        if ((users[i].username === userValue) && (users[i].password === passwordValue) && (users[i].username !== "" && users[i].password !== "")) {
-            loginContainer.classList.add("container--off")
-            signedup.classList.remove("container--off")
-        } else {
-            alert("Error")
-        }
-    }*/
-
+    signedup.classList.remove("container--off");*/
 }
 
 // CARGANDO LOS DATOS DE REGISTRO
@@ -145,7 +182,7 @@ registerContainer.onsubmit = function (event) {
     if(!user.length) return alert("User is empty")
     if(!password.length) return alert("Password is empty")
 
-    var user = {
+    /*var user = {
         name: name,
         surname: surname,
         email: email,
@@ -155,14 +192,32 @@ registerContainer.onsubmit = function (event) {
 
     users.push(user);
 
-    /*var user = new User(inputs[0].value, inputs[1].value, inputs[2].value, inputs[3].value, inputs[4].value);
+    var user = new User(inputs[0].value, inputs[1].value, inputs[2].value, inputs[3].value, inputs[4].value);
     newUser.register(user);*/
 
-    registerContainer.reset();
+    var xhr = new XMLHttpRequest
 
-    registerContainer.classList.add("container--off")
-    registered.classList.remove("container--off")
+    xhr.onload = function () {
+        var status = xhr.status
+        if (status === 409) return alert("user alredy exists")
+    
+        if (status === 201) {
+            registerContainer.reset();
+            registerContainer.classList.add("container--off")
+            registered.classList.remove("container--off")
+        }
+    }
+
+    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+
+    xhr.setRequestHeader('Content-Type', 'application/json')
+
+    var body = '{ "name": "' + name + '", "surname": "' + surname + '", "email": "' + email + '", "username": "' + user + '", "password": "' + password + '" }'
+
+    xhr.send(body)
 }
+
+
 
 // REDIRECCIONANDO A LOGIN LUEGO DE REGISTRO SATISFACTORIO
 
@@ -170,3 +225,4 @@ loginAfterRegisterButton.onclick = function () {
     registered.classList.add("container--off")
     loginContainer.classList.remove("container--off")
 }
+
