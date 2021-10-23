@@ -62,14 +62,3 @@ body {
     display: none;
 }
 
-.landing {
-    background-color: lightskyblue;
-}
-
-.login {
-    background-color: lightseagreen;
-}
-
-.register {
-    background-color: lightyellow;
-}
