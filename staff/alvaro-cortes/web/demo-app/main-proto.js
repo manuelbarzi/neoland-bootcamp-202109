@@ -1,7 +1,6 @@
 // DATA
 
-//var users = []
-//var newUser = new UsersCollection
+var newUser = new UsersCollection
 
 // INICIALES
 
@@ -69,33 +68,18 @@ registerLoginButton.onclick = function (event) {
 
 loginContainer.onsubmit = function (event) {
     event.preventDefault();
-
-    /*var user = new User("", "", "", inputs[0].value, inputs[1].value);
-    var userLogin = newUser.login(user);
-
-    if (userLogin.username === undefined) {
-        alert("Este usuario no está registrado")
-        loginContainer.classList.add("container--off")
-        signedup.classList.remove("container--off")
-    }
-        
-    else
-        alert("Has iniciado sesión como " + userLogin.username)
-    loginContainer.reset();*/
-
     var inputs = loginContainer.querySelectorAll("input");
+    
     var userInput = inputs[0];
     var passwordInput = inputs[1];
-
+    
     var userValue = userInput.value;
     var passwordValue = passwordInput.value;
+    
+    var user = new User("", "", "", userValue, passwordValue);
 
     if (!userValue.length) return alert("Username is empty")
     if (!passwordValue.length) return alert("Password is empty")
-
-    /*var user = users.find(function (user) {
-        return user.username === userValue && user.password === passwordValue
-    })*/
 
     var xhr = new XMLHttpRequest
 
@@ -139,22 +123,9 @@ loginContainer.onsubmit = function (event) {
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    var body = '{ "username": "' + userValue + '", "password": "' + passwordValue + '" }'
+    var body = JSON.stringify(user)
 
     xhr.send(body)
-
-
-
-    /*
-    loginContainer.reset();
-
-    loginContainer.classList.add("container--off");
-
-    var nameSpan = signedup.querySelector(".name")
-
-    nameSpan.innerText = " " + user.name + "."
-
-    signedup.classList.remove("container--off");*/
 }
 
 // CARGANDO LOS DATOS DE REGISTRO
@@ -182,18 +153,8 @@ registerContainer.onsubmit = function (event) {
     if (!user.length) return alert("User is empty")
     if (!password.length) return alert("Password is empty")
 
-    /*var user = {
-        name: name,
-        surname: surname,
-        email: email,
-        username: user,
-        password: password,
-    };
-
-    users.push(user);
-
-    var user = new User(inputs[0].value, inputs[1].value, inputs[2].value, inputs[3].value, inputs[4].value);
-    newUser.register(user);*/
+    var user = new User(name, surname, email, user, password);
+    //newUser.register(user);
 
     var xhr = new XMLHttpRequest
 
@@ -212,12 +173,10 @@ registerContainer.onsubmit = function (event) {
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    var body = '{ "name": "' + name + '", "surname": "' + surname + '", "email": "' + email + '", "username": "' + user + '", "password": "' + password + '" }'
+    var body = JSON.stringify(user)
 
     xhr.send(body)
 }
-
-
 
 // REDIRECCIONANDO A LOGIN LUEGO DE REGISTRO SATISFACTORIO
 
