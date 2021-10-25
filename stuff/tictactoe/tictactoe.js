@@ -24,7 +24,7 @@ function checkWinner(player) {
     && document.getElementById(7).value === player)
     || (document.getElementById(2).value === player
     && document.getElementById(5).value === player 
-    && document.getElementById(3).value === player)
+    && document.getElementById(8).value === player)
     || (document.getElementById(3).value === player
     && document.getElementById(6).value === player 
     && document.getElementById(9).value === player)
