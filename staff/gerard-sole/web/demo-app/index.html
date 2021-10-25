@@ -1,46 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Demo App</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div class="landing container container--vertical container--gapped">
-    <button class="button button--medium button--dark">Sign In</button>
-    <button class='button button--medium'>Sign Up</button>
-</div>
-
-<form class ='signin container container--vertical container--gapped container--off'>
-    <input type="text" class="field" name='username' id='username' placeholder="username">
-    <input type="password" class="field" name='password' id='password' placeholder="password">
-
-    <div class='container'>
-        <button class="button button--medium ">Sign Up</button>
-        <button class="button button--medium button--dark">Sign In</button>
+    <div class="landing container container--vertical container--gapped">
+        <button class="button button--medium button--dark">Sign in</button>
+        <button class="button button--medium">Sign up</button>
     </div>
-</form>   
 
-<form class ='signup container container--vertical container--gapped container--off'>
-    <input type="text" class="field" name='name' id='name' placeholder="name">
-    <input type="text" class="field" name='username' id='username' placeholder="username">
-    <input type="password" class="field" name='password' id='password' placeholder="password">
-    <input type="text" class='field' name='email' id='email' placeholder='email'>
+    <form class="box signup container container--vertical container--gapped container--off">
+        <input class="field" type="text" name="name" id="signupName" placeholder="name">
+        <input class="field" type="text" name="username" id="signupUsername" placeholder="username">
+        <input class="field" type="password" name="password" id="signupPassword" placeholder="password">
 
-    <div class='container'>
-        <button class="button button--medium">Sign In</button>
-        <button class="button button--medium button--dark">Sign Up</button>
+        <div class="container">
+            <button class="button button--medium">Sign in</button>
+            <button class="button button--medium button--dark">Sign up</button>
+        </div>
+    </form>
+
+    <form class="signin container container--vertical container--gapped container--off">
+        <input class="field" type="text" name="username" id="signinUsername" placeholder="username">
+        <input class="field" type="password" name="password" id="signinPassword" placeholder="password">
+
+        <div class="container">
+            <button class="button button--medium">Sign up</button>
+            <button class="button button--medium button--dark">Sign in</button>
+        </div>
+    </form>
+
+    <div class="post-signup container container--gapped container--vertical container--off">
+        User registered successfully, now you can proceed to <button class="button button--dark button--medium">Sign
+            in</button>
     </div>
-</form>   
-<div class="post-signup container container--gapped container--vertical container--off">
-    User registered successfully, now you can proceed to <button class="button button--dark button--medium">Sign in</button>
-</div>
-<div class="homepage container--off">
-    <h1>Hello, <span class="name">world</span>!</h1>
-</div>
+
+    <div class="home container container--gapped container--vertical container--off">
+        <p>Hello, <span class="name">World</span>!</p>
+        <button class="button button-medium button--dark">Profile</button>
+        <button class="button button-medium button">Sign out</button>
+    </div>
+
+    <div class="profile container container--vertical container--gapped container--off">
+        <form class="container container--vertical">
+            <h1>Change Password</h1>
+            <input class="field" type="password" name="oldPassword" id="oldPassword" placeholder="old password">
+            <input class="field" type="password" name="password" id="newPassword" placeholder="new password">
+            <h1>Change username</h1>
+            <h2>Your username its: <span class="name">username</span></h2>
+            <input class="field" type="text" name="username" id="newUsername" placeholder="new username">
+            <input class="field" type="password" name="password" id="password" placeholder="password">
+
+            <div class="container">
+                <button class="button button--medium">Go back</button>
+                <button class="button button--medium button--dark">Update</button>
+            </div>
+        </form>
+
+        <button class="button button--medium button--dark">Unregister</button>
+    </div>
+
+    <div class="unregister container container--vertical container--gapped container--off">
+        <form class="container container--vertical">
+            <input class="field" type="password" name="password" id="unregisterPassword" placeholder="password">
+
+            <div class="container">
+                <button class="button button--medium">Go back</button>
+                <button class="button button--medium button--dark">Unregister</button>
+            </div>
+        </form>
+    </div>
 
     <script src="main.js"></script>
 </body>
+
 </html>
