@@ -8,72 +8,67 @@
     <title>Demo App</title>
 </head>
 <body>
-    <div class="landing container">
-        <button class="button">Login</button>
-        <button class="button">Register</button>
+    <div class="landing container container--gapped">
+        <button class="button button--medium button--dark">Log in</button>
+        <button class="button button--medium">Register</button>
     </div>
 
-    <form class="login container container--vertical container--off">
-        <input type="text" placeholder="Username" class="field">
-        <input type="password" placeholder="Password" class="field">
+    <form class="register container container--vertical container--gapped container--off">
+        <input class="field" type="text" name="name" id="name" placeholder="Name">
+        <input class="field" type="text" name="surname" id="surname" placeholder="Surname">
+        <input class="field" type="text" name="username" id="register-username" placeholder="Username">
+        <input class="field" type="register-password" name="password" id="password" placeholder="Password">
+
         <div class="container">
-            <button class="button">Register</button>
-            <button class="button">Login</button>
+            <button class="button button--medium">Log in</button>
+            <button class="button button--medium button--dark">Register</button>
         </div>
     </form>
 
-    <form class="register container container--vertical container--off">
-        <input type="text" placeholder="Name" class="field">
-        <input type="text" placeholder="Surname" class="field">
-        <input type="text" placeholder="Username" class="field">
-        <input type="password" placeholder="Password" class="field">
+    <div class="registered container container--off"><p>¡Ya estás registrado! Puedes pasar al Login</p><button class="button button--medium button--dark">Log in</button>
+    </div>
+
+    <form class="login container container--vertical container--gapped container--off">
+        <input class="field" type="text" name="username" id="login-username" placeholder="Username">
+        <input class="field" type="password" name="password" id="login-password" placeholder="Password">
+
         <div class="container">
-            <button class="button">Login</button>
-            <button class="button">Register</button>
+            <button class="button button--medium">Register</button>
+            <button class="button button--medium button--dark">Log in</button>
         </div>
     </form>
 
-    <div class="registered container container--off"><p>¡Ya estás registrado! Puedes pasar al Login</p><button class="button">Login</button></div>
+    <div class="home container container--vertical container--gapped container--off">
+        <p>Hola, <span class="name"></span>. ¡Bienvenido a nuestro sitio!</p>
+        <button class="button button--medium button--dark">Profile</button>
+        <button class="button button--medium">Log out</button>
+    </div>
+    
+    <div class="profile container container--vertical container--gapped container--off">
+        <form class="container container--vertical">
+            <input class="field" type="password" name="old-password" id="old-password" placeholder="Old Password">
+            <input class="field" type="password" name="new-password" id="new-password" placeholder="New Password">
 
-    <div class="home container container--vertical container--off"><p>Hola, <span class="name"></span> . ¡Bienvenido a nuestro sitio!</p></div>
+            <div class="container">
+                <button class="button button--medium">Go Back</button>
+                <button class="button button--medium button--dark">Update</button>
+            </div>
+        </form>
+
+        <button class="button button--medium button--dark">Unregister</button>
+    </div>
+
+    <div class="unregister container container--vertical container--gapped container--off">
+        <form class="container container--vertical">
+            <input class="field" type="password" name="password" id="unregister-password" placeholder="Password">
+
+            <div class="container">
+                <button class="button button--medium">Go Back</button>
+                <button class="button button--medium button--dark">Unregister</button>
+            </div>
+        </form>
+    </div>
 
     <script src="main.js"></script>
 </body>
-</html>
-
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo App</title>
-
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-    <div class="landing container container--vertical container--gapped">
-        <button class="button button--medium button--dark">Sign in</button>
-        <button class="button button--medium">Sign up</button>
-    </div>
-
-    <form class="signup container container--vertical container--gapped container--off">
-        <input class="field" type="text" name="name" id="name" placeholder="name">
-        <input class="field" type="text" name="username" id="username" placeholder="username">
-        <input class="field" type="password" name="password" id="password" placeholder="password">
-
-        <div class="container">
-            <button class="button button--medium">Sign in</button>
-            <button class="button button--medium button--dark" type="submit">Sign up</button>
-        </div>
-    </form>
-
-
-    <script src="main.js"></script>
-</body> -->
-
 </html>
