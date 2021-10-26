@@ -1,5 +1,4 @@
-// PANELS
-
+// - - - - - Panels - - - - - 
 var landingContainer = document.querySelector('.landing')
 var registerContainer = document.querySelector('.register')
 var registeredContainer = document.querySelector('.registered')
@@ -8,15 +7,14 @@ var homeContainer = document.querySelector('.home')
 var profileContainer = document.querySelector('.profile')
 var unregisterContainer = document.querySelector('.unregister')
 
-// Global variables
-
+// - - - - - Global variables - - - - -
 var token
 
 
-// LANDING
+
+// - - - - - LANDING - - - - -
 
 // Button Landing to Register
-
 var landingRegisterButton = landingContainer.querySelectorAll('button')[1]
 
 landingRegisterButton.onclick = function () {
@@ -26,7 +24,6 @@ landingRegisterButton.onclick = function () {
 }
 
 // Button Landing to Login
-
 var landingLoginButton = landingContainer.querySelectorAll('button')[0]
 
 landingLoginButton.onclick = function () {
@@ -36,10 +33,10 @@ landingLoginButton.onclick = function () {
 }
 
 
-// REGISTER
 
-// var registerRegisterButton = registerContainer.querySelectorAll('button')[1]
+// - - - - - REGISTER - - - - -
 
+// Registering
 registerContainer.onsubmit = function (event) {
     event.preventDefault()
 
@@ -54,59 +51,22 @@ registerContainer.onsubmit = function (event) {
     var username = usernameInput.value 
     var password = passwordInput.value
 
-    if (!name.length) return alert('Name is empty')
-    if (!surname.length) return alert('Surname is empty')
-    if (!username.length) return alert('Username is empty')
-    if (!password.length) return alert('Password is empty')
-
-    // var user = {
-    //     name: name,
-    //     surname: surname,
-    //     username: username,
-    //     password: password
-    // }
-
-    // users.push(user)
-
-    var xhr = new XMLHttpRequest
-
-    xhr.onload = function () {
-        var status = xhr.status
-
-        if (status === 409 || status === 400) {
-            var response = xhr.responseText
-
-            var message = response.slice(10, -2)
-
-            return alert(message)
-        }
-
-        if (status === 201) {
-            var nameSpan = homeContainer.querySelector('.name')
-
-            nameSpan.innerText = name
+    try {
+        registerUser(name, surname, username, password, function (error) {
+            if (error) return alert(error.message)
 
             registerContainer.reset()
 
             registerContainer.classList.add('container--off')
 
             registeredContainer.classList.remove('container--off')
-        }
-
+        })
+    } catch (error) {
+        alert(error.message)
     }
-
-    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    var body = '{ "name": "' + name + '", "surname": "' + surname + '", "username": "' + username + '", "password": "' + password + '" }' 
-
-    xhr.send(body)
 }
 
-
 // Button New User Registered Page to Login
-
 var registeredLoginButton = registeredContainer.querySelector('button')
 
 registeredLoginButton.onclick = function () {
@@ -116,7 +76,6 @@ registeredLoginButton.onclick = function () {
 }
 
 // Button Register to Login
-
 var registerLoginButton = registerContainer.querySelectorAll('button')[0]
 
 registerLoginButton.onclick = function (event) {
@@ -129,10 +88,9 @@ registerLoginButton.onclick = function (event) {
 
 
 
-// LOGIN
+// - - - - - LOGIN - - - - -
 
-// var loginLoginButton = loginContainer.querySelectorAll('button')[1]
-
+// Loging in
 loginContainer.onsubmit = function (event) {
     event.preventDefault()
 
@@ -144,69 +102,39 @@ loginContainer.onsubmit = function (event) {
     var username = usernameInput.value
     var password = passwordInput.value
 
-    if (!username.length) return alert('username is empty')
-    if (!password.length) return alert('password is empty')
+    try {
+        loginUser(username, password, function (error, _token) {
+            if (error) return alert(error.message)
 
-    // var user = users.find(function(user) {
-    //     return user.username === usernameValue && user.password === passwordValue
-    // })
-    // if (!user) return alert('Usuario o contraseña incorrectos')
+            token = _token
 
-    var xhr = new XMLHttpRequest
+            loginContainer.reset()
 
-    xhr.onload = function () {
-        var status = xhr.status
+            try {
+                retrieveUser(token, function (error, user) {
+                    if (error) return alert(error.message)
 
-        if (status === 401) {
-            var response = xhr.responseText
+                    var name = user.name
 
-            var message = response.slice(10, -2)
+                    loginContainer.classList.add('container--off')
 
-            return alert(message)
-        }
+                    var nameSpan = homeContainer.querySelector('.name')
 
-        if (status === 200) {
-            var response = xhr.responseText 
+                    nameSpan.innerText = name
 
-            token = response.slice(10, -2)
-
-            var xhr2 = new XMLHttpRequest
-
-            xhr2.onload = function () {
-                var response = xhr2.responseText
-
-                var name = response.slice(9, response.indexOf(',') - 1)
-
-                var nameSpan = homeContainer.querySelector('.name')
-
-                nameSpan.innerText = name
-
-                loginContainer.classList.add('container--off')
-
-                loginContainer.reset()
-
-                homeContainer.classList.remove('container--off')
+                    homeContainer.classList.remove('container--off')
+                })
+            } catch (error) {
+                alert(error.message)
             }
-
-            xhr2.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-            xhr2.setRequestHeader('Authorization', 'Bearer ' + token)
-
-            xhr2.send()
-        }
+        })
+    } catch (error) {
+        alert(error.message)
     }
-
-    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users/auth')
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    var body = '{ "username": "' + username + '", "password": "' + password + '" }'
-
-    xhr.send(body)
 }
 
-// Button Login to Register
 
+// Button Login to Register
 var loginRegisterButton = loginContainer.querySelectorAll('button')[0]
 
 loginRegisterButton.onclick = function (event) {
@@ -218,10 +146,10 @@ loginRegisterButton.onclick = function (event) {
 }
 
 
-// HOME
+
+// - - - - - HOME - - - - -
 
 // Button Home to Profile
-
 var homeButtons = homeContainer.querySelectorAll('button')
 
 var homeProfileButton = homeButtons[0]
@@ -238,7 +166,6 @@ homeProfileButton.onclick = function() {
 
 
 // Button Log Out
-
 var homeLogoutButton = homeButtons[1]
 
 homeLogoutButton.onclick = function() {
@@ -249,10 +176,11 @@ homeLogoutButton.onclick = function() {
     landingContainer.classList.remove('container--off')
 }
 
-// PROFILE 
+
+
+// - - - - - PROFILE - - - - -
 
 // Button Profile to Previous Page
-
 var profileBackButton = profileForm.querySelector('button')
 
 profileBackButton.onclick = function (event) {
@@ -265,7 +193,6 @@ profileBackButton.onclick = function (event) {
 
 
 // Updating Password
-
 profileForm.onsubmit = function (event) {
     event.preventDefault()
 
@@ -277,42 +204,23 @@ profileForm.onsubmit = function (event) {
     var oldPassword = oldPasswordInput.value
     var password = passwordInput.value
 
-    var xhr = new XMLHttpRequest
+    try {
+        updateUserPassword(token, oldPassword, password, function (error) {
+            if (error) return alert(error.message)
 
-    xhr.onload = function() {
-        var status = xhr.status
-
-        if (status === 400 || status === 401) {
-            var response = xhr.responseText
-
-            var message = response.slice(10, -2)
-
-            return alert(message)
-        }
-
-        if (status === 204) {
             profileContainer.classList.add('container--off')
 
             profileForm.reset()
 
             homeContainer.classList.remove('container--off')
-        }
+        })
+    } catch (error) {
+        alert(error.message)
     }
-
-    xhr.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token)
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    var body = '{ "oldPassword": "' + oldPassword + '", "password": "' + password + '" }'
-
-    xhr.send(body)
 }
 
 
 // Button Profile to Unregister
-
 var profileUnregisterButton = profileContainer.querySelector('.profile>button')
 
 profileUnregisterButton.onclick = function() {
@@ -323,10 +231,9 @@ profileUnregisterButton.onclick = function() {
 
 
 
-// UNREGISTER
+// - - - - - UNREGISTER - - - - -
 
 // Button Unregister to Previous Page
-
 var unregisterBackButton = unregisterContainer.querySelector('button')
 
 var unregisterForm = unregisterContainer.querySelector('form')
@@ -343,7 +250,6 @@ unregisterBackButton.onclick = function (event) {
 
 
 // Unregistering
-
 unregisterForm.onsubmit = function (event) {
     event.preventDefault()
 
@@ -351,36 +257,17 @@ unregisterForm.onsubmit = function (event) {
 
     var password = passwordInput.value
 
-    var xhr = new XMLHttpRequest
+    try {
+        unregisterUser(token, password, function (error) {
+            if (error) return alert(error.message)
 
-    xhr.onload = function() {
-        var status = xhr.status
-
-        if (status === 400 || status === 401) {
-            var response = xhr.responseText
-
-            var message = response.slice(10, -2)
-
-            return alert(message)
-        }
-
-        if (status === 204) {
             unregisterContainer.classList.add('container--off')
 
             unregisterForm.reset()
 
             landingContainer.classList.remove('container--off')
-        }
+        })
+    } catch (error) {
+        alert(error.message)
     }
-    
-    xhr.open('DELETE', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token)
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    var body = '{ "password": "' + password + '" }'
-
-    xhr.send(body)
 }
-

@@ -1,26 +1,58 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
-
-/* resets */
-
+/* RESETS */
 * {
     box-sizing: border-box;
 }
 
 html,
 body {
-    height: 100%;
+    min-width: 100vw;
+    min-height: 100vh;
     padding: 0;
     margin: 0;
     border: 0;
 }
 
-/* compos */
+/* COMPONENTS */
 
-p {
+/* ----- titles ----- */
+h1 {
     font-family: 'Courier New', Courier, monospace;
     font-size: 1rem;
 }
 
+/* ----- containers ----- */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container--vertical {
+    flex-direction: column;
+}
+
+.container--gapped {
+    margin: 1rem;
+}
+
+.container--off {
+    display: none;
+}
+
+
+/* ----- forms ----- */
+.field {
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 5px;
+    padding: 10px;
+    background-color: transparent;
+    font-size: 1rem;
+}
+
+
+/* ----- buttons ----- */
 .button {
     border-radius: 5px;
     border-style: solid;
@@ -39,31 +71,16 @@ p {
     background-color: lightsalmon;
 }
 
-.field {
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 1px;
-    margin: 5px;
-    padding: 10px;
-    background-color: transparent;
-    font-size: 1rem;
+.button--dark:hover {
+    background-color: salmon;
 }
 
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.button--warning {
+    background-color: salmon;
 }
 
-.container--vertical {
-    flex-direction: column;
+.button--warning:hover {
+    background-color: red;
 }
 
-.container--gapped {
-    margin: 1rem;
-}
-
-.container--off {
-    display: none;
-}
 
