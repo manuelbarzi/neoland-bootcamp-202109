@@ -37,3 +37,5 @@ UsersCollection.prototype.signUp = function(user) {
 }
 
 // asegurarse que son valores unicos
+
+//primero te creas un user en interfaz de usuarios (user.prototype.js) y luego en base de datos para hacer signin de un user 
