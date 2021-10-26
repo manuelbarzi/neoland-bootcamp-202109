@@ -55,111 +55,70 @@ signInForm.onsubmit = function(event){
 
     var inputs = signInForm.querySelectorAll('input')
       
-    var username = inputs [0].value
+    var user = inputs [0].value
     var password = inputs[1].value
 
+    try{
+        signInCall(user,password, function(error, _token){
+            if(error) result.alert(error.message)
 
-    var login ={
-        username  : username,
-        password  : password
-    }
+            token = _token
 
-    if(!username.length){
-        formError= true;
-        return alert('username is empty')
-    }
+            signInForm.reset() 
 
-    if(!password.length){
-        formError= true;
-        return alert('password is empty')
-    }
-    if(!formError){
-        xhr.onload = function() {
-            var status = xhr.status;
-            var response = xhr.responseText;
-            token = response.slice(10,-2);
-            alert(response)
-            
-            if(status === 409)return alert('user already exist')
-            if(status === 200){
+            try{
+                retrieveSignIn(token, function(error, user){
+                    if(error) return alert (error.message)
+                     
+                    var name = user.name
+                    alert('Hola ' + name)
 
-                xhr.onload = function () {
-                    var status = xhr.status;
-                    if(status ===200){
-                        signInForm.reset();
-                        signInContainer.classList.add('container--off')  
-                        homeContainer.classList.remove('container--off')
-                    }
-                }
-                
-                xhr.open("GET", url + "users");
-                xhr.setRequestHeader('Content-Type','application/json');
-                xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-                xhr.send();
+                    signInContainer.classList.add('container--off')
 
+                    homeContainer.classList.remove('container--off')
+
+                })
+            }catch(error){
+                alert(error.message)
             }
-        }
 
-        xhr.open("POST", url + "users/auth");
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(login));
+        })
+    }catch(error){
+        alert(error.message)
     }
 }
 
 
 signUpContainer.onsubmit = function(event){
     event.preventDefault()
-    var formError = false;
 
     var inputs = signUpContainer.querySelectorAll('input')
-    var FirstName = inputs[0].value
-    var LastName = inputs[1].value
-    var Email = inputs[2].value
-    var Password = inputs[3].value
-    var ConfirmPassword = inputs[4].value
+    var firstName = inputs[0].value
+    var lastName = inputs[1].value
+    var email = inputs[2].value
+    var password = inputs[3].value
+    var confirmPassword = inputs[4].value
 
-    var register = {
-        name        : FirstName + ' ' + LastName,
-        username    : Email,
-        password    : Password
-    }
-
-    if(!FirstName.length){
-        formError = true;
-        return alert('name is empty');
-    }
+    // Aplicamos el bloque try catch
+    // Configuramos el manejador de errores catch
+    // Dentro de try llamar a la función que tienes en logic
+    // En la callBack manejamos lo que necesitemos implementar
     
-    if(!LastName.length){
-        formError = true;
-        return alert('last name is empty');
-    }
-    if(!Email.length){
-        formError = true;
-        return alert('email is empty');
-    }    
-    if(!Password.length){
-        formError = true;
-        return alert('Password is empty');
-    }
-    if(!ConfirmPassword.length && ConfirmPassword === Password){
-        formError = true;
-        return alert('Confirm password');
-    }
+    try{
+        signUpCall(firstName, lastName, email, password, confirmPassword, function(error){
+            if(error) result.alert(error.message)
 
-    if(!formError){
-        xhr.onload = function() {
-            alert(xhr.responseText, xhr.statusText);
-            signUpContainer.reset();
+            signUpContainer.reset()
 
             signUpContainer.classList.add('container--off')
-            thankyouContainer.classList.remove('container--off')
-        }
 
-        xhr.open("POST", url + "users");
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(register));
+            thankyouContainer.classList.remove('container--off')
+        })
+    
+    }catch(error){
+        alert(error.message)
     }
-}
+}   
 
 buttonProfile.onclick = function(event){
     event.preventDefault()
@@ -178,40 +137,22 @@ profileContainer.onsubmit = function(event){
     var oldPassword = profileInput[0].value
     var newPassword = profileInput[1].value
 
-    var profile={
-        oldPassword : oldPassword,
-        password    : newPassword
-    }
 
-    if(!oldPassword.length){
-        formError= true;
-        return alert()
-    }
+    profileCall(oldPassword,newPassword,token,function(error) {
+        if(error) result.alert(error.message)
 
-    if(!newPassword.length){
-        formError= true;
-        return alert()
-    }
-    if(!formError){
-        xhr.onload = function() {
-            alert(xhr.responseText, xhr.statusText);
-            profileContainer.reset();
-    
-            profileContainer.classList.add('container--off')
-            homeContainer.classList.remove('container--off')
-        }
-    
-        xhr.open("PATCH", url + "users");
-        xhr.setRequestHeader('Authorization', 'Bearer ' + token)
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(profile));
-    }
-    
-    buttonGoBack.onclick = function(event){
-        event.preventDefault()
+        profileContainer.reset();
 
-        buttonGoBack.classList.add('container--off')
+        profileContainer.classList.add('container--off')
         homeContainer.classList.remove('container--off')
-    }
+    })
 }
+    
+buttonGoBack.onclick = function(event){
+    event.preventDefault()
+
+    buttonGoBack.classList.add('container--off')
+    homeContainer.classList.remove('container--off')
+}
+
 
