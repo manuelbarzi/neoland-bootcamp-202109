@@ -1,0 +1,262 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Birthstone&display=swap');
+* {
+    box-sizing: content-box;
+    /* border: 1px dashed black; */
+ } 
+ 
+html, body {
+    height: 100%;
+    padding: o;
+    border: 0;
+    margin: 0;
+    width: 100% ;
+}
+/* reusable */
+
+
+
+.body-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.btn {
+    border-radius: 10px;
+    background-color: black;
+    border-color: white;
+    border-width: 3px;
+    margin: 10px 0px 0px 0px;
+    color: white;
+}
+.panel {
+    margin: 2px;
+    border: black;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 10px;
+    align-content: center;
+    font-family: roboto condensed;
+    background-color: white;
+}
+.panel__field {
+    margin: 2.5px 0px 2.5px 10px;
+}
+.area-panel {
+    border-radius: 10px;
+    display: block;
+    padding: 10px 10px 40px 10px;
+    text-align: center;
+    width: fit-content;
+    margin: 0 auto;
+    box-shadow: 20px 20px 30px gray;
+    background-color: wheat;
+}
+.title {
+    font-family: birthstone;
+    text-align: center;
+}
+.text {
+
+    display: inline-block;
+}
+.menu {
+    background-color: black;
+    padding: 10px;
+    text-align: center;
+    margin: 0px;
+    top: 0;
+    visibility: hidden;
+}
+.menu__item {
+    color: white;
+    margin: 0px 10px 0px 10px;
+    text-decoration: none;
+
+}
+.columns {
+    display: flex;
+}
+
+.footer{
+    background-color: black;
+    height: 300px;
+    margin-top: 20px;
+}
+
+
+/* custom */
+
+
+.panel__title {
+    text-align: center;
+}
+
+.panel__links {
+    padding-top: 20px;
+    text-decoration: none;
+    color: black;
+}
+.columns__left-video {
+    margin: 20px 0px 0px 0px ;
+    padding: 0px 0px 0px 0px ;
+    align-self: center;
+    flex-basis: 70%;
+}
+
+.columns__left-text {
+    flex-basis: 30%;
+    font-family: oswalld;
+} 
+
+.footer__list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    align-items: center;
+    margin: 0;
+    padding: 25px;
+    justify-content: space-between;
+    height: 250px;
+}
+.footer__list-item {
+   display: inline-block;
+   text-decoration: none;
+   color: white;
+}   
+.columns__left {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 85%;
+    margin: 0px 10px 0px 10px;
+}
+.column__right {
+    text-align: center;
+    background-color: wheat;
+    width: fit-content;
+    padding: 10px;
+    height: fit-content;
+    margin: 0px 10px 0px 10px;
+    border-radius: 5px; 
+    flex-basis: 12%;
+
+}
+.column__right--item {
+    margin: 10px 5px 10px 5px;
+    padding: 10px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    border: white 2px solid;
+    height: fit-content;
+}
+
+.column__right-item-light {
+    background-color: white;
+    color: black;
+    border: black 2px solid;
+}
+.btn__light {
+    background-color: white;
+    color: black;
+    border: black;
+}
+
+/* Mobile first */
+
+
+
+.main { 
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 20px;
+    justify-content: space-between;
+    gap: 20px;
+}
+.product-1 {
+    display: flex;
+    flex-basis: 25%;
+    justify-content: center;
+    align-items: center;
+}
+.product-2 {
+    display: flex;
+    flex-basis: 25%;
+    justify-content: center;
+    align-items: center;
+}
+.product-3 {
+    display: flex;
+    flex-basis: 25%;
+    justify-content: center;
+    align-items: center;
+}
+.product-4 {
+    display: flex;
+    flex-basis: 25%;
+    justify-content: center;
+    align-items: center;
+}
+@media screen and (min-width: 580px) {
+    .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "product-1 product-1"
+    "product-2 product-3"
+    "product-2 product-4"
+    ;
+    column-gap: 20px;
+    row-gap: 20px;   
+    }
+    .product-1 {
+    grid-area: product-1;
+    }
+    .product-2 {
+    grid-area: product-2;
+    }
+    .product-3 {
+    grid-area: product-3;
+    }
+    .product-4 {
+    grid-area: product-4;
+    }
+    .menu {
+     visibility: initial;   
+     position: sticky;
+     top: 0;
+    }
+    .hamburguer {
+   display: none;
+   
+    }
+   
+}
+@media screen and (min-width: 960px) {
+    .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 55% auto;
+    grid-template-areas: 
+    "product-1 product-1 product-1"
+    "product-2 product-3 product-4"
+    ;
+    column-gap: 20px;
+    row-gap: 20px;
+    }
+}
+.product {
+border: 1px solid black;
+}
+.menu-on {
+    background-color: black;
+    padding: 10px;
+    text-align: center;
+    margin: 0px;
+    top: 0;
+    visibility: initial;
+}
