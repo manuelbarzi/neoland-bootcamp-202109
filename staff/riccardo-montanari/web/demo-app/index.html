@@ -1,59 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo App</title>
-
+    <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="landing container container--vertical container--gapped">
-        <button class="button button--medium button--dark">Sign in</button>
-        <button class="button button--medium">Sign up</button>
+
+    <!-- Vista landing -->
+<section class="landing container container--vertical container--gapped">
+    <button class="button button--medium button--dark">Sign In</button>
+    <button class='button button--medium'>Sign Up</button>
+</section>
+
+<!-- Vista signUp -->
+<form class ='signup container container--vertical container--gapped container--off'>
+    <input type="text" class="field" name='name' id='name' placeholder="name">
+    <input type="text" class="field" name='username' id='username' placeholder="username">
+    <input type="password" class="field" name='password' id='password' placeholder="password">
+    <input type="text" class='field' name='email' id='email' placeholder='email'>
+
+    <div class='container'>
+        <button class="button button--medium" type="button">Sign In</button>
+        <button class="button button--medium button--dark" type="submit">Sign Up</button>
     </div>
+</form>
 
-    <form class="signup container container--vertical container--gapped container--off">
-        <input class="field" type="text" name="name" id="name" placeholder="name">
-        <input class="field" type="text" name="username" id="username" placeholder="username">
-        <input class="field" type="password" name="password" id="password" placeholder="password">
+<!-- Vista signIn -->
+<form class ='signin container container--vertical container--gapped container--off'>
+    <input type="text" class="field" name='username' id='username' placeholder="username">
+    <input type="password" class="field" name='password' id='password' placeholder="password">
 
-        <div class="container">
-            <button class="button button--medium">Sign in</button>
-            <button class="button button--medium button--dark">Sign up</button>
-        </div>
-    </form>
-
-    <form class="signin container container--vertical container--gapped container--off">
-        <input class="field" type="text" name="username" id="username" placeholder="username">
-        <input class="field" type="password" name="password" id="password" placeholder="password">
-
-        <div class="container">
-            <button class="button button--medium">Sign up</button>
-            <button class="button button--medium button--dark">Sign in</button>
-        </div>
-    </form>
-
-    <div class="post-signup container container--gapped container--vertical container--off">
-        User registered successfully, now you can proceed to <button class="button button--dark button--medium">Sign in</button>
+    <div class='container'>
+        <button class="button button--medium ">Sign Up</button>
+        <button class="button button--medium button--dark">Sign In</button>
     </div>
-    <div class="homepage container--off">
+</form>   
 
-        <h1>Welcome login successful!</h1>
-
-    </div>
-
-
-
-
-
-
-
+<!-- Vista Home de usuario logueado -->
+<!-- <div class="post-signup container container--vertical container--off">
+    User registered successfully, now you can proceed to <button class="button button--dark button--medium">Sign in</button>
+</div>
+<div class="homepage container container--vertical container--off">
+    <h1>Hello, <span class="name">world</span>!</h1>
+    <button class="button button--medium button--dark">profile</button>
+    <button class="button button--medium">sign out</button>
+</div> -->
 
     <script src="main.js"></script>
 </body>
-
 </html>
