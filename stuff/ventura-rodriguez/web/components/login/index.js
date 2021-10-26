@@ -1,10 +1,9 @@
 // ----- global variables -----
-var url = "https://b00tc4mp.herokuapp.com/api/v2";
 var user = {};
 var token = "";
 
 
-// ----- Pages selectors -----
+// ----- pages selectors -----
 var landing = document.getElementById("landing");
 var register = document.getElementById("register");
 var logIn = document.getElementById("logIn");
@@ -12,7 +11,7 @@ var home = document.getElementById("home");
 var profile = document.getElementById("profile");
 
 
-// ----- landing page logic -----
+// ----- logic page landing -----
 var landingButtons = landing.getElementsByTagName("button");
 var registerPage = landingButtons[0];
 var logInPage = landingButtons[1];
@@ -28,7 +27,7 @@ logInPage.onclick = function() {
 }
 
 
-// ----- register page logic -----
+// ----- logic page register -----
 var registerButtons = register.getElementsByTagName("button");
 var logInPage = registerButtons[0];
 var registerBtn = registerButtons[1];
@@ -40,41 +39,38 @@ logInPage.onclick = function () {
 
 register.onsubmit = function(event) {
     event.preventDefault();
-
     var inputs = this.getElementsByTagName("input");
-    var name = inputs[0].value;
-    var username = inputs[1].value;
-    var password = inputs[2].value;
+    var name = inputs[0];
+    var username = inputs[1];
+    var password = inputs[2];
     
-    // if (password.includes("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$")) {
-    if (password) { // Put some validates here
-        var user = {name, username, password};
-        
-        var xhr = new XMLHttpRequest;
-        xhr.onload = function () {
-            var status = xhr.status;
-            switch (status) {
-                case 201 :
-                    alert("Usuario registrado correctamente");
-                    register.reset();
-                    register.classList.add("panel--off");
-                    logIn.classList.remove("panel--off");
-                    break;
-                case 409 : alert("Este usuario ya está registrado"); inputs[2].value = ""; break;
-                default  : alert("Ops, respuesta del servidor no manejada");
+    try {
+        if (!password) throw new Error("Introduce un formato de contraseña válido");
+        var user = {
+            name     : name.value,
+            username : username.value,
+            password : password.value
+        };
+        logUpUser(user, function(err, res) {
+            if (err) {
+                alert(err.message);
+                register.reset();
             }
-        }
-        xhr.open("POST", url + "/users");
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(user));
+            else {
+                alert(res);
+                register.classList.add("panel--off");
+                logIn.classList.remove("panel--off");
+                register.reset();
+            }
+        })
     }
-    else {
-        alert("Introduce un formato de contraseña válido");
-        inputs[2].value = "";
+    catch (err) {
+        alert(err);
+        password = "";
     }
 }
 
-// ----- logic page logic -----
+// ----- logic page logIn -----
 var logInButtons = logIn.getElementsByTagName("button");
 var registerPage = logInButtons[0];
 var logInBtn = logInButtons[1];
@@ -84,61 +80,36 @@ registerPage.onclick = function () {
     register.classList.remove("panel--off");
 }
 
-function getData (_user, _token) {
-    var xhr = new XMLHttpRequest;
-    xhr.onload = function () {
-        var status2 = xhr.status;
-        var response = xhr.responseText;
-        switch (status2) {
-            case 200:
-                alert("Bienvenido");
-                logIn.reset();
-                user = JSON.parse(response);
-                token = _token;
-                logIn.classList.add("panel--off");
-                home.classList.remove("panel--off");
-                break;
-            default: alert("Ops, respuesta del servidor no manejada");
-        }
-    }
-    xhr.open("GET", url + "/users");
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + _token);
-    xhr.send(JSON.stringify(_user));
-}
 
 logIn.onsubmit = function(event) {
     event.preventDefault();
-
     var inputs = this.getElementsByTagName("input");
-    var username = inputs[0].value;
-    var password = inputs[1].value;
-    
-    // if (password.includes("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$")) {
-    if (password) { // Put some validates here
-        var xhr = new XMLHttpRequest;
-
-        var user = {username, password};
-        xhr.onload = function() {
-            var status = xhr.status;
-            var response = xhr.responseText;
-            var token = response.slice(10, -2);
-            switch(status) {
-                case 200: getData(user, token); break;
-                case 401:
-                    alert("El usuario o la contraseña no son correctas o el usuario no está registrado o autorizado");
-                    inputs[1].value = "";
-                    break;
-                default : alert("Ops, respuesta del servidor no manejada");
-            }
-        }
-        xhr.open("POST", url + "/users/auth");
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(user));
+    var username = inputs[0];
+    var password = inputs[1];
+    var _user = {
+        username : username.value,
+        password : password.value,
     }
-    else {
-        alert("Introduce un formato de contraseña válido");
-        inputs[2].value = "";
+    try {
+        if (!password) throw new Error("Introduce un formato de contraseña válido");
+        logInUser(_user, function(err, res) {
+            if(err) {
+                alert(err.message);
+                logIn.reset();
+            }
+            else {
+                user = res.user;
+                token = res.token;
+                alert(res.message);
+                logIn.classList.add("panel--off");
+                home.classList.remove("panel--off");
+                logIn.reset();
+            }
+        })
+    }
+    catch(err) {
+        alert(err.message);
+        password.value = "";
     }
 }
 
@@ -179,35 +150,26 @@ updateForm.onsubmit = function(event) {
     var inputs = this.getElementsByTagName("input");
     var oldPassword = inputs[0];
     var password = inputs[1];
-    var _user = {
-        username: user.username,
-        oldPassword: oldPassword.value,
-        password: password.value
-    }
-
-    if(_user.password && _user.oldPassword) {
-        var xhr = new XMLHttpRequest;
-    
-        xhr.onload = function() {
-            var status = xhr.status;
-    
-            switch (status) {
-                case 204:
-                    alert("El usuario ha sido modificado");
-                    updateForm.reset();
-                    break;
-                case 401: alert("Usuario no autorizado para la operación, comprueba el token"); break;
-                case 400: alert("Contraseña incorrecta, repita la operación"); break;
-                default : alert("Ops, respuesta del servidor no manejada, el usuario no ha podido ser modificado");
-            }
+    try {
+        var _user = {
+            username    : user.username,
+            oldPassword : oldPassword.value,
+            password    : password.value
         }
-        xhr.open("PATCH", url + "/users");
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-        xhr.send(JSON.stringify(_user));
+        if(!_user.password && !_user.oldPassword) throw new Error("Introduce un formato de contraseña válido");
+        changePasswordUser(_user, token, function(err, res) {
+            if(err) {
+                alert(err.message);
+                updateForm.reset();
+            }
+            else {
+                alert(res);
+                updateForm.reset();
+            }
+        })
     }
-    else {
-        alert("Introduce un formato de contraseña válido");
+    catch(err) {
+        alert(err.message);
         updateForm.reset();
     }
 }
@@ -216,36 +178,29 @@ deleteForm.onsubmit = function(event) {
     event.preventDefault();
     var inputs = this.getElementsByTagName("input");
     var password = inputs[0];
-    var _user = {
-        username: user.username,
-        password: password.value
-    }
-
-    if(_user.password) {
-        var xhr = new XMLHttpRequest;
-    
-        xhr.onload = function() {
-            var status = xhr.status;
-    
-            switch (status) {
-                case 204:
-                    alert("El usuario ha sido eliminado");
-                    deleteForm.reset();
-                    profile.classList.remove("panel--off");
-                    landing.classList.add("panel--off");
-                    break;
-                case 401: alert("Usuario no autorizado para la operación, comprueba el token"); break;
-                case 400: alert("Contraseña incorrecta"); deleteForm.reset(); break;
-                default : alert("Ops, respuesta del servidor no manejada, el usuario no ha podido ser eliminado");
-            }
+    try {
+        var _user = {
+            username : user.username,
+            password : password.value
         }
-        xhr.open("DELETE", url + "/users");
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-        xhr.send(JSON.stringify(_user));
+        if(!_user.password) throw new Error("Introduce un formato de contraseña válido");
+        deleteUser(_user, token, function(err, res) {
+            if(err) {
+                alert(err.message);
+                deleteForm.reset();
+            }
+            else {
+                user = {};
+                token = "";
+                alert(res)
+                profile.classList.remove("panel--off");
+                landing.classList.add("panel--off");
+                deleteForm.reset();
+            }
+        })
     }
-    else {
-        alert("Introduce un formato de contraseña válido");
+    catch(err) {
+        alert(err.message);
         password.value = "";
     }
 }
