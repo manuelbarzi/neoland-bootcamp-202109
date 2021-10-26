@@ -1,6 +1,6 @@
-var myCollection = new UsersCollection
+var myCollection;;
 
-function defaultUser() {
+(function() {
     var manu = new User("Manu", "manu@neoland.es", "headTeacher");
     var ventu = new User("Ventu", "ventu@neoland.es", "12345678");
     var sergio = new User("Sergio", "sergio@neoland.es", "876544321");
@@ -12,13 +12,11 @@ function defaultUser() {
     var riccardo = new User("Riccardo", "riccardo@neoland.es", "mmnbvcxz");
     var nico = new User("Nico", "nico@neoland.es", "hgfedcba");
     var adrian = new User("Adrián", "adrian@neoland.es", "abcdefgh");
-    var neoland = [manu, ventu, sergio, ana, noelia, alvaro, ismael, andreu, riccardo, nico, adrian];
-    for (var i = 0; i < neoland.length; i++) {
-        var element = neoland[i];
-        myCollection.signUp(element);
-    }
-}
-defaultUser();
+
+    myCollection = new UsersCollection(
+        [manu, ventu, sergio, ana, noelia, alvaro, ismael, andreu, riccardo, nico, adrian]
+    );
+})()
 
 
 var formSignIn = document.getElementById("formLogin");

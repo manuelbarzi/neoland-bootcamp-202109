@@ -3,7 +3,6 @@ function UsersCollection(arrUsers) {
     this.collection = arrUsers || [];
 }
 
-
 UsersCollection.prototype.getCollection = function() {
     return this.collection;
 }
