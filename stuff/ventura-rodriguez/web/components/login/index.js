@@ -54,18 +54,17 @@ register.onsubmit = function(event) {
         logUpUser(user, function(err, res) {
             if (err) {
                 alert(err.message);
-                register.reset();
             }
             else {
                 alert(res);
                 register.classList.add("panel--off");
                 logIn.classList.remove("panel--off");
-                register.reset();
             }
+            register.reset();
         })
     }
     catch (err) {
-        alert(err);
+        alert(err.message);
         password = "";
     }
 }
