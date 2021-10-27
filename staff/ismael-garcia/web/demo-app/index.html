@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo App</title>
     <link rel="stylesheet" href="style.css">
+    <script src="logic.js" defer></script>
+    <script src="main.js" defer></script>
 </head>
 <body>
 
     <!-- landing page -->
-    <div class="landing container container--gapped">
+    <div class="landing container container--gapped container--off">
         <button class="button button--medium button--dark">Log in</button>
         <button class="button button--medium">Register</button>
     </div>
@@ -31,14 +33,14 @@
 
 
     <!-- registered page -->
-    <div class="registered container container--vertical container--off">
-        <h1>¡Ya estás registrado! Puedes pasar al Login</h1>
+    <div class="registered container container--gapped container--vertical container--off">
+        <h1>¡Gracias por registrarte, y bienvenido! Puedes pasar al Login.</h1>
         <button class="button button--medium button--dark">Log in</button>
     </div>
 
 
     <!-- login page -->
-    <form id="login-form" class="login container container--vertical container--gapped container--off">
+    <form class="login container container--vertical container--gapped container--off" id="login-form">
         <input class="field" type="text" name="username" id="login-username" placeholder="Username">
         <input class="field" type="password" name="password" id="login-password" placeholder="Password">
 
@@ -61,7 +63,7 @@
     
 
     <!-- profile page -->
-    <div id="profile" class="profile container container--vertical container--gapped container--off">
+    <div class="profile container container--vertical container--gapped container--off" id="profile">
         <form class="container container--vertical">
             <input class="field" type="password" name="old-password" id="old-password" placeholder="Old Password" required>
             <input class="field" type="password" name="new-password" id="new-password" placeholder="New Password" required>
@@ -88,7 +90,9 @@
         </form>
     </div>
 
-    <script src="logic.js"></script>
-    <script src="main.js"></script>
+    <div class="spinner container container--vertical container--gapped container--full">
+        <img class="spinner__image" src="https://www.ithink.co/images/lg.ajax-spinner-preloader.gif" alt="spinner">
+    </div>
 </body>
+
 </html>

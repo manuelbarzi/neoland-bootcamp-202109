@@ -6,9 +6,32 @@ var loginContainer = document.querySelector('.login')
 var homeContainer = document.querySelector('.home')
 var profileContainer = document.querySelector('.profile')
 var unregisterContainer = document.querySelector('.unregister')
+var spinnerContainer = document.querySelector('.spinner')
 
-// - - - - - Global variables - - - - -
-var token
+// - - - - - leaving session open - - - - -
+if (!sessionStorage.token) {
+    spinnerContainer.classList.add('container--off')
+
+    landingContainer.classList.remove('container--off')
+} else {
+    try {
+        retrieveUser(sessionStorage.token, function (error, user) {
+            if (error) return alert(error.message)
+
+            var name = user.name
+
+            var nameSpan = homeContainer.querySelector('.name')
+
+            nameSpan.innerText = name
+
+            spinnerContainer.classList.add('container--off')
+
+            homeContainer.classList.remove('container--off')
+        })
+    } catch (error) {
+        alert(error.message)
+    }
+}
 
 
 
@@ -41,6 +64,7 @@ registerContainer.onsubmit = function (event) {
     event.preventDefault()
 
     var inputs = registerContainer.querySelectorAll('.field')
+
     var nameInput = inputs[0]
     var surnameInput = inputs[1]
     var usernameInput = inputs[2]
@@ -51,18 +75,32 @@ registerContainer.onsubmit = function (event) {
     var username = usernameInput.value 
     var password = passwordInput.value
 
+    registerContainer.classList.add('container--off')
+    spinnerContainer.classList.remove('container--off')
+
     try {
         registerUser(name, surname, username, password, function (error) {
-            if (error) return alert(error.message)
+            if (error) {
+                alert(error.message)
+
+                spinnerContainer.classList.add('container--off')
+                registerContainer.classList.remove('container--off')
+
+                return
+            }
 
             registerContainer.reset()
 
-            registerContainer.classList.add('container--off')
+            spinnerContainer.classList.add('container--off')
 
             registeredContainer.classList.remove('container--off')
+        
         })
     } catch (error) {
         alert(error.message)
+
+        spinnerContainer.classList.add('container--off')
+        registerContainer.classList.remove('container--off')
     }
 }
 
@@ -102,21 +140,38 @@ loginContainer.onsubmit = function (event) {
     var username = usernameInput.value
     var password = passwordInput.value
 
-    try {
-        loginUser(username, password, function (error, _token) {
-            if (error) return alert(error.message)
+    loginContainer.classList.add('container--off')
+    spinnerContainer.classList.remove('container--off')
 
-            token = _token
+    try {
+        loginUser(username, password, function (error, token) {
+            if (error) {
+                alert(error.message)
+
+                spinnerContainer.classList.add('container--off')
+                loginContainer.classList.remove('container--off')
+
+                return
+            }
+
+            sessionStorage.token = token
 
             loginContainer.reset()
 
             try {
-                retrieveUser(token, function (error, user) {
-                    if (error) return alert(error.message)
+                retrieveUser(sessionStorage.token, function (error, user) {
+                    if (error) {
+                        alert(error.message)
+
+                        spinnerContainer.classList.add('container--off')
+                        loginContainer.classList.remove('container--off')
+                        
+                        return
+                    }
 
                     var name = user.name
 
-                    loginContainer.classList.add('container--off')
+                    spinnerContainer.classList.add('container--off')
 
                     var nameSpan = homeContainer.querySelector('.name')
 
@@ -126,10 +181,16 @@ loginContainer.onsubmit = function (event) {
                 })
             } catch (error) {
                 alert(error.message)
+
+                spinnerContainer.classList.add('container--off')
+                loginContainer.classList.remove('container--off')
             }
         })
     } catch (error) {
         alert(error.message)
+
+        spinnerContainer.classList.add('container--off')
+        loginContainer.classList.remove('container--off')
     }
 }
 
@@ -204,11 +265,21 @@ profileForm.onsubmit = function (event) {
     var oldPassword = oldPasswordInput.value
     var password = passwordInput.value
 
-    try {
-        updateUserPassword(token, oldPassword, password, function (error) {
-            if (error) return alert(error.message)
+    profileContainer.classList.add('container--off')
+    spinnerContainer.classList.remove('container--off')
 
-            profileContainer.classList.add('container--off')
+    try {
+        updateUserPassword(sessionStorage.token, oldPassword, password, function (error) {
+            if (error) {
+                alert(error.message)
+
+                spinnerContainer.classList.add('container--off')
+                profileContainer.classList.remove('container--off')
+
+                return
+            }
+
+            spinnerContainer.classList.add('container--off')
 
             profileForm.reset()
 
@@ -216,6 +287,9 @@ profileForm.onsubmit = function (event) {
         })
     } catch (error) {
         alert(error.message)
+
+        spinnerContainer.classList.add('container--off')
+        profileContainer.classList.remove('container--off')
     }
 }
 
@@ -257,11 +331,21 @@ unregisterForm.onsubmit = function (event) {
 
     var password = passwordInput.value
 
-    try {
-        unregisterUser(token, password, function (error) {
-            if (error) return alert(error.message)
+    unregisterContainer.classList.add('container--off')
+    spinnerContainer.classList.remove('container--off')
 
-            unregisterContainer.classList.add('container--off')
+    try {
+        unregisterUser(sessionStorage.token, password, function (error) {
+            if (error) {
+                alert(error.message)
+
+                spinnerContainer.classList.add('container--off')
+                unregisterContainer.classList.remove('container--off')
+
+                return
+            }
+
+            spinnerContainer.classList.add('container--off')
 
             unregisterForm.reset()
 
@@ -269,5 +353,8 @@ unregisterForm.onsubmit = function (event) {
         })
     } catch (error) {
         alert(error.message)
+
+        spinnerContainer.classList.add('container--off')
+        unregisterContainer.classList.remove('container--off')
     }
 }
