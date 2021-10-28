@@ -12,7 +12,7 @@
     <header id="header">
     </header>
     <main id="main">
-        <button type="button" class="button" id="showmodal">show modal</button>
+        <button type="button" class="button" id="show-modal">show modal</button>
     </main>
     <aside id="aside">
     </aside>
@@ -20,16 +20,16 @@
 
     </footer>
 
-    <div id="modal" class="modal panel--off">
-        <div class="modal__pop-up">
-            <h1 class="modal__title">
-                Esto es un modal
-            </h1>
-            <div class="modal__control-box">
-                <button class="button button--warning" type="button">Salir</button>
-                <button class="button button--success" type="button">Aceptar</button>
+    <template id="template-modal">
+        <div class="modal" id="modal">
+            <div class="modal__pop-up" id="prueba">
+                <h1 class="modal__title">Esto es un modal</h1>
+                <div class="modal__control-box">
+                    <button class="button button--warning" type="button" id="close-modal">Salir</button>
+                    <button class="button button--success" type="button">Aceptar</button>
+                </div>
             </div>
         </div>
-    </div>
+    </template>
 </body>
 </html>

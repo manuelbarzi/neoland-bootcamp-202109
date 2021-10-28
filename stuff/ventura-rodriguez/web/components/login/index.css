@@ -5,6 +5,10 @@
     src: local('Lucida Console Regular'), url('assets/lucon.woff') format('woff');
 }
 
+:root {
+    --black: 0, 0, 0;
+}
+
 * {
     font-family: "Lucida Console Regular";
     box-sizing: border-box;
@@ -172,4 +176,49 @@ html, body {
 
 .button--warning:hover {
     background-color: #ff6666;
+}
+
+
+/* ----- Modal ------ */
+.modal {
+    display: flex;
+    /* align-items: center;
+    justify-content: center; */
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    background-color: rgba(var(--black), .2);
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+.modal__pop-up {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    height: fit-content;
+    min-width: 420px;
+    max-width: 420px;
+    margin: auto;
+    border: 1px solid rgb(var(--black));
+    border-radius: 7px;
+}
+
+.modal__title {
+    background-color: white;
+    margin-top: 32px;
+    font-size: 1.6rem;
+    padding: 0.7rem;
+    border-radius: 7px;
+}
+
+.modal__text {
+    margin-top: 12px;
+    padding: 32px;
+    text-align: center;
 }

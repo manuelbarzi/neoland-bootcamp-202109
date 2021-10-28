@@ -53,10 +53,10 @@ register.onsubmit = function(event) {
         };
         logUpUser(user, function(err, res) {
             if (err) {
-                alert(err.message);
+                injectableModal("template-modal", "Error", err.message);
             }
             else {
-                alert(res);
+                injectableModal("template-modal", "Success", res.message);
                 register.classList.add("panel--off");
                 logIn.classList.remove("panel--off");
             }
@@ -64,7 +64,7 @@ register.onsubmit = function(event) {
         })
     }
     catch (err) {
-        alert(err.message);
+        injectableModal("template-modal", "Error", err.message);
         password = "";
     }
 }
@@ -93,13 +93,13 @@ logIn.onsubmit = function(event) {
         if (!password) throw new Error("Introduce un formato de contraseña válido");
         logInUser(_user, function(err, res) {
             if(err) {
-                alert(err.message);
+                injectableModal("template-modal", "Error", err.message);
                 logIn.reset();
             }
             else {
                 user = res.user;
                 token = res.token;
-                alert(res.message);
+                injectableModal("template-modal", "Bienvenido", res.message);
                 logIn.classList.add("panel--off");
                 home.classList.remove("panel--off");
                 logIn.reset();
@@ -107,7 +107,7 @@ logIn.onsubmit = function(event) {
         })
     }
     catch(err) {
-        alert(err.message);
+        injectableModal("template-modal", "Error", err.message);
         password.value = "";
     }
 }

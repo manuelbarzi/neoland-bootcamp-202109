@@ -118,3 +118,42 @@ function deleteUser(user, token, callback) {
     xhr.setRequestHeader('Authorization', 'Bearer ' + token);
     xhr.send(JSON.stringify(user));
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+//      lógica visual del modal
+////////////////////////////////////////////////////////////////////////////////
+
+
+function generateCloseModal(element) {
+    var modal = document.getElementById(element);
+    var close = modal.querySelector("#close-modal");
+
+    // close.onclick = function() { modal.remove() }
+
+    modal.onclick = function(event) {
+        if(!(
+            event.target === modal.querySelector("#modal-content") ||
+            event.target === modal.querySelector("#modal-title") ||
+            event.target === modal.querySelector("#modal-text")
+        ))
+            modal.remove();
+    }
+}
+
+
+/** Esta función debe utilizarse siempre con una estructura modal, debe contener los id
+ * #modal-title para injectar un título y #modal-text para inyectar un texto. El parámetro
+ * element será el id del template a clonar, title el título personalizado y text el texto
+ * personalizado.
+ */
+function injectableModal(element, title, text) {
+    var template = document.getElementById(element);
+    var clone = template.content.cloneNode(true);
+    clone.querySelector("#modal-title").innerText = title;
+    clone.querySelector("#modal-text").innerText = text;
+    document.body.appendChild(clone);
+    generateCloseModal("modal");
+}
+
+// injectableModal("template-modal", "Este es mi título", "Error la contraseña es incorreca, prueba de nuevo");
