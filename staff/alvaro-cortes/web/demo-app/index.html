@@ -10,47 +10,175 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="user.prototype.js"></script>
-    <script src="user-collection.prototype.js"></script>
+    <!--<script src="user.prototype.js"></script>-->
+    <!--<script src="user-collection.prototype.js"></script>-->
+    <script src="logic.js" defer></script>
+    <script src="main-final.js" defer></script>
 </head>
 
 <body>
-    <div class="landing container container--vertical">
-        <button class="button">Login</button>
-        <button class="button">Register</button>
+    <!-- landing -->
+    <div class="landing container container--vertical container--off">
+        <button class="button buttons--landing">Iniciar Sesión</button>
+        <button class="button buttons--landing">Registrarse</button>
     </div>
 
+    <!-- login container -->
     <form class="login container container--vertical container--off">
-        <input type="text" placeholder="Usuario" id="usuario">
-        <input type="password" placeholder="Contraseña" id="password">
+        <h3 class="titles">Iniciar Sesión</h3>
+        <div class="color"></div><input type="text" placeholder="Usuario" id="usuario-login">
+        <input type="password" placeholder="Contraseña" id="password-login-container">
         <div class="cointainer">
-            <button class="button">Register</button>
-            <button class="button">Login</button>
+            <button class="button">Registrarse</button>
+            <button class="button button--red">Iniciar Sesión</button>
         </div>
     </form>
 
+    <!-- register container -->
     <form class="register container container--vertical container--off">
+        <h3 class="titles">Registro</h3>
         <input type="text" placeholder="Nombre" id="nombre">
         <input type="text" placeholder="Apellido" id="apellido">
         <input type="email" placeholder="Email" id="email">
-        <input type="text" placeholder="Usuario" id="usuario">
-        <input type="password" placeholder="Contraseña" id="password">
+        <input type="text" placeholder="Usuario" id="usuario-register">
+        <input type="password" placeholder="Contraseña" id="password-register-container">
+
         <div class="cointainer">
-            <button class="button">Login</button>
-            <button class="button">Register</button>
+            <button class="button">Iniciar Sesión</button>
+            <button class="button button--red">Registrarse</button>
         </div>
     </form>
 
-    <div class="welcome container container--off">
-        <h2> Bienvenido a tu página de inicio  <span class="name"></span></h2>
+    <!-- search bar -->
+
+    <form class="welcome__search container container--search container--off">
+        <input type="text" placeholder="Escribe aquí" id="search-car">
+        <button class="button button--red">Buscar</button>
+    </form>
+
+    <!-- welcome container -->
+    <div class="welcome container container--vertical container--off">
+        <h2> Bienvenido a tu página de inicio <span class="name"></span></h2>
+        <div class="container">
+            <button class="button button--red">Perfil</button>
+            <button class="button button--signout">Cerrar Sesión</button>
+        </div>
     </div>
-    <div class="register-ok container container--off">
+
+    <!-- welcome result list -->
+    <div class="buttons--list container container--off">
+        <button class="button button--red">Inicio</button>
+    </div>
+
+    <div class="welcome__results container container--vertical container--off">
+        <ul></ul>
+    </div>
+
+    <!-- welcome car details -->
+
+    <div class="welcome__details container container--vertical container--off">
+        <button class="button container--off"> Volver atrás</button>
+        <h2></h2>
+        <img src="" alt="" width="300px">
+        <p></p>
+        <time></time>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <a href=""></a>
+    </div>
+
+    <!-- registere-ok container -->
+    <div class="register-ok container container--vertical container--off button--out--form">
         ¡Registro satifactorio! Ya puedes iniciar sesión.
+
         <div class="cointainer">
             <button class="button">Login</button>
         </div>
     </div>
-    <script src="main-proto.js"></script>
+
+    <!-- profile container -->
+    <div class="profile container container--vertical container--off">
+        <h3 class="titles">Mi perfil</h3>
+        <hr>
+        <div class="button--out--form container">
+            <button class="button button--config">Modificar tu datos</button>
+        </div>
+        <div class="button--out--form container">
+            <button class="button button--change--password">Cambiar contraseña</button>
+        </div>
+        <div class="button--out--form container">
+            <button class="button button--delete">Eliminar usuario</button>
+        </div>
+        <div class="button--out--form container">
+            <button class="button button--back--profile">Volver atrás</button>
+        </div>
+        <hr>
+    </div>
+
+    <!-- change password container -->
+    <div class="change--password container container--vertical container--off">
+        <form class="container container--vertical">
+            <h3 class="titles">Cambiar contraseña</h3>
+            <input type="password" placeholder="Nueva contraseña" id="password-profile">
+            <input type="password" placeholder="Contraseña anterior" id="old-password-profile">
+
+            <div class="container">
+                <button class="button">Volver atrás</button>
+                <button class="button button--red">Acutalizar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- modify container -->
+    <div class="modify container container--vertical container--off">
+        <form class="container container--vertical">
+            <h3 class="titles">Modificar datos</h3>
+            <input type="text" placeholder="Nombre" id="name-modify">
+            <input type="text" placeholder="Apellido" id="surname-modify">
+            <input type="email" placeholder="Email" id="email-modify">
+            <input type="text" placeholder="Usuario" id="usuario-modify">
+
+            <div class="container">
+                <button class="button">Volver atrás</button>
+                <button class="button button--red">Actualizar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- unregister container -->
+    <div class="unregister container container--vertical container--off">
+        <form class="container container--vertical">
+            <h3 class="titles">Eliminar cuenta</h3>
+            <input type="password" placeholder="Contraseña" id="password-unregister">
+
+            <div class="container">
+                <button class="button">Volver atrás</button>
+                <button class="button button--red">Eliminar usuario</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- modal -->
+    <template id="template-modal">
+        <div class="modal" id="modal">
+            <div class="modal__pop-up" id="modal-content">
+                <h1 class="modal__title" id="modal-title"></h1>
+                <p class="modal__text" id="modal-text"></p>
+                <button class="button button--success" type="button" id="close-modal">Aceptar</button>
+            </div>
+        </div>
+    </template>
+
+    <!-- spinner -->
+    <svg class="spinner container container--vertical" viewBox="0 0 50 1500" height="50" width="300">
+        <g>
+            <circle class="todos circulo" cx="600" cy="1000" r="15" />
+        </g>
+    </svg>
+    <!--<script src="main-proto.js"></script>-->
     <!--<script src="main.js"></script>-->
 </body>
 
