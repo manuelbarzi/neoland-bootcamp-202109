@@ -1,0 +1,247 @@
+/* Welcome */
+
+body {
+  background-color: #000000;
+  background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fhobbydb-production.s3.amazonaws.com%2Fprocessed_uploads%2Fsubject_photo%2Fsubject_photo%2Fimage%2F36700%2F1517867341-8181-2924%2Fhotwheels_50th.jpg&f=1&nofb=1');
+  background-repeat: no-repeat;
+  background-position: -39px -176px;
+  min-height: 100vh;
+  display: grid;
+  align-content: center;
+  margin: 0;
+}
+
+.containers {
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 15px;
+  background: rgba(255, 255, 255, .8);
+  border-radius: 20px;
+  height: fit-content;
+  backdrop-filter: blur(5px);
+  box-shadow: rgba(0, 0, 0, .1) 0px 0px 10px 5px;
+}
+
+.landing__title {
+  text-align: center;
+  font-family: 'Birthstone', cursive;
+  font-size: 2rem;
+}
+
+.landing__subtitle {
+  text-align: center;
+  font-family: sans-serif;
+  font-size: 1rem;
+}
+
+.landing__buttons {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center;
+}
+
+.button {
+  width: fit-content;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  border: none;
+  background-color: #eda952;
+  margin-top: 20px;
+  text-align: center;
+  padding: 10px 35px;
+}
+
+.input {
+  height: 50px;
+  border: solid 1px #8cb7ec;
+  margin: 15px 0;
+  width: calc(100% - 30px);
+  padding: 15px;
+  border-radius: 15px;
+  color: #000000;
+}
+
+.grid-col, .grid-col .form__inputname {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+/* REGISTER */
+
+.form__title {
+  text-align: center;
+  font-family: 'Birthstone', cursive;
+  font-size: 3rem;
+  color: rgb(15, 10, 14)
+}
+
+.form__subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: rgb(22, 11, 19)
+}
+
+.form__input {
+  margin: 5px;
+  height: 50px;
+  width: 300px;
+  border-radius: 20px;
+  border: none;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.form__terms {
+  justify-content: center;
+  display: flex;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.Sing-up__buttons {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center;
+}
+
+/* LOGIN */
+
+.Sign-in__title {
+  text-align: center;
+  font-family: 'Birthstone', cursive;
+  font-size: 1.5rem;
+  color: rgb(19, 8, 15)
+}
+
+.sign-in__subbtitle {
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+.sing-in_buttons {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center;
+}
+
+/* spinner */
+
+.spinner::after, .spinner::before, .spinner-doublecircle::after, .spinner-doublecircle::before {
+  box-sizing: border-box
+}
+
+.spinner {
+  min-height: 100px;
+  width: 100%;
+  position: relative
+}
+
+.bloqueo {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, .6);
+  display: flex;
+}
+
+@keyframes animacion {
+  0% {
+    transform: rotate(0deg)
+  }
+  to {
+    transform: rotate(1turn)
+  }
+}
+
+.spinner-doublecircle {
+  background: transparent;
+  animation: animacion 2s linear infinite
+}
+
+.spinner-doublecircle, .spinner-doublecircle:after {
+  border: 8px solid;
+  border-radius: 50%;
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  margin-top: -25px;
+  left: 50%;
+  margin-left: -25px;
+  z-index: 1
+}
+
+.spinner-doublecircle {
+  border-color: rgb(209, 120, 190) rgba(0, 0, 0, .07)
+}
+
+.spinner-doublecircle:after {
+  border-color: transparent #ffffff;
+  animation: animacion 1s linear infinite
+}
+
+/* SPINNER 2 */
+
+.spinner2 {
+  width: 100px;
+  animation: animacion 1s linear infinite;
+  position: absolute;
+  left: calc(50% - 50px);
+  top: calc(50% - 50px);
+}
+
+/* HOME */
+
+.field {
+  margin: 5px;
+  height: 50px;
+  width: 300px;
+  border-radius: 20px;
+  border: none;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.home__title {
+  text-align: center;
+  font-family: 'Birthstone', cursive;
+  font-size: 3rem;
+  color: rgb(15, 10, 14)
+}
+
+.home__subtitle {
+  text-align: center;
+  font-size: 1.2rem;
+  color: rgb(22, 11, 19)
+}
+
+.home__results{
+  max-height: 500px;
+  overflow: auto;
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center;
+}
+
+.button-search {
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center;
+}
+
+/* Contenedor-app (SIEMPRE LO ÚLTIMO*/
+.container--off {
+  display: none
+}
