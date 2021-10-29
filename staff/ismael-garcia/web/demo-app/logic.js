@@ -286,6 +286,8 @@ function searchVehicles(query, callback) {
     xhr.onload = function () {
         var status = xhr.status
 
+
+        // Falta incluir manejo de errores
         if (status === 200) {
             var vehicles = JSON.parse(xhr.responseText)
 
@@ -316,6 +318,7 @@ function retrieveVehicle(id, callback) {
     xhr.onload = function () {
         var status = xhr.status
 
+        // Falta incluir manejo de errores
         if (status === 200) {
             var vehicle = JSON.parse(xhr.responseText)
 

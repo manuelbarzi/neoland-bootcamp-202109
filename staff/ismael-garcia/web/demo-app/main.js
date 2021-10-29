@@ -286,19 +286,63 @@ homeSearchForm.onsubmit = function (event) {
 
                 item.onclick = function () {
 
-                    spinnerContainer.classList.add('container--off')
+                    homeResultsList.classList.add('container--off')
+                    spinnerContainer.classList.remove('container--off')
                     
                     try {
                         retrieveVehicle(vehicle.id, function(error, vehicle) {
                             if (error) {
-                                
+
+                                alert(error.message)
+
+                                spinnerContainer.classList.add('container--off')
+                                homeResultsList.classList.remove('container--off')
+
+                                return
                             }
-                             
+
+                            var title = homeDetail.querySelector('h2')
+                            title.innerText = vehicle.name
+
+                            var image = homeDetail.querySelector('img')
+                            image.src = vehicle.image
+
+                            var description = homeDetail.querySelector('p')
+                            description.innerText = vehicle.description
+
+                            var year = homeDetail.querySelector('time')
+                            year.innerText = vehicle.year
+
+                            var other = homeDetail.querySelectorAll('span')
+
+                            other[0].innerText = vehicle.price
+                            other[1].innerText = vehicle.color
+                            other[2].innerText = vehicle.style
+                            other[3].innerText = vehicle.collection
+                            other[4].innerText = vehicle.maker
+
+                            var link = homeDetail.querySelector('a')
+                            link.src = vehicle.url
+
+                            spinnerContainer.classList.add('container--off')
+                            homeDetail.classList.remove('container--off')   
                         })
+                    } catch (error) {
+                        alert(error.message)
+
+                        spinnerContainer.classList.add('container--off')
+                        homeResultsList.classList.remove('container--off')
                     }
                 }
+
+                homeResultsList.append(item)
             })
         })
+    } catch (error) {
+        alert(error.message)
+
+        spinnerContainer.classList.add('container--off')
+        homeContainer.classList.remove('container--off')
     }
 }
 
