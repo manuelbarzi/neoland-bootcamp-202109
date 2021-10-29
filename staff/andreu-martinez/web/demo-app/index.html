@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,40 +8,101 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<div class="landing container container--vertical container--gapped">
-    <button class="button button--medium button--dark">Sign In</button>
-    <button class='button button--medium'>Sign Up</button>
-</div>
+    <div class="container">
+        <div class="landing container container--horizontal container--gapped container--off wrapper">
+            <div class="landing-links">
+                <a>Sign in</a>
+            </div>
+            <p class="rotation"> 🔷 </p>
+            <div class="landing-links">
+                <a>Sign up</a>
+            </div>
+            <!-- <button class="button button--medium">Sign In</button>
+        <button class='button button--medium'>Sign Up</button> -->
+        </div>
+        <form class='signin container container--vertical container--gapped container--off wrapper'>
+            <input type="text" class="field" name='username' id='username' placeholder="username">
+            <input type="password" class="field" name='password' id='password' placeholder="password">
 
-<form class ='signin container container--vertical container--gapped container--off'>
-    <input type="text" class="field" name='username' id='username' placeholder="username">
-    <input type="password" class="field" name='password' id='password' placeholder="password">
+            <div class='container container--vertical'>
+                <button class="button button--medium ">Sign In</button>
+                <p>You don't have an account?<a> Sign up!</a></p>
+            </div>
+        </form>
 
-    <div class='container'>
-        <button class="button button--medium ">Sign Up</button>
-        <button class="button button--medium button--dark">Sign In</button>
+        <form class='signup container container--vertical container--gapped container--off wrapper'>
+            <input type="text" class="field" name='name' id='name' placeholder="name">
+            <input type="text" class="field" name='username' id='username' placeholder="username">
+            <input type="password" class="field" name='password' id='password' placeholder="password">
+            <div class='container container--vertical'>
+                <button class="button button--medium">Sign Up</button>
+                <p>You already have an account?<a> Sign in!</a></p>
+            </div>
+        </form>
+        <div class="post-signup container container--gapped container--vertical container--off wrapper">
+            User registered successfully, now you can proceed to <button class="button button--dark button--medium">Sign
+                in</button>
+        </div>
+        <div class="home container container--gapped container--vertical container--off wrapper">
+            <h1>Hello, <span class="name">world</span>!</h1>
+            <div class="container container--horizontal">
+                <div class="button-padding"><button class="button button--medium">Profile</button></div>
+                <div class="button-padding"><button class="button button--medium">Sign out</button></div>
+            </div>
+
+            <form class="home__search container">
+                <input class="field" type="text" name="query" id="query" placeholder="criteria">
+                <button class="button button--medium button-padding">Search</button>
+            </form>
+    
+            <ul class="home__results wrapper"></ul>
+    
+            <div class="home__detail container container--off"></div>
+        </div>
+
+        <div class="profile container container--vertical container--gapped container--off wrapper">
+            <form class="container container--vertical">
+                <input type="password" class="field" name="oldPassword" id="oldPassword" placeholder="old password">
+                <input type="password" class="field" name="oldPassword" id="password" placeholder="new password">
+
+                <div class="container">
+                    <button class="button button--medium">Go back</button>
+                    <button class="button button--medium button--dark">Update</button>
+                </div>
+                <button class="button button--medium">Unregister</button>
+            </form>
+        </div>
+
+        <div class="unregister container container--gapped container--off wrapper">
+            <form class="container container--vertical">
+                <input class="field" type="password" name="password" id="password" placeholder="password">
+                <div>
+                    <button class="button button--medium">Go Back</button>
+                    <button class="button button--dark button--medium">Unregister</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="spinner container container--gapped wrapper">
+            <img class="spinner__image" src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt="">
+        </div>
+
+         <!-- Modal -->
+    <template id="template-modal">
+        <div class="modal" id="modal"> <!-- Este será la parte oscura de mi modal -->
+            <div class="modal__pop-up" id="modal-content"> <!-- Esto es la parte "visible" -->
+                <h1 class="modal__title" id="modal-title"></h1>
+                <p class="modal__text" id="modal-text"></p>
+                <button class="button button--success" type="button" id="close-modal">Aceptar</button>
+            </div>
+        </div>
+    </template>
     </div>
-</form>   
-
-<form class ='signup container container--vertical container--gapped container--off'>
-    <input type="text" class="field" name='name' id='name' placeholder="name">
-    <input type="text" class="field" name='username' id='username' placeholder="username">
-    <input type="password" class="field" name='password' id='password' placeholder="password">
-    <input type="text" class='field' name='email' id='email' placeholder='email'>
-
-    <div class='container'>
-        <button class="button button--medium">Sign In</button>
-        <button class="button button--medium button--dark">Sign Up</button>
-    </div>
-</form>   
-<div class="post-signup container container--gapped container--vertical container--off">
-    User registered successfully, now you can proceed to <button class="button button--dark button--medium">Sign in</button>
-</div>
-<div class="homepage container--off">
-    <h1>Hello, <span class="name">world</span>!</h1>
-</div>
-
+    <script src="logic.js"></script>
     <script src="main.js"></script>
+
 </body>
+
 </html>

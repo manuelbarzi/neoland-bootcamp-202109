@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre&display=swap');
 
 /* resets */
 
@@ -8,22 +9,100 @@
 }
 
 html, body {
+    font-family: Gemunu Libre;
+    background-color: rgb(221, 229, 255);
     height: 100%; 
     padding: 0;
     margin: 0;
     border: 0;
+    width:auto;
+    text-align: center;
 }
 
 /* compos */
 
-.button {
+
+
+.rotation {
+    position: absolute;
+    -webkit-animation:spin 1s linear infinite;
+    -moz-animation:spin 1s linear infinite;
+    animation:spin 2s linear infinite;
+}
+@-moz-keyframes spin { 
+    100% { -moz-transform: rotate(360deg); } 
+}
+@-webkit-keyframes spin { 
+    100% { -webkit-transform: rotate(360deg); } 
+}
+@keyframes spin { 
+    100% { 
+        -webkit-transform: rotate(360deg); 
+        transform:rotate(360deg); 
+    } 
+}
+
+a {
+    font-size: 1em;
+    font-weight: 800;
+    color: royalblue;
+    overflow: hidden;
+    background: linear-gradient(to right, midnightblue, midnightblue 50%, royalblue 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 275ms ease;
+    text-decoration: none;
+}
+
+a:hover{
+    background-position: 0 100%;
+    cursor: pointer;
+}
+
+.field {
+    font-family: Gemunu Libre;
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;
     margin: 5px;
     padding: 10px;
-    background-color: transparent;
+    background-color: rgb(228, 232, 250);
     font-size: 1rem;
+}
+
+
+button {
+	border-radius: 12px;
+	border: solid #ffffff00;
+	background-color: #8299ff;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 7px 10px;
+	letter-spacing: 1px;
+    margin: 10px;
+    transition: background-color .35s ease-in-out;
+}
+
+button:hover {
+	background-color: #617eff;
+    cursor: pointer;
+}
+
+button:active {
+	transform: scale(0.95);
+}
+
+button:focus {
+	outline: none;
+}
+
+button.ghost {
+	background-color: transparent;
+	border-color: #FFFFFF;
 }
 
 .button--medium {
@@ -31,17 +110,20 @@ html, body {
 }
 
 .button--dark {
-    background-color: lightgray;
+    background-color: rgb(54, 51, 255);
 }
 
-.field {
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 1px;
-    margin: 5px;
-    padding: 10px;
-    background-color: transparent;
-    font-size: 1rem;
+.wrapper {
+    width: auto;
+    height: auto;
+    /* margin: 3% auto; */
+    box-shadow: 2px 18px 70px 0px #9D9D9D;
+    
+}
+
+.landing-links{
+    display: flex;
+    padding: 5%;
 }
 
 .container {
@@ -54,10 +136,65 @@ html, body {
     flex-direction: column;
 }
 
+.container--horizontal {
+    flex-direction: row;
+}
+
 .container--gapped {
     margin: 1rem;
 }
 
 .container--off {
-    display: none;
+    display: none !important;
+}
+
+.spinner__image{
+    display: flex;
+    align-content: center;
+    width: 10vw;
+    height: 10vw;
+}
+
+/* ----- Modal ------ */
+.modal {
+    display: flex;
+    /* align-items: center;
+    justify-content: center; */
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    background-color: rgba(var(--black), .2);
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+.modal__pop-up {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    height: fit-content;
+    min-width: 420px;
+    max-width: 420px;
+    margin: auto;
+    border: 1px solid rgb(var(--black));
+    border-radius: 7px;
+}
+
+.modal__title {
+    background-color: white;
+    margin-top: 32px;
+    font-size: 1.6rem;
+    padding: 0.7rem;
+    border-radius: 7px;
+}
+
+.modal__text {
+    margin-top: 12px;
+    padding: 32px;
+    text-align: center;
 }
