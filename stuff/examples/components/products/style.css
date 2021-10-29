@@ -1,0 +1,13 @@
+.forms{
+    display: inline-flex;
+    flex-direction: column;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 20px;
+    border-style: solid;
+    
+}
+
+.botones{
+    margin: auto;
+    margin-top: 20px;
+}

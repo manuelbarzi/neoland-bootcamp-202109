@@ -1,0 +1,71 @@
+/* generics */
+
+.pointer:hover {
+    cursor: pointer;
+}
+
+/* blocks */
+
+.panel {
+    background-color: lightgray;
+    border-color: darkgray;
+    border-width: .5rem;
+    border-style: solid;
+    border-radius: 1rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    color: dimgrey;
+}
+
+.panel--light {
+    background-color: white;
+}
+
+.panel--dark {
+    background-color: black;
+}
+
+.smiley {
+    font-size: 3rem;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.menu__button {
+    width: fit-content;
+}
+
+.menu__list {
+    display: none;
+}
+
+.menu__list--on {
+    display: inline-flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+}
+
+
+.menu__list-item {
+    margin: .25rem;
+}
+
+@media screen and (min-width: 512px) {
+    .menu {
+        align-items: center;
+    }
+
+    .menu__button {
+        display: none;
+    }
+
+    .menu__list {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}

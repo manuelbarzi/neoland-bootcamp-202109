@@ -1,0 +1,9 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    /* background-color: red; */
+    /* background-color: rgb(255, 0, 255); */
+    background-color: #ff0000;
+}
