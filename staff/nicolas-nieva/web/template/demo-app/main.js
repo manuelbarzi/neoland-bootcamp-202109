@@ -6,6 +6,7 @@ var home = document.querySelector('.home')
 var profile = document.querySelector('.profile')
 var unregister = document.querySelector('.unregister')
 var spinner = document.querySelector('.spinner')
+var vehiclesid = document.querySelector('.home__detail')
 
 
 if (!sessionStorage.token) {
@@ -122,7 +123,7 @@ signInForm.onsubmit = function (event) {
                 alert(error.message)
 
                 spinner.classList.add('container--hide')
-                spinner.classList.remove('container--hide')
+                signIn.classList.remove('container--hide')
             }
 
         })
@@ -174,8 +175,8 @@ signUpForm.onsubmit = function (event) {
             if (error) {
                 alert(error.message)
 
-                spinner.classList.remove('container--hide')
-                signUp.classList.add('container--hide')
+                spinner.classList.add('container--hide')
+                signUp.classList.remove('container--hide')
 
                 return
 
@@ -183,7 +184,7 @@ signUpForm.onsubmit = function (event) {
             signUpForm.reset()
 
             signUp.classList.add('container--hide')
-            spinner.classList.add ('container--hide')
+            spinner.classList.add('container--hide')
 
             thankYou.classList.remove('container--hide')
 
@@ -214,6 +215,8 @@ thankYouButon.onclick = function (event) {
 var homeButons = home.querySelectorAll('button')
 var homeButon1 = homeButons[0]
 var homeButon2 = homeButons[1]
+var homeButon3 = homeButons[2]
+var homeButon4 = homeButons[3]
 
 homeButon1.onclick = function (event) {
     event.preventDefault()
@@ -229,6 +232,13 @@ homeButon2.onclick = function () {
 
     landing.classList.remove('container--hide')
 
+}
+
+homeButon4.onclick = function () {
+
+    homeDetail.classList.add('container--hide')
+    homeResultsList.classList.remove ('container--hide')
+    
 }
 
 var profileButtons = profile.querySelectorAll('button')
@@ -275,7 +285,7 @@ profileForm.onsubmit = function (event) {
             }
 
             profile.classList.add('container--hide')
-            spinner.classList.add ('container--hide')
+            spinner.classList.add('container--hide')
             profileForm.reset()
 
             home.classList.remove('container--hide')
@@ -292,7 +302,7 @@ profileForm.onsubmit = function (event) {
 //       Unregister
 
 unregisterButton.onclick = function () {
-   
+
 
     profile.classList.add('container--hide')
     unregister.classList.remove('container--hide')
@@ -322,22 +332,22 @@ unregisterForm.onsubmit = function (event) {
 
     var password = passwordInput.value
 
-    
+
     unregister.classList.add('container--hide')
     spinner.classList.remove('container--hide')
 
     try {
         unregisterUser(sessionStorage.token, password, function (error) {
-            if (error) { 
+            if (error) {
                 alert(error.message)
-                
+
                 spinner.classList.remove('container--hide')
                 unregister.classList.add('container--hide')
-            
+
             }
 
             unregister.classList.add('container--hide')
-            spinner.classList.add ('container--hide')
+            spinner.classList.add('container--hide')
 
             unregisterForm.reset()
 
@@ -348,6 +358,89 @@ unregisterForm.onsubmit = function (event) {
         alert(error.message)
         spinner.classList.remove('container--hide')
         unregister.classList.add('container--hide')
+    }
+}
+
+var homeSearchForm = home.querySelector('.home__search')
+var homeResultsList = home.querySelector('.home__results')
+var homeDetail = home.querySelector('.home__detail')
+
+homeSearchForm.onsubmit = function (event) {
+    event.preventDefault()
+
+    var queryInput = homeSearchForm.querySelector('#query')
+
+    var query = queryInput.value
+
+    try {
+        searchVehicles(query, function (error, vehicles) {
+            if (error) return alert(error.message)
+
+            homeDetail.classList.add('container--hide')
+            homeResultsList.classList.remove ('container--hide')
+
+            homeResultsList.innerHTML = ''
+
+            vehicles.forEach(function (vehicle) {
+                var item = document.createElement('li')
+
+                var image = document.createElement('img')
+                image.src = vehicle.thumbnail
+
+                var title = document.createElement('h2')
+                title.innerText = vehicle.name
+
+                var price = document.createElement('span')
+                price.innerText = vehicle.price + ' $'
+
+                item.append(image, title, price)
+
+                item.classList.add('home__results')
+
+                item.onclick = function () {
+                    try {
+
+                        retrieveVehicle(vehicle.id, function (error, vehicle) {
+                            if (error) return alert(error.message)
+
+                            homeResultsList.classList.add('container--hide')
+
+                            var title = homeDetail.querySelector('h2')
+                            title.innerText = vehicle.name
+
+                            var image = homeDetail.querySelector('img')
+                            image.src = vehicle.image
+
+                            var description = homeDetail.querySelector('p')
+                            description.innerText = vehicle.description
+
+                            var year = homeDetail.querySelector('time')
+                            year.innerText = vehicle.year
+
+                            var other = homeDetail.querySelectorAll('span')
+
+                            other[0].innerText = vehicle.price
+                            other[1].innerText = vehicle.color
+                            other[2].innerText = vehicle.style
+                            other[3].innerText = vehicle.collection
+                            other[4].innerText = vehicle.maker
+
+                            var link = homeDetail.querySelector('a')
+                            link.src = vehicle.url
+
+                            homeDetail.classList.remove('container--hide')
+
+                        })
+                    } catch (error) {
+                        alert(error.message)
+                    }
+                }
+
+                homeResultsList.append(item)
+            })
+        })
+    } catch (error) {
+        alert(error.message)
     }
 }
 

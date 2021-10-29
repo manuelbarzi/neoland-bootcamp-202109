@@ -4,4 +4,4 @@ Biblio.prototype.forEach = function(callback) {
 
         callback(element, i)        
     }
-}
+}                                                              
