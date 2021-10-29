@@ -1,0 +1,266 @@
+/* General Styles */
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Exo 2", sans-serif;
+    background-color: #5d8fc9;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+/* Components */
+.input {
+    display: block;
+    background-color: #ebf0fc;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    font: inherit;
+}
+
+.btn {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    font: inherit;
+    cursor: pointer;
+}
+
+.btn--white {
+    background-color: #ffffff;
+    color: #007bff;
+}
+
+/* landing */
+.landing__btn {
+    margin-bottom: 20px;
+    padding: 10px 30px;
+}
+
+/* Register Form */
+.register {
+    background-color: #ffffff;
+    width: 500px;
+    padding: 20px 40px 50px;
+    border-radius: 20px;
+    margin: 50px auto;
+}
+
+.register__title {
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.register__title::before {
+    content: "🙬 ";
+}
+
+.register__title::after {
+    content: " 🙮";
+}
+
+.register__subtitle {
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.register__inputInline {
+    display: inline-block;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.register__inputInline + .register__inputInline {
+    margin-left: 16px;
+}
+
+.register__input {
+    margin-bottom: 20px;
+}
+
+.register__inputCheck {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.register__btn:first-of-type {
+    margin-bottom: 20px;
+}
+
+/* Registered */
+.registered__btn {
+    margin-bottom: 20px;
+}
+
+/* loginForm */
+.login {
+    background-color: #ffffff;
+    width: 400px;
+    padding: 10px 20px 50px;
+    border-radius: 20px;
+    margin: 50px auto;
+}
+
+.login__title {
+    text-align: center;
+    font-size: 2.3rem;
+}
+
+.login__input {
+    margin-bottom: 20px;
+}
+
+.login__btn:first-of-type {
+    margin-bottom: 20px;
+}
+
+/* Welcome */
+.welcome__title {
+    text-align: center;
+}
+
+.welcome__btn {
+    margin-bottom: 20px;
+}
+
+/* Search Form */
+.search__input {
+    margin-bottom: 20px;
+}
+
+/* Items Api */
+.vehicles {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicles__item {
+    background: #ebf0fc;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.vehicles__title {
+    text-align: center;
+}
+
+/* .vehicles__img {} */
+
+.vehicles__price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #007bff;
+}
+
+/* Vehicle Details */
+.vehicleDetails {
+    background: #ebf0fc;
+    width: 70%;
+    margin: 50px auto;
+    border-radius: 20px;
+    padding: 30px 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.btn--back {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: #007bff;
+    color: white;
+    font-size: 1.5rem;
+    line-height: 40px;
+    position: absolute;
+    top: 25px;
+    left: 25px;
+}
+
+.vehicleDetails__lists {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.list1,
+.list2 {
+    list-style: none;
+    /* margin: 0; */
+    padding-left: 0;
+}
+
+/* Change Password */
+.change-password {
+    background-color: #ffffff;
+    width: 400px;
+    padding: 10px 20px 50px;
+    border-radius: 20px;
+    margin: 50px auto;
+}
+
+.change-password__input {
+    margin-bottom: 20px;
+}
+
+.change-password__btn:first-of-type {
+    margin-bottom: 20px;
+}
+
+/* Delete Account */
+.delete-account {
+    background-color: #ffffff;
+    width: 400px;
+    padding: 10px 20px 50px;
+    border-radius: 20px;
+    margin: 50px auto;
+}
+
+.delete-account__title {
+    text-align: center;
+}
+
+.delete-account__paragraph {
+    text-align: center;
+    color: rgb(192, 44, 44);
+}
+
+.delete-account__input {
+    margin-bottom: 20px;
+}
+
+.delete-account__btn:first-of-type {
+    margin-bottom: 20px;
+}
+
+/* Utils */
+
+.container--off {
+    display: none;
+}
