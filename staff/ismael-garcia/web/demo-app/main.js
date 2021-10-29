@@ -238,6 +238,71 @@ homeLogoutButton.onclick = function() {
 }
 
 
+// Using search form
+
+var homeSearchForm = homeContainer.querySelector('.home__search')
+var homeResultsList = homeContainer.querySelector('.home__results')
+
+homeSearchForm.onsubmit = function (event) {
+    event.preventDefault()
+
+    var queryInput = homeSearchForm.querySelector('#query')
+
+    var query = queryInput.value
+
+    homeContainer.classList.add('container--off')
+    spinnerContainer.classList.remove('container--off')
+
+    try {
+        searchVehicles(query, function(error, vehicles) {
+            if (error) {
+                alert(error)
+
+                spinnerContainer.classList.add('container--off')
+                homeContainer.classList.remove('container--off')
+
+                return
+            }
+
+            homeResultsList.innerHTML = ''
+
+            homeResultsList.classList.remove('container--off')
+
+            vehicles.forEach(function(vehicle) {
+                var item = document.createElement('li')
+
+                var image = document.createElement('img')
+                image.src = vehicle.thumbnail
+
+                var title = document.createElement('h2')
+                title.innerText = vehicle.name
+
+                var price = document.createElement('span')
+                price.innerText = vehicle.price + ' $'
+
+                item.append(image, title, price)
+
+                item.classList.add('home__results-item')
+
+                item.onclick = function () {
+
+                    spinnerContainer.classList.add('container--off')
+                    
+                    try {
+                        retrieveVehicle(vehicle.id, function(error, vehicle) {
+                            if (error) {
+                                
+                            }
+                             
+                        })
+                    }
+                }
+            })
+        })
+    }
+}
+
+
 
 // - - - - - PROFILE - - - - -
 
@@ -358,3 +423,5 @@ unregisterForm.onsubmit = function (event) {
         unregisterContainer.classList.remove('container--off')
     }
 }
+
+

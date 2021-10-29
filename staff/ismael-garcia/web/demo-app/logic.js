@@ -220,7 +220,7 @@ function updateUserPassword(token, oldPassword, password, callback) {
 
 // - - - - - unregistering - - - - -
 /**
- * Updates the user's password in the application.
+ * Unregisters the user in the application.
  * 
  * @param {string} token The token sent by the server when the user is authorized.
  * @param {string} password The password of the user to be unregistered.
@@ -266,4 +266,66 @@ function unregisterUser(token, password, callback) {
     var body = { password: password }
 
     xhr.send(JSON.stringify(body))
+}
+
+
+// - - - - - using search form - - - - -
+/**
+ * Searches for items that meet the query criteria.
+ * 
+ * @param {string} query The search criteria entered by the user in the search form.
+ * @param {function} callback The callback function to manage the response.
+ * 
+ * @throws {TypeError} When any of the arguments does not match the correct type.
+ */
+function searchVehicles(query, callback) {
+    if (typeof query !== 'string') throw new TypeError(query + ' is not a string')
+
+    var xhr = new XMLHttpRequest
+
+    xhr.onload = function () {
+        var status = xhr.status
+
+        if (status === 200) {
+            var vehicles = JSON.parse(xhr.responseText)
+
+            callback(null, vehicles)
+        }
+    }
+
+    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles?q=' + query)
+
+    xhr.send()
+}
+
+
+// ----- showing details when clicking on search results items -----
+/**
+ * Retrieves the details of the selected item.
+ * 
+ * @param {string} id The id of the item being retrieved.
+ * @param {function} callback The callback function to manage the response.
+ * 
+ * @throws {TypeError} When any of the arguments does not match the correct type.
+ */
+function retrieveVehicle(id, callback) {
+    if (typeof id !== 'string') throw new TypeError(id + ' is not a string')
+
+    var xhr = new XMLHttpRequest
+
+    xhr.onload = function () {
+        var status = xhr.status
+
+        if (status === 200) {
+            var vehicle = JSON.parse(xhr.responseText)
+
+            if (!vehicle) return callback(new Error('no vehicle found with id ' + id))
+
+            callback(null, vehicle)
+        }
+    }
+
+    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/' + id)
+
+    xhr.send()
 }

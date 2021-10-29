@@ -95,3 +95,15 @@ h1 {
 }
 
 
+/* ----- search results ----- */
+.home__results {
+    list-style: none;
+}
+
+.home__results-item {
+    cursor: pointer;
+}
+
+.home__detail-image {
+    max-width: 80vw;
+}
