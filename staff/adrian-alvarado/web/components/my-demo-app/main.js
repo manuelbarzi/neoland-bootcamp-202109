@@ -74,32 +74,13 @@ registerContainer.onsubmit = function (event) {
     var username = usernameInput.value
     var password = passwordInput.value
 
-    let xhr = new XMLHttpRequest
+    registerUser(name, surname, username, password, function (error) {
+        if (error) return alert(error.message)
 
-    xhr.onload = function () {
-        var status = xhr.status
-
-        if (status === 409) return ('user already exist')
-
-        if (status == 201) {
-            registerContainer.reset()
-            registerContainer.classList.add('container--off')
-            registered.classList.remove('container--off')
-        }
-    }
-
-    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    var body = `{
-        "name": "${name}",
-        "surname": "${surname}",
-        "username": "${username}",
-        "password": "${password}"
-    }`
-
-    xhr.send(body)
+        registerContainer.reset()
+        registerContainer.classList.add('container--off')
+        registered.classList.remove('container--off')
+    })
 }
 
 // REGISTERED PAGE TO LOGIN AND TO LANDING
@@ -124,49 +105,21 @@ loginContainer.onsubmit = function (event) {
     var username = usernameInput.value
     var password = passwordInput.value
 
-    let xhr = new XMLHttpRequest
+    loginUser(username, password, function (error, _token) {
+        if (error) return alert(error.message)
 
-    xhr.onload = function () {
-        var status = xhr.status
+        token = _token
 
-        if (status === 401)
-            return alert('wrong credentials')
+        loginContainer.reset()
+        loginContainer.classList.add('container--off')
+        welcome.classList.remove('container--off')
 
-        if (status == 200) {
-            var response = xhr.responseText
+        retrieveUser(token, function (error, user) {
+            if (error) return alert(error.message)
 
-            token = response.slice(10, -2)
-
-            var xhr2 = new XMLHttpRequest
-
-            xhr2.onload = function () {
-                loginContainer.reset()
-
-                loginContainer.classList.add('container--off')
-
-                welcomeUser.textContent = username
-
-                welcome.classList.remove('container--off')
-            }
-
-            xhr2.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-            xhr2.setRequestHeader('Authorization', 'Bearer ' + token)
-
-            xhr2.send()
-        }
-    }
-
-    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users/auth')
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    var body = `{
-        "username": "${username}",
-        "password": "${password}"
-    }`
-
-    xhr.send(body)
+            welcomeUser.textContent = user
+        })
+    })
 }
 
 // LOGIN TO REGISTER
@@ -196,43 +149,22 @@ welcomeLandingButton.onclick = function () {
 
 // CHANGE PASSWORD
 changePassword.onsubmit = function (event) {
-    // debugger
     event.preventDefault()
 
     var inputs = changePassword.querySelectorAll('input')
     var inputOldPassword = inputs[0]
-    var inputNewPassword = inputs[1]
+    var inputPassword = inputs[1]
 
     var oldPassword = inputOldPassword.value
-    var newPassword = inputNewPassword.value
+    var password = inputPassword.value
 
-    var xhr = new XMLHttpRequest
+    changePasswordUser(oldPassword, password, token, function (error) {
+        if (error) return alert(error.message)
 
-    xhr.onload = function () {
-        var status = xhr.status
-
-        if (status === 401)
-            alert('Wrong Password')
-
-        if (status === 204) {
-            changePassword.reset()
-            changePassword.classList.add('container--off')
-            landingContainer.classList.remove('container--off')
-        }
-    }
-
-    xhr.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token)
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    var body = `{
-        "oldPassword": "${oldPassword}",
-        "password": "${newPassword}"
-    }`
-
-    xhr.send(body)
+        changePassword.reset()
+        changePassword.classList.add('container--off')
+        landingContainer.classList.remove('container--off')
+    })
 }
 
 changePasswordBackButton.onclick = function () {
