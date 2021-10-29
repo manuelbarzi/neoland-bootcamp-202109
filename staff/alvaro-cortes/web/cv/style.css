@@ -1,0 +1,49 @@
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    text-align: center;
+    background-color: brown;
+    border: 2px solid;
+    border-radius: 50px;
+}
+
+body {
+    margin-left: 5%;
+    background-color: rgb(124, 124, 124);
+}
+
+h2 {
+    color: chocolate;
+    background-color: rgb(54, 54, 78);
+    display: inline-block;
+}
+
+table {
+    border: black solid 2px;
+    border-radius: 5px;
+    border-style: dashed;
+}
+
+.trabajos {
+    background-color: cornflowerblue;
+    margin-right: 80%;
+}
+
+.estudios {
+    background-color: darkgreen;
+    margin-right: 60%;
+}
+
+.cursos {
+    background-color: darkseagreen;
+    margin-right: 40%;
+}
+
+.idiomas {
+    background-color: darkviolet;
+    margin-right: 20%;
+}

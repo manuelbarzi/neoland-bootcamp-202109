@@ -1,0 +1,158 @@
+/*BODY*/
+
+.container {
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.back {
+    opacity: 0.4;
+    position: absolute;
+    margin-top: -20px;
+    margin-left: -10px;
+    left: 0;
+    top: 0;
+    right: 0;
+    width: 110%;
+    height: auto;
+}
+
+.back__position {
+    position: relative;
+}
+
+.home {
+    height: 200px;
+    margin-top: 20px;
+    padding-top: 200px;
+    padding-top: 50;
+    width: 95%;
+    margin-left: 2%;
+    position: relative;
+}
+
+/*HEADERS*/
+
+h1 {
+    font-family: 'Raleway', sans-serif;
+}
+
+h2 {
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+}
+
+.title {
+    font-size: 25px;
+    padding-bottom: 30px;
+    font-family: 'Raleway', sans-serif;
+}
+
+/*FORMS*/
+
+.forms {
+    margin-top: 100px;
+    border:white solid 5px;
+    border-radius: 10px;
+    background-color: rgb(129, 201, 195);
+    display: inline-block;
+    padding: 20px;
+}
+
+label {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+}
+
+input {
+    margin-left: 10px;
+    border: white 2px solid;
+    border-radius: 10px;
+    background: white;
+    outline: none;
+    color: black;
+    height: 20px;
+    padding: 5px;
+}
+
+input:hover {
+    border: cadetblue solid 2px;
+}
+
+/*BUTTONS*/
+
+.button {
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(87, 126, 128);
+    transition: all 0.3s;
+    width: 150px;
+    height: 30px;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-style: oblique;
+}
+
+.button:hover {
+    background-color: rgb(80, 104, 105) ;
+}
+
+.button__home {
+    margin: 20px;
+}
+
+.button__home--registro {
+    width: 220px;
+    padding: auto;
+    margin-left: 30%;
+    font-size: 12px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+/*COLUMNS*/
+
+.row {
+    display: flex;
+}
+
+.col__first {
+    margin-left: 15%;
+}
+
+.col__second {
+    border: cadetblue solid 3px;
+    margin-left: 30px;
+    background: white;
+    width: 600px;
+    height: 365px;
+    margin-top: 100px;
+    border-radius: 10px;
+    text-align: left;
+    padding: 15px;
+    display: block;
+}
+
+.col__second--login {
+    margin-left: 5%;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 15px;
+    height: 30px;
+    background-color: cadetblue;
+    border-radius: 10px;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+}
+
+.p__col{
+    color: black;
+    font-size: 14px;
+    text-align: justify;
+}
