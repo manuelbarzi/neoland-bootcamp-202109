@@ -1,0 +1,175 @@
+@font-face {
+    font-family: 'Lucida Console Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Lucida Console Regular'), url('assets/lucon.woff') format('woff');
+}
+
+* {
+    font-family: "Lucida Console Regular";
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin: 0;
+    cursor: default;
+}
+
+html, body {
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: #fbfbfb;
+    display: flex;
+}
+
+
+/* ----- panel CSS ----- */
+.panel {
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 180px;
+    width: 450px;
+    max-width: 450px;
+    margin: auto;
+    border: 1px solid #000;
+    border-radius: 3px;
+}
+
+.panel__title {
+    width: fit-content;
+    margin: 18px auto;
+    padding: 12px;
+    border-radius: inherit;
+    background-color: #fbfbfb;
+    font-size: 1.3em;
+}
+
+.panel__control {
+    width: fit-content;
+    margin: 18px auto;
+    display: flex;
+}
+
+.panel--off {
+    display: none !important;
+}
+
+
+/* ----- landing CSS ----- */
+.landing {
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 180px;
+    width: 450px;
+    max-width: 450px;
+    margin: auto;
+    border: 1px solid #000;
+    border-radius: 3px;
+}
+
+.landing__title {
+    width: fit-content;
+    margin: 18px auto;
+    padding: 12px;
+    border-radius: inherit;
+    background-color: #fbfbfb;
+    font-size: 1.3em;
+}
+
+.landing__control {
+    width: fit-content;
+    margin: 18px auto;
+    display: flex;
+}
+
+
+/* ----- forms CSS ----- */
+.form {
+    background-color: #f0f0f0;
+    width: 450px;
+    min-width: fit-content;
+    max-width: 450px;
+    margin: auto;
+    border: 1px solid #000;
+    border-radius: 3px;
+}
+
+.form__group {
+    margin: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form__legend {
+    font-weight: bold;
+    margin: 18px 0;
+    padding-bottom: 12px;
+    font-size: 1.3em;
+}
+
+.form__label {
+    padding-left: 3px;
+    margin-bottom: 7px;
+}
+
+.form__input {
+    margin-bottom: 18px;
+    padding: .6em 7px;
+    display: flex;
+}
+
+.form__input:last-child {
+    margin-bottom: 0;
+}
+
+.form__box-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+/* ----- buttons CSS ----- */
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e0e0e0;
+    border: 1px solid #000;
+    border-radius: 3px;
+    margin: 18px;
+    padding: 12px;
+    width: 120px;
+    transition: background-color .35s ease-in-out;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #c0c0c0;
+}
+
+.button--adaptative {
+    width: calc(100% - 18px - 18px);
+}
+
+.button--success {
+    background-color: #aaffaa;
+}
+
+.button--success:hover {
+    background-color: #66ff66;
+}
+
+.button--warning {
+    background-color: #ffaaaa;
+}
+
+.button--warning:hover {
+    background-color: #ff6666;
+}
