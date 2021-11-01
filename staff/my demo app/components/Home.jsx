@@ -43,7 +43,7 @@ class Home extends React.Component{
                 delete sessionStorage.token
                 this.setState({view: 'signOut'})}}
             ></ButtonsHome>}
-            
+
         {this.state.view === 'profile' && <Profile
             OnBackHome={()=> this.setState({view: 'home'})}
             OnSignOut={()=> {
@@ -52,6 +52,42 @@ class Home extends React.Component{
             OnChangePassword={()=> this.setState ({view: 'changePassword'})}
             OnDeleteAccount={()=> this.setState ({view: 'deleteAccount'})}
             ></Profile>}
+
+        {this.state.view === 'changePassword' && <ChangePassword
+          OnBackProfile={()=> this.setState({view: 'profile'})}
+          OnUpdate={(oldpassword, password) => {
+            try {
+                updatePassword(sessionStorage.token, oldpassword, password, (error) => {
+                    if (error) {
+                        alert(error.message)
+                        return
+                    }                    
+                    
+                    this.setState({view: 'home'})
+                })
+            } catch (error) {
+                alert(error.message)
+            }
+          }}  
+        ></ChangePassword>}
+
+        {this.state.view === 'deleteAccount' && <DeleteAccount
+           OnBackProfile={()=> this.setState({view: 'profile'})}
+           OnDelete={(password) => {
+            try {
+                unregisterUser(sessionStorage.token, password, (error) => {
+                    if (error) {
+                        alert(error.message)
+                        return
+                    }
+                    delete sessionStorage.token
+                    this.setState({view: 'signOut'})
+                })
+            } catch (error) {
+                alert(error.message)
+            }
+           }} 
+        ></DeleteAccount>}
 
 
         {this.state.view === 'signOut' && <App></App>}
