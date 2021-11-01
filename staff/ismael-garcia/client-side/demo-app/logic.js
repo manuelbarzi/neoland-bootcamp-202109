@@ -3,7 +3,6 @@
  * Registers a user in the application.
  * 
  * @param {string} name The name of the user to be registered.
- * @param {string} surname The surname of the user to be registered.
  * @param {string} username The username of the user to be registered.
  * @param {string} password The password of the user to be registered.
  * @param {function} callback The callback function to manage the response.
@@ -11,14 +10,10 @@
  * @throws {TypeError} When any of the arguments does not match the correct type.
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
- function signUpUser(name, surname, username, password, callback) {
+ function signUpUser(name, username, password, callback) {
     if (typeof name !== 'string') throw new TypeError(name + ' is not a string')
     if (!name.trim().length) throw new Error('name is empty or blank')
     if (name.trim() !== name) throw new Error('blank spaces around name')
-
-    if (typeof surname !== 'string') throw new TypeError(surname + ' is not a string')
-    if (!surname.trim().length) throw new Error('surname is empty or blank')
-    if (surname.trim() !== surname) throw new Error('blank spaces around surname')
 
     if (typeof username !== 'string') throw new TypeError(username + ' is not a string')
     if (!username.trim().length) throw new Error('username is empty or blank')
@@ -53,7 +48,7 @@
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    var body = { name: name, surname: surname, username: username, password: password } 
+    var body = { name: name, username: username, password: password } 
 
     xhr.send(JSON.stringify(body))
 }

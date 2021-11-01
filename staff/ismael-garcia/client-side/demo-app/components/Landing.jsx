@@ -1,6 +1,6 @@
 function Landing(props) {
-    return <div class="landing container container--gapped container--off">
-        <button class="button button--medium button--dark">Sign In</button>
-        <button class="button button--medium">Sign Up</button>
+    return <div className="landing container container--gapped">
+        <button className="button button--medium button--dark" onClick={() => props.onSignIn()}>Sign In</button>
+        <button className="button button--medium" onClick={() => props.onSignUp()}>Sign Up</button>
     </div>
 }

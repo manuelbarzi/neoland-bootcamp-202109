@@ -13,7 +13,7 @@ class App extends React.Component {
                 onSignUp={() => this.setState({ view: 'signup' })}
             />}
 
-            {this.state.view === 'signup' && <SignUp onSignUp={(name, username, password) => {
+            {this.state.view === 'signup' && <SignUp onSignIn={() => this.setState({ view: 'signin' })} onSignUp={(name, username, password) => {
                 try {
                     signUpUser(name, username, password, error => {
                         if (error) {
@@ -22,7 +22,7 @@ class App extends React.Component {
                             return
                         }
 
-                        this.setState({ view: 'post-signup'})
+                        this.setState({ view: 'post-signup' })
                     })
                 } catch (error) {
                     alert(error.message)
@@ -31,7 +31,21 @@ class App extends React.Component {
 
             {this.state.view === 'post-signup' && <PostSignUp onSignIn={() => this.setState({ view: 'signin' })} />}
 
-            {this.state.view === 'signin' && <SignIn /> }
+            {this.state.view === 'signin' && <SignIn onSignUp={() => this.setState({ view: 'signup' })} onSignIn={(username, password) => {
+                try {
+                    signInUser(username, password, error => {
+                        if (error) {
+                            alert(error.message)
+
+                            return
+                        }
+
+                        this.setState({ view: 'home' })
+                    })
+                } catch (error) {
+                    alert(error.message)
+                }
+            }} /> }
 
             {this.state.view === 'home' && <Home />}
         </>

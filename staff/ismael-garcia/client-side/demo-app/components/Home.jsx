@@ -1,17 +1,17 @@
 class Home extends React.Component {
-    contructor() {
+    constructor() {
         super()
 
         this.state = { vehicles: [], vehicle: null }
     }
 
     render() {
-        return <div id="home" class="home container container--vertical container--gapped container--off">
-            <h1>Hola, <span class="name"></span>. ¡Bienvenido a nuestro sitio!</h1>
+        return <div id="home" className="home container container--vertical container--gapped">
+            <h1>Hola, <span className="name"></span>. ¡Bienvenido a nuestro sitio!</h1>
 
             <div>
-                <button type="button" class="button button--medium button--dark">Profile</button>
-                <button type="button" class="button button--medium">Log out</button>
+                <button type="button" className="button button--medium button--dark">Profile</button>
+                <button type="button" className="button button--medium">Log out</button>
             </div>
 
             <Search onSearch={query => {
