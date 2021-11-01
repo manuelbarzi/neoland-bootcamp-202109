@@ -47,7 +47,26 @@ class App extends React.Component {
                             }
                 
                             sessionStorage.token = token
-            
+                
+                            // try {
+                            //     retrieveUser(sessionStorage.token,(error, user) => {
+                            //         if (error) {
+                            //             alert(error.message)
+                
+                            //             return
+                            //         }
+                
+                            //         // webName = user.name
+                
+                            //         // var nameSpan = home.querySelector('.name')
+                
+                            //         // nameSpan.innerText = webName
+                                    
+                                    
+                            //     })
+                            // } catch (error) {
+                            //     alert(error.message)
+                            // }
                             this.setState({view: 'home'})
                         })
                     } catch (error) {

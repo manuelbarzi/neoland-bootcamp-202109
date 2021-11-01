@@ -6,16 +6,10 @@ class Home extends React.Component{
     }
 
     render () {
-        return  <div className="pagelayout">
-        <div className="title layout__title">
-            <h1>RELAX</h1>
-        </div>
-        <div className="layout__subtitle">
-            <p><strong className="name">Name</strong> YOU ARE AT HOME
-            </p>
-        </div>
+        return  <>
+        {this.state.view === 'home' && <HeaderHome></HeaderHome>}
 
-        <Search
+        {this.state.view === 'home' && <Search
         onSearch ={ query => {
             try {   
                 searchVehicles(query,(error, vehicles)=>{
@@ -25,9 +19,9 @@ class Home extends React.Component{
                     
                 })} catch (error) {
                     alert(error.message)}
-        }}></Search>
+        }}></Search>}
 
-        {!this.state.vehicle && <Results items={this.state.vehicles} onItem={vehicleId => {
+        {this.state.view === 'home' && !this.state.vehicle && <Results items={this.state.vehicles} onItem={vehicleId => {
             try {
                 retrieveVehicle (vehicleId, (error, vehicle) => {
                     if (error) { return alert(error.message)}
@@ -38,22 +32,29 @@ class Home extends React.Component{
             }
         }}></Results>}
 
-        {this.state.vehicle && 
-        <Detail
+        {this.state.view === 'home' && this.state.vehicle &&  <Detail 
         item={this.state.vehicle}
+        OnBackList={() => this.setState ({vehicle : null})}
         ></Detail>}
-           
-        <div className="layout__buttons--home-hi layout__buttons container--hide">
-            <button className='button'>UPDATE PROFILE</button>
-            <button className='button'>CHANGE PASSWORD</button>
-            <button className='button'>DELETE ACCOUNT</button>
-        </div>
-        <div className="layout__buttons--home-low layout__buttons">
-            <button className='button'>VIEW PROFILE</button>
-            <button className='button'>SIGN OUT</button>
-        </div>
         
+        {this.state.view === 'home' && <ButtonsHome
+            OnViewProfile={()=> this.setState({view: 'profile'})}
+            OnSignOut={()=> {
+                delete sessionStorage.token
+                this.setState({view: 'signOut'})}}
+            ></ButtonsHome>}
+            
+        {this.state.view === 'profile' && <Profile
+            OnBackHome={()=> this.setState({view: 'home'})}
+            OnSignOut={()=> {
+            delete sessionStorage.token
+            this.setState({view: 'signOut'})}}
+            OnChangePassword={()=> this.setState ({view: 'changePassword'})}
+            OnDeleteAccount={()=> this.setState ({view: 'deleteAccount'})}
+            ></Profile>}
 
-    </div>
+
+        {this.state.view === 'signOut' && <App></App>}
+    </>
     }
 }

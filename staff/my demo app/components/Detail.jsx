@@ -1,6 +1,6 @@
 function Detail(props) {
     return <div className="home__detail">
-        <button className='button'>Back</button>
+        <button className='button'onClick={()=> props.OnBackList()}>Back</button>
         <h2>{props.item.name}</h2>
         <img className="home__detail-image" src={props.item.image} alt=""></img>
 
