@@ -1,4 +1,6 @@
 function Detail(props) {
+    logger.info('Detail -> render')
+    
     return <div className="home__detail container container--vertical">
         <button className="button button-medium button">Back to Results</button>
         <h2>{props.item.name}</h2>

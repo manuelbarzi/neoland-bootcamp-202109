@@ -1,4 +1,6 @@
 function SignUp(props) {
+    logger.info('SignUp -> render')
+
     return <form className="register container container--vertical container--gapped" onSubmit={event => {
         event.preventDefault()
 
@@ -13,7 +15,11 @@ function SignUp(props) {
         <input className="field" type="password" name="password" id="register-password" placeholder="Password" required />
 
         <div className="container">
-            <button type="button" className="button button--medium" onClick={() => props.onSignIn()}>Sign in</button>
+            <button type="button" className="button button--medium" onClick={(event) => {
+                event.preventDefault()
+
+                props.onSignIn()
+                }}>Sign in</button>
             <button type="submit" className="button button--medium button--dark">Sign Up</button>
         </div>
     </form>
