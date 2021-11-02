@@ -1,8 +1,36 @@
 class App extends React.Component {
     constructor (){
-        super ()
-        this.state = {view: 'landing'}
+    super ()
+    this.state = {
+        view: sessionStorage.token ? 'spinner' : 'landing',
+        name : null                
     }
+    }
+
+    componentDidMount(){
+        if (sessionStorage.token){
+            try {
+                retrieveUser(sessionStorage.token,(error, user) => {
+                    if (error) {
+                        alert(error.message)
+                        this.setState({view:'landing'})
+                        return
+                    }
+
+                         var name = user.name
+                         this.setState({
+                             name: name,
+                             view: 'home'
+                            })
+
+                })
+            } catch (error) {
+                alert(error.message)
+                this.setState({view:'landing'})
+            }
+        }
+    }
+
     render() {
         return <React.Fragment>
             {this.state.view === 'landing' && <Landing 
@@ -47,8 +75,25 @@ class App extends React.Component {
                             }
                 
                             sessionStorage.token = token
-            
-                            this.setState({view: 'home'})
+                            
+                            try {
+                                    retrieveUser(sessionStorage.token,(error, user) => {
+                                        if (error) {
+                                            alert(error.message)
+                    
+                                            return
+                                        }
+                    
+                                             var name = user.name
+                                             this.setState({
+                                                 name: name,
+                                                 view: 'home'
+                                                })
+
+                                    })
+                                } catch (error) {
+                                    alert(error.message)
+                                }
                         })
                     } catch (error) {
                         alert(error.message)
@@ -56,10 +101,24 @@ class App extends React.Component {
                 }}
                 ></SignIn>}
 
-            {this.state.view === 'home' && <Home></Home>}
+            {this.state.view === 'home' && <Home 
+            name={this.state.name} 
+            OnSignOut={this.deleteTokenAndSignOut}
+            OnDelete={this.deleteTokenAndLanding}
+            ></Home>}
                 
                 
                 
         </React.Fragment>
+    }
+
+    deleteTokenAndSignOut = () => {
+        this.setState({view: 'signin'})
+        delete sessionStorage.token
+    }
+
+    deleteTokenAndLanding = () => {
+        this.setState({view: 'landind'})
+        delete sessionStorage.token
     }
 }

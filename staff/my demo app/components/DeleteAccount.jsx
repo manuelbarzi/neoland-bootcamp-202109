@@ -4,7 +4,7 @@ function DeleteAccount(props) {
         <h1>Delete Account</h1>
     </div>
     <div className="layout__subtitle">
-        <p><strong className="name">Name</strong>, to delete your account, you need to know your
+        <p><strong className="name">{props.name? props.name : 'Name'}</strong>, to delete your account, you need to know your
             Password
         </p>
     </div>

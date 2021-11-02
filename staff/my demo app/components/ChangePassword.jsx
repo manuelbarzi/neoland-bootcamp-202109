@@ -4,7 +4,7 @@ function ChangePassword(props) {
         <h1>Change Password</h1>
     </div>
     <div className="layout__subtitle">
-        <p><strong className="name">Name</strong>, to update your Password, you need to know your
+        <p><strong className="name">{props.name? props.name : 'Name'}</strong>, to update your Password, you need to know your
             Old Password
         </p>
     </div>

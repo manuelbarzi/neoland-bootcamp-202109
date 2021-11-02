@@ -4,7 +4,7 @@ function Profile(props) {
             <h1>PROFILE</h1>
         </div>
         <div className="layout__subtitle">
-            <p><strong className="name">Name</strong> What do you whant to do with your profile?
+            <p><strong className="name">{props.name? props.name : 'Name'}</strong> What do you whant to do with your profile?
             </p>
         </div>
         <div className="layout__buttons--home-hi layout__buttons ">
