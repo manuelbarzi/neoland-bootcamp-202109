@@ -1,4 +1,5 @@
 function Results(props) {
+    logger.info("Results -> render")
     return props.items.length ?
         <div className="welcome__results container container--vertical">
             <ul>

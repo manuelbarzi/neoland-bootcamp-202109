@@ -1,7 +1,9 @@
 function Unregister(props) {
+    logger.info("Unregister -> render")
     return (
         <div className="unregister container container--vertical" onSubmit={event => {
             event.preventDefault()
+            props.goToSpinner()
             const user = {
                 password: event.target.password.value
             }
@@ -10,6 +12,7 @@ function Unregister(props) {
                     if (error) {
                         //injectableModal("template-modal", "Error", error.message);
                         alert(error.message)
+                        props.signOut()
                     }
 
                     event.target.reset()
@@ -20,6 +23,7 @@ function Unregister(props) {
                 //injectableModal("template-modal", "Error", error.message);
                 alert(error.message)
                 event.target.reset()
+                props.signOut()
             }
         }}>
             <form className="container container--vertical">

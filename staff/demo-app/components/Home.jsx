@@ -1,8 +1,10 @@
 class Home extends React.Component {
     constructor(props) {
+        logger.info("Home -> constructor")
+        
         super(props)
 
-        this.state = { vehicles: [], vehicle: null }
+        this.state = { vehicles: [], vehicle: null, }
     }
 
     render() {
@@ -10,14 +12,18 @@ class Home extends React.Component {
             {!this.state.vehicles && <Search onSearch={query => {
                 try {
                     searchVehicles(query, (error, vehicles) => {
-                        alert(error.message)
+                        //alert(error.message)
+                        props.onModal("Error", error.message)
+                        props.onModalPop("Error", error.message)
                         this.setState({ vehicles })
                     })
                 } catch (error) {
-                    if (error) return alert(error.message)
+                    //if (error) return alert(error.message)
+                    this.props.onModal("Error", error.message)
+                    this.props.onModalPop("Error", error.message)
                     this.setState({ vehicles: [] })
                 }
-            }} />}
+            }}/>}
 
             {this.state.vehicles && <Search onSearch={query => {
                 //En caso de ya tener resultados impresos de la busqueda anterior, se reemplazaran por los de la nueva busqueda 
@@ -25,19 +31,22 @@ class Home extends React.Component {
                 this.setState({ vehicle: null })
                 try {
                     searchVehicles(query, (error, vehicles) => {
-                        if (error) return alert(error.message)
-                        //injectableModal("template-modal", "Error", error.message);
+                        //if (error) return alert(error.message)
+                        this.props.onModal("Error", error.message)
+                        this.props.onModalPop("Error", error.message)
 
                         this.setState({ vehicles })
                     })
                 } catch (error) {
-                    alert(error.message)
+                    //alert(error.message)
+                    this.props.onModal("Error", error.message)
+                    this.props.onModalPop("Error", error.message)
                     this.setState({ vehicles: [] })
                 }
-            }} />}
+            }}/>}
 
             <div className="welcome container container--vertical">
-                <h2> Bienvenido a tu página de inicio <span className="name"></span></h2>
+                <h2> Bienvenido a tu página de inicio <span className="name"> {this.props.name} </span></h2>
                 <div className="container">
                     <button type="button" className="button button--red" onClick={() => this.props.onProfile()}>Perfil</button>
                     <button type="button" className="button button--signout" onClick={() => this.props.signOut()}>Cerrar Sesión</button>
@@ -47,8 +56,8 @@ class Home extends React.Component {
             {!this.state.vehicle && <Results items={this.state.vehicles} onItem={vehicleId => {
                 try {
                     retrieveVehicle(vehicleId, (error, vehicle) => {
-                        if (error) return alert(error.message)
-
+                        //if (error) return alert(error.message)
+                        this.props.onModalPop("Error", error.message)
                         this.setState({ vehicle })
                     })
                 } catch (error) {

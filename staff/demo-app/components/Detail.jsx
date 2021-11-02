@@ -1,4 +1,5 @@
 function Detail(props) {
+    logger.info("Detail -> render")
     return <div className="welcome__details container container--vertical">
     <button className="button" onClick={() => props.backResultList()}> Volver atrás</button>
     <h2>{props.item.name}</h2>

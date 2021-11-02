@@ -1,4 +1,5 @@
 function Profile(props) {
+    logger.info("Profile -> render")
     return (
         <div className="profile container container--vertical">
             <h3 className="titles">Mi perfil</h3>

@@ -1,7 +1,9 @@
 function SignIn(props) {
+    logger.info("SignIn -> render")
     return (
         <form className="login container container--vertical" onSubmit={event => {
             event.preventDefault()
+            props.goToSpinner()
             const user = {
                 username: event.target.username.value,
                 password: event.target.password.value
@@ -9,32 +11,23 @@ function SignIn(props) {
             try {
                 loginUser(user, (error, token) => {
                     if (error) {
-                        //injectableModal("template-modal", "Error", error.message);
-                        alert(error.message)
+                        //alert(error.message)
+                        props.onModal("Error", error.message)
+                        props.onModalPop("Error", error.message)
+                        props.onSignIn()
                     } else {
-                        alert("Usuario identificado")
+                        //alert("Usuario identificado")
                         event.target.reset()
+                        props.postSignIn()
                     }
 
                     sessionStorage.token = token
 
-                    try {
-                        retrieveUser(sessionStorage.token, function (error, user) {
-                            if (error) {
-                                //injectableModal("template-modal", "Error", error.message);
-                                alert(error.message)
-                            } else {
-                                props.postSignIn(user.name)
-                            }
-                        })
-                    } catch (error) {
-                        //injectableModal("template-modal", "Error", error.message);
-                        alert(error.message)
-                    }
                 })
             } catch (error) {
-                //injectableModal("template-modal", "Error", error.message);
-                alert(error.message)
+                //alert(error.message)
+                props.onModal("Error", error.message)
+               // props.onSignIn()
             }
         }}>
             <h3 className="titles">Iniciar Sesión</h3>

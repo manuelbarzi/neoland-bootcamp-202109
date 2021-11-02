@@ -1,7 +1,9 @@
 function ChangeData(props) {
+    logger.info("ChangeData -> render")
     return(
         <div className="modify container container--vertical" onSubmit={event => {
             event.preventDefault()
+            props.goToSpinner()
             const user = {
                 name     : event.target.name.value,
                 surname  : event.target.surname.value,
@@ -15,7 +17,8 @@ function ChangeData(props) {
                         alert(error.message)
                     }
                     event.target.reset()
-                    alert("Tus datos fueron actualziados.")
+                    alert("Tus datos fueron actualizados.")
+                    props.onProfile()
                 })
             } catch (error) {
                 //injectableModal("template-modal", "Error", error.message);

@@ -1,7 +1,9 @@
 function ChangePassword(props) {
+    logger.info("ChangePassword -> render")
     return (
         <div className="change--password container container--vertical" onSubmit={event => {
             event.preventDefault()
+            props.goToSpinner()
             const user = {
                 password: event.target.password.value,
                 oldPassword: event.target.oldPassword.value
@@ -15,6 +17,7 @@ function ChangePassword(props) {
                     }
                     event.target.reset()
                     alert("Tu contraseña fue cambiada con éxito.")
+                    props.onProfile()
                 })
             } catch (error) {
                 //injectableModal("template-modal", "Error", error.message);

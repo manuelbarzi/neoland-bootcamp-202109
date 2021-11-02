@@ -1,7 +1,9 @@
 function SignUp(props) {
+    logger.info("SignUp -> render")
     return (
         <form className="register container container--vertical" onSubmit={event => {
             event.preventDefault()
+            props.goToSpinner()
             const user = {
                 name     : event.target.name.value,
                 surname  : event.target.surname.value,
@@ -13,6 +15,7 @@ function SignUp(props) {
                 registerUser(user, (error) => {
                     if (error) {
                         alert(error.message);
+                        props.onSignUp()
                     } else {
                         alert("usuario registrado correctamente")
                         event.target.reset()
@@ -21,6 +24,7 @@ function SignUp(props) {
                 })
             } catch (error) {
                 alert(error.message);
+                props.onSignUp()
             }
         }}>
         <h3 className="titles">Registro</h3>
