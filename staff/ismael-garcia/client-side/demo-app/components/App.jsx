@@ -6,7 +6,11 @@ class App extends React.Component {
 
         this.state = { 
             view: sessionStorage.token ? 'spinner' : 'landing',
-            name: null
+            name: null,
+            modal: {
+                status: false,
+                message: ''
+            }
         }
     }
 
@@ -57,6 +61,8 @@ class App extends React.Component {
 
     goToHome = () => this.setState({ view: 'home' })
 
+    openModal = (message) => this.setState({ modal: { status: true, message }}) 
+
     onSignUp = (name, username, password) => {
         this.goToSpinner()
 
@@ -85,7 +91,8 @@ class App extends React.Component {
         try {
             signInUser(username, password, (error, token) => {
                 if (error) {
-                    alert(error.message)
+                    // alert(error.message)
+                    this.openModal(error.message)
 
                     this.goToSignIn()
 
@@ -127,7 +134,7 @@ class App extends React.Component {
         logger.info('App -> render')
         
         return <>
-            <Logo image='https://w7.pngwing.com/pngs/491/792/png-transparent-ladybug-ladybird-insect-beetle-nature-dotted-spring-bug-lady-bug-lady-bird-thumbnail.png' text='Demo App' />
+            <Logo image="./assets/logo.png" text='Demo App' />
 
             {/* <Time /> */}
 
@@ -137,7 +144,7 @@ class App extends React.Component {
                 onSignUp={this.goToSignUp}
             />}
 
-            {this.state.view === 'signup' && <SignUp  onSignUp={this.onSignUp} onSignIn={this.goToSignIn} />}
+            {this.state.view === 'signup' && <SignUp onSignUp={this.onSignUp} onSignIn={this.goToSignIn} />}
 
             {this.state.view === 'post-signup' && <PostSignUp onSignIn={this.goToSignIn} />}
 
@@ -146,6 +153,14 @@ class App extends React.Component {
             {this.state.view === 'home' && <Home name={this.state.name} onSignOut={this.resetTokenAndGoToLanding} />}
 
             {this.state.view === 'spinner' && <Spinner />}
+
+            {this.state.modal.status === true && <Modal message={this.state.modal.message} />}
         </>
     }
+
+    // render() {
+    //     return <>
+    //         {/* <Modal message='Hola chato, estoy funcionando' /> */}
+    //     </>
+    // }
 }
