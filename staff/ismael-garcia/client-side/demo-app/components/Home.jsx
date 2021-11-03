@@ -4,30 +4,110 @@ class Home extends React.Component {
 
         super()
 
-        this.state = { vehicles: [], vehicle: null }
+        this.state = { 
+            vehicles: [], 
+            vehicle: null,
+            view: 'search' 
+        }
     }
 
-    onSearch = query => {
+    search = query => {
+        this.props.onFlowStart()
+
+        this.setState({ vehicle: null, vehicles: [] })
+
         try {
             searchVehicles(query, (error, vehicles) => {
-                if (error) return alert(error.message)
+                if (error) { 
+                    alert(error.message)
+
+                    this.props.onFlowEnd()
+
+                    return
+                }
     
                 this.setState({ vehicles })
+
+                this.props.onFlowEnd()
             })
         } catch (error) {
             alert(error.message)
+
+            this.props.onFlowEnd()
         }
     }      
 
-    onItem = vehicleId => {
+    goToItem = vehicleId => {
+        this.props.onFlowStart()
+
         try {
             retrieveVehicle (vehicleId, (error, vehicle) => {
-                if (error) return alert(error.message)
+                if (error) { 
+                    alert(error.message)
+
+                    this.props.onFlowEnd()
+
+                    return
+                }
 
                 this.setState({ vehicle })
+
+                this.props.onFlowEnd()
             })
         } catch (error) {
             alert(error.message)
+
+            this.props.onFlowEnd()
+        }
+    }
+
+    clearVehicle = () => this.setState({ vehicle: null })
+
+    goToProfile = () => this.setState({ view: 'profile' })
+
+    goToSearch = () => this.setState({ view: 'search' })
+
+    updatePassword = (oldPassword, password) => {
+        try {
+            updateUserPassword(sessionStorage.token, oldPassword, password, error => {
+                if (error) {
+                    alert(error.message)
+
+                    this.props.onFlowEnd()
+
+                    return
+                }
+
+                this.props.onFlowEnd()
+            })
+        } catch (error) {
+            alert(error.message)
+
+            this.props.onFlowEnd()
+        }
+    }
+
+    unregister = password => {
+        this.props.onFlowStart()
+
+        try {
+            unregisterUser(sessionStorage.token, password, error => {
+                if (error) {
+                    alert(error.message)
+
+                    this.props.onFlowEnd()
+
+                    return
+                }
+
+                this.props.onFlowEnd()
+
+                this.props.onSignOut()
+            })
+        } catch (error) {
+            alert(error.message)
+
+            this.props.onFlowEnd()
         }
     }
 
@@ -38,15 +118,20 @@ class Home extends React.Component {
             <h1>Hola, <span className="name">{this.props.name? this.props.name : 'World'}</span>. ¡Bienvenido a nuestro sitio!</h1>
 
             <div>
-                <button type="button" className="button button--medium button--dark">Profile</button>
+                <button type="button" className="button button--medium button--dark" onClick={this.goToProfile}>Profile</button>
                 <button type="button" className="button button--medium" onClick={this.props.onSignOut}>Sign out</button>
             </div>
 
-            <Search onSearch={this.onSearch} />
+            {this.state.view === 'search' && <>
+            <Search onSearch={this.search} />
+            
+            {!this.state.vehicle && <Results items={this.state.vehicles} onItem={this.goToItem} />}
 
-            {!this.state.vehicle && <Results items={this.state.vehicles} onItem={this.onItem} />}
+            {this.state.vehicle && <Detail item={this.state.vehicle} onBack={this.clearVehicle} />}
+            </>
+            }
 
-            {this.state.vehicle && <Detail item={this.state.vehicle} />}
+            {this.state.view === 'profile' && <Profile onBack={this.goToSearch} onPasswordUpdate={this.updatePassword} onUnregister={this.unregister} />}
         </div>
     }
 }

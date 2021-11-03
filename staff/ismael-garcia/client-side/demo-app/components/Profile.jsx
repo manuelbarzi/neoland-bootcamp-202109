@@ -4,7 +4,7 @@ class Profile extends React.Component {
 
         super()
 
-        this.state = { view: 'update-password'}
+        this.state = { view: 'update-password' }
     }
     
     goToUnregister = () => this.setState({ view: 'unregister' })
@@ -15,8 +15,15 @@ class Profile extends React.Component {
         logger.info('Profile -> render')
 
         return <>
-            {this.state.view === 'update-password' && <div className="profile container container--vertical container--gapped" id="profile">
-                <form className="container container--vertical">
+            {this.state.view === 'update-password' && <div className="profile container container--vertical" id="profile">
+                <form className="container container--vertical" onSubmit={event => {
+                    event.preventDefault()
+
+                    const oldPassword = event.target.oldPassword.value
+                    const password = event.target.password.value
+
+                    this.props.onPasswordUpdate(oldPassword, password)
+                }}>
                     <input className="field" type="password" name="old-password" id="old-password" placeholder="Old Password" required />
                     <input className="field" type="password" name="new-password" id="new-password" placeholder="New Password" required />
 
@@ -32,6 +39,8 @@ class Profile extends React.Component {
 
                 <button className="button button--medium button--warning" onClick={this.goToUnregister}>Unregister</button>
             </div>}
+
+            {this.state.view === 'unregister' && <Unregister onBack={this.goToUpdatePassword} onUnregister={this.props.onUnregister} />}
         </>
     }
 }

@@ -10,7 +10,8 @@ class App extends React.Component {
             modal: {
                 status: false,
                 message: ''
-            }
+            },
+            spinner: sessionStorage.token ? true : false
         }
     }
 
@@ -47,7 +48,10 @@ class App extends React.Component {
     resetTokenAndGoToLanding = () => {
         delete sessionStorage.token
 
-        this.setState({ view: 'landing' })
+        this.setState({ 
+            view: 'landing',
+            spinner: false 
+        })
     }
 
     
@@ -55,7 +59,9 @@ class App extends React.Component {
     
     goToSignIn = () => this.setState({ view: 'signin' })
 
-    goToSpinner = () => this.setState({ view: 'spinner'})
+    showSpinner = () => this.setState({ spinner: true })
+
+    hideSpinner = () => this.setState({ spinner: false })
 
     goToPostSignUp = () => this.setState({ view: 'post-signup' })
 
@@ -63,30 +69,32 @@ class App extends React.Component {
 
     openModal = (message) => this.setState({ modal: { status: true, message }}) 
 
-    onSignUp = (name, username, password) => {
-        this.goToSpinner()
+    signUp = (name, username, password) => {
+        this.showSpinner()
 
         try {
             signUpUser(name, username, password, error => {
                 if (error) {
                     alert(error.message)
 
-                    this.goToSignUp()
+                    this.hideSpinner()
 
                     return
                 }
 
                 this.goToPostSignUp()
+
+                this.hideSpinner()
             })
         } catch (error) {
             alert(error.message)
 
-            this.goToSignUp()
+            this.hideSpinner()
         }
     }
 
-    onSignIn = (username, password) => {
-        this.goToSpinner()
+    signIn = (username, password) => {
+        this.showSpinner()
 
         try {
             signInUser(username, password, (error, token) => {
@@ -94,7 +102,7 @@ class App extends React.Component {
                     // alert(error.message)
                     this.openModal(error.message)
 
-                    this.goToSignIn()
+                    this.hideSpinner()
 
                     return
                 }
@@ -106,7 +114,7 @@ class App extends React.Component {
                         if (error) {
                             alert(error.message)
 
-                            this.goToSignIn()
+                            this.hideSpinner()
 
                             return
                         }
@@ -116,17 +124,19 @@ class App extends React.Component {
                         this.setState({ name })
 
                         this.goToHome()
+
+                        this.hideSpinner()
                     })
                 } catch (error) {
                     alert(error.message)
 
-                    this.goToSignIn()
+                    this.hideSpinner()
                 }
             })
         } catch (error) {
             alert(error.message)
 
-            this.goToSignIn()
+            this.hideSpinner()
         }
     }
 
@@ -144,23 +154,21 @@ class App extends React.Component {
                 onSignUp={this.goToSignUp}
             />}
 
-            {this.state.view === 'signup' && <SignUp onSignUp={this.onSignUp} onSignIn={this.goToSignIn} />}
+            {this.state.view === 'signup' && <SignUp onSignUp={this.signUp} onSignIn={this.goToSignIn} />}
 
             {this.state.view === 'post-signup' && <PostSignUp onSignIn={this.goToSignIn} />}
 
-            {this.state.view === 'signin' && <SignIn  onSignIn={this.onSignIn} onSignUp={this.goToSignUp} />}
+            {this.state.view === 'signin' && <SignIn  onSignIn={this.signIn} onSignUp={this.goToSignUp} />}
 
-            {this.state.view === 'home' && <Home name={this.state.name} onSignOut={this.resetTokenAndGoToLanding} />}
+            {this.state.view === 'home' && <Home 
+            name={this.state.name} 
+            onSignOut={this.resetTokenAndGoToLanding}
+            onFlowStart={this.showSpinner}
+            onFlowEnd={this.hideSpinner} />}
 
-            {this.state.view === 'spinner' && <Spinner />}
+            {this.state.spinner && <Spinner />}
 
             {this.state.modal.status === true && <Modal message={this.state.modal.message} />}
         </>
     }
-
-    // render() {
-    //     return <>
-    //         {/* <Modal message='Hola chato, estoy funcionando' /> */}
-    //     </>
-    // }
 }
