@@ -1,0 +1,54 @@
+/* General Styles */
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap");
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Exo 2", sans-serif;
+    background-color: #5d8fc9;
+}
+
+.login {
+    background-color: #ffffff;
+    width: 400px;
+    padding: 10px 20px 50px;
+    border-radius: 20px;
+    margin: 50px auto;
+}
+
+.login__title {
+    text-align: center;
+    font-size: 2.3rem;
+}
+
+.login__label {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.login__input {
+    display: block;
+    background-color: #ebf0fc;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    font: inherit;
+    margin-bottom: 20px;
+}
+
+.login__button {
+    display: block;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    font: inherit;
+    cursor: pointer;
+}

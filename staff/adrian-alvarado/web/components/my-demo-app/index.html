@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Single Page Applicattion</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="logic.js" defer></script>
+    <script src="main.js" defer></script>
+</head>
+
+<body>
+    <div class="landing">
+        <h1 class="landing__title">Single Page Applicattion</h1>
+        <button class="btn btn--white landing__btn">Login</button>
+        <button class="btn btn--white landing__btn">Register</button>
+    </div>
+
+    <form class="register container--off">
+        <h1 class="register__title">Register</h1>
+        <p class="register__subtitle">Lorem ipsum dolor sit amet.</p>
+        <input class="register__inputInline input" type="text" placeholder="First Name" required>
+        <input class="input register__inputInline" type="text" placeholder="Last Name" required>
+        <input class="register__input input" type="text" placeholder="Username" required>
+        <input class="register__input input" type="password" placeholder="Password" required>
+        <!-- <input class="register__input input" type="password" placeholder="Confirm Password"> -->
+        <div class="register__inputCheck">
+            <input class=" inputCheck" type="checkbox" required>
+            <label class="register__label" for="">I accept the <a href="#">Terms of Use</a> & <a href="#">Privacy Policy</a></label>
+        </div>
+        <button class="btn register__btn">Register Now</button>
+        <button class="btn register__btn">If you have an account, Login</button>
+    </form>
+
+    <div class="registered container--off">
+        <h1 class="registered__title">You have successfully registered</h1>
+        <button class="btn btn--white registered__btn" >Login</button>
+        <button class="btn btn--white registered__btn" >Landing Page</button>
+    </div>
+
+    <form class="login container--off">
+        <h1 class="login__title">Login</h1>
+        <input class="input login__input" type="text" placeholder="Username" required>
+        <input class="input login__input" type="password" placeholder="Password" required>
+        <button class="btn login__btn">Login</button>
+        <button class="btn login__btn">If you don't have account, Register</button>
+    </form>
+    
+    <div class="welcome container--off">
+        <h1 class="welcome__title">Welcome <span class="welcome__user"></span></h1>
+        <button class="btn btn--white welcome__btn">Change your Password</button>
+        <button class="btn btn--white welcome__btn">Delete Account</button>
+        <button class="btn btn--white welcome__btn">Log Out</button>
+    </div>
+
+    <form class="change-password container--off">
+        <h1 class="change-password__title">Change Your Password</h1>
+        <input class="input change-password__input" type="password" placeholder="Old Password" required>
+        <input class="input change-password__input" type="password" placeholder="New Password" required>
+        <button class="btn change-password__btn">Change</button>
+        <button class="btn change-password__btn">Home</button>
+    </form>
+
+    <form class="delete-account container--off">
+        <h1 class="delete-account__title">Delete Account</h1>
+        <p class="delete-account__paragraph">Are you sure?</p>
+        <input class="input delete-account__input" type="password" placeholder="Insert your password for delete your account" required>
+        <button class="btn delete-account__btn">Delete Account</button>
+        <button class="btn delete-account__btn">Home</button>
+    </form>
+</body>
+</html>

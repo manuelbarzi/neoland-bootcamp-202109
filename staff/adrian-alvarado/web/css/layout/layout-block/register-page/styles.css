@@ -1,0 +1,85 @@
+/* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Exo 2', sans-serif;
+}
+
+/* Components */
+.input {
+    display: block;
+    background-color: #ebf0fc;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    font: inherit;
+}
+
+.btn {
+    display: block;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    font: inherit;
+    cursor: pointer;
+}
+
+/* registerForm */
+.body--register {
+    background-color: #5d8fc9;
+}
+
+.register {
+    background-color: #ffffff;
+    width: 500px;
+    padding: 20px 40px 50px;
+    border-radius: 20px;
+    margin: 50px auto;
+}
+
+.register__title {
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+.register__title::before {
+    content: '🙬 ';
+}
+
+.register__title::after {
+    content: ' 🙮';
+}
+
+.register__subtitle {
+    text-align: center;
+    font-size: 1.4rem;
+}
+
+.register__inputInline {
+    display: inline-block;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
+.register__inputInline + .register__inputInline {
+    margin-left: 16px;
+}
+
+.register__input {
+    margin-bottom: 20px;
+}
+
+.register__inputCheck {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}

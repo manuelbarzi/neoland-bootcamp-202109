@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  body {
+    background-image: url(https://www.lavozdegalicia.es/default/2019/09/22/00121569162722054118567/Foto/HS23C7F1_163036.jpg);
+  }
+  
+  .login {
+    width: 500px;
+    height: 300px;
+    background-color: cadetblue;
+    display: flex;
+    flex-direction: column;
+    border-radius: 30px;
+    padding: 30px;
+  }
+  
+  .login__title {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+  }
+  
+  .login__input {
+    margin-bottom: 20px;
+    border-radius: 20px;
+    padding: 10px;
+  }
+  
+  .login__input::placeholder {
+    text-align: center;
+  }
+  
+  .login__button {
+    margin-bottom: 20px;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: rgb(248, 208, 105);
+  }
