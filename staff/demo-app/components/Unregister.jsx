@@ -3,27 +3,42 @@ function Unregister(props) {
     return (
         <div className="unregister container container--vertical" onSubmit={event => {
             event.preventDefault()
-            props.goToSpinner()
+            props.showSpinner()
             const user = {
                 password: event.target.password.value
             }
             try {
                 unregisterUser(sessionStorage.token, user, (error) => {
                     if (error) {
-                        //injectableModal("template-modal", "Error", error.message);
-                        alert(error.message)
-                        props.signOut()
+                        var error = error.message
+
+                        props.showModal("Error", error)
+
+                        props.hideSpinner()
+
+                        props.onUnregister()
+
+                        return
                     }
 
                     event.target.reset()
-                    alert("Usuario eliminado con éxito.")
+
+                    props.showModal("Éxito", "Has eliminado tu cuenta.")
+
+                    props.hideSpinner()
+
                     props.signOut()
                 })
             } catch (error) {
-                //injectableModal("template-modal", "Error", error.message);
-                alert(error.message)
+                var errorM = error.message
+
+                props.showModal("Error", errorM)
+
                 event.target.reset()
-                props.signOut()
+                
+                props.hideSpinner()
+
+                props.onUnregister()
             }
         }}>
             <form className="container container--vertical">

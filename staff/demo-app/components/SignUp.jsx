@@ -3,7 +3,7 @@ function SignUp(props) {
     return (
         <form className="register container container--vertical" onSubmit={event => {
             event.preventDefault()
-            props.goToSpinner()
+            props.showSpinner()
             const user = {
                 name     : event.target.name.value,
                 surname  : event.target.surname.value,
@@ -14,16 +14,29 @@ function SignUp(props) {
             try {
                 registerUser(user, (error) => {
                     if (error) {
-                        alert(error.message);
+                        var error = error.message
+
+                        props.showModal("Error", error)
+
+                        props.hideSpinner()
+
                         props.onSignUp()
                     } else {
                         alert("usuario registrado correctamente")
                         event.target.reset()
+
+                        props.hideSpinner()
+
                         props.onSignIn()
                     }
                 })
             } catch (error) {
-                alert(error.message);
+                var errorM = error.message
+
+                props.showModal("Error", errorM)
+
+                props.hideSpinner()
+
                 props.onSignUp()
             }
         }}>

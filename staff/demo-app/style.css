@@ -7,6 +7,13 @@ html, body {
     background-image: url(https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-simple-atmosphere-business-gray-background-ppth5-background-image_142920.jpg);
 }
 
+.title-landing {
+    font-family: 'Shadows Into Light Two', cursive;
+    font-size: 3rem;
+    color: rgb(170, 45, 45);
+    text-shadow: 2px 2px 10px rgb(179, 179, 179);
+}
+
 .titles {
     font-family: 'Noto Sans', sans-serif;
     color: rgb(170, 45, 45);
@@ -189,6 +196,29 @@ input {
 .circulo2 {
     fill:rgb(165, 144, 144);
     animation: miAnimacion 1.5s alternate infinite;
+}
+.circulo4 {
+    fill:rgb(165, 144, 144);
+    animation: miAnimacion 1.5s alternate infinite;
+}
+.circulo5 {
+    fill:rgb(165, 144, 144);
+    animation: miAnimacion 1.5s alternate infinite;
+}
+.circulo6 {
+    fill:rgb(165, 144, 144);
+    animation: miAnimacion 1.5s alternate infinite;
+}
+
+.spinner {
+    background-color: black;
+    height: 200vw;
+    width: 100vw;
+    top: -15px;
+    left: -10px;
+    opacity: 0.6;
+    position: absolute;
+    z-index: 1;
 }
 
 #spinner {

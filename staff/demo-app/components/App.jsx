@@ -3,8 +3,12 @@ class App extends React.Component {
         super()
         logger.info("App -> constructor")
         this.state = {
-            view: (sessionStorage.token ? "spinner" : "landing"),
-            name: null
+            view: sessionStorage.token ? "" : "landing",
+            name: null,
+            spinner: sessionStorage.token ? true : false,
+            modal: false, 
+            title: "",
+            text: ""
         };
     }
 
@@ -14,17 +18,27 @@ class App extends React.Component {
             try {
                 retrieveUser(sessionStorage.token, (error, user) => {
                     if (error) {
-                        alert(error.message)
+
                         this.resetTokenAndGoToLogin()
 
                         return
+
                     } else {
+
                         var name = user.name
-                        this.setState({ name, view: "home" })
+
+                        this.setState({
+                            name,
+                            view: "home",
+                            spinner: false
+                        })
                     }
                 })
             } catch (error) {
-                alert(error.message)
+                var errorM = error.message
+
+                this.props.showModal("Error", errorM)
+
                 this.resetTokenAndGoToLogin()
 
                 return
@@ -35,10 +49,19 @@ class App extends React.Component {
     resetTokenAndGoToLogin = () => {
         delete sessionStorage.token
 
-        this.setState({ view: "landing" })
+        this.setState({
+            view: "landing",
+            spinner: false
+        })
     }
 
-    goToSpinner = () => this.setState({ view: "spinner" })
+    showModal = (title, text) => this.setState({ modal: true, title, text })
+
+    closeModal = () => this.setState({ modal: false })
+
+    showSpinner = () => this.setState({ spinner: true })
+
+    hideSpinner = () => this.setState({ spinner: false })
 
     onSignIn = () => this.setState({ view: "login" })
 
@@ -58,10 +81,6 @@ class App extends React.Component {
 
     onModal = () => this.setState({ view: "modal" })
 
-    close = () => this.setState({ view: "login" })
-
-
-
     render() {
         logger.info("App -> render")
 
@@ -74,28 +93,35 @@ class App extends React.Component {
                 ></Landing>}
 
             {this.state.view === "register" && <SignUp
+                title={this.state.title} text={this.state.text}
                 onSignIn={this.onSignIn}
                 onSignUp={this.onSignUp}
-                goToSpinner={this.goToSpinner}
+                showSpinner={this.showSpinner}
+                hideSpinner={this.hideSpinner}
+                showModal={this.showModal}
             ></SignUp>}
 
             {this.state.view === "login" &&
                 <SignIn view={this.state.view}
+                    title={this.state.title} text={this.state.text}
                     onSignIn={this.onSignIn}
                     onSignUp={this.onSignUp}
                     postSignIn={this.postSignIn}
-                    goToSpinner={this.goToSpinner}
                     resetTokenAndGoToLogin={this.resetTokenAndGoToLogin}
-                    onModal={this.onModal}
+                    showSpinner={this.showSpinner}
+                    hideSpinner={this.hideSpinner}
+                    showModal={this.showModal}
                 ></SignIn>}
 
             {this.state.view === "home" &&
                 <Home name={this.state.name}
+                    title={this.state.title} text={this.state.text}
                     postSignIn={this.postSignIn}
                     onProfile={this.onProfile}
                     signOut={this.signOut}
-                    goToSpinner={this.goToSpinner}
-                    onModal={this.onModal}
+                    showSpinner={this.showSpinner}
+                    hideSpinner={this.hideSpinner}
+                    showModal={this.showModal}
                 ></Home>}
 
             {this.state.view === "profile" && <Profile
@@ -106,24 +132,37 @@ class App extends React.Component {
             ></Profile>}
 
             {this.state.view === "unregister" && <Unregister
+                title={this.state.title} text={this.state.text}
                 onProfile={this.onProfile}
-                goToSpinner={this.goToSpinner}
+                showSpinner={this.showSpinner}
+                hideSpinner={this.hideSpinner}
+                onUnregister={this.onUnregister}
+                showModal={this.showModal}
             ></Unregister>}
 
             {this.state.view === "change--password" && <ChangePassword
+                title={this.state.title} text={this.state.text}
                 onProfile={this.onProfile}
-                goToSpinner={this.goToSpinner}
+                showSpinner={this.showSpinner}
+                hideSpinner={this.hideSpinner}
+                onChangePassword={this.onChangePassword}
+                showModal={this.showModal}
             ></ChangePassword>}
 
             {this.state.view === "modify" && <ChangeData
+                title={this.state.title} text={this.state.text}
                 onProfile={this.onProfile}
-                goToSpinner={this.goToSpinner}
+                showSpinner={this.showSpinner}
+                hideSpinner={this.hideSpinner}
+                onChangeData={this.onChangeData}
+                showModal={this.showModal}
             ></ChangeData>}
 
-            {this.state.view === "spinner" && <Spinner></Spinner>}
+            {this.state.spinner && <Spinner></Spinner>}
 
-            {this.state.view === "modal" && <Modal
-                close={this.close}
+            {this.state.modal && <Modal title={this.state.title} text={this.state.text}
+                closeModal={this.closeModal}
+                showModal={this.showModal}
             ></Modal>}
 
         </React.Fragment>

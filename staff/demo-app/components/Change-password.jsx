@@ -3,7 +3,7 @@ function ChangePassword(props) {
     return (
         <div className="change--password container container--vertical" onSubmit={event => {
             event.preventDefault()
-            props.goToSpinner()
+            props.showSpinner()
             const user = {
                 password: event.target.password.value,
                 oldPassword: event.target.oldPassword.value
@@ -12,17 +12,32 @@ function ChangePassword(props) {
             try {
                 updateUserPassword(sessionStorage.token, user, (error) => {
                     if (error) {
-                        //injectableModal("template-modal", "Error", error.message);
-                        alert(error.message)
+                        var error = error.message
+
+                        props.showModal("Error", error)
+
+                        props.hideSpinner()
+
+                        props.onChangePassword()
+
+                        return
                     }
                     event.target.reset()
-                    alert("Tu contraseña fue cambiada con éxito.")
-                    props.onProfile()
+
+                    props.showModal("Éxito", "Tu contraseña fue actualizada.")
+
+                    props.hideSpinner()
+
+                    props.onChangePassword()
                 })
             } catch (error) {
-                //injectableModal("template-modal", "Error", error.message);
-                event.target.reset()
-                alert(error.message)
+                var errorM = error.message
+
+                props.showModal("Error", errorM)
+
+                props.hideSpinner()
+
+                props.onChangePassword()
 
             }
         }}>

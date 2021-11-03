@@ -3,7 +3,7 @@ function SignIn(props) {
     return (
         <form className="login container container--vertical" onSubmit={event => {
             event.preventDefault()
-            props.goToSpinner()
+            props.showSpinner()
             const user = {
                 username: event.target.username.value,
                 password: event.target.password.value
@@ -11,23 +11,31 @@ function SignIn(props) {
             try {
                 loginUser(user, (error, token) => {
                     if (error) {
-                        //alert(error.message)
-                        props.onModal("Error", error.message)
-                        props.onModalPop("Error", error.message)
+                        var error = error.message
+
+                        props.showModal("Error", error)
+
+                        props.hideSpinner()
+
                         props.onSignIn()
+
+                        return
                     } else {
-                        //alert("Usuario identificado")
                         event.target.reset()
+
                         props.postSignIn()
+
+                        props.hideSpinner()
+                        
+                        sessionStorage.token = token
                     }
-
-                    sessionStorage.token = token
-
                 })
             } catch (error) {
-                //alert(error.message)
-                props.onModal("Error", error.message)
-               // props.onSignIn()
+                var errorM = error.message
+
+                props.showModal("Error", errorM)
+
+                props.hideSpinner()
             }
         }}>
             <h3 className="titles">Iniciar Sesión</h3>

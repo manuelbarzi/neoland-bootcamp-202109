@@ -7,43 +7,68 @@ class Home extends React.Component {
         this.state = { vehicles: [], vehicle: null, }
     }
 
+    onSearch = query => {
+        //En caso de ya tener resultados impresos de la busqueda anterior, se reemplazaran por los de la nueva busqueda 
+        this.setState({ vehicle: null })
+
+        this.props.showSpinner()
+
+        try {
+            searchVehicles(query, (error, vehicles) => {
+                if (error) {
+                    var error = error.message
+
+                    this.props.hideSpinner()
+
+                    this.props.showModal("Error", error)
+
+                    return
+                }
+
+                this.props.hideSpinner()
+                
+                this.setState({ vehicles })
+            })
+        } catch (error) {
+            var errorM = error.message
+
+            this.props.showModal("Error", errorM)
+
+            this.props.hideSpinner()
+
+            this.setState({ vehicles: [] })
+        }
+    }
+
+    onItem = vehicleId => {
+
+        this.props.showSpinner()
+
+        try {
+            retrieveVehicle(vehicleId, (error, vehicle) => {
+                if (error) { 
+                    var error = error.message
+
+                    this.props.showModal("Error", error)
+                }
+                this.props.hideSpinner()
+
+                this.setState({ vehicle })
+            })
+        } catch (error) {
+            var errorM = error.message
+
+            this.props.showModal("Error", errorM)
+
+            this.props.hideSpinner()
+        }
+    }
+    
     render() {
         return <>
-            {!this.state.vehicles && <Search onSearch={query => {
-                try {
-                    searchVehicles(query, (error, vehicles) => {
-                        //alert(error.message)
-                        props.onModal("Error", error.message)
-                        props.onModalPop("Error", error.message)
-                        this.setState({ vehicles })
-                    })
-                } catch (error) {
-                    //if (error) return alert(error.message)
-                    this.props.onModal("Error", error.message)
-                    this.props.onModalPop("Error", error.message)
-                    this.setState({ vehicles: [] })
-                }
-            }}/>}
+            {!this.state.vehicles && <Search onSearch={this.onSearch}/>}
 
-            {this.state.vehicles && <Search onSearch={query => {
-                //En caso de ya tener resultados impresos de la busqueda anterior, se reemplazaran por los de la nueva busqueda 
-
-                this.setState({ vehicle: null })
-                try {
-                    searchVehicles(query, (error, vehicles) => {
-                        //if (error) return alert(error.message)
-                        this.props.onModal("Error", error.message)
-                        this.props.onModalPop("Error", error.message)
-
-                        this.setState({ vehicles })
-                    })
-                } catch (error) {
-                    //alert(error.message)
-                    this.props.onModal("Error", error.message)
-                    this.props.onModalPop("Error", error.message)
-                    this.setState({ vehicles: [] })
-                }
-            }}/>}
+            {this.state.vehicles && <Search onSearch={this.onSearch}/>}
 
             <div className="welcome container container--vertical">
                 <h2> Bienvenido a tu página de inicio <span className="name"> {this.props.name} </span></h2>
@@ -53,17 +78,7 @@ class Home extends React.Component {
                 </div>
             </div>
 
-            {!this.state.vehicle && <Results items={this.state.vehicles} onItem={vehicleId => {
-                try {
-                    retrieveVehicle(vehicleId, (error, vehicle) => {
-                        //if (error) return alert(error.message)
-                        this.props.onModalPop("Error", error.message)
-                        this.setState({ vehicle })
-                    })
-                } catch (error) {
-                    alert(error.message)
-                }
-            }} />}
+            {!this.state.vehicle && <Results items={this.state.vehicles} onItem={this.onItem} />}
 
             {this.state.vehicle && <Detail item={this.state.vehicle}
                 backResultList={() => this.setState({ vehicle: null })} />}

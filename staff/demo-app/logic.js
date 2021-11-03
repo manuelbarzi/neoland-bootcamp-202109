@@ -3,11 +3,7 @@
 /**
  * Signs up a user in the application.
  * 
- * @param {string} name The full name of the user to be registered.
- * @param {string} surname The username of the user to be registered.
- * @param {string} email The email of the user to be registered.
- * @param {string} user The username of the user to be registered.
- * @param {string} password The password of the user to be registered.
+ * @param {Object} name All data of the user to be registered.
  * @param {function} callback The callback function to manage the response.
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
@@ -68,8 +64,7 @@
 /**
  * Login a user in the application.
  * 
- * @param {string} user The username of the user to be authenticated.
- * @param {string} password The password of the user to be authenticated.
+ * @param {Object} user The user with the username and password to sign in.
  * @param {function} callback The callback function to manage the response.
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
@@ -168,10 +163,7 @@ function retrieveUser(token, callback) {
  * Updating the user data in the application.
  * 
  * @param {string} token The token to authenticate the retrieve user.
- * @param {string} name The full name of the user to be updated.
- * @param {string} surname The username of the user to be updated.
- * @param {string} email The email of the user to be updated.
- * @param {string} user The username of the user to be updated.
+ * @param {Object} user All data of user to be changed.
  * @param {function} callback The callback function to manage the response.
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
@@ -232,8 +224,7 @@ function updateUserData(token, user, callback) {
  * Updating the password in the application.
  * 
  * @param {string} token The token to authenticate the retrieve user.
- * @param {string} oldPassword The old password of the user to change a new one.
- * @param {string} password The new password to be changed.
+ * @param {string} user The user with the old and new password to be changed.
  * @param {function} callback The callback function to manage the response.
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
@@ -290,7 +281,7 @@ function updateUserPassword(token, user, callback) {
  * Unregistering a user in the application.
  * 
  * @param {string} token The token to authenticate the retrieve user.
- * @param {string} password The password to eliminate the user account.
+ * @param {Object} user The password of the user to be unregistered.
  * @param {function} callback The callback function to manage the response.
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
@@ -398,30 +389,4 @@ function retrieveVehicle(id, callback) {
     xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/' + id)
 
     xhr.send()
-}
-
-/**
- * Generate the modal to throw a message error
- * 
- * @param {string} element The element template modal to be generated to show the message
- */
-
-function generateCloseModal(element) {
-    var modal = document.getElementById(element);
-    var close = modal.querySelector("#close-modal");
-
-    modal.onclick = function (event) {
-        if (!(
-            event.target === modal.querySelector("#modal-content") || event.target === modal.querySelector("#modal-title") || event.target === modal.querySelector("#modal-text")))
-            modal.remove();
-    }
-}
-
-function injectableModal(element, title, text) {
-    var template = document.getElementById(element);
-    var clone = template.content.cloneNode(true);
-    clone.querySelector("#modal-title").innerText = title;
-    clone.querySelector("#modal-text").innerText = text;
-    document.body.appendChild(clone);
-    generateCloseModal("modal");
 }

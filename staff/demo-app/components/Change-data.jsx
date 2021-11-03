@@ -3,7 +3,7 @@ function ChangeData(props) {
     return(
         <div className="modify container container--vertical" onSubmit={event => {
             event.preventDefault()
-            props.goToSpinner()
+            props.showSpinner()
             const user = {
                 name     : event.target.name.value,
                 surname  : event.target.surname.value,
@@ -13,17 +13,30 @@ function ChangeData(props) {
             try {
                 updateUserData(sessionStorage.token, user, function (error) {
                     if (error) {
-                        //injectableModal("template-modal", "Error", error.message);
-                        alert(error.message)
+                        var error = error.message
+
+                        props.showModal("Error", error)
+
+                        props.hideSpinner()
+
+                        return
                     }
                     event.target.reset()
-                    alert("Tus datos fueron actualizados.")
-                    props.onProfile()
+
+                    props.showModal("Éxito", "Tus datos fueron actualizados.")
+
+                    props.hideSpinner()
+
+                    props.onChangeData()
                 })
             } catch (error) {
-                //injectableModal("template-modal", "Error", error.message);
-                event.target.reset()
-                alert(error.message)
+                var errorM = error.message
+
+                props.showModal("Error", errorM)
+
+                props.hideSpinner()
+                
+                props.onChangeData()
             }
         }}>
         <form className="container container--vertical">
