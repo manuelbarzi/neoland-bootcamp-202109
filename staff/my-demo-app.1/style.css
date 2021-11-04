@@ -145,11 +145,40 @@ margin-top: 20px;
     justify-content: center;
     height: 100vh;
     width: 100vw;
+    position: absolute ;
+    top: 0;
+    left: 0;
+    /* background-color: black;
+    opacity: 0.4; */
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 .spinner__image {
     width: 25vw;
     height: 25vw;
+}
+
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    position: absolute ;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal__panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: fit-content;
+    width: fit-content; 
+    background-color: whitesmoke;
+    text-align: center;
 }
 
 /* ----------- PAGES ----------- */
