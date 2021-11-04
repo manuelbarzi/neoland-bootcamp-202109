@@ -1,0 +1,187 @@
+/* RESETS */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    text-decoration: none;
+    text-transform: none;
+    background: transparent;
+    /* font-size: 16px; */
+    outline: none;
+    tab-size: 0;
+    padding-inline-end: 0;
+    padding-inline-start: 0;
+    cursor: default;
+    /* font-family: 'Courier New', Courier, monospace; */
+}
+
+html,
+body {
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+/* COMPONENTS */
+
+/* ----- titles ----- */
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1rem;
+}
+
+/* ----- containers ----- */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container--vertical {
+    flex-direction: column;
+}
+
+.container--gapped {
+    padding: 1rem;
+}
+
+.container--off {
+    display: none;
+}
+
+.container--full {
+    height: 100%;
+}
+
+
+/* ----- spinner and modal ----- */
+.spinner, .modal {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .3);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.spinner__image {
+    width: 10vw;
+    height: 10vw;
+}
+
+.modal__panel {
+    width: fit-content;
+    height: fit-content;
+    background-color: white;
+    padding: 1rem;
+    color: black;
+    border-radius: 7px;
+}
+
+.modal__title {
+    color: inherit;
+}
+
+.modal__message {
+    color: inherit;
+    padding: 12px 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.modal__message--info {
+    color: mediumblue;
+}
+
+.modal__message--warn {
+    color: orange;
+}
+
+.modal__message--success {
+    color: darkolivegreen;
+}
+
+.modal__message--error {
+    color: red;
+}
+
+.modal__button {
+    color: inherit;
+    background-color: darkgrey!important;
+}
+
+
+/* ----- forms ----- */
+.field {
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 5px;
+    padding: 10px;
+    background-color: transparent;
+    font-size: 1rem;
+}
+
+
+/* ----- buttons ----- */
+.button {
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 5px;
+    padding: 10px;
+    background-color: transparent;
+    font-size: 1rem;
+}
+
+.button--medium {
+    min-width: 5.5rem;
+}
+
+.button--dark {
+    background-color: lightsalmon;
+}
+
+.button--dark:hover {
+    background-color: salmon;
+}
+
+.button--warning {
+    background-color: salmon;
+}
+
+.button--warning:hover {
+    background-color: red;
+}
+
+
+/* ----- search results ----- */
+.home__results {
+    list-style: none;
+}
+
+.home__results-item {
+    cursor: pointer;
+}
+
+.home__detail-image {
+    max-width: 80vw;
+}
+
+
+/* ----- logo ----- */
+.logo__image {
+    width: 5vw;
+}
+
+.logo__text {
+    color: salmon;
+    margin: 0 0 0 1rem;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+/* ----- timer -----  */
+.time {
+    font-size: .75rem;
+}
