@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Henny+Penny&display=swap");
 
 /* resets */
 
@@ -8,8 +8,9 @@
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%; 
+html,
+body {
+    height: 100%;
     padding: 0;
     margin: 0;
     border: 0;
@@ -56,15 +57,25 @@ html, body {
 }
 
 .container--gapped {
-    padding: 1rem;
+    margin: 1rem;
 }
 
-.container--off {
+/* .container--off {
     display: none;
-}
+} */
 
 .container--full {
     height: 100%;
+}
+
+.spinner {
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: 0.3;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .spinner__image {
@@ -91,9 +102,9 @@ html, body {
 .logo__text {
     color: dodgerblue;
     margin: 0 0 0 1rem;
-    font-family: 'Henny Penny';
+    font-family: "Henny Penny";
 }
 
 .time {
-    font-size: .75rem;
+    font-size: 0.75rem;
 }
