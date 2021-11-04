@@ -17,3 +17,5 @@ function SignIn(props) {
         </div>
     </form>
 }
+
+export default SignIn

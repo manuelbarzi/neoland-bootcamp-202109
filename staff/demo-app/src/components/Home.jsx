@@ -1,9 +1,7 @@
-class Home extends React.Component {
-    constructor() {
-        super()
+import { Component } from 'react'
 
+class Home extends Component {
 
-    }
     render() {
         return <div className="home container container--gapped container--vertical container--off">
             <div className="container">
@@ -24,3 +22,5 @@ class Home extends React.Component {
     }
 
 }
+
+export default Home

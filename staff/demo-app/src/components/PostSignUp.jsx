@@ -4,3 +4,5 @@ function PostSignUp(props) {
             in</button>
     </div>
 }
+
+export default PostSignUp

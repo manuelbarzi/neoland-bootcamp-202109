@@ -4,3 +4,5 @@ function Landing(props) {
             <button type="button" className="button button--medium" onClick={() => props.onSignUp()}>Sign up</button>
         </div>
 }
+
+export default Landing
