@@ -5,3 +5,4 @@ function Spinner() {
     </div>
     </>
 }
+export default Spinner

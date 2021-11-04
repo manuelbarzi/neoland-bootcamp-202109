@@ -23,3 +23,5 @@ function DeleteAccount(props) {
     </form>
 </div>
 }
+
+export default DeleteAccount

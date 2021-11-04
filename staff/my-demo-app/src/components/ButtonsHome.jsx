@@ -4,3 +4,5 @@ function ButtonsHome(props) {
     <button className='button' onClick={() => props.OnSignOut()}>SIGN OUT</button>
 </div>
 }
+
+export default ButtonsHome

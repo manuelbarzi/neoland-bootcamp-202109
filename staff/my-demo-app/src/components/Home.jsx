@@ -1,4 +1,19 @@
-class Home extends React.Component{
+import {Component} from 'react'
+import { searchVehicles } from '../logic'
+import { retrieveVehicle } from '../logic'
+import { updatePassword } from '../logic'
+import { unregisterUser } from '../logic'
+import HeaderHome from './HeaderHome'
+import Search from './Search'
+import Results from './Results'
+import Detail from './Detail'
+import ButtonsHome from './ButtonsHome'
+import Profile from './Profile'
+import ChangePassword from './ChangePassword'
+import DeleteAccount from './DeleteAccount'
+
+
+class Home extends Component{
     constructor (){
         super ()
 
@@ -140,3 +155,5 @@ class Home extends React.Component{
         </div>
     }
 }
+
+export default Home

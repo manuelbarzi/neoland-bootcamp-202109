@@ -35,3 +35,5 @@ function SignUp(props) {
     </form>
 </div>
 }
+
+export default SignUp

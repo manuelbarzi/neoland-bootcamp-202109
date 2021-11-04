@@ -14,3 +14,5 @@ function Landing(props) {
     </div>
 </div>
 }
+
+export default Landing

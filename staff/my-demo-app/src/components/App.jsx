@@ -1,4 +1,17 @@
-class App extends React.Component {
+import { Component } from 'react'
+import { retrieveUser } from '../logic'
+import { signUpUser } from '../logic'
+import { signInUser } from '../logic'
+import Landing from './Landing'
+import SignUp from './SignUp'
+import ThankYou from './ThankYou'
+import SignIn from './SignIn'
+import Home from './Home'
+import Spinner from './Spinner'
+import Modal from './Modal'
+
+
+class App extends Component {
     constructor() {
         super()
         this.state = {
@@ -14,7 +27,7 @@ class App extends React.Component {
             try {
                 retrieveUser(sessionStorage.token, (error, user) => {
                     if (error) {
-                        alert(error.message),
+                        alert(error.message)
                         this.deleteTokenAndLanding()
 
                     } else {
@@ -27,7 +40,7 @@ class App extends React.Component {
                     }
                 })
             } catch (error) {
-                alert(error.message),
+                alert(error.message)
                 this.deleteTokenAndLanding()
             }
         }
@@ -107,7 +120,7 @@ class App extends React.Component {
     }
 
     render() {
-        return <React.Fragment>
+        return <div className="app-bg">
             {this.state.view === 'landing' && 
                 <Landing
                     OnSignIn={this.goToSignIn}
@@ -142,9 +155,9 @@ class App extends React.Component {
 
             {this.state.spinner && <Spinner></Spinner>}
 
-            {this.state.modal === '' && <Modal></Modal>}
+            {!this.state.modal === '' && <Modal></Modal>}
 
-        </React.Fragment>
+        </div>
     }
 }
 

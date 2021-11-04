@@ -26,3 +26,5 @@ function ChangePassword(props) {
     </form>
 </div>
 }
+
+export default ChangePassword

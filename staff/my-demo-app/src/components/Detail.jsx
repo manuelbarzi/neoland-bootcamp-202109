@@ -20,3 +20,5 @@ function Detail(props) {
     </div>
 
 }
+
+export default Detail

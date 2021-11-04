@@ -15,7 +15,7 @@ html, body {
     margin: 0;
 }
 
-.body-bg {
+.app-bg {
     background-image: url(https://i2.wp.com/www.csscodelab.com/wp-content/uploads/2019/11/stripe-hero-background-effect-html-css.png?fit=1062%2C631&ssl=1);
     background-size: cover;
     background-repeat: no-repeat;

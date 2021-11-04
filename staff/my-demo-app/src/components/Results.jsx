@@ -13,4 +13,4 @@ function Results(props) {
     null
 }
 
-
+export default Results

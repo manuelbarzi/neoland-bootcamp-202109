@@ -10,3 +10,5 @@ function HeaderHome(props) {
     </>
     
 }
+
+export default HeaderHome

@@ -16,3 +16,5 @@ function ThankYou(props) {
 </div>
     
 }
+
+export default ThankYou

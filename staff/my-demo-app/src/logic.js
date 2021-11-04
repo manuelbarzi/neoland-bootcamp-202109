@@ -252,7 +252,7 @@ function searchVehicles(query, callback) {
 }
 
 function retrieveVehicle(id, callback) {
-    if (typeof id !== 'string') throw new TypeError(query + ' is not a string')
+    if (typeof id !== 'string') throw new TypeError(id + ' is not a string')
 
     var xhr = new XMLHttpRequest
 
@@ -269,4 +269,15 @@ function retrieveVehicle(id, callback) {
     xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/' + id)
 
     xhr.send()
+}
+
+
+export {
+ signUpUser,
+ signInUser,
+ retrieveUser,
+ updatePassword,
+ unregisterUser,
+ searchVehicles,
+ retrieveVehicle
 }
