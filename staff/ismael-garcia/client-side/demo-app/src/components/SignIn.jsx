@@ -1,4 +1,4 @@
-import logger from '../logger'
+import logger from '../utils/logger'
 
 function SignIn({ onSignIn, onSignUp }) {
     logger.debug('SignIn -> render')

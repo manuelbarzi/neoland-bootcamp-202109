@@ -1,4 +1,4 @@
-import logger from '../logger'
+import logger from '../utils/logger'
 
 function PostSignUp ({ onSignIn }) {
     logger.info('PostSignUp -> render')

@@ -1,7 +1,8 @@
-import logger from '../logger'
+import logger from '../../utils/logger'
+import './Logo.css'
 
 function Logo({ image, text }) {
-    logger.info('Logo -> render')
+    logger.debug('Logo -> render')
     
     return <div className="logo container">
         <img className="logo__image" src={image} alt='logo: a ladybug' />

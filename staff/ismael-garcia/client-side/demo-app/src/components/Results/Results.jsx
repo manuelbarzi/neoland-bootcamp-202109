@@ -1,7 +1,8 @@
-import logger from '../logger'
+import logger from '../../utils/logger'
+import './Results.css'
 
 function Results({ items, onItem }) {
-    logger.info('Results -> render')
+    logger.debug('Results -> render')
 
     return items.length ?
         <ul className="home__results container container--vertical">

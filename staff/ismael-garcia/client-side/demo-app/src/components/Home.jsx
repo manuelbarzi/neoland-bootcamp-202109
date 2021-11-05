@@ -1,12 +1,14 @@
 import { Component } from 'react'
-import logger from '../logger'
-import { searchVehicles } from '../logic'
-import { retrieveVehicle } from '../logic'
-import { updateUserPassword } from '../logic'
-import { unregisterUser } from '../logic'
+import logger from '../utils/logger'
+import { 
+    searchVehicles, 
+    retrieveVehicle, 
+    updateUserPassword, 
+    unregisterUser 
+} from '../logic'
 import Search from './Search'
-import Results from './Results'
-import Detail from './Detail'
+import Results from './Results/Results'
+import Detail from './Detail/Detail'
 import Profile from './Profile'
 
 class Home extends Component {
@@ -100,6 +102,8 @@ class Home extends Component {
                 }
 
                 onFlowEnd()
+
+                onModal('Password updated', 'success')
             })
         } catch ({ message }) {
             onFlowEnd()

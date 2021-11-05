@@ -1,0 +1,7 @@
+.home__results {
+    list-style: none;
+}
+
+.home__results-item {
+    cursor: pointer;
+}

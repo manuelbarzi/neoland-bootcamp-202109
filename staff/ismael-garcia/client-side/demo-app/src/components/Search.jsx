@@ -1,4 +1,4 @@
-import logger from '../logger'
+import logger from '../utils/logger'
 
 function Search({ onSearch }) {
     logger.debug('Search -> render')

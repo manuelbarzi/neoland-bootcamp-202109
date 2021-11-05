@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import logger from '../logger'
+import logger from '../utils/logger'
 import Unregister from './Unregister'
 
 class Profile extends Component {
@@ -18,7 +18,12 @@ class Profile extends Component {
     render() {
         logger.debug('Profile -> render')
 
-        const { props: { onPasswordUpdate, onBack, onUnregister }, state: { view }, goToUnregister, goToUpdatePassword } = this
+        const { 
+            props: { onPasswordUpdate, onBack, onUnregister }, 
+            state: { view }, 
+            goToUnregister, 
+            goToUpdatePassword 
+        } = this
 
         return <>
             {view === 'update-password' && <div className="profile container container--vertical" id="profile">
@@ -29,8 +34,8 @@ class Profile extends Component {
                     
                     onPasswordUpdate(oldPassword, password)
                 }}>
-                    <input className="field" type="password" name="old-password" id="old-password" placeholder="Old Password" required />
-                    <input className="field" type="password" name="new-password" id="new-password" placeholder="New Password" required />
+                    <input className="field" type="password" name="oldPassword" id="oldPassword" placeholder="Old Password" required />
+                    <input className="field" type="password" name="password" id="password" placeholder="New Password" required />
 
                     <div className="container">
                         <button type="button" className="button button--medium" onClick={event => {

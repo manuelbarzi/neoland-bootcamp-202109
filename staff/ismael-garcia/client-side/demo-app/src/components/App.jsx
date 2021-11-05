@@ -1,17 +1,16 @@
 import { Component } from 'react'
-import logger from '../logger'
-import { retrieveUser } from '../logic'
-import { signUpUser } from '../logic'
-import { signInUser } from '../logic'
-import Logo from './Logo'
-import Time from './Time'
+import logger from '../utils/logger'
+import { retrieveUser, signUpUser, signInUser } from '../logic'
+import Logo from './Logo/Logo'
+import Time from './Time/Time'
 import Landing from './Landing'
 import SignUp from './SignUp'
 import PostSignUp from './PostSignUp'
 import SignIn from './SignIn'
 import Home from './Home'
-import Spinner from './Spinner'
-import Modal from './Modal'
+import Spinner from './Spinner/Spinner'
+import Modal from './Modal/Modal'
+import '../assets/logo.png'
 
 class App extends Component {
     constructor() {
@@ -170,7 +169,7 @@ class App extends Component {
         const { goToSignIn, goToSignUp, signUp, signIn, resetTokenAndGoToLanding, showSpinner, hideSpinner, acceptModal, showModal, state: { view, name, spinner, modal, level } } = this
         
         return <>
-            <Logo image="./assets/logo.png" text='Demo App' />
+            <Logo image="../assets/logo.png" text='Demo App' />
 
             <Time />
 

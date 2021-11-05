@@ -1,4 +1,5 @@
-import logger from '../logger'
+import logger from '../../utils/logger'
+import './Detail.css'
 
 function Detail({ onBack, item: { name, image, year, price, color, style, collection, maker, url } }) {
     logger.debug('Detail -> render')

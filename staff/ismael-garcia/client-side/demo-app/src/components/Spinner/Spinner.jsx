@@ -1,4 +1,5 @@
-import logger from '../logger'
+import logger from '../../utils/logger'
+import './Spinner.css'
 
 function Spinner() {
     logger.debug('Spinner -> render')

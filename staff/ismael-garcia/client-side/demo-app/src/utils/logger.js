@@ -2,11 +2,11 @@ const logger = {
     level: 'debug',
 
     debug(message) {
-        this.level === 'debug' && console.log('%DEBUG %c' + new Date().toISOString() + ' %c' + message, 'color: green;', 'color: grey;', 'color: green;')
+        this.level === 'debug' && console.log('%cDEBUG %c' + new Date().toISOString() + ' %c' + message, 'color: green;', 'color: grey;', 'color: green;')
     },
 
     info(message) {
-        (this.level === 'debug' || this.level === 'info') && console.log('%cINFO %c' + new Date().toISOString() + ' %c' + message, 'color: blue;', 'color: grey;', 'color: blue;')
+        (this.level === 'debug' || this.level === 'info') && console.log('%cINFO %c' + new Date().toISOString() + ' %c' + message, 'color: turquoise;', 'color: grey;', 'color: turquoise;')
     },
 
     warn(message) {

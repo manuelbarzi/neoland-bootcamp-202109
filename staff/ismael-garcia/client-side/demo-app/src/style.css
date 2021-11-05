@@ -55,62 +55,6 @@ h1 {
 }
 
 
-/* ----- spinner and modal ----- */
-.spinner, .modal {
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, .3);
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-
-.spinner__image {
-    width: 10vw;
-    height: 10vw;
-}
-
-.modal__panel {
-    width: fit-content;
-    height: fit-content;
-    background-color: white;
-    padding: 1rem;
-    color: black;
-    border-radius: 7px;
-}
-
-.modal__title {
-    color: inherit;
-}
-
-.modal__message {
-    color: inherit;
-    padding: 12px 0;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-.modal__message--info {
-    color: mediumblue;
-}
-
-.modal__message--warn {
-    color: orange;
-}
-
-.modal__message--success {
-    color: darkolivegreen;
-}
-
-.modal__message--error {
-    color: red;
-}
-
-.modal__button {
-    color: inherit;
-    background-color: darkgrey!important;
-}
-
-
 /* ----- forms ----- */
 .field {
     border-radius: 5px;
@@ -155,33 +99,6 @@ h1 {
 }
 
 
-/* ----- search results ----- */
-.home__results {
-    list-style: none;
-}
-
-.home__results-item {
-    cursor: pointer;
-}
-
-.home__detail-image {
-    max-width: 80vw;
-}
 
 
-/* ----- logo ----- */
-.logo__image {
-    width: 5vw;
-}
 
-.logo__text {
-    color: salmon;
-    margin: 0 0 0 1rem;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-
-/* ----- timer -----  */
-.time {
-    font-size: .75rem;
-}

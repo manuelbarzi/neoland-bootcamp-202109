@@ -1,4 +1,5 @@
-import logger from '../logger'
+import logger from '../../utils/logger'
+import './Modal.css'
 
 function Modal({ level, message, onAccept }) {
     logger.debug('Modal -> render')
