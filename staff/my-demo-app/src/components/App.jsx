@@ -18,7 +18,8 @@ class App extends Component {
             view: sessionStorage.token ? '' : 'landing',
             name: null,
             spinner: sessionStorage.token ? true : false,
-            modal: ''
+            modal: '',
+            level: 'error'
         }
     }
 
@@ -155,7 +156,10 @@ class App extends Component {
 
             {this.state.spinner && <Spinner></Spinner>}
 
-            {!this.state.modal === '' && <Modal></Modal>}
+            {this.state.modal === '' && <Modal
+            onGetIt={()=> this.setState ({modal: 'hello'})}
+
+            ></Modal>}
 
         </div>
     }

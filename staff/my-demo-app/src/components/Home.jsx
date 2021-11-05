@@ -14,15 +14,15 @@ import DeleteAccount from './DeleteAccount'
 
 
 class Home extends Component{
-    constructor (){
+    constructor (props){
         super ()
 
-        this.state = {view: 'home', vehicles: [], vehicle: null, name:null}
+        this.state = {view: 'home', vehicles: [], vehicle: null, name: props.name}
     }
 
-    componentDidMount(){
-        this.setState ({name: this.props.name})
-    }
+    // componentDidMount(){
+    //     this.setState ({name: this.props.name})
+    // }
 
     search = query => {
         this.props.OnStartFlow()
