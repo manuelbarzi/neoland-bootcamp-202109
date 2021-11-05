@@ -24,7 +24,7 @@ function signupUser(name, username, password, callback) {
     if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
     if (password.length < 6) throw new Error('password has less than 6 characters')
 
-    if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
+    if (typeof callback !== 'function') throw new TypeError(`{callback} is not a function`)
 
     const xhr = new XMLHttpRequest
 
@@ -63,7 +63,7 @@ function signinUser(username, password, callback) {
     if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
     if (password.length < 6) throw new Error('password has less than 6 characters')
 
-    if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
+    if (typeof callback !== 'function') throw new TypeError(`{callback} is not a function`)
 
     const xhr = new XMLHttpRequest
 
@@ -100,7 +100,7 @@ function retrieveUser(token, callback) {
     if (typeof token !== 'string') throw new TypeError(token + ' is not a string')
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
 
-    if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
+    if (typeof callback !== 'function') throw new TypeError(`{callback} is not a function`)
 
     const xhr = new XMLHttpRequest
 
@@ -144,7 +144,7 @@ function updateUserPassword(token, oldPassword, password, callback) {
     if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
     if (password.length < 6) throw new Error('password has less than 6 characters')
 
-    if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
+    if (typeof callback !== 'function') throw new TypeError(`{callback} is not a function`)
 
     const xhr = new XMLHttpRequest
 
@@ -183,7 +183,7 @@ function unregisterUser(token, password, callback) {
     if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
     if (password.length < 6) throw new Error('password has less than 6 characters')
 
-    if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
+    if (typeof callback !== 'function') throw new TypeError(`{callback} is not a function`)
 
     const xhr = new XMLHttpRequest
 
