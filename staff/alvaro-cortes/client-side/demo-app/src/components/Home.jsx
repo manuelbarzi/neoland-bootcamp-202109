@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import './Home.css'
 import logger from '../logger'
 import { searchVehicles } from '../logic'
 import { retrieveVehicle } from '../logic'
@@ -17,32 +18,32 @@ class Home extends Component {
 
     onSearch = query => {
         //En caso de ya tener resultados impresos de la busqueda anterior, se reemplazaran por los de la nueva busqueda 
+        const { props: { hideSpinner, showModal, showSpinner } } = this
+        
         this.setState({ vehicle: null })
 
-        this.props.showSpinner()
+        showSpinner()
 
         try {
             searchVehicles(query, (error, vehicles) => {
                 if (error) {
-                    var error = error.message
 
-                    this.props.hideSpinner()
+                    hideSpinner()
 
-                    this.props.showModal("Error", error)
+                    showModal("Error", error.message)
 
                     return
                 }
 
-                this.props.hideSpinner()
+                hideSpinner()
                 
                 this.setState({ vehicles })
             })
-        } catch (error) {
-            var errorM = error.message
+        } catch ({ message}) {
 
-            this.props.showModal("Error", errorM)
+            showModal("Error", message)
 
-            this.props.hideSpinner()
+            hideSpinner()
 
             this.setState({ vehicles: [] })
         }
@@ -50,45 +51,48 @@ class Home extends Component {
 
     onItem = vehicleId => {
 
-        this.props.showSpinner()
+        const { props: { showModal, showSpinner, hideSpinner } } = this
+
+        showSpinner()
 
         try {
             retrieveVehicle(vehicleId, (error, vehicle) => {
                 if (error) { 
-                    var error = error.message
 
-                    this.props.showModal("Error", error)
+                    showModal("Error", error.message)
                 }
-                this.props.hideSpinner()
+                hideSpinner()
 
                 this.setState({ vehicle })
             })
-        } catch (error) {
-            var errorM = error.message
+        } catch ({ message }) {
 
-            this.props.showModal("Error", errorM)
+            showModal("Error", message)
 
-            this.props.hideSpinner()
+            hideSpinner()
         }
     }
     
     render() {
-        return <>
-            {!this.state.vehicles && <Search onSearch={this.onSearch}/>}
 
-            {this.state.vehicles && <Search onSearch={this.onSearch}/>}
+            const { state: { vehicles, vehicle}, props: { name, onProfile, signOut}, onItem } = this
+        
+        return <>
+            {!vehicles && <Search onSearch={this.onSearch}/>}
+
+            {vehicles && <Search onSearch={this.onSearch}/>}
 
             <div className="welcome container container--vertical">
-                <h2> Bienvenido a tu página de inicio <span className="name"> {this.props.name} </span></h2>
+                <h2> Bienvenido a tu página de inicio <span className="name"> {name} </span></h2>
                 <div className="container">
-                    <button type="button" className="button button--red" onClick={() => this.props.onProfile()}>Perfil</button>
-                    <button type="button" className="button button--signout" onClick={() => this.props.signOut()}>Cerrar Sesión</button>
+                    <button type="button" className="button button--red" onClick={() => onProfile()}>Perfil</button>
+                    <button type="button" className="button button--signout" onClick={() => signOut()}>Cerrar Sesión</button>
                 </div>
             </div>
 
-            {!this.state.vehicle && <Results items={this.state.vehicles} onItem={this.onItem} />}
+            {!vehicle && <Results items={vehicles} onItem={onItem} />}
 
-            {this.state.vehicle && <Detail item={this.state.vehicle}
+            {vehicle && <Detail item={vehicle}
                 backResultList={() => this.setState({ vehicle: null })} />}
         </>
     }

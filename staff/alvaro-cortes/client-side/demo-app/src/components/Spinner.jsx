@@ -1,3 +1,4 @@
+import './Spinner.css'
 import logger from '../logger'
 
 function Spinner() {

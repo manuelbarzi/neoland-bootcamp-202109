@@ -1,3 +1,5 @@
+import './Modal.css'
+
 /*class Modal extends React.Component {
     constructor() {
         logger.info("Modal -> render")

@@ -32,7 +32,7 @@ class App extends Component {
         logger.info("App -> componentDidMount")
 
         const { token } = sessionStorage
-        const { props: { showModal }, resetTokenAndGoToLogin } = this // Destructuring
+        const {  showModal, resetTokenAndGoToLogin } = this // Destructuring
         
         if (token) {
             try {
@@ -71,6 +71,7 @@ class App extends Component {
 
         this.setState({
             view: "landing",
+            name: null,
             spinner: false
         })
     }

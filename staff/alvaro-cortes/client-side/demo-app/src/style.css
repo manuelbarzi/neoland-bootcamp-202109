@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Shadows+Into+Light+Two&display=swap');
+
 html, body {
     height: 100;
     padding: 0;
@@ -45,20 +47,6 @@ hr {
 
 .container--search {
    padding: 5px;
-}
-
-.welcome, .register-ok, .welcome__details, .welcome__results {
-    font-family: 'Noto Sans', sans-serif;
-    padding: 30px;
-    color: brown;
-    text-align: center;
-    background-color: white;
-    border-radius: 10px;
-}
-
-.welcome__results {
-    cursor: pointer;
-    list-style: none;
 }
 
 /* ------ form ------- */
@@ -131,105 +119,3 @@ input {
     background-color: rgb(170, 45, 45);
     color: white;
 }
-
-/* ----- Modal ----- */
-
-.modal {
-    display: flex;
-    min-width: 100%;
-    max-width: 100%;
-    min-height: 100%;
-    max-height: 100%;
-    background-color: rgba(85, 85, 85, 0.7);
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-}
-
-.modal__pop-up {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-direction: column;
-    background-color:  #f0f0f0;
-    height: fit-content;
-    min-width: 320px;
-    max-width: 420px;
-    margin: auto;
-    border: 2px solid rgb(143, 143, 143);
-    border-radius: 7px;
-}
-
-.modal__title {
-    background-color: white;
-    margin-top: 15px;
-    font-size: 1.6rem;
-    padding: 0.4rem;
-    border-radius: 7px;
-    color: rgb(170, 45, 45);
-    font-family: 'Noto Sans', sans-serif;
-}
-
-.modal__text {
-    margin-top: 12px;
-    padding: 15px;
-    text-align: center;
-    font-size: 1.1rem;
-    font-family: 'Noto Sans', sans-serif;
-}
-
-
-/* ----- spinner ----- */ 
-
-.circulo1 {
-    fill:rgb(170, 45, 45);
-    animation: miAnimacion 1.5s alternate infinite;
-}
-.circulo3 {
-    fill:rgb(179, 102, 102);
-    animation: miAnimacion 1.5s alternate infinite;
-}
-.circulo2 {
-    fill:rgb(165, 144, 144);
-    animation: miAnimacion 1.5s alternate infinite;
-}
-.circulo4 {
-    fill:rgb(165, 144, 144);
-    animation: miAnimacion 1.5s alternate infinite;
-}
-.circulo5 {
-    fill:rgb(165, 144, 144);
-    animation: miAnimacion 1.5s alternate infinite;
-}
-.circulo6 {
-    fill:rgb(165, 144, 144);
-    animation: miAnimacion 1.5s alternate infinite;
-}
-
-.spinner {
-    background-color: black;
-    height: 200vw;
-    width: 100vw;
-    top: -15px;
-    left: -10px;
-    opacity: 0.6;
-    position: absolute;
-    z-index: 1;
-}
-
-#spinner {
-    animation: rotate-out 0.8s linear infinite;
-    transform-origin: center;
-    transform-box: fill-box;
-  }
-
-  @keyframes rotate-out {
-    0% {
-      transform: rotate(0deg)
-    }
-    100% {
-      transform: rotate(180deg)
-    }
-  }
-

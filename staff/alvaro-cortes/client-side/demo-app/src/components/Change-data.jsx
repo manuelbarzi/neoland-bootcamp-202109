@@ -3,43 +3,48 @@ import { updateUserData } from '../logic'
 
 function ChangeData(props) {
     logger.info("ChangeData -> render")
+
     return(
         <div className="modify container container--vertical" onSubmit={event => {
             event.preventDefault()
-            props.showSpinner()
+
+            const { showModal, hideSpinner, showSpinner, onChangeData } = props
+            
+            const { target: { reset, name: { value: name }, surname: { value: surname }, email: { value: email }, username: { value: username } } } = event
+            
+            showSpinner()
+
             const user = {
-                name     : event.target.name.value,
-                surname  : event.target.surname.value,
-                email    : event.target.email.value,
-                username : event.target.username.value,
+                name,
+                surname,
+                email,
+                username
             }
             try {
                 updateUserData(sessionStorage.token, user, function (error) {
                     if (error) {
-                        var error = error.message
 
-                        props.showModal("Error", error)
+                        showModal("Error", error.message)
 
-                        props.hideSpinner()
+                        hideSpinner()
 
                         return
                     }
-                    event.target.reset()
+                    reset()
 
-                    props.showModal("Éxito", "Tus datos fueron actualizados.")
+                    showModal("Éxito", "Tus datos fueron actualizados.")
 
-                    props.hideSpinner()
+                    hideSpinner()
 
-                    props.onChangeData()
+                    onChangeData()
                 })
-            } catch (error) {
-                var errorM = error.message
+            } catch ({ message }) {
 
-                props.showModal("Error", errorM)
+                showModal("Error", message)
 
-                props.hideSpinner()
+                hideSpinner()
                 
-                props.onChangeData()
+                onChangeData()
             }
         }}>
         <form className="container container--vertical">

@@ -6,41 +6,46 @@ function SignUp(props) {
     return (
         <form className="register container container--vertical" onSubmit={event => {
             event.preventDefault()
-            props.showSpinner()
+
+            const { showModal, showSpinner, hideSpinner, onSignUp, onSignIn } = props
+            
+            const { target: { reset, name: { value: name }, surname: { value: surname }, email: { value: email }, username: { value: username }, password: { value: password } } } = event
+            
+            showSpinner()
+
             const user = {
-                name     : event.target.name.value,
-                surname  : event.target.surname.value,
-                email    : event.target.email.value,
-                username : event.target.username.value,
-                password : event.target.password.value
+                name,
+                surname,
+                email ,
+                username,
+                password
             }
             try {
                 registerUser(user, (error) => {
                     if (error) {
-                        var error = error.message
 
-                        props.showModal("Error", error)
+                        showModal("Error", error.message)
 
-                        props.hideSpinner()
+                        hideSpinner()
 
-                        props.onSignUp()
+                        onSignUp()
                     } else {
-                        props.showModal("Éxito", "Tu cuenta se ha creado correctamente.")
+                        showModal("Éxito", "Tu cuenta se ha creado correctamente.")
 
-                        event.target.reset()
+                        reset()
 
-                        props.hideSpinner()
+                        hideSpinner()
 
-                        props.onSignIn()
+                        onSignIn()
                     }
                 })
             } catch ({ message }) {
 
-                props.showModal("Error", message)
+                showModal("Error", message)
 
-                props.hideSpinner()
+                hideSpinner()
 
-                props.onSignUp()
+                onSignUp()
             }
         }}>
         <h3 className="titles">Registro</h3>

@@ -1,15 +1,16 @@
+import './Home.css'
 import logger from '../logger'
 
-function Results(props) {
+function Results({ items, onItem }) {
     logger.info("Results -> render")
-    return props.items.length ?
+    return items.length ?
         <div className="welcome__results container container--vertical">
-            <ul className="welcome__results">
+            <ul className="welcome__results--ul">
                 {
-                    props.items.map(item => <li  key={item.id} onClick={() => props.onItem(item.id)}>
-                        <h2>{item.name}</h2>
-                        <img src={item.thumbnail} />
-                        <span>{item.price}</span>
+                    items.map(({ id, name, thumbnail, image, price }) => <li  key={id} onClick={() => onItem(id)}>
+                        <h2>{name}</h2>
+                        <img src={thumbnail || image} />
+                        <span>{price}</span>
                     </li>)
                 }
             </ul>

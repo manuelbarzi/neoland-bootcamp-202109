@@ -6,10 +6,15 @@ function ChangePassword(props) {
     return (
         <div className="change--password container container--vertical" onSubmit={event => {
             event.preventDefault()
-            props.showSpinner()
+
+            const { showSpinner, showModal, hideSpinner, onChangePassword } = props
+            
+            const { target: { reset, password: { value: password }, oldPassword: { value: oldPassword } }} = event
+            
+            showSpinner()
             const user = {
-                password: event.target.password.value,
-                oldPassword: event.target.oldPassword.value
+                password,
+                oldPassword
             }
 
             try {
@@ -17,26 +22,25 @@ function ChangePassword(props) {
                     if (error) {
                         var error = error.message
 
-                        props.showModal("Error", error)
+                        showModal("Error", error)
 
-                        props.hideSpinner()
+                        hideSpinner()
 
-                        props.onChangePassword()
+                        onChangePassword()
 
                         return
                     }
-                    event.target.reset()
+                    reset()
 
-                    props.showModal("Éxito", "Tu contraseña fue actualizada.")
+                    showModal("Éxito", "Tu contraseña fue actualizada.")
 
-                    props.hideSpinner()
+                    hideSpinner()
 
-                    props.onChangePassword()
+                    onChangePassword()
                 })
-            } catch (error) {
-                var errorM = error.message
+            } catch ({ message }) {
 
-                props.showModal("Error", errorM)
+                props.showModal("Error", message)
 
                 props.hideSpinner()
 
