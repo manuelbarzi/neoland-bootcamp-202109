@@ -12,7 +12,7 @@ class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      view: 'landing',
+      view: sessionStorage.token ? 'home' : 'landing',
       user: null
     }
   }
@@ -20,16 +20,21 @@ class App extends React.Component {
   // Go to ..
   goToSignIn = () => this.setState({ view: 'signin' })
   goToSignUp = () => this.setState({ view: 'signup' })
+  goToLanding = () => this.setState({ view: 'landing' })
+  deleteToken = () => delete sessionStorage.token
 
   // Logic Functions
   login = (username, password) => {
     try {
-      signinUser(username, password, (error, token) => {
+      signinUser(username, password, (error, _token) => {
         if (error) {
           alert(error.message)
+          return
         }
+        sessionStorage.token = _token
+
         try {
-          retrieveUser(token, (error, _user) => {
+          retrieveUser(_token, (error, _user) => {
             if (error) {
               alert(error.message)
               return
@@ -58,7 +63,7 @@ class App extends React.Component {
 
       {this.state.view === 'signup' && <SignUp />}
 
-      {this.state.view === 'home' && <Home myUserName={this.state.user} />}
+      {this.state.view === 'home' && <Home myUserName={this.state.user} onSignOut={this.goToLanding} />}
     </>)
   }
 }
