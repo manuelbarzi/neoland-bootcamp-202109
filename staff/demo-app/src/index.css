@@ -13,6 +13,7 @@ body {
     padding: 0;
     margin: 0;
     border: 0;
+    background: lightgray;
 }
 
 /* compos */
@@ -25,7 +26,7 @@ body {
     padding: 10px;
     background-color: transparent;
     font-size: 1rem;
-    cursor:pointer;
+    cursor: pointer;
 }
 
 .button--medium {

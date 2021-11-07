@@ -1,52 +1,58 @@
-import {Component} from "react"
-import { updateUserPassword } from "../logic"
-import Profile from './Profile'
-import Landing from "./Landing"
+import { Component } from "react"
+import Search from "./Search"
+import Results from './Results'
+import ResultDetails from './ResultDetails'
 
-class Home extends Component{
-    constructor(){
+// Logic Bussines
+import { searchVehicles, retrieveVehicle } from '../logic'
+
+
+class Home extends Component {
+    constructor() {
         super()
-        
-        this.state={view:'search'}
+
+        this.state = { view: null, vehicles: [], detail: [] }
     }
 
-    //logic
-    
-    updatePassword=(oldPassword, password)=>{
-        try{
-        updateUserPassword(sessionStorage.token, oldPassword,password,error=>{
-            if(error){
-                alert(error.message)
-                return
+    search = query => {
+        searchVehicles(query, (error, vehicles) => {
+            if (error) {
+                return alert(error.message)
             }
-            alert('todo ok')
+
+            this.setState({ view: 'results', vehicles })
+
         })
-        }catch(error){
-            alert(error.message)
-            return
-        }
     }
 
-    render(){
-        const {props:{onSignOut, myUserName},updatePassword} = this
-        return <>
-        
-        <div className="home container container--gapped container--vertical">
-            <div className="container">
-                <p>Hello, <span className="name">{myUserName}</span>!</p>
-                <button type="button" className="button button-medium button--dark" onClick={()=> this.setState({view:'profile'})}>Profile</button>
-                <button className="button button-medium button" onClick={()=>onSignOut()}>Sign out</button>
-            </div>
-            {this.state.view==='search'&& <form className="home__search container">
-                <input className="field" type="text" name="query" id="query" placeholder="criteria" />
-                <button type="submit" className="button button--medium button--dark">Search</button>
-            </form>}
+    showDetails = (id) => {
+        retrieveVehicle(id, (error, detail) => {
+            if (error) return alert(error.message)
 
-            {this.state.view==='profile'&&<Profile onGoBack={()=> this.setState({view:'search'})} onSubmitUpdate={updatePassword} onUnRegister={()=> this.setState({view:'unregister'})}   />}
-            
-        </div>
-        {this.state.view === 'landing' && <Landing onSignIn={this.goToSignIn} onSignUp={this.goToSignUp}/>}
+            { this.setState({ view: 'details', detail }) }
+        })
+    }
+
+    render() {
+        const { state: { view, vehicles, detail },
+            props: { myUserName, onProfile, onSignOut },
+            search, showDetails } = this
+        return <>
+            <div className="home container container--gapped container--vertical">
+                <div className="container">
+                    <p>Hello, <span className="name">{myUserName}</span>!</p>
+                    <button type="button" className="button button-medium button--dark" onClick={() => onProfile()}>Profile</button>
+                    <button className="button button-medium button" onClick={() => onSignOut()}>Sign out</button>
+                </div>
+
+                <Search onSubmitSearch={search} />
+
+                {view === 'results' && <Results vehicles={vehicles} onVehicle={showDetails} />}
+
+                {this.state.view === 'details' && <ResultDetails detail={detail} onBack={() => this.setState({ view: 'results' })} />}
+            </div>
         </>
-    }     
+    }
 }
+
 export default Home

@@ -1,50 +1,52 @@
-import { Component } from "react"
-import Results from './Results'
-import Search from "./Search"
+import {Component} from "react"
+import { updateUserPassword } from "../logic"
+import Profile from './Profile'
+import Landing from "./Landing"
 
-// Logic Bussines
-import { searchVehicles } from '../logic'
-
-
-class Home extends Component {
-    constructor() {
+class Home extends Component{
+    constructor(){
         super()
-
-        this.state = { view: null }
+        
+        this.state={view:'search'}
     }
 
-    search = query => {
-        searchVehicles(query, (error, _vehicles) => {
-            if (error) {
+    //logic
+    
+    updatePassword=(oldPassword, password)=>{
+        try{
+        updateUserPassword(sessionStorage.token, oldPassword,password,error=>{
+            if(error){
                 alert(error.message)
                 return
             }
-            let vehicle = _vehicles
-            this.setState({ view: 'results' })
-
+            alert('todo ok')
         })
+        }catch(error){
+            alert(error.message)
+            return
+        }
     }
 
-    render() {
-        const { props: { myUserName, onProfile, onSignOut }, search } = this
+    render(){
+        const {props:{onSignOut, myUserName},updatePassword} = this
         return <>
-
-            <div className="home container container--gapped container--vertical">
-                <div className="container">
-                    <p>Hello, <span className="name">{myUserName}</span>!</p>
-                    <button type="button" className="button button-medium button--dark" onClick={() => onProfile()}>Profile</button>
-                    <button className="button button-medium button" onClick={() => onSignOut()}>Sign out</button>
-                </div>
-
-                <Search onSubmitSearch={search} />
-
-                {this.state.view === 'vehicles' && <Results />}
-
-                {/* {this.state.view === 'result-details' && <ResultDetails />} */}
-
+        
+        <div className="home container container--gapped container--vertical">
+            <div className="container">
+                <p>Hello, <span className="name">{myUserName}</span>!</p>
+                <button type="button" className="button button-medium button--dark" onClick={()=> this.setState({view:'profile'})}>Profile</button>
+                <button className="button button-medium button" onClick={()=>onSignOut()}>Sign out</button>
             </div>
+            {this.state.view==='search'&& <form className="home__search container">
+                <input className="field" type="text" name="query" id="query" placeholder="criteria" />
+                <button type="submit" className="button button--medium button--dark">Search</button>
+            </form>}
 
+            {this.state.view==='profile'&&<Profile onGoBack={()=> this.setState({view:'search'})} onSubmitUpdate={updatePassword} onUnRegister={()=> this.setState({view:'unregister'})}   />}
+            
+        </div>
+        {this.state.view === 'landing' && <Landing onSignIn={this.goToSignIn} onSignUp={this.goToSignUp}/>}
         </>
-    }
+    }     
 }
 export default Home
