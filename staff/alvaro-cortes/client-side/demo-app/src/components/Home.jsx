@@ -1,8 +1,11 @@
 import { Component } from 'react'
 import './Home.css'
 import logger from '../logger'
-import { searchVehicles } from '../logic'
-import { retrieveVehicle } from '../logic'
+import { 
+    searchVehicles, 
+    retrieveVehicle, 
+    toggleFavoriteVehicle
+} from '../logic'
 import Search from './Search'
 import Results from './Results'
 import Detail from './Detail'
@@ -72,15 +75,47 @@ class Home extends Component {
             hideSpinner()
         }
     }
+
+    toggleFavorite = id => {
+
+        const { props: { hideSpinner, showSpinner, showModal } } = this
+        
+        showSpinner()
+
+        try {
+            toggleFavoriteVehicle(sessionStorage.token, id, error => {
+                if (error) {
+                    hideSpinner()
+
+                    showModal(error.message)
+
+                    return
+                }
+
+                hideSpinner()
+
+            })
+        } catch({ message }) {
+            hideSpinner()
+
+            showModal(message)
+        }
+    }
     
     render() {
 
-            const { state: { vehicles, vehicle}, props: { name, onProfile, signOut}, onItem } = this
+            const { 
+                state: { vehicles, vehicle}, 
+                props: { name, onProfile, signOut},
+                toggleFavorite, 
+                onItem,
+                onSearch 
+            } = this
         
         return <>
-            {!vehicles && <Search onSearch={this.onSearch}/>}
+            {!vehicles && <Search onSearch={onSearch}/>}
 
-            {vehicles && <Search onSearch={this.onSearch}/>}
+            {vehicles && <Search onSearch={onSearch}/>}
 
             <div className="welcome container container--vertical">
                 <h2> Bienvenido a tu página de inicio <span className="name"> {name} </span></h2>
@@ -92,8 +127,10 @@ class Home extends Component {
 
             {!vehicle && <Results items={vehicles} onItem={onItem} />}
 
-            {vehicle && <Detail item={vehicle}
-                backResultList={() => this.setState({ vehicle: null })} />}
+            {vehicle && <Detail 
+                item={vehicle}
+                backResultList={() => this.setState({ vehicle: null })} 
+                onToggleFavorite={toggleFavorite} />}
         </>
     }
 }
