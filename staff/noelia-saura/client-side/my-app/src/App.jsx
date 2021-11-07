@@ -77,6 +77,7 @@ class App extends React.Component {
     }
     goToSignOut = () => {
         delete sessionStorage.token
+        delete sessionStorage.fav
         this.setState({ view: 'landing' })
     }
 
