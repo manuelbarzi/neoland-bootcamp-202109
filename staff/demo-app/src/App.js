@@ -5,14 +5,15 @@ import SignIn from "./components/SignIn";
 import Home from "./components/Home";
 
 // Logic Business
-import { signinUser } from "./logic";
+import { signinUser, signupUser } from "./logic";
 import { retrieveUser } from "./logic";
+
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      view: sessionStorage.token ? 'home' : 'landing',
+      view: sessionStorage.token? 'home':'landing',
       user: null
     }
   }
@@ -20,8 +21,12 @@ class App extends React.Component {
   // Go to ..
   goToSignIn = () => this.setState({ view: 'signin' })
   goToSignUp = () => this.setState({ view: 'signup' })
-  goToLanding = () => this.setState({ view: 'landing' })
-  deleteToken = () => delete sessionStorage.token
+  goToLanding = () => this.setState({view:'landing'})
+  resetToken = () => delete sessionStorage.token
+  onSignOut = () => {
+    this.goToLanding ()
+    this.resetToken()}
+
 
   // Logic Functions
   login = (username, password) => {
@@ -30,9 +35,10 @@ class App extends React.Component {
         if (error) {
           alert(error.message)
           return
+        }else{
+          
+          sessionStorage.token=_token
         }
-        sessionStorage.token = _token
-
         try {
           retrieveUser(_token, (error, _user) => {
             if (error) {
@@ -51,6 +57,21 @@ class App extends React.Component {
       return
     }
   }
+  
+  register =(name,username,password)=> {
+    try{
+      signupUser(name,username,password, (error)=>{
+        if(error){
+          alert(error.message)
+          return
+        }
+        alert('registrado correctamente')
+      })
+    }catch(error){
+      alert(error.message)
+      return
+    }
+  }
 
   render() {
     return (<>
@@ -61,11 +82,10 @@ class App extends React.Component {
 
       {this.state.view === 'signin' && <SignIn onSignUp={this.goToSignUp} onSubmitSignIn={this.login} />}
 
-      {this.state.view === 'signup' && <SignUp />}
+      {this.state.view === 'signup' && <SignUp onSignUp={this.register} onSignIn= {this.goToSignIn} />}
 
-      {this.state.view === 'home' && <Home myUserName={this.state.user} onSignOut={this.goToLanding} />}
+      {this.state.view === 'home' && <Home myUserName={this.state.user} onSignOut ={this.onSignOut} />}
     </>)
-  }
-}
-
+    }
+    }
 export default App;

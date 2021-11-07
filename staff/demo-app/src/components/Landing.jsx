@@ -5,6 +5,7 @@ function Landing({ onSignIn, onSignUp }) {
             <button type="button" className="button button--medium" onClick={() => onSignUp()}>Sign up</button>
         </div>
     )
+    
 }
 
 export default Landing
