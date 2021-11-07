@@ -1,8 +1,31 @@
 import logger from '../../utils/logger'
 import './Detail.css'
+import { Component } from 'react'
 
-function Detail({ onBack, item: { name, image, year, price, color, style, collection, maker, url } }) {
+class Detail extends Component {
+    constructor(props) {
+        super()
+
+        this.state = { fav: props.item.isFav }
+    }
+
+    toggleFav = id => {
+        this.setState({ fav: !this.state.fav })
+
+        this.props.onToggleFav(id)
+    }
+
+    render() {  
     logger.debug('Detail -> render')
+
+    const {
+        props: {
+            item: { id, name, image, year, price, color, style, collection, maker, url }, 
+            onBack
+        },
+        state: { fav },
+        toggleFav
+    } = this
     
     return <div className="home__detail container container--vertical">
         <button className="button button-medium button" onClick={onBack}>Back to Results</button>
@@ -16,7 +39,9 @@ function Detail({ onBack, item: { name, image, year, price, color, style, collec
         <span>{collection}</span>
         <span>{maker}</span>
         <a href={url}>original</a>
+        <button className='button' onClick={() => toggleFav(id)}>{fav ? '🧡' : '🤍'}</button>
     </div>
+    }
 }
 
 export default Detail

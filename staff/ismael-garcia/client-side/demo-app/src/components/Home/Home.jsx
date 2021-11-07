@@ -1,15 +1,19 @@
 import { Component } from 'react'
-import logger from '../utils/logger'
+import logger from '../../utils/logger'
 import { 
     searchVehicles, 
     retrieveVehicle, 
     updateUserPassword, 
-    unregisterUser 
-} from '../logic'
-import Search from './Search'
-import Results from './Results/Results'
-import Detail from './Detail/Detail'
-import Profile from './Profile'
+    unregisterUser,
+    toggleFavVehicle,
+    retrieveFavVehicles 
+} from '../../logic'
+import Search from '../Search'
+import Results from '../Results/Results'
+import Detail from '../Detail/Detail'
+import Profile from '../Profile'
+import Favs from '../Favs'
+import './Home.css'
 
 class Home extends Component {
     constructor() {
@@ -20,7 +24,9 @@ class Home extends Component {
         this.state = { 
             vehicles: [], 
             vehicle: null,
-            view: 'search' 
+            view: 'search',
+            favs: [],
+            query: null 
         }
     }
 
@@ -31,7 +37,7 @@ class Home extends Component {
 
         onFlowStart()
 
-        this.setState({ vehicle: null, vehicles: [] })
+        this.setState({ vehicle: null, vehicles: [], query })
 
         try {
             searchVehicles(query, (error, vehicles) => {
@@ -60,7 +66,7 @@ class Home extends Component {
         onFlowStart()
 
         try {
-            retrieveVehicle (vehicleId, (error, vehicle) => {
+            retrieveVehicle (sessionStorage.token, vehicleId, (error, vehicle) => {
                 if (error) { 
                     onFlowEnd()
 
@@ -127,9 +133,63 @@ class Home extends Component {
                     return
                 }
 
+                logger.info('User unregistered')
+
                 onFlowEnd()
 
+                onModal('User unregistered', 'success')
+
                 onSignOut()
+            })
+        } catch ({ message }) {
+            onFlowEnd()
+
+            onModal(message, 'warn')
+        }
+    }
+
+    toggleFav = id => {
+        const { props: { onFlowStart, onFlowEnd, onModal } } = this
+
+        onFlowStart()
+
+        try {
+            toggleFavVehicle(sessionStorage.token, id, error => {
+                if (error) {
+                    onFlowEnd()
+
+                    onModal(error.message)
+
+                    return
+                }
+
+                onFlowEnd()
+            })
+        } catch ({ message }) {
+            onFlowEnd()
+
+            onModal(message, 'warn')
+        }
+    }
+
+    goToFavs = () => {
+        const { props: { onFlowStart, onFlowEnd, onModal } } = this
+
+        onFlowStart()
+
+        try {
+            retrieveFavVehicles(sessionStorage.token, (error, favs) => {
+                if (error) {
+                    onFlowEnd()
+
+                    onModal(error.message)
+
+                    return
+                }
+
+                onFlowEnd()
+
+                this.setState({ view: 'favs', favs })
             })
         } catch ({ message }) {
             onFlowEnd()
@@ -141,26 +201,41 @@ class Home extends Component {
     render() {
         logger.debug('Home -> render')
 
-        const { state: { view, vehicle, vehicles }, props: { name, onSignOut }, goToProfile, goToItem, clearVehicle, updatePassword, goToSearch, search, unregister } = this
+        const { 
+            state: { view, vehicle, vehicles, query, favs }, 
+            props: { name, onSignOut }, 
+            goToProfile, 
+            goToItem, 
+            clearVehicle, 
+            updatePassword, 
+            goToSearch, 
+            search, 
+            unregister,
+            toggleFav,
+            goToFavs 
+        } = this
 
         return <div id="home" className="home container container--vertical container--gapped">
             <h1>Hola, <span className="name">{name? name : 'World'}</span>. ¡Bienvenido a nuestro sitio!</h1>
 
             <div>
                 <button type="button" className="button button--medium button--dark" onClick={goToProfile}>Profile</button>
+                <button type="button" className="button button--medium button--dark" onClick={goToFavs}>Favs</button>
                 <button type="button" className="button button--medium" onClick={onSignOut}>Sign out</button>
             </div>
 
             {view === 'search' && <>
-            <Search onSearch={search} />
-            
-            {!vehicle && <Results items={vehicles} onItem={goToItem} />}
+                <Search onSearch={search} query={query} />
 
-            {vehicle && <Detail item={vehicle} onBack={clearVehicle} />}
-            </>
-            }
+                {!vehicle && <Results items={vehicles} onItem={goToItem} />}
+
+                {vehicle && <Detail item={vehicle} onBack={clearVehicle} onToggleFav={toggleFav} />}
+
+                </>}
 
             {view === 'profile' && <Profile onBack={goToSearch} onPasswordUpdate={updatePassword} onUnregister={unregister} />}
+
+            {view === 'favs' && <Favs items={favs} onBack={goToSearch} />}
         </div>
     }
 }
