@@ -8,7 +8,7 @@
  * @throws {TypeError} When any of the arguments does not match the correct type.
  */
  function retrieveVehicle(token, id, callback) {
-    if (typeof id !== 'string') throw new TypeError(id + ' is not a string')
+    if (typeof id !== 'string') throw new TypeError(`${id} is not a string`)
 
     const xhr = new XMLHttpRequest()
 
@@ -28,8 +28,6 @@
 
             const { favs = [] } = user
 
-            const isFav = favs.includes(id)
-
             const xhr2 = new XMLHttpRequest()
 
             xhr2.onload = () => {
@@ -40,7 +38,7 @@
 
                     if (!vehicle) return callback(new Error(`no vehicle found with id ${id}`))
 
-                    vehicle.isFav = isFav
+                    vehicle.isFav = favs.includes(vehicle.id)
 
                     callback(null, vehicle)
                 }
@@ -52,7 +50,7 @@
         }
     }
 
-    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/')
+    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
 
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
