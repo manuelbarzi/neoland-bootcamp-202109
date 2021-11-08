@@ -12,7 +12,7 @@ function Unregister(props) {
             </div>
             <div>
                 <button className="button" type="button" onClick={() => props.backProfile()}>Back to Profile</button>
-                <button className="button" type="submit">Delete account</button>
+                <button className="button button--dark" type="submit">Delete account</button>
             </div>
         </form>
     </>

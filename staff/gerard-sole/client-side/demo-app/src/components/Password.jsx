@@ -15,7 +15,7 @@ function Password( props ) {
             </div>
             <div>
                 <button className="button" type="button" onClick={() => props.backProfile()}>Back to Profile</button>
-                <button className="button" type="submit">Change Password</button>
+                <button className="button button--dark" type="submit">Change Password</button>
             </div>
         </form>
     </>
