@@ -1,4 +1,4 @@
-import { Component } from "react"
+import { useState } from 'react'
 import Search from "./Search"
 import Results from './Results'
 import ResultDetails from './ResultDetails'
@@ -7,52 +7,46 @@ import ResultDetails from './ResultDetails'
 import { searchVehicles, retrieveVehicle } from '../logic'
 
 
-class Home extends Component {
-    constructor() {
-        super()
+function Home({ myUserName, onProfile, onSignOut }) {
+    const [view, setView] = useState(null)
+    const [vehicles, setVehicles] = useState([])
+    const [detail, setDetail] = useState([])
 
-        this.state = { view: null, vehicles: [], detail: [] }
-    }
-
-    search = query => {
+    const search = query => {
         searchVehicles(query, (error, vehicles) => {
             if (error) {
                 return alert(error.message)
             }
-
-            this.setState({ view: 'results', vehicles })
+            setView('results')
+            setVehicles(vehicles)
 
         })
     }
 
-    showDetails = (id) => {
+    const showDetails = (id) => {
         retrieveVehicle(id, (error, detail) => {
             if (error) return alert(error.message)
 
-            { this.setState({ view: 'details', detail }) }
+            setView('details')
+            setDetail(detail)
         })
     }
 
-    render() {
-        const { state: { view, vehicles, detail },
-            props: { myUserName, onProfile, onSignOut },
-            search, showDetails } = this
-        return <>
-            <div className="home container container--gapped container--vertical">
-                <div className="container">
-                    <p>Hello, <span className="name">{myUserName}</span>!</p>
-                    <button type="button" className="button button-medium button--dark" onClick={() => onProfile()}>Profile</button>
-                    <button className="button button-medium button" onClick={() => onSignOut()}>Sign out</button>
-                </div>
-
-                <Search onSubmitSearch={search} />
-
-                {view === 'results' && <Results vehicles={vehicles} onVehicle={showDetails} />}
-
-                {this.state.view === 'details' && <ResultDetails detail={detail} onBack={() => this.setState({ view: 'results' })} />}
+    return <>
+        <div className="home container container--gapped container--vertical">
+            <div className="container">
+                <p>Hello, <span className="name">{myUserName}</span>!</p>
+                <button type="button" className="button button-medium button--dark" onClick={() => onProfile()}>Profile</button>
+                <button className="button button-medium button" onClick={() => onSignOut()}>Sign out</button>
             </div>
-        </>
-    }
+
+            <Search onSubmitSearch={search} />
+
+            {view === 'results' && <Results vehicles={vehicles} onVehicle={showDetails} />}
+
+            {view === 'details' && <ResultDetails detail={detail} onBack={() => setView('results')} />}
+        </div>
+    </>
 }
 
 export default Home

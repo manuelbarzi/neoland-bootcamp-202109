@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from 'react'
 import Landing from "./components/Landing";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
@@ -18,16 +18,12 @@ import {
 } from "./logic";
 
 
-class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      view: sessionStorage.token ? 'spinner' : 'home',
-      user: null
-    }
-  }
+function App() {
 
-  componentDidMount() {
+  const [view, setView] = useState(sessionStorage.token ? 'home' : 'landing')
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
     if (sessionStorage.token) {
       try {
         retrieveUser(sessionStorage.token, (error, _user) => {
@@ -36,33 +32,36 @@ class App extends React.Component {
             return
           }
           const user = _user.username
-          this.setState({ view: 'home', user })
+          setView('home')
+          setUser(user)
         })
       } catch (error) {
         alert('Su sesión ha caducado')
       }
     }
-    this.deleteToken()
-    this.goToLanding()
-  }
+    deleteToken()
+    goToLanding()
+  }, [])
+
+
 
   // Go to ..
-  goToSignIn = () => this.setState({ view: 'signin' })
-  goToSignUp = () => this.setState({ view: 'signup' })
-  goToLanding = () => this.setState({ view: 'landing' })
-  goToProfile = () => this.setState({ view: 'profile' })
-  goToHome = () => this.setState({ view: 'home' })
-  goToUnregister = () => this.setState({ view: 'unregister' })
-  goToPostSignUp = () => this.setState({ view: 'postsignup' })
+  const goToSignIn = () => setView('signin')
+  const goToSignUp = () => setView('signup')
+  const goToLanding = () => setView('landing')
+  const goToProfile = () => setView('profile')
+  const goToHome = () => setView('home')
+  const goToUnregister = () => setView('unregister')
+  const goToPostSignUp = () => setView('postsignup')
 
   // Delete Token
-  deleteToken = () => delete sessionStorage.token
+  const deleteToken = () => delete sessionStorage.token
 
   // Go to landing and delete token
-  onSignOut = () => { this.goToLanding(); this.deleteToken() }
+  const onSignOut = () => { goToLanding(); deleteToken() }
 
   // Logic Functions
-  login = (username, password) => {
+  const login = (username, password) => {
     try {
       signinUser(username, password, (error, _token) => {
         if (error) {
@@ -70,22 +69,22 @@ class App extends React.Component {
           return
         }
         sessionStorage.token = _token
-        this.setState({ user: this.state.user })
-        this.goToHome()
+        setUser(user)
+        goToHome()
       })
     } catch (error) {
       alert(error.message)
     }
   }
 
-  register = (name, username, password) => {
+  const register = (name, username, password) => {
     try {
       signupUser(name, username, password, (error) => {
         if (error) {
           alert(error.message)
           return
         }
-        this.goToPostSignUp()
+        goToPostSignUp()
       })
     } catch (error) {
       alert(error.message)
@@ -93,7 +92,7 @@ class App extends React.Component {
     }
   }
 
-  updatePassword = (oldPassword, password) => {
+  const updatePassword = (oldPassword, password) => {
     try {
       updateUserPassword(sessionStorage.token, oldPassword, password, error => {
         if (error) {
@@ -108,7 +107,7 @@ class App extends React.Component {
     }
   }
 
-  unRegister = (password) => {
+  const unRegister = (password) => {
     try {
       unregisterUser(sessionStorage.token, password, error => {
         if (error) {
@@ -117,36 +116,33 @@ class App extends React.Component {
         }
         alert('usuario borrado')
         delete sessionStorage.token
-        this.setState({ view: 'landing' })
+        setView('landing')
       })
     } catch (error) {
       alert(error.message)
     }
   }
 
-  render() {
-    const { updatePassword } = this
-    return (<>
-      {this.state.view === 'landing' && <Landing
-        onSignIn={this.goToSignIn}
-        onSignUp={this.goToSignUp}
-      />}
+  return (<>
+    {view === 'landing' && <Landing
+      onSignIn={goToSignIn}
+      onSignUp={goToSignUp}
+    />}
 
-      {this.state.view === 'signin' && <SignIn onSignUp={this.goToSignUp} onSubmitSignIn={this.login} />}
+    {view === 'signin' && <SignIn onSignUp={goToSignUp} onSubmitSignIn={login} />}
 
-      {this.state.view === 'signup' && <SignUp onSignUp={this.register} onSignIn={this.goToSignIn} />}
+    {view === 'signup' && <SignUp onSignUp={register} onSignIn={goToSignIn} />}
 
-      {this.state.view === 'postsignup' && <PostSignUp onSignIn={this.goToSignIn} />}
+    {view === 'postsignup' && <PostSignUp onSignIn={goToSignIn} />}
 
-      {this.state.view === 'home' && <Home myUserName={this.state.user} onProfile={this.goToProfile} onSignOut={this.onSignOut} />}
+    {view === 'home' && <Home myUserName={user} onProfile={goToProfile} onSignOut={onSignOut} />}
 
-      {this.state.view === 'profile' && <Profile onGoBack={this.goToHome} onSubmitUpdate={updatePassword} onUnRegister={this.goToUnregister} />}
+    {view === 'profile' && <Profile onGoBack={goToHome} onSubmitUpdate={updatePassword} onUnRegister={goToUnregister} />}
 
-      {this.state.view === 'unregister' && <UnRegister onSubmitUnRegister={this.unRegister} onGoBack={this.goToProfile} />}
+    {view === 'unregister' && <UnRegister onSubmitUnRegister={unRegister} onGoBack={goToProfile} />}
 
-      {this.state.view === 'spinner' && <Spinner />}
-    </>)
-  }
+    {view === 'spinner' && <Spinner />}
+  </>)
 }
 export default App;
 
