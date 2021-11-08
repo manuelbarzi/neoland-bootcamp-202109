@@ -133,11 +133,11 @@ function App() {
 
     {view === 'signup' && <SignUp onSignUp={register} onSignIn={goToSignIn} />}
 
-    {view === 'postsignup' && <PostSignUp onSignIn={goToSignIn} />}
+    {view === 'postsignup' && <PostSignUp onSignIn={goToSignIn} onLanding={goToLanding} />}
 
     {view === 'home' && <Home myUserName={user} onProfile={goToProfile} onSignOut={onSignOut} />}
 
-    {view === 'profile' && <Profile onGoBack={goToHome} onSubmitUpdate={updatePassword} onUnRegister={goToUnregister} />}
+    {view === 'profile' && <Profile onUnRegister={goToUnregister} onDeleteAccount={goToUnregister} onGoBack={goToHome} />}
 
     {view === 'unregister' && <UnRegister onSubmitUnRegister={unRegister} onGoBack={goToProfile} />}
 
@@ -160,5 +160,4 @@ export default App;
         Search
         Results
         Details
-
 */

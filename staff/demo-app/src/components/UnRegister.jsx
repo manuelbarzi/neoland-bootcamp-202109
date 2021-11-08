@@ -1,21 +1,20 @@
+import './UnRegister.css'
+
 function UnRegister({ onSubmitUnRegister, onGoBack }) {
     return <>
-        <div className="unregister container container--vertical container--gapped">
-            <form className="container container--vertical" onSubmit={(event) => {
-                event.preventDefault()
+        <form className="delete-account" onSubmit={(event) => {
+            event.preventDefault()
 
-                const password = event.target.password.value
+            const password = event.target.password.value
 
-                onSubmitUnRegister(password)
-            }}  >
-                <input className="field" type="password" name="password" id="password" placeholder="password" />
-
-                <div className="container">
-                    <button className="button button--medium" onClick={() => onGoBack()}>Go back</button>
-                    <button className="button button--medium button--dark">Unregister</button>
-                </div>
-            </form>
-        </div>
+            onSubmitUnRegister(password)
+        }}  >
+            <h1 class="delete-account__title">Delete Account</h1>
+            <p class="delete-account__paragraph">Are you sure?</p>
+            <input className="input delete-account__input" type="password" name="password" id="password" placeholder="Password" />
+            <button className="btn delete-account__btn" onClick={() => onGoBack()}>Go back</button>
+            <button className="btn delete-account__btn">Unregister</button>
+        </form>
     </>
 }
 

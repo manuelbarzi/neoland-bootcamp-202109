@@ -6,6 +6,9 @@ import ResultDetails from './ResultDetails'
 // Logic Bussines
 import { searchVehicles, retrieveVehicle } from '../logic'
 
+// Styles
+import './Home.css'
+
 
 function Home({ myUserName, onProfile, onSignOut }) {
     const [view, setView] = useState(null)
@@ -33,19 +36,17 @@ function Home({ myUserName, onProfile, onSignOut }) {
     }
 
     return <>
-        <div className="home container container--gapped container--vertical">
-            <div className="container">
-                <p>Hello, <span className="name">{myUserName}</span>!</p>
-                <button type="button" className="button button-medium button--dark" onClick={() => onProfile()}>Profile</button>
-                <button className="button button-medium button" onClick={() => onSignOut()}>Sign out</button>
-            </div>
-
-            <Search onSubmitSearch={search} />
-
-            {view === 'results' && <Results vehicles={vehicles} onVehicle={showDetails} />}
-
-            {view === 'details' && <ResultDetails detail={detail} onBack={() => setView('results')} />}
+        <div className="home">
+            <p className="home__title">Hello, <span className="home__user">{myUserName}</span>!</p>
+            <button type="button" className="btn btn--white home__btn" onClick={() => onProfile()}>Profile</button>
+            <button className="btn btn--white hom__btn" onClick={() => onSignOut()}>Log Out</button>
         </div>
+
+        <Search onSubmitSearch={search} />
+
+        {view === 'results' && <Results vehicles={vehicles} onVehicle={showDetails} />}
+
+        {view === 'details' && <ResultDetails detail={detail} onBack={() => setView('results')} />}
     </>
 }
 

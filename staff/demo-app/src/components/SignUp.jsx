@@ -1,22 +1,23 @@
-function SignUp({onSignUp,onSignIn}) {
+import './SignUp.css';
+
+function SignUp({ onSignUp, onSignIn }) {
     return (
-        <form className="signup container container--vertical container--gapped" onSubmit={event=>{
+        <form className="register container container--vertical container--gapped" onSubmit={event => {
             event.preventDefault()
 
             const name = event.target.name.value
             const username = event.target.username.value
             const password = event.target.password.value
 
-            onSignUp (name,username,password)
+            onSignUp(name, username, password)
         }}>
-            <input className="field" type="text" name="name" id="name" placeholder="name" />
-            <input className="field" type="text" name="username" id="username" placeholder="username" />
-            <input className="field" type="password" name="password" id="password" placeholder="password" />
+            <h1 class="register__title">Register</h1>
+            <input className="input register__input" type="text" name="name" id="name" placeholder="Name" />
+            <input className="input register__input" type="text" name="username" id="username" placeholder="Username" />
+            <input className="input register__input" type="password" name="password" id="password" placeholder="Password" />
 
-            <div className="container">
-                <button className="button button--medium" onClick={()=>onSignIn()} >Sign in</button>
-                <button className="button button--medium button--dark">Sign up</button>
-            </div>
+            <button className="btn register__btn">Register</button>
+            <button className="btn register__btn" onClick={() => onSignIn()} >I have an account</button>
         </form>
     )
 }

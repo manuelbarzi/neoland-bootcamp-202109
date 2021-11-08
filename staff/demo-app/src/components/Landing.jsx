@@ -1,11 +1,13 @@
+import './Landing.css'
+
 function Landing({ onSignIn, onSignUp }) {
     return (
-        <div className="landing container container--vertical container--gapped">
-            <button type="button" className="button button--medium button--dark" onClick={() => onSignIn()}>Sign in</button>
-            <button type="button" className="button button--medium" onClick={() => onSignUp()}>Sign up</button>
+        <div className="landing">
+            <h1 class="landing__title">My App</h1>
+            <button type="button" className="btn btn--white landing__btn" onClick={() => onSignIn()}>Login</button>
+            <button type="button" className="btn btn--white landing__btn" onClick={() => onSignUp()}>Register</button>
         </div>
     )
-    
 }
 
 export default Landing

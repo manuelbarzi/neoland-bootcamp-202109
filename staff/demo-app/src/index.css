@@ -1,83 +1,48 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
-
-/* resets */
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap");
 
 * {
-    /* border: 1px dashed black; */
     box-sizing: border-box;
 }
 
-html,
 body {
-    height: 100%;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    background: lightgray;
-}
-
-/* compos */
-
-.button {
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 1px;
-    margin: 5px;
-    padding: 10px;
-    background-color: transparent;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.button--medium {
-    min-width: 5rem;
-}
-
-.button--dark {
-    background-color: lightgray;
-}
-
-.field {
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 1px;
-    margin: 5px;
-    padding: 10px;
-    background-color: transparent;
-    font-size: 1rem;
-}
-
-.container {
+    font-family: "Exo 2", sans-serif;
+    background-color: #5d8fc9;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    margin: 0;
 }
 
-.container--vertical {
-    flex-direction: column;
+img {
+    display: block;
+    max-width: 100%;
 }
 
-.container--gapped {
-    margin: 1rem;
+/* Components */
+.input {
+    display: block;
+    background-color: #ebf0fc;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    font: inherit;
 }
 
-.container--full {
-    height: 100%;
-}
-
-.spinner__image {
-    width: 10vw;
-    height: 10vw;
-}
-
-.home__results {
-    list-style: none;
-}
-
-.home__result {
+.btn {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    width: 100%;
+    font: inherit;
     cursor: pointer;
 }
 
-.home__detail-image {
-    max-width: 80vw;
+.btn--white {
+    background-color: #ffffff;
+    color: #007bff;
 }

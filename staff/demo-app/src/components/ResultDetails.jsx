@@ -1,16 +1,24 @@
+import './ResultDetails.css'
+
 function ResultDetails({ detail, onBack }) {
     return (
-        <div className="home__detail container container--vertical">
-            <button className="button button-medium button" onClick={() => onBack()}>Back</button>
-            <h2>{detail.name}</h2>
-            <img className="home__detail-image" src={detail.image} alt="" />
-            <p>{detail.description}</p>
-            <time>{detail.year}</time>
-            <span>{detail.price} $</span>
-            <span>{detail.color}</span>
-            <span>{detail.style}</span>
-            <span>{detail.collection}</span>
-            <span>{detail.maker}</span>
+        <div className="vehicleDetails">
+            <button className="btn--back" onClick={() => onBack()}>↩</button>
+            <h2 className="vehicleDetails__title">{detail.name}</h2>
+            <img className="vehicleDetails__img" src={detail.image} alt="" />
+            <p className="vehicleDetails__description">{detail.description}</p>
+            <div class="vehicleDetails__lists">
+                <ul class="list1">
+                    <li class="list__item"><time>{detail.year}</time></li>
+                    <li class="list__item">{detail.price} $</li>
+                    <li class="list__item"><span>{detail.color}</span></li>
+                </ul>
+                <ul class="list2">
+                    <li class="list__item"><span>{detail.style}</span></li>
+                    <li class="list__item"><span>{detail.collection}</span></li>
+                    <li class="list__item"><span>{detail.maker}</span></li>
+                </ul>
+            </div>
             <a href={detail.url}>Web</a>
         </div>
     )

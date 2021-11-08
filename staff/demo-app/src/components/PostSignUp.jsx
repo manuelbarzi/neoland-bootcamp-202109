@@ -1,7 +1,12 @@
-function PostSignUp({ onSignIn }) {
+import './PostSignUp.css'
+
+function PostSignUp({ onSignIn, onLanding }) {
     return <>
-        <p>Te has registrado satisfactoriamente</p>
-        <button type="button" className="button" onClick={() => onSignIn()}>SignIn</button>
+        <div class="registered container--off">
+            <h1 class="registered__title">You have successfully registered</h1>
+            <button class="btn btn--white registered__btn" onClick={() => onSignIn()}>Login</button>
+            <button class="btn btn--white registered__btn" onClick={() => onLanding()}>Landing Page</button>
+        </div>
     </>
 }
 
