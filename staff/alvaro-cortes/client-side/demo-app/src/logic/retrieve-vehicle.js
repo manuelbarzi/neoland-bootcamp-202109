@@ -30,8 +30,6 @@
 
             const { favs = [] } = user
 
-            const isFav = favs.includes(id)
-
             const xhr2 = new XMLHttpRequest
 
             xhr2.onload = () => {
@@ -42,7 +40,7 @@
         
                     if (!vehicle) return callback(new Error(`No vehicle found with id ${id}`))
         
-                    vehicle.isFav = isFav
+                    vehicle.isFav = favs.includes(vehicle.id)
 
                     callback(null, vehicle)
                 }

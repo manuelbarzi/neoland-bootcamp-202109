@@ -16,7 +16,7 @@ function ChangePassword({ onChangePassword, onProfile}) {
 
             onChangePassword(user)
 
-            reset()
+            event.target.reset()
         }}>
 
             <form className="container container--vertical">

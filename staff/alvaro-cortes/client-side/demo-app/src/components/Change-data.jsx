@@ -19,7 +19,7 @@ function ChangeData({ onChangeData, onProfile }) {
 
             onChangeData(user)
 
-            reset()
+            event.target.reset()
         }}>
         <form className="container container--vertical">
             <h3 className="titles">Modificar datos</h3>

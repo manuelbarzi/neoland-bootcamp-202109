@@ -1,12 +1,13 @@
-import React, { Component } from 'react'
+import React from 'react';
+import { useState, useEffect } from 'react'
 import logger from '../logger'
-import { 
-    registerUser, 
-    retrieveUser, 
-    loginUser, 
-    updateUserData, 
-    updateUserPassword ,
-    unregisterUser 
+import {
+    registerUser,
+    retrieveUser,
+    loginUser,
+    updateUserData,
+    updateUserPassword,
+    unregisterUser
 } from '../logic'
 import ChangeData from './Change-data'
 import Home from './Home'
@@ -19,27 +20,20 @@ import Unregister from './Unregister'
 import Modal from './Modal'
 import Spinner from './Spinner'
 
-class App extends Component {
-    constructor() {
-        super()
-        logger.info("App -> constructor")
-        this.state = {
-            view: sessionStorage.token ? "" : "landing",
-            name: null,
-            spinner: sessionStorage.token ? true : false,
-            modalCont: {
-                modal: false,
-                title: "",
-                text: ""
-            }
-        };
-    }
+function App() {
+    logger.info("App -> constructor")
 
-    componentDidMount() {
+    const [view, setView] = useState(sessionStorage.token ? "" : "landing")
+    const [name, setName] = useState(null)
+    const [spinner, setSpinner] = useState(sessionStorage.token ? true : false)
+    const [modal, setModal] = useState(false)
+    const [title, setTitle] = useState("")
+    const [text, setText] = useState("")
+
+    useEffect(() => {
         logger.info("App -> componentDidMount")
 
         const { token } = sessionStorage
-        const { showModal, resetTokenAndGoToLogin } = this // Destructuring
 
         if (token) {
             try {
@@ -55,11 +49,9 @@ class App extends Component {
 
                         const name = user.name
 
-                        this.setState({
-                            name,
-                            view: "home",
-                            spinner: false
-                        })
+                        setName(name)
+                        setView("home")
+                        setSpinner(false)
                     }
                 })
             } catch ({ message }) {
@@ -71,36 +63,36 @@ class App extends Component {
                 return
             }
         }
-    }
+    }, [])
 
-    resetTokenAndGoToLogin = () => {
+    const resetTokenAndGoToLogin = () => {
         delete sessionStorage.token
 
-        this.setState({
-            view: "landing",
-            name: null,
-            spinner: false
-        })
+        setView("landing")
+        setName(null)
+        setSpinner(false)
+
     }
 
-    showModal = (title, text) => this.setState({ modal: true, title, text })
+    const showModal = (title, text) => {
+        setTitle(title)
+        setText(text)
+        setModal(true)
+    }
 
-    closeModal = () => this.setState({ modal: false })
+    const closeModal = () => setModal(false)
 
-    onModal = () => this.setState({ view: "modal" })
+    const showSpinner = () => setSpinner(true)
 
-    showSpinner = () => this.setState({ spinner: true })
+    const hideSpinner = () => setSpinner(false)
 
-    hideSpinner = () => this.setState({ spinner: false })
-    
-    onProfile = () => this.setState({ view: "profile" })
-    
-    signOut = () => this.setState({ view: !(sessionStorage.token ? sessionStorage.token = "" : sessionStorage.token = "") ? "landing" : "home", name: null })
-    
-    goToSignUp = () => this.setState({ view: "register" })
+    const onProfile = () => setView("profile")
 
-    signUp = (user) => {
-        const { showModal, showSpinner, hideSpinner, goToSignUp, goToSignIn } = this
+    const goHome = () => setView("home")
+
+    const goToSignUp = () => setView("register")
+
+    const signUp = (user) => {
 
         showSpinner()
 
@@ -131,13 +123,9 @@ class App extends Component {
         }
     }
 
-    goToSignIn = () => this.setState({ view: "login" })
-    
-    postSignIn = () => this.setState({ view: "home", name: this.state.name })
+    const goToSignIn = () => setView("login")
 
-    signIn = (user) => {
-
-        const { showModal, showSpinner, hideSpinner, goToSignIn, postSignIn } = this
+    const signIn = (user) => {
 
         showSpinner()
 
@@ -155,11 +143,36 @@ class App extends Component {
                     return
                 } else {
 
-                    postSignIn()
+                    sessionStorage.token = token
+                }
+                try {
+                    retrieveUser(token, (error, user) => {
+                        if (error) {
+                            hideSpinner()
 
+                            showModal("Error", error.message)
+
+                            resetTokenAndGoToLogin()
+
+                            return
+
+                        } else {
+
+                            const { name } = user
+
+                            setView("home")
+                            setName(name)
+                            setSpinner(false)
+                        }
+                    })
+                } catch ({ message }) {
                     hideSpinner()
 
-                    sessionStorage.token = token
+                    showModal("Error", message)
+
+                    resetTokenAndGoToLogin()
+
+                    return
                 }
             })
         } catch ({ message }) {
@@ -170,11 +183,9 @@ class App extends Component {
         }
     }
 
-    goToChangeData = () => this.setState({ view: "modify" })
+    const goToChangeData = () => setView("modify")
 
-    changeData = user => {
-
-        const { showModal, hideSpinner, showSpinner, goToChangeData } = this
+    const changeData = user => {
 
         showSpinner()
 
@@ -205,11 +216,9 @@ class App extends Component {
         }
     }
 
-    goToChangePassword = () => this.setState({ view: "change--password" })
+    const goToChangePassword = () => setView("change--password")
 
-    changePassword = user => {
-
-        const { showSpinner, showModal, hideSpinner, goToChangePassword } = this
+    const changePassword = user => {
 
         showSpinner()
 
@@ -243,11 +252,10 @@ class App extends Component {
         }
     }
 
-    goToUnregister = () => this.setState({ view: "unregister" })
+    const goToUnregister = () => setView("unregister")
 
-    unregister = user => {
+    const unregister = user => {
 
-        const { showSpinner, showModal, hideSpinner, resetTokenAndGoToLogin } = this
         showSpinner()
 
         try {
@@ -262,43 +270,19 @@ class App extends Component {
                 }
 
                 showModal("Éxito", "Has eliminado tu cuenta.")
-                
+
                 hideSpinner()
-                
+
                 resetTokenAndGoToLogin()
             })
         } catch ({ message }) {
 
             showModal("Error", message)
-            
+
             hideSpinner()
 
         }
     }
-
-    render() {
-        logger.info("App -> render")
-
-        const { goToSignIn,
-                goToSignUp,
-                signUp,
-                signIn,
-                onProfile,
-                goToUnregister,
-                unregister,
-                goToChangeData,
-                changeData,
-                goToChangePassword,
-                changePassword,
-                signOut,
-                showSpinner,
-                showModal,
-                hideSpinner,
-                postSignIn,
-                resetTokenAndGoToLogin,
-                closeModal,
-            state: { view, name, spinner, modal, title, text }
-        } = this
 
         return <React.Fragment>
 
@@ -322,7 +306,6 @@ class App extends Component {
                     title={title} text={text}
                     onSignIn={signIn}
                     onSignUp={goToSignUp}
-                    postSignIn={postSignIn}
                     resetTokenAndGoToLogin={resetTokenAndGoToLogin}
                     showSpinner={showSpinner}
                     hideSpinner={hideSpinner}
@@ -332,19 +315,18 @@ class App extends Component {
             {view === "home" &&
                 <Home name={name}
                     title={title} text={text}
-                    postSignIn={postSignIn}
                     onProfile={onProfile}
-                    signOut={signOut}
+                    onSignOut={resetTokenAndGoToLogin}
                     showSpinner={showSpinner}
                     hideSpinner={hideSpinner}
                     showModal={showModal}
                 ></Home>}
 
             {view === "profile" && <Profile
-                postSignIn={postSignIn}
                 onUnregister={goToUnregister}
                 onChangePassword={goToChangePassword}
                 onChangeData={goToChangeData}
+                goHome={goHome}
             ></Profile>}
 
             {view === "unregister" && <Unregister
@@ -384,7 +366,6 @@ class App extends Component {
 
         </React.Fragment>
     }
-}
 
 export default App
 

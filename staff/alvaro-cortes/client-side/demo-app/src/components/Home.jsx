@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useState } from 'react'
 import './Home.css'
 import logger from '../logger'
 import {
@@ -12,25 +13,24 @@ import Results from './Results'
 import Detail from './Detail'
 import Favs from './Favs'
 
-class Home extends Component {
-    constructor(props) {
-        logger.info("Home -> constructor")
+function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut }) {
+    logger.info("Home -> constructor")
 
-        super(props)
+    const [vehicles, setVehicles] = useState([])
+    const [vehicle, setVehicle] = useState(null)
+    const [view, setView] = useState("results")
+    const [favs, setFavs] = useState([])
 
-        this.state = { vehicles: [], vehicle: null, favs: [], view: "results" }
-    }
-
-    onSearch = query => {
+    const onSearch = query => {
         //En caso de ya tener resultados impresos de la busqueda anterior, se reemplazaran por los de la nueva busqueda 
-        const { props: { hideSpinner, showModal, showSpinner } } = this
 
-        this.setState({ vehicle: null })
+        setVehicle(null)
+        setVehicles([])
 
         showSpinner()
 
         try {
-            searchVehicles(query, (error, vehicles) => {
+            searchVehicles(sessionStorage.token, query, (error, vehicles) => {
                 if (error) {
 
                     hideSpinner()
@@ -42,7 +42,9 @@ class Home extends Component {
 
                 hideSpinner()
 
-                this.setState({ vehicles, view: "results" })
+                setVehicles(vehicles)
+
+                setView("results")
             })
         } catch ({ message }) {
 
@@ -50,13 +52,11 @@ class Home extends Component {
 
             hideSpinner()
 
-            this.setState({ vehicles: [] })
+            setVehicles([])
         }
     }
 
-    onItem = vehicleId => {
-
-        const { props: { showModal, showSpinner, hideSpinner } } = this
+    const onItem = vehicleId => {
 
         showSpinner()
 
@@ -66,10 +66,13 @@ class Home extends Component {
                     hideSpinner()
 
                     showModal("Error", error.message)
-                }
-                hideSpinner()
 
-                this.setState({ vehicle })
+                    return
+                }
+                setVehicle(vehicle)
+                setView("detail")
+
+                hideSpinner()
             })
         } catch ({ message }) {
 
@@ -79,9 +82,7 @@ class Home extends Component {
         }
     }
 
-    toggleFavorite = id => {
-
-        const { props: { hideSpinner, showSpinner, showModal } } = this
+    const toggleFavorite = id => {
 
         showSpinner()
 
@@ -95,6 +96,21 @@ class Home extends Component {
                     return
                 }
 
+                if (vehicle)
+                    setVehicle({ ...vehicle, isFav: !vehicle.isFav })
+
+                if (vehicles.length)
+                    setVehicles(vehicles.map(vehicle => {
+                        if (vehicle.id === id) {
+                            return { ...vehicle, isFav: !vehicle.isFav }
+                        }
+
+                        return vehicle
+                    }))
+
+                if (favs.length)
+                    setFavs(favs.filter(vehicle => vehicle.id !== id))
+
                 hideSpinner()
             })
         } catch ({ message }) {
@@ -104,8 +120,7 @@ class Home extends Component {
         }
     }
 
-    goToFavorites = () => {
-        const { props: { hideSpinner, showModal, showSpinner } } = this
+    const goToFavorites = () => {
 
         showSpinner()
 
@@ -121,7 +136,8 @@ class Home extends Component {
 
                 hideSpinner()
 
-                this.setState({ view: "favs", favs })
+                setView("favs")
+                setFavs(favs)
             })
 
         } catch ({ message }) {
@@ -131,49 +147,43 @@ class Home extends Component {
         }
     }
 
-    render() {
+    return <>
+        {!vehicles && <Search onSearch={onSearch} />}
 
-        const {
-            state: { vehicles, vehicle, favs },
-            props: { name, onProfile, signOut },
-            toggleFavorite,
-            onItem,
-            onSearch,
-            goToFavorites
-        } = this
+        {vehicles && <Search onSearch={onSearch} />}
 
-        return <>
-            {!vehicles && <Search onSearch={onSearch} />}
-
-            {vehicles && <Search onSearch={onSearch} />}
-
-            <div className="welcome container container--vertical">
-                <h2> Bienvenido a tu página de inicio <span className="name"> {name} </span></h2>
-                <div className="container">
-                    <button type="button" className="button button--red" onClick={onProfile}>Perfil</button>
-                    <button type="button" className="button button--red" onClick={goToFavorites}>Favoritos</button>
-                    <button type="button" className="button button--signout" onClick={signOut}>Cerrar Sesión</button>
-                </div>
+        <div className="welcome container container--vertical">
+            <h2> Bienvenido a tu página de inicio <span className="name"> {name} </span></h2>
+            <div className="container container--vertical">
+                <button type="button" className="button button--red" onClick={onProfile}>Perfil</button>
+                <button type="button" className="button button--red" onClick={goToFavorites}>Favoritos</button>
+                <button type="button" className="button button--signout" onClick={onSignOut}>Cerrar Sesión</button>
             </div>
+        </div>
 
-            {this.state.view === "results" && <>
-            {!vehicle && <Results 
-                items={vehicles} onItem={onItem} />}
-
-            {vehicle && <Detail
-                item={vehicle}
-                backResultList={() => this.setState({ vehicle: null, view: "results" })}
-                onToggleFavorite={toggleFavorite}
-            />}
-
-            </>}
-
-            {this.state.view === "favs" && <Favs 
+        {view === "results" && <Results
+                items={vehicles}
                 onItem={onItem}
-                items={favs}
-                backResultList={() => this.setState({ vehicle: null, view: "results" })} />}
-        </>
-    }
+                onToggleFavorite={toggleFavorite}
+        />}
+
+        {view === "detail" && <Detail
+                item={vehicle}
+                backResultList={() =>
+                    setView("results")}
+                onToggleFavorite={toggleFavorite}
+        />}
+
+
+        {view === "favs" && <Favs
+            onItem={onItem}
+            items={favs}
+            backResultList={() =>
+                setView("results")}
+            onToggleFavorite={toggleFavorite}
+        />}
+    </>
+
 }
 
 export default Home
