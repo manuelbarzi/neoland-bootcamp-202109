@@ -3,8 +3,6 @@ import Landing from "./components/Landing";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import Home from "./components/Home";
-import Profile from "./components/Profile";
-import UnRegister from "./components/UnRegister";
 import PostSignUp from "./components/PostSignUp";
 import Spinner from "./components/Spinner";
 
@@ -12,9 +10,7 @@ import Spinner from "./components/Spinner";
 import {
   signinUser,
   signupUser,
-  retrieveUser,
-  updateUserPassword,
-  unregisterUser
+  retrieveUser
 } from "./logic";
 
 
@@ -51,7 +47,6 @@ function App() {
   const goToLanding = () => setView('landing')
   const goToProfile = () => setView('profile')
   const goToHome = () => setView('home')
-  const goToUnregister = () => setView('unregister')
   const goToPostSignUp = () => setView('postsignup')
 
   // Delete Token
@@ -92,37 +87,6 @@ function App() {
     }
   }
 
-  const updatePassword = (oldPassword, password) => {
-    try {
-      updateUserPassword(sessionStorage.token, oldPassword, password, error => {
-        if (error) {
-          alert(error.message)
-          return
-        }
-        alert('todo ok')
-      })
-    } catch (error) {
-      alert(error.message)
-      return
-    }
-  }
-
-  const unRegister = (password) => {
-    try {
-      unregisterUser(sessionStorage.token, password, error => {
-        if (error) {
-          alert(error.message)
-          return
-        }
-        alert('usuario borrado')
-        delete sessionStorage.token
-        setView('landing')
-      })
-    } catch (error) {
-      alert(error.message)
-    }
-  }
-
   return (<>
     {view === 'landing' && <Landing
       onSignIn={goToSignIn}
@@ -136,10 +100,6 @@ function App() {
     {view === 'postsignup' && <PostSignUp onSignIn={goToSignIn} onLanding={goToLanding} />}
 
     {view === 'home' && <Home myUserName={user} onProfile={goToProfile} onSignOut={onSignOut} />}
-
-    {view === 'profile' && <Profile onUnRegister={goToUnregister} onDeleteAccount={goToUnregister} onGoBack={goToHome} />}
-
-    {view === 'unregister' && <UnRegister onSubmitUnRegister={unRegister} onGoBack={goToProfile} />}
 
     {view === 'spinner' && <Spinner />}
   </>)
