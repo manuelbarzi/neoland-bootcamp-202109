@@ -1,3 +1,4 @@
+import React from 'react';
 import './Spinner.css'
 import logger from '../logger'
 

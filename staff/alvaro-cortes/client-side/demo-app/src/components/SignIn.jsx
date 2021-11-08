@@ -1,3 +1,4 @@
+import React from 'react';
 import logger from '../logger'
 
 function SignIn({ onSignIn, onSignUp }) {
@@ -6,7 +7,7 @@ function SignIn({ onSignIn, onSignUp }) {
         <form className="login container container--vertical" onSubmit={event => {
             event.preventDefault()
             
-            const { target: { username: { value: username }, password: { value: password } } } = event
+            const { target: { reset, username: { value: username }, password: { value: password } } } = event
 
             const user = {
                 username,
@@ -14,6 +15,8 @@ function SignIn({ onSignIn, onSignUp }) {
             }
 
             onSignIn(user)
+
+            event.target.reset()
         }}>
             <h3 className="titles">Iniciar Sesión</h3>
             <div className="color">

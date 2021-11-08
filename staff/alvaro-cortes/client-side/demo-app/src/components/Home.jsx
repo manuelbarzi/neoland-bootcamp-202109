@@ -1,28 +1,30 @@
-import { Component } from 'react'
+import React, { Component } from 'react';
 import './Home.css'
 import logger from '../logger'
-import { 
-    searchVehicles, 
-    retrieveVehicle, 
-    toggleFavoriteVehicle
+import {
+    searchVehicles,
+    retrieveVehicle,
+    toggleFavoriteVehicle,
+    retrieveFavVehicles
 } from '../logic'
 import Search from './Search'
 import Results from './Results'
 import Detail from './Detail'
+import Favs from './Favs'
 
 class Home extends Component {
     constructor(props) {
         logger.info("Home -> constructor")
-        
+
         super(props)
 
-        this.state = { vehicles: [], vehicle: null, }
+        this.state = { vehicles: [], vehicle: null, favs: [], view: "results" }
     }
 
     onSearch = query => {
         //En caso de ya tener resultados impresos de la busqueda anterior, se reemplazaran por los de la nueva busqueda 
         const { props: { hideSpinner, showModal, showSpinner } } = this
-        
+
         this.setState({ vehicle: null })
 
         showSpinner()
@@ -39,10 +41,10 @@ class Home extends Component {
                 }
 
                 hideSpinner()
-                
-                this.setState({ vehicles })
+
+                this.setState({ vehicles, view: "results" })
             })
-        } catch ({ message}) {
+        } catch ({ message }) {
 
             showModal("Error", message)
 
@@ -59,8 +61,9 @@ class Home extends Component {
         showSpinner()
 
         try {
-            retrieveVehicle(vehicleId, (error, vehicle) => {
-                if (error) { 
+            retrieveVehicle(sessionStorage.token, vehicleId, (error, vehicle) => {
+                if (error) {
+                    hideSpinner()
 
                     showModal("Error", error.message)
                 }
@@ -79,7 +82,7 @@ class Home extends Component {
     toggleFavorite = id => {
 
         const { props: { hideSpinner, showSpinner, showModal } } = this
-        
+
         showSpinner()
 
         try {
@@ -93,44 +96,82 @@ class Home extends Component {
                 }
 
                 hideSpinner()
-
             })
-        } catch({ message }) {
+        } catch ({ message }) {
             hideSpinner()
 
             showModal(message)
         }
     }
-    
+
+    goToFavorites = () => {
+        const { props: { hideSpinner, showModal, showSpinner } } = this
+
+        showSpinner()
+
+        try {
+            retrieveFavVehicles(sessionStorage.token, (error, favs) => {
+                if (error) {
+                    hideSpinner()
+
+                    showModal(error.message)
+
+                    return
+                }
+
+                hideSpinner()
+
+                this.setState({ view: "favs", favs })
+            })
+
+        } catch ({ message }) {
+            hideSpinner()
+
+            showModal(message)
+        }
+    }
+
     render() {
 
-            const { 
-                state: { vehicles, vehicle}, 
-                props: { name, onProfile, signOut},
-                toggleFavorite, 
-                onItem,
-                onSearch 
-            } = this
-        
-        return <>
-            {!vehicles && <Search onSearch={onSearch}/>}
+        const {
+            state: { vehicles, vehicle, favs },
+            props: { name, onProfile, signOut },
+            toggleFavorite,
+            onItem,
+            onSearch,
+            goToFavorites
+        } = this
 
-            {vehicles && <Search onSearch={onSearch}/>}
+        return <>
+            {!vehicles && <Search onSearch={onSearch} />}
+
+            {vehicles && <Search onSearch={onSearch} />}
 
             <div className="welcome container container--vertical">
                 <h2> Bienvenido a tu página de inicio <span className="name"> {name} </span></h2>
                 <div className="container">
-                    <button type="button" className="button button--red" onClick={() => onProfile()}>Perfil</button>
-                    <button type="button" className="button button--signout" onClick={() => signOut()}>Cerrar Sesión</button>
+                    <button type="button" className="button button--red" onClick={onProfile}>Perfil</button>
+                    <button type="button" className="button button--red" onClick={goToFavorites}>Favoritos</button>
+                    <button type="button" className="button button--signout" onClick={signOut}>Cerrar Sesión</button>
                 </div>
             </div>
 
-            {!vehicle && <Results items={vehicles} onItem={onItem} />}
+            {this.state.view === "results" && <>
+            {!vehicle && <Results 
+                items={vehicles} onItem={onItem} />}
 
-            {vehicle && <Detail 
+            {vehicle && <Detail
                 item={vehicle}
-                backResultList={() => this.setState({ vehicle: null })} 
-                onToggleFavorite={toggleFavorite} />}
+                backResultList={() => this.setState({ vehicle: null, view: "results" })}
+                onToggleFavorite={toggleFavorite}
+            />}
+
+            </>}
+
+            {this.state.view === "favs" && <Favs 
+                onItem={onItem}
+                items={favs}
+                backResultList={() => this.setState({ vehicle: null, view: "results" })} />}
         </>
     }
 }

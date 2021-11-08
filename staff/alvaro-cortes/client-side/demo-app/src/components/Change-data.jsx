@@ -1,3 +1,4 @@
+import React from 'react';
 import logger from '../logger'
 
 function ChangeData({ onChangeData, onProfile }) {
@@ -7,7 +8,7 @@ function ChangeData({ onChangeData, onProfile }) {
         <div className="modify container container--vertical" onSubmit={event => {
             event.preventDefault()
             
-            const { target: { name: { value: name }, surname: { value: surname }, email: { value: email }, username: { value: username } } } = event
+            const { target: { reset, name: { value: name }, surname: { value: surname }, email: { value: email }, username: { value: username } } } = event
 
             const user = {
                 name,
@@ -17,6 +18,8 @@ function ChangeData({ onChangeData, onProfile }) {
             }
 
             onChangeData(user)
+
+            reset()
         }}>
         <form className="container container--vertical">
             <h3 className="titles">Modificar datos</h3>

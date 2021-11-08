@@ -11,7 +11,7 @@ function toggleFavoriteVehicle(token, id, callback) {
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error("Invalid token")
 
     if (typeof id !== "string") throw new TypeError(`${id} is not a string`)
-    if (!id.trim().lenght) throw new Error("id is empty or blank.")
+    if (!id.trim().length) throw new Error("id is empty or blank.")
 
     if (typeof callback !== "function") throw new TypeError(`${callback} is not a function`)
 
@@ -27,7 +27,7 @@ function toggleFavoriteVehicle(token, id, callback) {
 
             callback(new Error(message))
         } else if (status === 200) {
-            const response = JSON.parse(responseText)
+            const response = responseText
 
             const user = JSON.parse(response)
 

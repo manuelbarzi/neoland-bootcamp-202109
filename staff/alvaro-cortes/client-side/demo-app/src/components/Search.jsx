@@ -1,3 +1,4 @@
+import React from 'react';
 import logger from '../logger'
 
 function Search(props) {
@@ -11,6 +12,9 @@ function Search(props) {
     }}>
         <input type="text" placeholder="Escribe aquí" name="query" />
         <button className="button button--red">Buscar</button>
+        <div className="container--search--heart">
+            <span>🤍</span> 
+        </div>
     </form>
 }
 

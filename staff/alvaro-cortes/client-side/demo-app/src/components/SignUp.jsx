@@ -1,3 +1,4 @@
+import React, { Component }  from 'react';
 import logger from '../logger'
 
 function SignUp({ onSignUp, onSignIn }) {
@@ -6,7 +7,7 @@ function SignUp({ onSignUp, onSignIn }) {
         <form className="register container container--vertical" onSubmit={event => {
             event.preventDefault()
             
-            const { target: { name: { value: name }, surname: { value: surname }, email: { value: email }, username: { value: username }, password: { value: password } } } = event
+            const { target: { reset, name: { value: name }, surname: { value: surname }, email: { value: email }, username: { value: username }, password: { value: password } } } = event
 
             const user = {
                 name,
@@ -17,6 +18,8 @@ function SignUp({ onSignUp, onSignIn }) {
             }
 
             onSignUp(user)
+
+            reset()
             
         }}>
         <h3 className="titles">Registro</h3>

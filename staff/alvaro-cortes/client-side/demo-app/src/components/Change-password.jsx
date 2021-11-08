@@ -1,3 +1,4 @@
+import React from 'react';
 import logger from '../logger'
 
 function ChangePassword({ onChangePassword, onProfile}) {
@@ -6,7 +7,7 @@ function ChangePassword({ onChangePassword, onProfile}) {
         <div className="change--password container container--vertical" onSubmit={event => {
             event.preventDefault()
             
-            const { target: { password: { value: password }, oldPassword: { value: oldPassword } }} = event
+            const { target: { reset, password: { value: password }, oldPassword: { value: oldPassword } }} = event
             
             const user = {
                 password,
@@ -14,6 +15,8 @@ function ChangePassword({ onChangePassword, onProfile}) {
             }
 
             onChangePassword(user)
+
+            reset()
         }}>
 
             <form className="container container--vertical">

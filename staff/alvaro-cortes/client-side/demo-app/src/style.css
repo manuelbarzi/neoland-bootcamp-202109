@@ -49,6 +49,11 @@ hr {
    padding: 5px;
 }
 
+.container--search--heart {
+    padding-left: 29rem;
+    margin-right: -29rem;
+}
+
 /* ------ form ------- */
 form {
     border-radius: 5px;

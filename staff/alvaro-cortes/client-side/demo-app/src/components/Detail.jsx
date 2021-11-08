@@ -1,6 +1,6 @@
 import './Home.css'
 import logger from '../logger'
-import { Component } from 'react'
+import React, { Component }  from 'react';
 
 class Detail extends Component {
     constructor(props) {
@@ -21,6 +21,7 @@ class Detail extends Component {
         const {
             props: {
                 item: {
+                    id,
                     name,
                     image,
                     description,
@@ -32,18 +33,17 @@ class Detail extends Component {
                     maker ,
                     url
                 },
-                toggleFavorite
+                backResultList
             }, 
             state: {
                 fav
             },
-            backResultList,
-            
+            toggleFavorite
         } = this
     
     return <div className="welcome__details container container--vertical">
         <button className="button" onClick={backResultList}> Volver atrás</button>
-        <span onClick={() => toggleFavorite(id)}>{fav ?'💜' : '🤍'}</span>
+        <span onClick={() => toggleFavorite(id)}>{fav ?'❤️' : '🤍'}</span>
         <h2>{name}</h2>
         <img src={image} alt="" width="300px" />
         <p>{description}</p>

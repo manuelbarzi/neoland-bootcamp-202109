@@ -247,8 +247,7 @@ class App extends Component {
 
     unregister = user => {
 
-        const { showSpinner, showModal, hideSpinner, onUnregister, resetTokenAndGoToLogin } = this
-
+        const { showSpinner, showModal, hideSpinner, resetTokenAndGoToLogin } = this
         showSpinner()
 
         try {
@@ -258,8 +257,6 @@ class App extends Component {
                     showModal("Error", error.message)
 
                     hideSpinner()
-
-                    onUnregister()
 
                     return
                 }
@@ -276,7 +273,6 @@ class App extends Component {
             
             hideSpinner()
 
-            onUnregister()
         }
     }
 

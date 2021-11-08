@@ -1,3 +1,4 @@
+import React from 'react';
 import logger from '../logger'
 
 function Unregister({ onUnregister, onProfile }) {
@@ -11,6 +12,8 @@ function Unregister({ onUnregister, onProfile }) {
             }
             
             onUnregister(user)
+
+            event.target.reset()
         }}>
             <form className="container container--vertical">
                 <h3 className="titles">Eliminar cuenta</h3>
