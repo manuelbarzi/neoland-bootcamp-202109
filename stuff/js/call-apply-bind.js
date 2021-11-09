@@ -1,164 +1,168 @@
-console.log('>call,apply & bind')
+console.log('> call, apply & bind')
 
-var a=1
+var a = 1
 
 console.log(a)
-console.log(windows.a)
+console.log(window.a)
 
-window.name='Winny'
+window.name = 'Winny'
 
-function hello(){
-    return this.name +'hello'
+function hello() {
+    return this.name + ': hello'
 }
 
 console.log(hello())
 console.log(window.hello())
 console.log(hello.call())
 
-var p = {name:'Peter'}
+var peter = { name: 'Peter' }
 
-console.log(hello.call(p)) //separado por comas
-console.log(hello.apply(p))
+console.log(hello.call(peter))
+console.log(hello.apply(peter))
 
-function salute(name){
+function salute(name) {
     return this.name + ': hello ' + name
 }
 
-console.log(salute.call(peter,'Wendy'))
-console.log(salute.apply(peter,['Wendy']))
+console.log(salute.call(peter, 'Wendy'))
+console.log(salute.apply(peter, ['Wendy']))
 
-function add(){
-    let accum = this.value
-    for(var i = 0;i<arguments.length;i++)
-        accum +=arguments[i]
+function add() {
+    var accum = this.value
+
+    for (var i = 0; i < arguments.length; i++)
+        accum += arguments[i]
 
     return accum
 }
 
-var total = {value : 10}
-console.log(add.call(total,20,30,40,50))
-console.log(add.apply(total,[20, 30,40,50]))
+var total = { value: 10 }
 
-var values= []
+console.log(add.call(total, 20, 30, 40, 50))
+console.log(add.apply(total, [20, 30, 40, 50]))
 
-for (var i = 0;i<Math.ceil(Math.random()*1000);i++)
-values.push(i*10)
+var values = []
 
-console.log(add.apply(total,values))
+for (var i = 0; i < Math.ceil(Math.random() * 1000); i++)
+    values.push(i * 10)
+
+console.log(add.apply(total, values))
+
 //
 
-var wendy = {name:'Wendy'}
+var wendy = { name: 'Wendy' }
 
 console.log(hello.call(wendy))
 console.log(hello.call(peter))
 
-var wendyHello = hello.bind(wendy) // es un metodo de las funciones, permite pasar un contexto(wendy) y nos devuelve una funcion (hello) 
+var wendyHello = hello.bind(wendy)
 var peterHello = hello.bind(peter)
 
 console.log(wendyHello())
 console.log(peterHello())
 
-
-function bind(func,ctx){
-    return function(){
+function bind(func, ctx) { // ctx = context
+    return function () {
         return func.call(ctx)
     }
 }
 
-var wendyHello = hello.bind(wendy) 
-var peterHello = hello.bind(peter)
+var wendyHello = bind(hello, wendy)
+var peterHello = bind(hello, peter)
 
 console.log(wendyHello())
 console.log(peterHello())
 
-function salute(){
-    var people= ''
+function salute() {
+    var people = ''
 
-    for(var i = 0; i<arguments.length;i++){
+    for (var i = 0; i < arguments.length; i++) {
         people += arguments[i]
-        if(i<arguments.length -1)
-        people+= ','
+
+        if (i < arguments.length - 1)
+            people += ', '
     }
-    return this.name + ': hello '+people
+
+
+    return this.name + ': hello ' + people
 }
-//en la consola salute.call(wendy,'felipe','jorge','sergio') y me devuelve 'Wendy: hello felipe,jorge,sergio'
 
-console.log(salute.call(wendy,'felipe','jorge','sergio'))
-var wendySalute=salute.bind(wendy)
-var peterSalute=salute.bind(peter)
+console.log(salute.call(wendy, 'Felipe', 'Jorge', 'Sergio'))
 
-console.log(wendySalute('felipe','jorge','sergio'))
-console.log(peterSalute('felipe','jorge','sergio'))
+var wendySalute = salute.bind(wendy)
+var peterSalute = salute.bind(peter)
 
-function bind(func,ctx){
-    return function(){
+console.log(wendySalute('Felipe', 'Jorge', 'Sergio'))
+console.log(peterSalute('Felipe', 'Jorge', 'Sergio'))
+
+function bind(func, ctx) { // ctx = context
+    return function () {
         return func.apply(ctx, arguments)
     }
 }
 
-var wendySalute=bind(salute,wendy)
-var peterSalute=bind(salute,peter)
+var wendySalute = bind(salute, wendy)
+var peterSalute = bind(salute, peter)
 
-console.log(wendySalute('felipe','jorge','sergio'))
-console.log(peterSalute('felipe','jorge','sergio'))
+console.log(wendySalute('Felipe', 'Jorge', 'Sergio'))
+console.log(peterSalute('Felipe', 'Jorge', 'Sergio'))
 
 //
 
-class Componenet{
-    setState(state){
-        for(var key in state){
-            this.state[key]=state[key]
+class Component {
+    setState(state) {
+        for (var key in state) {
+            this.state[key] = state[key]
         }
+
         console.log(this.render())
     }
 }
 
-
-class App{
-    constructor(){
+class App extends Component {
+    constructor() {
         super()
 
-        this.state={name:'Peter'}
+        this.state = { name: 'Peter' }
 
-        //this.showMark=this.showMark.bind(this)
-        
+        //this.showMark = this.showMark.bind(this)
     }
 
-    updateName(name){
-        this.setState({name})
+    updateName(name) {
+        this.setState({ name })
     }
 
-    // showMark(){
+    // showMark() {
     //     this.updateName('Mark')
     // }
 
-     showMark= function(){
+    // showMark = function() {
+    //     this.updateName('Mark')
+    // }.bind(this)
+
+    showMark = () => {
         this.updateName('Mark')
-    }.bind(this)
+    }
 
-    // showMark=()=>{
-    //     this.updateName('Mark')
-    // }
-
-    render(){
-        return '<h1>hello' + this.state.name + '</h1><button onClick={this.onButtonClick}>shwo Mark</button>'
+    render() {
+        return '<h1>hello ' + this.state.name + '</h1><button onClick={this.showMark}>show Mark</button>'
     }
 }
 
-var app= new App
+var app = new App
 
 console.log(app.render())
 
 app.updateName('Wendy')
 app.updateName('John')
 
-var button={ //dom
-    onclick:undefined,
-    click(){
+var button = { // dom
+    onclick: undefined,
+    click() {
         this.onclick.call(undefined)
     }
 }
 
-button.onclick=app.ushowMark
-button.click() //with mouse
+button.onclick = app.showMark
+button.click() // with mouse
 
