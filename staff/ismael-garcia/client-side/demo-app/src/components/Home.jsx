@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import logger from '../../utils/logger'
+import logger from '../utils/logger'
 import { 
     searchVehicles, 
     retrieveVehicle, 
@@ -7,13 +7,12 @@ import {
     unregisterUser,
     toggleFavVehicle,
     retrieveFavVehicles 
-} from '../../logic'
-import Search from '../Search'
-import Results from '../Results/Results'
-import Detail from '../Detail/Detail'
-import Profile from '../Profile'
-import Favs from '../Favs'
-import './Home.css'
+} from '../logic'
+import Search from './Search'
+import Results from './Results/Results'
+import Detail from './Detail/Detail'
+import Profile from './Profile'
+import Favs from './Favs'
 
 function Home({ name, onFlowStart, onFlowEnd, onSignOut, onModal }) {
     logger.debug('Home -> render')
@@ -148,7 +147,7 @@ function Home({ name, onFlowStart, onFlowEnd, onSignOut, onModal }) {
                     return
                 }
 
-                if (vehicle)
+                if (vehicle && vehicle.id === id)
                     setVehicle({ ...vehicle, isFav: !vehicle.isFav })
 
                 if (vehicles.length)
