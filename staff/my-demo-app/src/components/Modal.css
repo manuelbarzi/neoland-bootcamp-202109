@@ -15,6 +15,7 @@
 .modal__message {
     font-family: 'Roboto Mono', monospace;
     font-size: 1rem;
+    margin: auto 10px;
 }
 .modal__panel {
     display: flex;
@@ -22,6 +23,8 @@
     align-items: center;
     justify-content: space-between;
     height: fit-content;
+    min-height: 150px;
+    min-width: 200px;
     width: fit-content; 
     background-color: whitesmoke;
     text-align: center;
@@ -31,9 +34,33 @@
     border-width: 2px;
 }
 
+.modal__panel--error {
+    border-color: red;
+    }
+    
+.modal__panel--warn {
+border-color:orange;
+}
+
+.modal__panel--success {
+border-color: green;
+}
+
 .modal__tittle {
     font-family: 'Inconsolata', monospace;
     font-size: 1.2rem;
+}
+
+.modal__tittle--error {
+    color: red;
+    }
+    
+.modal__tittle--warn {
+color: orange;
+}
+
+.modal__tittle--success {
+color: green;
 }
 
 
@@ -49,4 +76,19 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     font-family: 'Roboto Mono', monospace;
     font-size: 0.8rem;
+}
+
+.modal__button--error {
+color: red;
+border-color: red;
+}
+
+.modal__button--warn {
+color: orange;
+border-color:orange;
+}
+
+.modal__button--success {
+color: green;
+border-color: green;
 }

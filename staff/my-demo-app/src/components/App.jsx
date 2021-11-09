@@ -1,7 +1,9 @@
-import { Component } from 'react'
-import { retrieveUser } from '../logic'
-import { signUpUser } from '../logic'
-import { signInUser } from '../logic'
+import { useState, useEffect } from 'react'
+import {
+    signUpUser,
+    signInUser,
+    retrieveUser,
+} from '../logic'
 import Landing from './Landing'
 import SignUp from './SignUp'
 import ThankYou from './ThankYou'
@@ -11,158 +13,168 @@ import Spinner from './Spinner'
 import Modal from './Modal'
 
 
-class App extends Component {
-    constructor() {
-        super()
-        this.state = {
-            view: sessionStorage.token ? '' : 'landing',
-            name: null,
-            spinner: sessionStorage.token ? true : false,
-            modal: '',
-            level: 'error'
-        }
-    }
+function App() {
 
-    componentDidMount() {
-        if (sessionStorage.token) {
+    const [view, setView] = useState(sessionStorage.token ? '' : 'landing')
+    const [name, setName] = useState(null)
+    const [spinner, setSpinner] = useState(sessionStorage.token ? true : false)
+    const [modal, setModal] = useState(null)
+    const [level, setLevel] = useState('error')
+
+
+    useEffect(() => {
+        const { token } = sessionStorage
+
+        if (token) {
             try {
-                retrieveUser(sessionStorage.token, (error, user) => {
+                retrieveUser(token, (error, user) => {
                     if (error) {
                         alert(error.message)
-                        this.deleteTokenAndLanding()
+                        deleteTokenAndLanding()
 
                     } else {
                         var name = user.name
-                        this.setState({
-                            name: name,
-                            view: 'home',
-                            spinner: false
-                        })
+
+                        setName(name)
+                        setView('home')
+                        setSpinner(false)
                     }
                 })
             } catch (error) {
                 alert(error.message)
-                this.deleteTokenAndLanding()
+                deleteTokenAndLanding()
             }
         }
-    }
+    }, [])
 
-    deleteTokenAndSignOut = () => {
-        this.setState({ view: 'signin' })
+    const deleteTokenAndSignOut = () => {
+        showModal(`Ok ${name} see you soon!`, 'success')
         delete sessionStorage.token
+        goToSignIn()
     }
 
-    deleteTokenAndLanding = () => {
+    const deleteTokenAndLanding = () => {
         delete sessionStorage.token
-        this.setState({ 
-            view: 'landing',
-            spinner: false
-    })
+        goToLanding()
+        setSpinner(false)
     }
 
-    goToSignUp = () => this.setState({ view: 'signup' })
-    goToSignIn = () => this.setState({ view: 'signin' })
-    goToLanding = () => this.setState({ view: 'landing' })
+    const goToSignUp = () => setView('signup')
+    const goToSignIn = () => setView('signin')
+    const goToLanding = () => setView('landing')
+    const goToThankYou = () => setView('thank-you')
 
-    showSpinner = () => this.setState({ spinner: true})
-    hideSpinner = () => this.setState({ spinner: false})
+    const showSpinner = () => setSpinner(true)
+    const hideSpinner = () => setSpinner(false)
 
-    signUp = (name, lastName, username, password, checkbox) => {
-        this.showSpinner()
+    const closeModal = () => setModal(null)
+    const showModal = (message, level = 'error') => {
+        setModal(message)
+        setLevel(level)
+    }
+
+
+    const signUp = (name, lastName, username, password, checkbox) => {
+        showSpinner()
         try {
             signUpUser(name, lastName, username, password, checkbox, (error) => {
                 if (error) {
-                    alert(error.message)
-                    this.hideSpinner()
+                    showModal(error.message)
+                    hideSpinner()
 
-                } else { this.setState({ view: 'thank-you', spinner: false }) }
+                } else {
+                    goToThankYou()
+                    hideSpinner()
+                    showModal(`Nice to meet you ${name}!`, 'success')
+                }
 
             })
-        } catch (error) {
-            alert(error.message)
-            this.hideSpinner()
+        } catch ({message}) {
+            showModal(message, 'warn')
+            hideSpinner()
         }
     }
 
-    signIn = (username, password) => {
-        this.showSpinner()
+    const signIn = (username, password) => {
+        showSpinner()
         try {
             signInUser(username, password, (error, token) => {
                 if (error) {
-                    alert(error.message)
-                    this.hideSpinner()
+                    showModal(error.message)
+                    hideSpinner()
                 } else {
                     sessionStorage.token = token
 
                     try {
                         retrieveUser(sessionStorage.token, (error, user) => {
                             if (error) {
-                                alert(error.message)
-                                this.hideSpinner()
+                                showModal(error.message)
+                                hideSpinner()
                             } else {
                                 var name = user.name
-                                this.setState({
-                                    name: name,
-                                    view: 'home',
-                                    spinner: false
-                                })
+                                setName(name)
+                                setView('home')
+                                setSpinner(false)
+                                showModal(`Welcome back ${name}`, 'success')
                             }
                         })
-                    } catch (error) {
-                        alert(error.message)
-                        this.hideSpinner()
+                    } catch ({message}) {
+                        showModal(message, 'warn')
+                        hideSpinner()
                     }
                 }
             })
-        } catch (error) {
-            alert(error.message)
-            this.hideSpinner()
+        } catch ({message}) {
+            showModal(message, 'warn')
+            hideSpinner()
         }
     }
 
-    render() {
-        return <div className="app-bg">
-            {this.state.view === 'landing' && 
-                <Landing
-                    OnSignIn={this.goToSignIn}
-                    OnSignUp={this.goToSignUp}
-                ></Landing>}
 
-            {this.state.view === 'signup' &&
-                <SignUp
-                    OnSignIn={this.goToSignIn}
-                    OnSignUp={this.signUp}
-                ></SignUp>}
+    return <div className="app-bg">
+        {view === 'landing' &&
+            <Landing
+                OnSignIn={goToSignIn}
+                OnSignUp={goToSignUp}
+            ></Landing>}
 
-            {this.state.view === 'thank-you' &&
-                <ThankYou
-                    OnSignIn={this.goToSignIn}
-                ></ThankYou>}
+        {view === 'signup' &&
+            <SignUp
+                OnSignIn={goToSignIn}
+                OnSignUp={signUp}
+            ></SignUp>}
 
-            {this.state.view === 'signin' &&
-                <SignIn
-                    OnSignUp={this.goToSignUp}
-                    OnSignIn={this.signIn}
-                ></SignIn>}
+        {view === 'thank-you' &&
+            <ThankYou
+                OnSignIn={goToSignIn}
+            ></ThankYou>}
 
-            {this.state.view === 'home' && 
-                <Home
-                    name={this.state.name}
-                    OnSignOut={this.deleteTokenAndSignOut}
-                    OnDelete={this.deleteTokenAndLanding}
-                    OnStartFlow={this.showSpinner}
-                    OnEndFlow={this.hideSpinner}
-                ></Home>}
+        {view === 'signin' &&
+            <SignIn
+                OnSignUp={goToSignUp}
+                OnSignIn={signIn}
+            ></SignIn>}
 
-            {this.state.spinner && <Spinner></Spinner>}
+        {view === 'home' &&
+            <Home
+                Username={name}
+                OnSignOut={deleteTokenAndSignOut}
+                OnDelete={deleteTokenAndLanding}
+                OnStartFlow={showSpinner}
+                OnEndFlow={hideSpinner}
+                OnShowModal={showModal}
+            ></Home>}
 
-            {this.state.modal === '' && <Modal
-            onGetIt={()=> this.setState ({modal: 'hello'})}
+        {spinner && <Spinner></Spinner>}
 
-            ></Modal>}
+        {modal && <Modal
+            onGetIt={closeModal}
+            message={modal}
+            level={level}
+        ></Modal>}
 
-        </div>
-    }
+    </div>
+
 }
 
 export default App

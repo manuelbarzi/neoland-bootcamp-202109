@@ -1,4 +1,4 @@
-function SignIn(props) {
+function SignIn({OnSignIn, OnSignUp}) {
     return <div className="pagelayout">
     <div className="title layout__title">
         <h1>SIGN IN</h1>
@@ -13,7 +13,7 @@ function SignIn(props) {
         const username = event.target.username.value
         const password = event.target.password.value
 
-        props.OnSignIn(username, password)
+        OnSignIn(username, password)
     }}>
         <div className="layout__inputs">
             <input type="email" className="input" name="username" placeholder="Email"></input>
@@ -21,7 +21,7 @@ function SignIn(props) {
         </div>
         <div className="layout__buttons">
             <button type="submit" className='button'>SIGN IN</button>
-            <p id="p-link">Go to <a className="link" onClick={() => props.OnSignUp()}>Sign Up</a></p>
+            <p id="p-link">Go to <a className="link" onClick={OnSignUp}>Sign Up</a></p>
         </div>
     </form>
 </div>

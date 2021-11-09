@@ -1,8 +1,10 @@
-import {Component} from 'react'
-import { searchVehicles } from '../logic'
-import { retrieveVehicle } from '../logic'
-import { updatePassword } from '../logic'
-import { unregisterUser } from '../logic'
+import { useState, useEffect } from 'react'
+import {
+    updatePassword,
+    unregisterUser,
+    searchVehicles,
+    retrieveVehicle
+} from '../logic'
 import HeaderHome from './HeaderHome'
 import Search from './Search'
 import Results from './Results'
@@ -13,147 +15,143 @@ import ChangePassword from './ChangePassword'
 import DeleteAccount from './DeleteAccount'
 
 
-class Home extends Component{
-    constructor (props){
-        super ()
+function Home({ Username, OnSignOut, OnDelete, OnStartFlow, OnEndFlow, OnShowModal }) {
 
-        this.state = {view: 'home', vehicles: [], vehicle: null, name: props.name}
-    }
+    const [view, setView] = useState('home')
+    const [vehicles, setvehicles] = useState([]);
+    const [vehicle, setvehicle] = useState(null);
+    const [name, setname] = useState(Username);
 
-    // componentDidMount(){
-    //     this.setState ({name: this.props.name})
-    // }
-
-    search = query => {
-        this.props.OnStartFlow()
-        this.setState({vehicles: [], vehicle: null})
-        try {   
-            searchVehicles(query,(error, vehicles)=>{
-                if (error) { 
-                    alert(error.message)
-                    this.props.OnEndFlow()
-                
-                } else {
-                    this.setState({vehicles: vehicles})
-                    this.props.OnEndFlow()
-                }
-            })
-        } catch (error) {
-                alert(error.message)
-                this.props.OnEndFlow()
-            }
-    }
-
-    getVehicleId = vehicleId => {
-        this.props.OnStartFlow()
+    const search = query => {
+        OnStartFlow()
+        setvehicles([])
+        setvehicle(null)
         try {
-            retrieveVehicle (vehicleId, (error, vehicle) => {
-                if (error) { 
-                    alert(error.message)
-                    this.props.OnEndFlow()
-                
+            searchVehicles(query, (error, vehicles) => {
+                if (error) {
+                    OnShowModal(error.message)
+                    OnEndFlow()
+
                 } else {
-                    this.setState({vehicle: vehicle})              
-                    this.props.OnEndFlow()
+                    setvehicles(vehicles)
+                    OnEndFlow()
                 }
             })
-        } catch (error) {
-            alert(error.message)
-            this.props.OnEndFlow()
+        } catch ({ message }) {
+            OnShowModal(message, 'warn')
+            OnEndFlow()
         }
     }
 
-    goToHome = ()=> this.setState({view: 'home'})
-    goToProfile = ()=> this.setState({view: 'profile'})
-    goToChangePassword = ()=> this.setState ({view: 'changePassword'})
-    goToDeleteAccount = ()=> this.setState ({view: 'deleteAccount'})
+    const getVehicleId = vehicleId => {
+        OnStartFlow()
+        try {
+            retrieveVehicle(vehicleId, (error, vehicle) => {
+                if (error) {
+                    OnShowModal(error.message)
+                    OnEndFlow()
 
-    changePassword = (oldpassword, password) => {
-        this.props.OnStartFlow()
+                } else {
+                    setvehicle(vehicle)
+                    OnEndFlow()
+                }
+            })
+        } catch ({ message }) {
+            OnShowModal(message, 'warn')
+            OnEndFlow()
+        }
+    }
+
+    const goToHome = () => setView('home')
+    const goToProfile = () => setView('profile')
+    const goToChangePassword = () => setView('changePassword')
+    const goToDeleteAccount = () => setView('deleteAccount')
+
+    const changePassword = (oldpassword, password) => {
+        OnStartFlow()
         try {
             updatePassword(sessionStorage.token, oldpassword, password, (error) => {
                 if (error) {
-                    alert(error.message)
-                    this.props.OnEndFlow()
-                    
-                } else {
-                    this.setState({view: 'home'})
-                    this.props.OnEndFlow()
-                }                
-                
-            })
-        } catch (error) {
-            alert(error.message)
-            this.props.OnEndFlow()
-        }
-      }
+                    OnShowModal(error.message)
+                    OnEndFlow()
 
-    deleteAccount = (password) => {
-        this.props.OnStartFlow()
+                } else {
+                    setView('home')
+                    OnEndFlow()
+                    OnShowModal(`${name}, your password has been updated!`, 'success')
+                }
+
+            })
+        } catch ({ message }) {
+            OnShowModal(message, 'warn')
+            OnEndFlow()
+        }
+    }
+
+    const deleteAccount = (password) => {
+        OnStartFlow()
         try {
             unregisterUser(sessionStorage.token, password, (error) => {
                 if (error) {
-                    alert(error.message)
-                    this.props.OnEndFlow()
-                    
+                    OnShowModal(error.message)
+                    OnEndFlow()
+
                 } else {
-                    this.props.OnDelete()
-                    this.props.OnEndFlow()
+                    OnEndFlow()
+                    OnShowModal(`${name}, account deleted`, 'success')
+                    OnDelete()
                 }
-                
+
             })
-        } catch (error) {
-            alert(error.message)
-            this.props.OnEndFlow()
+        } catch ({message}) {
+            OnShowModal(message, 'warn')
+            OnEndFlow()
         }
-       }
-    
+    }
+    return <div className="pagelayout">
 
-    render () {
-        return  <div className="pagelayout">
-        
-        {this.state.view === 'home' && <>
-            <HeaderHome name={this.state.name}></HeaderHome>
-            <Search onSearch ={this.search}></Search>
+        {view === 'home' && <>
+            <HeaderHome name={name}></HeaderHome>
+            <Search onSearch={search}></Search>
 
-            {!this.state.vehicle && <Results 
-                items={this.state.vehicles} 
-                onItem={this.getVehicleId}
+            {!vehicle && <Results
+                items={vehicles}
+                onItem={getVehicleId}
             ></Results>}
 
-            {this.state.vehicle &&  <Detail 
-                item={this.state.vehicle}
-                OnBackList={() => this.setState ({vehicle : null})}
+            {vehicle && <Detail
+                item={vehicle}
+                OnBackList={setvehicle(null)}
             ></Detail>}
-            
-            <ButtonsHome
-                OnViewProfile={this.goToProfile}
-                OnSignOut={()=> {this.props.OnSignOut()}}      
-            ></ButtonsHome>
-        </> }
-        
-        {this.state.view === 'profile' && <Profile
-            name={this.state.name}
-            OnBackHome={this.goToHome}
-            OnSignOut={()=> {this.props.OnSignOut()}}
-            OnChangePassword={this.goToChangePassword}
-            OnDeleteAccount={this.goToDeleteAccount}
-            ></Profile>}
 
-        {this.state.view === 'changePassword' && <ChangePassword
-            name={this.state.name}
-          OnBackProfile={this.goToProfile}
-          OnUpdate={this.changePassword}  
+            <ButtonsHome
+                OnViewProfile={goToProfile}
+                OnSignOut={OnSignOut}
+            ></ButtonsHome>
+        </>}
+
+        {view === 'profile' && <Profile
+            name={name}
+            OnBackHome={goToHome}
+            OnSignOut={OnSignOut}
+            OnChangePassword={goToChangePassword}
+            OnDeleteAccount={goToDeleteAccount}
+        ></Profile>}
+
+        {view === 'changePassword' && <ChangePassword
+            name={name}
+            OnBackProfile={goToProfile}
+            OnUpdate={changePassword}
         ></ChangePassword>}
 
-        {this.state.view === 'deleteAccount' && <DeleteAccount
-           name={this.state.name}
-           OnBackProfile={this.goToProfile}
-           OnDelete={this.deleteAccount} 
+        {view === 'deleteAccount' && <DeleteAccount
+            name={name}
+            OnBackProfile={goToProfile}
+            OnDelete={deleteAccount}
         ></DeleteAccount>}
-       
-        </div>
-    }
+
+    </div>
+
 }
 
 export default Home

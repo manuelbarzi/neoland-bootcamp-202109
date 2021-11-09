@@ -1,4 +1,4 @@
-function ThankYou(props) {
+function ThankYou({OnSignIn}) {
     return <div className="pagelayout">
     <div className="title title--font-height layout__title">
         <h1>Gracias Por Registrarte</h1>
@@ -10,7 +10,7 @@ function ThankYou(props) {
     <form action="" className="layout__main">
 
         <div className="layout__buttons">
-            <button className='button' onClick={() => props.OnSignIn()}> GO SIGN IN</button>
+            <button className='button' onClick={OnSignIn}> GO SIGN IN</button>
         </div>
     </form>
 </div>

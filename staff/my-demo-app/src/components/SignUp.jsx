@@ -1,4 +1,4 @@
-function SignUp(props) {
+function SignUp({OnSignUp, OnSignIn}) {
     return <div className="pagelayout">
     <div className="title layout__title">
         <h1>SIGN UP</h1>
@@ -16,7 +16,7 @@ function SignUp(props) {
         const password = event.target.password.value
         const checkbox = event.target.checkbox.checked
 
-        props.OnSignUp(name, lastName, username, password, checkbox)
+        OnSignUp(name, lastName, username, password, checkbox)
     }}>
         <div className=" layout__inputs">
             <input type="text" className="input" name="name" placeholder="Name"></input>
@@ -30,7 +30,7 @@ function SignUp(props) {
         </div>
         <div className="layout__buttons">
             <button type="submit" className='button'>SIGN UP</button>
-            <p id="p-link">Go to <a className="link" onClick={() => props.OnSignIn()}>Sign IN</a></p>
+            <p id="p-link">Go to <a className="link" onClick={OnSignIn}>Sign IN</a></p>
         </div>
     </form>
 </div>

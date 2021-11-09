@@ -1,4 +1,4 @@
-function Landing(props) {
+function Landing({OnSignIn, OnSignUp}) {
     return <div className="landing pagelayout">
     <div className="title layout__title">
         <h1>WELCOME</h1>
@@ -9,8 +9,8 @@ function Landing(props) {
             assumenda sequi nobis neque?</p>
     </div>
     <div className="layout__main">
-        <button className='button' onClick ={() => props.OnSignIn()}>SIGN IN</button>
-        <button className='button' onClick ={() => props.OnSignUp()}>SIGN UP</button>
+        <button className='button' onClick ={OnSignIn}>SIGN IN</button>
+        <button className='button' onClick ={OnSignUp}>SIGN UP</button>
     </div>
 </div>
 }

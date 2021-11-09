@@ -1,35 +1,30 @@
-import { Component } from 'react'
+// import { useState } from 'react'
 import './Modal.css'
 
-class Modal extends Component {
-    constructor(props) {
-        super()
+function Modal ({level, message, onGetIt}) {
 
-        this.state = {
-            level: props.level ? props.level : 'error',
-            message: props.message
-        }
-    }
+    // const [level, setsetLevel] = useState(level ? level : 'error');
+    // const [message, setMessage] = useState(message);
 
-    // componentDidMount () {
-    //     if (this.props.level) {this.setState({level: this.props.level})}
-    // }
+    const classNametitle = `modal__tittle ${level ? `modal__tittle--${level}` : ''}`
+    const classNamepanel = `modal__panel ${level ? `modal__panel--${level}` : ''}`
+    const classNamebutton = `modal__button ${level ? `modal__button--${level}` : ''}`
 
-    render() {
+    
         return <>
             <div className='modal'>
-                <div className='modal__panel'>
-                    <h1 className='modal__tittle'>
-                        {this.state.level === 'error' && 'Error!'}
-                        {this.state.level === 'warn' && 'Upss..'}
-                        {this.state.level === 'success' && 'Great!'}
+                <div className={classNamepanel}>
+                    <h1 className={classNametitle}>
+                        {level === 'error' && 'Error!'}
+                        {level === 'warn' && 'Upss..'}
+                        {level === 'success' && 'Great!'}
                     </h1>
-                    <p className='modal__message'>{this.state.message}</p>
-                    <button className='modal__button button' onClick={() => this.props.onGetIt()}>Get it</button>
+                    <p className='modal__message'>{message}</p>
+                    <button className={classNamebutton} onClick={onGetIt}>Get it</button>
                 </div>
             </div>
         </>
-    }
+    
 }
 
 export default Modal
