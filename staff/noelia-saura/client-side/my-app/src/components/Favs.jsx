@@ -1,36 +1,27 @@
-import React from "react";
+import { useState} from "react"
+function Favs() {
+    const[showFavs,setshowFavs]=useState(false)
 
-class Favs extends React.Component {
-    constructor(){
-        super()
-
-        this.state={showFavs:false}
-
-    }
     showFavs = () => {
-        if (this.state.showFavs === false) {
-            this.setState({ showFavs: true })
+        if (showFavs === false) {
+            setshowFavs(true)
         } else {
-            this.setState({ showFavs: false })
+            setshowFavs(false)
         }
-
     }
-    render() {
-        return <>
-            <button className="button button-medium button" onClick={this.showFavs} >❤️</button>
-            {this.state.showFavs ?
-                <div>
-
-                    <ul className="home__results container container--vertical ">
-                        {this.props.fav.map((f) => {
-                            return <li key={f.id}>
-                                <img src={f.image} width="200px" alt='Product'/>{f.name}
-                            </li>
-                        })}
-                    </ul>
-                </div> : <></>}
-        </>
-    }
+    return <div>
+    <button className="button button-medium button" onClick={showFavs} >❤️</button>
+    {setshowFavs ?
+        <div>
+            <ul className="home__results container container--vertical ">
+                {this.props.fav.map((f) => {
+                    return <li key={f.id}>
+                        <img src={f.image} width="200px" alt='Product'/>{f.name}
+                    </li>
+                })}
+            </ul>
+        </div> : <></>}
+    </div>
 
 }
 export default Favs

@@ -1,114 +1,104 @@
-import React from "react"
-import { retrieveVehicle, updateUserPassword, searchVehicles } from "../logic"
+//este Home es funcional y con hooks
+import { useState,useEffect} from "react"
+import {
+    retrieveVehicle,
+    updateUserPassword,
+    searchVehicles
+}
+    from "../logic"
 import Profile from "./Profile"
 import Search from "./Search"
 import Details from "./Details"
 import Results from "./Results"
 import Favs from "./Favs"
-class Home extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            view: 'home',
-            vehicle: null,
-            vehicles: [],
-            fav: [],
-            
-        }
-    }
 
-    componentDidMount() {
+function Home({ name, goToSignOut }) {
+    
+    const [view, setView] = useState('home')
+    const [vehicle, setVehicle] = useState(null)
+    const [vehicles, setVehicles] = useState([])
+    const [fav, setFav] = useState([])
+    
+    useEffect(()=>{
         if (sessionStorage.fav) {
-            this.setState({fav: JSON.parse(sessionStorage.fav)}) //parse: transforma de nuevo el string en array
+            setFav(JSON.parse(sessionStorage.fav)) //parse: transforma de nuevo el string en array
         }
-    }
-
-    goToProfile = () => { this.setState({ view: 'profile' }) }
-    goBack = () => { this.setState({ view: 'home' }) }
-    updatePassword = (oldPassword, password) => {
-
+    },[]) 
+   
+    
+    const goToProfile = () => setView('profile')
+    const goBack = () => setView('home')
+    const updatePassword = (oldPassword, password) => {
         updateUserPassword(sessionStorage.token, oldPassword, password, error => {
             if (error) {
                 alert(error.message)
                 return error
             }
             alert('password is updated')
-            this.setState({ view: 'home' })
-        }
-        )
+            setView('home')
+        })
     }
-
-    onSearch = query => {
-        this.setState({ vehicle: null, vehicles: [] })
-        try {
-            searchVehicles(query, (error, vehicles) => {
-                if (error) {
-                    alert(error.message)
-                    return
-                }
-                this.setState({ vehicles, view: 'search' })
-            })
-        } catch (error) {
-            alert(error.message)
-        }
+    const onSearch=(query)=>{
+        setVehicle(null)
+        setVehicles([])
+            try {
+                searchVehicles(query, (error, vehicles) => {
+                    if (error) {
+                        alert(error.message)
+                        return
+                    }
+                    setVehicle(vehicle)
+                    setView('search')
+                
+                })
+            } catch (error) {
+                alert(error.message)
+            }
     }
-
-    goToItem = vehicleId => {
+    const goToItem = (vehicleId)=>{
         try {
             retrieveVehicle(vehicleId, (error, vehicle) => {
-
+    
                 if (error) {
                     alert(error.message)
                     return
                 }
-                this.setState({ vehicle: vehicle })
+                setVehicle(vehicle)
+                
             })
         } catch (error) {
             alert(error.message)
         }
     }
-
-    addFavVehicle = (vehicle) => {
-        let arrayFavs = this.state.fav
+    const addFavVehicle=(vehicle)=>{
+        let arrayFavs=setFav(fav)
         arrayFavs.push(vehicle)
-        this.setState({ fav: arrayFavs });
-
-        sessionStorage.fav = JSON.stringify(arrayFavs)//stringify : covierte el array en forma de string
+        setFav(arrayFavs)
+        sessionStorage.fav =JSON.stringify(arrayFavs)//stringify : covierte el array en forma de string
     }
+    const clearVehicle = ()=>setVehicle(null)
+    const goToSearch = ()=>{setView('search')}
+    const goToLanding = ()=>{goToLanding()}
 
-    clearVehicle = () => this.setState({ vehicle: null })
-    goToSearch = () => { this.setState({ view: 'search' }) }
-    goToLanding = () => { this.props.goToLanding() }
-    
-    render() {
+    return <div className="home container container--gapped container--vertical "  >
+    <div className="container">
+        <p>Hello, <span className="name">{name}</span>!</p>
+        <button className="button button-medium button--dark" onClick={goToProfile} >Profile</button>
+        <button className="button button-medium button" onClick={goToSignOut}>Sign out</button>
+    </div>
+    {(view === 'home' || view === 'search') && <Favs fav={fav} />}
 
+    {view === 'profile' && <Profile goToHome={goBack} onPasswordUpdate={updatePassword} goToLanding={goToLanding} />}
 
-        return <>
+    {view === 'home' || view === 'search' ? <Search goToSearch={goToSearch} onSearch={onSearch} /> : <></>}
 
-            <div className="home container container--gapped container--vertical "  >
-                <div className="container">
-                    <p>Hello, <span className="name">{this.props.name}</span>!</p>
-                    <button className="button button-medium button--dark" onClick={this.goToProfile} >Profile</button>
-                    <button className="button button-medium button" onClick={this.props.goToSignOut}>Sign out</button>
-                </div>
-                {(this.state.view === 'home' || this.state.view === 'search') && <Favs fav={this.state.fav}/> }
-               
+    {view === 'search' && <>
+        {vehicles && !vehicle && <Results items={vehicles} onItem={goToItem} />}
+        {vehicle && <Details item={vehicle} onBack={clearVehicle} favSelect={addFavVehicle} />}
+    </>}
 
-
-                {this.state.view === 'profile' && <Profile goToHome={this.goBack} onPasswordUpdate={this.updatePassword} goToLanding={this.goToLanding} />}
-
-                {this.state.view === 'home' || this.state.view === 'search' ? <Search onSearch={this.onSearch} /> : <></>}
-
-                {this.state.view === 'search' && <>
-                    {this.state.vehicles && !this.state.vehicle && <Results items={this.state.vehicles} onItem={this.goToItem} />}
-                    {this.state.vehicle && <Details item={this.state.vehicle} onBack={this.clearVehicle} favSelect={this.addFavVehicle} />}
-                </>}
-
-
-            </div>
-        </>
-    }
-
+</div>
 }
+
 
 export default Home

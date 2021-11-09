@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Home from './components/Home';
 import Landing from './components/Landing';
 import React from 'react';
@@ -6,43 +7,37 @@ import SignUp from './components/SignUp';
 import PostSignUp from './components/PostSignUp';
 import { retrieveUser, signinUser, signupUser } from './logic';
 
+function App() {
+    const [view, setView] = useState('landing')
+    const [name, setName] = useState(null)
 
-
-class App extends React.Component {
-    constructor() {
-        super()
-        this.state = { view: 'landing', name: null }
-    }
-
-    componentDidMount() {
+    useEffect(() => {
         if (sessionStorage.token) {
-            this.getRetrieveUser(sessionStorage.token)
+            getRetrieveUser(sessionStorage.token)
+        }
+    }, [])
+
+
+
+    const goToSignIn = () => setView('signin')
+    const goToSignUp = () => setView('signup')
+    const goToPostSignUp = () => setView('postsignup')
+    const goToHome = () => setView('home')
+    const sendSignUp = (name, username, password) => {
+        try {
+            signupUser(name, username, password, (error) => {
+                if (error) {
+                    alert(error.message)
+                    return
+                }
+                goToPostSignUp()
+            })
+        } catch (error) {
+            alert(error.message)
         }
     }
 
-    componentWillUnmount() { }
-
-    goToSignIn = () => { this.setState({ view: 'signin' }) }
-    goToSignUp = () => { this.setState({ view: 'signup' }) }
-    goToPostSignUp = () => { this.setState({ view: 'postsignup' }) }
-    goToHome = () => { this.setState({ view: 'home' }) }
-
-
-    sendSignUp = (name, username, password) => {
-        try{
-        signupUser(name, username, password, (error) => {
-            if (error) {
-                alert(error.message)
-                return
-            }
-            this.goToPostSignUp()
-        })
-    }catch(error){
-        alert(error.message)
-    }
-
-    }
-    sendSignIn = (username, password) => {
+    const sendSignIn = (username, password) => {
         try {
             signinUser(username, password, (error, token) => {
                 if (error) {
@@ -51,7 +46,7 @@ class App extends React.Component {
                 }
                 sessionStorage.token = token
 
-                this.getRetrieveUser(token)
+                getRetrieveUser(token)
 
             })
         }
@@ -59,42 +54,37 @@ class App extends React.Component {
             alert(error.message)
         }
     }
-
-    getRetrieveUser = (token) => {
+    const getRetrieveUser = (token) => {
         try {
             retrieveUser(token, (error, user) => {
                 if (error) {
                     alert(error.message)
                     return
                 }
-                const { name } = user
+                
+                setName('home')
 
-                this.setState({ name: name, view: 'home' })
             })
         } catch (error) {
             alert(error.message)
         }
     }
-    goToSignOut = () => {
+
+    const goToSignOut = () => {
         delete sessionStorage.token
         delete sessionStorage.fav
-        this.setState({ view: 'landing' })
+        setView('landing')
     }
 
-    goToLanding = () => {
-        this.setState({ view: 'landing' })
-    }
-    render() {
-        return (
-            <div>
-                {this.state.view === 'landing' && <Landing onSignIn={this.goToSignIn} onSignUp={this.goToSignUp} />}
-                {this.state.view === 'signin' && <SignIn onSignUp={this.goToSignUp} onSignIn={this.sendSignIn} />}
-                {this.state.view === 'signup' && <SignUp onSignIn={this.goToSignIn} onSignUp={this.sendSignUp} />}
-                {this.state.view === 'postsignup' && <PostSignUp onSignIn={this.goToSignIn} />}
-                {this.state.view === 'home' && <Home name={this.state.name} goToSignOut={this.goToSignOut} goToLanding={this.goToLanding} />}
-            </div>
-        );
-    }
+    const goToLanding = () => { setView('landing') }
+
+    return <div>
+        {view === 'landing' && <Landing onSignIn={goToSignIn} onSignUp={goToSignUp} />}
+        {view === 'signin' && <SignIn onSignUp={goToSignUp} onSignIn={sendSignIn} />}
+        {view === 'signup' && <SignUp onSignIn={goToSignIn} onSignUp={sendSignUp} />}
+        {view === 'postsignup' && <PostSignUp onSignIn={goToSignIn} />}
+        {view === 'home' && <Home name={name} goToHome={goToHome} goToSignOut={goToSignOut} goToLanding={goToLanding} />}
+    </div>
 }
 
 export default App
