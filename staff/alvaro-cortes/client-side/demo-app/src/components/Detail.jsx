@@ -18,12 +18,14 @@ function Detail({
         isFav
     },
     backResultList,
-    onToggleFavorite
+    onToggleFavorite,
+    onAddToCart
 }) {   
     logger.info('Detail -> render')
 
     return <div className="welcome__details container container--vertical">
         <button className="button" onClick={backResultList}> Volver atrás</button>
+        <button className="button button--red" onClick={() => onAddToCart(id)}> Agregar al carrito </button>
         <span onClick={() => onToggleFavorite(id)}>{isFav ? '❤️' : '🤍'}</span>
         <h2>{name}</h2>
         <img src={image} alt="" width="300px" />

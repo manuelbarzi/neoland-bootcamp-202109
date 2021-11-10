@@ -50,8 +50,12 @@ hr {
 }
 
 .container--search--heart {
-    padding-left: 29rem;
+    padding-left: 26rem;
     margin-right: -29rem;
+    color: black;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 /* ------ form ------- */
@@ -124,3 +128,5 @@ input {
     background-color: rgb(170, 45, 45);
     color: white;
 }
+
+

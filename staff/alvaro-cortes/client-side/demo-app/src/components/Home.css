@@ -7,6 +7,10 @@
     border-radius: 10px;
 }
 
+.welcome {
+    box-shadow: 2px 2px 5px rgb(56, 56, 56);
+}
+
 .welcome__results--ul {
     cursor: pointer;
     list-style: none;

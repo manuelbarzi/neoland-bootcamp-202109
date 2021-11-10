@@ -1,17 +1,21 @@
 import React from 'react';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './Home.css'
 import logger from '../logger'
 import {
     searchVehicles,
     retrieveVehicle,
     toggleFavoriteVehicle,
-    retrieveFavVehicles
+    retrieveFavVehicles,
+    addToCart,
+    retrieveCartVehicles
 } from '../logic'
 import Search from './Search'
 import Results from './Results'
 import Detail from './Detail'
 import Favs from './Favs'
+import Cart from './Cart'
+
 
 function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut }) {
     logger.info("Home -> constructor")
@@ -20,6 +24,58 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
     const [vehicle, setVehicle] = useState(null)
     const [view, setView] = useState("results")
     const [favs, setFavs] = useState([])
+    const [cartModal, setCartModal] = useState(false)
+    const [cart, setCart] = useState([])
+
+    useEffect(() => {
+        showSpinner()
+        try {
+            retrieveFavVehicles(sessionStorage.token, (error, favs) => {
+                if (error) {
+                    hideSpinner()
+
+                    showModal(error.message)
+
+                    return
+                }
+
+                hideSpinner()
+
+                setFavs(favs)
+
+                try {
+                    retrieveCartVehicles(sessionStorage.token, (error, cart) => {
+                        if (error) {
+                            hideSpinner()
+        
+                            showModal(error.message)
+        
+                            return
+                        }
+        
+                        hideSpinner()
+        
+                        setCart(cart)
+                    })
+        
+                } catch ({ message }) {
+                    hideSpinner()
+        
+                    showModal(message)
+                }
+            })
+
+        } catch ({ message }) {
+            hideSpinner()
+
+            showModal(message)
+        } 
+    }, [])
+
+    const showCart = () => 
+    setCartModal(true)
+
+    const closeCart = () => setCartModal(false)
 
     const onSearch = query => {
         //En caso de ya tener resultados impresos de la busqueda anterior, se reemplazaran por los de la nueva busqueda 
@@ -45,6 +101,7 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
                 setVehicles(vehicles)
 
                 setView("results")
+
             })
         } catch ({ message }) {
 
@@ -96,7 +153,7 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
                     return
                 }
 
-                if (vehicle)
+                if (vehicle && vehicle.id === id)
                     setVehicle({ ...vehicle, isFav: !vehicle.isFav })
 
                 if (vehicles.length)
@@ -108,8 +165,9 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
                         return vehicle
                     }))
 
-                if (favs.length)
+                if (favs.length) {
                     setFavs(favs.filter(vehicle => vehicle.id !== id))
+                }
 
                 hideSpinner()
             })
@@ -136,8 +194,8 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
 
                 hideSpinner()
 
-                setView("favs")
                 setFavs(favs)
+                setView("favs")
             })
 
         } catch ({ message }) {
@@ -147,10 +205,68 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
         }
     }
 
-    return <>
-        {!vehicles && <Search onSearch={onSearch} />}
+    const addVehicleToCart = id => {
+        showSpinner()
 
-        {vehicles && <Search onSearch={onSearch} />}
+        try {
+            addToCart(sessionStorage.token, id, 1, error => {
+                if (error) {
+                    hideSpinner()
+
+                    showModal(error.message)
+
+                    return
+                }
+                
+                setCart(cart.map(vehicle => {
+                    if (vehicle.id === id)
+                    return { ...vehicle, quantity: vehicle.quantity + 1}
+                    
+                    return vehicle
+                }))
+
+                hideSpinner()
+            })
+
+        } catch ({ message }) {
+            hideSpinner()
+
+            showModal(message)
+        }
+    }
+
+    const goToCart = () => {
+
+        showSpinner()
+
+        try {
+            retrieveCartVehicles(sessionStorage.token, (error, vehicles) => {
+                if (error) {
+                    hideSpinner()
+
+                    showModal(error.message)
+
+                    return
+                }
+
+                hideSpinner()
+
+                setCart(vehicles)
+
+                showCart()
+            })
+            
+        } catch ({ message }) {
+            hideSpinner()
+
+            showModal(message)
+        }
+    }
+
+    return <>
+        {!vehicles && <Search onSearch={onSearch} itemsF={favs} itemsC={cart} goToCart={goToCart}/>}
+
+        {vehicles && <Search onSearch={onSearch} itemsF={favs} itemsC={cart}  goToCart={goToCart}/>}
 
         <div className="welcome container container--vertical">
             <h2> Bienvenido a tu página de inicio <span className="name"> {name} </span></h2>
@@ -162,16 +278,17 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
         </div>
 
         {view === "results" && <Results
-                items={vehicles}
-                onItem={onItem}
-                onToggleFavorite={toggleFavorite}
+            items={vehicles}
+            onItem={onItem}
+            onToggleFavorite={toggleFavorite}
         />}
 
         {view === "detail" && <Detail
-                item={vehicle}
-                backResultList={() =>
-                    setView("results")}
-                onToggleFavorite={toggleFavorite}
+            item={vehicle}
+            backResultList={() =>
+                setView("results")}
+            onToggleFavorite={toggleFavorite}
+            onAddToCart={addVehicleToCart}
         />}
 
 
@@ -181,6 +298,12 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
             backResultList={() =>
                 setView("results")}
             onToggleFavorite={toggleFavorite}
+        />}
+
+        {cartModal && <Cart
+            closeCart={closeCart}
+            items={cart}
+            onAddToCart={addVehicleToCart}
         />}
     </>
 

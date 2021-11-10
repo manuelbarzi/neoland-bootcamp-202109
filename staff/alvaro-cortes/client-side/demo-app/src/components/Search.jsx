@@ -1,7 +1,9 @@
 import React from 'react';
 import logger from '../logger'
+import { FaStore } from "react-icons/fa";
+import { FaHeart} from "react-icons/fa";
 
-function Search({ onSearch }) {
+function Search({ onSearch, itemsF, itemsC, goToCart }) {
     logger.info("Search -> render")
     return <form className="welcome__search container container--search" onSubmit={event => {
         event.preventDefault()
@@ -13,7 +15,7 @@ function Search({ onSearch }) {
         <input type="text" placeholder="Escribe aquí" name="query" />
         <button className="button button--red">Buscar</button>
         <div className="container--search--heart">
-        <span>🤍</span> 
+        <span className="cart"> <FaStore onClick={() => goToCart()}/>{itemsC.length}</span> <span> <FaHeart /> {itemsF.length}</span> 
         </div>
     </form>
 }

@@ -9,7 +9,7 @@ function Results({ items, onItem, onToggleFavorite }) {
         <div className="welcome__results container container--vertical">
             <ul className="welcome__results--ul">
                 {
-                    items.map(({ id, name, thumbnail, image, price, isFav }) => <li key={id} onClick={event => {onItem(id)}}>
+                    items.map(({ id, name, thumbnail, image, price, isFav }) => <li key={id} onClick={() => {onItem(id)}}>
                         <div>
                             <h2>{name}</h2>
                             <span onClick={event => {

@@ -6,8 +6,10 @@ import updateUserPassword  from "./update-user-password";
 import unregisterUser  from "./unregister-user";
 import searchVehicles  from "./search-vehicles";
 import retrieveVehicle  from "./retrieve-vehicle";
-import toggleFavoriteVehicle from "./toggle-favorite-vehicle"
-import retrieveFavVehicles from "./retrieve-favorites-vehicles"
+import toggleFavoriteVehicle from "./toggle-favorite-vehicle";
+import retrieveFavVehicles from "./retrieve-favorites-vehicles";
+import addToCart from "./add-to-cart";
+import retrieveCartVehicles from "./retrieve-cart-vehicles";
 
 export {
     registerUser,
@@ -19,5 +21,7 @@ export {
     searchVehicles,
     retrieveVehicle,
     toggleFavoriteVehicle,
-    retrieveFavVehicles
+    retrieveFavVehicles,
+    addToCart,
+    retrieveCartVehicles
 }
