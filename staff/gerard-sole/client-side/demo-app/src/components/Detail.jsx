@@ -1,12 +1,15 @@
-function Detail(props){
+function Detail( { item, goSearch } ) {
     return <>
-        <button className="button" onClick ={() => props.goSearch()}>Go back</button>
+        <div className="container container--gapped">
+            <button className="button" onClick={() => goSearch()}>Go back</button>
+            <button className="button" >❤️</button>
+        </div>
         <div className="container container--vertical" >
-        <h1>{props.item.name}</h1>
-        <img src= {props.item.image}/>
-        <time>{props.item.year}</time>
-        <p>{props.item.description}</p>
-        <span>{props.item.price} $</span>
+            <h1>{item.name}</h1>
+            <img src={item.image} />
+            <time>{item.year}</time>
+            <p>{item.description}</p>
+            <span>{item.price} $</span>
         </div>
     </>
 

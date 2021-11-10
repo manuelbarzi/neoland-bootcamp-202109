@@ -1,33 +1,31 @@
-import React from "react"
-import {setState} from "react"
+import React, {useState} from "react"
 import Search from "./Search"
 import { retrieveVehicle, searchVehicles, unregisterUser, updateUserPassword } from '../logic/index'
 import Results from "./Results"
 import Detail from "./Detail"
 import Profile from "./Profile"
 
-
 function Home({ name, toLanding }) {
 
-    const [view, setView] = setState( "search" )
-    const [vehicles, setVehicles] = setState( [] )
-    const [vehicle, setVehicle] = setState( null )
+    const [view, setView] = useState( "search" )
+    const [vehicles, setVehicles] = useState( [] )
+    const [vehicle, setVehicle] = useState( null )
 
     return <div className="home container container--gapped container--vertical">
         <div className="container">
             <p>Hello, <span className="name">{name ? name : 'World'}</span>!</p>
-            <button className="button button-medium button--dark" onClick={() => setState('profile')}>Profile</button>
-            <button className="button button-medium button" onClick={() => toLanding()}>Sign out</button>
+            <button className="button button--dark" onClick={() => setView('profile')}>Profile</button>
+            <button className="button button" onClick={() => toLanding()}>Sign out</button>
         </div>
 
         {view === 'search' && <><Search onSearch={( query ) => {
-            setState( { vehicle: null, vehicles: [] } )
+            setVehicles( [] )
 
             try {
                 searchVehicles( query, ( error, vehicles ) => {
-                    if ( error ) alert( error.message )
-                    else setState( { vehicles } )
-                } )
+                    if(error) alert(error.message)
+                    else setVehicles(vehicles)
+                })
 
             } catch ( error ) {
                 alert( error.message )
@@ -41,7 +39,7 @@ function Home({ name, toLanding }) {
                 try {
                     retrieveVehicle( vehicleid, ( error, vehicle ) => {
                         if ( error ) { alert( error.message ) }
-                        else { setState( { vehicle } ) }
+                        else { setVehicle  (vehicle) }
                     } )
                 } catch ( error ) {
                     alert( error.message )
@@ -49,16 +47,16 @@ function Home({ name, toLanding }) {
             }}
             ></Results>}
 
-            {vehicle && <Detail item={vehicle} goSearch={() => setState( { vehicle: null } )}></Detail>}
+            {vehicle && <Detail item={vehicle} goSearch={() => {setVehicles( [] ); setView("search")}}></Detail>}
         </>}
 
         {view === 'profile' && <Profile
-            goSearch={() => setState( { view: 'search', vehicles: [], vehicle: null } )}
+            goSearch={() => { setView("search"); setVehicles([]); setVehicle(null)}}
             onChangePassword={( oldPassword, password ) => {
                 try {
                     updateUserPassword( sessionStorage.token, oldPassword, password, ( error ) => {
                         if ( error ) alert( error.message )
-                        else setState( { view: 'search' } )
+                        else setView("search") 
                     } )
                 } catch ( error ) {
                     alert( error.message )

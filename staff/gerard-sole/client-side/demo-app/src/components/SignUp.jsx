@@ -12,7 +12,7 @@ function SignUp(props) {
         <input className="field" type="text" name="username" id="username" placeholder="username" />
         <input className="field" type="password" name="password" id="password" placeholder="password" />
 
-        <div className="container">
+        <div className="container container--gapped">
             <button className="button button--medium" onClick={() => props.onSignIn()}>Sign in</button>
             <button className="button button--medium button--dark">Sign up</button>
         </div>

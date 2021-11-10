@@ -1,5 +1,4 @@
 function signinUser(username, password, callback) {
-    debugger
     if (typeof username !== 'string')  throw new TypeError(username + ' is not a string')
     if (!username.trim().length) throw new Error('username is empty or blank')
     if (/\r?\n|\r|\t| /g.test(username)) throw new Error('username has blank spaces')

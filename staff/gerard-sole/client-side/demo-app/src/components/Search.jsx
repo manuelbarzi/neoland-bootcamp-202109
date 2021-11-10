@@ -1,15 +1,16 @@
-function Search(props) {
+function Search({onSearch}) {
     return <> 
         <form className="home__search container" onSubmit = {(event) => {
             event.preventDefault()
 
             const query = event.target.query.value 
 
-            props.onSearch(query)
+            onSearch(query)
                 
         }}>
             <input className="field" type="text" name="query" id="query" placeholder="criteria" />
-            <button className="button button--medium button--dark">Search</button>
+            <button className="button button--dark">Search</button>
+            <button className="button">❤️</button>
         </form>
     </>
 
