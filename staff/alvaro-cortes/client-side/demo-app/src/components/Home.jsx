@@ -8,7 +8,8 @@ import {
     toggleFavoriteVehicle,
     retrieveFavVehicles,
     addToCart,
-    retrieveCartVehicles
+    retrieveCartVehicles,
+    removeFromCart
 } from '../logic'
 import Search from './Search'
 import Results from './Results'
@@ -47,20 +48,20 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
                     retrieveCartVehicles(sessionStorage.token, (error, cart) => {
                         if (error) {
                             hideSpinner()
-        
+
                             showModal(error.message)
-        
+
                             return
                         }
-        
+
                         hideSpinner()
-        
+
                         setCart(cart)
                     })
-        
+
                 } catch ({ message }) {
                     hideSpinner()
-        
+
                     showModal(message)
                 }
             })
@@ -69,11 +70,11 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
             hideSpinner()
 
             showModal(message)
-        } 
+        }
     }, [])
 
-    const showCart = () => 
-    setCartModal(true)
+    const showCart = () =>
+        setCartModal(true)
 
     const closeCart = () => setCartModal(false)
 
@@ -209,7 +210,7 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
         showSpinner()
 
         try {
-            addToCart(sessionStorage.token, id, 1, error => {
+            addToCart(sessionStorage.token, id, error => {
                 if (error) {
                     hideSpinner()
 
@@ -217,11 +218,11 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
 
                     return
                 }
-                
+
                 setCart(cart.map(vehicle => {
                     if (vehicle.id === id)
-                    return { ...vehicle, quantity: vehicle.quantity + 1}
-                    
+                        return { ...vehicle, quantity: vehicle.quantity + 1 }
+
                     return vehicle
                 }))
 
@@ -255,7 +256,42 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
 
                 showCart()
             })
-            
+
+        } catch ({ message }) {
+            hideSpinner()
+
+            showModal(message)
+        }
+    }
+
+    const onRemoveFromCart = id => {
+        showSpinner()
+
+        try {
+            removeFromCart(sessionStorage.token, id, error => {
+                if (error) {
+                    hideSpinner()
+
+                    showModal(error.message)
+
+                    return
+                }
+
+                setCart(cart.reduce((accum, vehicle) => {
+                    if (vehicle.id === id) {
+                        if (vehicle.quantity < 2)
+                        return accum
+
+                        vehicle = { ...vehicle, quantity: vehicle.quantity - 1 }
+                    }
+
+                    accum.push(vehicle)
+
+                    return accum
+                }, []))
+
+                hideSpinner()
+            })
         } catch ({ message }) {
             hideSpinner()
 
@@ -264,9 +300,9 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
     }
 
     return <>
-        {!vehicles && <Search onSearch={onSearch} itemsF={favs} itemsC={cart} goToCart={goToCart}/>}
+        {!vehicles && <Search onSearch={onSearch} itemsF={favs} itemsC={cart} goToCart={goToCart} />}
 
-        {vehicles && <Search onSearch={onSearch} itemsF={favs} itemsC={cart}  goToCart={goToCart}/>}
+        {vehicles && <Search onSearch={onSearch} itemsF={favs} itemsC={cart} goToCart={goToCart} />}
 
         <div className="welcome container container--vertical">
             <h2> Bienvenido a tu página de inicio <span className="name"> {name} </span></h2>
@@ -303,7 +339,8 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
         {cartModal && <Cart
             closeCart={closeCart}
             items={cart}
-            onAddToCart={addVehicleToCart}
+            addToCart={addVehicleToCart}
+            onRemove={onRemoveFromCart}
         />}
     </>
 

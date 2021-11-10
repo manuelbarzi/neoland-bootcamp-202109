@@ -1,11 +1,8 @@
 import React from "react"
 import { useState } from "react"
-import { addToCart } from "../logic"
 import "./Cart.css"
 
-function Cart({ closeCart, items, onAddToCart }) {
-
-    const [total, setTotal] = useState(null)
+function Cart({ closeCart, items, addToCart, onRemove }) {
 
     return ( 
         <div className="content--cart">
@@ -14,7 +11,7 @@ function Cart({ closeCart, items, onAddToCart }) {
                 <ul  className="cart__detail">
                     {
                         items.map(({ id, quantity, name, thumbnail, image, price }) => 
-                        <li>
+                        <li key={id}>
                             <div>
                                 <h3>{name}</h3>
                                 <img src={thumbnail || image} alt="" width="150px" /><br />
@@ -23,9 +20,13 @@ function Cart({ closeCart, items, onAddToCart }) {
                                 <button className="button--cart" onClick={event => {
                                     event.stopPropagation()
 
-                                    onAddToCart(id)
+                                    addToCart(id)
                                 }}>Agregar</button>
-                                <button className="button--cart">Quitar</button>
+                                <button className="button--cart" onClick={event => {
+                                    event.stopPropagation()
+
+                                    onRemove(id)
+                                }}>Quitar</button>
                             </div>
                         </li>)
                     }

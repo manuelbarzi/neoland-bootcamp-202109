@@ -10,6 +10,7 @@ import toggleFavoriteVehicle from "./toggle-favorite-vehicle";
 import retrieveFavVehicles from "./retrieve-favorites-vehicles";
 import addToCart from "./add-to-cart";
 import retrieveCartVehicles from "./retrieve-cart-vehicles";
+import removeFromCart from "./remove-vehicle-from-cart";
 
 export {
     registerUser,
@@ -23,5 +24,6 @@ export {
     toggleFavoriteVehicle,
     retrieveFavVehicles,
     addToCart,
-    retrieveCartVehicles
+    retrieveCartVehicles,
+    removeFromCart
 }

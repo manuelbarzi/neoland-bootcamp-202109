@@ -1,4 +1,4 @@
-function addToCart(token, id, callback) {
+function removeFromCart(token, id, callback) {
     if (typeof token !== "string") throw new TypeError(`${token} is not a string`)
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error("Invalid token")
 
@@ -15,7 +15,8 @@ function addToCart(token, id, callback) {
         if (status === 401 || status === 404) {
             const response = JSON.parse(responseText)
 
-            const message = response.error
+            const message = response.message
+
             callback(new Error(message))
         } else if (status === 200) {
             const response = responseText
@@ -24,12 +25,17 @@ function addToCart(token, id, callback) {
 
             const { cart = [] } = user
 
-            const item = cart.find(item => item.id === id)
+            const index = cart.findIndex(item => item.id === id)
 
-            if (item) {
-                item.quantity++
-            } else
-                cart.push({ id, quantity: 1 })
+            if (index < 0)
+                return callback(new Error(`No item with id ${id} in cart`))
+
+            const item = cart[index]
+
+            item.quantity--
+
+            if (item.quantity === 0)
+                cart.splice(index, 1)
 
             const xhr2 = new XMLHttpRequest
 
@@ -39,7 +45,7 @@ function addToCart(token, id, callback) {
                 if (status === 400 || status === 401) {
                     const response = JSON.parse(responseText)
 
-                    const message = response.error
+                    const message = response.Error
 
                     callback(new Error(message))
                 } else if (status === 204) {
@@ -51,12 +57,13 @@ function addToCart(token, id, callback) {
 
             xhr2.setRequestHeader('Authorization', `Bearer ${token}`)
 
-            xhr2.setRequestHeader('Content-Type', 'application/json')
+            xhr2.setRequestHeader('Content-Type', 'applitacion/json')
 
             const body = { cart }
 
             xhr2.send(JSON.stringify(body))
         }
+
     }
 
     xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
@@ -66,4 +73,4 @@ function addToCart(token, id, callback) {
     xhr.send()
 }
 
-export default addToCart
+export default removeFromCart
