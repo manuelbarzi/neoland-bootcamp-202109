@@ -14,34 +14,29 @@ function retrieveVehicle(token, id, callback) {
 
         } else if (status === 200) {
             const user = JSON.parse(responseText)
-
-            const { favs = [] } = user
-
-            const xhr2 = new XMLHttpRequest
-
-            xhr2.onload = function () {
-                const {status, responseText} = xhr2
-
-                if (status === 200) {
-                    const vehicle = JSON.parse(responseText)
-
-                    if (!vehicle) return callback(new Error(`no vehicle found with id ${id}`))
-
-                    vehicle.isFav = favs.includes(vehicle.id)
-
-                    callback(null, vehicle)
-                }
-            }
-
-            xhr2.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/${id}`)
-
-            xhr2.send()
-        }
+            
+            const { fav = [] } = user
+            
+       
     }
     xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     xhr.send()
 
+    // var xhr = new XMLHttpRequest
 
-}
+    // xhr.onload = function () {
+    //     var status = xhr.status
+
+    //     if (status === 200) {
+    //         var vehicle = JSON.parse(xhr.responseText)
+
+    //         callback(null, vehicle)
+    //     }
+    // }
+
+    // xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/' + id)
+
+    // xhr.send()
+}}
 export default retrieveVehicle

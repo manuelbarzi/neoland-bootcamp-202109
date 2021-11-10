@@ -110,7 +110,6 @@ function Home({ Username, OnSignOut, OnDelete, OnStartFlow, OnEndFlow, OnShowMod
 
                 } else {
                     setvehicle(vehicle)
-                    goToHome()
                     OnEndFlow()
                 }
             })

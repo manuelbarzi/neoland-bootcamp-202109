@@ -201,8 +201,7 @@ box-sizing: content-box;
 .home__detail {
     width: 400px;
     height: 300px;
-    overflow-y: scroll;
-    /* overflow: auto; */
+    overflow: auto;
     display : flex;
     flex-direction: column;
     margin-top: 30px;
