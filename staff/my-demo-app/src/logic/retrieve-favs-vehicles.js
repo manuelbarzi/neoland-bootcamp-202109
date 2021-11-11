@@ -33,7 +33,7 @@ function retrieveFavVehicles(token, callback) {
                         if (status === 200) {
                             const vehicle = JSON.parse(responseText)
 
-                            if (!vehicle) return callback(new Error('no vehicle found with id ${id}`'))
+                            if (!vehicle) return callback(new Error(`no vehicle found with id ${id}`))
 
                             count++
                             vehicles[index] = vehicle

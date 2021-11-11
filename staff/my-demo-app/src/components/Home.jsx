@@ -56,8 +56,9 @@ function Home({ Username, OnSignOut, OnDelete, OnStartFlow, OnEndFlow, OnShowMod
                 if (error) {
                     OnShowModal(error.message)
                     OnEndFlow()
+                    return
                 }
-                if (vehicle) {
+                if (vehicle && vehicle.id === id) {
                     setvehicle({ ...vehicle, isFav: !vehicle.isFav })
                 }
                 if (vehicles.length) {
@@ -122,8 +123,7 @@ function Home({ Username, OnSignOut, OnDelete, OnStartFlow, OnEndFlow, OnShowMod
 
     const goToHome = () => setView('home')
     const goToProfile = () => setView('profile')
-    // const goToChangePassword = () => setView('changePassword')
-    // const goToDeleteAccount = () => setView('deleteAccount')
+ 
 
     const changePassword = (oldpassword, password) => {
         OnStartFlow()
@@ -168,30 +168,20 @@ function Home({ Username, OnSignOut, OnDelete, OnStartFlow, OnEndFlow, OnShowMod
 
         {view === 'home' && <>
             <HeaderHome name={name}></HeaderHome>
-
             <Search onSearch={search} query={query} ></Search>
 
             {!vehicle && <Results items={vehicles} onItem={getVehicle} OnClickFav={ToggleFav} ></Results>}
-
             {vehicle && <Detail item={vehicle} OnBackList={() => setvehicle(null)} OnClickFav={ToggleFav} ></Detail>}
 
             <ButtonsHome OnViewProfile={goToProfile} OnViewFavs={goToFavs} ></ButtonsHome>
         </>}
 
         {view === 'profile' && <Profile
-            name={name}
-            OnBackHome={goToHome}
-            OnSignOut={OnSignOut}
-            OnUpdate={changePassword}
-            OnDelete={deleteAccount}
+            name={name} OnBackHome={goToHome} OnSignOut={OnSignOut} OnUpdate={changePassword} OnDelete={deleteAccount}  
         ></Profile>}
 
         {view === 'favs' && <Favs
-            name={name}
-            OnBackHome={goToHome}
-            items={favs}
-            onItem={getVehicle}
-            OnClickFav={ToggleFav}
+            name={name} OnBackHome={goToHome} items={favs} onItem={getVehicle} OnClickFav={ToggleFav}   
         ></Favs>}
 
     </div>
