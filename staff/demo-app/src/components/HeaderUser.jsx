@@ -13,7 +13,7 @@ function HeaderUser({ myUserName, onProfile, onLogOut }) {
                     <p className="box-2__posts"><span className="post__span">164</span> post</p>
                     <p className="box-2--followers"><span className="followers__span">188</span> followers</p>
                     <p className="box-2__following"><span className="following__span">206</span> following</p></div>
-                <div className="userInfo__box-3"><p className="box-3__description">Jane Doe Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit error quibusdam amet ducimus veritatis tenetur explicabo similique modi, eius architecto asperiores voluptatum ea non commodi cupiditate mollitia blanditiis deleniti laudantium. ✈🏝🕌</p></div>
+                <div className="userInfo__box-3"><p className="box-3__description">{myUserName} Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit error quibusdam amet ducimus veritatis tenetur explicabo similique modi, eius architecto asperiores voluptatum ea non commodi cupiditate mollitia blanditiis deleniti laudantium. ✈🏝🕌</p></div>
             </div>
         </div>
     )

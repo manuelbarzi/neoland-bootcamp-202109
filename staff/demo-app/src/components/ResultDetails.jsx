@@ -7,16 +7,16 @@ function ResultDetails({ detail, onBack }) {
             <h2 className="vehicleDetails__title">{detail.name}</h2>
             <img className="vehicleDetails__img" src={detail.image} alt="" />
             <p className="vehicleDetails__description">{detail.description}</p>
-            <div class="vehicleDetails__lists">
-                <ul class="list1">
-                    <li class="list__item"><time>{detail.year}</time></li>
-                    <li class="list__item">{detail.price} $</li>
-                    <li class="list__item"><span>{detail.color}</span></li>
+            <div className="vehicleDetails__lists">
+                <ul className="list1">
+                    <li className="list__item"><time>{detail.year}</time></li>
+                    <li className="list__item">{detail.price} $</li>
+                    <li className="list__item"><span>{detail.color}</span></li>
                 </ul>
-                <ul class="list2">
-                    <li class="list__item"><span>{detail.style}</span></li>
-                    <li class="list__item"><span>{detail.collection}</span></li>
-                    <li class="list__item"><span>{detail.maker}</span></li>
+                <ul className="list2">
+                    <li className="list__item"><span>{detail.style}</span></li>
+                    <li className="list__item"><span>{detail.collection}</span></li>
+                    <li className="list__item"><span>{detail.maker}</span></li>
                 </ul>
             </div>
             <a href={detail.url}>Web</a>

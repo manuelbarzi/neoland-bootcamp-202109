@@ -4,7 +4,11 @@ import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import Home from "./components/Home";
 import PostSignUp from "./components/PostSignUp";
+import Feedback from "./components/Feedback";
 import Spinner from "./components/Spinner";
+
+// Logger
+import logger from './utils/logger';
 
 // Logic Business
 import {
@@ -15,31 +19,38 @@ import {
 
 
 function App() {
-
+  logger.debug('App -> render')
   const [view, setView] = useState(sessionStorage.token ? 'home' : 'landing')
   const [user, setUser] = useState(null)
+  const [spinner, setSpinner] = useState(sessionStorage.token ? true : false)
+  const [feedback, setFeedback] = useState(null)
+  const [level, setLevel] = useState(null)
 
   useEffect(() => {
+    logger.debug('App -> useEffect')
     if (sessionStorage.token) {
       try {
         retrieveUser(sessionStorage.token, (error, _user) => {
           if (error) {
-            alert(error)
+            hideSpinner()
+            deleteToken()
+            goToLanding()
+            showFeedback(error.message)
             return
           }
           const user = _user.username
-          setView('home')
+          goToHome()
           setUser(user)
+          hideSpinner()
         })
-      } catch (error) {
-        alert('Su sesión ha caducado')
+      } catch ({ message }) {
+        hideSpinner()
+        deleteToken()
+        goToLanding()
+        showFeedback(message, 'warn')
       }
     }
-    deleteToken()
-    goToLanding()
   }, [])
-
-
 
   // Go to ..
   const goToSignIn = () => setView('signin')
@@ -52,46 +63,73 @@ function App() {
   // Delete Token
   const deleteToken = () => delete sessionStorage.token
 
-  // Go to landing and delete token
-  const onSignOut = () => { goToLanding(); deleteToken() }
+  // Spinner on | off
+  const showSpinner = () => setSpinner(true)
+  const hideSpinner = () => setSpinner(false)
+
+  // Feedback
+  const acceptFeedback = () => setFeedback(null)
+
+  const showFeedback = (message, level = 'error') => {
+    setFeedback(message)
+    setLevel(level)
+  }
 
   // Logic Functions
   const login = (username, password) => {
+    showSpinner()
     try {
       signinUser(username, password, (error, _token) => {
         if (error) {
-          alert(error.message)
+          hideSpinner()
+          showFeedback(error.message)
           return
         }
         sessionStorage.token = _token
-        setUser(user)
-        goToHome()
+        try {
+          retrieveUser(sessionStorage.token, (error, _user) => {
+            if (error) {
+              hideSpinner()
+              showFeedback(error.message)
+              return
+            }
+            const user = _user.username
+            hideSpinner()
+            setUser(user)
+            goToHome()
+          })
+        } catch ({ message }) {
+          hideSpinner()
+          showFeedback(message, 'warn')
+        }
       })
-    } catch (error) {
-      alert(error.message)
+    } catch ({ message }) {
+      hideSpinner()
+      showFeedback(message, 'warn')
     }
   }
 
   const register = (name, username, password) => {
+    showSpinner()
     try {
       signupUser(name, username, password, (error) => {
         if (error) {
-          alert(error.message)
+          hideSpinner()
+          showFeedback(error.message)
           return
         }
+        hideSpinner()
         goToPostSignUp()
       })
-    } catch (error) {
-      alert(error.message)
+    } catch ({ message }) {
+      hideSpinner()
+      showFeedback(message, 'warn')
       return
     }
   }
 
   return (<>
-    {view === 'landing' && <Landing
-      onSignIn={goToSignIn}
-      onSignUp={goToSignUp}
-    />}
+    {view === 'landing' && <Landing onSignIn={goToSignIn} onSignUp={goToSignUp} />}
 
     {view === 'signin' && <SignIn onSignUp={goToSignUp} onSubmitSignIn={login} />}
 
@@ -99,9 +137,17 @@ function App() {
 
     {view === 'postsignup' && <PostSignUp onSignIn={goToSignIn} onLanding={goToLanding} />}
 
-    {view === 'home' && <Home myUserName={user} onProfile={goToProfile} onSignOut={onSignOut} />}
+    {view === 'home' && <Home
+      myUserName={user}
+      goToLanding={goToLanding}
+      showSpinner={showSpinner}
+      hideSpinner={hideSpinner}
+      showFeedback={showFeedback} />}
 
-    {view === 'spinner' && <Spinner />}
+    {feedback && <Feedback level={level} message={feedback} onAccept={acceptFeedback} />}
+
+    {spinner && <Spinner />}
+
   </>)
 }
 export default App;
@@ -112,11 +158,11 @@ export default App;
       SignUp
       SignIn
       Search
-      Profile
-      UpdatePassword
-      Unregister
-      Landing
       Home
+        HeaderUser
+        Profile
+          UpdatePassword
+          Unregister
         Search
         Results
         Details

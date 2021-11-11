@@ -11,7 +11,7 @@ function SignUp({ onSignUp, onSignIn }) {
 
             onSignUp(name, username, password)
         }}>
-            <h1 class="register__title">Register</h1>
+            <h1 className="register__title">Register</h1>
             <input className="input register__input" type="text" name="name" id="name" placeholder="Name" />
             <input className="input register__input" type="text" name="username" id="username" placeholder="Username" />
             <input className="input register__input" type="password" name="password" id="password" placeholder="Password" />

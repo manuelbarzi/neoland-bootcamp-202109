@@ -8,7 +8,7 @@ function SignIn({ onSignUp, onSubmitSignIn }) {
             const password = event.target.password.value
             onSubmitSignIn(username, password)
         }}>
-            <h1 class="login__title">Login</h1>
+            <h1 className="login__title">Login</h1>
             <input className="input login__input" type="text" name="username" id="username" placeholder="Username" />
             <input className="input login__input" type="password" name="password" id="password" placeholder="Password" />
 
