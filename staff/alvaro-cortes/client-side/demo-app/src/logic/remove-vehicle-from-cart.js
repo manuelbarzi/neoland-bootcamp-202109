@@ -45,7 +45,7 @@ function removeFromCart(token, id, callback) {
                 if (status === 400 || status === 401) {
                     const response = JSON.parse(responseText)
 
-                    const message = response.Error
+                    const message = response.error
 
                     callback(new Error(message))
                 } else if (status === 204) {
@@ -57,7 +57,7 @@ function removeFromCart(token, id, callback) {
 
             xhr2.setRequestHeader('Authorization', `Bearer ${token}`)
 
-            xhr2.setRequestHeader('Content-Type', 'applitacion/json')
+            xhr2.setRequestHeader('Content-Type', 'application/json')
 
             const body = { cart }
 

@@ -1,12 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&family=Shadows+Into+Light+Two&display=swap');
 
 html, body {
-    height: 100;
     padding: 0;
     margin: 0;
     border: 0;
+    /*background-image: url(https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-simple-atmosphere-business-gray-background-ppth5-background-image_142920.jpg);*/
+}
+
+body {
+    height: 100vh;
     background: linear-gradient(to bottom, #3a3a3a, #D9C5B2);
-    background-image: url(https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-simple-atmosphere-business-gray-background-ppth5-background-image_142920.jpg);
 }
 
 .title-landing {
@@ -50,8 +53,6 @@ hr {
 }
 
 .container--search--heart {
-    padding-left: 26rem;
-    margin-right: -29rem;
     color: black;
     font-family: 'Noto Sans', sans-serif;
     font-weight: 700;
@@ -129,4 +130,14 @@ input {
     color: white;
 }
 
+@media screen and (min-width: 960px) {
+    .container--search--heart {
+        padding-left: 26rem;
+        margin-right: -29rem;
+        color: black;
+        font-family: 'Noto Sans', sans-serif;
+        font-weight: 700;
+        cursor: pointer;
+    }
+}
 

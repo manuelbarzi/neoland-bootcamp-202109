@@ -18,7 +18,7 @@ import Favs from './Favs'
 import Cart from './Cart'
 
 
-function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut }) {
+function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut, toCheckout }) {
     logger.info("Home -> constructor")
 
     const [vehicles, setVehicles] = useState([])
@@ -27,7 +27,7 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
     const [favs, setFavs] = useState([])
     const [cartModal, setCartModal] = useState(false)
     const [cart, setCart] = useState([])
-
+    
     useEffect(() => {
         showSpinner()
         try {
@@ -45,7 +45,7 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
                 setFavs(favs)
 
                 try {
-                    retrieveCartVehicles(sessionStorage.token, (error, cart) => {
+                    retrieveCartVehicles(sessionStorage.token, (error, vehicles) => {
                         if (error) {
                             hideSpinner()
 
@@ -56,7 +56,7 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
 
                         hideSpinner()
 
-                        setCart(cart)
+                        setCart(vehicles)
                     })
 
                 } catch ({ message }) {
@@ -71,7 +71,7 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
 
             showModal(message)
         }
-    }, [])
+    }, [vehicles])
 
     const showCart = () =>
         setCartModal(true)
@@ -207,17 +207,19 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
     }
 
     const addVehicleToCart = id => {
-        showSpinner()
 
         try {
             addToCart(sessionStorage.token, id, error => {
                 if (error) {
+                    showSpinner()
+                    
                     hideSpinner()
 
                     showModal(error.message)
 
                     return
                 }
+                hideSpinner()
 
                 setCart(cart.map(vehicle => {
                     if (vehicle.id === id)
@@ -225,8 +227,6 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
 
                     return vehicle
                 }))
-
-                hideSpinner()
             })
 
         } catch ({ message }) {
@@ -255,6 +255,7 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
                 setCart(vehicles)
 
                 showCart()
+
             })
 
         } catch ({ message }) {
@@ -300,9 +301,19 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
     }
 
     return <>
-        {!vehicles && <Search onSearch={onSearch} itemsF={favs} itemsC={cart} goToCart={goToCart} />}
+        {!vehicles && <Search 
+        onSearch={onSearch} 
+        itemsF={favs} 
+        itemsC={cart} 
+        goToCart={goToCart} 
+        />}
 
-        {vehicles && <Search onSearch={onSearch} itemsF={favs} itemsC={cart} goToCart={goToCart} />}
+        {vehicles && <Search 
+        onSearch={onSearch} 
+        itemsF={favs} 
+        itemsC={cart} 
+        goToCart={goToCart} 
+        />}
 
         <div className="welcome container container--vertical">
             <h2> Bienvenido a tu página de inicio <span className="name"> {name} </span></h2>
@@ -341,7 +352,10 @@ function Home({ name, hideSpinner, showModal, showSpinner, onProfile, onSignOut 
             items={cart}
             addToCart={addVehicleToCart}
             onRemove={onRemoveFromCart}
+            toCheckout={toCheckout}
+            onItem={onItem}
         />}
+
     </>
 
 }

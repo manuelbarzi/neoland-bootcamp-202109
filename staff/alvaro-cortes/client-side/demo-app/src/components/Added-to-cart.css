@@ -1,0 +1,19 @@
+.added {
+    position: absolute;
+    margin-left: 50px;
+    margin-top: -13px;
+    animation: aparece 2s;
+    opacity: 0;
+}
+
+@keyframes aparece {
+    30%{
+        opacity: 0;
+    }
+    60%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}

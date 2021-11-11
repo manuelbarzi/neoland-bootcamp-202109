@@ -19,6 +19,7 @@ import SignIn from './SignIn'
 import Unregister from './Unregister'
 import Modal from './Modal'
 import Spinner from './Spinner'
+import Checkout from './Checkout-payment';
 
 function App() {
     logger.info("App -> constructor")
@@ -39,7 +40,6 @@ function App() {
             try {
                 retrieveUser(token, (error, user) => {
                     if (error) {
-                        showModal("Error", error.message)
 
                         resetTokenAndGoToLogin()
 
@@ -85,6 +85,8 @@ function App() {
     const showSpinner = () => setSpinner(true)
 
     const hideSpinner = () => setSpinner(false)
+
+    const toCheckout = () => setView("checkout")
 
     const onProfile = () => setView("profile")
 
@@ -320,6 +322,7 @@ function App() {
                     showSpinner={showSpinner}
                     hideSpinner={hideSpinner}
                     showModal={showModal}
+                    toCheckout={toCheckout}
                 ></Home>}
 
             {view === "profile" && <Profile
@@ -364,6 +367,9 @@ function App() {
                 showModal={showModal}
             ></Modal>}
 
+            {view === "checkout" && <Checkout
+                onBack={goHome}
+            />}
 
         </React.Fragment>
     }
