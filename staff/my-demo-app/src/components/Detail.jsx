@@ -1,4 +1,4 @@
-function Detail({OnBackList, OnClickFav, item:{
+function Detail({OnBackList, OnClickFav, OnAddToCart, item:{
     id,
     name,
     image,
@@ -17,6 +17,7 @@ function Detail({OnBackList, OnClickFav, item:{
         <div className="buttons-detail">
         <button type='button' className='button'onClick={OnBackList}>Back</button>
         <button type='button' className='button'onClick={()=> OnClickFav(id)}>{isFav ? '🧡' : '🤍'}</button>
+        <button type='button' className='button'onClick={()=> OnAddToCart(id)}>Add to Cart</button>
         </div>
         <h2>{name}</h2>
         <img className="home__detail-image" src={image} alt=""></img>

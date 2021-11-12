@@ -5,7 +5,10 @@ import {
     searchVehicles,
     retrieveVehicle,
     toggleFavVehicle,
-    retrieveFavVehicles
+    retrieveFavVehicles,
+    addVehicleToCart,
+    retrieveCartVehicles,
+    removeVehicleCart
 } from '../logic'
 import HeaderHome from './HeaderHome'
 import Search from './Search'
@@ -14,6 +17,7 @@ import Detail from './Detail'
 import ButtonsHome from './ButtonsHome'
 import Profile from './Profile'
 import Favs from './Favs'
+import Cart from './Cart'
 // import ChangePassword from './ChangePassword'
 // import DeleteAccount from './DeleteAccount'
 
@@ -26,6 +30,14 @@ function Home({ Username, OnSignOut, OnDelete, OnStartFlow, OnEndFlow, OnShowMod
     const [name, setname] = useState(Username);
     const [favs, setfavs] = useState([]);
     const [query, setquery] = useState(null);
+    const [cart, setcart] = useState([]);
+
+    const goToHome = () => setView('home')
+    const goToResults = () => {
+        setView('home')
+        setvehicle(null)
+    }
+    const goToProfile = () => setView('profile')
 
     const search = query => {
         OnStartFlow()
@@ -121,9 +133,81 @@ function Home({ Username, OnSignOut, OnDelete, OnStartFlow, OnEndFlow, OnShowMod
         }
     }
 
-    const goToHome = () => setView('home')
-    const goToProfile = () => setView('profile')
- 
+    const addToCArt = (id) => {
+        OnStartFlow()
+        try {
+            addVehicleToCart(sessionStorage.token, id, (error) => {
+                if (error) {
+                    OnShowModal(error.message)
+                    OnEndFlow()
+                } else {
+                    setcart(cart.map(vehicle => {
+                        if (vehicle.id === id) {
+                            return { ...vehicle, qty: vehicle.qty + 1 }
+                        }
+                        return vehicle
+                    })) 
+                    OnEndFlow()
+                }
+            })
+
+        } catch ({ message }) {
+            OnShowModal(message, 'warn')
+            OnEndFlow()
+        }
+    }
+
+    const removeFromCart = (id) => {
+        OnStartFlow()
+        try {
+
+            removeVehicleCart(sessionStorage.token, id, (error) => {
+                if (error) {
+                    OnShowModal(error.message)
+                    OnEndFlow()
+                } else {
+                    setcart(cart.reduce((acum, vehicle) => {
+                        if (vehicle.id === id) {
+                            if (vehicle.qty < 2) {
+                                return acum
+                            }
+                            vehicle = { ...vehicle, qty: vehicle.qty -1}   
+                        }
+                        acum.push(vehicle)
+                        return acum
+
+                    }, []))
+                    OnEndFlow()
+                }
+            } )
+            
+        } catch ({ message }) {
+            OnShowModal(message)
+            OnEndFlow()
+        }
+    }
+
+    const goToCart = () => {
+        OnStartFlow()
+        try {
+            retrieveCartVehicles(sessionStorage.token, (error, vehicles) => {
+
+                if (error) {
+                    OnShowModal(error.message)
+                    OnEndFlow()
+                } else {
+                    setcart(vehicles)
+                    setView('cart')
+                    OnEndFlow()
+                }
+            })
+
+        } catch ({ message }) {
+            OnShowModal(message)
+            OnEndFlow()
+        }
+    }
+
 
     const changePassword = (oldpassword, password) => {
         OnStartFlow()
@@ -171,18 +255,22 @@ function Home({ Username, OnSignOut, OnDelete, OnStartFlow, OnEndFlow, OnShowMod
             <Search onSearch={search} query={query} ></Search>
 
             {!vehicle && <Results items={vehicles} onItem={getVehicle} OnClickFav={ToggleFav} ></Results>}
-            {vehicle && <Detail item={vehicle} OnBackList={() => setvehicle(null)} OnClickFav={ToggleFav} ></Detail>}
+            {vehicle && <Detail item={vehicle} OnBackList={() => setvehicle(null)} OnClickFav={ToggleFav} OnAddToCart={addToCArt} ></Detail>}
 
-            <ButtonsHome OnViewProfile={goToProfile} OnViewFavs={goToFavs} ></ButtonsHome>
+            <ButtonsHome OnViewProfile={goToProfile} OnViewFavs={goToFavs} OnViewCart={goToCart} ></ButtonsHome>
         </>}
 
         {view === 'profile' && <Profile
-            name={name} OnBackHome={goToHome} OnSignOut={OnSignOut} OnUpdate={changePassword} OnDelete={deleteAccount}  
+            name={name} OnBackHome={goToHome} OnSignOut={OnSignOut} OnUpdate={changePassword} OnDelete={deleteAccount}
         ></Profile>}
 
         {view === 'favs' && <Favs
-            name={name} OnBackHome={goToHome} items={favs} onItem={getVehicle} OnClickFav={ToggleFav}   
+            name={name} OnBackHome={goToHome} items={favs} onItem={getVehicle} OnClickFav={ToggleFav}
         ></Favs>}
+
+        {view === 'cart' && <Cart 
+        name={name} OnBackHome={goToResults} items={cart} onItem={getVehicle} OnClickFav={ToggleFav} OnAdd={addToCArt} OnRemove={removeFromCart}
+        ></Cart>}
 
     </div>
 

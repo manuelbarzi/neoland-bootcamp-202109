@@ -2,11 +2,11 @@ function Results({items, onItem, OnClickFav}) {
     return items.length ?
     <div className="home__results-list">
         {
-            items.map(item => <div className='home__result' onClick={()=> onItem(item.id)}>
+            items.map(item => <div key={item.id} className='home__result' onClick={()=> onItem(item.id)}>
                 <h2 className='home__result-title'>{item.name}</h2>
                 <img className='home__result-img' src={item.thumbnail || item.image} ></img>
                 <span className='home__result-price'>{item.price} $</span>
-                <button className='button-fav' onClick={ event => {
+                <button className='button--small' onClick={ event => {
                     event.stopPropagation()
 
                     OnClickFav(item.id)
@@ -14,6 +14,7 @@ function Results({items, onItem, OnClickFav}) {
             </div>)
         }
     </div>
+    
     :
     null
 }

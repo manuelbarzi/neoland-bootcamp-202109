@@ -7,6 +7,9 @@ import searchVehicles from './search-vehicles'
 import retrieveVehicle from './retrieve-vehicles'
 import toggleFavVehicle from './toggle-fav-vehicle'
 import retrieveFavVehicles from './retrieve-favs-vehicles'
+import addVehicleToCart from './add-cart-vehicle'
+import retrieveCartVehicles from './retrieve-cart-vehicles'
+import removeVehicleCart from './remove-cart-vehicle'
 
 export {
     signUpUser,
@@ -17,5 +20,8 @@ export {
     searchVehicles,
     retrieveVehicle,
     toggleFavVehicle,
-    retrieveFavVehicles
+    retrieveFavVehicles,
+    addVehicleToCart,
+    retrieveCartVehicles,
+    removeVehicleCart
 }
