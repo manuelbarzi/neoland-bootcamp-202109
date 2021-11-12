@@ -1,22 +1,18 @@
-import React from "react"
+import logger from '../logger'
 
-class Search extends React.Component {
-   
-    render() {
-        
-        return <>
-            <form className="home__search container" onSubmit={event =>{  
-                              
-                event.preventDefault()
-                const query = event.target.query.value
-                this.props.onSearch(query)
-                this.props.goToSearch()
-            }}>
-                <input className="field" type="text" name="query" id="query" placeholder="criteria" />
-                <button className="button button--medium button--dark" type='submit' >Search</button>
-            </form>
-        </>
-    }
+function Search({ onSearch, query }) {
+    logger.debug('Search -> render')
+
+    return <form className="home__search container" onSubmit={event => {
+        event.preventDefault()
+
+        const query = event.target.query.value // DOM API
+
+        onSearch(query)
+    }}>
+        <input className="field" type="text" placeholder="criteria" name="query" defaultValue={query} />
+        <button className="button button--medium button--dark">Search</button>
+    </form>
 }
 
 export default Search

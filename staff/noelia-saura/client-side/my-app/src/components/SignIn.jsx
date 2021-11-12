@@ -13,7 +13,7 @@ function SignIn({onSignIn,onSignUp}) {
 
         <div className="container">
             <button className="button button--medium" onClick={onSignUp} >Sign up</button>
-            <button className="button button--medium button--dark" type='submit'>Sign in</button>
+            <button className="button button--medium button--dark" >Sign in</button>
         </div>
     </form>
 

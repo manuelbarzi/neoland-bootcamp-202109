@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Russo+One&display=swap');
 
 /* resets */
 
@@ -13,6 +14,7 @@ body {
     padding: 0;
     margin: 0;
     border: 0;
+    background-color: #0078b9;
 }
 
 /* compos */
@@ -23,9 +25,14 @@ body {
     border-width: 1px;
     margin: 5px;
     padding: 10px;
-    background-color: transparent;
+    background-color: white;
     font-size: 1rem;
     cursor:pointer;
+    transition-duration: 0.4s;
+}
+.button:hover{
+    background-color:dodgerblue;
+    color:white
 }
 
 .button--medium {
@@ -33,7 +40,7 @@ body {
 }
 
 .button--dark {
-    background-color: lightgray;
+    background-color: white;
 }
 
 .field {
@@ -42,14 +49,29 @@ body {
     border-width: 1px;
     margin: 5px;
     padding: 10px;
-    background-color: transparent;
+    background-color: white;
     font-size: 1rem;
 }
-
-.container {
+.logo{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.container {
+    background-color:#ff6d22;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Bree Serif';
+    color: white;
+    padding: 10px;
 }
 
 .container--vertical {
@@ -79,4 +101,77 @@ body {
 
 .home__detail-image {
     max-width: 80vw;
+}
+.spinner {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.spinner__image {
+    width: 20vw;
+    height: 20vw;
+}
+
+.logo__image {
+    width: 20vw;
+}
+
+.logo__text {
+    color: white;
+    margin: 0 0 0 1rem;
+    font-family: 'Bree Serif';
+}
+
+.modal {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+}
+
+.modal__text {
+    color: black;
+    font-family: 'Bebas Neue';
+}
+
+.modal__text--info {
+    color: blue;
+}
+
+.modal__text--warn {
+    color: yellow;
+}
+
+.modal__text--success {
+    color: green;
+}
+
+.modal__text--error {
+    color: red;
+}
+.cart__list {
+    list-style-type: none;
+}
+
+.cart__image {
+    width: 50vw;
+}
+
+.cart__total {
+    font-size: 2rem;
+}
+
+.results {
+    list-style-type: none;
+}
+
+.results__image {
+    width: 50vw;
 }

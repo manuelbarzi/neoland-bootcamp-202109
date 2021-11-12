@@ -1,27 +1,18 @@
-import { useState} from "react"
-function Favs() {
-    const[showFavs,setshowFavs]=useState(false)
+import Results from './Results'
+import logger from '../logger.js'
 
-    showFavs = () => {
-        if (showFavs === false) {
-            setshowFavs(true)
-        } else {
-            setshowFavs(false)
-        }
-    }
-    return <div>
-    <button className="button button-medium button" onClick={showFavs} >❤️</button>
-    {setshowFavs ?
-        <div>
-            <ul className="home__results container container--vertical ">
-                {this.props.fav.map((f) => {
-                    return <li key={f.id}>
-                        <img src={f.image} width="200px" alt='Product'/>{f.name}
-                    </li>
-                })}
-            </ul>
-        </div> : <></>}
-    </div>
+function Favs({ items, onBack, onItem, onToggleFav }) {
+    logger.debug('Favs -> render')
 
+    return <>
+        <button className="button button--medium" onClick={event => {
+            event.preventDefault()
+
+            onBack()
+        }}>Go back</button>
+
+        <Results items={items} onItem={onItem} onToggleFav={onToggleFav} />
+    </>
 }
+
 export default Favs

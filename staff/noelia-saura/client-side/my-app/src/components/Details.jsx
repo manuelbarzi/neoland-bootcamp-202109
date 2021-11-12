@@ -1,10 +1,8 @@
-
 function Detail({
     item: {
         id,
         name,
         image,
-        description,
         year,
         price,
         color,
@@ -15,26 +13,27 @@ function Detail({
         isFav
     },
     onBack,
-    favSelect
+    onToggleFav,
+    onAddToCart
 }) {
     
-    return <div className="home__detail container container--vertical ">
+    return <div className="home__detail container container--vertical">
         <h2>{name}</h2>
-        <div className='container'>
-            <button className="button button-medium button" onClick={onBack}>Back</button>
-            <button className="button button-medium button" onClick={() => favSelect(id)}>{isFav ?'❤️' : '🤍'}</button>
+        <div className="container">
+            <button className="button" onClick={onBack}>Go back</button>
+            <button className="button" onClick={() => onAddToCart(id)}>Add to Cart</button>
+            <button className="button" onClick={() => onToggleFav(id)}>{isFav ? '💜' : '🤍'}</button>
         </div>
         <img className="home__detail-image" src={image} alt="" />
-        <p>{description}</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.Nostrum quas sapiente veritatis, magni natus necessitatibus velit aliquam enim iste?Beatae velit explicabo temporibus et blanditiis!Deleniti nemo voluptatem cumque nam.</p>
         <time>{year}</time>
-        <span>{price}</span>
+        <span>{price} $</span>
         <span>{color}</span>
         <span>{style}</span>
         <span>{collection}</span>
         <span>{maker}</span>
-        <a href={url} target='_blank' rel="noreferrer">original</a>
+        <a href={url}>original</a>
     </div>
 }
 
 export default Detail
-

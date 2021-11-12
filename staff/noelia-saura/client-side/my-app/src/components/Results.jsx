@@ -1,18 +1,29 @@
-function Results (items,onItem,){
-    return <div>
-    {items ?
-            <ul className="home__results container container--vertical ">
-                {items.map(
-                    ({ id, name, thumbnail, price }) =>
-                        <li className='home__result' key={id} onClick={() => onItem(id)} >
-                            <h2>{name}</h2>
-                            <img src={thumbnail} alt='Product' />
-                            <span>{price}</span>
-                        </li>)
-                }
-            </ul>   
-            : 'Vacio' }
-    </div>
+import logger from '../logger'
+
+function Results({ items, onItem, onToggleFav}) {
+    logger.debug('Results -> render')
+
+    return items.length ?
+        <ul className="home__results container container--vertical">
+            
+            {
+                items.map(({ id, name, thumbnail, image, price, isFav }) => <li key={id} className="home__result" onClick={() => onItem(id)}>
+                    <div className="container">
+                        <h2>{name}</h2>
+                        <button className="button" onClick={event => {
+                            event.stopPropagation()
+
+                            onToggleFav(id)
+                        }}>{isFav ? '💜' : '🤍'}</button>
+                    </div>
+                    <img src={thumbnail || image} />
+                    <span>{price}€</span>
+                </li>)
+            }
+        </ul>
+        :
+        null
+           
 }
 
 export default Results
