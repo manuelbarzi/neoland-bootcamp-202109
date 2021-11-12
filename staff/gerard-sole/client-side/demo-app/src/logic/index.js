@@ -5,6 +5,9 @@ import searchVehicles from './search.logic'
 import retrieveVehicle from './detailLogic'
 import toggleFavVehicle from './togle-fav-vehicles'
 import retrieveFavVehicles from './retrieveFavVehicles'
+import addVehicleToCart from './add-vehicle-to-cart'
+import removeVehicleFromCart from './remove-vehicle-from-cart'
+import retrieveVehiclesCart from './retrieve-vehicles-cart'
 
 export {
     signinUser,
@@ -15,5 +18,8 @@ export {
     searchVehicles,
     retrieveVehicle,
     toggleFavVehicle,
-    retrieveFavVehicles
+    retrieveFavVehicles,
+    addVehicleToCart,
+    removeVehicleFromCart,
+    retrieveVehiclesCart
 }

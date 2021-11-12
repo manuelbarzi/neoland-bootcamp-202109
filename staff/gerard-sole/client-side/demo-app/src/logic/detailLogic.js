@@ -2,7 +2,6 @@ function retrieveVehicle( token, id, callback ) {
     if ( typeof id !== 'string' ) throw new TypeError( id + ' is not a string' )
     const xhr = new XMLHttpRequest
     xhr.onload = function () {
-        debugger
         const { status } = xhr
         if ( status === 401 || status === 404 ) {
             const response = JSON.parse( xhr.responseText )
