@@ -141,7 +141,9 @@ function App() {
 
             {view === "home" && (
                 <Home name={name}
-                    toLanding={resetTokenAndGoToLanding} />
+                    toLanding={resetTokenAndGoToLanding} 
+                    openModal={openModal}
+                    />
             )}
             {modal.state === true && <Modal message={modal.message} onCloseModal={closeModal} />}
 

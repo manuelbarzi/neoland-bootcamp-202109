@@ -1,8 +1,8 @@
-function Detail( { item, goSearch } ) {
+function Detail( { item, goSearch, onToggleFav } ) {
     return <>
         <div className="container container--gapped">
-            <button className="button" onClick={() => goSearch()}>Go back</button>
-            <button className="button" >❤️</button>
+            <button className="button" onClick={goSearch}>Go back</button>
+            <button className="button" type="button" onClick={()=>onToggleFav(item.id)}>{item.isFav? '❤️' : '🤍'}</button>
         </div>
         <div className="container container--vertical" >
             <h1>{item.name}</h1>
