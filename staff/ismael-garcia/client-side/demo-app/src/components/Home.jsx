@@ -1,221 +1,61 @@
 import { useState } from 'react'
 import logger from '../utils/logger'
-import { 
-    searchVehicles, 
-    retrieveVehicle, 
-    updateUserPassword, 
-    unregisterUser,
-    toggleFavVehicle,
-    retrieveFavVehicles 
-} from '../logic'
 import Search from './Search'
 import Results from './Results/Results'
 import Detail from './Detail/Detail'
 import Profile from './Profile'
-import Favs from './Favs'
+import Favs from './Favs/Favs'
+import Cart from './Cart/Cart'
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+import { useQueryParams } from '../hooks'
 
 function Home({ name, onFlowStart, onFlowEnd, onSignOut, onModal }) {
     logger.debug('Home -> render')
 
-    const [vehicles, setVehicles] = useState([])
-    const [vehicle, setVehicle] = useState(null)
-    const [view, setView] = useState('search')
-    const [favs, setFavs] = useState([])
-    const [query, setQuery] = useState(null)
+    const queryParams = useQueryParams()
+
+    const [query, setQuery] = useState(queryParams.get('q'))
+
+    const navigate = useNavigate()
+
+    const location = useLocation()
 
     const search = query => {
-        onFlowStart()
-
-        setVehicle(null)
-        setVehicles([])
         setQuery(query)
-        
-        try {
-            searchVehicles(sessionStorage.token, query, (error, vehicles) => {
-                if (error) { 
-                    onFlowEnd()
 
-                    onModal(error.message)
-
-                    return
-                }
-    
-                setVehicles(vehicles)
-
-                onFlowEnd()
-            })
-        } catch ({ message }) {
-            onFlowEnd()
-
-            onModal(message, 'warn')
-        }
-    }      
-
-    const goToItem = vehicleId => {
-        onFlowStart()
-
-        try {
-            retrieveVehicle (sessionStorage.token, vehicleId, (error, vehicle) => {
-                if (error) { 
-                    onFlowEnd()
-
-                    onModal(error.message)
-
-                    return
-                }
-
-                setVehicle(vehicle)
-                setView('search')
-
-                onFlowEnd()
-            })
-        } catch ({ message }) {
-            onFlowEnd()
-
-            onModal(message, 'warn')
-        }
+        navigate(`/search?q=${query}`)
     }
 
-    const clearVehicle = () => setVehicle(null)
+    const goToItem = id => navigate(`/vehicles/${id}`)
 
-    const goToProfile = () => setView('profile')
+    const goToProfile = () => navigate('/profile')
 
-    const goToSearch = () => setView('search')
+    const goToSearch = () => search(query)
 
-    const updatePassword = (oldPassword, password) => {
-        onFlowStart()
-        
-        try {
-            updateUserPassword(sessionStorage.token, oldPassword, password, error => {
-                if (error) {
-                    onFlowEnd()
+    const goToFavs = () => navigate('/favs')
 
-                    onModal(error.message)
+    const goToCart = () => navigate('/cart')
 
-                    return
-                }
-
-                onFlowEnd()
-
-                onModal('Password updated', 'success')
-            })
-        } catch ({ message }) {
-            onFlowEnd()
-
-            onModal(message, 'warn')
-        }
-    }
-
-    const unregister = password => {
-        onFlowStart()
-
-        try {
-            unregisterUser(sessionStorage.token, password, error => {
-                if (error) {
-                    onFlowEnd()
-
-                    onModal()
-
-                    return
-                }
-
-                logger.info('User unregistered')
-
-                onFlowEnd()
-
-                onModal('User unregistered', 'success')
-
-                onSignOut()
-            })
-        } catch ({ message }) {
-            onFlowEnd()
-
-            onModal(message, 'warn')
-        }
-    }
-
-    const toggleFav = id => {
-        onFlowStart()
-
-        try {
-            toggleFavVehicle(sessionStorage.token, id, error => {
-                if (error) {
-                    onFlowEnd()
-
-                    onModal(error.message)
-
-                    return
-                }
-
-                if (vehicle && vehicle.id === id)
-                    setVehicle({ ...vehicle, isFav: !vehicle.isFav })
-
-                if (vehicles.length)
-                    setVehicles(vehicles.map(vehicle => {
-                        if (vehicle.id === id) {
-                            return { ...vehicle, isFav: !vehicle.isFav}
-                        }
-
-                        return vehicle
-                    }))
-                
-                if (favs.length)
-                    setFavs(favs.filter(vehicle => vehicle.id !== id))
-
-                onFlowEnd()
-            })
-        } catch ({ message }) {
-            onFlowEnd()
-
-            onModal(message, 'warn')
-        }
-    }
-
-    const goToFavs = () => {
-        onFlowStart()
-
-        try {
-            retrieveFavVehicles(sessionStorage.token, (error, favs) => {
-                if (error) {
-                    onFlowEnd()
-
-                    onModal(error.message)
-
-                    return
-                }
-
-                onFlowEnd()
-                setFavs(favs)
-                setView('favs')
-            })
-        } catch ({ message }) {
-            onFlowEnd()
-
-            onModal(message, 'warn')
-        }
-    }
-
-    return <div id="home" className="home container container--vertical container--gapped">
+    return <div id="home" className="container container--vertical container--gapped">
             <h1>Hola, <span className="name">{name? name : 'World'}</span>. ¡Bienvenido a nuestro sitio!</h1>
-
-            <div>
-                <button type="button" className="button button--medium button--dark" onClick={goToProfile}>Profile</button>
-                <button type="button" className="button button--medium button--dark" onClick={goToFavs}>Favs</button>
+            
+            <div className="container">   
+                <button type="button" className={`button button--medium ${location.pathname === '/profile' && 'button--dark'}`} onClick={goToProfile}>Profile</button>
+                <button type="button" className={`button button-medium ${location.pathname === '/favs' && 'button--dark'}`} onClick={goToFavs}>Favs</button>
+                <button type="button" className={`button button-medium ${location.pathname === '/cart' && 'button--dark'}`} onClick={goToCart}>Cart</button>
                 <button type="button" className="button button--medium" onClick={onSignOut}>Sign out</button>
             </div>
 
-            {view === 'search' && <>
-                <Search onSearch={search} query={query} />
+            <Routes>
+                <Route path="/" element={<Search onSearch={search} query={query} />}>
+                    <Route path="search" element={<Results onItem={goToItem} onFlowStart={onFlowStart} onFlowEnd={onFlowEnd} onModal={onModal} />} />
+                    <Route path="vehicles/:id" element={<Detail onback={goToSearch} onFlowStart={onFlowStart} onFlowEnd={onFlowEnd} onModal={onModal} />} />
+                </Route>
 
-                {!vehicle && <Results items={vehicles} onItem={goToItem} onToggleFav={toggleFav} />}
-
-                {vehicle && <Detail item={vehicle} onBack={clearVehicle} onToggleFav={toggleFav} />}
-
-                </>}
-
-            {view === 'profile' && <Profile onBack={goToSearch} onPasswordUpdate={updatePassword} onUnregister={unregister} />}
-
-            {view === 'favs' && <Favs items={favs} onBack={goToSearch} onItem={goToItem} onToggleFav={toggleFav} />}
+                <Route path="/profile" element={<Profile onBack={goToSearch} onSignOut={onSignOut} onFlowStart={onFlowStart} onFlowEnd={onFlowEnd} onModal={onModal} />} />
+                <Route path="/favs" element={<Favs onBack={goToSearch} onItem={goToItem} onFlowStart={onFlowStart} onFlowEnd={onFlowEnd} onModal={onModal} />} />
+                <Route path="/cart" element={<Cart onBack={goToSearch} onItem={goToItem} onFlowStart={onFlowStart} onFlowEnd={onFlowEnd} onModal={onModal} />} />
+            </Routes>
         </div>
 }
 

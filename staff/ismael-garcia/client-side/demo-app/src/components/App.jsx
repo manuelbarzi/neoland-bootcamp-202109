@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import logger from '../utils/logger'
 import { retrieveUser, signUpUser, signInUser } from '../logic'
 import Logo from './Logo/Logo'
-import Time from './Time/Time'
+// import Time from './Time/Time'
 import Landing from './Landing'
 import SignUp from './SignUp'
 import PostSignUp from './PostSignUp'
@@ -52,7 +52,7 @@ function App() {
                 return // why this return?
             }
         }
-    }, []) // why this empty array?
+    }, [])
 
     // function resetTokenAndGoToLanding() {
     //     delete sessionStorage.token
@@ -61,106 +61,106 @@ function App() {
     //     setSpinner(false)
     // }
 
-        const resetTokenAndGoToLanding = () => {
-            delete sessionStorage.token
+    const resetTokenAndGoToLanding = () => {
+        delete sessionStorage.token
 
-            setView('landing')
-            setSpinner(false)
-        }
+        setView('landing')
+        setSpinner(false)
+    }
 
-        
-        const goToSignUp = () => setView('signup')
-        
-        const goToSignIn = () => setView('signin')
+    
+    const goToSignUp = () => setView('signup')
+    
+    const goToSignIn = () => setView('signin')
 
-        const showSpinner = () => setSpinner(true)
+    const showSpinner = () => setSpinner(true)
 
-        const hideSpinner = () => setSpinner(false)
+    const hideSpinner = () => setSpinner(false)
 
-        const goToPostSignUp = () => setView('post-signup')
+    const goToPostSignUp = () => setView('post-signup')
 
-        const goToHome = () => setView('home')
+    const goToHome = () => setView('home')
 
-        const showModal = (message, level = 'error') => {
-            setModal(message)
-            setLevel(level)
-        }
+    const showModal = (message, level = 'error') => {
+        setModal(message)
+        setLevel(level)
+    }
 
-        const acceptModal = () => setModal(null)
+    const acceptModal = () => setModal(null)
 
-        const signUp = (name, username, password) => {
-            showSpinner()
+    const signUp = (name, username, password) => {
+        showSpinner()
 
-            try {
-                signUpUser(name, username, password, error => {
-                    if (error) {
-                        hideSpinner()
-
-                        showModal(error.message)
-
-                        return
-                    }
-
-                    goToPostSignUp()
-
+        try {
+            signUpUser(name, username, password, error => {
+                if (error) {
                     hideSpinner()
-                })
-            } catch ({ message }) {
+
+                    showModal(error.message)
+
+                    return
+                }
+
+                goToPostSignUp()
+
                 hideSpinner()
+            })
+        } catch ({ message }) {
+            hideSpinner()
 
-                showModal(message, 'warn')
-            }
+            showModal(message, 'warn')
         }
+    }
 
-        const signIn = (username, password) => {
-            showSpinner()
+    const signIn = (username, password) => {
+        showSpinner()
 
-            try {
-                signInUser(username, password, (error, token) => {
-                    if (error) {
-                        // alert(error.message)
-                        hideSpinner()
+        try {
+            signInUser(username, password, (error, token) => {
+                if (error) {
+                    // alert(error.message)
+                    hideSpinner()
 
-                        showModal(error.message)
+                    showModal(error.message)
 
-                        return
-                    }
+                    return
+                }
 
-                    sessionStorage.token = token
+                sessionStorage.token = token
 
-                    try {
-                        retrieveUser(token, (error, user) => {
-                            if (error) {
-                                hideSpinner()
-
-                                showModal(error.message)
-
-                                return
-                            }
-
-                            const { name } = user
-
-                            setName(name)
-                            goToHome()
+                try {
+                    retrieveUser(token, (error, user) => {
+                        if (error) {
                             hideSpinner()
-                        })
-                    } catch ({ message }) {
+
+                            showModal(error.message)
+
+                            return
+                        }
+
+                        const { name } = user
+
+                        setName(name)
+                        goToHome()
                         hideSpinner()
+                    })
+                } catch ({ message }) {
+                    hideSpinner()
 
-                        showModal(message, 'warn')
-                    }
-                })
-            } catch ({ message }) {
-                hideSpinner()
+                    showModal(message, 'warn')
+                }
+            })
+        } catch ({ message }) {
+            hideSpinner()
 
-                showModal(message, 'warn')
-            }
+            showModal(message, 'warn')
         }
+    }
 
     return <>
         <Logo image="../assets/logo.png" text='Demo App' />
 
-        <Time />
+        {/* <Time /> */}
 
         {view === 'landing' && 
         <Landing

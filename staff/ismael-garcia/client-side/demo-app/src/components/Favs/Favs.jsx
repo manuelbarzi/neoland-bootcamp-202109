@@ -1,41 +1,34 @@
-import logger from '../../utils/logger'
-import './Results.css'
-import { useQueryParams } from '../../hooks'
+import logger from '../../utils/logger.js'
 import { useState, useEffect } from 'react'
-import { searchVehicles, toggleFavVehicle } from '../../logic'
+import { retrieveFavVehicles, toggleFavVehicle } from '../../logic'
+import './Favs.css'
 
-function Results({ onItem, onFlowStart, onFlowEnd, onModal }) {
-    logger.debug('Results -> render')
+function Favs({ onBack, onItem, onFlowStart, onFlowEnd, onModal }) {
+    logger.debug('Favs -> render')
 
-    const [vehicles, setVehicles] = useState([])
-
-    const queryParams = useQueryParams()
-
-    const query = queryParams.get('q')
+    const [vehicles, setVehicles] = useState()
 
     useEffect(() => {
         onFlowStart()
-        
+
         try {
-            searchVehicles(sessionStorage.token, query, (error, vehicles) => {
-                if (error) { 
+            retrieveFavVehicles(sessionStorage.token, (error, vehicles) => {
+                if (error) {
                     onFlowEnd()
 
                     onModal(error.message)
 
                     return
                 }
-    
-                setVehicles(vehicles)
 
-                onFlowEnd()
+                setVehicles(vehicles)
             })
         } catch ({ message }) {
             onFlowEnd()
 
             onModal(message, 'warn')
         }
-    }, [query])
+    }, []);
 
     const toggleFav = id => {
         onFlowStart()
@@ -50,13 +43,7 @@ function Results({ onItem, onFlowStart, onFlowEnd, onModal }) {
                     return
                 }
 
-                setVehicles(vehicles.map(vehicle => {
-                    if (vehicle.id === id) {
-                        return { ...vehicle, isFav: !vehicle.isFav}
-                    }
-
-                    return vehicle
-                }))
+                setVehicles(vehicles.filter(vehicle => vehicle.id !== id))
 
                 onFlowEnd()
             })
@@ -67,13 +54,16 @@ function Results({ onItem, onFlowStart, onFlowEnd, onModal }) {
         }
     }
 
-    return vehicles.length ?
-        <ul className="results container container--vertical">
+    return <>
+        <button className='button button--medium' onClick={onBack}>Go back</button>
+
+        {vehicles && vehicles.length ?
+        <ul className="favs container container--vertical">
             {
                 vehicles.map(({ id, name, thumbnail, image, price, isFav }) => <li key={id}className="home__results-item" onClick={() => onItem(id)}>
                     <h2>{name}</h2>
                     <span>{price}$</span>
-                    <img src={thumbnail || image} alt='' />
+                    <img className="favs__image" src={thumbnail || image} alt='' />
                     <button className="button" onClick={event => {
                             event.stopPropagation()
 
@@ -83,7 +73,8 @@ function Results({ onItem, onFlowStart, onFlowEnd, onModal }) {
             }
         </ul>
         :
-        null
+        null}
+    </>
 }
 
-export default Results
+export default Favs
