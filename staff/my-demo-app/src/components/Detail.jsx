@@ -1,40 +1,109 @@
-function Detail({OnBackList, OnClickFav, OnAddToCart, item:{
-    id,
-    name,
-    image,
-    year,
-    price,
-    color,
-    style,
-    collection,
-    maker,
-    description,
-    url,
-    isFav
+import { useState, useEffect } from 'react'
+import {
+    retrieveVehicle,
+    toggleFavVehicle,
+    addVehicleToCart,
+} from '../logic'
 
-}}) {
+function Detail({ OnBackList, itemid, OnStartFlow, OnEndFlow, OnShowModal }) {
+
+    const [vehicle, setvehicle] = useState(null);
+    // const [cart, setcart] = useState(null);
+
+    useEffect(() => {
+
+        OnStartFlow()
+        try {
+            retrieveVehicle(sessionStorage.token, itemid, (error, vehicle) => {
+                if (error) {
+                    OnShowModal(error.message)
+                    OnEndFlow()
+
+                } else {
+                    setvehicle(vehicle)
+                    // OnGoToDetail(vehicle)
+                    // goToHome()
+                    OnEndFlow()
+                }
+            })
+        } catch ({ message }) {
+            OnShowModal(message, 'warn')
+            OnEndFlow()
+        }
+
+    }, [itemid]);
+
+    const ToggleFav = (id) => {
+        OnStartFlow()
+        try {
+            toggleFavVehicle(sessionStorage.token, id, (error => {
+                if (error) {
+                    OnShowModal(error.message)
+                    OnEndFlow()
+                    return
+                }
+                if (vehicle && vehicle.id === id) {
+                    setvehicle({ ...vehicle, isFav: !vehicle.isFav })
+                }
+                
+                OnEndFlow()
+            }))
+        } catch ({ message }) {
+            OnShowModal(message, 'warn')
+            OnEndFlow()
+        }
+    }
+    
+    const addToCArt = (id) => {
+        OnStartFlow()
+        try {
+            addVehicleToCart(sessionStorage.token, id, (error) => {
+                if (error) {
+                    OnShowModal(error.message)
+                    OnEndFlow()
+                } else {
+                    // setcart(cart.map(vehicle => {
+                    //     if (vehicle.id === id) {
+                    //         return { ...vehicle, qty: vehicle.qty + 1 }
+                    //     }
+                    //     return vehicle
+                    // }))
+                    OnEndFlow()
+                }
+            })
+
+        } catch ({ message }) {
+            OnShowModal(message, 'warn')
+            OnEndFlow()
+        }
+    }
+
+
+
     return <div className="home__detail">
+        {vehicle && <>
         <div className="buttons-detail">
-        <button type='button' className='button'onClick={OnBackList}>Back</button>
-        <button type='button' className='button'onClick={()=> OnClickFav(id)}>{isFav ? '🧡' : '🤍'}</button>
-        <button type='button' className='button'onClick={()=> OnAddToCart(id)}>Add to Cart</button>
+            <button type='button' className='button' onClick={OnBackList}>Back</button>
+            <button type='button' className='button' onClick={() => ToggleFav(vehicle.id)}>{vehicle.isFav ? '🧡' : '🤍'}</button>
+            <button type='button' className='button' onClick={() => addToCArt(vehicle.id)}>Add to Cart</button>
         </div>
-        <h2>{name}</h2>
-        <img className="home__detail-image" src={image} alt=""></img>
+        <h2>{vehicle.name}</h2>
+        <img className="home__detail-image" src={vehicle.image} alt=""></img>
 
         {/* <div className="home__detail-main"> */}
-            <span>{maker}</span>
-            <time>{year}</time>
-            <span>{price} $</span>
+        <span>{vehicle.maker}</span>
+        <time>{vehicle.year}</time>
+        <span>{vehicle.price} $</span>
         {/* </div> */}
 
         {/* <div className="home__detail-second"> */}
-            <span>{color}</span>
-            <span>{style}</span>
-            <span>{collection}</span>
+        <span>{vehicle.color}</span>
+        <span>{vehicle.style}</span>
+        <span>{vehicle.collection}</span>
         {/* </div> */}
-        <p>{description}</p>
-        <a href={url}>original</a>
+        <p>{vehicle.description}</p>
+        <a href={vehicle.url}>original</a>
+        </>}
     </div>
 
 }

@@ -115,7 +115,7 @@ function App() {
                                 setName(name)
                                 setView('home')
                                 setSpinner(false)
-                                showModal(`Nice to see you ${name}`, 'success')
+                                showModal(`Welcome back ${name}`, 'success')
                             }
                         })
                     } catch ({message}) {
@@ -132,13 +132,28 @@ function App() {
 
 
     return <div className="app-bg">
-        {view === 'landing' && <Landing OnSignIn={goToSignIn} OnSignUp={goToSignUp}  ></Landing>}
+        {view === 'landing' &&
+            <Landing
+                OnSignIn={goToSignIn}
+                OnSignUp={goToSignUp}
+            ></Landing>}
 
-        {view === 'signup' && <SignUp OnSignIn={goToSignIn} OnSignUp={signUp} ></SignUp>}
-  
-        {view === 'thank-you' && <ThankYou  OnSignIn={goToSignIn}  ></ThankYou>}
+        {view === 'signup' &&
+            <SignUp
+                OnSignIn={goToSignIn}
+                OnSignUp={signUp}
+            ></SignUp>}
 
-        {view === 'signin' && <SignIn OnSignUp={goToSignUp} OnSignIn={signIn} ></SignIn>}
+        {view === 'thank-you' &&
+            <ThankYou
+                OnSignIn={goToSignIn}
+            ></ThankYou>}
+
+        {view === 'signin' &&
+            <SignIn
+                OnSignUp={goToSignUp}
+                OnSignIn={signIn}
+            ></SignIn>}
 
         {view === 'home' &&
             <Home
@@ -152,9 +167,14 @@ function App() {
 
         {spinner && <Spinner></Spinner>}
 
-        {modal && <Modal onGetIt={closeModal} message={modal} level={level} ></Modal>}
+        {modal && <Modal
+            onGetIt={closeModal}
+            message={modal}
+            level={level}
+        ></Modal>}
 
     </div>
+
 }
 
 export default App

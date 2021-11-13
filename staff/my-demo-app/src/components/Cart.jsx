@@ -1,5 +1,92 @@
-function Cart({ items, onItem, OnClickFav, OnAdd, OnRemove, name, OnBackHome }) {
-    return items.length ?
+import { useState, useEffect } from 'react'
+import {
+    addVehicleToCart,
+    retrieveCartVehicles,
+    removeVehicleCart
+} from '../logic'
+
+function Cart({ onItem, name, OnBackHome, OnStartFlow, OnEndFlow, OnShowModal }) {
+    const [cart, setcart] = useState([]);
+
+    useEffect(() => {
+
+        OnStartFlow()
+        try {
+            retrieveCartVehicles(sessionStorage.token, (error, vehicles) => {
+
+                if (error) {
+                    OnShowModal(error.message)
+                    OnEndFlow()
+                } else {
+                    setcart(vehicles)
+                    OnEndFlow()
+                }
+            })
+
+        } catch ({ message }) {
+            OnShowModal(message)
+            OnEndFlow()
+        }
+
+    }, []);
+
+
+    const addToCArt = (id) => {
+        OnStartFlow()
+        try {
+            addVehicleToCart(sessionStorage.token, id, (error) => {
+                if (error) {
+                    OnShowModal(error.message)
+                    OnEndFlow()
+                } else {
+                    setcart(cart.map(vehicle => {
+                        if (vehicle.id === id) {
+                            return { ...vehicle, qty: vehicle.qty + 1 }
+                        }
+                        return vehicle
+                    }))
+                    OnEndFlow()
+                }
+            })
+
+        } catch ({ message }) {
+            OnShowModal(message, 'warn')
+            OnEndFlow()
+        }
+    }
+
+    const removeFromCart = (id) => {
+        OnStartFlow()
+        try {
+
+            removeVehicleCart(sessionStorage.token, id, (error) => {
+                if (error) {
+                    OnShowModal(error.message)
+                    OnEndFlow()
+                } else {
+                    setcart(cart.reduce((acum, vehicle) => {
+                        if (vehicle.id === id) {
+                            if (vehicle.qty < 2) {
+                                return acum
+                            }
+                            vehicle = { ...vehicle, qty: vehicle.qty - 1 }
+                        }
+                        acum.push(vehicle)
+                        return acum
+
+                    }, []))
+                    OnEndFlow()
+                }
+            })
+
+        } catch ({ message }) {
+            OnShowModal(message)
+            OnEndFlow()
+        }
+    }
+
+
+    return cart.length ?
         <div className="pagelayout">
             <div className="title layout__title">
                 <h1>YOUR CART</h1>
@@ -10,7 +97,7 @@ function Cart({ items, onItem, OnClickFav, OnAdd, OnRemove, name, OnBackHome }) 
             </div>
             <div className='home__results-list'>
                 {
-                    items.map(item => <div key={item.id} className='home__result' onClick={() => onItem(item.id)}>
+                    cart.map(item => <div key={item.id} className='home__result' onClick={() => onItem(item.id)}>
                         <h2 className='home__result-title'>{item.name}</h2>
                         <img className='home__result-img' src={item.thumbnail || item.image} ></img>
                         <span className='home__result-price'>{item.qty} x {item.price} $</span>
@@ -18,13 +105,13 @@ function Cart({ items, onItem, OnClickFav, OnAdd, OnRemove, name, OnBackHome }) 
                             <button className='button--small' onClick={event => {
                                 event.stopPropagation()
 
-                                OnAdd(item.id)
+                                addToCArt(item.id)
                             }}>Add</button>
 
                             <button className='button--small' onClick={event => {
                                 event.stopPropagation()
 
-                                OnRemove(item.id)
+                                removeFromCart(item.id)
                             }}>Remove</button>
 
                             {/* <button className='button--small' onClick={event => {
@@ -37,8 +124,8 @@ function Cart({ items, onItem, OnClickFav, OnAdd, OnRemove, name, OnBackHome }) 
                 }
             </div>
             <div className="total-cart">
-                <span>TOTAL Items: {items.reduce((acum, {qty} ) => acum + qty, 0)}</span>
-                <span>TOTAL Price: {items.reduce((acum, { price, qty }) => acum + price * qty, 0)} $</span>
+                <span>TOTAL Items: {cart.reduce((acum, { qty }) => acum + qty, 0)}</span>
+                <span>TOTAL Price: {cart.reduce((acum, { price, qty }) => acum + price * qty, 0)} $</span>
             </div>
             <div className="layout__buttons--home-low layout__buttons">
                 <button className='button' type='button' onClick={() => OnBackHome()}>BACK HOME</button>
