@@ -36,9 +36,10 @@ class Home extends React.Component {
         logger.info('Home -> render')
 
         return <div className="home container container--gapped container--vertical">
+            <h1>home</h1>
             <div className="container">
-                <p>Hello, <span className="name">{this.props.name? this.props.name : 'World'}</span>!</p>
-                <button className="button button-medium button--dark">Profile</button>
+                <p>Hello, <span className="name">{this.props.name}</span>!</p>
+                <button className="button button-medium button--dark" onClick={this.props.goToProfile}>Profile</button>
                 <button className="button button-medium button" onClick={this.props.onSignOut}>Sign out</button>
             </div>
 

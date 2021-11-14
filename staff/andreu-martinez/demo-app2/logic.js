@@ -10,22 +10,20 @@
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
  function signupUser(user, callback) {
-     const name = user.name
-     const username = user.username
-     const password = user.password
-    if (typeof name !== 'string')  throw new TypeError(name + ' is not a string')
-    if (!name.trim().length) throw new Error('name is empty or blank')
-    if (name.trim() !== name) throw new Error('blank spaces around name')
 
-    if (typeof username !== 'string')  throw new TypeError(username + ' is not a string')
-    if (!username.trim().length) throw new Error('username is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(username)) throw new Error('username has blank spaces')
-    if (username.length < 4) throw new Error('username has less than 4 characters')
+    if (typeof user.name !== 'string')  throw new TypeError(user.name + ' is not a string')
+    if (!user.name.trim().length) throw new Error('name is empty or blank')
+    if (user.name.trim() !== user.name) throw new Error('blank spaces around name')
 
-    if (typeof password !== 'string')  throw new TypeError(password + ' is not a string')
-    if (!password.trim().length) throw new Error('password is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
-    if (password.length < 6) throw new Error('password has less than 6 characters')
+    if (typeof user.username !== 'string')  throw new TypeError(user.username + ' is not a string')
+    if (!user.username.trim().length) throw new Error('username is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(user.username)) throw new Error('username has blank spaces')
+    if (user.username.length < 4) throw new Error('username has less than 4 characters')
+
+    if (typeof user.password !== 'string')  throw new TypeError(user.password + ' is not a string')
+    if (!user.password.trim().length) throw new Error('password is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(user.password)) throw new Error('password has blank spaces')
+    if (user.password.length < 6) throw new Error('password has less than 6 characters')
 
     if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
 
@@ -49,22 +47,22 @@
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    var body = { name: name, username: username, password: password }
+    var body = user
 
     xhr.send(JSON.stringify(body))
 }
 
 // TODO document me
-function signinUser(username, password, callback) {
-    if (typeof username !== 'string')  throw new TypeError(username + ' is not a string')
-    if (!username.trim().length) throw new Error('username is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(username)) throw new Error('username has blank spaces')
+function signinUser(user, callback) {
+    if (typeof user.username !== 'string')  throw new TypeError(user.username + ' is not a string')
+    if (!user.username.trim().length) throw new Error('username is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(user.username)) throw new Error('username has blank spaces')
     if (username.length < 4) throw new Error('username has less than 4 characters')
 
-    if (typeof password !== 'string')  throw new TypeError(password + ' is not a string')
-    if (!password.trim().length) throw new Error('password is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
-    if (password.length < 6) throw new Error('password has less than 6 characters')
+    if (typeof user.password !== 'string')  throw new TypeError(user.password + ' is not a string')
+    if (!user.password.trim().length) throw new Error('password is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(user.password)) throw new Error('password has blank spaces')
+    if (user.password.length < 6) throw new Error('password has less than 6 characters')
 
     if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
 
@@ -92,7 +90,7 @@ function signinUser(username, password, callback) {
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    var body = { username: username, password: password }
+    var body = user
 
     xhr.send(JSON.stringify(body))
 }
