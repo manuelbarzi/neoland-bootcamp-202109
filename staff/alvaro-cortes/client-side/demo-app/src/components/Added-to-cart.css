@@ -2,7 +2,7 @@
     position: absolute;
     margin-left: 50px;
     margin-top: -13px;
-    animation: aparece 2s;
+    animation: aparece 1s;
     opacity: 0;
 }
 

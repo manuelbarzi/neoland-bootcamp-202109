@@ -286,93 +286,92 @@ function App() {
         }
     }
 
-        return <React.Fragment>
+    return <React.Fragment>
 
-            {view === "landing" &&
-                <Landing
-                    onSignIn={goToSignIn}
-                    onSignUp={goToSignUp}
-                ></Landing>}
-
-            {view === "register" && <SignUp
-                title={title} text={text}
+        {view === "landing" &&
+            <Landing
                 onSignIn={goToSignIn}
-                onSignUp={signUp}
-                showSpinner={showSpinner}
-                hideSpinner={hideSpinner}
-                showModal={showModal}
-            ></SignUp>}
+                onSignUp={goToSignUp}
+            ></Landing>}
 
-            {view === "login" &&
-                <SignIn view={view}
-                    title={title} text={text}
-                    onSignIn={signIn}
-                    onSignUp={goToSignUp}
-                    resetTokenAndGoToLogin={resetTokenAndGoToLogin}
-                    showSpinner={showSpinner}
-                    hideSpinner={hideSpinner}
-                    showModal={showModal}
-                ></SignIn>}
+        {view === "register" && <SignUp
+            title={title} text={text}
+            onSignIn={goToSignIn}
+            onSignUp={signUp}
+            showSpinner={showSpinner}
+            hideSpinner={hideSpinner}
+            showModal={showModal}
+        ></SignUp>}
 
-            {view === "home" &&
-                <Home name={name}
-                    title={title} text={text}
-                    onProfile={onProfile}
-                    onSignOut={resetTokenAndGoToLogin}
-                    showSpinner={showSpinner}
-                    hideSpinner={hideSpinner}
-                    showModal={showModal}
-                    toCheckout={toCheckout}
-                ></Home>}
-
-            {view === "profile" && <Profile
-                onUnregister={goToUnregister}
-                onChangePassword={goToChangePassword}
-                onChangeData={goToChangeData}
-                goHome={goHome}
-            ></Profile>}
-
-            {view === "unregister" && <Unregister
+        {view === "login" &&
+            <SignIn view={view}
                 title={title} text={text}
-                onProfile={onProfile}
-                showSpinner={showSpinner}
-                hideSpinner={hideSpinner}
-                onUnregister={unregister}
-                showModal={showModal}
+                onSignIn={signIn}
+                onSignUp={goToSignUp}
                 resetTokenAndGoToLogin={resetTokenAndGoToLogin}
-            ></Unregister>}
-
-            {view === "change--password" && <ChangePassword
-                title={title} text={text}
-                onChangePassword={changePassword}
-                onProfile={onProfile}
                 showSpinner={showSpinner}
                 hideSpinner={hideSpinner}
                 showModal={showModal}
-            ></ChangePassword>}
+            ></SignIn>}
 
-            {view === "modify" && <ChangeData
+        {view === "home" &&
+            <Home name={name}
                 title={title} text={text}
                 onProfile={onProfile}
+                onSignOut={resetTokenAndGoToLogin}
                 showSpinner={showSpinner}
                 hideSpinner={hideSpinner}
-                onChangeData={changeData}
                 showModal={showModal}
-            ></ChangeData>}
+                toCheckout={toCheckout}
+            ></Home>}
 
-            {spinner && <Spinner></Spinner>}
+        {view === "profile" && <Profile
+            onUnregister={goToUnregister}
+            onChangePassword={goToChangePassword}
+            onChangeData={goToChangeData}
+            goHome={goHome}
+        ></Profile>}
 
-            {modal && <Modal title={title} text={text}
-                closeModal={closeModal}
-                showModal={showModal}
-            ></Modal>}
+        {view === "unregister" && <Unregister
+            title={title} text={text}
+            onProfile={onProfile}
+            showSpinner={showSpinner}
+            hideSpinner={hideSpinner}
+            onUnregister={unregister}
+            showModal={showModal}
+            resetTokenAndGoToLogin={resetTokenAndGoToLogin}
+        ></Unregister>}
 
-            {view === "checkout" && <Checkout
-                onBack={goHome}
-            />}
+        {view === "change--password" && <ChangePassword
+            title={title} text={text}
+            onChangePassword={changePassword}
+            onProfile={onProfile}
+            showSpinner={showSpinner}
+            hideSpinner={hideSpinner}
+            showModal={showModal}
+        ></ChangePassword>}
 
-        </React.Fragment>
-    }
+        {view === "modify" && <ChangeData
+            title={title} text={text}
+            onProfile={onProfile}
+            showSpinner={showSpinner}
+            hideSpinner={hideSpinner}
+            onChangeData={changeData}
+            showModal={showModal}
+        ></ChangeData>}
+
+        {spinner && <Spinner></Spinner>}
+
+        {modal && <Modal title={title} text={text}
+            closeModal={closeModal}
+            showModal={showModal}
+        ></Modal>}
+
+        {view === "checkout" && <Checkout
+            onBack={goHome}
+        />}
+    </React.Fragment>
+}
 
 export default App
 

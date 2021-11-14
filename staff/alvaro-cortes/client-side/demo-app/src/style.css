@@ -32,6 +32,14 @@ hr {
     background-color: brown;
     border: brown 0.5px solid;
 }
+
+.hr--comment {
+    height: 0.1px;
+    width: 300px;
+    background-color: brown;
+    border: brown 0.1px solid;
+    margin-top: -20px;
+}
 /* ------ containers ------- */
 .container {
     display: flex;
@@ -57,6 +65,21 @@ hr {
     font-family: 'Noto Sans', sans-serif;
     font-weight: 700;
     cursor: pointer;
+}
+
+.container--comment {
+    border: rgb(104, 104, 104) 1px solid;
+    border-radius: 5px;
+}
+
+.container--comment--p {
+    padding: 10px;
+    font-weight: 500;
+    color: rgb(128, 128, 128);
+}
+
+.button--comment {
+    margin-left: 170px;
 }
 
 /* ------ form ------- */
