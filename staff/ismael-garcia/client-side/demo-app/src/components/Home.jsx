@@ -49,7 +49,7 @@ function Home({ name, onFlowStart, onFlowEnd, onSignOut, onModal }) {
             <Routes>
                 <Route path="/" element={<Search onSearch={search} query={query} />}>
                     <Route path="search" element={<Results onItem={goToItem} onFlowStart={onFlowStart} onFlowEnd={onFlowEnd} onModal={onModal} />} />
-                    <Route path="vehicles/:id" element={<Detail onback={goToSearch} onFlowStart={onFlowStart} onFlowEnd={onFlowEnd} onModal={onModal} />} />
+                    <Route path="vehicles/:id" element={<Detail onBack={goToSearch} onFlowStart={onFlowStart} onFlowEnd={onFlowEnd} onModal={onModal} />} />
                 </Route>
 
                 <Route path="/profile" element={<Profile onBack={goToSearch} onSignOut={onSignOut} onFlowStart={onFlowStart} onFlowEnd={onFlowEnd} onModal={onModal} />} />

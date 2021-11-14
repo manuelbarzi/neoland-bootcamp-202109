@@ -103,7 +103,7 @@ function Cart({ onItem, onBack, onFlowStart, onFlowEnd, onModal }) {
     return <>
         <button type="button" className="button button--medium button--dark" onClick={onBack}>Go Back</button>
 
-        {vehicles.length ?
+        {vehicles && vehicles.length ?
             <div className="cart container container--vertical">
                 <ul className="cart__list">
                     {

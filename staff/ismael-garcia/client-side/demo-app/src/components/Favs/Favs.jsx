@@ -22,6 +22,8 @@ function Favs({ onBack, onItem, onFlowStart, onFlowEnd, onModal }) {
                 }
 
                 setVehicles(vehicles)
+
+                onFlowEnd()
             })
         } catch ({ message }) {
             onFlowEnd()

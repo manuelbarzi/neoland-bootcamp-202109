@@ -83,14 +83,14 @@ function Detail({ onBack, onFlowStart, onFlowEnd, onModal }) {
     
     return <div className="container container--vertical">
         {vehicle && <>
-            <button className="button button--medium" onClick={onBack}>Back to Results</button>
+            <button type="button" className="button button--medium" onClick={onBack}>Back to Results</button>
             <h2>{vehicle.name}</h2>
             <img className="home__detail-image" src={vehicle.image} alt="" />
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quas sapiente veritatis, magni natus necessitatibus velit aliquam enim iste? Beatae velit explicabo temporibus et blanditiis! Deleniti nemo voluptatem cumque nam.</p>
             <time>{vehicle.year}</time>
             <span>{vehicle.price}</span>
             <button className='button' onClick={() => toggleFav(id)}>{vehicle.isFav ? '🧡' : '🤍'}</button>
-            <button className='button button--medium button--dark' onClick={() => addToCart(id)}>Add to Cart</button>
+            <button type="button" className='button button--medium button--dark' onClick={() => addToCart(id)}>Add to Cart</button>
             <span>{vehicle.color}</span>
             <span>{vehicle.style}</span>
             <span>{vehicle.collection}</span>
