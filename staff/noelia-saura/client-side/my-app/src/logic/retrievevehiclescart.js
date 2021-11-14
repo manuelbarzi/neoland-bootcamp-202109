@@ -1,10 +1,5 @@
 function retrieveVehiclesCart(token, callback) {
-    if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
-    if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
-
-    if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
-
-    const xhr = new XMLHttpRequest
+    
 
     xhr.onload = () => {
         const { status, responseText } = xhr
