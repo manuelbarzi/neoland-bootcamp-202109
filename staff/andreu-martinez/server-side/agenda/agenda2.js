@@ -97,6 +97,8 @@ else if (command === 'modify') // $ node agenda.js modify 4 * * peter3@mail.com
         
         const { argv: [, , , userId, newName, newPhone, newEmail] } = process
 
+        console.log(argv[5])
+
         const contact = contacts.filter( ({id}) => id === userId)
         
       
@@ -105,9 +107,9 @@ else if (command === 'modify') // $ node agenda.js modify 4 * * peter3@mail.com
                 const {id, name, phone, email} = contact[0]
                 const newContact = {
                  id: id,
-                 name: (newName === "*" || !newName) ? name : newName ,
-                 phone: (newPhone === "*" || !newPhone) ? phone : newPhone,
-                 email: (newEmail === "*" || !newEmail) ? email : newEmail              
+                 name: newName || name,
+                 phone: newPhone || phone,
+                 email: newEmail || email               
             }
             contacts.forEach((contact, index) => {
                 if(contact.id === id) contacts[index] = newContact
