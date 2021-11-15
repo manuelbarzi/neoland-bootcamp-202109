@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Header from './Header'
 import {
     updateUserPassword,
@@ -35,6 +36,9 @@ function Home({ name, onSignOut, hideSpinner, showSpinner, onFeedback }) {
     const goToHome = () => setView('search')
     const clearVehicle = () => setVehicle(null)
     const goToSearch = () => setView('search')
+
+    // const navigate = useNavigate()
+    // const location = useLocation()
 
     const search = query => {
 
@@ -242,21 +246,25 @@ function Home({ name, onSignOut, hideSpinner, showSpinner, onFeedback }) {
 
     return <>
         <div className="layout">
-            <Header goToProfile={goToProfile} goToFavs={goToFavs} goToCart={goToCart} onSignOut={onSignOut} name={name}>
+            <div>
+                <Header goToProfile={goToProfile} goToSearch={goToSearch} goToFavs={goToFavs} goToCart={goToCart} onSignOut={onSignOut} name={name}>
 
-            </Header>
-            {
-                view === 'profile' &&
-                <Profile
-                    onBack={goToHome}
-                    onPasswordUpdate={updatePassword}
-                    onUnregister={unregister}
-                    showSpinner={showSpinner}
-                    hideSpinner={hideSpinner}
-                    onFeedback={onFeedback}>
-                </Profile>
-            }
+                </Header>
+            </div>
+
             <div className="center">
+                {
+                    view === 'profile' &&
+                    <Profile
+                        onBack={goToHome}
+                        onPasswordUpdate={updatePassword}
+                        onUnregister={unregister}
+                        showSpinner={showSpinner}
+                        hideSpinner={hideSpinner}
+                        onFeedback={onFeedback}>
+                    </Profile>
+                }
+
                 {
                     view === 'search' && <>
 
@@ -268,9 +276,9 @@ function Home({ name, onSignOut, hideSpinner, showSpinner, onFeedback }) {
 
                     </>
                 }
-                {view === 'favs' && <Favs items={favs} onBack={goToSearch} onItem={goToItem} onToggleFav={toggleFav} />}
+                {view === 'favs' && <Favs items={favs} onItem={goToItem} onToggleFav={toggleFav} />}
 
-                {view === 'cart' && <Cart items={cart} onItem={goToItem} onBack={goToSearch} onRemove={removeFromCart} onAdd={addToCart} />}
+                {view === 'cart' && <Cart items={cart} onItem={goToItem} onRemove={removeFromCart} onAdd={addToCart} />}
             </div>
             <Footer>
 

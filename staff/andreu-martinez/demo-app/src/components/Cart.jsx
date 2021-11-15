@@ -1,7 +1,6 @@
-function Cart ({items, onItem, onBack, onAdd, onRemove}){
+function Cart ({items, onItem, onAdd, onRemove}){
         return items.length ?
         <div className="cart container container--vertical">
-            <button className="button" onClick={onBack}>Go back</button>
             <ul>
                 {
                     items.map(({id, name, thumbnail, image, price, qty}) => <li key={id} className="home__result" onClick={() => onItem(id)}>

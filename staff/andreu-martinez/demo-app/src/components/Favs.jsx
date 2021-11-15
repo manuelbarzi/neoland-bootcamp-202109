@@ -1,16 +1,12 @@
 import Results from './Results'
 
-function Favs({ items, onBack, onItem, onToggleFav }) {
+function Favs({ items, onItem, onToggleFav }) {
 
-    return <>
-        <button className="button" onClick={event => {
-            event.preventDefault()
-
-            onBack()
-        }}>Go back</button>
-
-        <Results items={items} onItem={onItem} onToggleFav={onToggleFav} />
-    </>
+    return items.length ?
+        <div className="test">
+            <Results items={items} onItem={onItem} onToggleFav={onToggleFav} />
+        </div>
+        : <p>No favorites to show</p>
 }
 
 export default Favs

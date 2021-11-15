@@ -13,7 +13,7 @@ function Profile({ onPasswordUpdate, onBack, onUnregister }) {
     return <>
         {
             view === 'update-password' &&
-            <form className="container container--vertical" onSubmit={event => {
+            <form className="home__update--password center" onSubmit={event => {
                 event.preventDefault()
 
                 const { target: { oldPassword: { value: oldPassword }, password: { value: password } } } = event

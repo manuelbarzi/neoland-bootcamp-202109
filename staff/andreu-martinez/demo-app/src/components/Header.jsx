@@ -1,19 +1,21 @@
-function Header({goToProfile, goToFavs, goToCart, onSignOut, name}) {
+import "./style.css"
 
-    return <>
-    <div className="header">
-        <div className="home container">
+function Header({ goToProfile, goToSearch, goToFavs, goToCart, onSignOut, name }) {
 
-            <p>Hello, <span className="name">{name ? name : 'World'}</span>!</p>
-        </div>
-        <div>
-            <button className="button" onClick={goToProfile}>Profile</button>
-            <button className="button" onClick={goToFavs}>Favs</button>
-            <button className="button" onClick={goToCart}>Cart</button>
-            <button className="button" onClick={onSignOut}>Sign Out</button>
-        </div>
-    </div>
-    </>
+    return  <div className="header">
+                <div className="header__user">
+                    <p>Hello, <span className="name">{name ? name : 'World'}</span>!</p>
+                </div>
+
+                <div></div>
+                <div className="header__menu">
+                    <button className="button" onClick={goToSearch}>Search</button>
+                    <button className="button" onClick={goToFavs}>Favs</button>
+                    <button className="button" onClick={goToCart}>Cart</button>
+                    <button className="button" onClick={goToProfile}>Profile</button>
+                    <button className="button" onClick={onSignOut}>Sign Out</button>
+                </div>
+            </div>
 
 }
 
