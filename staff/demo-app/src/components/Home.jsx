@@ -28,7 +28,7 @@ function Home({ myUserName, goToLanding, showSpinner, hideSpinner, showFeedback 
     const [view, setView] = useState('search')
     const [vehicles, setVehicles] = useState([])
     const [detail, setDetail] = useState([])
-    const [fav, setFav] = useState('🤍')
+    const [isFav, setIsFav] = useState(null)
 
     // Go to ...
     const goToProfile = () => setView('profile')
@@ -37,7 +37,6 @@ function Home({ myUserName, goToLanding, showSpinner, hideSpinner, showFeedback 
     const goToResults = () => setView('results')
     const signOut = () => { delete sessionStorage.token; goToLanding() }
     const goToChangePassword = () => setView('changepassword')
-
 
     const search = query => {
         showSpinner()
@@ -66,7 +65,8 @@ function Home({ myUserName, goToLanding, showSpinner, hideSpinner, showFeedback 
     const showDetails = (id) => {
         showSpinner()
         try {
-            retrieveVehicle(id, (error, detail) => {
+            retrieveVehicle(sessionStorage.token, id, (error, detail) => {
+
                 if (error) {
                     hideSpinner()
                     showFeedback(error.message)
@@ -74,6 +74,7 @@ function Home({ myUserName, goToLanding, showSpinner, hideSpinner, showFeedback 
                 }
                 hideSpinner()
                 setDetail(detail)
+                setIsFav(detail.isFav)
                 setView('details')
             })
         } catch (error) {
@@ -83,7 +84,7 @@ function Home({ myUserName, goToLanding, showSpinner, hideSpinner, showFeedback 
 
     }
 
-    const unRegister = (password) => {
+    const unRegister = password => {
         showSpinner()
         try {
             unregisterUser(sessionStorage.token, password, error => {
@@ -122,14 +123,23 @@ function Home({ myUserName, goToLanding, showSpinner, hideSpinner, showFeedback 
         }
     }
 
-    const toggleFav = (id) => {
-        toggleFavVehicle(sessionStorage.token, id, error => {
-            if (error) {
-                showFeedback(error.message)
-                return
-            }
-            setFav('❤')
-        })
+    const toggleFav = id => {
+        showSpinner()
+        try {
+            toggleFavVehicle(sessionStorage.token, id, error => {
+                if (error) {
+                    hideSpinner()
+                    showFeedback(error.message)
+                    return
+                }
+                hideSpinner()
+                setIsFav(!isFav)
+            })
+        } catch (error) {
+            hideSpinner()
+            showFeedback(error.message)
+            return
+        }
     }
 
     return <>
@@ -137,9 +147,9 @@ function Home({ myUserName, goToLanding, showSpinner, hideSpinner, showFeedback 
 
         {(view === 'search' || view === 'results') && <Search onSubmitSearch={search} />}
 
-        {view === 'results' && <Results vehicles={vehicles} onVehicle={showDetails} onFav={toggleFav} />}
+        {view === 'results' && <Results vehicles={vehicles} onVehicle={showDetails} isFav={isFav} onFav={toggleFav} />}
 
-        {view === 'details' && <ResultDetails detail={detail} onBack={goToResults} />}
+        {view === 'details' && <ResultDetails detail={detail} onBack={goToResults} onFav={toggleFav} isFav={isFav} />}
 
         {view === 'profile' && <Profile onUpdatePassword={goToChangePassword} onDeleteAccount={goToUnregister} onGoBack={goToSearch} />}
 

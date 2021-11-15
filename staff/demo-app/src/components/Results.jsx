@@ -1,15 +1,15 @@
 import './Results.css'
 
-function Results({ vehicles, onVehicle, onFav }) {
+function Results({ vehicles, onVehicle, onFav, isFav }) {
     return <>
         <div className="results">
             {
                 vehicles.map(vehicle =>
                     <div className="results__item" key={vehicle.id} onClick={() => onVehicle(vehicle.id)}>
-                        <button className="btnFav results__button" onClick={event => {
+                        <button className="btnFav--item results__button" onClick={event => {
                             event.stopPropagation()
                             onFav(vehicle.id)
-                        }}>🤍</button>
+                        }}>{isFav ? '✔' : '✖'}</button>
                         <img className="item__img" src={vehicle.thumbnail} alt="" />
                     </div>
                 )

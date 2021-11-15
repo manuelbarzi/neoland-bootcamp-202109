@@ -56,7 +56,6 @@ function App() {
   const goToSignIn = () => setView('signin')
   const goToSignUp = () => setView('signup')
   const goToLanding = () => setView('landing')
-  const goToProfile = () => setView('profile')
   const goToHome = () => setView('home')
   const goToPostSignUp = () => setView('postsignup')
 

@@ -1,9 +1,10 @@
 import './ResultDetails.css'
 
-function ResultDetails({ detail, onBack }) {
+function ResultDetails({ detail, onBack, onFav, isFav }) {
     return (
         <div className="vehicleDetails">
-            <button className="btn--back" onClick={() => onBack()}>↩</button>
+            <button className="btnBack" onClick={() => onBack()}>↩</button>
+            <button className="btnFav" onClick={() => onFav(detail.id)}>{isFav ? '✖' : '✔'}</button>
             <h2 className="vehicleDetails__title">{detail.name}</h2>
             <img className="vehicleDetails__img" src={detail.image} alt="" />
             <p className="vehicleDetails__description">{detail.description}</p>
