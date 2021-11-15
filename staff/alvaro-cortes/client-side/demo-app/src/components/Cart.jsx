@@ -7,7 +7,7 @@ import {
 } from '../logic'
 import "./Cart.css"
 
-function Cart({ closeCart, toCheckout, onItem, showSpinner, hideSpinner, showModal }) {
+function Cart({ closeCart, onItem, showSpinner, hideSpinner, showModal }) {
 
     const [vehicles, setVehicles] = useState()
 
@@ -131,7 +131,7 @@ function Cart({ closeCart, toCheckout, onItem, showSpinner, hideSpinner, showMod
                     <br />
                     <hr />
                     <span>Total: ${vehicles.reduce((accum, { price, quantity }) => accum + price * quantity, 0)}</span><br />
-                    <button className="button--cart--check" onClick={() => toCheckout()}>Procede con el pago</button>
+                    <button className="button--cart--check" onClick={() => showModal("Éxito", "Tu compra fue realizada.")}>Procede con el pago</button>
                 </ul>
             </div>
         </div>

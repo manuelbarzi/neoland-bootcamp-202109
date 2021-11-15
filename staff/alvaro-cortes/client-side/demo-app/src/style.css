@@ -36,8 +36,8 @@ hr {
 .hr--comment {
     height: 0.1px;
     width: 300px;
-    background-color: brown;
-    border: brown 0.1px solid;
+    background-color: rgb(128, 128, 128);
+    border: rgb(128, 128, 128) 0.1px solid;
     margin-top: -20px;
 }
 /* ------ containers ------- */

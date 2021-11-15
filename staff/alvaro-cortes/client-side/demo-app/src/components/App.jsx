@@ -21,7 +21,7 @@ import Modal from './Modal'
 import Spinner from './Spinner'
 import Checkout from './Checkout-payment';
 
-function App() {
+function App({ goToSearch }) {
     logger.info("App -> constructor")
 
     const [view, setView] = useState(sessionStorage.token ? "" : "landing")
@@ -330,6 +330,7 @@ function App() {
             onChangePassword={goToChangePassword}
             onChangeData={goToChangeData}
             goHome={goHome}
+            onGoBack={goToSearch}
         ></Profile>}
 
         {view === "unregister" && <Unregister

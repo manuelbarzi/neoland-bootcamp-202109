@@ -13,6 +13,7 @@ import retrieveCartVehicles from "./retrieve-cart-vehicles";
 import removeFromCart from "./remove-vehicle-from-cart";
 import addComent from "./add-comment";
 import retrieveComment from "./retrieve-comments";
+import removeComment from "./remove-comment";
 
 export {
     registerUser,
@@ -29,5 +30,6 @@ export {
     retrieveCartVehicles,
     removeFromCart,
     addComent,
-    retrieveComment
+    retrieveComment,
+    removeComment
 }

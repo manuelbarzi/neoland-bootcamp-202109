@@ -1,11 +1,11 @@
-function addToCart(token, id, callback) {
+function removeComment(token, id, comment, callback) {
     if (typeof token !== "string") throw new TypeError(`${token} is not a string`)
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error("Invalid token")
 
     if (typeof id !== "string") throw new TypeError(`${id} is not a string`)
     if (!id.trim().length) throw new Error("id is empty or blank.")
 
-    //if (typeof callback !== "function") throw new TypeError(`${callback} is not a function`)
+    if (typeof callback !== "function") throw new TypeError(`${callback} is not a function`)
 
     const xhr = new XMLHttpRequest
 
@@ -16,20 +16,33 @@ function addToCart(token, id, callback) {
             const response = JSON.parse(responseText)
 
             const message = response.error
+
             callback(new Error(message))
         } else if (status === 200) {
             const response = responseText
 
             const user = JSON.parse(response)
 
-            const { cart = [] } = user
+            const { comments = [] } = user
 
-            const item = cart.find(item => item.id === id)
+            const indexC = comments.findIndex(item => item.id === id)
 
-            if (item) {
-                item.quantity++
-            } else
-                cart.push({ id, quantity: 1 })
+            const items = comments[indexC]
+
+            const itemTexts = items.text
+
+            const item = itemTexts.filter(texto => texto === comment)
+
+            if (item == comment) {
+
+                const index = item.indexOf(comment)
+
+                if (itemTexts.length === 1) {
+                    comments.splice(indexC, 1)
+                }
+
+                itemTexts.splice(index, 1)
+            }
 
             const xhr2 = new XMLHttpRequest
 
@@ -53,10 +66,12 @@ function addToCart(token, id, callback) {
 
             xhr2.setRequestHeader('Content-Type', 'application/json')
 
-            const body = { cart }
+            const body = { comments }
 
             xhr2.send(JSON.stringify(body))
+
         }
+
     }
 
     xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
@@ -66,4 +81,4 @@ function addToCart(token, id, callback) {
     xhr.send()
 }
 
-export default addToCart
+export default removeComment

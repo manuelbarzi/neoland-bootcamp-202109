@@ -1,13 +1,13 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';
-import { retrieveVehicle, addComent, retrieveComment } from '../logic';
+import { retrieveVehicle, addComent, retrieveComment, toggleFavoriteVehicle, addToCart, removeComment } from '../logic';
 import './Home.css'
 import AddedToCart from './Added-to-cart';
 
 import logger from '../logger'
 
-function Detail({ onGoBack, onToggleFavorite, onAddToCart, showSpinner, showModal, hideSpinner }) {
+function Detail({ onGoBack, showSpinner, showModal, hideSpinner }) {
     logger.info('Detail -> render')
 
     const [added, setAdded] = useState(false)
@@ -61,6 +61,51 @@ function Detail({ onGoBack, onToggleFavorite, onAddToCart, showSpinner, showModa
         }
     }, [id])
 
+    const toggleFavorite = id => {
+
+        showSpinner()
+
+        try {
+            toggleFavoriteVehicle(sessionStorage.token, id, error => {
+                if (error) {
+                    hideSpinner()
+
+                    showModal(error.message)
+
+                    return
+                }
+                setVehicle({ ...vehicle, isFav: !vehicle.isFav })
+
+                hideSpinner()
+            })
+        } catch ({ message }) {
+            hideSpinner()
+
+            showModal(message)
+        }
+    }
+
+    const addVehicleToCart = id => {
+        showSpinner()
+        try {
+            addToCart(sessionStorage.token, id, error => {
+                if (error) {
+
+                    hideSpinner()
+
+                    showModal(error.message)
+
+                    return
+                }
+                hideSpinner()
+            })
+        } catch ({ message }) {
+            hideSpinner()
+
+            showModal(message)
+        }
+    }
+
     const addComentToVehicle = (id, text) => {
         showSpinner()
 
@@ -92,6 +137,42 @@ function Detail({ onGoBack, onToggleFavorite, onAddToCart, showSpinner, showModa
 
     }
 
+    const removeComments = (id, text) => {
+        //showSpinner()
+
+        try {
+            removeComment(sessionStorage.token, id, text, error => {
+                if (error) {
+                    showModal(error.message)
+
+                    hideSpinner()
+
+                    return
+                }
+
+                hideSpinner()
+
+                setComments(comments.map(comments => {
+                    const comment = comments
+                    if (comment === text) {
+
+                        //const index = comment.indexOf(text)
+
+                        return null
+                    }
+
+                    return comments
+                }))
+
+            })
+
+        } catch ({ message }) {
+            showModal(message)
+
+            hideSpinner()
+        }
+    }
+
     function list(comments) {
         const texts = comments
 
@@ -103,9 +184,9 @@ function Detail({ onGoBack, onToggleFavorite, onAddToCart, showSpinner, showModa
                     <li>
                         <h5>Comentario # {i + 1}
                             <span className="button--comment">
-                                <button className="button--cart">Eliminar</button>
+                                <button className="button--cart" onClick={() => removeComments(id, texts[i])}>Eliminar</button>
                             </span>
-                        </h5> <hr className="hr--comment"/>
+                        </h5> <hr className="hr--comment" />
                         <p className="container--comment--p">{texts[i]}</p>
                     </li>
                 </div>)
@@ -120,10 +201,10 @@ function Detail({ onGoBack, onToggleFavorite, onAddToCart, showSpinner, showModa
         {vehicle && <>
             <button className="button" onClick={onGoBack}> Volver atrás</button>
             <button className="button button--red" onClick={() => {
-                onAddToCart(id);
+                addVehicleToCart(id);
                 addedTo();
             }}> Agregar al carrito <span>{added && <AddedToCart />}</span></button>
-            <span onClick={() => onToggleFavorite(id)}>{vehicle.isFav ? '❤️' : '🤍'}</span>
+            <span onClick={() => toggleFavorite(id)}>{vehicle.isFav ? '❤️' : '🤍'}</span>
             <h2>{vehicle.name}</h2>
             <img src={vehicle.image} alt="" width="300px" />
             <p>{vehicle.description}</p>
@@ -145,11 +226,15 @@ function Detail({ onGoBack, onToggleFavorite, onAddToCart, showSpinner, showModa
                 <textarea name="textarea" id="textarea" rows="10" cols="50" placeholder="Deja tu comentario aquí."></textarea>
                 <button type="submit" className="button button--red">Enviar</button>
             </form>
+            {comments && comments.length ?
             <ul className="welcome__results--ul ">
                 {
                     list(comments)
                 }
             </ul>
+            : 
+            null
+            }
         </>}
     </div>
 }

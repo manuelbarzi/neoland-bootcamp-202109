@@ -28,14 +28,12 @@ function retrieveComment(token, id, callback) {
                 
                 comments.forEach((text) => {
 
-                    if (!comments) return callback(new Error(`no comment found with id ${id}`))
                     if (text.id === id) {
                         count++
     
                        const texts = text.text
     
                         if (count === 1) {
-    
                             return callback(null, texts)
                         }
                     }

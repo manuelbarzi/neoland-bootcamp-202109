@@ -6,7 +6,7 @@ import { FaStore } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import Cart from './Cart'
 
-function Search({ onSearch, name,  onProfile, goToFavorites, onSignOut, showModal, showSpinner, hideSpinner }) {
+function Search({ onSearch, name,  onProfile, goToFavorites, onSignOut, showModal, showSpinner, hideSpinner, onItem }) {
     logger.info("Search -> render")
     const [cartModal, setCartModal] = useState(false)
 
@@ -41,6 +41,7 @@ function Search({ onSearch, name,  onProfile, goToFavorites, onSignOut, showModa
             showModal={showModal}
             showSpinner={showSpinner}
             hideSpinner={hideSpinner}
+            onItem={onItem}
         />}
         <Outlet />
     </>

@@ -6,13 +6,10 @@ import Search from './Search'
 import Results from './Results'
 import Detail from './Detail'
 import Favs from './Favs'
-
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import { useQuery } from '../hooks';
-import { addToCart } from '../logic';
 
-
-function Home({ hideSpinner, showModal, showSpinner, onSignOut }) {
+function Home({ hideSpinner, showModal, showSpinner, onSignOut, addVehicleToCart, onProfile }) {
     logger.info("Home -> constructor")
 
     const queryParams = useQuery()
@@ -42,6 +39,8 @@ function Home({ hideSpinner, showModal, showSpinner, onSignOut }) {
                 showSpinner={showSpinner}
                 hideSpinner={hideSpinner}
                 onSignOut={onSignOut}
+                onProfile={onProfile}
+                onItem={goToItem}
             />}>
 
                 <Route path="search" element={
@@ -55,7 +54,7 @@ function Home({ hideSpinner, showModal, showSpinner, onSignOut }) {
 
                 <Route path="vehicles/:id" element={
                     <Detail
-                        onAddToCart={addToCart}
+                        addVehicleToCart={addVehicleToCart}
                         onGoBack={goToSearch}
                         showSpinner={showSpinner}
                         showModal={showModal}
