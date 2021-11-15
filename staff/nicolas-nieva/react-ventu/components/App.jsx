@@ -38,20 +38,29 @@
 //     }
 // }
 
-class App extends React.Component {
-    constructor () {
-        super()
-    }
-    render () {
-        return <React.Fragment>
-            {this.state.view === landing &&
-            <Landing
-            onSignIn={() => this.setState ({ view: "login"})}
-            onSignUp={() => this.setState ({view: "register"})}
-            ></Landing>
-    }
-    {this.state.view === 'login &&'}
 
-            </React.Fragment>
+class App extends React.Component {
+    constructor (){
+        super ()
+        this.state = {view: 'Landing'}
+    }
+    render() {
+        return <React.Fragment>
+            {this.state.view === 'Landing' && <Landing 
+            onSignin={() => this.setState({view: 'Signin'})}
+            onSignup={() => this.setState({view: 'Signup'})}
+            ></Landing>}
+
+            {this.state.view === 'Signup' && 
+                <Signup
+                onSignin={()=> this.setState({view: 'Signin'})}
+                // onSignup={}
+                ></Signup>}
+
+            {this.state.view === 'Signin' && <Signin></Signin>}
+
+            
+            
+        </React.Fragment>
     }
 }

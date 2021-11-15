@@ -1,6 +1,7 @@
 import React from "react"
 import { searchVehicles } from "../logic"
 import Results from "./Results"
+import Search from "./Search"
 
 class Home extends React.Component {
     constructor() {
