@@ -1,11 +1,10 @@
-debugger
-const fs = require('fs')
+const fs = require('fs') // import fs from 'fs' // WARNING it requires package.json
 const { readFile, writeFile } = fs
 
 const { argv: [, , command] } = process
 
 if (command === 'list') // $ node agenda.js list
-    readFile('./agenda.json', 'utf8', (error, json) => {
+    readFile('./contacts.json', 'utf8', (error, json) => {
         if (error) {
             console.error(error)
 
@@ -19,7 +18,7 @@ if (command === 'list') // $ node agenda.js list
         contacts.forEach(({ id, name, phone, email }) => console.log(id, name, phone, email))
     })
 else if (command === 'save') // $ node agenda.js save Mario 456456456 mario@mail.com
-    readFile('./agenda.json', 'utf8', (error, json) => {
+    readFile('./contacts.json', 'utf8', (error, json) => {
         if (error) {
             console.error(error.message)
 
@@ -36,7 +35,7 @@ else if (command === 'save') // $ node agenda.js save Mario 456456456 mario@mail
 
         const json2 = JSON.stringify(contacts, null, 4)
     
-        writeFile('./agenda.json', json2, error => {
+        writeFile('./contacts.json', json2, error => {
             if (error) {
                 console.error(error.message)
 
@@ -45,89 +44,62 @@ else if (command === 'save') // $ node agenda.js save Mario 456456456 mario@mail
         })
     })
 else if (command === 'find') // $ node agenda.js find peter
-    readFile('./agenda.json', 'utf8', (error, json) => {
-        if (error) {
-            console.error(error)
-
-            return
-        }
+    readFile('./contacts.json', 'utf8', (error, json) => {
+        if (error) return console.error(error)
 
         const contacts = JSON.parse(json)
 
-        const { argv: [, , , query] } = process
+        let { argv: [, , , query] } = process // let instead of const because you will modify the query variable in the line
 
-        const match = contacts.filter(contact => {
-            for (const key in contact) {
-                const lowKey = key.toLowerCase()
+        query = query.toLowerCase()
 
-                lowKey.includes(query)
-            }
-        })
+        const results = contacts.filter(({ name, phone, email }) => name.toLowerCase().includes(query) || phone.toLowerCase().includes(query) || email.toLowerCase().includes(query))
 
-        console.log(match)
+        console.log('ID NAME PHONE EMAIL')
+
+        results.forEach(( { id, name, phone, email }) => console.log(id, name, phone, email))
     })
 else if (command === 'remove') // $ node agenda.js remove 3
-    readFile('./agenda.json', 'utf8', (error, json) => {
-        if (error) {
-            console.error(error)
-
-            return
-        }
+    readFile('./contacts.json', 'utf8', (error, json) => {
+        if (error) return console.error(error)
 
         const contacts = JSON.parse(json)
 
         const { argv: [, , , id] } = process
 
-        contacts.forEach(contact => {
-            if (contact.id === id) {
-                contacts.splice(contact)
+        const index = contacts.findIndex(contact => contact.id == id)
 
-                return contacts
-            }
-        })
+        if (index < 0) return console.error(`no contact with id ${id} found`)
+
+        contacts.splice(index, 1)
 
         const json2 = JSON.stringify(contacts, null, 4)
     
-        writeFile('./agenda.json', json2, error => {
-            if (error) {
-                console.error(error.message)
-
-                return
-            }
+        writeFile('./contacts.json', json2, error => {
+            if (error) return console.error(error.message)
         })
-    })
-else if (command === 'modify') // $ node agenda.js modify 4 * * peter3@mail.com
-    readFile('./agenda.json', 'utf8', (error, json) => {
-        if (error) {
-            console.error(error.message)
 
-            return
-        }
+    })
+else if (command === 'modify') // $ node agenda.js modify 4 . . peter3@mail.com
+    readFile('./contacts.json', 'utf8', (error, json) => {
+        if (error) return console.error(error.message)
 
         const contacts = JSON.parse(json)
 
         const { argv: [, , , id, name, phone, email] } = process
 
-        contacts.forEach(contact => {
-            if (contact.id === id) {
-                if (name !== '*' && name !== undefined) {
-                    contact.name = name
-                } else if (phone !== '*' && phone !== undefined) {
-                    contact.phone = phone
-                } else if (email !== '*' && email !== undefined) {
-                    contact.email = email
-                }
-            }
-        })
+        const contact = contacts.find(contact => contact.id == id)
+
+        if (!contact) return console.error(`no contact with id ${id} found`)
+
+        if (name !== '.') contact.name = name // Short circuit version: name !== '.' && (contact.name = name)
+        if (phone !== '.') contact.phone = phone
+        if (email !== '.')  contact.email = email
 
         const json2 = JSON.stringify(contacts, null, 4)
 
-        writeFile('./agenda.json', json2, error => {
-            if (error) {
-                console.error(error.message)
-
-                return
-            }
+        writeFile('./contacts.json', json2, error => {
+            if (error) return console.error(error.message)
         })
     })
 
