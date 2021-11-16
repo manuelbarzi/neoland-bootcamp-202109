@@ -1,13 +1,13 @@
-debugger
-const fs = require('fs')
+const fs = require('fs') // ~ import
+//import fs from 'fs' // WARN it requires package.json
 const { readFile, writeFile } = fs
 
 const { argv: [, , command] } = process
 
 if (command === 'list') // $ node agenda.js list
-    readFile('./agenda.json', 'utf8', (error, json) => {
+    readFile('./contacts.json', 'utf8', (error, json) => {
         if (error) {
-            console.error(error)
+            console.error(error.message)
 
             return
         }
@@ -19,7 +19,7 @@ if (command === 'list') // $ node agenda.js list
         contacts.forEach(({ id, name, phone, email }) => console.log(id, name, phone, email))
     })
 else if (command === 'save') // $ node agenda.js save Mario 456456456 mario@mail.com
-    readFile('./agenda.json', 'utf8', (error, json) => {
+    readFile('./contacts.json', 'utf8', (error, json) => {
         if (error) {
             console.error(error.message)
 
@@ -36,7 +36,7 @@ else if (command === 'save') // $ node agenda.js save Mario 456456456 mario@mail
 
         const json2 = JSON.stringify(contacts, null, 4)
 
-        writeFile('./agenda.json', json2, error => {
+        writeFile('./contacts.json', json2, error => {
             if (error) {
                 console.error(error.message)
 
@@ -45,97 +45,74 @@ else if (command === 'save') // $ node agenda.js save Mario 456456456 mario@mail
         })
     })
 else if (command === 'find') // $ node agenda.js find peter
-    readFile('./agenda.json', 'utf8', (error, json) => {
-        if (error) {
-            console.error(error)
+    readFile('./contacts.json', 'utf8', (error, json) => {
+        if (error) return console.error(error.message)
 
-            return
-        }
-
-        const { argv: [, , , contactname] } = process
         const contacts = JSON.parse(json)
+
+        let { argv: [, , , query] } = process
+
+        query = query.toLowerCase()
+
+        const results = contacts.filter(({ name, phone, email }) => name.toLowerCase().includes(query) || phone.toLowerCase().includes(query) || email.toLowerCase().includes(query))
 
         console.log('ID NAME PHONE E-MAIL')
 
-        console.log(contacts.find(({ name }) => name.toLowerCase() === contactname))
-
+        results.forEach(({ id, name, phone, email }) => console.log(id, name, phone, email))
     })
-else if (command === 'filter') // $ node agenda.js filter gmail
-    readFile('./agenda.json', 'utf8', (error, json) => {
-        if (error) {
-            console.error(error)
+else if (command === 'remove') {// $ node agenda.js remove 3
+    const start = Date.now()
 
-            return
-        }
-        const { argv: [, , , filtergmail] } = process
+    readFile('./contacts.json', 'utf8', (error, json) => {
+        if (error) return console.error(error.message)
+
         const contacts = JSON.parse(json)
 
-        console.log('ID NAME PHONE E-MAIL')
+        const { argv: [, , , id] } = process
 
-        console.log(contacts.filter(({ email }) => email.includes(filtergmail)))
-        // console.log(contacts[1].email)
-        // console.log(filtergmail)
+        const index = contacts.findIndex(contact => contact.id == id)
 
-    })
-else if (command === 'splice') // $ node agenda.js splice 3
+        if (index < 0) return console.error(`no contact with id ${id} found`)
 
-    readFile('./agenda.json', 'utf8', (error, json) => {
-        if (error) {
-            console.error(error)
+        contacts.splice(index, 1)
 
-            return
-        }
-        const { argv: [, , , remove] } = process
-        const contacts = JSON.parse(json)
-
-        console.log('ID NAME PHONE E-MAIL')
-
-        contacts.splice(remove, 1);
-        console.log(contacts)
         const json2 = JSON.stringify(contacts, null, 4)
 
-        writeFile('./agenda.json', json2, error => {
-            if (error) {
-                console.error(error.message)
+        writeFile('./contacts.json', json2, error => {
+            if (error) return console.error(error.message)
 
-                return
-            }
+            const end = Date.now()
+
+            console.log(`contact removed (${end - start}ms)`)
         })
     })
-else if (command === 'modify') // $ node agenda.js modify 4 * * * peter3@mail.com
-    
+} else if (command === 'modify') {// $ node agenda.js modify 4 . . peter3@mail.com
+    const start = Date.now()
 
-readFile('./agenda.json', 'utf8', (error, json) => {
+    readFile('./contacts.json', 'utf8', (error, json) => {
+        if (error) return console.error(error.message)
 
-    if (error) {
-        console.error(error)
+        const contacts = JSON.parse(json)
 
-        return
-    }
-    
-    const contacts = JSON.parse(json)
-    const { argv: [, , , , userId, newName, newPhone, newEmail] } = process
-    const contact=contacts.filter(({id})=>id===userId)
-if(contact.length<1)console.log(`user with id ${userId} don't exists`)
-else{
-    const{id,name,phone,email}=contact[0]
-    const newContact={
-        id:id,
-        name:(newName==='*'||newName)?name:newName,
-        phone:(newPhone==='*'||newPhone)?phone:newPhone,
-        email:(newEmail==='*'||newEmail)?email:newEmail
-    }
-    contacts.forEach((contact,index)=>{
-    if(contact.id===id)contacts[index]=newContact
-})
-    const json2 = JSON.stringify(contacts, null, 4)
+        const { argv: [, , , id, name, phone, email] } = process
 
-    writeFile('./agenda.json', json2, error => {
-        if (error) {
-            console.error(error.message)
+        const contact = contacts.find(contact => contact.id == id)
 
-            return
-        }
+        if (!contact) return console.error(`no contact with id ${id} found`)
+
+        if (name !== '.') contact.name = name
+        // name !== '.' && (contact.name = name)
+        if (phone !== '.') contact.phone = phone
+        if (email !== '.')  contact.email = email
+
+        const json2 = JSON.stringify(contacts, null, 4)
+
+        writeFile('./contacts.json', json2, error => {
+            if (error) return console.error(error.message)
+
+            const end = Date.now()
+
+            console.log(`contact modified (${end - start}ms)`)
+        })
     })
 }
-})

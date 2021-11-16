@@ -3,13 +3,13 @@
         "id": 1,
         "name": "Peter",
         "phone": "123123123",
-        "email": "peter@hotmail.com"
+        "email": "peter@mail.com"
     },
     {
         "id": 2,
         "name": "Jack",
         "phone": "234234234",
-        "email": "jack@gmail.com"
+        "email": "jack@mail.com"
     },
     {
         "id": 3,
@@ -18,21 +18,15 @@
         "email": "manu@mail.com"
     },
     {
+        "id": 4,
+        "name": "Hola Mundo",
+        "phone": "123123123",
+        "email": "peter3@mail.com"
+    },
+    {
         "id": 5,
         "name": "Wendy",
         "phone": "234234234",
         "email": "wendy@mail.com"
-    },
-    {
-        "id": 6,
-        "name": "Mario",
-        "phone": "456456456",
-        "email": "mario@mail.com"
-    },
-    {
-        "id": 7,
-        "name": "Noelia",
-        "phone": "111222333",
-        "email": "noelia@mail.com"
     }
 ]
