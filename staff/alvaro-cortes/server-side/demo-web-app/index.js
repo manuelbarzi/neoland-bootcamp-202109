@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const formBodyParser = bodyParser.urlencoded({ extended: false })
-const { registerUser, authenticateUser, retrieveUser, modifyUser } = require('users')
+const { registerUser, authenticateUser, retrieveUser, modifyUser, unregisterUser, unregisterUser } = require('users')
 
 const server = express()
 
@@ -379,7 +379,60 @@ server.post('/changedata', formBodyParser, (req, res) => {
         </body>
         </html>`)
     })
+})
 
+server.get('/unregister', (req, res) => {
+    res.send(`<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,  initial-scale=1.0">
+        <title>Private | Demo Web-App</title>
+    
+        <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h3> Modificar contraseña </h3>
+
+        <form method="POST" action="/unregister">
+            <input type="password" name="password" placeholder="Contrase{a"></input>
+            <button type="submit">Eliminar cuenta</button>
+        </form>
+
+        <a href="/private"><button>Volver atrás</button></a>
+    </body>
+    </html>`)
+})
+
+server.post('/unregister', formBodyParser, (req, res) => {
+    const { body: { password } } = req
+    const { headers: { cookie } } = req
+    const [, id] = cookie.split('=')
+
+    unregisterUser(id, password, error => {
+        if (error)
+        res.send(`<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width,  initial-scale=1.0">
+            <title>Private | Demo Web-App</title>
+        
+            <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
+            <link rel="stylesheet" href="style.css">
+        </head>
+        <body>
+            <h1>${error.message}</h1>
+
+            <a href="/unregister"><button>Volver atrás</button></a>
+        </body>
+        </html>`)
+
+        res.redirect('/')
+    })
 })
 
 server.listen(8000, () => {
