@@ -6,11 +6,12 @@ function retrieveUser(id, callback) {
 
         const users = JSON.parse(json)
 
-        const index = users.findIndex(user => user.id === id)
+        const user = users.find(user => user.id === id)
 
-        if (index < 0) return callback(new Error(`user with id ${id} not found`))
+        if (!user) return callback(new Error(`user with id ${id} not found`))
 
-        const user = users[index]
+        delete user.id
+        delete user.password
 
         callback(null, user)
     })

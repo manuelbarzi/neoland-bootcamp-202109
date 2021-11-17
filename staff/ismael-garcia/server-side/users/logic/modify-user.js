@@ -10,7 +10,7 @@ function modifyUser(id, name, username, password, callback) { // data => { name:
 
         if (!user) return callback(new Error(`no user with id ${id} found`))
 
-        if (name !== '.') user.name = name // Short circuit version: name !== '.' && (contact.name = name)
+        if (name !== '.') user.name = name // Short circuit version: name !== '.' && (user.name = name)
         if (username !== '.') user.username = username
         if (password !== '.')  user.password = password
 
