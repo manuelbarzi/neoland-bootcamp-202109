@@ -1,17 +1,29 @@
-const {readFile}=require('fs')
+const { readFile } = require('fs')
 
-function authenticateUser (username,password,callback){
-    readFile(`${__dirname}/../users.json`, 'utf8', (error, json)=>{
-        if(error)return callback(error)
+function authenticateUser(username, password, callback) {
+    if (typeof username !== 'string') throw new TypeError(`${username} is not a string`)
+    if (!username.trim().length) throw new Error('username is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(username)) throw new Error('username has blank spaces')
+    if (username.length < 4) throw new Error('username has less than 4 characters')
 
-        const users=JSON.parse(json)
+    if (typeof password !== 'string') throw new TypeError(`${password} is not a string`)
+    if (!password.trim().length) throw new Error('password is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
+    if (password.length < 8) throw new Error('password has less than 8 characters')
 
-        const user=users.find(user=>user.username===username && user.password===password)
+    if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
 
-        if(!user)return console.log(new Error (`wrong credentials`))
-        
-        return callback(null,user.id)
+    readFile(`${__dirname}/../users.json`, 'utf8', (error, json) => {
+        if (error) return callback(error)
+
+        const users = JSON.parse(json)
+
+        const user = users.find(user => user.username === username && user.password === password)
+
+        if (!user) return callback(new Error('wrong credentials'))
+
+        callback(null, user.id)
     })
 }
 
-module.exports=authenticateUser
+module.exports = authenticateUser

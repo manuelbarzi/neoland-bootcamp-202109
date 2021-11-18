@@ -7,6 +7,15 @@ body {
     background-color: yellow;
 }
 
-.signin__feedback--error {
+.feedback {
+    border: 1px solid black;
+    display: inline-block;
+}
+
+.feedback--success {
+    color: green;
+}
+
+.feedback--error {
     color: red;
 }
