@@ -14,11 +14,11 @@ function unregisterUser(id, password, callback) {
 
         if (user.password !== password) return callback(new Error("wrong credentials"))
 
-        user.splice(index, 1)
+        users.splice(index, 1)
 
         const json2 = JSON.stringify(users, null, 4)
 
-        writeFile('./users.json', json2, error => {
+        writeFile(`${__dirname}/../users.json`, json2, error => {
             if (error) return callback(error)
 
             callback()

@@ -1,409 +1,158 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const formBodyParser = bodyParser.urlencoded({ extended: false })
-const { registerUser, authenticateUser, retrieveUser, modifyUser, unregisterUser, unregisterUser } = require('users')
+const { registerUser, authenticateUser, retrieveUser, modifyUser, unregisterUser } = require('users')
+const { home, landing, login, register, fail, postSignUp, changePass, changeData, unregister } = require('./components')
+
+function getUserId(cookie) {
+    let res = null
+    if (cookie) {
+        const [, id] = cookie.split('=')
+        res = id
+    }
+    return res
+}
 
 const server = express()
 
 server.use(express.static('public')) // middleware
 
-server.get('/hello', (req, res) => { // http://localhost:8000/hello?name=Pepito => html saluting Pepito
-    const name = req.query.name
+server.get('/', (req, res) => {
+    const { headers: { cookie } } = req
 
-    const userAgent = req.headers['user-agent']
+    const id = getUserId(cookie)
 
-    res.send(`<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-        <title>Hello, ${name}!</title>
-    
-        <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h1>Hello, ${name}!</h1>
-        <p>You've connected to this server using the client ${userAgent}.
-    </body>
-    </html>`)
-
+    if (id) {
+        retrieveUser(id, (error, user) => {
+            if (error) {
+                return res.send(landing())
+            } else {
+                return res.send(home(user))
+            }
+        })
+    } else
+        res.send(landing())
 })
 
-server.get('/signup', (req, res) => { // http://localhost:8000/signup
-    res.send(`<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-            <title>Sign up | Demo Web-App</title>
-        
-            <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-            <h1>Demo Web-App</h1>
-            <h1>Sign up</h1>
-            <form method="POST" action="/signup">
-                <input type="text" name="name" placeholder="name">
-                <input type="text" name="username" placeholder="username">
-                <input type="password" name="password" placeholder="password">
-                <button>Sign up</button>
-            </form>
-        </body>
-        </html>`)
+server.get('/register', (req, res) => {
+    const { headers: { cookie } } = req
+
+    const id = getUserId(cookie)
+
+    if (id) return res.redirect('/')
+
+    res.send(register())
 })
 
 
-server.post('/signup', formBodyParser, (req, res) => {
+server.post('/register', formBodyParser, (req, res) => {
     // const name = req.body.name
     // const username = req.body.username
     // const password = req.body.password
     const { body: { name, username, password } } = req
 
-    registerUser(name, username, password, function (error) {
-        if (error) {
-            res.send(`<!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-                <title>Sign up | Demo Web-App</title>
-            
-                <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-                <link rel="stylesheet" href="style.css">
-            </head>
-            <body>
-                <h1>Sorry 🤡🎈</h1>
+    const { headers: { cookie } } = req
 
-                <p>${error.message}</p>
+    const id = getUserId(cookie)
 
-                <a href="/signup">Try again</a>.
-            </body>
-            </html>`)
+    if (id) return res.redirect('/')
 
-            return
-        }
+    try {
+        registerUser(name, username, password, function (error) {
+            if (error) {
+                res.send(fail(error))
 
-        res.send(`<!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-                <title>Sign up | Demo Web-App</title>
-            
-                <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-                <link rel="stylesheet" href="style.css">
-            </head>
-            <body>
-                <h1>User successfully registered</h1>
+                return
+            }
 
-                <p>You can proceed to <a href="/signin">sign in</a>.</p>
-            </body>
-            </html>`)
-    })
+            res.send(postSignUp())
+        })
+    } catch (error) {
+        return res.send(register(name, username, error))
+    }
 })
 
-server.get('/signin', (req, res) => {
-    res.send(`<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-        <title>Sign in | Demo Web-App</title>
-    
-        <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h1>Demo Web-App</h1>
-        <h1>Sign in</h1>
-        <form method="POST" action="/signin">
-            <input type="text" name="username" placeholder="username">
-            <input type="password" name="password" placeholder="password">
-            <button>Sign in</button>
-        </form>
-    </body>
-    </html>`)
+server.get('/login', (req, res) => {
+    const { headers: { cookie } } = req
+
+    const id = getUserId(cookie)
+
+    if (id) return res.redirect('/')
+
+    res.send(login())
 })
 
-server.post('/signin', formBodyParser, (req, res) => {
+server.post('/login', formBodyParser, (req, res) => {
     const { body: { username, password } } = req
 
-    authenticateUser(username, password, (error, id) => {
-        if (error)
-            return res.send(`<!DOCTYPE html>
-                <html lang="en">
-                <head>
-                    <meta charset="UTF-8">
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                    <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-                    <title>Sign in | Demo Web-App</title>
-                
-                    <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-                    <link rel="stylesheet" href="style.css">
-                </head>
-                <body>
-                    <h1>Demo Web-App</h1>
-                    <h1>Sign in</h1>
-                    <form class="signin" method="POST" action="/signin">
-                        <input type="text" name="username" placeholder="username">
-                        <input type="password" name="password" placeholder="password">
-                        <span class="signin__feedback signin__feedback-error">${error.messsage}</span>
-                        <button>Sign in</button>
-                    </form>
-                </body>
-                </html>`)
+    const { headers: { cookie } } = req
 
-        res.setHeader('Set-Cookie', `user-id=${id}`) //Max-Age=3600
+    const id = getUserId(cookie)
 
-        res.redirect('/private')
-    })
+    if (id) return res.redirect('/')
 
-    server.get('/private', (req, res) => {
-        const { headers: { cookie } } = req
-        //const cookie = req.headers
-
-        if (!cookie) return res.redirect('/')
-
-        // cookie = 'user-id=kw0vnj6s'
-        // cookie.split('=')
-        // cookie = ['user-id', 'kw0vnj6s'][1]
-
-        const [, id] = cookie.split('=')
-
-        retrieveUser(id, (error, user) => {
+    try {
+        authenticateUser(username, password, (error, id) => {
             if (error)
-                return res.send(`<!DOCTYPE html>
-                    <html lang="en">
-                    <head>
-                        <meta charset="UTF-8">
-                        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                        <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-                        <title>Private | Demo Web-App</title>
-                    
-                        <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-                        <link rel="stylesheet" href="style.css">
-                    </head>
-                    <body>
-                        <h1>${error.message}</h1>
-                    </body>
-                    </html>`)
+                return res.send(login({ username, feedback: error.message }))
 
-            res.send(`<!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-                <title>Private | Demo Web-App</title>
-            
-                <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-                <link rel="stylesheet" href="style.css">
-            </head>
-            <body>
-                <h1>Hello, ${user.username}!</h1>
+            res.setHeader('Set-Cookie', `user-id=${id}; Max-Age=3600`)
 
-                <a href="/changepassword"><button>Cambiar contraseña</button></a>
-                <a href="/changedata"><button>Cambiar datos de usuario</button></a>
-
-            </body>
-            </html>`)
+            res.redirect('/')
         })
-
-    })
+    } catch (error) {
+        return res.send(login({ username, feedback: error.message }))
+    }
 })
 
-server.get('/changepassword', (req, res) => {
-    res.send(`<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-        <title>Private | Demo Web-App</title>
-    
-        <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h3> Modificar contraseña </h3>
-
-        <form method="POST" action="/changepassword">
-            <input type="password" name="oldPassword" placeholder="Contraseña anterior"></input>
-            <input type="password" name="newPassword" placeholder="Nueva contraseña"></input>
-            <button type="submit">Enviar</button>
-        </form>
-
-        <a href="/private"><button>Volver atrás</button></a>
-    </body>
-    </html>`)
+server.get('/change-password', (req, res) => {
+    res.send(changePass())
 })
 
-server.post("/changepassword", formBodyParser, (req, res) => {
+server.post("/change-password", formBodyParser, (req, res) => {
     const { body: { oldPassword, newPassword } } = req
     const { headers: { cookie } } = req
     const [, id] = cookie.split('=')
 
-    modifyUser(id, ".", ".", oldPassword, newPassword, error => {
-        if (error)
-        res.send(`<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-            <title>Private | Demo Web-App</title>
-        
-            <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-            <h1>${error.message}</h1>
+    try {
+        modifyUser(id, ".", ".", oldPassword, newPassword, error => {
+            if (error)
+                return res.send(changePass({ error: error.message }))
 
-            <a href="/changepassword"><button>Volver atrás</button></a>
-        </body>
-        </html>`)
-
-        res.send(`<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-            <title>Private | Demo Web-App</title>
-        
-            <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-            <h1>Contraseña modificada con exito.</h1>
-
-            <a href="/changepassword"><button>Volver atrás</button></a>
-        </body>
-        </html>`)
-    })
+            res.send(changePass({ success: "Password changed." }))
+        })
+    } catch (error) {
+        return res.send(changePass())
+    }
 })
 
-server.get('/changedata', (req, res) => {
-    res.send(`<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-        <title>Private | Demo Web-App</title>
-    
-        <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h3> Modificar contraseña </h3>
-
-        <form method="POST" action="/changedata">
-            <input type="text" name="name" placeholder="Nombre"></input>
-            <input type="text" name="username" placeholder="Nombre de usuario"></input>
-            <button type="submit">Enviar</button>
-        </form>
-
-        <a href="/private"><button>Volver atrás</button></a>
-    </body>
-    </html>`)
+server.get('/change-data', (req, res) => {
+    res.send(changeData())
 })
 
-server.post('/changedata', formBodyParser, (req, res) => {
+server.post('/chang-edata', formBodyParser, (req, res) => {
     const { body: { name, username } } = req
     const { headers: { cookie } } = req
     const [, id] = cookie.split('=')
 
-    modifyUser(id, name, username, ".", ".", error => {
-        if (error)
-        res.send(`<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-            <title>Private | Demo Web-App</title>
-        
-            <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-            <h1>${error.message}</h1>
+    try {
+        modifyUser(id, name, username, ".", ".", error => {
+            if (error)
+                return res.send(changeData({ name, username, error }))
 
-            <a href="/changedata"><button>Volver atrás</button></a>
-        </body>
-        </html>`)
+            else if (name === "" && username === "")
+                res.send(changeData({ success: "No data has been updated." }))
 
-        else if (name === "" && username === "")
-        res.send(`<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-            <title>Private | Demo Web-App</title>
-        
-            <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-            <h1>No has modificados ningun dato.</h1>
-
-            <a href="/changedata"><button>Volver atrás</button></a>
-        </body>
-        </html>`)
-
-        else 
-        res.send(`<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-            <title>Private | Demo Web-App</title>
-        
-            <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-            <h1>Datos de usuarios modificados con exito.</h1>
-
-            <a href="/changedata"><button>Volver atrás</button></a>
-        </body>
-        </html>`)
-    })
+            else
+                res.send(changeData({ success: "Your data has been updated." }))
+        })
+    } catch (error) {
+        return res.send(changeData({ name, username, error }))
+    }
 })
 
 server.get('/unregister', (req, res) => {
-    res.send(`<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-        <title>Private | Demo Web-App</title>
-    
-        <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h3> Modificar contraseña </h3>
-
-        <form method="POST" action="/unregister">
-            <input type="password" name="password" placeholder="Contrase{a"></input>
-            <button type="submit">Eliminar cuenta</button>
-        </form>
-
-        <a href="/private"><button>Volver atrás</button></a>
-    </body>
-    </html>`)
+    res.send(unregister())
 })
 
 server.post('/unregister', formBodyParser, (req, res) => {
@@ -413,26 +162,16 @@ server.post('/unregister', formBodyParser, (req, res) => {
 
     unregisterUser(id, password, error => {
         if (error)
-        res.send(`<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-            <title>Private | Demo Web-App</title>
-        
-            <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-            <h1>${error.message}</h1>
-
-            <a href="/unregister"><button>Volver atrás</button></a>
-        </body>
-        </html>`)
-
-        res.redirect('/')
+            res.send(unregister({ error }))
+        else
+            res.redirect('/')
     })
+})
+
+server.post('/signout', (req, res) => {
+    res.setHeader('Set-Cookie', `user-id=null; Max-Age=0`)
+
+    res.redirect('/')
 })
 
 server.listen(8000, () => {
