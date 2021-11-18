@@ -39,7 +39,7 @@ if (command === 'register') { // $ node manager register "Peter Pan" peterpan 12
             console.log(error.message)
             
         }else{
-            console.log(user)
+            console.log(`user ${user.name} retrieved`)
             return
         }
         
@@ -76,7 +76,7 @@ if (command === 'register') { // $ node manager register "Peter Pan" peterpan 12
         if(error){
             console.log(error.message)
         }else{
-            console.log(id)
+            console.log(`user with ${id} authenticated`)
         }
         
     })
