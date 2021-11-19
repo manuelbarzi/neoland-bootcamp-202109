@@ -50,24 +50,24 @@ else if (command === 'save') // $ node contacts.js save Mario 456456456 mario@ma
     })
 else if (command === 'find') // $ node agenda.js find peter
     readFile('./contacts.json', 'utf8', (error, json) => {
-        if (error) {
-            console.error(error)
-
-            return
-        }
+        if (error) return console.error (error.message)
 
         const contacts = JSON.parse(json)
-        const { argv: [, , , query] } = process //PREGUNTAR VENTU
 
-        contacts.forEach(element => {
-            if (element.name === query || element.phone === query || element.email  === query) {      
+        let { argv: [, , , query] } = process
 
-                console.log(element)
+        query = query.toLowerCase()
 
-            }
-        })
+        const results = contacts.filter (({name, phone, email}) => name.toLowerCase().includes(query) ||  phone.toLowerCase().includes(query) || email.toLowerCase().includes(query))
+        
+        console.log('ID NAME PHONE E-MAIL')
+
+        results.forEach(({ id, name, phone, email }) => console.log(id, name, phone, email))  
+        
     })
 
+    
+   
 else if (command === 'modify') //  $ node contacts.js modify 4 * * peter3@mail.com
     readFile('./contacts.json', 'utf8', (error, json) => {
         if (error) {
