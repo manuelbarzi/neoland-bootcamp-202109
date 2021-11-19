@@ -5,7 +5,7 @@ module.exports = {
     postSignUp: require ('./post-sign-up'),
     home: require ('./home'),
     fail: require ('./fail'),
-    modifyPassword: require('./modify-password')
-    // modifyData: require ('./modify-user'),
-    // unregisterUser: require ('./unregister-user')
+    modifyPassword: require('./modify-password'),
+    modifyData: require ('./modify-data'),
+    unregisterU: require ('./unregister')
 }

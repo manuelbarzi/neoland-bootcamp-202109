@@ -1,7 +1,8 @@
-function modifyPassword (args={}) {
-    const {feedback} = args
+function modifyData (args= {}){
+    const {feedback} = args 
     
-    return `<!DOCTYPE html>
+    
+    return`<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -13,18 +14,19 @@ function modifyPassword (args={}) {
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h3> Modificar contraseña </h3>
+        <h3> Modificar datos </h3>
 
-        <form method="POST" action="/modify-password">
-            <input type="password" name="oldPassword" placeholder="Contraseña anterior"></input>
-            <input type="password" name="newPassword" placeholder="Nueva contraseña"></input>
+        <form method="POST" action="/changedata">
+            <input type="text" name="name" placeholder="Nombre"></input>
+            <input type="text" name="username" placeholder="Nombre de usuario"></input>
             ${feedback ? `<p class= "feedback feedback--error">${feedback}</p>`:''}
             <button type="submit">Enviar</button>
         </form>
+        
 
         <a href="/"><button>Volver atrás</button></a>
     </body>
     </html>`
 }
 
-module.exports = modifyPassword
+module.exports = modifyData

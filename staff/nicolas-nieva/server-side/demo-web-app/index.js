@@ -1,8 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const formBodyParser = bodyParser.urlencoded({ extended: false })
-const { registerUser, authenticateUser, retrieveUser, modifyUser } = require('users')
-const {landing, home, signUp, signIn, modifyPassword, modifyData, unregisterUser, fail, postSignUp} = require ('./components')
+const { registerUser, authenticateUser, retrieveUser, modifyUser, unregisterUser } = require('users')
+const {landing, home, signUp, signIn, modifyPassword, modifyData, unregisterU, fail, postSignUp} = require ('./components')
 
 const server = express()
 
@@ -72,9 +72,9 @@ server.get('/signin', (req, res) => {
 
 server.post('/signin', formBodyParser, (req, res) => {
     const { body: { username, password } } = req
+    const { headers: { cookie } } = req
     const id = getUserId (cookie)
     if (id) return res.redirect ('/')
-    res.send(signIn ())
     try{
     authenticateUser(username, password, (error, id) => {
         if (error)
@@ -101,122 +101,62 @@ server.post ("/modify-password", formBodyParser, (req, res) =>{
     const { headers: { cookie } } = req
     const [, id] = cookie.split ('=')
     try{
-    modifyPassword(id, ".", ".", oldPassword, newPassword, error => {
-        if (error)
-        res.send(modifyPassword ({oldPassword, newPassword, feedback: message.error}))
+    modifyUser(id, ".", ".", oldPassword, newPassword, error => {
+        if (error) return res.send(modifyPassword ({feedback: message.error}))
 
-        res.send(`<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-            <title>Private | Demo Web-App</title>
-        
-            <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-            <h1>Contraseña modificada con exito.</h1>
-
-            <a href="/modify-password"><button>Volver atrás</button></a>
-        </body>
-        </html>`)
+        res.send(modifyPassword ({feedback: 'password modified'}))
     })}catch (error){
-        res.send(modifyPassword ({oldPassword, newPassword, feedback: message.error}))
+        return res.send(modifyPassword ({feedback: message.error}))
     }
 })
 
 server.get ('/changedata', (req,res) => {
-    res.send (`<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-        <title>Private | Demo Web-App</title>
-    
-        <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h3> Modificar datos </h3>
-
-        <form method="POST" action="/changedata">
-            <input type="text" name="name" placeholder="Nombre"></input>
-            <input type="text" name="username" placeholder="Nombre de usuario"></input>
-            <button type="submit">Enviar</button>
-        </form>
-
-        <a href="/"><button>Volver atrás</button></a>
-    </body>
-    </html>`)
+    res.send (modifyData())
 })
 
 server.post('/changedata', formBodyParser, (req,res) => {
     const { body: { name, username } } = req
     const { headers: { cookie } } = req
     const [, id] = cookie.split('=')
-
+    try{
     modifyUser(id, name, username, ".", ".", error => {
-        if (error)
-        res.send (`<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-            <title>Private | Demo Web-App</title>
-        
-            <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-            <h1>${error.message}</h1>
-
-            <a href="/changedata"><button>Volver atrás</button></a>
-        </body>
-        </html>`)
+        if (error) return res.send (modifyData ({feedback:error.message}))
 
         else if (name === "" && username === "")
-        res.send(`<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-            <title>Private | Demo Web-App</title>
-        
-            <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-            <h1>No has modificados ningun dato.</h1>
-
-            <a href="/changedata"><button>Volver atrás</button></a>
-        </body>
-        </html>`)
+        res.send(modifyData ({feedback:'empty spaces'}))
 
         else
-        res.send (`<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width,  initial-scale=1.0">
-            <title>Private | Demo Web-App</title>
-        
-            <link rel="shortcut icon" href="favicon.webp" type="image/x-icon">
-            <link rel="stylesheet" href="style.css">
-        </head>
-        <body>
-            <h1>Datos de usuarios modificados con exito.</h1>
+        res.send (modifyData ({feedback: 'datos cambiados'}))
 
-            <a href="/changedata"><button>Volver atrás</button></a>
-        </body>
-        </html>`)
+    })}catch(error){
+        return res.send (modifyData ({feedback:error.message}))
+    }
+})
 
-    })
+server.get ('/unregister', (req, res) => {
+    const { headers: { cookie } } = req
+    const id = getUserId (cookie)
+    res.send (unregisterU())
+})
+
+server.post ("/unregister", formBodyParser, (req, res) =>{
+    const { body: { password } } = req
+    const { headers: { cookie } } = req
+    const [, id] = cookie.split ('=')
+    try{
+    unregisterUser(id, password, error => {
+        if (error) return res.send(unregisterU ({feedback: message.error}))
+
+        res.setHeader("Set-Cookie", "user-id=null; Max-Age=0")
+        res.redirect ('/')
+    })}catch (error){
+        return res.send(unregisterU ({feedback: message.error}))
+    }
+})
+
+server.post ("/sign-out", (req, res) =>{
+    res.setHeader("Set-Cookie", "user-id=null; Max-Age=0")
+        res.redirect ('/')
 })
 
 server.listen(8000, () => {

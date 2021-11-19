@@ -15,6 +15,8 @@ function home (user) {
 
         <a href="/modify-password"><button>Cambiar contraseña</button></a>
         <a href="/changedata"><button>Cambiar datos de usuario</button></a>
+        <a href="/unregister"><button>Borrar usuario</button></a>
+        <form method="POST" action="/sign-out"><button>LOG OUT</button></form>
 
     </body>
     </html>`
