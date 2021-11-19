@@ -15,3 +15,5 @@ function fail(args = {}) {
     </body>
     </html>`
 }
+
+module.exports = fail 
