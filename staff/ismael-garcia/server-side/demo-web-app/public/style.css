@@ -4,9 +4,18 @@ html, body {
 }
 
 body {
-    background-color: yellow;
+    background-color: steelblue;
 }
 
-.signin__feedback--error {
+.feedback {
+    border: 1px solid blue;
+    display: inline-block;
+}
+
+.feedback--success {
+    color: green;
+}
+
+.feedback--error {
     color: red;
 }
