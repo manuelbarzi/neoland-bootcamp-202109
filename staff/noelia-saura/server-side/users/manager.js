@@ -1,9 +1,4 @@
-const retrieveUser = require('./logic/retrieve-user.js')
-const registerUser = require('./logic/register-user.js')
-const unregisterUser = require('./logic/unregister-user.js')
-const findUsers = require('./logic/find-users.js')
-const authenticateUser=require('./logic/authenticate-user.js')
-const modifyUser = require('./logic/modify-user.js')
+const { registerUser, unregisterUser, authenticateUser, retrieveUser, modifyUser } = require('./logic')
 
 const { argv: [, , command] } = process
 

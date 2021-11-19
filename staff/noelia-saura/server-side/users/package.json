@@ -2,11 +2,16 @@
   "name": "users",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "logic",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha logic/*.spec.js",
+    "test-inspect": "mocha --inspect-brk logic/*.spec.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3"
+  }
 }

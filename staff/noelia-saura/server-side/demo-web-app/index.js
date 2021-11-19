@@ -1,12 +1,18 @@
+require('dotenv').config()
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const { registerUser, authenticateUser, retrieveUser } = require('users')
 const {landing,signUp,postSignUp,signIn,home,fail}=require('./components')
 const {getUserId}=require('./helpers')
 const {searchVehicles}=require('vehicles')
+
+const{env:{PORT}, arg:[, , port=PORT || 8080]}=process
+
 const server = express()
 
 server.use(express.static('public')) // middleware
+
 server.get('/',(req,res)=>{
     const{headers:{cookie}}=req
     const id = getUserId(cookie)
@@ -73,16 +79,17 @@ server.post('/signin',formBodyParser,(req,res)=>{
     }
 })
 
-server.post('/signout',(req,res)=>{
-    res.setHeader('Set-Cookie',`user-id=null; Max-Age=0`)
+server.post('/signout', (req, res) => {
+    res.setHeader('Set-Cookie', `user-id=null; Max-Age=0`)
+
     res.redirect('/')
 })
 
-server.all('*',(req,res)=>{
-    res.send(fail({message:'sorry,this page isn\'t available'}))
+server.all('*', (req, res) => {
+    res.send(fail({ message: 'sorry, this page isn\'t available' }))
 })
 
-server.listen(8000)
+server.listen(port, () => console.log(`server up and listening on port ${port}`))
 
 
 //     res.send(`<!DOCTYPE html>
