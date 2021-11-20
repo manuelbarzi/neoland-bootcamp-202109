@@ -1,0 +1,36 @@
+Instalar express
+npm i express
+
+añadir users a la dependencia
+npm i ../users
+
+instalar nodemon
+npm i -D nodemon
+
+
+en scripts añadir
+"start": "nodemon index.js
+
+
+Estructura de carpetas:
+app/
+/public con html statico y css
+index.js con ->
+
+const express=require('express')
+const bodyParser = require('body-parser')
+const formBodyParser = bodyParser.urlencoded({extend: false})
+
+const server=express()
+
+server.use(express.static('public'))
+server.get('/register',(req, res)=>{
+	res.send(`HTML`)
+})
+
+server.listen(8000,()=>{console.log('server listen on port 8000')})
+
+
+package.json
+/users -> con la logica y su package.son
+
