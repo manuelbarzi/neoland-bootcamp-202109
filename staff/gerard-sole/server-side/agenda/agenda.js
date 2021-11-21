@@ -51,7 +51,7 @@ else if ( command === 'find' ) // $ node agenda.js find peter
         let { argv: [, , , query] } = process
         query = query.toLowerCase
         contacts.forEach( element => {
-            if ( element.name.toLowerCase.includes(query) || element.phone.includes(query) || element.email.toLower.case.includes(query) ) {
+            if ( element.name.toLowerCase().includes(query) || element.phone.includes(query) || element.email.toLowerCase().case.includes(query) ) {
                 console.log( element )
             }
         } )
@@ -97,7 +97,6 @@ else if ( command === 'find' ) // $ node agenda.js find peter
             if (!contact) return console.error(`no contact with id ${id} found`)
     
             if (name !== '.') contact.name = name
-            // name !== '.' && (contact.name = name)
             if (phone !== '.') contact.phone = phone
             if (email !== '.')  contact.email = email
     
