@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const unregisterUser = require('./unregister.user')
+const unregisterUser = require('./unregister-user')
 const { readFile, writeFile } = require('fs')
 
 describe('unregisterUser', () => {
@@ -25,9 +25,15 @@ describe('unregisterUser', () => {
         unregisterUser(id, password, error => {
             if (error) return done(error)
 
-            expect(user).to.not.exist
+            readFile('./users.json', 'utf8', (error, content) => {
+                if (error) return done(error)
 
-            done()
+                const users = JSON.parse(content)
+
+                expect(users).to.be.an('array').that.is.empty
+
+                done()
+            })
         })
     })
 
