@@ -1,0 +1,24 @@
+/* Busca en google fonts una fuente que te guste e implementala en tu css */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Merienda&family=Nanum+Myeongjo&display=swap');
+
+/* Implementa los retesets */
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: 0;
+    background: transparent;
+    text-decoration: none;
+    border-radius: 0;
+    font-size: 16x;
+}
+
+/* Implementar limpiador de html, body */
+html, body {
+    background-image: url('https://pinguinodigital.com/wp-content/uploads/2020/06/recursos-de-dise%C3%B1o-gr%C3%A1fico1.jpg');
+    background-size: cover;
+    color: white;
+    backdrop-filter: blur(10px);
+    min-height:100vh;
+}
