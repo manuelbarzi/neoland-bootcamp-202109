@@ -18,32 +18,35 @@ client.connect(error => {
     // ----- Demo de createUser ------
     // const user = 'Ventu'
     // const user = { name: 'Ventu'}
-    // const user = { name: 'Coco Drilo', username: 'cocoPromise2', password: '123123123 '}
+    // const user = { name: 'Coco Drilo', username: 'cocodrilo', password: '123123123 '}
     
-    // createUser(usersCollection, user)
-    // .then(user => console.table(user))
-    // .catch(err => console.error(err))
+    // createUser(usersCollection, user, (err, users) => {
+    //         if(err) console.error(err)
+    //         console.table(users)
+    //     })
         
-
     // ----- Demo de updateUser -----
     // const find = {_id : new ObjectId("619bc1f95d42735f916a32be")}
     // const data = {username: 'xFNighTMaRe', password: '12345678'}
 
-    // updateUser(usersCollection, find, data)
-    // .then(users => console.table(users))
-    // .catch(err => console.error(err))
+    // updateUser(usersCollection, find, data, (err, users) => {
+    //     if(err) console.error(err)
+    //     console.table(users)
+    // })
 
     // ----- Demo de findUser -----
     // const search = {name: 'Coco Drilo', username: 'coco'}
 
-    // findUser(usersCollection, search)
-    // .then(users => console.table(users))
-    // .catch(err => console.error(err))
+    // findUser(usersCollection, search, (err, users) => {
+    //     if (err) console.error(err)
+    //     else console.table(users)
+    // })
 
     // ----- Demo de deleteUser -----
-    // const search = {username: 'coco'}
+    const search = {username: 'coco'}
 
-    // deleteUser(usersCollection, search)
-    // .then(users => console.table(users))
-    // .catch(err => console.error(err))
+    deleteUser(usersCollection, search, (err, users) => {
+        if (err) console.error(err)
+        else console.table(users)
+    })
 })

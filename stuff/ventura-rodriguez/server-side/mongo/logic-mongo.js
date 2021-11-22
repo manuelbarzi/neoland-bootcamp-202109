@@ -1,22 +1,55 @@
-const createUser = (collection, data, callback) => {
-    // Collection es la coleción de Mongo y data es el objeto a introducir
 
-    collection.insertOne(data, error => {
-        if (error) return callback(error)
-        collection.find({}).toArray((error, users) => {
-            if (error) return callback(error)
-            callback(null, users)
+const createUser = (collection, data) => {
+
+    return new Promise ((resolve, reject) => {
+        collection.insertOne(data, err => {
+            if (err) reject(err)
+            else {
+                collection.find({}).toArray((err, users) => {
+                    if (err) reject(err)
+                    else resolve(users)
+                })
+            }
         })
     })
 }
 
-const updateUser = (collection, data, callback) => {
+const updateUser = (collection, search, data) => {
+
+    return new Promise((resolve, reject) => {
+        collection.updateOne(search, {$set: data}, err => {
+            if(err) reject(err)
+            else {
+                collection.find({}).toArray((err, users) => {
+                    if (err) reject(err)
+                    else resolve(users)
+                })
+            }
+        })
+    })
 }
 
-const findUser = (collection, data, callback) => {
+const findUser = (collection, search) => {
+    return new Promise((resolve, reject) => {
+        collection.find(search).toArray((err, users) => {
+            if(err) reject(err)
+            else resolve(users)
+        })
+    })
 }
 
-const deleteUser = (collection, data, callback) => {
+const deleteUser = (collection, search) => {
+    return new Promise((resolve, reject) => {
+        collection.deleteOne(search, err => {
+            if(err) reject(err)
+            else {
+                collection.find({}).toArray((err, users) => {
+                    if (err) reject(err)
+                    else resolve(users)
+                })
+            }
+        })
+    })
 }
 
 module.exports = {
