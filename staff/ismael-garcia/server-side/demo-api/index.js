@@ -10,9 +10,11 @@ const { env: { PORT, SECRET }, argv: [, , port = PORT || 8080] } = process // es
 
 const server = express() // estudiar esta línea
 
+const api = express.Router()
+
 const jsonBodyParser = bodyParser.json() // estudiar esta línea
 
-server.post('/api/users', jsonBodyParser, (req, res) => {
+api.post('/users', jsonBodyParser, (req, res) => {
     const { body: { name, username, password } } = req
 
     try {
@@ -28,7 +30,7 @@ server.post('/api/users', jsonBodyParser, (req, res) => {
     }
 })
 
-server.post('/api/users/auth', jsonBodyParser, (req, res) => {
+api.post('/users/auth', jsonBodyParser, (req, res) => {
     const { body: { username, password } } = req
 
     try {
@@ -44,7 +46,7 @@ server.post('/api/users/auth', jsonBodyParser, (req, res) => {
     }
 })
 
-server.get('/api/users', (req, res) => {
+api.get('/users', (req, res) => {
     const { headers: { authorization } } = req 
 
     try {
@@ -65,7 +67,7 @@ server.get('/api/users', (req, res) => {
     }
 })
 
-server.patch('/api/users', jsonBodyParser, (req, res) => {
+api.patch('/users', jsonBodyParser, (req, res) => {
     const { headers: { authorization }, body: data } = req 
 
     try {
@@ -98,8 +100,25 @@ server.patch('/api/users', jsonBodyParser, (req, res) => {
     }
 })
 
-// server.all('*', (req, res) => {
-//     res.send(fail({ message: 'sorry, this page isn\'t available' }))
-// })
+api.get('/hotwheels/vehicles', (req, res) => {
+    const { query: { q } } = req 
+
+    try {
+        searchVehicles(q, (error, vehicles) => {
+            if (error) return res.status(400).json({ error: 'client error' })
+
+            res.json(vehicles)
+
+        })
+    } catch (error) {
+        res.status(400).json({ error: 'client error' })
+    }
+})
+
+api.all('*', (req, res) => {
+    res.status(404).json({ message: 'sorry, this endpoint isn\'t available' })
+})
+
+server.use('/api', api)
 
 server.listen(port, () => console.log(`server up and listening on port ${port}`))
