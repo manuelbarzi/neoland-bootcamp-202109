@@ -1,5 +1,5 @@
 function home(args = {}) {
-    const { name } = args
+    const { name, results } = args
 
     return `<!DOCTYPE html>
     <html lang="en">
@@ -24,6 +24,21 @@ function home(args = {}) {
         <form method="POST" action="/signout">
             <button>Sign out</button>
         </form>
+
+        <form method="GET">
+            <input type="text" placeholder="Search here" name="query">
+            <button className="button button--red">Buscar</button>
+        </form>
+
+        ${
+            results && results.length ?
+            `<ul>${results.reduce((accum, {name, thumbnail, price}) => accum + `<li>
+                <h2>${name}</h2>
+                <img src="${thumbnail}">
+                <span>${price} $</ul>
+            </li>`, '')}</ul>`
+            : ''
+        }
     </body>
     </html>`
 }

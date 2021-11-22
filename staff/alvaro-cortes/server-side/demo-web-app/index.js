@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const formBodyParser = bodyParser.urlencoded({ extended: false })
 const { registerUser, authenticateUser, retrieveUser, modifyUser, unregisterUser } = require('users')
 const { home, landing, login, register, fail, postSignUp, changePass, changeData, unregister } = require('./components')
+const { searchVehicles } = require('vehicles')
 
 function getUserId(cookie) {
     let res = null
@@ -24,10 +25,18 @@ server.get('/', (req, res) => {
 
     if (id) {
         retrieveUser(id, (error, user) => {
-            if (error) {
-                return res.send(landing())
+            if (error) return res.send(landing())
+
+            const { query: { query } } = req
+
+            if (query) {
+                return searchVehicles(query, (error, results) => {
+                    if (error) return res.send("/")
+
+                    res.send(home({ name: user.name, results }))
+                })
             } else {
-                return res.send(home(user))
+                return res.send(home({ name: user.name }))
             }
         })
     } else
@@ -163,8 +172,10 @@ server.post('/unregister', formBodyParser, (req, res) => {
     unregisterUser(id, password, error => {
         if (error)
             res.send(unregister({ error }))
-        else
+        else {
+            res.setHeader('Set-Cookie', `user-id=null; Max-Age=0`)
             res.redirect('/')
+        }
     })
 })
 
