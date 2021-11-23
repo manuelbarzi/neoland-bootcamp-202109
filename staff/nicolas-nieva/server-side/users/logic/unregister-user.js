@@ -3,7 +3,6 @@ const { readFile, writeFile } = require('fs')
 function unregisterUser(id, password, callback) {
     readFile(`${__dirname}/../../users.json`, 'utf8', (error, json) => {
         if (error) return callback(error)
-
         const users = JSON.parse(json)
 
         const index = users.findIndex(user => user.id === id)
