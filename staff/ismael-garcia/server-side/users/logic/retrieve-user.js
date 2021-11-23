@@ -1,4 +1,4 @@
-const { readFile } = require('fs')
+const context = require('./context')
 
 function retrieveUser(id, callback) {
     if (typeof id !== 'string') throw new TypeError('id is not a string')
@@ -6,17 +6,12 @@ function retrieveUser(id, callback) {
 
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
     
-    readFile(`${__dirname}/../users.json`, 'utf8', (error, json) => {
+    const users = context.db.collection('users')
+
+    users.findOne({ _id: id }, (error, user) => {
         if (error) return callback(error)
 
-        const users = JSON.parse(json)
-
-        const user = users.find(user => user.id === id)
-
         if (!user) return callback(new Error(`user with id ${id} not found`))
-
-        delete user.id
-        delete user.password
 
         callback(null, user)
     })
