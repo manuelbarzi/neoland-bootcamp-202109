@@ -18,7 +18,7 @@ client.connect(error => {
     // ----- Demo de createUser ------
     // const user = 'Ventu'
     // const user = { name: 'Ventu'}
-    // const user = { name: 'Coco Drilo', username: 'cocoPromise2', password: '123123123 '}
+    // const user = { name: 'Coco', username: 'usuario2', password: '123123123 '}
     
     // createUser(usersCollection, user)
     // .then(user => console.table(user))
