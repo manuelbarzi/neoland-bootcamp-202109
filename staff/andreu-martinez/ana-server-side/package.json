@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "inspect": "node --inspect-brk .",
     "start": "nodemon index.js"
+    
   },
   "keywords": [],
   "author": "",
@@ -12,7 +14,9 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
-    "users": "../users.v2"
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.2.0",
+    "users": "file:../users"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

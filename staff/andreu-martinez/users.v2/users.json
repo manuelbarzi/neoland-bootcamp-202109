@@ -3,7 +3,7 @@
         "name": "ventu",
         "username": "ventu54",
         "email": "ventu@gmail.com",
-        "password": "123456",
+        "password": "12345678",
         "id": 1
     },
     {
@@ -11,13 +11,20 @@
         "name": "vengarl",
         "username": "ventu54",
         "email": "gee@email.com",
-        "password": "123456"
+        "password": "425543534545345"
     },
     {
         "id": 6,
         "name": "lucatiel",
         "username": "ventu54",
         "email": "gad@email.com",
-        "password": "123456"
+        "password": "423123123123"
+    },
+    {
+        "id": 7,
+        "name": "Andreu",
+        "username": "Andreu123",
+        "email": "andreu@email.com",
+        "password": "423123123123"
     }
 ]
