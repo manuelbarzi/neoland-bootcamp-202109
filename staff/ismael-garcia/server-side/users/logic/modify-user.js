@@ -1,5 +1,7 @@
 const context = require('./context')
 const { ObjectId } = require('mongodb')
+const { validateId, validateData, validateCallback } = require('./helpers/validators')
+const { NotFoundError, ConflictError, CredentialsError } = require('errors')
 
 /**
  * TODO doc me
@@ -8,14 +10,9 @@ const { ObjectId } = require('mongodb')
  * @param {*} callback 
  */
 function modifyUser(id, data, callback) { // data => { username: ?, password: ?, oldPassword: ? }
-    if (typeof id !== 'string') throw new TypeError('id is not a string')
-    if (!id.trim().length) throw new Error('id is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(id)) throw new Error('id has blank spaces')
-    if (id.length !== 24) throw new Error('id does not have 24 characters') // mongo ids tienen 24 caracteres
-
-    if (typeof data !== 'object') throw new TypeError('data is not an object')
-
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+    validateId(id)
+    validateData(data)
+    validateCallback(callback)
     
     // readFile(`${__dirname}/../users.json`, 'utf8', (error, json) => {
     //     if (error) return callback(error)
@@ -62,14 +59,28 @@ function modifyUser(id, data, callback) { // data => { username: ?, password: ?,
     users.findOne({ _id: ObjectId(id) }, (error, user) => {
         if (error) return callback(error)
 
-        if (!user) return callback(new Error(`user with id ${id} not found`))
+        if (!user) return callback(new NotFoundError(`user with id ${id} not found`))
 
-        const { username, password, oldPassword } = data 
+        // const { name, username, password, newPassword } = data 
     
-        if (oldPassword !== user.password) return callback(new Error('wrong password')) 
+        if (data.password !== user.password) return callback(new CredentialsError('wrong password')) 
         
-        users.updateOne({ _id: ObjectId(id) }, { $set: { username, password } }, (error) => {
-            if (error) return callback(error)
+        if (data.newPassword) {
+            data.password = data.newPassword 
+
+            delete data.newPassword 
+        }
+            
+
+        users.updateOne({ _id: ObjectId(id) }, { $set: data }, error => {
+            if (error) {
+                if (error.code === 11000)
+                    callback(new ConflictError(`user with username ${data.username} already exists`))
+                else
+                    callback(error)
+
+                return 
+            }
 
             callback(null)
         })
