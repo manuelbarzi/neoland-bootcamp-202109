@@ -18,27 +18,27 @@ function unregisterUser(id, password, callback) {
     if (/\r?\n|\r|\t| /g.test(id)) throw new Error('id has blank spaces')
     if (id.length !== 24) throw new Error('id doesn\'t have 24 characters')
 
-    if (typeof password !== "string") throw new TypeError("Password is not a string")
-    if (!password.trim().length) throw new Error("Password is empty or blank")
-    if (/\r?\n|\r|\t| /g.test(password)) throw new Error("Password has blank spaces")
-    if (password.length < 6) throw new Error("Password has less than 6 characters")
+    if (typeof password !== "string") throw new TypeError("password is not a string")
+    if (!password.trim().length) throw new Error("password is empty or blank")
+    if (/\r?\n|\r|\t| /g.test(password)) throw new Error("password has blank spaces")
+    if (password.length < 8) throw new Error("password has less than 8 characters")
 
-    if (typeof callback !== "function") throw new TypeError("Callback is not a function")
+    if (typeof callback !== "function") throw new TypeError("callback is not a function")
 
     const users = context.db.collection('users')
 
-    users.deleteOne({ _id: ObjectId(id) }, { password }, error => {
-        if (error) {
-            if (error.code === 11000)
-                callback(new Error(`user with username ${data.username} already exists`))
-            else
-                callback(error)
+    users.findOne({ _id: ObjectId(id) }, (error, user) => {
 
-            return
-        }
+        if (!user) return callback(new Error(`user with id ${id} not found`))
 
-        callback(null, 'User deleted successfully')
-    } )
+        if (user.password === password) {
+            users.deleteOne({ _id: ObjectId(id) }, password, () => {
+
+                callback(null, 'User deleted successfully')
+            })
+        } else return callback(new Error('Wrong password'))
+    })
+
 }
 
 module.exports = unregisterUser

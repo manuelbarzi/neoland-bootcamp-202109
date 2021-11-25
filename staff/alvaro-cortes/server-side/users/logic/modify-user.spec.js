@@ -51,8 +51,6 @@ describe('modifyUser', () => {
 
             const data = { name, username }
 
-            debugger
-
             modifyUser(userId, data, error => {
                 if (error) return done(error)
 
