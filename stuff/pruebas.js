@@ -44,4 +44,9 @@ console.log (vector(5, 40))
 console.log (vector(20, 400)) //primer parametro longitud array, segundo maximo valor nro natural
 
 
+// -	1. Loop de pares
+// Debés crear una función llamada loopDePares que reciba como parámetro un número y
+// haga un loop de 0 a 100 mostrando en la consola cada número del loop. 
+// En caso de que el número de la iteración, sumado con el número pasado por parámetro, 
+//sea par, mostrá en la consola “El número x es par”.
 

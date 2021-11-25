@@ -19,7 +19,7 @@ function registerUser(name, username, password, callback) {
 
     // const users = this.db.collection ('users')
     const users = context.db.collection ('users')
-    users.createIndex({username:1},{unique:true})
+    
     users.insertOne ( { name, username, password }, error => {
         if (error) {
             if (error.code === 11000)

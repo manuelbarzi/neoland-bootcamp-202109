@@ -4,6 +4,7 @@ const retrieveUser = require('./logic/retrieve-user')
 const modifyUser = require('./logic/modify-user')
 const findUsers = require('./logic/find-users')
 const unregisterUser = require('./logic/unregister-user')
+const context = require('./logic/context')
 
 module.exports = {
     registerUser,
@@ -11,10 +12,7 @@ module.exports = {
     retrieveUser,
     modifyUser,
     findUsers,
-    unregisterUser
+    unregisterUser,
+    context
 }
 
-for (let index = 0; index < array.length; index++) {
-    const element = array[index];
-    
-}

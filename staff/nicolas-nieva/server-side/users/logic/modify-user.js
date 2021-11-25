@@ -1,46 +1,86 @@
-const { readFile, writeFile } = require ('fs')
+const { ObjectId } = require('mongodb')
+const context = require('./context')
 
-function modifyUser(id, data, callback) { // data => { name: ?, username: ?, password: ? }
+/**
+ * Updating the user data in the application.
+ * 
+ * @param {string} id The id to authenticate the retrieve user.
+ * @param {Object} data All data of user to be changed.
+ * @param {function} callback The callback function to manage the response.
+ * 
+ * @throws {TypeError} When any of the arguments does not match the correct type.
+ * @throws {Error} When any of the arguments does not contain the correct format.
+ */
+
+function modifyUser(id, data, callback) {
     if (typeof id !== 'string') throw new TypeError('id is not a string')
     if (!id.trim().length) throw new Error('id is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(id)) throw new Error('id has blank spaces')
+    if (id.length !== 24) throw new Error('id doesn\'t have 24 characters')
 
-    if (typeof data !== 'object') throw new TypeError('data is not an object')
+    if (typeof data !== 'object' || data.constructor.name !== 'Object') throw new TypeError('data is not an object')
+
+    const { name, username, password, oldPassword } = data
+
+    if (typeof name !== 'undefined') {
+        if (typeof name !== 'string') throw new TypeError('name is not a string')
+        if (!name.trim().length) throw new Error('name is empty or blank')
+        if (name.trim() !== name) throw new Error('blank spaces around name')
+    }
+
+    if (typeof username !== 'undefined') {
+        if (typeof username !== 'string') throw new TypeError('username is not a string')
+        if (!username.trim().length) throw new Error('username is empty or blank')
+        if (/\r?\n|\r|\t| /g.test(username)) throw new Error('username has blank spaces')
+        if (username.length < 4) throw new Error('username has less than 4 characters')
+    }
+
+    if (typeof oldPassword === 'undefined' && typeof password !== 'undefined') throw new Error('old password is not defined')
+    if (typeof password === 'undefined' && typeof oldPassword !== 'undefined') throw new Error('password is not defined')
+
+    if (typeof password !== 'undefined') {
+        if (typeof password !== 'string') throw new TypeError('password is not a string')
+        if (!password.trim().length) throw new Error('password is empty or blank')
+        if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
+        if (password.length < 8) throw new Error('password has less than 8 characters')
+    }
+
+    if (typeof oldPassword !== 'undefined') {
+        if (typeof oldPassword !== 'string') throw new TypeError('old password is not a string')
+        if (!oldPassword.trim().length) throw new Error('old password is empty or blank')
+        if (/\r?\n|\r|\t| /g.test(oldPassword)) throw new Error('old password has blank spaces')
+        if (oldPassword.length < 8) throw new Error('old password has less than 8 characters')
+    }
 
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 
-    readFile (`${__dirname}/../../users.json`, 'utf8', (error, json) =>{
-        if (error) return callback (error.message)
+    const users = context.db.collection('users')
 
-        const users = JSON.parse(json)
+    const filter = { _id: ObjectId(id) }
 
-        const user = users.find(user => user.id === id)
+    users.findOne(filter, (error, user) => {
+        if (error) return callback(error)
 
-        if (!user) return callback(new Error (`User with ${id} not found`))
+        if (!user) return callback(new Error(`user with id ${id} not found`))
 
-        const { username, password, oldPassword } = data
-
-        if (username) {
-            const exists = user.some(user => user.username === username)
-
-            if (exists) return callback (new Error('username already exists'))
-
-            user.username = username
-        }
+        const { password, oldPassword } = data
 
         if (password) {
-            if (oldPassword !== user.password) return callback(new Error('wrong password'))
-
-            user.password = password
+            if (oldPassword !== user.password)
+                return callback(new Error('wrong password'))
+            else
+                delete data.oldPassword
         }
 
-        for (const property in data)
-            if (property !== 'username' && property !== 'password' && property !== 'oldPassword')
-                user[property] = data[property]
+        users.updateOne(filter, { $set: data }, error => {
+            if (error) {
+                if (error.code === 11000)
+                    callback(new Error(`user with username ${data.username} already exists`))
+                else
+                    callback(error)
 
-            const json2 = JSON.stringify(users, null, 4)
-
-        writeFile (`${__dirname}/../../users.json`, json2, error => {
-            if (error) return callback (error.message)
+                return
+            }
 
             callback(null)
         })
@@ -48,4 +88,3 @@ function modifyUser(id, data, callback) { // data => { name: ?, username: ?, pas
 }
 
 module.exports = modifyUser
-

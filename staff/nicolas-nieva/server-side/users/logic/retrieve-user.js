@@ -1,24 +1,29 @@
-const {readFile} = require ('fs')
+const context = require('./context')
+const { ObjectId } = require('mongodb')
 
 function retrieveUser(id, callback) {
-    readFile (`${__dirname}/../../users.json`, 'utf8', (error, json) =>{
+    if (typeof id !== 'string') throw new TypeError('id is not a string')
+    if (!id.trim().length) throw new Error('id is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(id)) throw new Error('id has blank spaces')
+    if (id.length !== 24) throw new Error('id doesn\'t have 24 characters')
+
+    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+
+    const users = context.db.collection ('users')
+
+    users.findOne({ _id: ObjectId(id) }, (error, user) => {
         if (error) return callback (error)
 
-        const users = JSON.parse(json)
+        if (!user) return callback(new Error(`user with id ${id} not found`))
 
-        const userindex = users.findIndex(user => user.id === id)
+        user.id = user._id.toString()
+        delete user._id
 
-        const user = users[userindex]
         delete user.password
-        delete user.id
-
-        if(userindex < 0) return callback(new Error(`No user with that ${id}`))
-
+        
         callback (null, user)
         
     })
 }
-
-
 
 module.exports = retrieveUser

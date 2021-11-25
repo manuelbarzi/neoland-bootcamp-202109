@@ -1,4 +1,4 @@
-const { readFile } = require ('fs')
+const context = require('./context')
 
 function authenticateUser(username, password, callback){
     if (typeof username !== 'string') throw new TypeError('username is not a string')
@@ -12,17 +12,15 @@ function authenticateUser(username, password, callback){
     if (password.length < 8) throw new Error('password has less than 8 characters')
 
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+
+    const users = context.db.collection('users')
     
-    readFile(`${__dirname}/../../users.json`, 'utf8', (error, json) => {
+    users.findOne({ username, password }, (error, user) => {
         if (error) return callback(error)
 
-        const users = JSON.parse(json)
+        if (!user) return callback(new Error('wrong credentials'))
 
-        const user = users.find(user => user.username === username && user.password === password)
-
-        if (!user) return callback(new Error(`User ${username} not found.`))
-
-        callback (null, user.id)
+        callback (null, user.id.toString())
     })
 }
 

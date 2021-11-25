@@ -14,9 +14,10 @@ describe('registerUser', () => {
 
             db = client.db('demo')
 
-            context.db = db
+            context.db = db 
 
             users = db.collection ('users')
+            users.createIndex({username:1},{unique:true})
 
             done ()
         })
@@ -66,7 +67,7 @@ describe('registerUser', () => {
             debugger
             registerUser(name, username, password, error => {
                 expect (error).to.exist
-                expect (error.message).to.equal(`username with username ${username} already exists`)
+                expect (error.message).to.equal(`user with username ${username} already exists`)
 
                 done ()
             })

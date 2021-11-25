@@ -1,28 +1,44 @@
-const { readFile, writeFile } = require('fs')
+const { ObjectId } = require('mongodb')
+const context = require('./context')
+
+/**
+ * Unregistering a user in the application.
+ * 
+ * @param {string} token The token to authenticate the retrieve user.
+ * @param {Object} user The password of the user to be unregistered.
+ * @param {function} callback The callback function to manage the response.
+ * 
+ * @throws {TypeError} When any of the arguments does not match the correct type.
+ * @throws {Error} When any of the arguments does not contain the correct format.
+ */
 
 function unregisterUser(id, password, callback) {
-    readFile(`${__dirname}/../../users.json`, 'utf8', (error, json) => {
-        if (error) return callback(error)
-        const users = JSON.parse(json)
+    if (typeof id !== 'string') throw new TypeError('id is not a string')
+    if (!id.trim().length) throw new Error('id is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(id)) throw new Error('id has blank spaces')
+    if (id.length !== 24) throw new Error('id doesn\'t have 24 characters')
 
-        const index = users.findIndex(user => user.id === id)
+    if (typeof password !== "string") throw new TypeError("password is not a string")
+    if (!password.trim().length) throw new Error("password is empty or blank")
+    if (/\r?\n|\r|\t| /g.test(password)) throw new Error("password has blank spaces")
+    if (password.length < 8) throw new Error("password has less than 8 characters")
 
-        if (index < 0) return callback(new Error(`user with id ${id} not found`))
+    if (typeof callback !== "function") throw new TypeError("callback is not a function")
 
-        const user = users[index]
+    const users = context.db.collection('users')
 
-        if (user.password !== password) return callback(new Error(`wrong credentials`))
+    users.findOne({ _id: ObjectId(id) }, (error, user) => {
 
-        users.splice(index, 1)
+        if (!user) return callback(new Error(`user with id ${id} not found`))
 
-        const json2 = JSON.stringify(users, null, 4)
+        if (user.password === password) {
+            users.deleteOne({ _id: ObjectId(id) }, password, () => {
 
-        writeFile(`${__dirname}/../../users.json`, json2, error => {
-            if (error) return callback(error)
-
-            callback()
-        })
+                callback(null, 'User deleted successfully')
+            })
+        } else return callback(new Error('Wrong password'))
     })
+
 }
 
 module.exports = unregisterUser
