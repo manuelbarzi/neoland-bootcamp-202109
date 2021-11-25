@@ -47,3 +47,23 @@ cerrar sesión o eliminar el usuario
 del módulo
 
 - Genera los ficheros register, unregister, modify, change-password, auth, retrieve
+
+# DONE!
+
+
+# Logic
+
+- Implementar la lógica de register POST `https://b00tc4mp.herokuapp.com/api/v2/user`
+- Implementar la lógica de auth (autentificación) POST `https://b00tc4mp.herokuapp.com/api/v2/users/auth`
+- Implementar la lógica de retrieve GET `https://b00tc4mp.herokuapp.com/api/v2/users`
+
+- Implementarlo a través de la api de users de Manu
+
+
+# Esquema de uso de logic
+
+- Implementamos el logic
+
+- Creamos la función en el componente padre que maneja la respuesta de este logic
+
+- Creamos la función que maneja el lanzamiento de la funcionalidad (on submit)

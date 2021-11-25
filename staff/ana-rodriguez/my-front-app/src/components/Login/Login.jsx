@@ -2,15 +2,23 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import './Login.css';
 
-function Login(){
+function Login(props){
+
+    const {authVisual} = props
 
 return <>
-    <form className="Login_container">
+    <form className="Login_container" onSubmit={event => {
+        event.preventDefault()
+        const username = event.target.username.value
+        const password = event.target.password.value
+
+        authVisual(username, password)
+    }}>
         <h1 className="title">Login</h1>
 
         <div className="login_inputs">
-            <input className="login_input" type="text" placeholder="Username" />
-            <input className="login_input" type="password" placeholder="Password" />
+            <input className="login_input" type="text" placeholder="Username" name="username"/>
+            <input className="login_input" type="password" placeholder="Password" name="password"/>
         </div>
         <div className="buttons">
             <button className="Login__button" type="submit">Login</button>

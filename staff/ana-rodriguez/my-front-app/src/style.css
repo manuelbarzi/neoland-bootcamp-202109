@@ -15,10 +15,13 @@
 }
 
 /* Implementar limpiador de html, body */
-html, body {
+body {
     background-image: url('https://pinguinodigital.com/wp-content/uploads/2020/06/recursos-de-dise%C3%B1o-gr%C3%A1fico1.jpg');
     background-size: cover;
     color: white;
     backdrop-filter: blur(10px);
     min-height:100vh;
 }
+
+
+
