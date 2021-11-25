@@ -1,6 +1,6 @@
 const { expect } = require('chai')
 const retrieveUser = require('./retrieve-user')
-const { MongoClient } = require('mongodb')
+const { MongoClient, ObjectId } = require('mongodb')
 const context = require('./context')
 
 describe('retrieveUser', () => {
@@ -45,22 +45,27 @@ describe('retrieveUser', () => {
     })
 
     it('should suceed with correct id for an already existing user', done => { 
+        const { name, username } = user 
+
         retrieveUser(userId, (error, user) => {
             if (error) return done(error)
 
             expect(user).to.exist
-            expect(user.name).to.equal('Wendy Pan')
-            expect(user.username).to.equal('wendypan')
-            expect(user.password).to.equal('123123123')
+            expect(user.name).to.equal(name)
+            expect(user.username).to.equal(username)
 
             done()
         })
     })
 
     it('should fail with incorrect id', done => {
-        retrieveUser(userId + '-wrong', (error, user) => {
+        const { name, username } = user
+        
+        userId = ObjectId().toString()
+
+        retrieveUser(userId, (error, user) => {
             expect(error).to.exist
-            expect(error.message).to.equal(`user with id ${userId + '-wrong'} not found`)
+            expect(error.message).to.equal(`user with id ${userId} not found`)
 
             expect(user).to.be.undefined
 
@@ -82,24 +87,34 @@ describe('retrieveUser', () => {
                 expect(() => retrieveUser([], () => { })).to.throw(TypeError, 'id is not a string')
             })
 
-            it('should fail when id is empty', () => {
+            it('should fail when id is empty or blank', () => {
                 expect(() => retrieveUser('', () => { })).to.throw(Error, 'id is empty or blank')
 
                 expect(() => retrieveUser('   ', () => { })).to.throw(Error, 'id is empty or blank')
+            })
+
+            it('should fail when id has spaces', () => {
+                expect(() => retrieveUser(' abcd1234abcd1234abcd1234 ', () => { })).to.throw(Error, 'id has blank spaces')
+
+                expect(() => retrieveUser('abcd 1234abc d1234abc d1234', () => { })).to.throw(Error, 'id has blank spaces')
+            })
+
+            it('should fail when id length is different from 24 characters', () => {
+                expect(() => retrieveUser('abc', () => { })).to.throw(Error, 'id does not have 24 characters')
             })
         })
 
         describe('when callback is not valid', () => {
             it('should fail when callback is not a function', () => {
-                expect(() => retrieveUser('wendypan', '123123123', true)).to.throw(TypeError, 'callback is not a function')
+                expect(() => retrieveUser('abcd1234abcd1234abcd1234', true)).to.throw(TypeError, 'callback is not a function')
 
-                expect(() => retrieveUser('wendypan', '123123123', 123)).to.throw(TypeError, 'callback is not a function')
+                expect(() => retrieveUser('abcd1234abcd1234abcd1234', 123)).to.throw(TypeError, 'callback is not a function')
 
-                expect(() => retrieveUser('wendypan', '123123123', {})).to.throw(TypeError, 'callback is not a function')
+                expect(() => retrieveUser('abcd1234abcd1234abcd1234', {})).to.throw(TypeError, 'callback is not a function')
 
-                expect(() => retrieveUser('wendypan', '123123123', '...')).to.throw(TypeError, 'callback is not a function')
+                expect(() => retrieveUser('abcd1234abcd1234abcd1234', '...')).to.throw(TypeError, 'callback is not a function')
 
-                expect(() => retrieveUser('wendypan', '123123123', [])).to.throw(TypeError, 'callback is not a function')
+                expect(() => retrieveUser('abcd1234abcd1234abcd1234', [])).to.throw(TypeError, 'callback is not a function')
             })
         })
     })
