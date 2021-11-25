@@ -22,7 +22,7 @@ client.connect(error => {
         .catch(error => console.error(error))
 
     const id = new ObjectId("619bb46e95d66423be1318d8")
-
+    debugger
     findUser(usersCollection, id)
         .then(users => console.log(users))
         .catch(error => console.error(error))

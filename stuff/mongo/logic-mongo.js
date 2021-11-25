@@ -3,10 +3,10 @@ const createUser = (collection, data) => {
     return new Promise((resolve, reject) => {
         collection.insertOne(data, error => {
             if (error) return reject(error)
-    
+
             collection.find({}).toArray((error, users) => {
                 if (error) return reject(error)
-    
+
                 resolve(users)
             })
         })
@@ -16,12 +16,12 @@ const createUser = (collection, data) => {
 const updateUser = (collection, username, data) => {
 
     return new Promise((resolve, reject) => {
-        collection.updateOne({ username: username}, { $set: { age: data } }, error => {
+        collection.updateOne({ username: username }, { $set: { age: data } }, error => {
             if (error) return reject(error)
-    
+
             collection.find({}).toArray((error, users) => {
                 if (error) return reject(error)
-    
+
                 resolve(users)
             })
         })
@@ -30,14 +30,10 @@ const updateUser = (collection, username, data) => {
 const findUser = (collection, data) => {
 
     return new Promise((resolve, reject) => {
-        collection.findOne({ _id: data }, error => {
+        collection.find({ _id: data }).toArray((error, user) => {
             if (error) return reject(error)
-    
-            collection.find({_id: data}).toArray((error, user) => {
-                if (error) return reject(error)
-    
-                resolve(user)
-            })
+
+            resolve(user)
         })
     })
 }
@@ -46,10 +42,10 @@ const deleteUser = (collection, data) => {
     return new Promise((resolve, reject) => {
         collection.deleteOne({ _id: data }, error => {
             if (error) return rejecterror(error)
-    
+
             collection.find({}).toArray((error, users) => {
                 if (error) return reject(error)
-    
+
                 resolve(users)
             })
         })
