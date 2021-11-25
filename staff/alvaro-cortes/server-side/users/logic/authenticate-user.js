@@ -1,4 +1,4 @@
-const { readFile } = require('fs')
+const context = require('./context')
 
 /**
  * Login a user in the application.
@@ -23,16 +23,14 @@ function authenticateUser(username, password, callback) {
 
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
     
-    readFile(`${__dirname}/../users.json`, 'utf8', (error, json) => {
+    const users = context.db.collection('users')
+
+    users.findOne({ username, password }, (error, user) => {
         if (error) return callback(error)
 
-        const users = JSON.parse(json)
+        if (!user) return callback(new Error('Wrong credentials'))
 
-        const user = users.find(user => user.username === username && user.password === password)
-
-        if (!user) return callback(new Error(`User ${username} not found.`))
-
-        callback(null, user.id)
+        callback(null, user._id.toString())
     })
 }
 
