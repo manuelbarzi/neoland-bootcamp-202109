@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0">
+    <title>App demo</title>
+    <link rel="stylesheet" href="style-app.css"></link>
+</head>
+
+<!-- WELCOME -->
+
+<body class="body-bg container--gapped">
+    <div class="landing">
+        <div class="landing__title">
+            <h1>Welcome</h1>
+        </div>
+        <div class="landing__subtitle">
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipiscing elit sed bibendum,
+                ridiculus suscipit inceptos blandit faucibus montes luctus torquent primis mus,
+                vestibulum euismod sociis vehicula suspendisse metus lacinia nisl.
+            </p>
+        </div>
+        <div class="landing__buttons">
+            <button class="button">Sign in</button>
+            <button class="button">Sign up</button>
+        </div>
+
+    </div>
+
+    <!-- LOGIN -->
+
+    <div class="Sign-in container--off">
+        <div class="Sign-in__title">
+            <h1>Login</h1>
+        </div>
+        <form class="sign-in__form">
+            <div class="sign-in__subbtitle">
+                <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed bibendum,
+                    ridiculus suscipit inceptos blandit faucibus montes luctus torquent primis mus,
+                    vestibulum euismod sociis vehicula suspendisse metus lacinia nisl.
+                </p>
+            </div>
+            <div class="sign-in_inputs">
+                <input type="user" class="input" name="username" placeholder="Email">
+                <input type="password" class="input" name="password" placeholder=Password>
+            </div>
+            <div class="sing-in_buttons">
+                <button class="button">Sign In</button>
+                <p>Go to <a class="links">Sign Up</a></a> </p>
+            </div>
+        </form>
+
+    </div>
+    
+
+
+    <!-- Register -->
+
+    <form class="Sign-up container--off">
+        <h1 class="form__title">Register</h1>
+        <p class="form__subtitle">Lorem ipsum dolor sit amet.</p>
+        <div class="form__inputname">
+            <input class="form__input" type="text" placeholder="first Name">
+            <input class="form__input" type="text" placeholder="Last Name">
+        </div>
+        <input class="form__input" type="email" placeholder="Email" required>
+        <input class="form__input" type="password" placeholder="Password">
+        <input class="form__input" type="password" placeholder="Confirm Password">
+        <div class="form__terms">
+            <input class="form__checkbox" type="checkbox"><label class="form__label" for="">I accept the <a
+                    href="#">Terms of Use</a> & <a href="#">Privacy Policy</a></label>
+
+        </div>
+        <div class="Sing-up__buttons">
+          <button class="button">Sign up</button>
+          <p>Go to <a class="link">Sign In</a></p>
+        </div>
+    </form>
+
+    <!-- THANK YOU -->
+
+    <div class="Thank-you container--off">
+        <div class=thank-you__title>
+            <h1>Thanks for registering</h1>
+        </div>
+        <div class="thank-you__subtitle">
+            <p>Go to Sing In to acces your profile</p>
+        </div>
+        <form action="" class ="thank-you__form">
+            <div class="thank-you__buttons">
+                <button class="button">Sing In</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- HOME -->
+ 
+<div class="home container--off ">
+    <div class="home__title">
+        <h1>Home</h1>
+    </div>
+    <div class="home__subtitle">
+        <p>Hello, world</p>
+    </div>
+    <div class= "profile">
+        <button class="button button-profile">Profile</button>
+        <button class="button button-signout">Sign-out</button>
+    </div> 
+</div>
+
+      <!-- PROFILE -->
+<form class="form_profile container--off">
+    <div class="form_profile-pass">
+        <input class="input__input" type="password" placeholder="old password">
+        <input class="input__input" type="password" placeholder="new password">
+    </div>
+    <div class ="profile_button">
+        <button class ="button button-Update" type="submit">Update</button>
+        <button class ="button button-Unregister" type="button">Unregister</button>
+        <button class ="button button-Goback" type="button">Go back</button>
+    </div>
+</form> 
+ 
+        <!-- UNREGISTER -->
+ <form class="form_Unregister container--off">
+     <div class = "form_Unregister-pass">
+         <input class= "password" type = "password" placeholder= "password">
+      <div class ="Unregister_button">
+          <button class ="button button-Goback" type="button">Goback</button>
+          <button class ="button button-Unregister" type="submit">Unregister</button>
+      </div>   
+     </div>
+ </form>       
+
+
+    
+    
+     
+
+    <script src="logic.js"></script>
+    <script src="main-app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+.landing_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    min-height: 100vh;
+    max-width: 80vw;
+    margin: 0 auto;
+}
+
+.title_landing {
+    text-align: center;
+    margin: 15px;
+    font-family: 'Nanum Myeongjo', serif;
+    text-align: center;
+    font-size: 35px;
+    overflow: hidden;
+    white-space: nowrap;
+    letter-spacing: .15em;
+    animation: typing 3.5s steps(30, end), blink-caret .5s step-end infinite;
+    
+}
+@keyframes typing {
+    from {
+      width: 0
+    }
+    to {
+      width: 100%
+    }
+  }
+
+
+.parrafo {
+    text-align: center;
+    margin: 20px;
+    font-family: 'Nanum Myeongjo', serif;
+    text-align: center;
+    font-size: 18px;
+}
+
+.landing_buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button__login{
+  border-radius: 7px;
+  padding: 15px;
+  font-size: 20px;
+  align-items: center;
+  color:white;
+  transition: all .3s;
+  background-image: linear-gradient(90deg, #2bc2f5 0%, #d641f0 49%, #2bc2f5 100%);
+  border-radius:5px;
+  cursor:pointer;
+  padding: 10px 35px;
+  width: 150px;
+  height: 50px;
+  margin: 30px;
+}
+.button__login:hover {
+  animation:slidebg 2s linear infinite;
+}
+
+@keyframes slidebg {
+  to {
+    background-position:20vw;
+  }
+}
+.register__button{
+  border-radius: 7px;
+  font-size: 20px;
+  align-items: center;
+  color:white;
+  transition: all .3s;
+  background-image: linear-gradient(90deg, #2bc2f5 0%, #d641f0 49%, #2bc2f5 100%);
+  border-radius:5px;
+  cursor: pointer;
+  padding: 10px 35px;
+  width: 150px;
+  height: 50px;
+  margin: 30px;
+
+  
+}
+.register__button:hover {
+  animation:slidebg 2s linear infinite;
+}
+
+@keyframes slidebg {
+  to {
+    background-position:20vw;
+  }
+}

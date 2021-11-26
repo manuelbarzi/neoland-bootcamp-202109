@@ -1,0 +1,86 @@
+/*BLOG*/
+@import url('https://fonts.googleapis.com/css2?family=Birthstone&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+.header{
+    text-align: center;
+    font-size: 2rem;
+}
+
+.nav-bar__item{
+    font-family: 'Birthstone';
+    color:black;
+}
+
+.Photo__Blogger{
+    font-family:'Birthstone', cursive ;
+    font-size: 3rem;
+    color: rgb(155, 32, 89);
+    grid-template-columns:20px 30px;
+    text-align: center;
+    
+}
+
+.Photo__Blogger h1{
+    margin: 0;
+    padding: 2rem;
+}
+
+.blog__container{
+    font-family: "Ephesis", cursive;
+    height: 90%;
+    width: 100%;
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;   
+}
+
+.blog__post{
+    display: grid;
+}
+
+.blog__image{
+    width: 100%;
+    grid-template-columns: 30px 50px;
+}
+
+.blog__text{
+    padding: 15px;
+}
+
+.copy{
+    text-align: center;
+}
+
+.social{
+    padding:15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+footer .social img{
+    margin:0 auto;
+    width:30px;
+    height: 30px;
+}
+
+/* Tablet */
+@media screen and (max-width: 992px) {
+    .blog__container{
+        grid-template-columns: auto;
+    }
+
+    .blog__post{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Mobile */
+@media screen and (max-width: 600px) {
+    .blog__post{
+        grid-template-columns: auto;
+    }
+}
