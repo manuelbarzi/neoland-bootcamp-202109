@@ -7,30 +7,45 @@ const { ConflictError } = require('errors')
  * @param {*} name 
  * @param {*} username 
  * @param {*} password 
- * @param {*} callback 
  */
 
-function registerUser(name, username, password, callback) {
+// function registerUser(name, username, password, callback) {
+//     validateName(name)
+//     validateUsername(username)
+//     validatePassword(password)
+//     validateCallback(callback)
+
+//     const users = context.db.collection('users')
+
+//     users.insertOne({ name, username, password }, error => {
+//         if (error) {
+//             if (error.code === 11000)
+//                 callback(new ConflictError(`user with username ${username} already exists`))
+//             else
+//                 callback(error)
+
+//             return
+//         }
+
+//         callback(null)
+//     })
+    
+// }
+
+function registerUser(name, username, password) {
     validateName(name)
     validateUsername(username)
     validatePassword(password)
-    validateCallback(callback)
 
-    const users = context.db.collection('users')
-
-    users.insertOne({ name, username, password }, error => {
-        if (error) {
+    return User.create({ name, username, password })
+        .then(() => { }) // estudiar esta línea
+        .catch(error => {
             if (error.code === 11000)
-                callback(new ConflictError(`user with username ${username} already exists`))
-            else
-                callback(error)
+                throw new ConflictError(`user with username ${username} already exists`)
 
-            return
-        }
-
-        callback(null)
-    })
-    
+            throw error
+        })
+        
 }
 
 module.exports = registerUser//.bind(context)

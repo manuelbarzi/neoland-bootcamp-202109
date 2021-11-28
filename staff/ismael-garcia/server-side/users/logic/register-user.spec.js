@@ -1,81 +1,110 @@
 const { expect } = require('chai')
 const registerUser = require('./register-user')
-const { MongoClient } = require('mongodb')
-const context = require('./context')
+// const { MongoClient } = require('mongodb')
+// const context = require('./context')
+const { mongoose, models: { User } } = require('data')
 const { ConflictError, FormatError } = require('errors')
 
 describe('registerUser', () => {
-    let client, db, users
+    // let client, db, users
 
-    before(done => {
-        client = new MongoClient('mongodb://localhost:27017')
+    // before(done => {
+    //     client = new MongoClient('mongodb://localhost:27017')
 
-        client.connect(error => {
-            if (error) return done(error)
+    //     client.connect(error => {
+    //         if (error) return done(error)
 
-            db = client.db('demo')
+    //         db = client.db('demo')
 
-            context.db = db 
+    //         context.db = db 
 
-            users = db.collection('users')
+    //         users = db.collection('users')
             
-            users.createIndex({ username: 1 }, { unique: true })
+    //         users.createIndex({ username: 1 }, { unique: true })
 
-            done()
+    //         done()
 
-        })
-    })
+    //     })
+    // })
 
-    beforeEach(done => {
-        users.deleteMany({}, done)
+    // beforeEach(done => {
+    //     users.deleteMany({}, done)
 
-    })
+    // })
+
+    before(() => mongoose.connect('mongodb://localhost:27017'))
+
+    beforeEach(() => User.deleteMany())
 
     it('should suceed with new user', done => {
         const name = 'Wendy Pan'
         const username = 'wendypan'
         const password = '123123123'
 
-        registerUser(name, username, password, error => {
-            if (error) return done(error)
+        // return registerUser(name, username, password, error => {
+        //     if (error) return done(error)
 
-            users.findOne({ username }, (error, user) => {
-                if (error) return done(error)
+        //     users.findOne({ username }, (error, user) => {
+        //         if (error) return done(error)
                 
+        //         expect(user).to.exist
+        //         expect(user.name).to.equal(name)
+        //         expect(user.username).to.equal(username)
+        //         expect(user.password).to.equal(password)
+    
+        //         done()
+
+        //     })
+        // })
+        return registerUser(name, username, password)
+            .then(() => User.findOne({ username }))
+            .then(user => {
                 expect(user).to.exist
                 expect(user.name).to.equal(name)
                 expect(user.username).to.equal(username)
                 expect(user.password).to.equal(password)
-    
-                done()
-
             })
-        })
     })
 
     describe('when user already exists', () => {
         let user 
 
-        beforeEach(done => {
+        // beforeEach(done => {
+        //     user = {
+        //         name: 'Wendy Pan',
+        //         username: 'wendypan',
+        //         password: '123123123'
+        //     }
+
+        //     users.insertOne(user, done)
+        // })
+
+        beforeEach(() => {
             user = {
                 name: 'Wendy Pan',
                 username: 'wendypan',
                 password: '123123123'
             }
 
-            users.insertOne(user, done)
+            return User.create(user) //repasar esta línea
         })
 
         it('should fail when user already exists', done => {
             const { name, username, password } = user
 
-            registerUser(name, username, password, error => {
-                expect(error).to.exist
-                expect(error).to.be.instanceOf(ConflictError) 
-                expect(error.message).to.equal(`user with username ${username} already exists`)
+            // registerUser(name, username, password, error => {
+            //     expect(error).to.exist
+            //     expect(error).to.be.instanceOf(ConflictError) 
+            //     expect(error.message).to.equal(`user with username ${username} already exists`)
 
-                done()
-            })
+            //     done()
+            // })
+            return registerUser(name, username, password)
+                .catch(error => {
+                    expect(error).to.exist
+                    expect(error).to.be.instanceOf(ConflictError) 
+                    expect(error.message).to.equal(`user with username ${username} already exists`)
+                })
         })
     })
 
@@ -179,13 +208,18 @@ describe('registerUser', () => {
         })
     })
 
-    after(done => users.deleteMany({}, error => {
-        if (error) return done(error)
-        // client.close(error => {
-        //     if (error) return done(error)
+    // after(done => users.deleteMany({}, error => {
+    //     if (error) return done(error)
+    //     // client.close(error => {
+    //     //     if (error) return done(error)
 
-        //     done()
-        // })
-        client.close(done)
-    }))
+    //     //     done()
+    //     // })
+    //     client.close(done)
+    // }))
+    
+    after(() => 
+        User.deleteMany()
+           .then(() => mongoose.disconnect()) 
+    )
 })
