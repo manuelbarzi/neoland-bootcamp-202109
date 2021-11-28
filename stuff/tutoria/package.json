@@ -1,15 +1,15 @@
 {
-  "name": "vehicles",
+  "name": "tutoria",
   "version": "1.0.0",
-  "main": "logic",
+  "description": "",
+  "main": "tutoria.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "xmlhttprequest": "^1.8.0"
-  },
-  "description": ""
+    "chai": "^4.3.4",
+    "mocha": "^9.1.3"
+  }
 }

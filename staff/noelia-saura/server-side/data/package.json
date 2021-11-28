@@ -1,15 +1,14 @@
 {
-  "name": "vehicles",
+  "name": "data",
   "version": "1.0.0",
-  "main": "logic",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "xmlhttprequest": "^1.8.0"
-  },
-  "description": ""
+    "mongoose": "^6.0.13"
+  }
 }
