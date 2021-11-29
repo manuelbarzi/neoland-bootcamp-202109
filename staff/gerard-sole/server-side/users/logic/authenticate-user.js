@@ -1,17 +1,17 @@
-const { readFile } = require('fs')
+const { validateUsername, validatePassword } = require('./helpers/validators')
+const { CredentialsError } = require('../../error')
+const { models: { User } } = require('data')
 
-function authenticateUser(username, password, callback) {
-    readFile(`${__dirname}/../users.json`, 'utf8', (error, json) => {
-        if (error) return callback(error)
+function authenticateUser(username, password) {
+    validateUsername(username)
+    validatePassword(password)
 
-        const users = JSON.parse(json)
+    return User.findOne({ username, password })
+        .then(user => {
+            if (!user) throw new CredentialsError('wrong credentials')
 
-        const user = users.find(user => user.username === username && user.password === password)
-
-        if (!user) return callback(new Error(`User ${username} not found.`))
-
-        callback(null, user.id)
-    })
+            return user.id
+        })
 }
 
 module.exports = authenticateUser

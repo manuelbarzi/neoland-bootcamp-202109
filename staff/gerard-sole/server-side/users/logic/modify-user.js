@@ -1,28 +1,36 @@
-const { readFile, writeFile } = require('fs')
+const { mongoose, models: { User } } = require('data')
+const { validateId, validateData } = require('./helpers/validators')
+const { NotFoundError, ConflictError, CredentialsError } = require('../../error')
 
-function modifyUser(id, name, username, oldPassword, newPassword, callback) {
-    readFile(`${__dirname}/../users.json`, 'utf8', (error, json) => {
-        if (error) return callback(error)
+function modifyUser(id, data) {
+    validateId(id)
+    validateData(data)
 
-        const users = JSON.parse(json)
+    return User.findById(id)
+        .then(user => {
+            if (!user) throw new NotFoundError(`user with id ${id} not found`)
 
-        const user = users.find(user => user.id === id)
+            const { password, oldPassword } = data
 
-        if (!user) return callback(new Error(`User with ${id} not found`))
+            if (password) {
+                if (oldPassword !== user.password)
+                    throw new CredentialsError('wrong password')
+                else
+                    delete data.oldPassword
+            }
 
-        if (name !== "."  && name !== "") user.name = name
-        if (username !== "." && username !== "") user.username = username
-        if (oldPassword !== "." && newPassword !== "." && oldPassword === user.password) user.password = newPassword
+            for (const property in data)
+                user[property] = data[property]
 
-        const json2 = JSON.stringify(users, null, 4)
+            return user.save()
+                .catch(error => {
+                    if (error.code === 11000)
+                        throw new ConflictError(`user with username ${data.username} already exists`)
 
-        writeFile(`${__dirname}/../users.json`, json2, error => {
-            if (error) return console.error(error.message)
-
-            callback(null, user)
+                    throw error
+                })
+                .then(() => {})
         })
-
-    })
 }
 
 module.exports = modifyUser

@@ -4,6 +4,7 @@ const modifyUser = require('./logic/modify-user')
 const findUser = require('./logic/find-user')
 const unregisterUser = require('./logic/unregister-user')
 const authenticateUser = require('./logic/authenticate-user')
+const context = require('./logic/context')
 
 module.exports = {
     registerUser,
@@ -11,5 +12,6 @@ module.exports = {
     modifyUser,
     findUser,
     unregisterUser,
-    authenticateUser
+    authenticateUser,
+    context
 }

@@ -1,12 +1,13 @@
-const findUsers = require('./logic/find-users')
-const modifyUser = require('./logic/modify-user')
 const registerUser = require('./logic/register-user')
 const retrieveUser = require('./logic/retrieve-user')
 const unregisterUser = require('./logic/unregister-user')
+const findUser = require('./logic/find-user')
+const modifyUser = require('./logic/modify-user')
+const authenticateUser = require('./logic/authenticate-user')
 
 const { argv: [, , command] } = process
 
-if (command === 'register') { // $ node manager register "Peter Pan" peterpan 123123123
+if (command === "register") {
     const { argv: [, , , name, username, password] } = process
 
     registerUser(name, username, password, error => {
@@ -15,10 +16,9 @@ if (command === 'register') { // $ node manager register "Peter Pan" peterpan 12
 
             return
         }
-
-        console.log('user registered')
+        console.log("User registered.")
     })
-} else if (command === 'unregister') { // $ node manager unregister kw0mnxlk 123123123
+} else if (command === "unregister") {
     const { argv: [, , , id, password] } = process
 
     unregisterUser(id, password, error => {
@@ -27,41 +27,55 @@ if (command === 'register') { // $ node manager register "Peter Pan" peterpan 12
 
             return
         }
-
-        console.log(`user ${id} unregistered`)
+        console.log(`User ${id} unregistered`)
     })
-} else if (command === 'retrieve') { // $ node manager retrieve kw0ms3h9
-    const { argv: [, , , id]} = process
+} else if (command === "retrieve") {
+    const { argv: [, , , id] } = process
 
-    retrieveUser (id, (error,user) => {
+    retrieveUser(id, (error, user) => {
         if (error) {
-            console.log (error.message)
+            console.log(error.message)
 
             return
         }
 
-        console.log (`user ${user.name} recuperado`)
-        return user
-        
-    } )
-} else if (command === 'find') { // $ node manager find pan
-    const { argv: [, , , query]} = process
-
-    findUsers (query, (error,results) => {
-        if(error)return console.log (error.message) 
-    
-    results.forEach(({name, username, password }) => console.log(name, username, password))
-        
+        console.log(`User ${user.name} retrieved.`)
     })
 
-} else if (command === 'modify') { // $ node manager modify kw0ms3h9 * * 123123123:234234234
-                                   // $ node manager modify kw0ms3h9 "Juanito Perez" * *
-    const { argv: [, , , id, name, username,password, oldpassword]} = process         
-    modifyUser (id, name, username, password, oldpassword, (error,user) =>{
-    if (error) return console.log (error.message) 
+} else if (command === "find") {
+    const { argv: [, , , query] } = process
 
-    console.log (`user ${user.name} modificado`)
-    
-    return 
-})
-}
+    findUser(query, (error, result) => {
+        if (error) {
+            console.log(error.message)
+
+            return
+        }
+
+        result.forEach(({ name, username, password }) => console.log(name, username, password))
+    })
+
+} else if (command === "modify") {
+    const { argv: [, , , id, name, username, oldPassword, newPassword] } = process
+
+    modifyUser(id, name, username, oldPassword, newPassword, (error, user) => {
+        if (error) {
+            console.log(error.message)
+
+            return
+        }
+         console.log(user)
+    })
+
+} else if (command === "authenticate") {
+    const { argv: [, , , username, password] } = process
+
+    authenticateUser(username, password, (error, id) => {
+        if (error) {
+            console.log(error.message)
+
+            return
+        }
+        console.log(`User ${id} authenticated.`)
+    })
+} 

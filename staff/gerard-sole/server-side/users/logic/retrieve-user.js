@@ -1,23 +1,24 @@
-const { readFile } = require('fs')
+const { models: { User } } = require('data')
+const { validateId } = require('./helpers/validators')
+const { NotFoundError } = require('../../error')
 
-function retrieveUser(id, callback) {
-    readFile(`${__dirname}/../users.json`, 'utf8', (error, json) => {
-        if (error) return callback(error)
+function retrieveUser(id) {
+    validateId(id)
 
-        const users = JSON.parse(json)
+    return User.findById(id).lean()
+        .then(user => {
+            if (!user) throw new NotFoundError(`user with id ${id} not found`)
 
-        const index = users.findIndex(user => user.id === id)
+            user.id = user._id.toString()
 
-        if (index < 0) return callback(new Error(`User with id ${id} not found`))
+            delete user._id
 
-        const user = users[index]
-        delete user.password
-        delete user.id
+            delete user.password
 
+            delete user.__v
 
-        callback(null, user)
-
-    })
+            return user
+        })
 }
 
 module.exports = retrieveUser

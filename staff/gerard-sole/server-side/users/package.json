@@ -1,12 +1,25 @@
 {
   "name": "users",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "logic",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha logic/*.spec.js",
+    "test-inspect": "mocha --inspect-brk logic/*.spec.js",
+    "test-coverage": "nyc --reporter=html --reporter=text mocha logic/*.spec.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
+    "mocha": "^9.1.3",
+    "nyc": "^15.1.0"
+  },
+  "dependencies": {
+    "data": "file:../data",
+    "error": "file:../error",
+    "mongodb": "^4.2.0"
+  },
+  "description": ""
 }

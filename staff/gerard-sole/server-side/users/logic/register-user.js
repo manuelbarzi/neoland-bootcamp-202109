@@ -1,25 +1,27 @@
-const { readFile, writeFile } = require('fs')
+const { validateName, validateUsername, validatePassword } = require('./helpers/validators')
+const { ConflictError } = require('../../error')
+const { models: { User } } = require('data')
 
-function registerUser(name, username, password, callback) {
-    readFile(`${__dirname}/../users.json`, 'utf8', (error, json) => {
-        if (error) return callback(error)
+/**
+ * TODO doc me
+ * @param {*} name 
+ * @param {*} username 
+ * @param {*} password 
+ * @param {*} callback 
+ */
+function registerUser(name, username, password) {
+    validateName(name)
+    validateUsername(username)
+    validatePassword(password)
 
-        const users = JSON.parse(json)
+    return User.create({ name, username, password })
+        .then(() => { })
+        .catch(error => {
+            if (error.code === 11000)
+                throw new ConflictError(`user with username ${username} already exists`)
 
-        const user = users.find(user => user.username === username)
-
-        if (user) return callback(new Error(`user with username ${username} already exists`))
-    
-        users.push({ id: Date.now().toString(36), name, username, password })
-
-        const json2 = JSON.stringify(users, null, 4)
-
-        writeFile(`${__dirname}/../users.json`, json2, error => {
-            if (error) return callback(error)
-
-            callback()
+            throw error
         })
-    })
 }
 
 module.exports = registerUser
