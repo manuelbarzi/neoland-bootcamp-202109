@@ -1,22 +1,20 @@
-const context = require('./context')
-const { ObjectId } = require('mongodb')
+const {retrieveUser} = require('users')
+const jwt = require('jsonwebtoken')
+const {env: {SECRET}} = process
+const handleError = require('./helpers/handle-error')
 
-function retrieveUser(id, callback) {
-    if (typeof id !== 'string') throw new TypeError(id + ' is not a string')
-    if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
+module.exports = (req, res) => {
+    const {headers: {authorization}} = req
 
-    const users = context.db.collection('users')
-
-    users.findOne({_id: ObjectId(id)},(error,user)=>{
-        if(error) return callback(error)
-
-        if (!user) return callback(new Error(`No user with the id: ${id}`))
-
-        user.id=user._id.toString()
-        delete user._id
-        delete user.password
+    try {
+        const[,token] = authorization.split(' ')
+        const payload = jwt.verify(token, SECRET)
+        const { sub: id } = payload
         
-        callback(null, user)
-    })
+        retrieveUser(id)
+            .then(user => res.json(user))
+            .catch(error => handleError(error,res))
+    } catch (error) {
+        handleError(error,res)
+    }
 }
-module.exports = retrieveUser

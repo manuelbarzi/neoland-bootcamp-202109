@@ -2,6 +2,7 @@ const { expect } = require('chai')
 const registerUser = require('./register-user')
 const { MongoClient } = require('mongodb')
 const context = require('./context')
+// const { ConflictError, FormatError} = require('errors')
 
 describe('Register User', () => {
     let users, db, client
@@ -22,11 +23,9 @@ describe('Register User', () => {
         })
     })
 
-    beforeEach(done => {
-        users.deleteMany({}, done)
-    })
-    
-    
+    beforeEach(done => users.deleteMany({}, done))
+
+
     describe('When user doesnt exists', () => {
 
         it('should succeed with new user', (done) => {
@@ -34,7 +33,7 @@ describe('Register User', () => {
             const username = 'crazyJ'
             const password = '123123123'
 
-            registerUser(name, username, password, (error) => {
+            registerUser(name, username, password, error => {
                 if (error) return done(error)
 
                 users.findOne({ username }, (error, user) => {
@@ -63,7 +62,7 @@ describe('Register User', () => {
         })
 
         it('should fail when username already exists', (done) => {
-            const {name, username, password} = user
+            const { name, username, password } = user
 
             registerUser(name, username, password, error => {
                 expect(error).to.exist
@@ -72,56 +71,87 @@ describe('Register User', () => {
             })
 
         });
-   
+
     });
 
     describe('validation parameters with invalid data', () => {
         describe('When name is not valid', () => {
-            it('should fail when name is not a string', () =>{
-                expect(() => registerUser(true, 'wendypan','123123123', () =>{})).to.throw(TypeError, 'name is not a string')
-                expect(() => registerUser(123, 'wendypan','123123123', () =>{})).to.throw(TypeError, 'name is not a string')
-                expect(() => registerUser({}, 'wendypan','123123123', () =>{})).to.throw(TypeError, 'name is not a string')
-                expect(() => registerUser(()=>{}, 'wendypan','123123123', () =>{})).to.throw(TypeError, 'name is not a string')
-                expect(() => registerUser([], 'wendypan','123123123', () =>{})).to.throw(TypeError, 'name is not a string')
+            it('should fail when name is not a string', () => {
+                expect(() => registerUser(true, 'wendypan', '123123123', () => { })).to.throw(TypeError, 'name is not a string')
+                expect(() => registerUser(123, 'wendypan', '123123123', () => { })).to.throw(TypeError, 'name is not a string')
+                expect(() => registerUser({}, 'wendypan', '123123123', () => { })).to.throw(TypeError, 'name is not a string')
+                expect(() => registerUser(() => { }, 'wendypan', '123123123', () => { })).to.throw(TypeError, 'name is not a string')
+                expect(() => registerUser([], 'wendypan', '123123123', () => { })).to.throw(TypeError, 'name is not a string')
             })
 
-            it('should fail when name is empty', ()=>{
-                expect(()=> registerUser('','wendypan','123123123', ()=>{})).to.throw(Error, 'name is empty or blank')
-                expect(()=> registerUser('    ','wendypan','123123123',()=>{})).to.throw(Error,'name is empty or blank')
+            it('should fail when name is empty', () => {
+                expect(() => registerUser('', 'wendypan', '123123123', () => { })).to.throw(Error, 'name is empty or blank')
+                expect(() => registerUser('    ', 'wendypan', '123123123', () => { })).to.throw(Error, 'name is empty or blank')
             })
 
-            it('should fail when name has spaces around', ()=>{
-                expect(() => registerUser('  Wendy Pan  ','wendypan', '123123123', ()=>{})).to.throw(Error,'blank spaces around name')
+            it('should fail when name has spaces around', () => {
+                expect(() => registerUser('  Wendy Pan  ', 'wendypan', '123123123', () => { })).to.throw(Error, 'blank spaces around name')
             })
         })
 
-        describe('when username is not valid', () =>{
-            it('should fail when callback is not a string', ()=>{
-                expect(()=>registerUser('Wendy Pan', true, '123123123', ()=>{})).to.throw(TypeError,'username is not a string')
-                expect(()=>registerUser('Wendy Pan', 123, '123123123', ()=>{})).to.throw(TypeError,'username is not a string')
-                expect(()=>registerUser('Wendy Pan', {}, '123123123', ()=>{})).to.throw(TypeError,'username is not a string')
-                expect(()=>registerUser('Wendy Pan', ()=>{}, '123123123', ()=>{})).to.throw(TypeError,'username is not a string')
-                expect(()=>registerUser('Wendy Pan', [], '123123123', ()=>{})).to.throw(TypeError,'username is not a string')
+        describe('when username is not valid', () => {
+            it('should fail when username is not a string', () => {
+                expect(() => registerUser('Wendy Pan', true, '123123123', () => { })).to.throw(TypeError, 'username is not a string')
+                expect(() => registerUser('Wendy Pan', 123, '123123123', () => { })).to.throw(TypeError, 'username is not a string')
+                expect(() => registerUser('Wendy Pan', {}, '123123123', () => { })).to.throw(TypeError, 'username is not a string')
+                expect(() => registerUser('Wendy Pan', () => { }, '123123123', () => { })).to.throw(TypeError, 'username is not a string')
+                expect(() => registerUser('Wendy Pan', [], '123123123', () => { })).to.throw(TypeError, 'username is not a string')
             })
 
-            it('should fail when username is empty', ()=>{
-                expect(()=> registerUser('Wendy Pan', '', '123123123',()=>{})).to.throw(Error,'username is empty or blank')
-                expect(()=> registerUser('Wendy Pan', '   ', '123123123',()=>{})).to.throw(Error,'username is empty or blank')
+            it('should fail when username is empty', () => {
+                expect(() => registerUser('Wendy Pan', '', '123123123', () => { })).to.throw(Error, 'username is empty or blank')
+                expect(() => registerUser('Wendy Pan', '   ', '123123123', () => { })).to.throw(Error, 'username is empty or blank')
             })
 
-            it('should fail when username has spaces around', ()=>{
-                expect(()=> registerUser('Wendy Pan', '  wendypan  ', '123123123',()=>{})).to.throw(Error,'username has blank spaces')
+            it('should fail when username has spaces around', () => {
+                expect(() => registerUser('Wendy Pan', '  wendypan  ', '123123123', () => { })).to.throw(Error, 'blank spaces around username')
             })
 
-            it('should fail when username length is less than 4 characters',()=>{
-                expect(()=> registerUser('Wendy Pan', 'wp','123123123', ()=>{})).to.throw(Error, 'username has less than 4 characters')
+            it('should fail when username length is less than 4 characters', () => {
+                expect(() => registerUser('Wendy Pan', 'wp', '123123123', () => { })).to.throw(Error, 'username has less than 4 characters')
+            })
+
+        })
+
+        describe('when password is not valid', () => {
+            it('should fail when password is not a string', () => {
+                expect(() => registerUser('Wendy Pan', 'wendypan', true, () => { })).to.throw(TypeError, 'password is not a string')
+                expect(() => registerUser('Wendy Pan', 'wendypan', 123, () => { })).to.throw(TypeError, 'password is not a string')
+                expect(() => registerUser('Wendy Pan', 'wendypan', {}, () => { })).to.throw(TypeError, 'password is not a string')
+                expect(() => registerUser('Wendy Pan', 'wendypan', () => { }, () => { })).to.throw(TypeError, 'password is not a string')
+                expect(() => registerUser('Wendy Pan', 'wendypan', [], () => { })).to.throw(TypeError, 'password is not a string')
+            })
+
+            it('should fail when password is empty', () => {
+                expect(() => registerUser('Wendy Pan', 'wendypan', '', () => { })).to.throw(Error, 'password is empty or blank')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '   ', () => { })).to.throw(Error, 'password is empty or blank')
+            })
+
+            it('should fail when password has spaces', () => {
+                expect(() => registerUser('Wendy Pan', 'wendypan', ' 123123123 ', () => { })).to.throw(Error, 'password has blank spaces')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123 123 123', () => { })).to.throw(Error, 'password has blank spaces')
+            })
+
+            it('should fail when password length is less that 8 characters', () => {
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123', () => { })).to.throw(Error, 'password has less than 8 characters')
             })
             
+        describe('when callback is not valid', () => {
+            it('should fail when callback is not a string', () => {
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', true)).to.throw(TypeError, 'callback is not a function')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', 123)).to.throw(TypeError, 'callback is not a function')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', {})).to.throw(TypeError, 'callback is not a function')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', '...')).to.throw(TypeError, 'callback is not a function')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', [])).to.throw(TypeError, 'callback is not a function')
+            })
         })
-        
+        })
     })
-    
-
 
     after(done => {
         client.close(done)
