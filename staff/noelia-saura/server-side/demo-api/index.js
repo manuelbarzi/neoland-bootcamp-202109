@@ -1,5 +1,5 @@
 require('dotenv').config()
-
+//para iniciar api poner http://localhost:8000/api/
 const express = require('express')
 const bodyParser = require('body-parser')
 const { mongoose } = require('data')

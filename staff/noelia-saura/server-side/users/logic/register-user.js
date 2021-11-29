@@ -1,25 +1,20 @@
-const context=require('./context')
-const{validateName,validateUsername,validatePassword,validateCallback}=require('./helpers/validators')
-const{ConflictError}=require('errors')
+const { validateName, validateUsername, validatePassword } = require('./helpers/validators')
+const { ConflictError } = require('errors')
+const { models: { User } } = require('data')
 
-function registerUser(name, username, password, callback) {
+function registerUser(name, username, password) {
     validateName(name)
     validateUsername(username)
     validatePassword(password)
-    validateCallback(callback)
 
-    const users=context.db.collection('users')
+    return User.create({ name, username, password })
+        .then(() => { })
+        .catch(error => {
+            if (error.code === 11000)
+                throw new ConflictError(`user with username ${username} already exists`)
 
-    users.insertOne({name,username,password},error=>{
-        if(error){
-            if(error.code===11000)
-                callback(new ConflictError(`user with username ${username} already exists`))
-            else
-            callback(error)
-            return
-            }
-        callback(null)
-    })
+            throw error
+        })
 }
 
 module.exports = registerUser

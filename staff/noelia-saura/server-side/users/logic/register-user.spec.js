@@ -1,68 +1,89 @@
 const { expect } = require('chai')
 const registerUser = require('./register-user')
-const { MongoClient } = require('mongodb')
-const context = require('./context')
+const { mongoose, models: { User } } = require('data')
 const {ConflictError,FormatError}=require('errors')
 
 describe('registerUser', () => {
-    let client, db, users
 
-    before(done => {
-        client = new MongoClient('mongodb://localhost:27017')
+    before(() => mongoose.connect('mongodb://localhost:27017'))
 
-        client.connect(error => {
-            if (error) return done(error)
+    // let client, db, users
+
+    // before(done => {
+    //     client = new MongoClient('mongodb://localhost:27017')
+
+    //     client.connect(error => {
+    //         if (error) return done(error)
             
-            db = client.db('demo')
+    //         db = client.db('demo')
 
-            context.db = db
+    //         context.db = db
 
-            users = db.collection('users')
-            users.createIndex({ username: 1 }, { unique: true })
-            done()
-        })
-    })
+    //         users = db.collection('users')
+    //         users.createIndex({ username: 1 }, { unique: true })
+    //         done()
+    //     })
+    // })
 
-    beforeEach(done => {
+    beforeEach(()=>User.deleteMany())
+
+    // beforeEach(done => {
        
-        users.deleteMany({}, done)
-    })
+    //     users.deleteMany({}, done)
+    // })
 
-    it('should succeed with new user', done => {
+    it('should succeed with new user', () => {
         const name = 'Wendy Pan'
         const username = 'wendypan'
         const password = '123123123'
 
-        registerUser(name, username, password, error => {
-            if (error) return done(error)
-
-            users.findOne({ username }, (error, user) => {
-                if (error) return done(error)
-
+        return registerUser(name, username, password)
+            .then(() => User.findOne({ username }))
+            .then(user => {
                 expect(user).to.exist
                 expect(user.name).to.equal(name)
                 expect(user.username).to.equal(username)
                 expect(user.password).to.equal(password)
-
-                done()
             })
-        })
     })
+
+
+    // it('should succeed with new user', done => {
+    //     const name = 'Wendy Pan'
+    //     const username = 'wendypan'
+    //     const password = '123123123'
+
+    //     registerUser(name, username, password, error => {
+    //         if (error) return done(error)
+
+    //         users.findOne({ username }, (error, user) => {
+    //             if (error) return done(error)
+
+    //             expect(user).to.exist
+    //             expect(user.name).to.equal(name)
+    //             expect(user.username).to.equal(username)
+    //             expect(user.password).to.equal(password)
+
+    //             done()
+    //         })
+    //     })
+    // })
 
     describe('when user already exists', () => {
         let user
         
-        beforeEach(done => {
+        beforeEach(() => {
             user = {
                 name: 'Wendy Pan',
                 username: 'wendypan',
                 password: '123123123'
             }
 
-            users.insertOne(user, done)
+            return User.create(user)
+            // users.insertOne(user, done)
         })
 
-        it('should fail when user already exists', done => {
+        it('should fail when user already exists', () => {
             const { name, username, password } = user
 
             registerUser(name, username, password, error => {
@@ -70,7 +91,6 @@ describe('registerUser', () => {
                 expect(error).to.be.instanceOf(ConflictError)
                 expect(error.message).to.equal(`user with username ${username} already exists`)
 
-                done()
             })
         })
     })
@@ -160,23 +180,11 @@ describe('registerUser', () => {
             })
         })
 
-        describe('when callback is not valid', () => {
-            it('should fail when callback is not a string', () => {
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', true)).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', 123)).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', {})).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', '...')).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', [])).to.throw(TypeError, 'callback is not a function')
-            })
-        })
+       
     })
 
-    after(done => users.deleteMany({},error=>{
-       if(error)return done(error)
-        client.close(done)
-    }))
+    after(() =>
+        User.deleteMany()
+            .then(() => mongoose.disconnect())
+    )
 })

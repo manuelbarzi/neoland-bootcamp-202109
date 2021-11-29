@@ -6,7 +6,6 @@ const handleError = require('./helpers/handle-error')
 module.exports = (req, res) => {
     const { headers: { authorization } } = req
 
-    debugger
     try {
         const [, token] = authorization.split(' ')
 

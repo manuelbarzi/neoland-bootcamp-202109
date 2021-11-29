@@ -13,11 +13,12 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.3.4",
+    "dotenv": "^10.0.0",
     "mocha": "^9.1.3",
     "nyc": "^15.1.0"
   },
   "dependencies": {
-    "errors": "file:../errors",
-    "mongodb": "^4.2.0"
+    "data": "file:../data",
+    "errors": "file:../errors"
   }
 }
