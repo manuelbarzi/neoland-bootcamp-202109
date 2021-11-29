@@ -1,9 +1,13 @@
+require('dotenv').config()
+
 const { expect } = require('chai')
 const registerUser = require('./register-user')
 // const { MongoClient } = require('mongodb')
 // const context = require('./context')
 const { mongoose, models: { User } } = require('data')
 const { ConflictError, FormatError } = require('errors')
+
+const { env: { MONGO_URL } } = process
 
 describe('registerUser', () => {
     // let client, db, users
@@ -32,7 +36,7 @@ describe('registerUser', () => {
 
     // })
 
-    before(() => mongoose.connect('mongodb://localhost:27017'))
+    before(() => mongoose.connect(MONGO_URL))
 
     beforeEach(() => User.deleteMany())
 

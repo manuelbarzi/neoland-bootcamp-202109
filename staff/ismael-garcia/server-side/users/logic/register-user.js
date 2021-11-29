@@ -1,6 +1,6 @@
-const context = require('./context')
-const { validateName, validateUsername, validatePassword, validateCallback } = require('./helpers/validators')
+const { validateName, validateUsername, validatePassword } = require('./helpers/validators')
 const { ConflictError } = require('errors')
+const { models: { User } } = require('data')
 
 /**
  * TODO doc me
