@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <h1>Hello, World!</h1>
+
+    <button class="button" id="switch">🌚</button>
+
+    <br />
+
+    <form class="panel panel--light" action="" id="register">
+      <h1 class="panel__title">Register</h1>
+      <label for="name">Name</label>
+      <input
+        class="field"
+        type="text"
+        name="name"
+        id="name"
+        placeholder="name"
+      /><br />
+      <label for="birthdate">Birth</label>
+      <input class="field" type="date" name="birth" id="birthdate" /><br />
+      <label for="username">Username</label>
+      <input
+        class="field"
+        type="text"
+        name="username"
+        id="username"
+        placeholder="username"
+      /><br />
+      <label for="password">Password</label>
+      <input
+        class="field"
+        type="password"
+        name="password"
+        id="password"
+        placeholder="password"
+      /><br />
+      <button class="button" type="submit">Register</button>
+      <button class="button" type="reset">Clear</button>
+    </form>
+
+    <br />
+
+    <form class="panel panel--dark" action="">
+      <h1 class="panel__title">Login</h1>
+      <label for="username">Username</label>
+      <input
+        class="field"
+        type="text"
+        name="username"
+        id="username"
+        placeholder="username"
+      /><br />
+      <label for="password">Password</label>
+      <input
+        class="field"
+        type="password"
+        name="password"
+        id="password"
+        placeholder="password"
+      /><br />
+      <button class="button" type="submit">Login</button>
+      <button class="button" type="reset">Clear</button>
+    </form>
+
+    <br />
+
+    <form class="search" action="https://www.google.com/search">
+      <fieldset class="search__body panel">
+        <legend class="search__title">Search in Google</legend>
+        <label for="query">Query</label>
+        <input
+          class="field"
+          type="text"
+          id="query"
+          name="q"
+          placeholder="query"
+        />
+        <!-- input type="submit" value="🔍️" -->
+        <button class="button">🔍️</button>
+      </fieldset>
+    </form>
+
+    <br />
+
+    <div class="panel panel--light">Hello, world!</div>
+
+    <div class="panel panel--dark">Hello, world!</div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
