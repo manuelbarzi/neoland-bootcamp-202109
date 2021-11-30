@@ -1,77 +1,56 @@
+require('dotenv').config()
+
 const { expect } = require('chai')
 const registerUser = require('./register-user')
-const { MongoClient } = require('mongodb')
-const context = require('./context')
+const { mongoose, models: { User } } = require('data')
+const { ConflictError, FormatError } = require('errors')
+
+const { env: { MONGO_URL } } = process
 
 describe('registerUser', () => {
-    let client, db, users
 
-    before(done => {
-        client = new MongoClient('mongodb://localhost:27017')
+    before(() => mongoose.connect(MONGO_URL))
 
-        client.connect(error => {
-            if (error) return done(error)
+    beforeEach(() => User.deleteMany())
 
-            db = client.db('demo')
-
-            context.db = db
-
-            users = db.collection('users')
-
-            users.createIndex({ username: 1}, { unique: true })
-
-            done()
-        })
-    })
-
-    beforeEach(done => {
-
-        users.deleteMany({}, done)
-    })
-
-    it('Should succeed with new user', done => {
+    it('Should succeed with new user', () => {
         const name = 'Wendy Pan'
         const username = 'wendypan'
         const password = '123123123'
 
-        registerUser(name, username, password, error => {
-            if (error) return done(error)
-
-            users.findOne({ username }, (error, user) => {
-                if (error) return done(error)
-
+        return registerUser(name, username, password)
+            .then(() => User.findOne({ username }))
+            .then(user => {
                 expect(user).to.exist
                 expect(user.name).to.equal(name)
                 expect(user.username).to.equal(username)
                 expect(user.password).to.equal(password)
-
-                done()
             })
-        })
     })
 
     describe('When user already exists', () => {
         let user;
 
-        beforeEach(done => {
+        beforeEach(() => {
             user = {
                 name: 'Wendy Pan',
                 username: 'wendypan',
                 password: '123123123'
             }
 
-            users.insertOne(user, done)
+            User.create(user)
         })
 
-        it('Should fail when user already exists', done => {
+        it('Should fail when user already exists', () => {
             const { name, username, password } = user
-            
-            registerUser(name, username, password, error => {
-                expect(error).to.exist
-                expect(error.message).to.equal(`User with username ${username} already exists.`)
 
-                done()
-            })
+            return registerUser(name, username, password)
+                .catch(error => {
+                    expect(error).to.exist
+                    expect(error).to.be.instanceOf(ConflictError)
+                    expect(error.message).to.equal(`user with username ${username} already exists`)
+
+                })
         })
     })
 
@@ -90,13 +69,13 @@ describe('registerUser', () => {
             })
 
             it('Should fail when name is empty', () => {
-                expect(() => registerUser('', 'wendypan', '123123123', () => { })).to.throw(Error, 'name is empty or blank')
+                expect(() => registerUser('', 'wendypan', '123123123', () => { })).to.throw(FormatError, 'name is empty or blank')
 
-                expect(() => registerUser('   ', 'wendypan', '123123123', () => { })).to.throw(Error, 'name is empty or blank')
+                expect(() => registerUser('   ', 'wendypan', '123123123', () => { })).to.throw(FormatError, 'name is empty or blank')
             })
 
             it('Should fail when name has spaces around', () => {
-                expect(() => registerUser(' Wendy Pan ', 'wendypan', '123123123', () => { })).to.throw(Error, 'blank spaces around name')
+                expect(() => registerUser(' Wendy Pan ', 'wendypan', '123123123', () => { })).to.throw(FormatError, 'blank spaces around name')
             })
         })
 
@@ -115,15 +94,15 @@ describe('registerUser', () => {
             })
 
             it('Should fail when username is empty', () => {
-                expect(() => registerUser('Wendy Pan', '', '123123123', () => { })).to.throw(Error, 'username is empty or blank')
+                expect(() => registerUser('Wendy Pan', '', '123123123', () => { })).to.throw(FormatError, 'username is empty or blank')
 
-                expect(() => registerUser('Wendy Pan', '  ', '123123123', () => { })).to.throw(Error, 'username is empty or blank')
+                expect(() => registerUser('Wendy Pan', '  ', '123123123', () => { })).to.throw(FormatError, 'username is empty or blank')
             })
 
             it('Should fail when username has spaces around', () => {
-                expect(() => registerUser('Wendy Pan', ' wendypan ', '123123123', () => { })).to.throw(Error, 'username has blank spaces')
-                
-                expect(() => registerUser('Wendy Pan', 'wendy pan', '123123123', () => { })).to.throw(Error, 'username has blank spaces')
+                expect(() => registerUser('Wendy Pan', ' wendypan ', '123123123', () => { })).to.throw(FormatError, 'username has blank spaces')
+
+                expect(() => registerUser('Wendy Pan', 'wendy pan', '123123123', () => { })).to.throw(FormatError, 'username has blank spaces')
             })
         })
 
@@ -141,39 +120,24 @@ describe('registerUser', () => {
             })
 
             it('Should fail when password is empty', () => {
-                expect(() => registerUser('Wendy Pan', 'wendypan', '', () => { })).to.throw(Error, 'password is empty or blank')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '', () => { })).to.throw(FormatError, 'password is empty or blank')
 
-                expect(() => registerUser('Wendy Pan', 'wendypan', '   ', () => { })).to.throw(Error, 'password is empty or blank')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '   ', () => { })).to.throw(FormatError, 'password is empty or blank')
             })
 
             it('Should fail when password has spaces around', () => {
-                expect(() => registerUser('Wendy Pan', 'wendypan', ' 123123123 ', () => { })).to.throw(Error, 'password has blank spaces')
-                
-                expect(() => registerUser('Wendy Pan', 'wendypan', '1231 23123', () => { })).to.throw(Error, 'password has blank spaces')
+                expect(() => registerUser('Wendy Pan', 'wendypan', ' 123123123 ', () => { })).to.throw(FormatError, 'password has blank spaces')
+
+                expect(() => registerUser('Wendy Pan', 'wendypan', '1231 23123', () => { })).to.throw(FormatError, 'password has blank spaces')
             })
 
             it('Should fail when password length is less than 8 characters', () => {
-                expect(() => registerUser('Wendy Pan', 'wendypan', '1231', () => { })).to.throw(Error, 'password has less than 8 characters')
-            })
-        })
-
-        describe('When callback is not valid', () => {
-            it('Should fail when callback is not a string', () => {
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', true)).to.throw(TypeError, 'callback is not a function')
-                
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', 123)).to.throw(TypeError, 'callback is not a function')
-                
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', {})).to.throw(TypeError, 'callback is not a function')
-                
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', '...')).to.throw(TypeError, 'callback is not a function')
-                
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', [])).to.throw(TypeError, 'callback is not a function')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '1231', () => { })).to.throw(FormatError, 'password has less than 8 characters')
             })
         })
     })
 
-    after(done => {
-
-        client.close(done)
-    })
+    after(() => 
+        User.deleteMany()
+            .then(() => mongoose.disconnect()))
 })

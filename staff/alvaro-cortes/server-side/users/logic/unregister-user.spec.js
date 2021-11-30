@@ -1,164 +1,133 @@
+require('dotenv').config()
+
 const { expect } = require('chai')
 const unregisterUser = require('./unregister-user')
-const { MongoClient, ObjectId } = require('mongodb')
-const context = require('./context')
+const { mongoose, models: { User } } = require('data')
+const { Types: { ObjectId } } = mongoose
+const { CredentialsError, FormatError, NotFoundError } = require('errors')
+
+const { env: { MONGO_URL } } = process
 
 describe('unregisterUser', () => {
-    let client, db, users
 
-    before(done => {
-        client = new MongoClient('mongodb://localhost:27017')
+    before(() => mongoose.connect(MONGO_URL))
 
-        client.connect(error => {
-            if (error) return done(error)
+    beforeEach(() => User.deleteMany())
 
-            db = client.db('demo')
+    let user, userId
 
-            context.db = db
+    beforeEach(() => {
+        user = {
+            name: 'Wendy Pan',
+            username: 'wendypan',
+            password: '123123123'
+        }
 
-            users = db.collection('users')
-
-            done()
-        })
+        return User.create(user)
+            .then(user => userId = user.id)
     })
 
-    beforeEach(done => users.deleteMany({}, done))
-
     describe('When user already exists', () => {
-        let user, userId
-        debugger
-        beforeEach(done => {
-            user = {
-                name: 'Wendy Pan',
-                username: 'wendypan',
-                password: '123123123'
-            }
 
-            users.insertOne(user, (error, result) => {
-                if (error) return done(error)
-
-                userId = result.insertedId.toString()
-
-                done()
-            })
-        })
-        
-        it('Should succeed when user is deleted from data base', done => {
+        it('Should succeed when user is deleted from data base', () => {
             const { password } = user
 
-            unregisterUser(userId, password, (error, response) => {
-                if (error) return done(error)
-
-                expect(response).to.equal('User deleted successfully')
-
-                done()
-            })
+            return unregisterUser(userId, password)
+                .then(response => {
+                    expect(response).to.equal('User deleted successfully')
+                })
+                .catch(() => { throw new CredentialsError('Wrong password') })
         })
 
-        it('Should fail with wrong password', done => {
+        it('Should fail with wrong password', () => {
 
-            unregisterUser(userId, '11111111', error => {
-
-                expect(error).to.exist
-                expect(error.message).to.equal('Wrong password')
-
-                done()
-            })
+            return unregisterUser(userId, '11111111')
+                .then(() => { throw new Error('Should not reach this point.') })
+                .catch(error => {
+                    expect(error).to.exist
+                    expect(error).to.be.instanceOf(CredentialsError)
+                    expect(error.message).to.equal('Wrong password')
+                })
         })
 
-        it('Should fail when user id does not correspond to any user', done => {
+        it('Should fail when user id does not correspond to any user', () => {
             const userId = ObjectId().toString()
 
             const { password } = user
-    
-            unregisterUser(userId, password, error => {
-                expect(error).to.exist
-                expect(error.message).to.equal(`user with id ${userId} not found`)
-    
-                done()
-            })
+
+            return unregisterUser(userId, password)
+                .then(() => { throw new Error('Should not reach this point.') })
+                .catch(error => {
+                    expect(error).to.exist
+                    expect(error).to.be.instanceOf(NotFoundError)
+                    expect(error.message).to.equal(`user with id ${userId} not found`)
+                })
         })
 
         describe('When parameters are note valid', () => {
             describe('When id is not valid', () => {
                 it('should fail when id is not a string', () => {
                     expect(() => unregisterUser(true, {}, () => { })).to.throw(TypeError, 'id is not a string')
-    
+
                     expect(() => unregisterUser(123, {}, () => { })).to.throw(TypeError, 'id is not a string')
-    
+
                     expect(() => unregisterUser({}, {}, () => { })).to.throw(TypeError, 'id is not a string')
-    
+
                     expect(() => unregisterUser(() => { }, {}, () => { })).to.throw(TypeError, 'id is not a string')
-    
+
                     expect(() => unregisterUser([], {}, () => { })).to.throw(TypeError, 'id is not a string')
                 })
-    
+
                 it('should fail when id is empty or blank', () => {
-                    expect(() => unregisterUser('', {}, () => { })).to.throw(Error, 'id is empty or blank')
-    
-                    expect(() => unregisterUser('   ', {}, () => { })).to.throw(Error, 'id is empty or blank')
+                    expect(() => unregisterUser('', {}, () => { })).to.throw(FormatError, 'id is empty or blank')
+
+                    expect(() => unregisterUser('   ', {}, () => { })).to.throw(FormatError, 'id is empty or blank')
                 })
-    
+
                 it('should fail when id has spaces', () => {
-                    expect(() => unregisterUser(' abcd1234abcd1234abcd1234 ', {}, () => { })).to.throw(Error, 'id has blank spaces')
-    
-                    expect(() => unregisterUser('abcd 1234abc d1234abc d1234', {}, () => { })).to.throw(Error, 'id has blank spaces')
+                    expect(() => unregisterUser(' abcd1234abcd1234abcd1234 ', {}, () => { })).to.throw(FormatError, 'blank spaces around id')
+
+                    expect(() => unregisterUser('abcd 1234abc d1234abc d1234', {}, () => { })).to.throw(FormatError, 'blank spaces around id')
                 })
-    
+
                 it('should fail when id length is different from 24 characters', () => {
-                    expect(() => unregisterUser('abc', {}, () => { })).to.throw(Error, 'id doesn\'t have 24 characters')
+                    expect(() => unregisterUser('abc', {}, () => { })).to.throw(FormatError, 'id has less than 24 characters')
                 })
             })
 
             describe('When password is not valid', () => {
                 it('Should fail when password is not a string', () => {
                     expect(() => unregisterUser(userId, true, () => { })).to.throw(TypeError, 'password is not a string')
-    
+
                     expect(() => unregisterUser(userId, 123, () => { })).to.throw(TypeError, 'password is not a string')
-    
+
                     expect(() => unregisterUser(userId, {}, () => { })).to.throw(TypeError, 'password is not a string')
-    
+
                     expect(() => unregisterUser(userId, () => { }, () => { })).to.throw(TypeError, 'password is not a string')
-    
+
                     expect(() => unregisterUser(userId, [], () => { })).to.throw(TypeError, 'password is not a string')
                 })
-    
-                it('Should fail when password is empty', () => {
-                    expect(() => unregisterUser(userId, '', () => { })).to.throw(Error, 'password is empty or blank')
-    
-                    expect(() => unregisterUser(userId, '   ', () => { })).to.throw(Error, 'password is empty or blank')
-                })
-    
-                it('Should fail when password has spaces around', () => {
-                    expect(() => unregisterUser(userId, ' 123123123 ', () => { })).to.throw(Error, 'password has blank spaces')
-                    
-                    expect(() => unregisterUser(userId, '1231 23123', () => { })).to.throw(Error, 'password has blank spaces')
-                })
-    
-                it('Should fail when password length is less than 8 characters', () => {
-                    expect(() => unregisterUser(userId, '1231', () => { })).to.throw(Error, 'password has less than 8 characters')
-                })
-            })
 
-            describe('When callback is not valid', () => {
-                it('Should fail when callback is not a string', () => {
-                    expect(() => unregisterUser(userId, '123123123', true)).to.throw(TypeError, 'callback is not a function')
-                    
-                    expect(() => unregisterUser(userId, '123123123', 123)).to.throw(TypeError, 'callback is not a function')
-                    
-                    expect(() => unregisterUser(userId, '123123123', {})).to.throw(TypeError, 'callback is not a function')
-                    
-                    expect(() => unregisterUser(userId, '123123123', '...')).to.throw(TypeError, 'callback is not a function')
-                    
-                    expect(() => unregisterUser(userId, '123123123', [])).to.throw(TypeError, 'callback is not a function')
+                it('Should fail when password is empty', () => {
+                    expect(() => unregisterUser(userId, '', () => { })).to.throw(FormatError, 'password is empty or blank')
+
+                    expect(() => unregisterUser(userId, '   ', () => { })).to.throw(FormatError, 'password is empty or blank')
+                })
+
+                it('Should fail when password has spaces around', () => {
+                    expect(() => unregisterUser(userId, ' 123123123 ', () => { })).to.throw(FormatError, 'password has blank spaces')
+
+                    expect(() => unregisterUser(userId, '1231 23123', () => { })).to.throw(FormatError, 'password has blank spaces')
+                })
+
+                it('Should fail when password length is less than 8 characters', () => {
+                    expect(() => unregisterUser(userId, '1231', () => { })).to.throw(FormatError, 'password has less than 8 characters')
                 })
             })
         })
     })
 
-    after(done => users.deleteMany({}, error => {
-        if (error) return done(error)
-
-        client.close(done)
-    }))
+    after(() => 
+        User.deleteMany()
+            .then(() => mongoose.disconnet))
 })

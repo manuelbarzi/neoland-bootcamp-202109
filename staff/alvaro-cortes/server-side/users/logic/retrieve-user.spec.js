@@ -1,126 +1,87 @@
+require('dotenv').config()
+
 const { expect } = require('chai')
 const retrieveUser = require('./retrieve-user')
-const { MongoClient, ObjectId } = require('mongodb')
-const contex = require('./context')
-const context = require('./context')
+const { mongoose, models: { User } } = require('data')
+const { Types: { ObjectId } } = mongoose
+const { NotFoundError, FormatError } = require('errors')
+
+const { env: { MONGO_URL } } = process
 
 describe('retrieveUser', () => {
-    let client, db, users
 
-    before(done => {
-        client = new MongoClient('mongodb://localhost:27017')
+    before(() => mongoose.connect(MONGO_URL))
 
-        client.connect(error => {
-            if (error) return done(error)
-
-            db = client.db('demo')
-
-            context.db = db
-
-            users = db.collection('users')
-
-            done()
-        })
-    })
-
-    beforeEach(done =>
-        users.deleteMany({}, done)
-    )
+    beforeEach(() => User.deleteMany())
 
     let user, userId
 
-    beforeEach(done => {
+    beforeEach(() => {
         user = {
             name: 'Wendy Pan',
             username: 'wendypan',
             password: '123123123'
         }
 
-        users.insertOne(user, (error, result) => {
-            if (error) return done(error)
-
-            userId = result.insertedId.toString()
-
-            done()
-        })
+        return User.create(user)
+            .then(user => userId = user.id)
     })
 
-    it('Should succed with correct id', done => {
+    it('Should succed with correct id', () => {
         const { name, username } = user
 
-        retrieveUser(userId, (error, user) => {
-            if (error) return done(error)
-
-            expect(user).to.exist
-            expect(user.name).to.equal(name)
-            expect(user.username).to.equal(username)
-
-            done()
-
-        })
-
-        after(done => client.close(done))
+        return retrieveUser(userId)
+            .then(user => {
+                expect(user).to.exist
+                expect(user.name).to.equal(name)
+                expect(user.username).to.equal(username)
+            })
     })
 
-    it('Should fail when incorrect id', done => {
-        const { name, username } = user
+    it('Should fail when incorrect id', () => {
 
         userId = ObjectId().toString()
 
-        retrieveUser(userId, (error, id) => {
-            expect(error).to.exist
-            expect(error.message).to.equal('Wrong ID')
-
-            expect(id).to.be.undefined
-
-            done()
-
-        })
+        return retrieveUser(userId)
+            .then(() => { throw new Error('Should not reach this point') })
+            .catch(error => {
+                expect(error).to.exist
+                expect(error).to.be.instanceOf(NotFoundError)
+                expect(error.message).to.equal('Wrong ID')
+            })
     })
 
     describe('When parameters are not valid', () => {
         describe('When id is not valid', () => {
             it('Should fail when id is not a string', () => {
                 expect(() => retrieveUser(true, () => { })).to.throw(TypeError, 'id is not a string')
-                
+
                 expect(() => retrieveUser(123, () => { })).to.throw(TypeError, 'id is not a string')
-                
+
                 expect(() => retrieveUser([], () => { })).to.throw(TypeError, 'id is not a string')
-                
+
                 expect(() => retrieveUser(() => { }, () => { })).to.throw(TypeError, 'id is not a string')
-                
+
                 expect(() => retrieveUser({}, () => { })).to.throw(TypeError, 'id is not a string')
             })
 
             it('Should fail when id is empty', () => {
-                expect(() => retrieveUser('', '123123123', () => { })).to.throw(Error, 'id is empty or blank')
+                expect(() => retrieveUser('', '123123123', () => { })).to.throw(FormatError, 'id is empty or blank')
 
-                expect(() => retrieveUser('   ', '123123123', () => { })).to.throw(Error, 'id is empty or blank')
+                expect(() => retrieveUser('   ', '123123123', () => { })).to.throw(FormatError, 'id is empty or blank')
             })
 
             it('Should fail when id has spaces around', () => {
-                expect(() => retrieveUser(' 111111111111111111111111 ', () => { })).to.throw(Error, 'blank spaces around id')
+                expect(() => retrieveUser(' 111111111111111111111111 ', () => { })).to.throw(FormatError, 'blank spaces around id')
             })
 
             it('Should fail when id length is less than 24 characters', () => {
-                expect(() => retrieveUser('1111111111111', () => { })).to.throw(Error, 'id has less than 24 characters')
-            })
-        })
-
-        describe('When callback is not valid', () => {
-            it('Should fail when callback is not a string', () => {
-                expect(() => retrieveUser(userId, true)).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => retrieveUser(userId, 123)).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => retrieveUser(userId, {})).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => retrieveUser(userId, '...')).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => retrieveUser(userId, [])).to.throw(TypeError, 'callback is not a function')
+                expect(() => retrieveUser('1111111111111', () => { })).to.throw(FormatError, 'id has less than 24 characters')
             })
         })
     })
 
-    after(done => client.close(done))
+    after(() => 
+        User.deleteMany()
+            .then(() => mongoose.disconnet))
 })
