@@ -1,77 +1,77 @@
-const { expect } = require ('chai')
-const authenticateUser = require ('./authenticate-user')
-const { MongoClient } = require ('mongodb')
-const context = require ('./context')
+require('dotenv').config()
 
-describe ('authenticateUser', () => {
-    let client, db, users
+const { expect } = require('chai')
+const authenticateUser = require('./authenticate-user')
+const { mongoose, models: { User } } = require('data')
+const { CredentialsError, FormatError } = require('../../errors')
 
-    before(done => {
-        client = new MongoClient ('mongodb://localhost:27017')
+const { env: { MONGO_URL } } = process
 
-        client.connect (error => {
-            if (error) return done (error)
+describe('authenticateUser', () => {
+    before(() => mongoose.connect(MONGO_URL))
 
-            db = client.db('demo')
-
-            context.db = db
-
-            users = db.collection ('users')
-
-            done ()
-        })
-    })
-
-    beforeEach (done => 
-        users.deleteMany({}, done)
-    )
+    beforeEach(() => User.deleteMany())
 
     let user, userId
 
-    beforeEach (done => {
+    beforeEach(() => {
         user = {
             name: 'Wendy Pan',
             username: 'wendypan',
             password: '123123123'
         }
 
-        users.insertOne(user, (error, result) => {
-            if (error) return done (error)
-
-            userId = result.insertedId.toString()
-
-            done()
-        })
+        return User.create(user)
+            .then(user => userId = user.id)
     })
 
-    it ('should succeed with correct credentials for an already existing user', done => {
+    it('should succeed with correct credentials for an already existing user', () => {
         const { username, password } = user
 
-        authenticateUser (username, password + '-wrong', (error, id) => {
-            expect (error).to.exist
-            expect (error.message).to.equal('wrong credentials')
-
-            expect(id).to.be.undefined
-
-            done()
-        })
+        return authenticateUser(username, password)
+            .then(id => {
+                expect(id).to.exist
+                expect(id).to.equal(userId)
+            })
     })
 
-    it('should fail with incorrect username and password', done =>{
+    it('should fail with incorrect password', () => {
         const { username, password } = user
 
-        authenticateUser(username + '-wrong', password + '-wrong,', (error, id) => {
+        return authenticateUser(username, password + '-wrong,')
+            .then(() => { throw new Error('should not reach this point') })
+            .catch(error => {
+                expect(error).to.exist
+                expect(error).to.be.instanceOf(CredentialsError)
+                expect(error.message).to.equal('wrong credentials')
+            })
+    })
+
+    it('should fail with incorrect username', () => {
+        const { username, password } = user
+
+        return authenticateUser(username + '-wrong', password)
+            .then(() => { throw new Error('should not reach this point') })
+            .catch(error => {
+                expect(error).to.exist
+                expect(error).to.be.instanceOf(CredentialsError)
+                expect(error.message).to.equal('wrong credentials')
+            })
+    })
+
+    it('should fail with incorrect username and password', () => {
+        const { username, password } = user
+
+        return authenticateUser(username + '-wrong', password + '-wrong')
+        .then(() => { throw new Error('should not reach this point') })
+        .catch(error => {
             expect(error).to.exist
-            expect(error.message).to.equal('wrong credentials')
-
-            expect(id).to.be.undefined
-
-            done()
+            expect(error).to.be.instanceOf(CredentialsError)
+            expect(error.message).to.equal ('wrong credentials')
         })
-
     })
 
-    describe ('when parameters are not valid', () => {
+    describe('when parameters are not valid', () => {
         describe('when username is not valid', () => {
             it('should fail when username is not a string', () => {
                 expect(() => authenticateUser(true, '123123123', () => { })).to.throw(TypeError, 'username is not a string')
@@ -86,19 +86,19 @@ describe ('authenticateUser', () => {
             })
 
             it('should fail when username is empty', () => {
-                expect(() => authenticateUser('', '123123123', () => { })).to.throw(Error, 'username is empty or blank')
+                expect(() => authenticateUser('', '123123123', () => { })).to.throw(FormatError, 'username is empty or blank')
 
-                expect(() => authenticateUser('   ', '123123123', () => { })).to.throw(Error, 'username is empty or blank')
+                expect(() => authenticateUser('   ', '123123123', () => { })).to.throw(FormatError, 'username is empty or blank')
             })
 
             it('should fail when username has spaces', () => {
-                expect(() => authenticateUser(' wendypan ', '123123123', () => { })).to.throw(Error, 'username has blank spaces')
+                expect(() => authenticateUser(' wendypan ', '123123123', () => { })).to.throw(FormatError, 'username has blank spaces')
 
-                expect(() => authenticateUser('wendy pan', '123123123', () => { })).to.throw(Error, 'username has blank spaces')
+                expect(() => authenticateUser('wendy pan', '123123123', () => { })).to.throw(FormatError, 'username has blank spaces')
             })
 
             it('should fail when username length is less that 4 characters', () => {
-                expect(() => authenticateUser('wp', '123123123', () => { })).to.throw(Error, 'username has less than 4 characters')
+                expect(() => authenticateUser('wp', '123123123', () => { })).to.throw(FormatError, 'username has less than 4 characters')
             })
         })
 
@@ -116,38 +116,25 @@ describe ('authenticateUser', () => {
             })
 
             it('should fail when password is empty', () => {
-                expect(() => authenticateUser('wendypan', '', () => { })).to.throw(Error, 'password is empty or blank')
+                expect(() => authenticateUser('wendypan', '', () => { })).to.throw(FormatError, 'password is empty or blank')
 
-                expect(() => authenticateUser('wendypan', '   ', () => { })).to.throw(Error, 'password is empty or blank')
+                expect(() => authenticateUser('wendypan', '   ', () => { })).to.throw(FormatError, 'password is empty or blank')
             })
 
             it('should fail when password has spaces', () => {
-                expect(() => authenticateUser('wendypan', ' 123123123 ', () => { })).to.throw(Error, 'password has blank spaces')
+                expect(() => authenticateUser('wendypan', ' 123123123 ', () => { })).to.throw(FormatError, 'password has blank spaces')
 
-                expect(() => authenticateUser('wendypan', '123 123 123', () => { })).to.throw(Error, 'password has blank spaces')
+                expect(() => authenticateUser('wendypan', '123 123 123', () => { })).to.throw(FormatError, 'password has blank spaces')
             })
 
             it('should fail when password length is less that 8 characters', () => {
-                expect(() => authenticateUser('wendypan', '123123', () => { })).to.throw(Error, 'password has less than 8 characters')
+                expect(() => authenticateUser('wendypan', '123123', () => { })).to.throw(FormatError, 'password has less than 8 characters')
             })
-        })
-
-        describe('when callback is not valid', () => {
-            it('should fail when callback is not a string', () => {
-                expect(() => authenticateUser('wendypan', '123123123', true)).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => authenticateUser('wendypan', '123123123', 123)).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => authenticateUser('wendypan', '123123123', {})).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => authenticateUser('wendypan', '123123123', '...')).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => authenticateUser('wendypan', '123123123', [])).to.throw(TypeError, 'callback is not a function')
-            })
-  
         })
     })
 
-    after (done => client.close(done))
-
+    after(() => 
+        User.deleteMany()
+            .then(() => mongoose.disconnect())
+    )
 })

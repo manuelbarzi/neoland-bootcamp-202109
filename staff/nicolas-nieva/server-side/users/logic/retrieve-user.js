@@ -1,29 +1,24 @@
-const context = require('./context')
-const { ObjectId } = require('mongodb')
+const { models: { User } } = require ('data')
+const { validateId } = require('./helpers/validators')
+const { NotFoundError } = require('../../errors')
 
-function retrieveUser(id, callback) {
-    if (typeof id !== 'string') throw new TypeError('id is not a string')
-    if (!id.trim().length) throw new Error('id is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(id)) throw new Error('id has blank spaces')
-    if (id.length !== 24) throw new Error('id doesn\'t have 24 characters')
+function retrieveUser(id) {
+    validateId(id)
 
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
-
-    const users = context.db.collection ('users')
-
-    users.findOne({ _id: ObjectId(id) }, (error, user) => {
-        if (error) return callback (error)
-
-        if (!user) return callback(new Error(`user with id ${id} not found`))
-
-        user.id = user._id.toString()
-        delete user._id
-
-        delete user.password
+    return User.findById(id).lean()
+        .then(user => {
+            if (!user) throw new NotFoundError(`user with id ${id} not found`)
         
-        callback (null, user)
-        
-    })
+            user.id = user._id.toString()
+
+            delete user._id
+            
+            delete user.password
+
+            delete user.__v
+
+            return user
+        })
 }
 
 module.exports = retrieveUser

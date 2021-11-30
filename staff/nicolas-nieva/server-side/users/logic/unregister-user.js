@@ -1,5 +1,6 @@
-const { ObjectId } = require('mongodb')
-const context = require('./context')
+const { models: { User } } = require ('data')
+const { NotFoundError, CredentialsError } = require('../../errors')
+const { validateId, validatePassword} = require('./helpers/validators')
 
 /**
  * Unregistering a user in the application.
@@ -12,33 +13,20 @@ const context = require('./context')
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
 
-function unregisterUser(id, password, callback) {
-    if (typeof id !== 'string') throw new TypeError('id is not a string')
-    if (!id.trim().length) throw new Error('id is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(id)) throw new Error('id has blank spaces')
-    if (id.length !== 24) throw new Error('id doesn\'t have 24 characters')
+function unregisterUser(id, password){
+    validateId(id)
+    validatePassword(password)
 
-    if (typeof password !== "string") throw new TypeError("password is not a string")
-    if (!password.trim().length) throw new Error("password is empty or blank")
-    if (/\r?\n|\r|\t| /g.test(password)) throw new Error("password has blank spaces")
-    if (password.length < 8) throw new Error("password has less than 8 characters")
+    return User.findById(id) 
+        .then (user => {
+            if (!user) throw new NotFoundError(`user with id ${id} not found`)
+            if (user.password === password) {
+               return user.delete(id)
+               .then(()=> 'User deleted successfully') 
+            } 
+            else throw new CredentialsError ('Wrong password') 
 
-    if (typeof callback !== "function") throw new TypeError("callback is not a function")
-
-    const users = context.db.collection('users')
-
-    users.findOne({ _id: ObjectId(id) }, (error, user) => {
-
-        if (!user) return callback(new Error(`user with id ${id} not found`))
-
-        if (user.password === password) {
-            users.deleteOne({ _id: ObjectId(id) }, password, () => {
-
-                callback(null, 'User deleted successfully')
-            })
-        } else return callback(new Error('Wrong password'))
-    })
-
+        })    
 }
 
 module.exports = unregisterUser
