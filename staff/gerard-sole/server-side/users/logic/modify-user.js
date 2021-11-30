@@ -1,6 +1,6 @@
 const { mongoose, models: { User } } = require('data')
 const { validateId, validateData } = require('./helpers/validators')
-const { NotFoundError, ConflictError, CredentialsError } = require('errors')
+const { NotFoundError, ConflictError, CredentialsError } = require('error')
 
 /**
  * Updating the user data in the application.

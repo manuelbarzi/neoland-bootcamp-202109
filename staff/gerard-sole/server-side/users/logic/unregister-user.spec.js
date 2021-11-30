@@ -4,7 +4,7 @@ const { expect } = require('chai')
 const unregisterUser = require('./unregister-user')
 const { mongoose, models: { User } } = require('data')
 const { Types: { ObjectId } } = mongoose
-const { CredentialsError, FormatError, NotFoundError } = require('errors')
+const { CredentialsError, FormatError, NotFoundError } = require('error')
 
 const { env: { MONGO_URL } } = process
 

@@ -1,5 +1,5 @@
 const { validateName, validateUsername, validatePassword, validateCallback } = require('./helpers/validators')
-const { ConflictError } = require('errors')
+const { ConflictError } = require('error')
 const { models: { User } } = require('data')
 
 /**

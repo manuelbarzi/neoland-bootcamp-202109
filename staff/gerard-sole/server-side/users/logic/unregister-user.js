@@ -1,6 +1,6 @@
 const { mongoose, models: { User } } = require('data')
 const { validateId, validatePassword } = require('./helpers/validators')
-const { NotFoundError, CredentialsError } = require('errors')
+const { NotFoundError, CredentialsError } = require('error')
 
 /**
  * Unregistering a user in the application.

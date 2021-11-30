@@ -1,5 +1,5 @@
 const { validateId, validateCallback } = require('./helpers/validators')
-const { NotFoundError } = require('errors')
+const { NotFoundError } = require('error')
 const { mongoose: { ObjectId }, models: { User } } = require('data')
 
 /**
