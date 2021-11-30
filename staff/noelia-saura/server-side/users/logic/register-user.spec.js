@@ -7,30 +7,7 @@ describe('registerUser', () => {
 
     before(() => mongoose.connect('mongodb://localhost:27017'))
 
-    // let client, db, users
-
-    // before(done => {
-    //     client = new MongoClient('mongodb://localhost:27017')
-
-    //     client.connect(error => {
-    //         if (error) return done(error)
-            
-    //         db = client.db('demo')
-
-    //         context.db = db
-
-    //         users = db.collection('users')
-    //         users.createIndex({ username: 1 }, { unique: true })
-    //         done()
-    //     })
-    // })
-
     beforeEach(()=>User.deleteMany())
-
-    // beforeEach(done => {
-       
-    //     users.deleteMany({}, done)
-    // })
 
     it('should succeed with new user', () => {
         const name = 'Wendy Pan'
@@ -47,27 +24,6 @@ describe('registerUser', () => {
             })
     })
 
-
-    // it('should succeed with new user', done => {
-    //     const name = 'Wendy Pan'
-    //     const username = 'wendypan'
-    //     const password = '123123123'
-
-    //     registerUser(name, username, password, error => {
-    //         if (error) return done(error)
-
-    //         users.findOne({ username }, (error, user) => {
-    //             if (error) return done(error)
-
-    //             expect(user).to.exist
-    //             expect(user.name).to.equal(name)
-    //             expect(user.username).to.equal(username)
-    //             expect(user.password).to.equal(password)
-
-    //             done()
-    //         })
-    //     })
-    // })
 
     describe('when user already exists', () => {
         let user
