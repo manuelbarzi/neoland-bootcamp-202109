@@ -19,7 +19,8 @@
   "dependencies": {
     "data": "file:../data",
     "error": "file:../error",
-    "mongodb": "^4.2.0"
+    "mongodb": "^4.2.0",
+    "mongoose": "^6.0.14"
   },
   "description": ""
 }
