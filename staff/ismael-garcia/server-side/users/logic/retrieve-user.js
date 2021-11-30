@@ -1,26 +1,23 @@
-const context = require('./context')
-const { ObjectId } = require('mongodb')
-const { validateId, validateCallback } = require('./helpers/validators')
+const { models: { User } } = require('data')
+const { validateId } = require('./helpers/validators')
 const { NotFoundError } = require('errors')
 
-function retrieveUser(id, callback) {
+function retrieveUser(id) {
     validateId(id)
-    validateCallback(callback)
+
+    return User.findById(id).lean() // estudiar esta línea
+        .then(user => {
+            if (!user) throw new NotFoundError(`user with id ${id} not found`)
     
-    const users = context.db.collection('users')
+            user.id = user._id.toString()
+            delete user._id // el proceso de estas dos líneas se conoce como saneamiento de datos
+    
+            delete user.password
 
-    users.findOne({ _id: ObjectId(id) }, (error, user) => {
-        if (error) return callback(error)
+            delete user.__v // peculiaridad de mongoose
 
-        if (!user) return callback(new NotFoundError(`user with id ${id} not found`))
-
-        user.id = user._id.toString()
-        delete user._id // el proceso de estas dos líneas se conoce como saneamiento de datos
-
-        delete user.password
-
-        callback(null, user)
-    })
+            return user
+        })
 }
 
 module.exports = retrieveUser

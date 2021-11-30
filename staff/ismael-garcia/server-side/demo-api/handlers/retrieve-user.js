@@ -13,11 +13,9 @@ module.exports = (req, res) => {
 
         const { sub: id } = payload 
 
-        retrieveUser(id, (error, user) => {
-            if (error) return handleError(error, res)
-
-            res.json(user)
-        })
+        retrieveUser(id)
+            .then(user => res.json(user))
+            .catch(error => handleError(error, res))
     } catch (error) {
         handleError(error, res)
     }

@@ -1,6 +1,5 @@
-const context = require('./context')
-const { ObjectId } = require('mongodb')
-const { validateId, validateData, validateCallback } = require('./helpers/validators')
+const { mongoose, models: { User } } = require('data')
+const { validateId, validateData } = require('./helpers/validators')
 const { NotFoundError, ConflictError, CredentialsError } = require('errors')
 
 /**
@@ -9,10 +8,9 @@ const { NotFoundError, ConflictError, CredentialsError } = require('errors')
  * @param {*} data 
  * @param {*} callback 
  */
-function modifyUser(id, data, callback) { // data => { username: ?, password: ?, oldPassword: ? }
+function modifyUser(id, data) { // data => { username: ?, password: ?, oldPassword: ? }
     validateId(id)
     validateData(data)
-    validateCallback(callback)
     
     // readFile(`${__dirname}/../users.json`, 'utf8', (error, json) => {
     //     if (error) return callback(error)
@@ -54,37 +52,32 @@ function modifyUser(id, data, callback) { // data => { username: ?, password: ?,
     //     })
     // })
 
-    const users = context.db.collection('users')
-
-    users.findOne({ _id: ObjectId(id) }, (error, user) => {
-        if (error) return callback(error)
-
-        if (!user) return callback(new NotFoundError(`user with id ${id} not found`))
-
-        // const { name, username, password, newPassword } = data 
+    return User.findById(id)
+        .then(user => {
+            if (!user) throw new NotFoundError(`user with id ${id} not found`)
     
-        if (data.password !== user.password) return callback(new CredentialsError('wrong password')) 
+            // const { name, username, password, newPassword } = data 
         
-        if (data.newPassword) {
-            data.password = data.newPassword 
-
-            delete data.newPassword 
-        }
+            if (data.password !== user.password) throw new CredentialsError('wrong password')
             
-
-        users.updateOne({ _id: ObjectId(id) }, { $set: data }, error => {
-            if (error) {
-                if (error.code === 11000)
-                    callback(new ConflictError(`user with username ${data.username} already exists`))
-                else
-                    callback(error)
-
-                return 
+            if (data.newPassword) {
+                data.password = data.newPassword 
+    
+                delete data.newPassword 
             }
 
-            callback(null)
+            for (const property in data)
+                user[property] = data[property] // estudiar esta línea
+                
+            return user.save()
+                .catch(error => {
+                    if (error.code === 11000)
+                        throw new ConflictError(`user with username ${data.username} already exists`)
+                    
+                    throw error
+                })
+                .then(() => {})
         })
-    })
 }
 
 module.exports = modifyUser

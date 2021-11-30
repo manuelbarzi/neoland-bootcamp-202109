@@ -40,7 +40,7 @@ describe('registerUser', () => {
 
     beforeEach(() => User.deleteMany())
 
-    it('should suceed with new user', done => {
+    it('should suceed with new user', () => {
         const name = 'Wendy Pan'
         const username = 'wendypan'
         const password = '123123123'
@@ -93,7 +93,7 @@ describe('registerUser', () => {
             return User.create(user) //repasar esta línea
         })
 
-        it('should fail when user already exists', done => {
+        it('should fail when user already exists', () => {
             const { name, username, password } = user
 
             // registerUser(name, username, password, error => {
@@ -194,20 +194,6 @@ describe('registerUser', () => {
 
             it('should fail when password length is less that 8 characters', () => {
                 expect(() => registerUser('Wendy Pan', 'wendypan', '123123', () => { })).to.throw(FormatError, 'password has less than 8 characters')
-            })
-        })
-
-        describe('when callback is not valid', () => {
-            it('should fail when callback is not a function', () => {
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', true)).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', 123)).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', {})).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', '...')).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123', [])).to.throw(TypeError, 'callback is not a function')
             })
         })
     })

@@ -45,8 +45,6 @@ describe('authenticateUser', () => {
                 expect(error).to.exist
                 expect(error).to.be.instanceOf(CredentialsError)
                 expect(error.message).to.equal('wrong credentials')
-    
-                expect(id).to.be.undefined
 
             })
     })
@@ -60,8 +58,6 @@ describe('authenticateUser', () => {
                 expect(error).to.exist
                 expect(error).to.be.instanceOf(CredentialsError)
                 expect(error.message).to.equal('wrong credentials')
-    
-                expect(id).to.be.undefined
 
             })
     })
@@ -75,8 +71,6 @@ describe('authenticateUser', () => {
                 expect(error).to.exist
                 expect(error).to.be.instanceOf(CredentialsError)
                 expect(error.message).to.equal('wrong credentials')
-    
-                expect(id).to.be.undefined
 
             })
     })
@@ -139,20 +133,6 @@ describe('authenticateUser', () => {
 
             it('should fail when password length is less that 8 characters', () => {
                 expect(() => authenticateUser('wendypan', '123123', () => { })).to.throw(FormatError, 'password has less than 8 characters')
-            })
-        })
-
-        describe('when callback is not valid', () => {
-            it('should fail when callback is not a function', () => {
-                expect(() => authenticateUser('wendypan', '123123123', true)).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => authenticateUser('wendypan', '123123123', 123)).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => authenticateUser('wendypan', '123123123', {})).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => authenticateUser('wendypan', '123123123', '...')).to.throw(TypeError, 'callback is not a function')
-
-                expect(() => authenticateUser('wendypan', '123123123', [])).to.throw(TypeError, 'callback is not a function')
             })
         })
     })
