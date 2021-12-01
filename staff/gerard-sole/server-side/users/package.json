@@ -17,8 +17,8 @@
     "nyc": "^15.1.0"
   },
   "dependencies": {
+    "app-errors": "file:../app-errors",
     "data": "file:../data",
-    "error": "file:../error",
     "mongodb": "^4.2.0"
   },
   "description": ""

@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const { registerUser, authenticateUser, retrieveUser, modifyUser, unregisterUser } = require('users')
 const { searchVehicles } = require('vehicles')
 const jwt = require('jsonwebtoken')
-const context = require('../users/logic/context')
+const context = require('users/logic/context')
 const { MongoClient } = require('mongodb')
 
 const { env: { PORT, SECRET, MONGO_URL }, argv: [, , port = PORT || 8080] } = process

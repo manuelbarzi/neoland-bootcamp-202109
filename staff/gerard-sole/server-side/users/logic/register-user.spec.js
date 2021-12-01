@@ -3,7 +3,7 @@ require('dotenv').config()
 const { expect } = require('chai')
 const registerUser = require('./register-user')
 const { mongoose, models: { User } } = require('data')
-const { ConflictError, FormatError } = require('error')
+const { ConflictError, FormatError } = require('app-errors')
 
 const { env: { MONGO_URL } } = process
 

@@ -4,7 +4,7 @@ const { expect } = require('chai')
 const retrieveUser = require('./retrieve-user')
 const { mongoose, models: { User } } = require('data')
 const { Types: { ObjectId } } = mongoose
-const { NotFoundError, FormatError } = require('error')
+const { NotFoundError, FormatError } = require('app-errors')
 
 const { env: { MONGO_URL } } = process
 

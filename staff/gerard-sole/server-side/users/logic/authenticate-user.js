@@ -1,5 +1,5 @@
 const { validateUsername, validatePassword } = require('./helpers/validators')
-const { CredentialsError } = require('error')
+const { CredentialsError } = require('app-errors')
 const { models: { User } } = require('data')
 
 function authenticateUser(username, password) {

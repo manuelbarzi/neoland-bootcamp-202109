@@ -1,4 +1,4 @@
-const { FormatError, ConflictError } = require('error')
+const { FormatError, ConflictError } = require('app-errors')
 
 function validateId(id) {
     if (typeof id !== 'string') throw new TypeError('id is not a string')

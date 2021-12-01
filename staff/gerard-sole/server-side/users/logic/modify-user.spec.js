@@ -4,7 +4,7 @@ const { expect } = require('chai')
 const modifyUser = require('./modify-user')
 const { mongoose, models: { User } } = require('data')
 const { Types: { ObjectId } } = mongoose
-const { CredentialsError, FormatError, ConflictError, NotFoundError } = require('error')
+const { CredentialsError, FormatError, ConflictError, NotFoundError } = require('app-errors')
 
 const { env: { MONGO_URL } } = process
 
