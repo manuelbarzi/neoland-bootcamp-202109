@@ -3,11 +3,12 @@ require('dotenv').config()
 const { expect } = require('chai')
 const authenticateUser = require('./authenticate-user')
 const { mongoose, models: { User } } = require('data')
-const { CredentialsError, FormatError } = require('../../error')
+const { CredentialsError, FormatError } = require('error')
 
 const { env: { MONGO_URL } } = process
 
 describe('authenticateUser', () => {
+
     before(() => mongoose.connect(MONGO_URL))
 
     beforeEach(() => User.deleteMany())
@@ -35,11 +36,11 @@ describe('authenticateUser', () => {
             })
     })
 
-    it('should fail with incorrect password', () => {
+    it('Should fail with incorrect password', () => {
         const { username, password } = user
 
         return authenticateUser(username, password + '-wrong')
-            .then(() => { throw new Error('should not reach this point') })
+            .then(() => { throw Error('Should not reach this point') })
             .catch(error => {
                 expect(error).to.exist
                 expect(error).to.be.instanceOf(CredentialsError)
@@ -47,11 +48,11 @@ describe('authenticateUser', () => {
             })
     })
 
-    it('should fail with incorrect username', () => {
+    it('Should fail with incorrect username', () => {
         const { username, password } = user
 
         return authenticateUser(username + '-wrong', password)
-            .then(() => { throw new Error('should not reach this point') })
+            .then(() => { throw Error('Should not reach this point') })
             .catch(error => {
                 expect(error).to.exist
                 expect(error).to.be.instanceOf(CredentialsError)
@@ -59,11 +60,11 @@ describe('authenticateUser', () => {
             })
     })
 
-    it('should fail with incorrect username and password', () => {
+    it('Should fail with incorrect username and password', () => {
         const { username, password } = user
 
         return authenticateUser(username + '-wrong', password + '-wrong')
-            .then(() => { throw new Error('should not reach this point') })
+            .then(() => { throw Error('Should not reach this point') })
             .catch(error => {
                 expect(error).to.exist
                 expect(error).to.be.instanceOf(CredentialsError)
@@ -71,9 +72,9 @@ describe('authenticateUser', () => {
             })
     })
 
-    describe('when parameters are not valid', () => {
-        describe('when username is not valid', () => {
-            it('should fail when username is not a string', () => {
+    describe('When parameters are not valid', () => {
+        describe('When username is not valid', () => {
+            it('Should fail when username is not a string', () => {
                 expect(() => authenticateUser(true, '123123123', () => { })).to.throw(TypeError, 'username is not a string')
 
                 expect(() => authenticateUser(123, '123123123', () => { })).to.throw(TypeError, 'username is not a string')
@@ -83,6 +84,7 @@ describe('authenticateUser', () => {
                 expect(() => authenticateUser(() => { }, '123123123', () => { })).to.throw(TypeError, 'username is not a string')
 
                 expect(() => authenticateUser([], '123123123', () => { })).to.throw(TypeError, 'username is not a string')
+
             })
 
             it('should fail when username is empty', () => {
@@ -133,8 +135,7 @@ describe('authenticateUser', () => {
         })
     })
 
-    after(() =>
+    after(() => 
         User.deleteMany()
-            .then(() => mongoose.disconnect())
-    )
+            .then(() => mongoose.disconnect()))
 })

@@ -1,10 +1,10 @@
-const { FormatError, ConflictError } = require('../../../error')
+const { FormatError, ConflictError } = require('error')
 
 function validateId(id) {
     if (typeof id !== 'string') throw new TypeError('id is not a string')
     if (!id.trim().length) throw new FormatError('id is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(id)) throw new FormatError('id has blank spaces')
-    if (id.length !== 24) throw new FormatError('id doesn\'t have 24 characters')
+    if (/\r?\n|\r|\t| /g.test(id)) throw new FormatError('blank spaces around id')
+    if (id.length < 24) throw new FormatError('id has less than 24 characters')
 }
 
 function validateUsername(username) {
@@ -12,6 +12,7 @@ function validateUsername(username) {
     if (!username.trim().length) throw new FormatError('username is empty or blank')
     if (/\r?\n|\r|\t| /g.test(username)) throw new FormatError('username has blank spaces')
     if (username.length < 4) throw new FormatError('username has less than 4 characters')
+
 }
 
 function validatePassword(password) {
@@ -23,15 +24,15 @@ function validatePassword(password) {
 
 function validateOldPassword(oldPassword) {
     if (typeof oldPassword !== 'string') throw new TypeError('old password is not a string')
-    if (!oldPassword.trim().length) throw new FormatError('old password is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(oldPassword)) throw new FormatError('old password has blank spaces')
-    if (oldPassword.length < 8) throw new FormatError('old password has less than 8 characters')
+        if (!oldPassword.trim().length) throw new FormatError('old password is empty or blank')
+        if (/\r?\n|\r|\t| /g.test(oldPassword)) throw new FormatError('old password has blank spaces')
+        if (oldPassword.length < 8) throw new FormatError('old password has less than 8 characters')
 }
 
 function validateName(name) {
     if (typeof name !== 'string') throw new TypeError('name is not a string')
-    if (!name.trim().length) throw new FormatError('name is empty or blank')
-    if (name.trim() !== name) throw new FormatError('blank spaces around name')
+        if (!name.trim().length) throw new FormatError('name is empty or blank')
+        if (name.trim() !== name) throw new FormatError('blank spaces around name')
 }
 
 function validateData(data) {

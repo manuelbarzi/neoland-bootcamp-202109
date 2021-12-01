@@ -4,11 +4,12 @@ const { expect } = require('chai')
 const retrieveUser = require('./retrieve-user')
 const { mongoose, models: { User } } = require('data')
 const { Types: { ObjectId } } = mongoose
-const { NotFoundError, FormatError } = require('../../error')
+const { NotFoundError, FormatError } = require('error')
 
 const { env: { MONGO_URL } } = process
 
 describe('retrieveUser', () => {
+
     before(() => mongoose.connect(MONGO_URL))
 
     beforeEach(() => User.deleteMany())
@@ -26,7 +27,7 @@ describe('retrieveUser', () => {
             .then(user => userId = user.id)
     })
 
-    it('should succeed with correct id for an already existing user', () => {
+    it('Should succed with correct id', () => {
         const { name, username } = user
 
         return retrieveUser(userId)
@@ -37,52 +38,50 @@ describe('retrieveUser', () => {
             })
     })
 
-    it('should fail with incorrect id', () => {
-        userId = new ObjectId().toString()
+    it('Should fail when incorrect id', () => {
+
+        userId = ObjectId().toString()
 
         return retrieveUser(userId)
-            .then(() => { throw new Error('should not reach this point') })
+            .then(() => { throw new Error('Should not reach this point') })
             .catch(error => {
                 expect(error).to.exist
                 expect(error).to.be.instanceOf(NotFoundError)
-                expect(error.message).to.equal(`user with id ${userId} not found`)
+                expect(error.message).to.equal('Wrong ID')
             })
     })
 
-    describe('when parameters are not valid', () => {
-        describe('when id is not valid', () => {
-            it('should fail when id is not a string', () => {
+    describe('When parameters are not valid', () => {
+        describe('When id is not valid', () => {
+            it('Should fail when id is not a string', () => {
                 expect(() => retrieveUser(true, () => { })).to.throw(TypeError, 'id is not a string')
 
                 expect(() => retrieveUser(123, () => { })).to.throw(TypeError, 'id is not a string')
 
-                expect(() => retrieveUser({}, () => { })).to.throw(TypeError, 'id is not a string')
+                expect(() => retrieveUser([], () => { })).to.throw(TypeError, 'id is not a string')
 
                 expect(() => retrieveUser(() => { }, () => { })).to.throw(TypeError, 'id is not a string')
 
-                expect(() => retrieveUser([], () => { })).to.throw(TypeError, 'id is not a string')
+                expect(() => retrieveUser({}, () => { })).to.throw(TypeError, 'id is not a string')
             })
 
-            it('should fail when id is empty or blank', () => {
-                expect(() => retrieveUser('', () => { })).to.throw(FormatError, 'id is empty or blank')
+            it('Should fail when id is empty', () => {
+                expect(() => retrieveUser('', '123123123', () => { })).to.throw(FormatError, 'id is empty or blank')
 
-                expect(() => retrieveUser('   ', () => { })).to.throw(FormatError, 'id is empty or blank')
+                expect(() => retrieveUser('   ', '123123123', () => { })).to.throw(FormatError, 'id is empty or blank')
             })
 
-            it('should fail when id has spaces', () => {
-                expect(() => retrieveUser(' abcd1234abcd1234abcd1234 ', () => { })).to.throw(FormatError, 'id has blank spaces')
-
-                expect(() => retrieveUser('abcd 1234abc d1234abc d1234', () => { })).to.throw(FormatError, 'id has blank spaces')
+            it('Should fail when id has spaces around', () => {
+                expect(() => retrieveUser(' 111111111111111111111111 ', () => { })).to.throw(FormatError, 'blank spaces around id')
             })
 
-            it('should fail when id length is different from 24 characters', () => {
-                expect(() => retrieveUser('abc', () => { })).to.throw(FormatError, 'id doesn\'t have 24 characters')
+            it('Should fail when id length is less than 24 characters', () => {
+                expect(() => retrieveUser('1111111111111', () => { })).to.throw(FormatError, 'id has less than 24 characters')
             })
         })
     })
 
-    after(() =>
+    after(() => 
         User.deleteMany()
-            .then(() => mongoose.disconnect())
-    )
+            .then(() => mongoose.disconnet))
 })

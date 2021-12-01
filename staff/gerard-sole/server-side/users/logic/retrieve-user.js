@@ -1,13 +1,22 @@
-const { models: { User } } = require('data')
-const { validateId } = require('./helpers/validators')
-const { NotFoundError } = require('../../error')
+const { validateId, validateCallback } = require('./helpers/validators')
+const { NotFoundError } = require('error')
+const { mongoose: { ObjectId }, models: { User } } = require('data')
+
+/**
+ * Authenticate a user in the application.
+ *
+ * @param {string} id The id to authenticate the retrieve user.
+ * 
+ * @throws {TypeError} When any of the arguments does not match the correct type.
+ * @throws {Error} When any of the arguments does not contain the correct format.
+ */
 
 function retrieveUser(id) {
     validateId(id)
 
-    return User.findById(id).lean()
+    return User.findById(id)
         .then(user => {
-            if (!user) throw new NotFoundError(`user with id ${id} not found`)
+            if (!user) throw new NotFoundError('Wrong ID')
 
             user.id = user._id.toString()
 
