@@ -1,5 +1,6 @@
-const { CredentialsError, ConflictError, FormatError, NotFoundError } = require('errors')
+const { CredentialsError, ConflictError, FormatError, NotFoundError } = require('project-errors')
 const { JsonWebTokenError, TokenExpiredError } = require('jsonwebtoken')
+const logger = require('../../utils/my-logger')
 
 function handleError(error, res) {
     let status = 500
@@ -13,7 +14,12 @@ function handleError(error, res) {
     else if (error instanceof ConflictError)
         status = 409
 
-    res.status(status).json({ error: error.message }) //estudiar esta línea
+    if (status < 500)
+        logger.warn(error.message)
+    else
+        logger.error(error.message)
+
+    res.status(status).json({ error: error.message })
 }
 
 module.exports = handleError

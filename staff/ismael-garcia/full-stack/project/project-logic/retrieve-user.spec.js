@@ -1,10 +1,10 @@
-require('dotenv').config() // estudiar config()
+require('dotenv').config()
 
 const { expect } = require('chai')
 const retrieveUser = require('./retrieve-user')
-const { mongoose, models: { User } } = require('data')
+const { mongoose, models: { User } } = require('project-data')
 const { Types: { ObjectId } } = mongoose  
-const { NotFoundError, FormatError } = require('errors')
+const { NotFoundError, FormatError } = require('project-errors')
 
 const { env: { MONGO_URL } } = process
 
@@ -24,7 +24,6 @@ describe('retrieveUser', () => {
 
         return User.create(user)
             .then(user => userId = user.id)
-
     })
 
     it('should suceed with correct id for an already existing user', () => { 
@@ -35,7 +34,6 @@ describe('retrieveUser', () => {
                 expect(user).to.exist
                 expect(user.name).to.equal(name)
                 expect(user.username).to.equal(username)
-
             })
     })
 
@@ -48,7 +46,6 @@ describe('retrieveUser', () => {
                 expect(error).to.exist
                 expect(error).to.be.instanceOf(NotFoundError)
                 expect(error.message).to.equal(`user with id ${userId} not found`)
-
             })
     })
 

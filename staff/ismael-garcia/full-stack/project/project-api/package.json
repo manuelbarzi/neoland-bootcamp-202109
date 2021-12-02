@@ -1,0 +1,28 @@
+{
+  "name": "project-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "watch": "nodemon .",
+    "inspect": "node --inspect-brk .",
+    "watch-inspect": "nodemon --inspect-brk .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "project-data": "file:../project-data",
+    "project-errors": "file:../project-errors",
+    "project-logic": "file:../project-logic",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

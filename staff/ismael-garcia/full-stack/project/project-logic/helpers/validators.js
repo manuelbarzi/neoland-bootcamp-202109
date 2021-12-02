@@ -1,4 +1,4 @@
-const { FormatError, ConflictError } = require('errors')
+const { FormatError } = require('errors')
 
 function validateId(id) {
     if (typeof id !== 'string') throw new TypeError('id is not a string')
@@ -49,13 +49,6 @@ function validateData(data) {
         validateUsername(username)
     }
 
-    // if (typeof oldPassword === 'undefined' && typeof password !== 'undefined') throw new ConflictError('old password is not defined')
-    // if (typeof password === 'undefined' && typeof oldPassword !== 'undefined') throw new ConflictError('password is not defined')
-
-    // if (typeof password !== 'undefined') {
-    //     validatePassword(password)
-    // }
-
     if (typeof newPassword !== 'undefined') {
         validateNewPassword(newPassword)
     }
@@ -70,7 +63,7 @@ module.exports = {
     validateUsername,
     validatePassword,
     validateNewPassword,
-    validateData,
     validateName,
+    validateData,
     validateCallback
 }

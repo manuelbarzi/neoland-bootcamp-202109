@@ -2,8 +2,9 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const authenticateUser = require('./authenticate-user')
-const { mongoose, models: { User } } = require('data')
-const { CredentialsError, FormatError } = require('errors')
+const { mongoose, models: { User } } = require('project-data')
+const { CredentialsError, FormatError } = require('project-errors')
+const bcrypt = require('bcryptjs')
 
 const { env: { MONGO_URL } } = process
 
@@ -21,7 +22,7 @@ describe('authenticateUser', () => {
             password: '123123123'
         }
 
-        return User.create(user)
+        return User.create({ ...user, password: bcrypt.hashSync(user.password) })
             .then(user => userId = user.id)
 
     })
@@ -62,10 +63,10 @@ describe('authenticateUser', () => {
             })
     })
 
-    it('should fail with incorrect username and password', () => {
+    it('should fail with incorrect password', () => {
         const { username, password } = user
 
-        return authenticateUser(username + '-wrong', password + '-wrong')
+        return authenticateUser(username, password + '-wrong')
             .then(() => { throw new Error('should not reach this point') })
             .catch(error => {
                 expect(error).to.exist

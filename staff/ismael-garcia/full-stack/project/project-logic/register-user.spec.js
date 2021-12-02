@@ -2,40 +2,13 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const registerUser = require('./register-user')
-// const { MongoClient } = require('mongodb')
-// const context = require('./context')
-const { mongoose, models: { User } } = require('data')
-const { ConflictError, FormatError } = require('errors')
+const { mongoose, models: { User } } = require('project-data')
+const { ConflictError, FormatError } = require('project-errors')
+const bcrypt = require('bcryptjs')
 
 const { env: { MONGO_URL } } = process
 
 describe('registerUser', () => {
-    // let client, db, users
-
-    // before(done => {
-    //     client = new MongoClient('mongodb://localhost:27017')
-
-    //     client.connect(error => {
-    //         if (error) return done(error)
-
-    //         db = client.db('demo')
-
-    //         context.db = db 
-
-    //         users = db.collection('users')
-            
-    //         users.createIndex({ username: 1 }, { unique: true })
-
-    //         done()
-
-    //     })
-    // })
-
-    // beforeEach(done => {
-    //     users.deleteMany({}, done)
-
-    // })
-
     before(() => mongoose.connect(MONGO_URL))
 
     beforeEach(() => User.deleteMany())
@@ -45,43 +18,24 @@ describe('registerUser', () => {
         const username = 'wendypan'
         const password = '123123123'
 
-        // return registerUser(name, username, password, error => {
-        //     if (error) return done(error)
-
-        //     users.findOne({ username }, (error, user) => {
-        //         if (error) return done(error)
-                
-        //         expect(user).to.exist
-        //         expect(user.name).to.equal(name)
-        //         expect(user.username).to.equal(username)
-        //         expect(user.password).to.equal(password)
-    
-        //         done()
-
-        //     })
-        // })
         return registerUser(name, username, password)
-            .then(() => User.findOne({ username }))
+            .then(res => {
+                expect(res).to.be.undefined
+
+                return User.findOne({ username })
+            })
             .then(user => {
                 expect(user).to.exist
                 expect(user.name).to.equal(name)
                 expect(user.username).to.equal(username)
                 expect(user.password).to.equal(password)
+
+                expect(bcrypt.compareSync(password, user.password)).to.be.true
             })
     })
 
     describe('when user already exists', () => {
         let user 
-
-        // beforeEach(done => {
-        //     user = {
-        //         name: 'Wendy Pan',
-        //         username: 'wendypan',
-        //         password: '123123123'
-        //     }
-
-        //     users.insertOne(user, done)
-        // })
 
         beforeEach(() => {
             user = {
@@ -90,20 +44,14 @@ describe('registerUser', () => {
                 password: '123123123'
             }
 
-            return User.create(user) //repasar esta línea
+            return User.create(user) 
         })
 
         it('should fail when user already exists', () => {
             const { name, username, password } = user
 
-            // registerUser(name, username, password, error => {
-            //     expect(error).to.exist
-            //     expect(error).to.be.instanceOf(ConflictError) 
-            //     expect(error.message).to.equal(`user with username ${username} already exists`)
-
-            //     done()
-            // })
             return registerUser(name, username, password)
+                .then(() => { throw new Error('should not reach this point')})
                 .catch(error => {
                     expect(error).to.exist
                     expect(error).to.be.instanceOf(ConflictError) 
@@ -192,21 +140,11 @@ describe('registerUser', () => {
                 expect(() => registerUser('Wendy Pan', 'wendypan', '123 123 123', () => { })).to.throw(FormatError, 'password has blank spaces')
             })
 
-            it('should fail when password length is less that 8 characters', () => {
+            it('should fail when password length is less than 8 characters', () => {
                 expect(() => registerUser('Wendy Pan', 'wendypan', '123123', () => { })).to.throw(FormatError, 'password has less than 8 characters')
             })
         })
     })
-
-    // after(done => users.deleteMany({}, error => {
-    //     if (error) return done(error)
-    //     // client.close(error => {
-    //     //     if (error) return done(error)
-
-    //     //     done()
-    //     // })
-    //     client.close(done)
-    // }))
     
     after(() => 
         User.deleteMany()

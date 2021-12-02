@@ -1,20 +1,20 @@
-const { models: { User } } = require('data')
+const { models: { User } } = require('project-data')
 const { validateId } = require('./helpers/validators')
-const { NotFoundError } = require('errors')
+const { NotFoundError } = require('project-errors')
 
 function retrieveUser(id) {
     validateId(id)
 
-    return User.findById(id).lean() // estudiar esta línea
+    return User.findById(id).lean()
         .then(user => {
             if (!user) throw new NotFoundError(`user with id ${id} not found`)
     
             user.id = user._id.toString()
-            delete user._id // el proceso de estas dos líneas se conoce como saneamiento de datos
+            delete user._id 
     
             delete user.password
 
-            delete user.__v // peculiaridad de mongoose
+            delete user.__v 
 
             return user
         })
