@@ -1,4 +1,4 @@
-import './Search.css'
+import './Search.sass'
 
 function Search({ onSubmitSearch }) {
     return <>

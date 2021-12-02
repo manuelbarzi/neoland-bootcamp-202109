@@ -1,4 +1,4 @@
-import './PostSignUp.css'
+import './PostSignUp.sass'
 
 function PostSignUp({ onSignIn, onLanding }) {
     return <>

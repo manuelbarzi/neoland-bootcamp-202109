@@ -1,4 +1,4 @@
-import './Profile.css'
+import './Profile.sass'
 
 function Profile({ onUpdatePassword, onDeleteAccount, onGoBack }) {
     return (

@@ -1,5 +1,5 @@
 import logger from '../utils/logger'
-import './Feedback.css'
+import './Feedback.sass'
 
 function Feedback({ level, message, onAccept }) {
     logger.debug('Feedback -> render')

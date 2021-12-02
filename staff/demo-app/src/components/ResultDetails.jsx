@@ -1,4 +1,4 @@
-import './ResultDetails.css'
+import './ResultDetails.sass'
 
 function ResultDetails({ detail, onBack, onFav, isFav }) {
     return (

@@ -1,4 +1,4 @@
-import './SignUp.css';
+import './SignUp.sass';
 
 function SignUp({ onSignUp, onSignIn }) {
     return (

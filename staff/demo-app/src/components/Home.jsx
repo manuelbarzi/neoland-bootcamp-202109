@@ -20,7 +20,7 @@ import {
 } from '../logic'
 
 // Styles
-import './Home.css'
+import './Home.sass'
 
 function Home({ myUserName, goToLanding, showSpinner, hideSpinner, showFeedback }) {
     logger.debug('Home -> render')

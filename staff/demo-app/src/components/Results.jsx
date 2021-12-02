@@ -1,4 +1,4 @@
-import './Results.css'
+import './Results.sass'
 
 function Results({ vehicles, onVehicle, onFav, isFav }) {
     return <>

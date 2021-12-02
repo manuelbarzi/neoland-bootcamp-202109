@@ -1,4 +1,4 @@
-import './ChangePassword.css'
+import './ChangePassword.sass'
 
 function ChangePassword({ onSubmitUpdate, onGoBack }) {
     return (
