@@ -3,6 +3,7 @@ const { ConflictError } = require('demo-errors')
 const { models: { User } } = require('demo-data')
 const bcrypt = require('bcryptjs')
 
+
 function registerUser(name, username, password) {
     validateName(name)
     validateUsername(username)

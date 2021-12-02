@@ -86,7 +86,7 @@ describe('registerProperty', () => {
         expect(() => registerProperty(cadastre, address, squareMeters, price, currency, [userId])).to.throw(FormatError, 'string is empty or blank')
     })
 
-    
+    // TODO test more unhappy paths
 
     after(() =>
         Promise.all([User.deleteMany(), Property.deleteMany()])
