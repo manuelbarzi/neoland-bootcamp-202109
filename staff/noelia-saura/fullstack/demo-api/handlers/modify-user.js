@@ -1,5 +1,5 @@
 const { modifyUser } = require('demo-logic')
-const { handleError } = require('./helpers')
+const { handleError, validateAuthorizationAndExtractPayload } = require('./helpers')
 
 module.exports = (req, res) => {
     const { headers: { authorization }, body: data } = req

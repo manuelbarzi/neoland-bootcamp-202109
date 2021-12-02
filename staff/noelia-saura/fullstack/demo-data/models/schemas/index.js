@@ -1,3 +1,5 @@
 module.exports = {
-    user: require('./user')
+    user: require('./user'),
+    creditCard: require('./credit-card'),
+    property: require('./property')
 }

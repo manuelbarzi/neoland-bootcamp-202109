@@ -1,4 +1,3 @@
-
 const { registerUser } = require('demo-logic')
 const { handleError } = require('./helpers')
 
