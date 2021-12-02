@@ -4,6 +4,7 @@ const { expect } = require('chai')
 const registerUser = require('./register-user')
 const { mongoose, models: { User } } = require('crowdaids-data')
 const { ConflictError, FormatError } = require('crowdaids-errors')
+const bcrypt = require('bcryptjs')
 
 const { env: { MONGO_URL } } = process
 
@@ -19,12 +20,17 @@ describe('registerUser', () => {
         const password = '123123123'
 
         return registerUser(name, username, password)
-            .then(() => User.findOne({ username }))
+            .then(res => {
+                expect(res).to.be.undefined
+
+                return User.findOne({ username })
+            })
             .then(user => {
                 expect(user).to.exist
                 expect(user.name).to.equal(name)
                 expect(user.username).to.equal(username)
-                expect(user.password).to.equal(password)
+                
+                expect(bcrypt.compareSync(password, user.password)).to.be.true
             })
     })
 

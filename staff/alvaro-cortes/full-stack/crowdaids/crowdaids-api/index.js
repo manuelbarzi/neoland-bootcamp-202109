@@ -6,18 +6,21 @@ const {
     retrieveUser,
     modifyUser,
     unregisterUser,
-    searchVehicles
+    searchVehicles,
+    addCreditCardToUser
 } = require('./handlers')
 const express = require('express')
 const bodyParser = require('body-parser')
 const { mongoose } = require('crowdaids-data')
 
+const logger = require('./utils/my-logger')
+
 const { env: { PORT, MONGO_URL }, argv: [, , port = PORT || 8080] } = process
+
+logger.info('Starting server')
 
 mongoose.connect(MONGO_URL)
     .then(() => {
-        context.db = mongoose.connection.db
-
         const server = express()
 
         const api = express.Router()
@@ -30,9 +33,11 @@ mongoose.connect(MONGO_URL)
      
         api.get('/users', retrieveUser)
      
-        api.patch("/users", jsonBodyParser, modifyUser)
+        api.patch('/users', jsonBodyParser, modifyUser)
      
         api.delete('/users', jsonBodyParser, unregisterUser)
+
+        api.get('/users/cards', jsonBodyParser, addCreditCardToUser)
      
         api.get('/hotwheels/vehicles', searchVehicles)
 
@@ -43,5 +48,11 @@ mongoose.connect(MONGO_URL)
         server.use('/api', api)
     
         server.listen(port, () => console.log(`Server up and listening on ${port}`))
+    
+        process.on('SIGINT', () => {
+            logger.info('Stopping server')
+
+            process.exit(0)
+        })
     })
     .catch(error => console.error(error))

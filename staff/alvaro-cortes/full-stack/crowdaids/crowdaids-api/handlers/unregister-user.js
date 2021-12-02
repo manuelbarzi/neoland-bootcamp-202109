@@ -1,4 +1,4 @@
-const { unregisterUser } = require('users')
+const { unregisterUser } = require('crowdaids-logic')
 const jwt = require('jsonwebtoken')
 const handleError = require('./helpers/handle-error')
 const { env: { SECRET } } = process

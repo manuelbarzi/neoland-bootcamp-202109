@@ -5,6 +5,7 @@ const modifyUser = require('./modify-user')
 const { mongoose, models: { User } } = require('crowdaids-data')
 const { Types: { ObjectId } } = mongoose
 const { CredentialsError, FormatError, ConflictError, NotFoundError } = require('crowdaids-errors')
+const bcrypt = require('bcryptjs')
 
 const { env: { MONGO_URL } } = process
 
@@ -23,7 +24,7 @@ describe('modifyUser', () => {
             password: '123123123'
         }
 
-        return User.create(user)
+        return User.create({ ...user, password: bcrypt.hashSync(user.password) })
             .then(user => userId = user.id)
     })
 
@@ -60,7 +61,7 @@ describe('modifyUser', () => {
 
                 return User.findById(userId)
             })
-            .then(user => expect(user.password).to.equal(password))
+            .then(user => expect(bcrypt.compareSync(password, user.password)).to.be.true)
     })
 
     it('should fail updating password on a pre-existing user when old password is wrong', () => {

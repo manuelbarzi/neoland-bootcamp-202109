@@ -1,4 +1,4 @@
-const { retrieveUser } = require('users')
+const { retrieveUser } = require('crowdaids-logic')
 const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
 const handleError = require('./helpers/handle-error')

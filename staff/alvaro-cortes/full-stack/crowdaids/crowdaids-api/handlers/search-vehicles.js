@@ -1,4 +1,4 @@
-const { searchVehicles } = require('vehicles')
+const { searchVehicles } = require('crowdaids-logic')
 const handleError = require('./helpers/handle-error')
 
 module.exports = (req, res) => {

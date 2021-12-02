@@ -1,6 +1,7 @@
 const { mongoose, models: { User } } = require('crowdaids-data')
 const { validateId, validateData } = require('./helpers/validators')
 const { NotFoundError, ConflictError, CredentialsError } = require('crowdaids-errors')
+const bcrypt = require('bcryptjs')
 
 /**
  * Updating the user data in the application.
@@ -23,14 +24,17 @@ function modifyUser(id, data,) {
             const { password, oldPassword } = data
 
             if (password) {
-                if (oldPassword !== user.password)
+                if (!bcrypt.compareSync(oldPassword, user.password))
                     throw new CredentialsError('wrong password')
                 else
                     delete data.oldPassword
             }
 
             for (const property in data)
-                user[property] = data[property]
+                if (property === "password")
+                    user[property] = bcrypt.hashSync(data[property])
+                else
+                    user[property] = data[property]
 
             return user.save()
                 .catch(error => {

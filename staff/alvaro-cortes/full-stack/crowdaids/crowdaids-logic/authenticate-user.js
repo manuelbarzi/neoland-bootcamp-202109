@@ -1,6 +1,7 @@
 const { validateUsername, validatePassword } = require('./helpers/validators')
 const { CredentialsError } = require('crowdaids-errors')
 const { models: { User } } = require('crowdaids-data')
+const bcrypt = require('bcryptjs')
 
 /**
  * Login a user in the application.
@@ -16,9 +17,9 @@ function authenticateUser(username, password) {
     validateUsername(username)
     validatePassword(password)
 
-    return User.findOne({ username, password })
+    return User.findOne({ username })
         .then(user => {
-            if (!user) throw new CredentialsError('Wrong credentials')
+            if (!user || !bcrypt.compareSync(password, user.password)) throw new CredentialsError('Wrong credentials')
 
             return user.id
         })

@@ -1,4 +1,4 @@
-const { registerUser } = require('users')
+const { registerUser } = require('crowdaids-logic')
 const handleError = require('./helpers/handle-error')
 
 module.exports = (req, res) => {

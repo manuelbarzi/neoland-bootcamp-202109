@@ -1,6 +1,7 @@
 const { validateName, validateUsername, validatePassword } = require('./helpers/validators')
 const { ConflictError } = require('crowdaids-errors')
 const { models: { User } } = require('crowdaids-data')
+const bcrypt = require('bcryptjs')
 
 /**
  * Signs up a user in the application.
@@ -18,7 +19,7 @@ function registerUser(name, username, password) {
     validateUsername(username)
     validatePassword(password)
 
-    return User.create({ name, username, password })
+    return User.create({ name, username, password: bcrypt.hashSync(password) })
         .then(() => { })
         .catch(error => {
             if(error.code === 11000)
