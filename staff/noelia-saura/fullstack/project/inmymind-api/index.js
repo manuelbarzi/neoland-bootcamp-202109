@@ -6,6 +6,9 @@ const { mongoose } = require('inmymind-data')
 
 const {
     registerUser,
+    authenticateUser,
+    retrieveUser,
+    modifyUser
 } = require('./handlers')
 
 const logger = require('./utils/my-logger')
@@ -23,6 +26,12 @@ mongoose.connect(MONGO_URL)
         const jsonBodyParser = bodyParser.json()
 
         api.post('/users', jsonBodyParser, registerUser)
+
+        api.post('/users/auth', jsonBodyParser, authenticateUser)
+        
+        api.get('/users', jsonBodyParser, retrieveUser)
+      
+        api.patch('/users', jsonBodyParser, modifyUser)
 
         api.all('*', (req, res) => {
             res.status(404).json({ message: 'sorry, this endpoint isn\'t available' })

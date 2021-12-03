@@ -53,8 +53,6 @@ function validateName(name) {
     if (name.trim() !== name) throw new FormatError('blank spaces around name')
 }
 
-
-
 function validateData(data) {
     if (typeof data !== 'object' || data.constructor.name !== 'Object') throw new TypeError('data is not an object')
 
