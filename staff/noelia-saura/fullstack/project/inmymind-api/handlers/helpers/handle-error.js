@@ -5,6 +5,8 @@ const logger = require('../../utils/my-logger')
 function handleError(error, res) {
     let status = 500
 
+    console.log(error)
+
     if (error instanceof CredentialsError || error instanceof TokenExpiredError)
         status = 401
     else if (error instanceof TypeError || error instanceof FormatError || error instanceof JsonWebTokenError)

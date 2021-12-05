@@ -53,6 +53,16 @@ function validateName(name) {
     if (name.trim() !== name) throw new FormatError('blank spaces around name')
 }
 
+function validateNote(note) {
+    if (typeof note !== 'string') throw new TypeError('note is not a string')
+    if (!note.trim().length) throw new FormatError('note is empty or blank')
+}
+
+function validateTreatment(treatment){
+    if (typeof treatment !== 'string') throw new TypeError('treatment is not a string')
+    if (!treatment.trim().length) throw new FormatError('treatment is empty or blank')
+}
+
 function validateData(data) {
     if (typeof data !== 'object' || data.constructor.name !== 'Object') throw new TypeError('data is not an object')
 
@@ -108,5 +118,7 @@ module.exports = {
     validateNumber,
     validateGender,
     validateAge,
-    validateEmail
+    validateEmail,
+    validateNote,
+    validateTreatment
 }

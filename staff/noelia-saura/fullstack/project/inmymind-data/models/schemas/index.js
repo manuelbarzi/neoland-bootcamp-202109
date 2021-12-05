@@ -1,6 +1,7 @@
 module.exports={
     user: require('./user'),
     note: require('./note'),
-    emotional: require ('./emotional'),
-    medication: require ('./medication')
+    diary: require ('./diary'),
+    treatment: require ('./treatment'),
+    disorder:require('./disorder')
 }

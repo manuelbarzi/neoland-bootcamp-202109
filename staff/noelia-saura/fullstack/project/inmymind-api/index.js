@@ -8,7 +8,11 @@ const {
     registerUser,
     authenticateUser,
     retrieveUser,
-    modifyUser
+    modifyUser,
+    addNote,
+    deleteNote,
+    addTreatment,
+    deleteTreatment
 } = require('./handlers')
 
 const logger = require('./utils/my-logger')
@@ -32,6 +36,14 @@ mongoose.connect(MONGO_URL)
         api.get('/users', jsonBodyParser, retrieveUser)
       
         api.patch('/users', jsonBodyParser, modifyUser)
+
+        api.post('/notes',jsonBodyParser, addNote)
+
+        api.delete('/notes/:id',jsonBodyParser, deleteNote)
+
+        api.post('/treatments',jsonBodyParser, addTreatment)
+
+        api.delete('/treatments',jsonBodyParser, deleteTreatment)
 
         api.all('*', (req, res) => {
             res.status(404).json({ message: 'sorry, this endpoint isn\'t available' })

@@ -1,9 +1,10 @@
 const { model } = require('mongoose')
-const { user,note,emotional,medication } = require('./schemas')
+const { user,note,diary,disorder,treatment } = require('./schemas')
 
 module.exports = {
     User: model('User', user),
     Note: model('Note',note),
-    Emotional: model('Emotional',emotional),
-    Medication: model('Medication', medication)
+    Diary: model('diary',diary),
+    Treatment: model('treatment', treatment),
+    Disorder:model('disorder', disorder)
 }

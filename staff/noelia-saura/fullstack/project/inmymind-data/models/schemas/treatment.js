@@ -1,6 +1,6 @@
 const { Schema,SchemaTypes } = require('mongoose')
 
-const note = new Schema({
+const treatment = new Schema({
     content: {
         type: String,
         required: true
@@ -17,15 +17,15 @@ const note = new Schema({
 
     date_add: {
         type: Date,
-        required: false,
+        required: true,
         default: Date.now
     },
 
     date_upd: {
         type: Date,
-        required: false,
+        required: true,
         default: Date.now
     }
 })
 
-module.exports = note
+module.exports = treatment
