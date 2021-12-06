@@ -1,18 +1,20 @@
-const { modifyUser } = require('users')
-const jwt = require('jsonwebtoken')
+// const { retrieveUser } = require('users')
+// const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
 const handleError = require('./helpers/handle-error')
 
 module.exports = (req, res) => {
-    const { headers: { authorization }, body: data } = req 
+    const { headers: { authorization } } = req 
 
     try {
         const [, token] = authorization.split(' ')
 
-        const { sub: id } = jwt.verify(token, SECRET) // estudiar esta línea
+        const payload = jwt.verify(token, SECRET)
 
-        modifyUser(id, data)
-            .then(() => res.status(204).send())
+        const { sub: id } = payload 
+
+        retrieveUser(id)
+            .then(user => res.json(user))
             .catch(error => handleError(error, res))
     } catch (error) {
         handleError(error, res)

@@ -1,8 +1,8 @@
-require('dotenv').config()
+// require('dotenv').config()
 
-const express = require('express')
+// const express = require('express')
 const bodyParser = require('body-parser')
-const { mongoose } = require('project-data')
+// const { mongoose } = require('logical-echo-data')
 
 const { 
     registerUser, 
@@ -11,11 +11,11 @@ const {
     modifyUser
 } = require('./handlers')
 
-const logger = require('./utils/my-logger')
+// const logger = require('./utils/my-logger')
 
 const { env: { PORT, SECRET, MONGO_URL }, argv: [, , port = PORT || 8080] } = process
 
-logger.info('starting server')
+// logger.info('starting server')
 
 mongoose.connect(MONGO_URL)
     .then(() => {
@@ -42,9 +42,9 @@ mongoose.connect(MONGO_URL)
         server.listen(port, () => logger.info(`server up and listening on port ${port}`))
 
         process.on('SIGINT', () => {
-            logger.info('stopping server')
+            // logger.info('stopping server')
 
             process.exit(0)
         })
     })
-    .catch(error => logger.error(error))
+    // .catch(error => logger.error(error))

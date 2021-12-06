@@ -1,5 +1,5 @@
 {
-  "name": "project-api",
+  "name": "logical-echo-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,9 +17,9 @@
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "project-data": "file:../project-data",
-    "project-errors": "file:../project-errors",
-    "project-logic": "file:../project-logic",
+    "logical-echo-data": "file:../logical-echo-data",
+    "logical-echo-errors": "file:../logical-echo-errors",
+    "logical-echo-logic": "file:../logical-echo-logic",
     "winston": "^3.3.3"
   },
   "devDependencies": {

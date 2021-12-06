@@ -1,7 +1,7 @@
-const { mongoose, models: { User } } = require('project-data')
+const { mongoose, models: { User } } = require('logical-echo-data')
 const { validateId, validateData } = require('./helpers/validators')
-const { NotFoundError, ConflictError, CredentialsError } = require('project-errors')
-const bcrypt = require('bcryptjs')
+const { NotFoundError, ConflictError, CredentialsError } = require('../logical-echo-errors')
+// const bcrypt = require('bcryptjs')
 
 /**
  * TODO doc me

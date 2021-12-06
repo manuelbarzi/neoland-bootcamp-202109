@@ -1,5 +1,5 @@
-const { CredentialsError, ConflictError, FormatError, NotFoundError } = require('project-errors')
-const { JsonWebTokenError, TokenExpiredError } = require('jsonwebtoken')
+const { CredentialsError, ConflictError, FormatError, NotFoundError } = require('../../../logical-echo-errors')
+// const { JsonWebTokenError, TokenExpiredError } = require('jsonwebtoken')
 const logger = require('../../utils/my-logger')
 
 function handleError(error, res) {

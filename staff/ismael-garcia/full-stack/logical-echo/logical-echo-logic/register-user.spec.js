@@ -4,7 +4,7 @@ const { expect } = require('chai')
 const registerUser = require('./register-user')
 const { mongoose, models: { User } } = require('project-data')
 const { ConflictError, FormatError } = require('project-errors')
-const bcrypt = require('bcryptjs')
+// const bcrypt = require('bcryptjs')
 
 const { env: { MONGO_URL } } = process
 
@@ -13,25 +13,24 @@ describe('registerUser', () => {
 
     beforeEach(() => User.deleteMany())
 
-    it('should suceed with new user', () => {
+    it('should suceed with new user', async () => {
         const name = 'Wendy Pan'
         const username = 'wendypan'
         const password = '123123123'
 
-        return registerUser(name, username, password)
-            .then(res => {
-                expect(res).to.be.undefined
+        const res = await registerUser(name, username, password)
+            
+        expect(res).to.be.undefined
 
-                return User.findOne({ username })
-            })
-            .then(user => {
-                expect(user).to.exist
-                expect(user.name).to.equal(name)
-                expect(user.username).to.equal(username)
-                expect(user.password).to.equal(password)
+        const user = await User.findOne({ username })
+     
+        expect(user).to.exist
+        expect(user.name).to.equal(name)
+        expect(user.username).to.equal(username)
+        expect(user.password).to.equal(password)
 
-                expect(bcrypt.compareSync(password, user.password)).to.be.true
-            })
+        expect(bcrypt.compareSync(password, user.password)).to.be.true
+            
     })
 
     describe('when user already exists', () => {
