@@ -14,8 +14,8 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "project-data": "file:../project-data",
-    "project-errors": "file:../project-errors",
+    "logical-echo-data": "file:../logical-echo-data",
+    "logical-echo-errors": "file:../logical-echo-errors",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {

@@ -1,10 +1,16 @@
-const { FormatError } = require('errors')
+const { FormatError } = require('logical-echo-errors')
 
 function validateId(id) {
     if (typeof id !== 'string') throw new TypeError('id is not a string')
     if (!id.trim().length) throw new FormatError('id is empty or blank')
     if (/\r?\n|\r|\t| /g.test(id)) throw new FormatError('id has blank spaces')
     if (id.length !== 24) throw new FormatError('id does not have 24 characters')
+}
+
+function validateName(name) {
+    if (typeof name !== 'string') throw new TypeError('name is not a string')
+    if (!name.trim().length) throw new FormatError('name is empty or blank')
+    if (name.trim() !== name) throw new FormatError('blank spaces around name')
 }
 
 function validateUsername(username) {
@@ -26,12 +32,6 @@ function validateNewPassword(newPassword) {
     if (!newPassword.trim().length) throw new FormatError('new password is empty or blank')
     if (/\r?\n|\r|\t| /g.test(newPassword)) throw new FormatError('new password has blank spaces')
     if (newPassword.length < 8) throw new FormatError('new password has less than 8 characters')
-}
-
-function validateName(name) {
-    if (typeof name !== 'string') throw new TypeError('name is not a string')
-    if (!name.trim().length) throw new FormatError('name is empty or blank')
-    if (name.trim() !== name) throw new FormatError('blank spaces around name')
 }
 
 function validateData(data) {
@@ -60,10 +60,10 @@ function validateCallback(callback) {
 
 module.exports = {
     validateId,
+    validateName,
     validateUsername,
     validatePassword,
     validateNewPassword,
-    validateName,
     validateData,
     validateCallback
 }

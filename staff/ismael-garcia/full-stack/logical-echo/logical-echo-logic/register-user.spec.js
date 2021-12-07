@@ -2,9 +2,9 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const registerUser = require('./register-user')
-const { mongoose, models: { User } } = require('project-data')
-const { ConflictError, FormatError } = require('project-errors')
-// const bcrypt = require('bcryptjs')
+const { mongoose, models: { User } } = require('logical-echo-data')
+const { ConflictError, FormatError } = require('logical-echo-errors')
+const bcrypt = require('bcryptjs')
 
 const { env: { MONGO_URL } } = process
 
@@ -27,10 +27,9 @@ describe('registerUser', () => {
         expect(user).to.exist
         expect(user.name).to.equal(name)
         expect(user.username).to.equal(username)
-        expect(user.password).to.equal(password)
+        // expect(user.password).to.equal(password)
 
-        expect(bcrypt.compareSync(password, user.password)).to.be.true
-            
+        expect(bcrypt.compareSync(password, user.password)).to.be.true      
     })
 
     describe('when user already exists', () => {
@@ -46,16 +45,19 @@ describe('registerUser', () => {
             return User.create(user) 
         })
 
-        it('should fail when user already exists', () => {
+        it('should fail when user already exists', async () => {
             const { name, username, password } = user
 
-            return registerUser(name, username, password)
-                .then(() => { throw new Error('should not reach this point')})
-                .catch(error => {
-                    expect(error).to.exist
-                    expect(error).to.be.instanceOf(ConflictError) 
-                    expect(error.message).to.equal(`user with username ${username} already exists`)
-                })
+            try {
+                await registerUser(name, username, password)
+
+                throw new Error('should not reach this point')
+
+            } catch(error) {
+                expect(error).to.exist
+                expect(error).to.be.instanceOf(ConflictError) 
+                expect(error.message).to.equal(`user with username ${username} already exists`)
+            }
         })
     })
 
@@ -145,8 +147,9 @@ describe('registerUser', () => {
         })
     })
     
-    after(() => 
-        User.deleteMany()
-           .then(() => mongoose.disconnect()) 
-    )
+    after(async () => {
+        await User.deleteMany()
+        
+        await mongoose.disconnect()
+    })
 })

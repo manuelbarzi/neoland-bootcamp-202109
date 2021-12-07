@@ -1,29 +1,29 @@
-const { readFile, writeFile } = require('fs')
+const { validateId, validatePassword } = require('./helpers/validators')
+const { CredentialsError } = require('logical-echo-errors')
+const { models: { User } } = require('logical-echo-data')
+const bcrypt = require('bcryptjs')
 
-function unregisterUser(id, password, callback) {
-    readFile(`${__dirname}/../users.json`, 'utf8', (error, json) => {
-        if (error) return callback(error)
+/**
+ * TODO doc me
+ * @param {*} id 
+ * @param {*} password 
+ */
+function unregisterUser(id, password) {
+    validateId(id)
+    validatePassword(password)
 
-        const users = JSON.parse(json)
-
-        const index = users.findIndex(user => user.id === id)
-
-        if (index < 0) return callback(new Error(`user with id ${id} not found`))
-
-        const user = users[index]
-
-        if (user.password !== password) return callback(new Error('wrong credentials'))
-
-        users.splice(index, 1)
-
-        const json2 = JSON.stringify(users, null, 4)
-
-        writeFile(`${__dirname}/../users.json`, json2, error => {
-            if (error) return callback(error)
-
-            callback(null)
-        })
-    })
+    return (async () => {
+        const user = await User.findById(id).lean()
+        
+        if (!user || !bcrypt.compareSync(password, user.password)) throw new CredentialsError('wrong credentials')
+        
+        try {
+            await User.deleteOne({ id })
+            
+        } catch (error) {
+            throw error
+        }
+    })()
 }
 
 module.exports = unregisterUser 
