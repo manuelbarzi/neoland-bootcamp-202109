@@ -16,6 +16,19 @@ const item = new Schema({
     },
     price: {
         type: Array
+    },
+    url: {
+        type: String,
+        unique: true
+    },
+    description: {
+        type: String
+    },
+    color: {
+        type: String
+    },
+    keywords: {
+        type: Array
     }
 })
 

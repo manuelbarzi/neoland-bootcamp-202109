@@ -1,6 +1,6 @@
-const { models: { User } } = require('logical-echo-data')
+const { models: { User } } = require('../logical-echo-data')
 const { validateId } = require('./helpers/validators')
-const { NotFoundError } = require('logical-echo-errors')
+const { NotFoundError } = require('../logical-echo-errors')
 
 function retrieveUser(id) {
     validateId(id)
