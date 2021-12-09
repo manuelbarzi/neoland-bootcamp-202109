@@ -1,21 +1,18 @@
-// const { retrieveUser } = require('users')
+const { retrieveUser } = require('../logical-echo-logic')
 // const jwt = require('jsonwebtoken')
-const { env: { SECRET } } = process
-const handleError = require('./helpers/handle-error')
+// const { env: { SECRET } } = process
+const { handleError, validateAuthorizationAndExtractPayload } = require('./helpers')
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
     const { headers: { authorization } } = req 
 
     try {
-        const [, token] = authorization.split(' ')
+        const { sub: id } = validateAuthorizationAndExtractPayload(authorization)
 
-        const payload = jwt.verify(token, SECRET)
+        const user = await retrieveUser(id)
 
-        const { sub: id } = payload 
+        res.json(user)
 
-        retrieveUser(id)
-            .then(user => res.json(user))
-            .catch(error => handleError(error, res))
     } catch (error) {
         handleError(error, res)
     }

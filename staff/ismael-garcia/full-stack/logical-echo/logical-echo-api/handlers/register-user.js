@@ -1,14 +1,14 @@
-// const { registerUser } = require('users')
-const handleError = require('./helpers/handle-error')
+const { registerUser } = require('../logical-echo-logic')
+const { handleError } = require('./helpers')
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
     const { body: { name, username, password } } = req 
 
     try {
-        registerUser(name, username, password)
-            .then(() => res.status(201).send())
-            .catch(error => handleError(error, res))
-    // estudiar este bloque
+        await registerUser(name, username, password)
+        
+        res.status(201).send()
+
     } catch (error) {
         handleError(error, res)
     }

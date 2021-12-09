@@ -16,6 +16,7 @@
     "bcryptjs": "^2.4.3",
     "logical-echo-data": "file:../logical-echo-data",
     "logical-echo-errors": "file:../logical-echo-errors",
+    "puppeteer": "^12.0.1",
     "xmlhttprequest": "^1.8.0"
   },
   "devDependencies": {

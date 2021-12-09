@@ -1,21 +1,22 @@
-// require('dotenv').config()
+require('dotenv').config()
 
-// const express = require('express')
+const express = require('express')
 const bodyParser = require('body-parser')
-// const { mongoose } = require('logical-echo-data')
+const { mongoose } = require('logical-echo-data')
 
 const { 
     registerUser, 
     authenticateUser, 
     retrieveUser, 
-    modifyUser
+    modifyUser,
+    unregisterUser
 } = require('./handlers')
 
-// const logger = require('./utils/my-logger')
+const logger = require('./utils/my-logger')
 
 const { env: { PORT, SECRET, MONGO_URL }, argv: [, , port = PORT || 8080] } = process
 
-// logger.info('starting server')
+logger.info('starting server')
 
 mongoose.connect(MONGO_URL)
     .then(() => {
@@ -33,6 +34,8 @@ mongoose.connect(MONGO_URL)
 
         api.patch('/users', jsonBodyParser, modifyUser)
 
+        api.patch('/users', jsonBodyParser, unregisterUser)
+
         api.all('*', (req, res) => {
             res.status(404).json({ message: 'sorry, this endpoint is not available' })
         })
@@ -42,9 +45,9 @@ mongoose.connect(MONGO_URL)
         server.listen(port, () => logger.info(`server up and listening on port ${port}`))
 
         process.on('SIGINT', () => {
-            // logger.info('stopping server')
+            logger.info('stopping server')
 
             process.exit(0)
         })
     })
-    // .catch(error => logger.error(error))
+    .catch(error => logger.error(error))

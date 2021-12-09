@@ -1,20 +1,18 @@
-// const { authenticateUser } = require('users')
-// const jwt = require('jsonwebtoken')
+const { authenticateUser } = require('../logical-echo-logic')
+const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
-const handleError = require('./helpers/handle-error')
+const { handleError } = require('./helpers')
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
     const { body: { username, password } } = req 
 
     try {
-        authenticateUser(username, password)
-            .then(id => {
-                const token = jwt.sign({ sub: id, exp: Math.floor(Date.now() / 1000) + 3600 }, SECRET ) // estudiar este bloque
-    
-                res.json({ token })
+        const id = await authenticateUser(username, password)
 
-            })
-            .catch(error => handleError(error, res))
+        const token = jwt.sign({ sub: id, exp: Math.floor(Date.now() / 1000) + 3600 }, SECRET )
+
+        res.json({ token })
+
     } catch (error) {
         handleError(error, res)
     }
