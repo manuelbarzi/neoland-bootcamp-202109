@@ -3,6 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const { mongoose } = require('logical-echo-data')
+// const cors = require('cors')
 
 const { 
     registerUser, 
@@ -14,13 +15,17 @@ const {
 
 const logger = require('./utils/my-logger')
 
-const { env: { PORT, SECRET, MONGO_URL }, argv: [, , port = PORT || 8080] } = process
+const { env: { PORT, MONGO_URL }, argv: [, , port = PORT || 8080] } = process
 
-logger.info('starting server')
+// logger.info('starting server')
 
-mongoose.connect(MONGO_URL)
-    .then(() => {
+(async () => {
+    try {
+        await mongoose.connect(MONGO_URL)
+            
         const server = express()
+
+        // server.use(cors())
 
         const api = express.Router()
 
@@ -49,5 +54,8 @@ mongoose.connect(MONGO_URL)
 
             process.exit(0)
         })
-    })
-    .catch(error => logger.error(error))
+
+    } catch (error) {
+        logger.error(error)
+    }
+})()

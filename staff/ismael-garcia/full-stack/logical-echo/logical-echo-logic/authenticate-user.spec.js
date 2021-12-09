@@ -2,8 +2,8 @@ require('dotenv').config()
 
 const { expect } = require('chai')
 const authenticateUser = require('./authenticate-user')
-const { mongoose, models: { User } } = require('../logical-echo-data')
-const { CredentialsError, FormatError } = require('../logical-echo-errors')
+const { mongoose, models: { User } } = require('logical-echo-data')
+const { CredentialsError, FormatError } = require('logical-echo-errors')
 const bcrypt = require('bcryptjs')
 
 const { env: { MONGO_URL } } = process

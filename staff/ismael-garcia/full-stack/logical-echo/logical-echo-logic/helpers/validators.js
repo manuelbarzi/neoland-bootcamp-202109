@@ -41,21 +41,68 @@ function validateData(data) {
 
     validatePassword(password)
 
-    if (typeof name !== 'undefined') {
+    if (typeof name !== 'undefined')
         validateName(name)
-    }
 
-    if (typeof username !== 'undefined') {
+    if (typeof username !== 'undefined')
         validateUsername(username)
-    }
 
-    if (typeof newPassword !== 'undefined') {
+    if (typeof newPassword !== 'undefined')
         validateNewPassword(newPassword)
-    }
 }
 
 function validateCallback(callback) {
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+}
+
+function validateString(string) {
+    if (typeof string !== 'string') throw new TypeError(`${string} is not a string`)
+    if (!string.trim().length) throw new FormatError('string is empty or blank')
+}
+
+function validateDate(date) {
+    if (!(date instanceof Date)) throw new TypeError('date is not a date')
+}
+
+function validateArray(array) {
+    if (!(array instanceof Array)) throw new TypeError(`${array} is not an array`)
+}
+
+function validateNumber(number) {
+    if (typeof number !== 'number') throw new TypeError(`${number} is not a number`)
+}
+
+function validateItem(item) {
+    if (typeof item !== 'object' || item.constructor.name !== 'Object') throw new TypeError('item is not an object')
+
+    const { id, name, images, price, url, description, color, keywords } = item
+
+    validateName(name)
+
+    if (typeof images !== 'undefined')
+        validateArray(images)
+
+    if (typeof price !== 'undefined')
+        validateNumber(price)
+
+    validateArray(url)
+
+    if (typeof description !== 'undefined')
+        validateString(description)
+
+    if (typeof color !== 'undefined')
+        validateString(color)
+
+    if (typeof keywords !== 'undefined')
+        validateArray(keywords)
+}
+
+function validateEmail(email) {
+    return String(email)
+        .toLowerCase()
+        .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
 }
 
 module.exports = {
@@ -65,5 +112,11 @@ module.exports = {
     validatePassword,
     validateNewPassword,
     validateData,
-    validateCallback
+    validateCallback,
+    validateString,
+    validateDate,
+    validateArray,
+    validateNumber,
+    validateItem,
+    validateEmail
 }

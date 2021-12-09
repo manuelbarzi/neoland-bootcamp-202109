@@ -1,6 +1,6 @@
-const { models: { User } } = require('../logical-echo-data')
+const { models: { User } } = require('logical-echo-data')
 const { validateId, validateData } = require('./helpers/validators')
-const { NotFoundError, ConflictError, CredentialsError } = require('../logical-echo-errors')
+const { NotFoundError, ConflictError, CredentialsError } = require('logical-echo-errors')
 const bcrypt = require('bcryptjs')
 
 /**

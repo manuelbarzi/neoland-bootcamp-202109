@@ -2,7 +2,9 @@ const { Schema } = require('mongoose')
 
 const item = new Schema({
     id: {
-        type: String
+        type: String,
+        required: true,
+        unique: true
     },
     name: {
         type: String,
@@ -11,14 +13,12 @@ const item = new Schema({
     images: {
         type: Array
     },
-    color: {
-        type: String
-    },
     price: {
         type: Array
     },
     url: {
         type: String,
+        required:true,
         unique: true
     },
     description: {

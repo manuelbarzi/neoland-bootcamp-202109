@@ -42,6 +42,10 @@ const user = new Schema({
             }
         ]
     },
+    email: {
+        type: String,
+        validate: validators.isEmail({'message': 'Please enter a valid email address.'})
+    },
     favs: {
         type: Array
     }

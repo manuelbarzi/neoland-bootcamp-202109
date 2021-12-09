@@ -1,17 +1,13 @@
 const { Schema } = require('mongoose')
 
 const search = new Schema({
-    id: {
-        type: String
-    },
-    user_id: {
-        type: String,
-    },
     query: {
-        type: String
+        type: String,
+        required: true
     },
     date: {
-        type: Date
+        type: Date,
+        required: true
     }
 })
 

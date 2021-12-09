@@ -1,4 +1,4 @@
-const { registerUser } = require('../logical-echo-logic')
+const { registerUser } = require('logical-echo-logic')
 const { handleError } = require('./helpers')
 
 module.exports = async (req, res) => {

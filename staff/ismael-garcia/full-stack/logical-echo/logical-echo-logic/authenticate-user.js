@@ -1,6 +1,6 @@
 const { validateUsername, validatePassword } = require('./helpers/validators')
-const { CredentialsError } = require('../logical-echo-errors')
-const { models: { User } } = require('../logical-echo-data')
+const { CredentialsError } = require('logical-echo-errors')
+const { models: { User } } = require('logical-echo-data')
 const bcrypt = require('bcryptjs')
 
 function authenticateUser (username, password) {

@@ -1,4 +1,4 @@
-const { authenticateUser } = require('../logical-echo-logic')
+const { authenticateUser } = require('logical-echo-logic')
 const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
 const { handleError } = require('./helpers')

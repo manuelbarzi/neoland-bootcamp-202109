@@ -1,6 +1,6 @@
 const { validateName, validateUsername, validatePassword } = require('./helpers/validators')
-const { ConflictError } = require('../logical-echo-errors')
-const { models: { User } } = require('../logical-echo-data')
+const { ConflictError } = require('logical-echo-errors')
+const { models: { User } } = require('logical-echo-data')
 const bcrypt = require('bcryptjs')
 
 /**
@@ -24,7 +24,7 @@ function registerUser(name, username, password) {
 
             throw error
         }
-    })() // IIFE      
+    })()     
 }
 
 module.exports = registerUser

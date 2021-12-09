@@ -1,0 +1,1 @@
+// function to retrieve the items that were clicked more times and the items that appeared more times in results in the last week.

@@ -1,18 +1,14 @@
 const { Schema } = require('mongoose')
 
 const clickedItem = new Schema({
-    id: {
-        type: String
-    },
-    item_id: {
+    url: {
         type: String,
-    },
-    keywords: {
-        type: Array
+        required: true
     },
     date: {
-        type: Date
-    }
+        type: Date,
+        required: true
+    },
 })
 
 module.exports = clickedItem 
