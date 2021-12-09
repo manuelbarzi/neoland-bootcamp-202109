@@ -1,0 +1,112 @@
+{
+  "clients": [
+    {
+      "firstName": "Pepito",
+      "lastName": "Grillo",
+      "phone": "+34 712 345 678",
+      "email": "pepigri@gmail.com",
+      "passport": "00000000T",
+      "id": 1
+    },
+    {
+      "firstName": "Peter",
+      "lastName": "Pan",
+      "phone": "+34 712 555 666",
+      "email": "peterpan@gmail.com",
+      "passport": "00000001S",
+      "id": 2
+    },
+    {
+      "firstName": "Wendy",
+      "lastName": "Pan",
+      "phone": "+34 712 777 333",
+      "email": "wendypan@gmail.com",
+      "passport": "00000001S",
+      "id": 3
+    },
+    {
+      "firstName": "Ana",
+      "lastName": "Rodriguez",
+      "phone": "+34 712 456 234",
+      "email": "anaro@gmail.com",
+      "passport": "12312318I",
+      "id": 4
+    }
+  ],
+  "pets": [
+    {
+      "id": 1,
+      "client": 1,
+      "name": "Rechonchito",
+      "age": 6,
+      "gender": "male",
+      "species": "canine",
+      "race": "bulldog",
+      "pedigree": true,
+      "chip": "1234X",
+      "date": "2021-12-01"
+    },
+    {
+      "id": 2,
+      "client": 2,
+      "name": "Mary",
+      "age": 3,
+      "gender": "female",
+      "species": "feline",
+      "race": "eurepan common",
+      "pedigree": false,
+      "chip": "234234Y",
+      "date": "2021-12-07"
+    },
+    {
+      "id": 3,
+      "client": 2,
+      "name": "John",
+      "age": 3.5,
+      "gender": "male",
+      "species": "feline",
+      "race": "eurepan common",
+      "pedigree": false,
+      "chip": "1234123Z",
+      "date": "2021-12-07"
+    },
+    {
+      "id": 4,
+      "client": 3,
+      "name": "Nani",
+      "age": 4,
+      "gender": "female",
+      "species": "canine",
+      "race": "san bernard",
+      "pedigree": true,
+      "chip": "345435U",
+      "date": "2021-12-05"
+    },
+    {
+      "client": 4,
+      "name": "Marvel",
+      "age": 2,
+      "gender": "male",
+      "species": "feline",
+      "race": "european common",
+      "pedigree": false,
+      "chip": "1234k",
+      "date": "2021-12-09",
+      "id": 5
+    }
+  ],
+  "notes": [
+    {
+      "pet": 5,
+      "text": "se aplica vacuna trivalente",
+      "date": "2021-12-09",
+      "id": 1
+    },
+    {
+      "pet": 5,
+      "text": "se realiza una limpieza dental e inspeccion general",
+      "date": "2021-12-10",
+      "id": 2
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+// usuario clínica/vet
+{
+    "name": "ana",
+    "username": "clinicaAna",
+    "password": "123456",
+    "email": "ana@email.com",
+    "clients" : [
+        {
+            "name": "ventu",
+            "firstName": "ventu",
+            "lastName": "ventu",
+            "dni": "12345678L",
+            "phone": "123456789",
+            "email": "ventu@email.com",
+            "pets": [
+                {
+                    "name": "Duque",
+                    "age": "11",
+                    "genre": "male",
+                    "race": "mastín leonés",
+                    "species":"dog" ,
+                    "chip": "vsfudkbsjni28e848rvdsbckerucher7e78re98hvs9e8ry9vh",
+                    "ref": "dfvknfvngbsgbh234tyhberdsfverw"
+                },
+                {
+                    "name": "Duque",
+                    "age": "11",
+                    "genre": "male",
+                    "race": "mastín leonés",
+                    "species":"dog" ,
+                    "chip": "vsfudkbsjni28e848rvdsbckerucher7e78re98hvs9e8ry9vh",
+                    "ref": "dfvknfvngbsgbh234tyhberdsfverw"
+                },
+                {
+                    "name": "Duque",
+                    "age": "11",
+                    "genre": "male",
+                    "race": "mastín leonés",
+                    "species":"dog" ,
+                    "chip": "vsfudkbsjni28e848rvdsbckerucher7e78re98hvs9e8ry9vh",
+                    "ref": "dfvknfvngbsgbh234tyhberdsfverw"
+                }
+            ]
+        },
+        {
+            "name": "ventu",
+            "firstName": "ventu",
+            "lastName": "ventu",
+            "dni": "12345678L",
+            "phone": "123456789",
+            "email": "ventu@email.com",
+            "pets": [
+                {
+                    "name": "Duque",
+                    "age": "11",
+                    "genre": "male",
+                    "race": "mastín leonés",
+                    "species":"dog" ,
+                    "chip": "vsfudkbsjni28e848rvdsbckerucher7e78re98hvs9e8ry9vh",
+                    "ref": "dfvknfvngbsgbh234tyhberdsfverw"
+                },
+                {
+                    "name": "Duque",
+                    "age": "11",
+                    "genre": "male",
+                    "race": "mastín leonés",
+                    "species":"dog" ,
+                    "chip": "vsfudkbsjni28e848rvdsbckerucher7e78re98hvs9e8ry9vh",
+                    "ref": "dfvknfvngbsgbh234tyhberdsfverw"
+                },
+                {
+                    "name": "Duque",
+                    "age": "11",
+                    "genre": "male",
+                    "race": "mastín leonés",
+                    "species":"dog" ,
+                    "chip": "vsfudkbsjni28e848rvdsbckerucher7e78re98hvs9e8ry9vh",
+                    "ref": "dfvknfvngbsgbh234tyhberdsfverw"
+                }
+            ]
+        },
+        {
+            "name": "ventu",
+            "firstName": "ventu",
+            "lastName": "ventu",
+            "dni": "12345678L",
+            "phone": "123456789",
+            "email": "ventu@email.com",
+            "pets": [
+                {
+                    "name": "Duque",
+                    "age": "11",
+                    "genre": "male",
+                    "race": "mastín leonés",
+                    "species":"dog" ,
+                    "chip": "vsfudkbsjni28e848rvdsbckerucher7e78re98hvs9e8ry9vh",
+                    "ref": "dfvknfvngbsgbh234tyhberdsfverw"
+                },
+                {
+                    "name": "Duque",
+                    "age": "11",
+                    "genre": "male",
+                    "race": "mastín leonés",
+                    "species":"dog" ,
+                    "chip": "vsfudkbsjni28e848rvdsbckerucher7e78re98hvs9e8ry9vh",
+                    "ref": "dfvknfvngbsgbh234tyhberdsfverw"
+                },
+                {
+                    "name": "Duque",
+                    "age": "11",
+                    "genre": "male",
+                    "race": "mastín leonés",
+                    "species":"dog" ,
+                    "chip": "vsfudkbsjni28e848rvdsbckerucher7e78re98hvs9e8ry9vh",
+                    "ref": "dfvknfvngbsgbh234tyhberdsfverw"
+                }
+            ]
+        }
+    ]
+}

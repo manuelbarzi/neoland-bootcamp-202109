@@ -1,0 +1,22 @@
+// data
+
+Client
+- id (number)
+- firstName (string)
+- secondName (string)
+- lastName (string)
+- phone (string)
+- email (string)
+- passport (string)
+
+Pet
+- id (number)
+- clientId (string)
+- name (string)
+- age (number)
+- gender (string: 'female' | 'male')
+- species (string)
+- race (string)
+- pedigree (boolean: true | false)
+- chip (string)
+- date (date)
