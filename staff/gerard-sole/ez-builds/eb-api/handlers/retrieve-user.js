@@ -1,4 +1,4 @@
-const { retrieveUser } = require('users')
+const { retrieveUser } = require('eb-data')
 const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
 const handleError = require('./helpers/handle-error')

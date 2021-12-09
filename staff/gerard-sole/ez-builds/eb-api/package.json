@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "eb-data": "file:../eb-data",
     "eb-errors": "file:../eb-errors",

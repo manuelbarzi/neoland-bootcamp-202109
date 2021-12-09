@@ -1,4 +1,4 @@
-const { CredentialsError, ConflictError, FormatError, NotFoundError } = require('errors')
+const { CredentialsError, ConflictError, FormatError, NotFoundError } = require('eb-errors')
 const { JsonWebTokenError, TokenExpiredError } = require('jsonwebtoken')
 
 function handleError(error, res) {
