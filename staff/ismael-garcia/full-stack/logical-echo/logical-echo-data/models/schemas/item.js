@@ -14,7 +14,7 @@ const item = new Schema({
         type: Array
     },
     price: {
-        type: Array
+        type: String
     },
     url: {
         type: String,
@@ -26,9 +26,6 @@ const item = new Schema({
     },
     color: {
         type: String
-    },
-    keywords: {
-        type: Array
     }
 })
 

@@ -75,7 +75,9 @@ function validateNumber(number) {
 function validateItem(item) {
     if (typeof item !== 'object' || item.constructor.name !== 'Object') throw new TypeError('item is not an object')
 
-    const { id, name, images, price, url, description, color, keywords } = item
+    const { id, name, images, price, url, description, color } = item
+    
+    validateString(id)
 
     validateName(name)
 
@@ -83,7 +85,7 @@ function validateItem(item) {
         validateArray(images)
 
     if (typeof price !== 'undefined')
-        validateNumber(price)
+        validateString(price)
 
     validateArray(url)
 
@@ -92,17 +94,12 @@ function validateItem(item) {
 
     if (typeof color !== 'undefined')
         validateString(color)
-
-    if (typeof keywords !== 'undefined')
-        validateArray(keywords)
 }
 
 function validateEmail(email) {
     return String(email)
         .toLowerCase()
-        .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        )
+        .match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
 }
 
 module.exports = {
