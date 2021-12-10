@@ -6,7 +6,7 @@ function deleteTreatment(treatment_id) {
   
     validateId(treatment_id)
     
-    return Treatment.deleteOne({note_id})
+    return Treatment.deleteOne({_id:treatment_id})
         .then(() => { })
         .catch(error => {
             

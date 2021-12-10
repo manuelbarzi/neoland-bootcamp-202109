@@ -66,7 +66,6 @@ describe('registerUser', () => {
                     expect(error.message).to.equal(`user with username ${username} already exists`)
                 })
         })
-        
     })
 
     describe('when parameters are not valid', () => {
@@ -154,50 +153,50 @@ describe('registerUser', () => {
             })
         })
 
-        // describe('when gender is not valid',() =>{
-        //     it('should fail when gender is not a string',()=>{
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123',true,26,'wendypan@gmail.com')).to.throw(TypeError, 'gender is not a string')
+        describe('when gender is not valid',() =>{
+            it('should fail when gender is not a string',()=>{
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123',true,26,'wendypan@gmail.com')).to.throw(TypeError, 'gender is not a string')
                 
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123',123,26,'wendypan@gmail.com')).to.throw(TypeError, 'gender is not a string')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123',123,26,'wendypan@gmail.com')).to.throw(TypeError, 'gender is not a string')
                 
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123',{},26,'wendypan@gmail.com')).to.throw(TypeError, 'gender is not a string')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123',{},26,'wendypan@gmail.com')).to.throw(TypeError, 'gender is not a string')
                
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123',()=>{},26,'wendypan@gmail.com')).to.throw(TypeError, 'gender is not a string')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123',()=>{},26,'wendypan@gmail.com')).to.throw(TypeError, 'gender is not a string')
                 
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123',[],26,'wendypan@gmail.com')).to.throw(TypeError, 'gender is not a string')
-        //     })
-        //     it('should fail when gender is empty',()=>{
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','',26,'wendypan@gmail.com')).to.throw(FormatError, 'gender is empty or blank')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123',[],26,'wendypan@gmail.com')).to.throw(TypeError, 'gender is not a string')
+            })
+            it('should fail when gender is empty',()=>{
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','',26,'wendypan@gmail.com')).to.throw(FormatError, 'gender is empty or blank')
 
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','   ',26,'wendypan@gmail.com')).to.throw(FormatError, 'gender is empty or blank')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','   ',26,'wendypan@gmail.com')).to.throw(FormatError, 'gender is empty or blank')
             
-        //     })
-        //     it('should fail when gender has spaces',()=>{
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123',' female ',26,'wendypan@gmail.com')).to.throw(FormatError, 'gender has blank spaces')
+            })
+            it('should fail when gender has spaces',()=>{
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123',' female ',26,'wendypan@gmail.com')).to.throw(FormatError, 'gender has blank spaces')
 
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','fe ma le',26,'wendypan@gmail.com')).to.throw(FormatError, 'gender has blank spaces')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','fe ma le',26,'wendypan@gmail.com')).to.throw(FormatError, 'gender has blank spaces')
             
-        //     })        
-        // })
+            })        
+        })
 
-        // describe('when age is not valid',() =>{
-        //     it('should fail when age is not a number',()=>{
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','female',true,'wendypan@gmail.com')).to.throw(TypeError, 'age is not a number')
+        describe('when age is not valid',() =>{
+            it('should fail when age is not a number',()=>{
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','female',true,'wendypan@gmail.com')).to.throw(TypeError, 'age is not a number')
                 
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','female','','wendypan@gmail.com')).to.throw(TypeError, 'age is not a number')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','female','','wendypan@gmail.com')).to.throw(TypeError, 'age is not a number')
                 
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','female',{},'wendypan@gmail.com')).to.throw(TypeError, 'age is not a number')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','female',{},'wendypan@gmail.com')).to.throw(TypeError, 'age is not a number')
                
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','female',()=>{},'wendypan@gmail.com')).to.throw(TypeError, 'age is not a number')
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','female',()=>{},'wendypan@gmail.com')).to.throw(TypeError, 'age is not a number')
                 
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','female',[],'wendypan@gmail.com')).to.throw(TypeError, 'age is not a number')
-        //     })
+                expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','female',[],'wendypan@gmail.com')).to.throw(TypeError, 'age is not a number')
+            })
                    
-        // })
+        })
         
         // describe('when email is not valid',()=>{
         //     it('should fail when email is not a string',()=>{
-        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','female',26,true)).to.throw(TypeError, 'email is not a string')
+        //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','female', 26 , true)).to.throw(TypeError, 'email is not a string')
                 
         //         expect(() => registerUser('Wendy Pan', 'wendypan', '123123123','female',26,123)).to.throw(TypeError, 'email is not a string')
                 

@@ -1,12 +1,22 @@
-const{addTreatment}=require('inmymind-logic')
-const {handleError}=require('./helpers')
+const { addTreatment } = require('inmymind-logic')
+const { handleError } = require('./helpers')
+const jwt = require('jsonwebtoken')
+const { env: { SECRET } } = process
 
-module.exports=(req,res)=>{
-    const{body:{content,date,user_id}}=req
-    try{
-        addTreatment(content,date,user_id)
-        .then(()=>res.status(201).send())
-        .catch(error => handleError(error, res))
+module.exports = (req, res) => {
+    const { headers: { authorization }, body: { content, date } } = req
+
+    try {
+
+        const [, token] = authorization.split(' ')
+
+        const payload = jwt.verify(token, SECRET)
+
+        const { sub: id } = payload
+
+        addTreatment(content, new Date(date), id)
+            .then(() => res.status(201).send())
+            .catch(error => handleError(error, res))
     } catch (error) {
         handleError(error, res)
     }

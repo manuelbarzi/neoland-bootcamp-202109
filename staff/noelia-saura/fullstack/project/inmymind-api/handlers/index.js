@@ -6,5 +6,9 @@ module.exports = {
     addNote: require('./add-note'),
     deleteNote: require('./delete-note'),
     addTreatment: require('./add-treatment'),
-    deleteTreatment: require('./delete-treatment')
+    deleteTreatment: require('./delete-treatment'),
+    addDiary:require('./add-diary'),
+    addDisorder:require('./add-disorder'),
+    retrieveNotes:require('./retrieve-notes'),
+    retrieveTreatments:require('./retrieve-treatment')
 }

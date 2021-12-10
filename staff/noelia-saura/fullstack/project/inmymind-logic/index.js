@@ -3,8 +3,12 @@ module.exports = {
     authenticateUser:require('./authenticate-user'),
     retrieveUser:require('./retrieve-user'),
     modifyUser:require('./modify-user'),
-    addNote:require('./addNote'),
-    deleteNote:require('./deleteNote'),
-    addTreatment:require('./addTreatment'),
-    deleteTreatment:require('./deleteTreatment')
+    addNote:require('./add-note'),
+    deleteNote:require('./delete-note'),
+    addTreatment:require('./add-treatment'),
+    deleteTreatment:require('./delete-treatment'),
+    addDiary:require('./add-diary'),
+    addDisorder:require('./add-disorder'),
+    retrieveNotes:require('./retrieve-notes'),
+    retrieveTreatment:require('./retrieve-treatment')
 }

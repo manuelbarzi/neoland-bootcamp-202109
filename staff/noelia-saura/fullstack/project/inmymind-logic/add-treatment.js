@@ -3,6 +3,7 @@ const { models: { Treatment } } = require('inmymind-data')
 
 
 function addTreatment(content,date,user_id) {
+    
     validateTreatment(content)
     validateId(user_id)
     validateDate(date)

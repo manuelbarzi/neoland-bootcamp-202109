@@ -7,22 +7,86 @@ const diary = new Schema({
         required: true
     },
 
-    q1: {
+    emotional: {
         type: String,
         required: false
     },
 
-    q2: {
+    timesleep: {
+        type: Number,
+        required: false
+    },
+
+    timetowakeup: {
         type: String,
         required: false
     },
 
-    q3: {
-        type: String,
+    qualitysleep: {
+        type: Number,
         required: false
     },
 
-    q4: {
+    hydrate: {
+        type: Boolean,
+        required: false
+    },
+
+    quantityhydrate: {
+        type: Number,
+        required: false
+    },
+
+    exercise: {
+        type: Boolean,
+        required: false
+    },
+
+    meditation: {
+        type: Boolean,
+        required: false
+    },
+    earlywakeup: {
+        type: Boolean,
+        required: false
+    },
+    makethebed: {
+        type: Boolean,
+        required: false
+    },
+    cleanface: {
+        type: Boolean,
+        required: false
+    },
+    cleanteeth: {
+        type: Boolean,
+        required: false
+    },
+    shower: {
+        type: Boolean,
+        required: false
+    },
+    order: {
+       type: Boolean,
+        required: false
+    },
+    cleanhouse: {
+        type: Boolean,
+        required: false
+    },
+    changesheets: {
+        type: Boolean,
+        required: false
+    },
+    cooking: {
+        type: Boolean,
+        required: false
+    },
+    gotostreet: {
+        type: Boolean,
+        required: false
+    },
+    timetostreet: {
         type: String,
         required: false
     },
@@ -35,12 +99,14 @@ const diary = new Schema({
 
     date_add: {
         type: Date,
-        required: true
+        required: false,
+        default: Date.now
     },
 
     date_upd: {
         type: Date,
-        required: true
+        required: false,
+        default: Date.now
     }
 })
 

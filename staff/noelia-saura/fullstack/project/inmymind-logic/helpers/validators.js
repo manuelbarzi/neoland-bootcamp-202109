@@ -105,6 +105,12 @@ function validateNumber(number) {
     if (typeof number !== 'number') throw new TypeError(`${number} is not a number`)
 }
 
+function validateBoolean(boolean){
+    if(typeof boolean !== 'boolean') throw new TypeError(`${boolean} is not a boolean`)
+}
+
+
+
 module.exports = {
     validateId,
     validateUsername,
@@ -120,5 +126,6 @@ module.exports = {
     validateAge,
     validateEmail,
     validateNote,
-    validateTreatment
+    validateTreatment,
+    validateBoolean
 }

@@ -5,23 +5,23 @@ const note = new Schema({
         type: String,
         required: true
     },
-    date: {
+    date: { // createdDate
         type: Date,
         required: true
     },
-    user_id: {
+    user_id: { // user
         type: SchemaTypes.ObjectId,
         ref: 'User',
         required: true
     },
 
-    date_add: {
+    date_add: { // addedDate (?)
         type: Date,
         required: false,
         default: Date.now
     },
 
-    date_upd: {
+    date_upd: { // updatedDate
         type: Date,
         required: false,
         default: Date.now

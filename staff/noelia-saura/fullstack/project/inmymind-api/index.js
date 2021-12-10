@@ -12,7 +12,11 @@ const {
     addNote,
     deleteNote,
     addTreatment,
-    deleteTreatment
+    deleteTreatment,
+    addDiary,
+    addDisorder,
+    retrieveNotes,
+    retrieveTreatments
 } = require('./handlers')
 
 const logger = require('./utils/my-logger')
@@ -39,11 +43,19 @@ mongoose.connect(MONGO_URL)
 
         api.post('/notes',jsonBodyParser, addNote)
 
+        api.get('/notes',jsonBodyParser, retrieveNotes) // user_id - date
+
+        api.get('/treatments',jsonBodyParser, retrieveTreatments)
+
         api.delete('/notes/:id',jsonBodyParser, deleteNote)
 
         api.post('/treatments',jsonBodyParser, addTreatment)
 
-        api.delete('/treatments',jsonBodyParser, deleteTreatment)
+        api.delete('/treatments/:id',jsonBodyParser, deleteTreatment)
+
+        api.post('/diaries',jsonBodyParser, addDiary)
+
+        api.post('/disorders',jsonBodyParser, addDisorder)
 
         api.all('*', (req, res) => {
             res.status(404).json({ message: 'sorry, this endpoint isn\'t available' })
