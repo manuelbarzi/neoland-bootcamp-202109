@@ -14,7 +14,7 @@ function updateUserPassword(token, oldPassword, password, callback) {
 
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
 
-    const xhr = new XMLHttpRequest
+    const xhr = new XMLHttpRequest()
 
     xhr.onload = () => {
         const { status, responseText } = xhr

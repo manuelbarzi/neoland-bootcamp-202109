@@ -21,7 +21,7 @@ function retrieveDiary(user_id, date) {
                 delete diary[index].__v
 
             }
-            // diary.id = diary._id.toString()
+            
             return diary
         })
 }

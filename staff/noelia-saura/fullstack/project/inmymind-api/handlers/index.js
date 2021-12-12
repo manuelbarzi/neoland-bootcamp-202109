@@ -10,5 +10,8 @@ module.exports = {
     addDiary:require('./add-diary'),
     addDisorder:require('./add-disorder'),
     retrieveNotes:require('./retrieve-notes'),
-    retrieveTreatments:require('./retrieve-treatment')
+    retrieveTreatments:require('./retrieve-treatment'),
+    retrieveDiary:require('./retrieve-diary'),
+    retrieveDisorder:require('./retrieve-disorder'),
+    unregisterUser:require('./unregister-user')
 }

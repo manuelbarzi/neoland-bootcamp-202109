@@ -11,7 +11,7 @@ import context from './context'
  * @throws {TypeError} When any of the arguments does not match the correct type.
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
-function signupUser(name, username, password) {
+function signupUser(name, username, password, gender,email,age) {
     if (typeof name !== 'string') throw new TypeError(name + ' is not a string')
     if (!name.trim().length) throw new Error('name is empty or blank')
     if (name.trim() !== name) throw new Error('blank spaces around name')
@@ -27,12 +27,12 @@ function signupUser(name, username, password) {
     if (password.length < 6) throw new Error('password has less than 6 characters')
 
     return (async () => {
-        const res = await fetch(`${context.API_URL}/v2/users`, {
+        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/users`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name, username, password })
+            body: JSON.stringify({ name, username, password, gender, email,age})
         })
 
         const { status } = res

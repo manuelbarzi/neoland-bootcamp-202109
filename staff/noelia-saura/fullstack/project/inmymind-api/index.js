@@ -16,7 +16,10 @@ const {
     addDiary,
     addDisorder,
     retrieveNotes,
-    retrieveTreatments
+    retrieveTreatments,
+    retrieveDiary,
+    retrieveDisorder,
+    unregisterUser
 } = require('./handlers')
 
 const logger = require('./utils/my-logger')
@@ -24,6 +27,8 @@ const logger = require('./utils/my-logger')
 const { env: { PORT, MONGO_URL }, argv: [, , port = PORT || 8080] } = process
 
 logger.info('starting server')
+
+const cors = require('cors');
 
 mongoose.connect(MONGO_URL)
     .then(() => {
@@ -37,29 +42,37 @@ mongoose.connect(MONGO_URL)
 
         api.post('/users/auth', jsonBodyParser, authenticateUser)
         
-        api.get('/users', jsonBodyParser, retrieveUser)
-      
         api.patch('/users', jsonBodyParser, modifyUser)
 
         api.post('/notes',jsonBodyParser, addNote)
-
-        api.get('/notes',jsonBodyParser, retrieveNotes) // user_id - date
-
-        api.get('/treatments',jsonBodyParser, retrieveTreatments)
-
-        api.delete('/notes/:id',jsonBodyParser, deleteNote)
-
-        api.post('/treatments',jsonBodyParser, addTreatment)
-
-        api.delete('/treatments/:id',jsonBodyParser, deleteTreatment)
 
         api.post('/diaries',jsonBodyParser, addDiary)
 
         api.post('/disorders',jsonBodyParser, addDisorder)
 
+        api.post('/treatments',jsonBodyParser, addTreatment)
+
+        api.get('/users', jsonBodyParser, retrieveUser)
+
+        api.get('/notes',jsonBodyParser, retrieveNotes) // user_id - date
+
+        api.get('/treatments',jsonBodyParser, retrieveTreatments)
+        
+        api.get('/diaries',jsonBodyParser,retrieveDiary)
+
+        api.get('/disorders',jsonBodyParser,retrieveDisorder)
+
+        api.delete('/notes/:id',jsonBodyParser, deleteNote)
+
+        api.delete('/treatments/:id',jsonBodyParser, deleteTreatment)
+
+        api.delete('/unregister:id',jsonBodyParser,unregisterUser)
+
         api.all('*', (req, res) => {
             res.status(404).json({ message: 'sorry, this endpoint isn\'t available' })
         })
+
+        server.use(cors());
 
         server.use('/api', api)
 

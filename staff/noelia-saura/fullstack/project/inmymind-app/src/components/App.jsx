@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import logger from '../logger'
 import Logo from './Logo'
-import Time from './Time'
+
 import Landing from './Landing'
 import SignUp from './SignUp'
 import PostSignUp from './PostSignUp'
@@ -51,8 +51,8 @@ function App() {
             onFlowEnd: hideSpinner,
             onFeedback: showFeedback
         }}>
-            <Logo image="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flat_tick_icon.svg/1200px-Flat_tick_icon.svg.png" text="Demo App" />
-            <Time />
+            <Logo image={process.env.PUBLIC_URL + '/logo.png'} text="In My Mind" />
+            
 
             {view === 'landing' && <Landing
                 onSignIn={goToSignIn}

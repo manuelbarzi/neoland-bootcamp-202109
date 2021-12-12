@@ -1,10 +1,10 @@
 const { addDisorder } = require('inmymind-logic')
 const { handleError } = require('./helpers')
-
+const jwt = require('jsonwebtoken')
+const { env: { SECRET } } = process
 module.exports = (req, res) => {
-    const { body: {
+    const { headers: { authorization }, body: {
         date,
-        user_id,
         symptom,
         relax,
         negativestate,
@@ -29,10 +29,14 @@ module.exports = (req, res) => {
         causedstate } } = req
     try {
 
-        
+        const [, token] = authorization.split(' ')
+
+        const payload = jwt.verify(token, SECRET)
+
+        const { sub: id } = payload
         addDisorder(
             new Date(date),
-            user_id,
+            id,
             symptom,
             relax,
             negativestate,

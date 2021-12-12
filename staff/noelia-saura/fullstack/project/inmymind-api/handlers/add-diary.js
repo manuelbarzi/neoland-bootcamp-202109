@@ -1,10 +1,11 @@
 const { addDiary } = require('inmymind-logic')
 const { handleError } = require('./helpers')
+const jwt = require('jsonwebtoken')
+const { env: { SECRET } } = process
 
 module.exports = (req, res) => {
-    const { body: {
+    const { headers: { authorization }, body: {
         date,
-        user_id,
         emotional,
         timesleep,
         timetowakeup,
@@ -27,9 +28,17 @@ module.exports = (req, res) => {
     } } = req
 
     try {
+
+        
+        const [, token] = authorization.split(' ')
+
+        const payload = jwt.verify(token, SECRET)
+
+        const { sub: id } = payload
+
         addDiary(
             new Date(date),
-            user_id,
+            id,
             emotional,
             timesleep,
             timetowakeup,

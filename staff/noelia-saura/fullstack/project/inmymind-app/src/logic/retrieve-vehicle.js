@@ -35,7 +35,7 @@ function retrieveVehicle(token, id, callback) {
                     function retrieveVehicle(token, id, callback) {
                         if (typeof id !== 'string') throw new TypeError(`${id} is not a string`)
                     
-                        const xhr = new XMLHttpRequest
+                        const xhr = new XMLHttpRequest()
                     
                         xhr.onload = () => {
                             const { status, responseText } = xhr
@@ -53,7 +53,7 @@ function retrieveVehicle(token, id, callback) {
                     
                                 const { favs = [] } = user
                     
-                                const xhr2 = new XMLHttpRequest
+                                const xhr2 = new XMLHttpRequest()
                     
                                 xhr2.onload = () => {
                                     const { status, responseText } = xhr2

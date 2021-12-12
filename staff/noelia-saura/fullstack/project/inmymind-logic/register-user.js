@@ -9,7 +9,7 @@ function registerUser(name, username, password, gender, age, email) {
     validateUsername(username)
     validatePassword(password)
     validateGender(gender)
-    validateAge(age)
+    validateAge(parseInt(age))
     validateEmail(email)
     
 

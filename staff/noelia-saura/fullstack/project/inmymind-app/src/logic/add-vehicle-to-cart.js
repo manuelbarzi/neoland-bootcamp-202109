@@ -7,7 +7,7 @@ function addVehicleToCart(token, id, callback) {
 
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
 
-    const xhr = new XMLHttpRequest
+    const xhr = new XMLHttpRequest()
 
     xhr.onload = () => {
         const { status, responseText } = xhr
@@ -32,7 +32,7 @@ function addVehicleToCart(token, id, callback) {
             else
                 cart.push({ id, qty: 1 })
 
-            const xhr2 = new XMLHttpRequest
+            const xhr2 = new XMLHttpRequest()
 
             xhr2.onload = () => {
                 const { status, responseText } = xhr2

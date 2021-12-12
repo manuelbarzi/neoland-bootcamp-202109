@@ -1,7 +1,7 @@
 function searchVehicles(token, query, callback) {
     if (typeof query !== 'string') throw new TypeError(`${query} is not a string`)
 
-    const xhr = new XMLHttpRequest
+    const xhr = new XMLHttpRequest()
 
     xhr.onload = () => {
         const { status, responseText } = xhr
@@ -19,7 +19,7 @@ function searchVehicles(token, query, callback) {
 
             const { favs = [] } = user
 
-            const xhr2 = new XMLHttpRequest
+            const xhr2 = new XMLHttpRequest()
 
             xhr2.onload = () => {
                 const { status, responseText } = xhr2

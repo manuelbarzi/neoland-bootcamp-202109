@@ -18,7 +18,6 @@ function validateGender(gender){
     if (typeof gender !== 'string') throw new TypeError('gender is not a string')
     if (!gender.trim().length) throw new FormatError('gender is empty or blank')
     if (/\r?\n|\r|\t| /g.test(gender)) throw new FormatError('gender has blank spaces')
-    if (gender.length < 4) throw new FormatError('gender has less than 4 characters')
 }
 
 function validateAge(age){

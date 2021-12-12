@@ -7,7 +7,7 @@ function removeVehicleFromCart(token, id, callback) {
 
     if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
 
-    const xhr = new XMLHttpRequest
+    const xhr = new XMLHttpRequest()
 
     xhr.onload = () => {
         const { status, responseText } = xhr
@@ -37,7 +37,7 @@ function removeVehicleFromCart(token, id, callback) {
             if (item.qty === 0)
                 cart.splice(index, 1)
 
-            const xhr2 = new XMLHttpRequest
+            const xhr2 = new XMLHttpRequest()
 
             xhr2.onload = () => {
                 const { status, responseText } = xhr2
