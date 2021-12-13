@@ -55,31 +55,31 @@ describe('retrieveUser', () => {
     describe('when parameters are not valid', () => {
         describe('when id is not valid', () => {
             it('should fail when id is not a string', () => {
-                expect(() => retrieveUser(true, () => { })).to.throw(TypeError, 'id is not a string')
+                expect(() => retrieveUser(true)).to.throw(TypeError, 'id is not a string')
 
-                expect(() => retrieveUser(123, () => { })).to.throw(TypeError, 'id is not a string')
+                expect(() => retrieveUser(123)).to.throw(TypeError, 'id is not a string')
 
-                expect(() => retrieveUser({}, () => { })).to.throw(TypeError, 'id is not a string')
+                expect(() => retrieveUser({})).to.throw(TypeError, 'id is not a string')
 
-                expect(() => retrieveUser(() => { }, () => { })).to.throw(TypeError, 'id is not a string')
+                expect(() => retrieveUser(() => {})).to.throw(TypeError, 'id is not a string')
 
-                expect(() => retrieveUser([], () => { })).to.throw(TypeError, 'id is not a string')
+                expect(() => retrieveUser([])).to.throw(TypeError, 'id is not a string')
             })
 
             it('should fail when id is empty or blank', () => {
-                expect(() => retrieveUser('', () => { })).to.throw(FormatError, 'id is empty or blank')
+                expect(() => retrieveUser('')).to.throw(FormatError, 'id is empty or blank')
 
-                expect(() => retrieveUser('   ', () => { })).to.throw(FormatError, 'id is empty or blank')
+                expect(() => retrieveUser('   ')).to.throw(FormatError, 'id is empty or blank')
             })
 
             it('should fail when id has spaces', () => {
-                expect(() => retrieveUser(' abcd1234abcd1234abcd1234 ', () => { })).to.throw(FormatError, 'id has blank spaces')
+                expect(() => retrieveUser(' abcd1234abcd1234abcd1234 ')).to.throw(FormatError, 'id has blank spaces')
 
-                expect(() => retrieveUser('abcd 1234abc d1234abc d1234', () => { })).to.throw(FormatError, 'id has blank spaces')
+                expect(() => retrieveUser('abcd 1234abc d1234abc d1234')).to.throw(FormatError, 'id has blank spaces')
             })
 
             it('should fail when id length is different from 24 characters', () => {
-                expect(() => retrieveUser('abc', () => { })).to.throw(FormatError, 'id does not have 24 characters')
+                expect(() => retrieveUser('abc')).to.throw(FormatError, 'id does not have 24 characters')
             })
         })
     })

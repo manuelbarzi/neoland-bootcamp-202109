@@ -1,13 +1,13 @@
 const { validateString, validateEmail } = require('./helpers/validators')
-const { models: { Newsletter } } = require('logical-echo-data')
+const { models: { Subscription } } = require('logical-echo-data')
 
-function registerNewsletter(id, email) {
+function registerSubscription(id, email) {
     validateString(id)
     validateEmail(email)
 
     return (async () => {
         try {
-            await Newsletter.create({ user_id: id, email })
+            await Subscription.create({ user_id: id, email })
 
         } catch (error) {
             throw error 
@@ -15,4 +15,4 @@ function registerNewsletter(id, email) {
     })()
 }
 
-module.exports = registerNewsletter
+module.exports = registerSubscription

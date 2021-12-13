@@ -75,7 +75,7 @@ function validateNumber(number) {
 function validateItem(item) {
     if (typeof item !== 'object' || item.constructor.name !== 'Object') throw new TypeError('item is not an object')
 
-    const { id, name, images, price, url, description, color } = item
+    const { id, name, images, price, url, description, colors } = item
     
     validateString(id)
 
@@ -92,8 +92,8 @@ function validateItem(item) {
     if (typeof description !== 'undefined')
         validateString(description)
 
-    if (typeof color !== 'undefined')
-        validateString(color)
+    if (typeof colors !== 'undefined')
+        validateArray(colors)
 }
 
 function validateEmail(email) {

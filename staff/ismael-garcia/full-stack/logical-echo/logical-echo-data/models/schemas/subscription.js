@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose')
 
-const newsletter = new Schema({
+const subscription = new Schema({
     user_id: {
         type: String,
         unique: true
@@ -20,4 +20,4 @@ const newsletter = new Schema({
     }
 })
 
-module.exports = newsletter
+module.exports = subscription

@@ -8,7 +8,6 @@ module.exports = async (req, res) => {
         await registerItem(item)
         
         res.status(201).send()
-
     } catch (error) {
         handleError(error, res)
     }

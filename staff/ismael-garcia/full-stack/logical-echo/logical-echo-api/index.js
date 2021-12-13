@@ -3,7 +3,7 @@ require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const { mongoose } = require('logical-echo-data')
-// const cors = require('cors')
+const cors = require('cors')
 
 const { 
     registerUser, 
@@ -17,7 +17,7 @@ const logger = require('./utils/my-logger')
 
 const { env: { PORT, MONGO_URL }, argv: [, , port = PORT || 8080] } = process
 
-// logger.info('starting server')
+logger.info('starting server')
 
 (async () => {
     try {
@@ -25,7 +25,7 @@ const { env: { PORT, MONGO_URL }, argv: [, , port = PORT || 8080] } = process
             
         const server = express()
 
-        // server.use(cors())
+        server.use(cors())
 
         const api = express.Router()
 

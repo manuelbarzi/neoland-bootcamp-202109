@@ -24,8 +24,8 @@ const item = new Schema({
     description: {
         type: String
     },
-    color: {
-        type: String
+    colors: {
+        type: Array
     }
 })
 

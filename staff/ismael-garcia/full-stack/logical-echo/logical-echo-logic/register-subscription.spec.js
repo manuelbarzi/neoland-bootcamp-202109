@@ -1,58 +1,71 @@
 require('dotenv').config()
 
 const { expect } = require('chai')
-const registerSearch = require('./register-search')
-const { mongoose, models: { Search } } = require('logical-echo-data')
+const registerSubscription = require('./register-subscription')
+const { mongoose, models: { Subscription, User } } = require('logical-echo-data')
 const { ConflictError, FormatError } = require('logical-echo-errors')
 
 const { env: { MONGO_URL } } = process
 
-describe('registerSearch', () => {
+describe('registerSubscription', () => {
     before(() => mongoose.connect(MONGO_URL))
 
-    beforeEach(() => Search.deleteMany())
+    beforeEach(() => Subscription.deleteMany())
 
-    it('should suceed with new search', async () => {
-        const query = 'camiseta'
-        const date = new Date()
+    let user, userId 
 
-        const search = { query, date }
+    beforeEach(async () => {
+        user = {
+            name: 'Wendy Pan',
+            username: 'wendypan',
+            password: '123123123'
+        }
 
-        const res = await registerSearch(search)
+        const user2 = await User.create(user)
+        
+        userId = user2.id
+    })
+
+    it('should suceed with new subscription', async () => {
+        const user_id = userId
+        const email = 'igluit3@gmail.com'
+
+        const subscription = { user_id, email }
+
+        const res = await registerSubscription(subscription)
             
         expect(res).to.be.undefined
 
-        const registered = await Search.findOne({ date })
+        const registered = await Subscription.findOne({ email })
      
         expect(registered).to.exist
-        expect(registered.query).to.equal(query)
-        expect(registered.date).to.equal(date)  
+        expect(registered.user_id).to.equal(user_id)
+        expect(registered.email).to.equal(email)  
     })
 
-    describe('when search already exists', () => {
-        let search, searchId 
+    describe('when subscription already exists', () => {
+        let subscription 
 
-        beforeEach(async () => {
-            search = {
-                query: 'camiseta',
-                date: new Date()
+        beforeEach(() => {
+            subscription = {
+                user_id: userId,
+                email: 'igluit3@gmail.com'
             }
 
-            const search2 = await Search.create(search)
-
-            searchId = search2.id
+            return Subscription.create(subscription) 
         })
 
-        it('should fail when search already exists', async () => {
+        it('should fail when subscription already exists', async () => {
+            const { email } = subscription
             try {
-                await registerSearch(search)
+                await registerSubscription(subscription)
 
                 throw new Error('should not reach this point')
 
             } catch(error) {
                 expect(error).to.exist
                 expect(error).to.be.instanceOf(ConflictError) 
-                expect(error.message).to.equal(`search with searchId ${searchId} already exists`)
+                expect(error.message).to.equal(`subscription with email ${email} already exists`)
             }
         })
     })
