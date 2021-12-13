@@ -42,7 +42,7 @@
         }
     }
 
-    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.open('POST', 'https://localhost:27017/users')
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 

@@ -25,11 +25,3 @@ function authenticateUser(username, password) {
 }
 
 module.exports = authenticateUser
-
-/*users.findOne({ username, password }, (error, user) => {
-        if (error) return callback(error)
-
-        if (!user) return callback(new CredentialsError('Wrong credentials'))
-
-        callback(null, user._id.toString())
-    })*/
