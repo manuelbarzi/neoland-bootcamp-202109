@@ -20,6 +20,9 @@ function SignIn({ onSignedIn, onSignUp }) {
 
             sessionStorage.token = token
 
+            console.log(token)
+            console.log(sessionStorage.token)
+
             onFlowEnd()
 
             onSignedIn()

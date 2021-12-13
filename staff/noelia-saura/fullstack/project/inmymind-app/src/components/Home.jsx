@@ -1,98 +1,110 @@
-import { useState, useEffect, useContext } from 'react'
-import logger from '../logger'
-import './Home.sass'
-import Search from './Search'
-import Results from './Results'
-import Detail from './Detail'
-import Profile from './Profile'
-import Favs from './Favs'
-import Cart from './Cart'
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
-import { useQueryParams } from '../hooks'
-import { retrieveUser } from '../logic'
-import AppContext from './AppContext'
+import { useState, useEffect, useContext } from "react";
+import logger from "../logger";
+import "./Home.sass";
+import Profile from "./Profile";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { useQueryParams } from "../hooks";
+import { retrieveUser } from "../logic";
+import AppContext from "./AppContext";
 
 function Home({ onSignOut, onAuthError }) {
-    logger.debug('Home -> render')
+  logger.debug("Home -> render");
 
-    const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext)
+  const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext);
 
-    const [name, setName] = useState(null)
 
-    const queryParams = useQueryParams()
+  const [name, setName] = useState(null);
 
-    const [query, setQuery] = useState(queryParams.get('q'))
+  const queryParams = useQueryParams();
 
-    const navigate = useNavigate()
+  const [query, setQuery] = useState(queryParams.get("q"));
 
-    const location = useLocation()
+  const navigate = useNavigate();
 
-    useEffect(async () => {
-        logger.debug('Home -> useEffect (componentDidMount)')
+  const location = useLocation();
 
-        const { token } = sessionStorage
-        
-        if (token) {
-            try {
-                onFlowStart()
-        
-                const user = await retrieveUser(token)
+  useEffect(async () => {
+    logger.debug("Home -> useEffect (componentDidMount)");
 
-                onFlowEnd()
-                
-                const { name } = user
-                
-                setName(name)
-            } catch ({ message }) {
-                onFlowEnd()
-                
-                onFeedback(message, 'warn')
+    const { token } = sessionStorage;
 
-                onAuthError()
-            }
-        }
-    }, [])
+    if (token) {
+      try {
+        onFlowStart();
 
-    const search = query => {
-        setQuery(query)
+        const user = await retrieveUser(token);
 
-        navigate(`/search?q=${query}`)
+        onFlowEnd();
+
+        const { name } = user;
+
+        setName(name);
+      } catch ({ message }) {
+        onFlowEnd();
+
+        onFeedback(message, "warn");
+
+        onAuthError();
+      }
     }
+  }, []);
 
-    const goToItem = id => navigate(`/vehicles/${id}`)
+  const search = (query) => {
+    setQuery(query);
 
-    const goToProfile = () => navigate('/profile')
+    navigate(`/search?q=${query}`);
+  };
 
-    const goToSearch = () => search(query)
+  const doSignOut = () => {
+    navigate('/')
+    onSignOut()
+  }
 
-    const goToFavs = () => navigate('/favs')
+  const toggleProfle = () => {
+    if (location.pathname === "/profile") {
+      navigate('/')
+    } else {
+      navigate('/profile')
+    }
+  }
 
-    const goToCart = () => navigate('/cart')
+  // const goToSearch = () => search(query);
 
-    return <div className="container container--gapped container--vertical">
-        <div className="container">
-            <p>Hello, <span className="name">{name ? name : 'World'}</span>!</p>
-            <button className={`button button-medium ${location.pathname === '/profile' && 'button--dark'}`} onClick={goToProfile}>Profile</button>
-            <button className={`button button-medium ${location.pathname === '/favs' && 'button--dark'}`} onClick={goToFavs}>Favs</button>
-            <button className={`button button-medium ${location.pathname === '/cart' && 'button--dark'}`} onClick={goToCart}>Cart</button>
-            <button className="button button-medium button" onClick={onSignOut}>Sign out</button>
-        </div>
+  const gotoNotes = ()=> navigate("/notes")
 
-        <Routes>
-            <Route path="/" element={<Search onSearch={search} query={query} />}>
-                <Route path="search" element={
-                    <Results onItem={goToItem} />
-                } />
-                <Route path="vehicles/:id" element={
-                    <Detail onBack={goToSearch} />
-                } />
-            </Route>
+  const image = process.env.PUBLIC_URL + "/logo.png";
+  const text = "In My Mind";
 
-            <Route path="/profile" element={<Profile onBack={goToSearch} onSignOut={onSignOut} />} />
-            <Route path="/favs" element={<Favs onBack={goToSearch} onItem={goToItem} />} />
-            <Route path="/cart" element={<Cart onBack={goToSearch} onItem={goToItem} />} />
-        </Routes>
+  return (
+    <div className="container container--gapped container--vertical">
+      <div className="logo--home container">
+        <img className="logo--home__image" src={image} />
+        <h1 className="logo--home__text">{text}</h1>
+        <button
+          className={`button button-medium  ${
+            location.pathname === "/profile" && "button--dark"
+          }`}
+          onClick={toggleProfle}
+        >
+          <svg viewBox="0 0 100 80" width="30" height="20">
+            <rect width="100" height="15"></rect>
+            <rect y="30" width="100" height="15"></rect>
+            <rect y="60" width="100" height="15"></rect>
+          </svg>
+        </button>
+      </div>
+      
+      <div className="container">
+        <button className={`button button-medium ${location.pathname === "/notes" && "button--dark"}`} onClick={gotoNotes}>Notes</button>
+        
+      </div>
+
+      <Routes>
+        <Route path="/profile" element={<Profile onBack={() => {}} onSignOut={doSignOut} />} />
+      </Routes>
+
     </div>
+  );
 }
 
-export default Home
+export default Home;

@@ -1,4 +1,4 @@
-import context from './context'
+
 
 /**
  * TODO
@@ -8,16 +8,6 @@ import context from './context'
  * @param {*} callback 
  */
 function signinUser(username, password) {
-    if (typeof username !== 'string') throw new TypeError(`${username} is not a string`)
-    if (!username.trim().length) throw new Error('username is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(username)) throw new Error('username has blank spaces')
-    if (username.length < 4) throw new Error('username has less than 4 characters')
-
-    if (typeof password !== 'string') throw new TypeError(`${password} is not a string`)
-    if (!password.trim().length) throw new Error('password is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
-    if (password.length < 6) throw new Error('password has less than 6 characters')
-
     return (async () => {
         const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/users/auth`, {
             method: 'POST',

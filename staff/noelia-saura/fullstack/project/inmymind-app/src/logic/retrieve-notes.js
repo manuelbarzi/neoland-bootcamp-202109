@@ -1,9 +1,9 @@
-
-
-function retrieveUser(token) {
+function retrieveNotes(token, date) {
+    
+    const dateGet = date ? '?date=' + date : ''
     
     return (async () => {
-        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/users/`, {
+        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/notes` + dateGet, {
             method:'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -22,4 +22,4 @@ function retrieveUser(token) {
     })()
 }
 
-export default retrieveUser
+export default retrieveNotes

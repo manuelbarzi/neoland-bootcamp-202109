@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import logger from '../logger'
 import Logo from './Logo'
-
 import Landing from './Landing'
 import SignUp from './SignUp'
 import PostSignUp from './PostSignUp'
@@ -10,6 +9,7 @@ import Home from './Home'
 import Spinner from './Spinner'
 import Feedback from './Feedback'
 import AppContext from './AppContext'
+import Profile from './Profile'
 
 function App() {
     logger.debug('App -> render')
@@ -19,13 +19,7 @@ function App() {
     const [feedback, setFeedback] = useState(null)
     const [level, setLevel] = useState(null)
 
-    const resetTokenAndGoToLanding = () => {
-        delete sessionStorage.token
-
-        setView('landing')
-        setSpinner(false)
-    }
-
+   
     const goToSignIn = () => setView('signin')
 
     const goToSignUp = () => setView('signup')
@@ -44,6 +38,13 @@ function App() {
         setFeedback(message)
         setLevel(level)
     }
+    const resetTokenAndGoToLanding = () => {
+        delete sessionStorage.token
+
+        setView('landing')
+        setSpinner(false)
+    }
+
 
     return <>
         <AppContext.Provider value={{
@@ -51,7 +52,10 @@ function App() {
             onFlowEnd: hideSpinner,
             onFeedback: showFeedback
         }}>
-            <Logo image={process.env.PUBLIC_URL + '/logo.png'} text="In My Mind" />
+            {view === 'landing'&& <Logo image={process.env.PUBLIC_URL + '/logo.png'} text="In My Mind" />}
+            {view === 'post-signup'&& <Logo image={process.env.PUBLIC_URL + '/logo.png'} text="In My Mind" />}
+            {view === 'signin'&& <Logo image={process.env.PUBLIC_URL + '/logo.png'} text="In My Mind" />}
+            {view === 'signup'&& <Logo image={process.env.PUBLIC_URL + '/logo.png'} text="In My Mind" />}
             
 
             {view === 'landing' && <Landing
@@ -67,6 +71,8 @@ function App() {
 
             {view === 'home' &&
                 <Home onSignOut={resetTokenAndGoToLanding} onAuthError={resetTokenAndGoToLanding} />}
+
+            {view === 'profile' && <Profile/>}
 
             {feedback && <Feedback level={level} message={feedback} onAccept={acceptFeedback} />}
 
