@@ -11,7 +11,7 @@ const retriveClients = (token) => {
             else if(status === 404) reject('page not found')
             else if(status === 200) resolve(client)
         }
-        xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+        xhr.open('GET', ' http://localhost:8000/clients/')
         xhr.setRequestHeader('Authorization', 'Bearer ' + token)
         xhr.send()
     })

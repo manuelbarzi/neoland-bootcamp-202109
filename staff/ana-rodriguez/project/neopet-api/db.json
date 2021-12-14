@@ -5,7 +5,8 @@
       "lastName": "Grillo",
       "phone": "+34 712 345 678",
       "email": "pepigri@gmail.com",
-      "passport": "00000000T",
+      "document": "00000000T",
+      "direction": "calle Disney nº2, Disney,Pais Italia",
       "id": 1
     },
     {
@@ -13,7 +14,8 @@
       "lastName": "Pan",
       "phone": "+34 712 555 666",
       "email": "peterpan@gmail.com",
-      "passport": "00000001S",
+      "document": "00000001S",
+      "direction": "Calle Nunca Jamas nº8 Nunca Jamas,Pais Nunca jamas",
       "id": 2
     },
     {
@@ -21,7 +23,8 @@
       "lastName": "Pan",
       "phone": "+34 712 777 333",
       "email": "wendypan@gmail.com",
-      "passport": "00000001S",
+      "document": "00000001S",
+      "direction": "Calle Nunca Jamas nº8 Nunca Jamas,Pais Nunca jamas",
       "id": 3
     },
     {
@@ -29,7 +32,8 @@
       "lastName": "Rodriguez",
       "phone": "+34 712 456 234",
       "email": "anaro@gmail.com",
-      "passport": "12312318I",
+      "document": "12312318I",
+      "direction": "Calle Micky Mouse nº10 Disney,Pais Nunca jamas",
       "id": 4
     },
     {
@@ -37,8 +41,18 @@
       "lastName": "García",
       "phone": "+34 712 111 222",
       "email": "anagarcia@gmail.com",
-      "passport": "123234234P",
+      "document": "123234234P",
+      "direction": "Calle Micky Mouse nº10 Disney,Pais Nunca jamas",
       "id": 5
+    },
+    {
+      "firstName": "Pedro",
+      "lastName": "Picapiedra",
+      "phone": "666666666",
+      "direction": "Calle Narnia 38",
+      "email": "picapiedra@mail.com",
+      "document": "65432198H",
+      "id": 6
     }
   ],
   "pets": [
@@ -101,6 +115,19 @@
       "chip": "1234k",
       "date": "2021-12-09",
       "id": 5
+    },
+    {
+      "name": "Dino",
+      "chip": "45646dsfa",
+      "tatoo": "",
+      "hair": "corto",
+      "layer": "marron",
+      "age": "10/12/2017",
+      "pedigree": "on",
+      "passport": "",
+      "alta": "12/12/2021",
+      "client": 6,
+      "id": 6
     }
   ],
   "notes": [

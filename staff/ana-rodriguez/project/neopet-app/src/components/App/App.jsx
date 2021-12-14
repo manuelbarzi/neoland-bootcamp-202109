@@ -5,7 +5,9 @@ import Landing from "../Landing/Landing";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
 import Home from "../Home/Home";
-import Search from "../Home/Search";
+import Search from "../Home/Forms/Search";
+import SearchClient from "../Home/Forms/SearchClient";
+import SearchPet from '../Home/Forms/SearchPet';
 import Profile from "../Home/Profile";
 import ClientPet from "../Home/ClientPet";
 import ChangePass from "../Home/Forms/ChangePass";
@@ -95,12 +97,16 @@ function App() {
               <Route path="//login" element={<Login loginVisual={loginVisual} />} />
             </Route>
             <Route path="/home" element={<Home />}>
-                <Route path="/home/search" element={<Search />} />
-                <Route path="/home/clientPet" element={<ClientPet/>}>
-                  <Route path="/home/clientPet/registerClientPet" element={<RegisterClientPet/>} />
-                    
+                {/* <Route path="/home/search" element={<Search />} /> */}
+                 <Route path="/home/clientPet" element={<ClientPet/>}>
+                    <Route path="/home/clientPet/registerClientPet" element={<RegisterClientPet/>} />
+                    <Route path="/home/clientPet/search" element={<Search/>}/>
+                    <Route path="/home/clientPet/searchClient" element={<SearchClient/>}/>
+                    <Route path="/home/clientPet/searchPet" element={<SearchPet/>}/>
+                    {/* <Route path="/home/clientPet/resultClient" element={<ResultClient/>}/> */}
+                    {/* <Route path="/home/clientPet/file/:id" element={<FichaCliente/>}/> */}
                 </Route>  
-                <Route path="/home/profile" element={<Profile />}>
+                <Route path="/home/profile" element={<Profile/>}>
                     <Route path="/home/profile/changepass" element={<ChangePass changePassVisual={changePassVisual} />} />
                     <Route path="/home/profile/changeuser" element={<ChangeUser changeUserVisual={changeUserVisual}/>} />
                     <Route path="/home/profile/unregister" element={<Unregister unregisterVisual={unregisterVisual} />} />

@@ -3,14 +3,11 @@ import { Link, Outlet,Navigate } from 'react-router-dom';
 
 
 function Profile() {
- 
-      if(typeof sessionStorage.token === 'string')
-      return<Navigate to ="/home"/>
 
     //Comprobar si hay token
 
     return <>
-        <nav className="buttons">
+        <nav className="nav__buttons">
             <Link to='/home/profile/changepass'> <button className="button">Change Password</button></Link>
             <Link to='/home/profile/changeuser'><button className="button">Change User</button></Link>
             <Link to='/home/profile/unregister' ><button className="button">Unregister</button></Link>

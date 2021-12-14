@@ -6,6 +6,9 @@ import changeUser from './changeUser'
 import unregisterUser from './unregister'
 import registerClients from './register-clients'
 import registerPet from './register-pet'
+import searchClient from './search-client'
+import searchPet from './search-pet'
+import modifyPets from './modify-pets'
 // import search from './search'
 // import retrieveSearch from './retrieve-search'
 
@@ -18,6 +21,9 @@ export {
     unregisterUser,
     registerClients,
     registerPet,
+    searchClient,
+    searchPet,
+    modifyPets,
     // search,
     // retrieveSearch,
 }

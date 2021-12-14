@@ -1,46 +1,75 @@
 .title {
   text-align: center;
-  margin: 15px;
   font-family: 'Nanum Myeongjo', serif;
-  text-align: center;
   font-size: 35px;
-  overflow: hidden;
-  white-space: nowrap;
-
+  background-image: url('http://localhost:3000/clinica.png');
+  background-repeat: no-repeat;
+  background-position: 35px;
+  background-size: 100px;
+  height: 100px;
 }
 
 .nav__buttons {
   display: flex;
+  align-items: center;
+  padding: 10px;
+  float: left;
+  height: calc(100vh - 115px);
+  border-top: solid 0px;
+  margin-top: 15px;
+  box-shadow: 4px -1px 20px -10px;
+  border-radius: 0 10px;
+}
+
+.nav__buttons ul {
+  display: flex;
+  flex-flow: column;
+  list-style: none;
+  height: 100%;
+}
+
+.nav__buttons .button {
+  display: flex;
+  min-width: 130px;
+  padding: 12px;
+  color: #fff;
+  font-size: 1.05em ;
+  margin: 12px;
+  cursor: pointer;
+  flex-flow: column;
+  align-items: center;
+  max-width: 130px;
+  border-radius: 0 10px;
+  transition: all .5s;
+  position: relative;
+}
+
+.nav__buttons button:hover{
+  box-shadow: 4px -1px 20px -10px rgb(9, 93, 149);
+  background-color: rgba(9,93,149,.3);
+}
+
+.nav__buttons button>img {
+  margin-bottom: 12px;
+}
+.nav__buttons button.piquito:after {
+  content: '▸';
+  position: absolute;
+  font-size: 2em;
+  color: black;
+  right: 0;
+  top: calc(50% - 1.75em);
+}
+
+#search__container {
+  display: flex;
+  flex-flow: column;
+  height: calc(100vh - 115px);
+  padding: 25px;
+  background-color: rgba(9,16,250,.1);
+  margin-top: 15px;
+  float: left;
+  width: calc(100% - 350px);
   justify-content: center;
   align-items: center;
-  min-height: 31vh;
-  max-width: 80vw;
-  margin: 0 auto;
 }
-
-.button {
-  display: inline-block;
-  width: 200px;
-  padding: 8px;
-  color: #fff;
-  border: 2px solid #fff;
-  text-align: center;
-  outline: none;
-  text-decoration: none;
-  transition: background-color 0.2s ease-out,
-    color 0.2s ease-out;
-  margin: 30px;
-  cursor: pointer;
-
-  
- 
-}
-
-
-
-  
-
-
-
-
-

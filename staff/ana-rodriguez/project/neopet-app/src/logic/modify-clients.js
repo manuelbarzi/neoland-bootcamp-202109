@@ -1,13 +1,4 @@
-const modifyClient = (name,firstName,lastName,phone,dni,email,token) => {
-
-    const changeDatos = {
-        name: name,
-        firstName: firstName,
-        lastName: lastName,
-        phone: phone,
-        dni: dni,
-        email: email
-    };
+const modifyClient = (client,token) => {
 
     return new Promise((resolve,reject) => {
 
@@ -17,15 +8,11 @@ const modifyClient = (name,firstName,lastName,phone,dni,email,token) => {
             const {status} = xhr
             if (status === 400) reject('wrong credential')
             else if(status === 404) reject('page not found')
-            else if(status === 200) {
-
-
-            }
+            else if(status === 200) resolve('datos cambiados correctamente')    
         }
-         xhr.open("PATCH", "https://b00tc4mp.herokuapp.com/api/v2/users");
-         xhr.setRequestHeader('Authorization', 'Bearer ' + token)
+         xhr.open("PATCH", "http://localhost:8000/client/"+client.id);
          xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(changeDatos));
+        xhr.send(JSON.stringify(client));
     })
 }
 

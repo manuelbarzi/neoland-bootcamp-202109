@@ -9,10 +9,10 @@
     min-height: 100vh;
     max-width: 80vw;
     margin: 0 auto;
-    background-image:url('https://key0.cc/images/small/279669_3ae66d30edb418a5604b1db70314112b.png');
+    background-image:url('http://localhost:3000/clinica.png');
     background-repeat: no-repeat;
     background-position: top;
-    padding-top: 165px;
+    padding-top: 238px;
 }
 
 .title_landing {

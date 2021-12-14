@@ -6,5 +6,4 @@ module.exports = [
         "id": "H",
         "valor": "Hembra"
     }
-
 ]

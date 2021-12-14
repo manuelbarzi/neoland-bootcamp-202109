@@ -1,0 +1,36 @@
+.search_container{
+    margin: 15px;
+    padding: 15px;
+    border:solid 1px;
+    width: 50%;
+    height: 33%;
+}
+.search_container input{
+    display: flex;
+    flex-flow: column;
+    margin: 7px;
+}
+.search_container button{
+    padding:5px;
+    background-color: #66c0fbd9;
+    border: solid 1px white;
+    margin: 5px;
+}
+
+.result{
+    padding: 12px;
+    margin:5px;
+    list-style: none;
+    color: black;
+    border-bottom: solid 1px;
+}
+
+.title_search{
+    color: #093d7d;
+    font-size: 22px;
+}
+
+.search_input{
+    background: rgb(245 245 248 / 72%);
+    padding:5px;
+}
