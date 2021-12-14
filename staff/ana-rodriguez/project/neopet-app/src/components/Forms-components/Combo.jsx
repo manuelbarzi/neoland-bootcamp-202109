@@ -1,6 +1,6 @@
-function Combo({items,onSelect}){
+function Combo({items,onSelect,className='',campoPendiente=''}){
     return items?.length ?
-    <select onChange={(event) => onSelect(event)}>
+    <select className={className} onChange={(event) => onSelect(event)}>
         <option value=""></option>
         {
             items.map(
@@ -10,7 +10,10 @@ function Combo({items,onSelect}){
         }
     </select>
     :
-    null;
+    <select className={className} onChange={(event) => onSelect(event)}>
+    <option value=""></option>
+        <option disabled >Pendiente de campo {campoPendiente}</option>
+    </select>
 }
 
 export default Combo;

@@ -70,6 +70,8 @@
   margin-top: 15px;
   float: left;
   width: calc(100% - 350px);
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  overflow: hidden;
+  overflow-y: auto;
 }

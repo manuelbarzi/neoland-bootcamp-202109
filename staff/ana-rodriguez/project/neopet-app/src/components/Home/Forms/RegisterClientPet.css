@@ -1,36 +1,73 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Merienda&family=Nanum+Myeongjo&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
-.Register_cliPet{
-    margin: 15px;
-    padding: 15px;
-    border:solid 1px;
-    width: 50%;
-    height: 33%;
+
+
+.Register_cliPet {
+    margin: 15 px;
+    padding: 15 px;
+    border: solid 1px;
+    width: 80%;
 }
 
 .tit_ReCliPet {
-    color: rgb(6, 5, 12);
-    font-size: 25px;
+    font-family: 'Montserrat', sans-serif;
+    color: rgb(5 80 141);
+    font-size: 22px;
+    text-align: center;
+    margin: 12px;
 }
 
-
-
-.reClipet{
-    padding: 13px;
-    background: rgb(245 245 248 / 72%);
-    
+.input_reCliPet {
+    margin: 5px;
+    height: 40px;
+    width: 288px;
+    background-color: #fdf5f5f2;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    align-items: center;
+    border: 1px solid;
+    padding: 12px;
 }
 
-.button_CliPet{
+.button_CliPet {
     display: inline-block;
     padding: 8px;
     color: #fff;
     border: 2px solid rgb(10, 6, 6);
     text-align: center;
-    outline: none;
-    text-decoration: none;
-    transition: background-color 0.2s ease-out,
-                color 0.2s ease-out;
-    margin:30px;
-    cursor:pointer; 
+    margin: 30px;
+    cursor: pointer;
+}
+
+.input_CliPet {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+    margin: 15px;
+}
+
+.reCliPet{
+    margin: 5px;
+    height: 40px;
+    width: 288px;
+    background-color: #fdf5f5f2;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    align-items: center;
+    border: 1px solid;
+    padding: 12px;
+}
+.checkbox_label {
+    display: flex;
+    max-width: 298px;
+    justify-content: flex-start;
+    align-items: center;
+    min-width: 298px;
+}
+input[type="checkbox"].reCliPet {
+    height: 20px;
+    width: 20px;
+    margin: 15px 5px;
 }

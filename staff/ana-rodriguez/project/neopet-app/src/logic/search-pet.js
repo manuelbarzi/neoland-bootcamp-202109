@@ -1,7 +1,7 @@
 const searchPet = (pet, token) => {
 
     return new Promise((resolve,reject)=> {
-        const name = pet
+        const {name,client} = pet
         const xhr = new XMLHttpRequest
 
         xhr.onload = () => {
@@ -11,8 +11,16 @@ const searchPet = (pet, token) => {
             else if(status === 200) resolve (JSON.parse(responseText))
         
         }
-        xhr.open("GET", "http://localhost:8000/pets?name="+name)
-        xhr.send(JSON.stringify(pet))
+         let url;
+        if(name){
+            url="http://localhost:8000/pets?name="+name
+        }
+        else if(client) {
+            url="http://localhost:8000/pets?client="+client
+        }
+
+        xhr.open("GET", url );
+        xhr.send(JSON.stringify(pet));
     })
 }
 

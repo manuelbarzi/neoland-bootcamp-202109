@@ -1,5 +1,5 @@
 
-function modifyPets (pet, token){
+function modifyPets (petId, pet, token){
 
     return new Promise((resolve,reject)=> {
 
@@ -12,7 +12,7 @@ function modifyPets (pet, token){
             else if(status === 200) resolve (JSON.parse(responseText))
         }
 
-        xhr.open("PATCH", "http://localhost:8000/notes/"+pet.id)
+        xhr.open("PATCH", "http://localhost:8000/pets/"+petId)
         xhr.send(JSON.stringify(pet))
     })
 }

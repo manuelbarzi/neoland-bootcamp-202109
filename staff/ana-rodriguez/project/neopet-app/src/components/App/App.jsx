@@ -104,7 +104,7 @@ function App() {
                     <Route path="/home/clientPet/searchClient" element={<SearchClient/>}/>
                     <Route path="/home/clientPet/searchPet" element={<SearchPet/>}/>
                     {/* <Route path="/home/clientPet/resultClient" element={<ResultClient/>}/> */}
-                    {/* <Route path="/home/clientPet/file/:id" element={<FichaCliente/>}/> */}
+                    {/* <Route path="/home/clientPet/file/:clientId" element={<File/>}/> */}
                 </Route>  
                 <Route path="/home/profile" element={<Profile/>}>
                     <Route path="/home/profile/changepass" element={<ChangePass changePassVisual={changePassVisual} />} />

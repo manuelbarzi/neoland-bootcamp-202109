@@ -9,6 +9,7 @@ import './RegisterClientPet.css';
 function RegisterClientPet() {
     const [especies, setEspecies] = useState([]);
     const [razas, setRazas] = useState([]);
+    // const [mestizo, setMestizo] = useState(false);
     const [genero, setGenero] = useState([]);
     // const [petCount, setPetCount] = useState([0]);
 
@@ -36,6 +37,11 @@ function RegisterClientPet() {
     function razaSeleccionada(event){
         const id = event.target.value;
         valorComboRaza = id;
+        // if(valorComboRaza === "515"){
+        //     setMestizo(true);
+        // }else{
+        //     setMestizo(false);
+        // }
     }
 
     function generoSeleccionado(event){
@@ -75,6 +81,7 @@ function RegisterClientPet() {
             tatoo: event.target.tatoo.value,
             specie: valorComboEspecie,
             race: valorComboRaza,
+            mestizo: event.target.mestizo.value,//||'',
             hair: event.target.hair.value,
             layer: event.target.layer.value,
             genre: valorComboGenero,
@@ -107,27 +114,31 @@ function RegisterClientPet() {
         
     return <>
         <form className="Register_cliPet" onSubmit={(event) => registerClientsOnSubmit(event)}>
-            <h1 className="tit_ReCliPet">Registro Cliente y Mascota</h1>
+            <h1 className="tit_ReCliPet">Registro Propietario</h1>
             <div className="input_CliPet">
-                <input className="reCliPet" type="text" placeholder="Nombre" name="firstName" />
-                <input className="reCliPet" type="text" placeholder="Apellidos" name="lastName" />
-                <input className="reCliPet" type="text" placeholder="teléfono" name="phone" />
-                <input className="reCliPet" type="text" placeholder="Direccion" name="direction" />
-                <input className="reCliPet" type="text" placeholder="email" name="email" />
-                <input className="reCliPet" type="text" placeholder="documento de identidad" name="document" />
+                <input className="input_reCliPet" type="text" placeholder="Nombre" name="firstName" />
+                <input className="input_reCliPet" type="text" placeholder="Apellidos" name="lastName" />
+                <input className="input_reCliPet" type="text" placeholder="teléfono" name="phone" />
+                <input className="input_reCliPet" type="text" placeholder="Direccion" name="direction" />
+                <input className="input_reCliPet" type="text" placeholder="email" name="email" />
+                <input className="input_reCliPet" type="text" placeholder="documento de identidad" name="document" />
             </div>
             <hr></hr>
+            <h1 className="tit_ReCliPet">Registro Mascota</h1>
             <div className="input_CliPet">
                 <label>Nombre<input className="reCliPet" type="text" name="name" /></label>
                 <label>Chip<input className="reCliPet" type="text" name="chip" /></label>
                 <label>Tatuaje<input className="reCliPet" type="text" name="tatoo" /></label>
-                <label className="reCliPet">Especie:{<Combo items={especies} onSelect={(event) => especieSeleccionada(event)} />}</label>
-                <label className="reCliPet">Raza:<Combo items={razas} onSelect={(event) => razaSeleccionada(event)} /></label>
+                <label>Especie:{<Combo className="reCliPet" items={especies} onSelect={(event) => especieSeleccionada(event)} />}</label>
+                <label>Raza:<Combo className="reCliPet" items={razas} onSelect={(event) => razaSeleccionada(event)} campoPendiente="Especie"/></label>
+                <label>Tipo de Mestizo<input className="reCliPet" type="text" name="mestizo" /></label>
                 <label>Tipo de Pelo<input className="reCliPet" type="text" name="hair" /></label>
                 <label>Capa<input className="reCliPet" type="text" name="layer" /></label>
-                <label className="reCliPet">Género:<Combo items={genero} onSelect={(event) => generoSeleccionado(event)} /></label>
+                <label>Género:<Combo className="reCliPet" items={genero} onSelect={(event) => generoSeleccionado(event)} /></label>
                 <label>Nacimiento<input className="reCliPet" type="text" name="age" /></label>
-                <label>Pedigrí<input className="reCliPet" type="checkbox" name="pedigree" /></label>
+                <div className='checkbox_label'>                   
+                <label htmlFor="pedigree">Pedigrí</label><input className="reCliPet" id='pedigree' type="checkbox" name="pedigree" />
+                </div>
                 <label>Pasaporte<input className="reCliPet" type="text" name="passport" /></label>
                 <label>Alta<input className="reCliPet" type="text" name="alta" /></label>
                 <label>Baja<input className="reCliPet" type="text" name="baja" /></label>

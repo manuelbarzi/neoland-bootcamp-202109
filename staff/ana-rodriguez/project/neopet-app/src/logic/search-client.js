@@ -1,7 +1,7 @@
 function searchClient (client,token) {
 
     return new Promise((resolve,reject) => {
-        const {firstName,lastName}=client;
+        const {firstName,lastName, id}=client;
         const xhr = new XMLHttpRequest;
 
         xhr.onload = () => {
@@ -21,6 +21,9 @@ function searchClient (client,token) {
         }
         else if (lastName){
             url="http://localhost:8000/clients?lastName="+lastName
+        }
+        else if(id){
+            url="http://localhost:8000/clients?id="+id
         }
 
         xhr.open("GET",url)

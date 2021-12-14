@@ -14,7 +14,7 @@ return <>
 
         loginVisual(username, password)
     }}>
-        <h1 className="title">Login</h1>
+        <h1 className="title_login">Login</h1>
 
         <div className="login_inputs">
             <input className="login_input" type="text" placeholder="Username" name="username"/>

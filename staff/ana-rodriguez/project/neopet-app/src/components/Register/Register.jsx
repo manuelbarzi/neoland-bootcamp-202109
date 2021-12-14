@@ -20,7 +20,7 @@ return <>
 
         registerVisual(name, username, email, password)
     }}>
-        <h1 className="title">Register</h1>
+        <h1 className="title_register">Registro</h1>
         <div className="register_inputs">
             <input className="register_input" type="text" placeholder="user" name="name"/>
             <input className="register_input" type="text" placeholder="username" name="username"/>

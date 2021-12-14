@@ -2122,7 +2122,48 @@ export const getRazaById = function (id, callback){
             "id": 514,
             "especie": 7,
             "valor": "Waler"
-        }
+        },
+        //Mestizos
+        {
+            "id": 515,
+            "especie":0,
+            "valor":"Mestizo"
+        },
+        {
+            "id": 515,
+            "especie":1,
+            "valor":"Mestizo"
+        },
+        {
+            "id": 515,
+            "especie":2,
+            "valor":"Mestizo"
+        },
+        {
+            "id": 515,
+            "especie":3,
+            "valor":"Mestizo"
+        },
+        {
+            "id": 515,
+            "especie":4,
+            "valor":"Mestizo"
+        },
+        {
+            "id": 515,
+            "especie":5,
+            "valor":"Mestizo"
+        },
+        {
+            "id": 515,
+            "especie":6,
+            "valor":"Mestizo"
+        },
+        {
+            "id": 515,
+            "especie":7,
+            "valor":"Mestizo"
+        },
     ];
     const raza = razas.filter((raza)=>{
        return raza.especie===id

@@ -1,5 +1,6 @@
 import React from 'react';
 
+function File() {
 
 return<>
 <form className='file_container'>
@@ -8,3 +9,6 @@ return<>
     </div>
 </form>
 </>
+};
+
+export default File;
