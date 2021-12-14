@@ -12,7 +12,6 @@ function validateUsername(username) {
     if (!username.trim().length) throw new FormatError('username is empty or blank')
     if (/\r?\n|\r|\t| /g.test(username)) throw new FormatError('username has blank spaces')
     if (username.length < 4) throw new FormatError('username has less than 4 characters')
-
 }
 
 function validatePassword(password) {
@@ -64,6 +63,16 @@ function validateCallback(callback) {
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 }
 
+function validateItems(items) {
+    if (!items instanceof Array) throw new TypeError('Items are not an array')
+    if (items.length > 6 ) throw new TypeError('Items length is bigger than 6')
+}
+
+function validateChampion(champion) {
+    if (typeof champion !== 'string') throw new TypeError('Champion is not a string')
+}
+
+
 module.exports = {
     validateId,
     validateUsername,
@@ -71,5 +80,7 @@ module.exports = {
     validateOldPassword,
     validateData,
     validateName,
-    validateCallback
+    validateCallback,
+    validateItems,
+    validateChampion
 }

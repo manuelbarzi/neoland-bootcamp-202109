@@ -1,15 +1,6 @@
 const { validateId } = require('./helpers/validators')
-const { NotFoundError } = require('crowdaids-errors')
-const { mongoose: { ObjectId }, models: { User } } = require('crowdaids-data')
-
-/**
- * Authenticate a user in the application.
- *
- * @param {string} id The id to authenticate the retrieve user.
- * 
- * @throws {TypeError} When any of the arguments does not match the correct type.
- * @throws {Error} When any of the arguments does not contain the correct format.
- */
+const { NotFoundError } = require('eb-errors')
+const { mongoose: { ObjectId }, models: { User } } = require('eb-data')
 
 function retrieveUser(id) {
     validateId(id)

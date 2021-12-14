@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose')
+const { Schema, Types: { ObjectId } } = require('mongoose')
 
 const build = new Schema({
     champion: {
@@ -9,7 +9,12 @@ const build = new Schema({
     items: [{
         type: ObjectId,
         ref: 'Item'
-    }]
+    }],
+    userId: {      
+        type: ObjectId,
+        ref: 'user',
+        required: true
+    }
 
 })
 

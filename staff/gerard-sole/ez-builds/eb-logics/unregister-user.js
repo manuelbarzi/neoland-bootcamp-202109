@@ -2,16 +2,6 @@ const { mongoose, models: { User } } = require('eb-data')
 const { validateId, validatePassword } = require('./helpers/validators')
 const { NotFoundError, CredentialsError } = require('eb-errors')
 
-/**
- * Unregistering a user in the application.
- * 
- * @param {string} token The token to authenticate the retrieve user.
- * @param {Object} user The password of the user to be unregistered.
- * 
- * @throws {TypeError} When any of the arguments does not match the correct type.
- * @throws {Error} When any of the arguments does not contain the correct format.
- */
-
 function unregisterUser(id, password, callback) {
     validateId(id)
     validatePassword(password)

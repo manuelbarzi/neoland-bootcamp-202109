@@ -5,10 +5,6 @@ const item = new Schema( {
         type: String,
         required: true
     },
-    level: {
-        type: String,
-        enum: ['boots', 'mythic', 'epic', 'legendary'],
-    },
     key: {
         type: Number,
         required: true

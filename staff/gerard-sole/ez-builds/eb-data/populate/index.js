@@ -8,7 +8,6 @@ const { env: { MONGO_URL } } = process
 
     ; ( async () => {
         try {
-            debugger
             await mongoose.connect( MONGO_URL )
 
             // champions

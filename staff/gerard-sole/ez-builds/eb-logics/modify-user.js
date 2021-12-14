@@ -2,16 +2,6 @@ const { mongoose, models: { User } } = require('eb-data')
 const { validateId, validateData } = require('./helpers/validators')
 const { NotFoundError, ConflictError, CredentialsError } = require('eb-errors')
 
-/**
- * Updating the user data in the application.
- * 
- * @param {string} id The id to authenticate the retrieve user.
- * @param {Object} data All data of user to be changed.
- * 
- * @throws {TypeError} When any of the arguments does not match the correct type.
- * @throws {Error} When any of the arguments does not contain the correct format.
- */
-
 function modifyUser(id, data,) {
     validateId(id)
     validateData(data)
