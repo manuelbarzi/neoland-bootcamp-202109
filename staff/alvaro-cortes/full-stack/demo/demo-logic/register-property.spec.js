@@ -16,42 +16,45 @@ describe('registerProperty', () => {
 
     let user, userId
 
-    beforeEach(() => {
+    beforeEach(async () => {
         user = {
             name: 'Wendy Pan',
             username: 'wendypan',
             password: '123123123'
         }
 
-        return User.create({ ...user, password: bcrypt.hashSync(user.password) })
-            .then(user => userId = user.id)
+        const user2 = await User.create({ ...user, password: bcrypt.hashSync(user.password) })
+
+        userId = user2.id
     })
-debugger
-    it('should succeed on correct property and owner data', () => {
+    debugger
+    it('should succeed on correct property and owner data', async () => {
         const cadastre = '123ABC', address = 'Poblenou (Barcelona)', squareMeters = 60, price = 1500000, currency = 'euro'
 
-        return registerProperty(cadastre, address, squareMeters, price, currency, [userId])
-            .then(() => Property.findOne({ cadastre }))
-            .then(property => {
-                expect(property.address).to.equal(address)
-                expect(property.squareMeters).to.equal(squareMeters)
-                expect(property.price).to.equal(price)
-                expect(property.currency).to.equal(currency)
-                expect(property.owners).to.have.lengthOf(1)
-                expect(property.owners.map(id => id.toString())).to.include(userId)
-            })
+        await registerProperty(cadastre, address, squareMeters, price, currency, [userId])
+
+        const property = await Property.findOne({ cadastre })
+
+        expect(property.address).to.equal(address)
+        expect(property.squareMeters).to.equal(squareMeters)
+        expect(property.price).to.equal(price)
+        expect(property.currency).to.equal(currency)
+        expect(property.owners).to.have.lengthOf(1)
+        expect(property.owners.map(id => id.toString())).to.include(userId)
     })
 
-    it('should fail on correct property and missing owner data', () => {
+    it('should fail on correct property and missing owner data', async () => {
         const cadastre = '123ABC', address = 'Poblenou (Barcelona)', squareMeters = 60, price = 1500000, currency = 'euro'
 
-        return registerProperty(cadastre, address, squareMeters, price, currency, [userId, ObjectId().toString()])
-            .then(() => { throw new Error('should not reach this point') })
-            .catch(error => {
-                expect(error).to.exist
-                expect(error).to.be.instanceOf(NotFoundError)
-                expect(error.message).to.equal('one or more of the owners do not exist')
-            })
+        try {
+            await registerProperty(cadastre, address, squareMeters, price, currency, [userId, ObjectId().toString()])
+
+            throw new Error('should not reach this point')
+        } catch (error) {
+            expect(error).to.exist
+            expect(error).to.be.instanceOf(NotFoundError)
+            expect(error.message).to.equal('one or more of the owners do not exist')
+        }
     })
 
     it('should fail on non-string cadastre', () => {
@@ -86,8 +89,9 @@ debugger
         expect(() => registerProperty(cadastre, address, squareMeters, price, currency, [userId])).to.throw(FormatError, 'string is empty or blank')
     })
 
-    after(() =>
-        Promise.all([User.deleteMany(), Property.deleteMany()])
-            .then(() => mongoose.disconnect())
-    )
+    after(async () => {
+        await Promise.all([User.deleteMany(), Property.deleteMany()])
+        
+        await mongoose.disconnect()
+    })
 })
