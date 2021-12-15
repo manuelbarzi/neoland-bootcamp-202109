@@ -60,12 +60,58 @@ function validateString(string) {
     if (!string.trim().length) throw new FormatError('string is empty or blank')
 }
 
+function validateItemId(itemId) {
+    if (typeof itemId !== 'string') throw new TypeError('id is not a string')
+    if (!itemId.trim().length) throw new FormatError('id is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(itemId)) throw new FormatError('id has blank spaces')
+}
+
+function validateStore(store) {
+    if (typeof store !== 'string') throw new TypeError('store is not a string')
+    if (!store.trim().length) throw new FormatError('store is empty or blank')
+    if (store.trim() !== store) throw new FormatError('blank spaces around store')
+}
+
+function validateCollection(collection) {
+    if (typeof collection !== 'string') throw new TypeError('collection is not a string')
+    if (!collection.trim().length) throw new FormatError('collection is empty or blank')
+    if (collection.trim() !== collection) throw new FormatError('blank spaces around collection')
+}
+
+function validatePrice(price) {
+    if (typeof price !== 'string') throw new TypeError('price is not a string')
+    if (!price.trim().length) throw new FormatError('price is empty or blank')
+    if (price.trim() !== price) throw new FormatError('blank spaces around price')
+}
+
+function validateUrl(url) {
+    if (typeof url !== 'string') throw new TypeError('url is not a string')
+    if (!url.trim().length) throw new FormatError('url is empty or blank')
+    if (url.trim() !== url) throw new FormatError('blank spaces around url')
+}
+
+function validateDescription(description) {
+    if (typeof description !== 'string') throw new TypeError('description is not a string')
+    if (!description.trim().length) throw new FormatError('description is empty or blank')
+    if (description.trim() !== description) throw new FormatError('blank spaces around description')
+}
+
 function validateDate(date) {
     if (!(date instanceof Date)) throw new TypeError('date is not a date')
 }
 
 function validateArray(array) {
     if (!(array instanceof Array)) throw new TypeError(`${array} is not an array`)
+}
+
+function validateImages(images) {
+    if (!(images instanceof Array)) throw new TypeError('images is not an array')
+    if (!images.length) throw new FormatError('images is empty or blank')
+}
+
+function validateColors(colors) {
+    if (!(colors instanceof Array)) throw new TypeError('colors is not an array')
+    if (!colors.length) throw new FormatError('colors is empty or blank')
 }
 
 function validateNumber(number) {
@@ -75,25 +121,29 @@ function validateNumber(number) {
 function validateItem(item) {
     if (typeof item !== 'object' || item.constructor.name !== 'Object') throw new TypeError('item is not an object')
 
-    const { id, name, images, price, url, description, colors } = item
+    const { id, store, collection, name, images, price, url, description, colors } = item
     
-    validateString(id)
+    validateItemId(id)
+
+    validateStore(store)
+
+    validateCollection(collection)
 
     validateName(name)
 
     if (typeof images !== 'undefined')
-        validateArray(images)
+        validateImages(images)
 
     if (typeof price !== 'undefined')
-        validateString(price)
+        validatePrice(price)
 
-    validateArray(url)
+    validateUrl(url)
 
     if (typeof description !== 'undefined')
-        validateString(description)
+        validateDescription(description)
 
     if (typeof colors !== 'undefined')
-        validateArray(colors)
+        validateColors(colors)
 }
 
 function validateEmail(email) {
@@ -115,5 +165,13 @@ module.exports = {
     validateArray,
     validateNumber,
     validateItem,
-    validateEmail
+    validateEmail,
+    validateItemId,
+    validateImages,
+    validatePrice,
+    validateUrl,
+    validateDescription,
+    validateColors,
+    validateStore,
+    validateCollection
 }

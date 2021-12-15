@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --timeout 5000 *.spec.js",
+    "test": "mocha --timeout 5000",
     "test-inspect": "mocha --timeout 5000 --inspect *.spec.js",
     "test-inspect-brk": "mocha --timeout 5000 --inspect-brk *.spec.js",
-    "test-coverage": "nyc --reporter=html --reporter=text mocha --timeout 5000 *.spec.js"
+    "test-coverage": "nyc --reporter=html --reporter=text mocha --timeout 5000 *.spec.js",
+    "debug": "mocha --debug"
   },
   "keywords": [],
   "author": "",

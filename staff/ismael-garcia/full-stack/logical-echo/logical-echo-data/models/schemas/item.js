@@ -6,6 +6,14 @@ const item = new Schema({
         required: true,
         unique: true
     },
+    store: {
+        type: String,
+        required: true
+    },
+    collection: {
+        type: String,
+        required: true
+    },
     name: {
         type: String,
         required: true

@@ -1,8 +1,9 @@
-const { validateString, validateEmail } = require('./helpers/validators')
+const { validateItemId, validateEmail } = require('./helpers/validators')
 const { models: { Subscription } } = require('logical-echo-data')
+const { ConflictError } = require('logical-echo-errors')
 
 function registerSubscription(id, email) {
-    validateString(id)
+    validateItemId(id)
     validateEmail(email)
 
     return (async () => {
@@ -10,6 +11,9 @@ function registerSubscription(id, email) {
             await Subscription.create({ user_id: id, email })
 
         } catch (error) {
+            if (error.code === 11000)
+                throw new ConflictError(`subscription with id ${id} already exists`)
+
             throw error 
         }
     })()

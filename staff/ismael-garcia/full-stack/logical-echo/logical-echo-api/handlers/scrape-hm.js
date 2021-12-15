@@ -1,71 +1,108 @@
 const puppeteer = require("puppeteer");
 // const { registerItem } = require('./register-item');
 const { writeFile } = require("fs").promises;
+const logger = require("../utils/my-logger");
 
 (async () => {
-    try {
-        console.log("start scraping")
+  try {
+    logger.debug("start scraping");
 
-        const browser = await puppeteer.launch()
+    const browser = await puppeteer.launch();
 
-        const page = await browser.newPage()
+    const page = await browser.newPage();
 
-        // page.setUserAgent(
-        //   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3419.0 Safari/537.36"
-        // );
+    await page.setDefaultNavigationTimeout(0);
 
-        await page.goto('https://www2.hm.com/es_es/search-results.html?q=conscious+mujer')
+    page.setUserAgent(
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3419.0 Safari/537.36"
+    );
 
-        // await autoScroll(page)
+    await page.goto(
+      "https://www2.hm.com/es_es/search-results.html?q=conscious+mujer"
+    );
 
-        const hrefs = await page.evaluate(() => {
-            const anchors = Array.from(document.querySelectorAll('.item-link'))
+    // await autoScroll(page)
 
-            const mappedHrefs = anchors.map((anchor) => anchor.href)
+    await page.waitForSelector(".item-link");
 
-            return mappedHrefs
-        })
+    const hrefs = await page.evaluate(() => {
+        const anchors = Array.from(document.querySelectorAll(".item-link"));
 
-        const promises = hrefs.map(async (href) => {
-            await page.goto(href)
+        const mappedHrefs = anchors.map((anchor) => anchor.href);
 
-            // await autoScroll(page)
+        return mappedHrefs;
+      });
 
-            return await page.evaluate(() => {
-                const urlParts = window.location.href.split("=")
-                const id = `hm${urlParts[1]}`
+    const promises = hrefs.map(async (href) => {
+      logger.debug(`scraping page ${href}`)
 
-                const name = document.querySelector('.primary.product-item-headline').innerText
+      const page = await browser.newPage();
 
-                const imgs = Array.from(document.querySelectorAll('.product-detail-thumbnail-image'))
-                const images = imgs.map(image => image.src)
+      await page.setDefaultNavigationTimeout(0);
 
-                const price = document.querySelector('.ProductPrice-module--productItemPrice__2i2Hc > span').innerText
+      page.setUserAgent(
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3419.0 Safari/537.36"
+      );
 
-                const url = window.location.href
+      await page.goto(href);
 
-                const description = document.querySelector('.pdp-description-text').innerText
+      // await autoScroll(page)
 
-                const colorSpans = Array.from(document.querySelectorAll('.filter-option.miniature'))
-                const colors = colorSpans.map(span => span.title)
+      try {
+        const item = await page.evaluate(() => {
+          const urlPart = window.location.href.slice(-15, -5)
+          const id = `hm${urlPart}`
 
-                const item = { id, name, images, price, url, description, colors }
+          const name = document.querySelector(
+            ".primary.product-item-headline"
+          ).innerText;
 
-                return item
-            })
-        })
+          const imgs = Array.from(
+            document.querySelectorAll(".product-detail-thumbnail-image")
+          );
+          const images = imgs.map((image) => image.src);
 
-        const items = await Promise.all(promises)
+          const price = document.querySelector(
+            ".ProductPrice-module--productItemPrice__2i2Hc span"
+          ).innerText;
 
-        await writeFile("items-hm.json", JSON.stringify(items))
+          const url = window.location.href;
 
-        await browser.close()
+          const description = document.querySelector(
+            ".pdp-description-text"
+          ).innerText;
 
-        console.log("end scraping")
-    } catch (error) {
-        console.error(error)
-    }
-})()
+          const colorSpans = Array.from(
+            document.querySelectorAll(".filter-option.miniature")
+          );
+          const colors = colorSpans.map((span) => span.title);
+
+          const item = { id, name, images, price, url, description, colors };
+
+          return item;
+        });
+
+        logger.debug(`scraped item ${JSON.stringify(item)}`)
+
+        return item
+      } catch (error) {
+        logger.error(error);
+      }
+    });
+
+    const items = await Promise.all(promises);
+
+    logger.debug(`scraped item ${JSON.stringify(items)}`)
+
+    await writeFile("items-hm.json", JSON.stringify(items, null, 4));
+
+    await browser.close();
+
+    logger.debug("end scraping");
+  } catch (error) {
+    logger.error(error);
+  }
+})();
 
 // async function autoScroll(page) {
 //     await page.evaluate(async () => {

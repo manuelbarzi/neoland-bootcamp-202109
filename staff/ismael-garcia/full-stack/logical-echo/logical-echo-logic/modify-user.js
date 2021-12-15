@@ -13,28 +13,28 @@ function modifyUser(id, data) {
     validateData(data)
 
     return (async () => {
-        const user = await User.findById(id).lean()
-        
-        if (!user) throw new NotFoundError(`user with id ${id} not found`)
-        
-        const { password } = data 
-    
-        if (password !== user.password) throw new CredentialsError('wrong password')
-        
-        if (data.newPassword) {
-            password = data.newPassword 
-
-            delete data.newPassword 
-        }
-
-        for (const key in data) {
-            if (key === 'newPassword')
-                user[key] = bcrypt.hashSync(data[key])
-            else
-                user[key] = data[key]        
-        }
-        
         try {
+            const user = await User.findById(id).lean()
+            debugger 
+            if (!user) throw new NotFoundError(`user with id ${id} not found`)
+            
+            const { password } = data 
+        
+            if (password !== user.password) throw new CredentialsError('wrong password')
+            
+            if (data.newPassword) {
+                password = data.newPassword 
+
+                delete data.newPassword 
+            }
+
+            for (const key in data) {
+                if (key === 'newPassword')
+                    user[key] = bcrypt.hashSync(data[key])
+                else
+                    user[key] = data[key]        
+            }
+        
             await user.save()
         
         } catch (error) {
