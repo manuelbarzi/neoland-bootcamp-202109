@@ -1,12 +1,12 @@
-const registerUser = require('./helpers/register-user')
-const retrieveUser = require('./helpers/retrieve-user')
+const registerUser = require('./register-user')
+const retrieveUser = require('./retrieve-user')
 const modifyUser = require('./modify-user')
-const unregisterUser = require('./helpers/unregister-user')
+const unregisterUser = require('./unregister-user')
 const authenticateUser = require('./authenticate-user')
-const searchVehicles = require('./helpers/search-vehicles')
 const retrieveChampion = require('./retrieve-champion')
 const retrieveItem = require('./retrieve-item')
 const createBuild = require('./create-build')
+const deleteBuild = require('./delete-build')
 
 module.exports = {
     registerUser,
@@ -14,8 +14,8 @@ module.exports = {
     modifyUser,
     unregisterUser,
     authenticateUser,
-    searchVehicles,
     retrieveChampion,
     retrieveItem,
     createBuild,
+    deleteBuild
 }

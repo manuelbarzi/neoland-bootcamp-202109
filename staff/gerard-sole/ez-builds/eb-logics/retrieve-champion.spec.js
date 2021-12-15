@@ -3,7 +3,6 @@ require('dotenv').config()
 const { expect } = require('chai')
 const retrieveChampion = require('./retrieve-champion')
 const { mongoose, models: { Champion } } = require('eb-data')
-const { Types: { ObjectId } } = mongoose
 const { NotFoundError, FormatError } = require('eb-errors')
 
 const { env: { MONGO_URL } } = process
