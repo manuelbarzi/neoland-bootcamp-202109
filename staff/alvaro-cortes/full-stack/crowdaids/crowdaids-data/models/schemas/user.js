@@ -25,6 +25,19 @@ const user = new Schema({
             }
         ]
     },
+    email: {
+        type: String,
+        required: true,
+        unique: true,
+        validate: [
+            {
+                validator(email) {
+                    return email.includes('@')
+                },
+                message: 'Is not an email'
+            }
+        ]
+    },
     password: {
         type: String,
         required: true,

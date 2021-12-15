@@ -1,6 +1,6 @@
 const { validateId } = require('./helpers/validators')
 const { NotFoundError } = require('crowdaids-errors')
-const { mongoose: { ObjectId }, models: { User } } = require('crowdaids-data')
+const { models: { User } } = require('crowdaids-data')
 
 /**
  * Authenticate a user in the application.
@@ -14,20 +14,21 @@ const { mongoose: { ObjectId }, models: { User } } = require('crowdaids-data')
 function retrieveUser(id) {
     validateId(id)
 
-    return User.findById(id)
-        .then(user => {
-            if (!user) throw new NotFoundError('Wrong ID')
+    return (async () => {
+        const user = await User.findById(id)
 
-            user.id = user._id.toString()
+        if (!user) throw new NotFoundError('Wrong ID')
 
-            delete user._id
+        user.id = user._id.toString()
 
-            delete user.password
+        delete user._id
 
-            delete user.__v
+        delete user.password
 
-            return user
-        })
+        delete user.__v
+
+        return user
+    })()
 }
 
 module.exports = retrieveUser

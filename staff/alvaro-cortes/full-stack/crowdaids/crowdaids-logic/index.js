@@ -3,8 +3,12 @@ const retrieveUser = require('./retrieve-user')
 const modifyUser = require('./modify-user')
 const unregisterUser = require('./unregister-user')
 const authenticateUser = require('./authenticate-user')
-const searchVehicles = require('./search-vehicles')
-const addCreditCardToUser = require('./add-credit-card-to-user')
+const searchBeaches = require('./search-beaches')
+const retrieveSwellConditions = require('./retrieve-swell-conditions')
+const retrieveSwellConditionsText = require('./retrieve-swell-conditions-text')
+const retrieveWeatherConditions = require('./retrieve-weather-conditions')
+const retrieveWindConditions = require('./retrieve-wind-conditions')
+const retrieveTides = require('./retrieve-tides')
 
 module.exports = {
     registerUser,
@@ -12,6 +16,10 @@ module.exports = {
     modifyUser,
     unregisterUser,
     authenticateUser,
-    searchVehicles,
-    addCreditCardToUser
+    searchBeaches,
+    retrieveSwellConditions,
+    retrieveSwellConditionsText,
+    retrieveWeatherConditions,
+    retrieveWindConditions,
+    retrieveTides
 }

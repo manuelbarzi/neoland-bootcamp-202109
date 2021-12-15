@@ -21,6 +21,7 @@
     "bcryptjs": "^2.4.3",
     "crowdaids-data": "file:../crowdaids-data",
     "crowdaids-errors": "file:../crowdaids-errors",
+    "node-fetch": "^2.6.6",
     "xmlhttprequest": "^1.8.0"
   }
 }

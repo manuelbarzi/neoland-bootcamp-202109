@@ -3,7 +3,11 @@ module.exports = {
     authenticateUser: require('./authenticate-user'),
     retrieveUser: require('./retrieve-user'),
     modifyUser: require('./modify-user'),
-    searchVehicles: require('./search-vehicles'),
+    searchBeaches: require('./search-beaches'),
     unregisterUser: require('./unregister-user'),
-    addCreditCardToUser: require('./add-credit-card-to-user')
+    retrieveSwellConditions: require('./retrieve-swell-conditions'),
+    retrieveSwellConditionsText: require('./retrieve-swell-conditions-text'),
+    retrieveWeatherConditions: require('./retrieve-weather-conditions'),
+    retrieveWindConditions: require('./retrieve-wind-conditions'),
+    retrieveTides: require('./retrieve-tides')
 }

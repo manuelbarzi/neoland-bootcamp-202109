@@ -7,6 +7,11 @@ function validateId(id) {
     if (id.length < 24) throw new FormatError('id has less than 24 characters')
 }
 
+function validateToken(token) {
+    if (typeof token !== 'string') throw new TypeError('token is not a string')
+    if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
+}
+
 function validateUsername(username) {
     if (typeof username !== 'string') throw new TypeError('username is not a string')
     if (!username.trim().length) throw new FormatError('username is empty or blank')
@@ -24,21 +29,27 @@ function validatePassword(password) {
 
 function validateOldPassword(oldPassword) {
     if (typeof oldPassword !== 'string') throw new TypeError('old password is not a string')
-        if (!oldPassword.trim().length) throw new FormatError('old password is empty or blank')
-        if (/\r?\n|\r|\t| /g.test(oldPassword)) throw new FormatError('old password has blank spaces')
-        if (oldPassword.length < 8) throw new FormatError('old password has less than 8 characters')
+    if (!oldPassword.trim().length) throw new FormatError('old password is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(oldPassword)) throw new FormatError('old password has blank spaces')
+    if (oldPassword.length < 8) throw new FormatError('old password has less than 8 characters')
 }
 
 function validateName(name) {
     if (typeof name !== 'string') throw new TypeError('name is not a string')
-        if (!name.trim().length) throw new FormatError('name is empty or blank')
-        if (name.trim() !== name) throw new FormatError('blank spaces around name')
+    if (!name.trim().length) throw new FormatError('name is empty or blank')
+    if (name.trim() !== name) throw new FormatError('blank spaces around name')
+}
+
+function validateEmail(email) {
+    if (typeof email !== "string") throw new TypeError("email is not a string")
+    if (!email.trim().length) throw new FormatError("email is empty or blank")
+    if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) throw new FormatError("is not an e-mail")
 }
 
 function validateData(data) {
     if (typeof data !== 'object' || data.constructor.name !== 'Object') throw new TypeError('data is not an object')
 
-    const { name, username, password, oldPassword } = data
+    const { name, username, email, password, oldPassword } = data
 
     if (typeof name !== 'undefined') {
         validateName(name)
@@ -46,6 +57,10 @@ function validateData(data) {
 
     if (typeof username !== 'undefined') {
         validateUsername(username)
+    }
+
+    if (typeof email !== 'undefined') {
+        validateEmail(email)
     }
 
     if (typeof oldPassword === 'undefined' && typeof password !== 'undefined') throw new ConflictError('old password is not defined')
@@ -74,7 +89,7 @@ function validateCreditCardNumber(number) {
 
 function validateDate(date) {
     if (!(date instanceof Date)) throw new TypeError('date is not a date')
-} 
+}
 
 function validateCreditCardCVV(cvv) {
     if (typeof cvv !== 'string') throw new TypeError('cvv is not a string')
@@ -86,6 +101,7 @@ function validateCreditCardCVV(cvv) {
 
 module.exports = {
     validateId,
+    validateToken,
     validateUsername,
     validatePassword,
     validateOldPassword,
@@ -94,5 +110,6 @@ module.exports = {
     validateCallback,
     validateCreditCardNumber,
     validateDate,
-    validateCreditCardCVV
+    validateCreditCardCVV,
+    validateEmail
 }

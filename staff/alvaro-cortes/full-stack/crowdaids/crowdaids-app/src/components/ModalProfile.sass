@@ -1,0 +1,40 @@
+@import ./Modal
+    
+.modal--profile 
+    @include format($min-width: 130px, $max-width: 130px, $min-height: 100px, $max-height: 200px, $back: #F7F7FF, $top: 90, $left: none, $animation: show 1s)
+    right: 0px
+   
+
+@keyframes show 
+    
+    0%
+        opacity: 0
+    
+    50%
+        opacity: 1
+
+@keyframes transfo 
+
+    from 
+        transform: translateX(100px) translateY(0px)
+    to 
+        transform: translateX(-250px) translateY(0px)
+
+@keyframes show 
+    
+    0%
+        opacity: 0
+    
+    50%
+        opacity: 1
+    
+
+
+@keyframes transfo 
+
+    from 
+        transform: translateX(10px) translateY(0px)
+    to 
+        transform: translateX(0px) translateY(0px)
+    
+

@@ -1,0 +1,17 @@
+.welcome, .register-ok, .welcome__details, .welcome__results {
+    font-family: 'Noto Sans', sans-serif;
+    padding: 30px;
+    color: brown;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.welcome {
+    box-shadow: 2px 2px 5px rgb(56, 56, 56);
+}
+
+.welcome__results--ul {
+    cursor: pointer;
+    list-style: none;
+}

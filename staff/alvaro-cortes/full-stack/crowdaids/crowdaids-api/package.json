@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "crowdaids-data": "file:../crowdaids-data",
     "crowdaids-errors": "file:../crowdaids-errors",
     "crowdaids-logic": "file:../crowdaids-logic",

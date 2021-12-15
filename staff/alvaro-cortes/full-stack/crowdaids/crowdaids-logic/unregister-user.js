@@ -1,6 +1,7 @@
-const { mongoose, models: { User } } = require('crowdaids-data')
+const { models: { User } } = require('crowdaids-data')
 const { validateId, validatePassword } = require('./helpers/validators')
 const { NotFoundError, CredentialsError } = require('crowdaids-errors')
+const bcrypt = require('bcryptjs')
 
 /**
  * Unregistering a user in the application.
@@ -12,20 +13,23 @@ const { NotFoundError, CredentialsError } = require('crowdaids-errors')
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
 
-function unregisterUser(id, password, callback) {
+function unregisterUser(id, password) {
     validateId(id)
     validatePassword(password)
 
-    return User.findById(id)
-        .then(user => {
-            if (!user) throw new NotFoundError(`user with id ${id} not found`)
-            
-            if (user.password === password) {
-                return user.remove(id)
-                    .then(() => 'User deleted successfully')
-            } else throw new CredentialsError('Wrong password')
-        })
+    return (async () => {
+        const user = await User.findById(id)
 
+        if (!user) throw new NotFoundError(`user with id ${id} not found`)
+
+        if (user.password !== password) throw new CredentialsError('Wrong password')
+       
+        else if (!bcrypt.compareSync(password, user.password)) {
+            await user.remove()
+
+            return ('User deleted successfully')
+        }
+    })()
 }
 
 module.exports = unregisterUser

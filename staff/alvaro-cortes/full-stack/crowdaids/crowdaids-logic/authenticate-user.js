@@ -17,12 +17,13 @@ function authenticateUser(username, password) {
     validateUsername(username)
     validatePassword(password)
 
-    return User.findOne({ username })
-        .then(user => {
-            if (!user || !bcrypt.compareSync(password, user.password)) throw new CredentialsError('Wrong credentials')
+    return (async () => {
+        const user = await User.findOne({ username })
+    
+        if (!user || !bcrypt.compareSync(password, user.password)) throw new CredentialsError('Wrong credentials')
 
-            return user.id
-        })
+        return user.id
+    })()
 }
 
 module.exports = authenticateUser

@@ -16,118 +16,125 @@ describe('unregisterUser', () => {
 
     let user, userId
 
-    beforeEach(() => {
+    beforeEach(async () => {
         user = {
             name: 'Wendy Pan',
             username: 'wendypan',
+            email: 'wendy@pan.com',
             password: '123123123'
         }
 
-        return User.create(user)
-            .then(user => userId = user.id)
+        const user2 = await User.create(user)
+
+        userId = user2.id
     })
 
-    describe('When user already exists', () => {
+    it('Should succeed when user is deleted from data base', async () => {
+        const { password } = user
 
-        it('Should succeed when user is deleted from data base', () => {
-            const { password } = user
+        try {
+            const response = await unregisterUser(userId, password)
 
-            return unregisterUser(userId, password)
-                .then(response => {
-                    expect(response).to.equal('User deleted successfully')
-                })
-                .catch(() => { throw new CredentialsError('Wrong password') })
-        })
+            expect(response).to.equal('User deleted successfully')
+        } catch (error) {
+            throw new CredentialsError('Wrong password')
+        }
+    })
 
-        it('Should fail with wrong password', () => {
+    it('Should fail with wrong password', async () => {
 
-            return unregisterUser(userId, '11111111')
-                .then(() => { throw new Error('Should not reach this point.') })
-                .catch(error => {
-                    expect(error).to.exist
-                    expect(error).to.be.instanceOf(CredentialsError)
-                    expect(error.message).to.equal('Wrong password')
-                })
-        })
+        try {
+            await unregisterUser(userId, '11111111')
 
-        it('Should fail when user id does not correspond to any user', () => {
-            const userId = ObjectId().toString()
+            throw new Error('Should not reach this point.')
+        } catch (error) {
+            expect(error).to.exist
+            expect(error).to.be.instanceOf(CredentialsError)
+            expect(error.message).to.equal('Wrong password')
+        }
+    })
 
-            const { password } = user
+    it('Should fail when user id does not correspond to any user', async () => {
+        const userId = ObjectId().toString()
 
-            return unregisterUser(userId, password)
-                .then(() => { throw new Error('Should not reach this point.') })
-                .catch(error => {
-                    expect(error).to.exist
-                    expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.equal(`user with id ${userId} not found`)
-                })
-        })
+        const { password } = user
 
-        describe('When parameters are note valid', () => {
-            describe('When id is not valid', () => {
-                it('should fail when id is not a string', () => {
-                    expect(() => unregisterUser(true, {}, () => { })).to.throw(TypeError, 'id is not a string')
+        try {
+            await unregisterUser(userId, password)
 
-                    expect(() => unregisterUser(123, {}, () => { })).to.throw(TypeError, 'id is not a string')
+            throw new Error('Should not reach this point.')
+        } catch (error) {
+            expect(error).to.exist
+            expect(error).to.be.instanceOf(NotFoundError)
+            expect(error.message).to.equal(`user with id ${userId} not found`)
+        }
+    })
 
-                    expect(() => unregisterUser({}, {}, () => { })).to.throw(TypeError, 'id is not a string')
+    describe('When parameters are note valid', () => {
+        describe('When id is not valid', () => {
+            it('should fail when id is not a string', () => {
+                expect(() => unregisterUser(true, {}, () => { })).to.throw(TypeError, 'id is not a string')
 
-                    expect(() => unregisterUser(() => { }, {}, () => { })).to.throw(TypeError, 'id is not a string')
+                expect(() => unregisterUser(123, {}, () => { })).to.throw(TypeError, 'id is not a string')
 
-                    expect(() => unregisterUser([], {}, () => { })).to.throw(TypeError, 'id is not a string')
-                })
+                expect(() => unregisterUser({}, {}, () => { })).to.throw(TypeError, 'id is not a string')
 
-                it('should fail when id is empty or blank', () => {
-                    expect(() => unregisterUser('', {}, () => { })).to.throw(FormatError, 'id is empty or blank')
+                expect(() => unregisterUser(() => { }, {}, () => { })).to.throw(TypeError, 'id is not a string')
 
-                    expect(() => unregisterUser('   ', {}, () => { })).to.throw(FormatError, 'id is empty or blank')
-                })
-
-                it('should fail when id has spaces', () => {
-                    expect(() => unregisterUser(' abcd1234abcd1234abcd1234 ', {}, () => { })).to.throw(FormatError, 'blank spaces around id')
-
-                    expect(() => unregisterUser('abcd 1234abc d1234abc d1234', {}, () => { })).to.throw(FormatError, 'blank spaces around id')
-                })
-
-                it('should fail when id length is different from 24 characters', () => {
-                    expect(() => unregisterUser('abc', {}, () => { })).to.throw(FormatError, 'id has less than 24 characters')
-                })
+                expect(() => unregisterUser([], {}, () => { })).to.throw(TypeError, 'id is not a string')
             })
 
-            describe('When password is not valid', () => {
-                it('Should fail when password is not a string', () => {
-                    expect(() => unregisterUser(userId, true, () => { })).to.throw(TypeError, 'password is not a string')
+            it('should fail when id is empty or blank', () => {
+                expect(() => unregisterUser('', {}, () => { })).to.throw(FormatError, 'id is empty or blank')
 
-                    expect(() => unregisterUser(userId, 123, () => { })).to.throw(TypeError, 'password is not a string')
+                expect(() => unregisterUser('   ', {}, () => { })).to.throw(FormatError, 'id is empty or blank')
+            })
 
-                    expect(() => unregisterUser(userId, {}, () => { })).to.throw(TypeError, 'password is not a string')
+            it('should fail when id has spaces', () => {
+                expect(() => unregisterUser(' abcd1234abcd1234abcd1234 ', {}, () => { })).to.throw(FormatError, 'blank spaces around id')
 
-                    expect(() => unregisterUser(userId, () => { }, () => { })).to.throw(TypeError, 'password is not a string')
+                expect(() => unregisterUser('abcd 1234abc d1234abc d1234', {}, () => { })).to.throw(FormatError, 'blank spaces around id')
+            })
 
-                    expect(() => unregisterUser(userId, [], () => { })).to.throw(TypeError, 'password is not a string')
-                })
+            it('should fail when id length is different from 24 characters', () => {
+                expect(() => unregisterUser('abc', {}, () => { })).to.throw(FormatError, 'id has less than 24 characters')
+            })
+        })
 
-                it('Should fail when password is empty', () => {
-                    expect(() => unregisterUser(userId, '', () => { })).to.throw(FormatError, 'password is empty or blank')
+        describe('When password is not valid', () => {
+            it('Should fail when password is not a string', () => {
+                expect(() => unregisterUser(userId, true, () => { })).to.throw(TypeError, 'password is not a string')
 
-                    expect(() => unregisterUser(userId, '   ', () => { })).to.throw(FormatError, 'password is empty or blank')
-                })
+                expect(() => unregisterUser(userId, 123, () => { })).to.throw(TypeError, 'password is not a string')
 
-                it('Should fail when password has spaces around', () => {
-                    expect(() => unregisterUser(userId, ' 123123123 ', () => { })).to.throw(FormatError, 'password has blank spaces')
+                expect(() => unregisterUser(userId, {}, () => { })).to.throw(TypeError, 'password is not a string')
 
-                    expect(() => unregisterUser(userId, '1231 23123', () => { })).to.throw(FormatError, 'password has blank spaces')
-                })
+                expect(() => unregisterUser(userId, () => { }, () => { })).to.throw(TypeError, 'password is not a string')
 
-                it('Should fail when password length is less than 8 characters', () => {
-                    expect(() => unregisterUser(userId, '1231', () => { })).to.throw(FormatError, 'password has less than 8 characters')
-                })
+                expect(() => unregisterUser(userId, [], () => { })).to.throw(TypeError, 'password is not a string')
+            })
+
+            it('Should fail when password is empty', () => {
+                expect(() => unregisterUser(userId, '', () => { })).to.throw(FormatError, 'password is empty or blank')
+
+                expect(() => unregisterUser(userId, '   ', () => { })).to.throw(FormatError, 'password is empty or blank')
+            })
+
+            it('Should fail when password has spaces around', () => {
+                expect(() => unregisterUser(userId, ' 123123123 ', () => { })).to.throw(FormatError, 'password has blank spaces')
+
+                expect(() => unregisterUser(userId, '1231 23123', () => { })).to.throw(FormatError, 'password has blank spaces')
+            })
+
+            it('Should fail when password length is less than 8 characters', () => {
+                expect(() => unregisterUser(userId, '1231', () => { })).to.throw(FormatError, 'password has less than 8 characters')
             })
         })
     })
 
-    after(() => 
-        User.deleteMany()
-            .then(() => mongoose.disconnet))
+    after(async () => {
+        await User.deleteMany()
+
+        await mongoose.disconnect()
+    })
 })

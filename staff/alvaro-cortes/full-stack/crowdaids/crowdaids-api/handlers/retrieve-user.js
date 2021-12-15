@@ -1,21 +1,15 @@
 const { retrieveUser } = require('crowdaids-logic')
-const jwt = require('jsonwebtoken')
-const { env: { SECRET } } = process
-const handleError = require('./helpers/handle-error')
+const { handleError, validateAuthorizationAndExtractPayload } = require('./helpers')
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
     const { headers: { authorization } } = req
 
     try {
-        const [, token] = authorization.split(' ')
+        const { sub: id } = validateAuthorizationAndExtractPayload(authorization)
 
-        const payload = jwt.verify(token, SECRET)
-
-        const { sub: id } = payload
-
-        retrieveUser(id)
-            .then(user => res.json(user))
-            .catch(error => handleError(error, res))
+        const user = await retrieveUser(id)
+        
+        res.json(user)
     } catch (error) {
         handleError(error, res)
     }

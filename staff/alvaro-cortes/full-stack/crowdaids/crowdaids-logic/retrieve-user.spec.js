@@ -16,39 +16,42 @@ describe('retrieveUser', () => {
 
     let user, userId
 
-    beforeEach(() => {
+    beforeEach(async () => {
         user = {
             name: 'Wendy Pan',
             username: 'wendypan',
+            email: 'wendy@pan.com',
             password: '123123123'
         }
 
-        return User.create(user)
-            .then(user => userId = user.id)
+        const user2 = await User.create(user)
+
+        userId = user2.id
     })
 
-    it('Should succed with correct id', () => {
+    it('Should succeed with correct id for an already existing user', async () => {
         const { name, username } = user
 
-        return retrieveUser(userId)
-            .then(user => {
-                expect(user).to.exist
-                expect(user.name).to.equal(name)
-                expect(user.username).to.equal(username)
-            })
+        const user2 = await retrieveUser(userId)
+
+        expect(user2).to.exist
+        expect(user2.name).to.equal(name)
+        expect(user2.username).to.equal(username)
     })
 
-    it('Should fail when incorrect id', () => {
+    it('Should fail when incorrect id', async () => {
 
         userId = ObjectId().toString()
 
-        return retrieveUser(userId)
-            .then(() => { throw new Error('Should not reach this point') })
-            .catch(error => {
-                expect(error).to.exist
-                expect(error).to.be.instanceOf(NotFoundError)
-                expect(error.message).to.equal('Wrong ID')
-            })
+        try {
+            await retrieveUser(userId)
+
+            throw new Error('Should not reach this point')
+        } catch (error) {
+            expect(error).to.exist
+            expect(error).to.be.instanceOf(NotFoundError)
+            expect(error.message).to.equal('Wrong ID')
+        }
     })
 
     describe('When parameters are not valid', () => {
@@ -81,7 +84,9 @@ describe('retrieveUser', () => {
         })
     })
 
-    after(() => 
-        User.deleteMany()
-            .then(() => mongoose.disconnet))
+    after(async () => {
+        await User.deleteMany()
+
+        await mongoose.disconnect()
+    })
 })
