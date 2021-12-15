@@ -1,62 +1,86 @@
-import {signinUser, retrieveUser} from '../logic'
+import logger from '../logger'
+import { useContext } from 'react'
+import AppContext from './AppContext'
+import { signInUser } from '../logic'
+import './SignIn.sass'
+import image1 from '../images/msg2113249246-33268.jpg'
+import image2 from '../images/msg2113249246-33271 (2).jpg'
+import image3 from '../images/msg2113249246-33272.jpg'
+import image4 from '../images/msg2113249246-33273.jpg'
+import image5 from '../images/msg2113249246-33274.jpg'
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
-function SignIn({gotoRegister, gotoHome, showSpinner, hideSpinner, showFeedback }) {
 
+function SignIn({onSignedIn, x}) {
+    logger.debug('SignIn -> render')
+    const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext)
+    const image = [image1,image2,image3,image4,image5]
     return <>
-        <h1>Login</h1>
-        <form className="signin container container--vertical container--gapped"
-            onSubmit={event => {
-                event.preventDefault()
+        <div className="container">
+            <div className="left">
+                <img src={image[Math.floor(Math.random() * 5)]} />
+            </div>
+            <div className="right">
+                <div>
+                    <p className="right__title">MyNutriMethod</p>
+                    <form onSubmit={async event => {
+                        event.preventDefault()
 
-                const { target: { username: { value: username }, password: { value: password } } } = event
-                showSpinner()
-                try {
-                    signinUser(username, password, (error, token) => {
-                        if (error) {
-                            showFeedback(error.message)
-                            hideSpinner()
-                            return
-                        }
-
-                        sessionStorage.token = token
+                        const { target: { username: { value: username }, password: { value: password } } } = event
 
                         try {
-                            retrieveUser(token, (error, user) => {
-                                if (error) {
-                                    showFeedback(error.message)
-                                    hideSpinner()
-                                    return
-                                }
-                                
-                                const { name } = user
-                                hideSpinner()
-                                gotoHome(name)
-                            })
+                            onFlowStart()
+
+                            const token = await signInUser(username, password)
+
+                            sessionStorage.token = token
+
+                            onFlowEnd()
+                            
+                            onSignedIn()
                         } catch ({ message }) {
-                            showFeedback(message)
-                            hideSpinner()
+                            onFlowEnd()
+
+                            onFeedback(message, 'warn')
                         }
-                    })
-                } catch ({ message }) {
-                    showFeedback(message)
-                    hideSpinner()
-                }
+                    }}>
+                        <div><TextField
+                            margin="normal"
+                            fullWidth
+                            id="username"
+                            label="Username"
+                            name="username"
+                            autoComplete="username"
+                            autoFocus
+                        /></div>
+                        <div><TextField
+                            margin="normal"
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                        /></div>
+                        <div><Button type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >Sign in</Button></div>
 
-            }}>
-            <div className="container container--vertical container--gapped">
-                <input className="field" autoComplete="off" type="text" name="username" id="username" placeholder="username" />
-                <input className="field" type="password" name="password" id="password" placeholder="password" />
-            </div>
-            <div>
+                        {/* <button className="button" onClick={event => {
+                event.preventDefault()
 
-                <button className="button">Login</button>
+                onSignUp()
+            }}>Sign up</button> */}
+                    </form>
+                </div>
+
             </div>
-        </form>
-        <a onClick={() => gotoRegister()}>Go to register</a>
+        </div>
+
     </>
-
 }
 
 export default SignIn
-
-

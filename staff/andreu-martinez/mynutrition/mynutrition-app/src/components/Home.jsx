@@ -1,289 +1,134 @@
-import { useState } from 'react'
-import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import Header from './Header'
-import {
-    updateUserPassword,
-    unregisterUser,
-    searchVehicles,
-    toggleFavVehicle,
-    retrieveFavVehicles,
-    retrieveCartVehicles,
-    removeVehicleFromCart,
-    addVehicleToCart,
-    retrieveVehicle
-} from '../logic'
-import "./style.css"
+import { useState, useEffect, useContext } from 'react'
+import logger from '../logger'
+import './Home.sass'
 import Profile from './Profile'
-import Detail from './Detail'
-import Search from './Search'
-import Favs from './Favs'
-import Results from './Results'
-import Cart from './Cart'
+import ListMyEmails from './ListMyEmails'
+import HomeLanding from './HomeLanding'
+import SignIn from './SignIn'
+import NewEmail from './NewEmail'
+import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
+import { useQueryParams } from '../hooks'
+import { retrieveUser } from '../logic'
+import AppContext from './AppContext'
+import Badge from '@mui/material/Badge'
+import MailIcon from '@mui/icons-material/Mail'
+import SvgIcon from '@mui/material/SvgIcon'
+import AccountCircle from '@mui/icons-material/AccountCircle'
+import LogoutIcon from '@mui/icons-material/Logout';
+import Unregister from './Unregister'
 
-import Footer from './Footer'
 
 
-function Home({ name, onSignOut, hideSpinner, showSpinner, onFeedback }) {
+function Home({ onSignOut, onAuthError }) {
+    logger.debug('Home -> render')
 
-    const [vehicles, setVehicles] = useState([])
-    const [vehicle, setVehicle] = useState(null)
-    const [view, setView] = useState('search')
-    const [favs, setFavs] = useState([])
-    const [cart, setCart] = useState([])
-    const [query, setQuery] = useState(null)
+    const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext)
 
-    const goToProfile = () => setView('profile')
-    const goToHome = () => setView('search')
-    const clearVehicle = () => setVehicle(null)
-    const goToSearch = () => setView('search')
+    const [name, setName] = useState(null)
 
-    // const navigate = useNavigate()
-    // const location = useLocation()
+    const queryParams = useQueryParams()
 
-    const search = query => {
+    // const [query, setQuery] = useState(queryParams.get('q'))
 
-        setVehicle(null)
-        setVehicles([])
-        setQuery(query)
+    const navigate = useNavigate()
 
-        try {
-            searchVehicles(sessionStorage.token, query, (error, vehicles) => {
-                if (error) {
-                    onFeedback(error.message)
-                    return
-                }
+    const location = useLocation()
 
-                setVehicles(vehicles)
-                hideSpinner()
-            })
+    useEffect(async () => {
+        logger.debug('Home -> useEffect (componentDidMount)')
 
-        } catch ({ message }) {
-            hideSpinner()
-            onFeedback(message)
+        const { token } = sessionStorage
+
+        if (token) {
+            try {
+                onFlowStart()
+
+                const user = await retrieveUser(token)
+
+                onFlowEnd()
+
+                const { name } = user
+
+                setName(name)
+            } catch ({ message }) {
+                onFlowEnd()
+
+                onFeedback(message, 'warn')
+
+                onAuthError()
+            }
         }
-    }
+    }, [])
 
-    const goToCart = () => {
-        showSpinner()
-        try {
-            retrieveCartVehicles(sessionStorage.token, (error, vehicles) => {
-                if (error) {
-                    hideSpinner()
-                    onFeedback(error)
-                    return
-                }
-                setCart(vehicles)
-                setView('cart')
-                hideSpinner()
-            })
-        } catch ({ message }) {
-            hideSpinner()
-            onFeedback(message)
-        }
-    }
+    // const search = query => {
+    //     setQuery(query)
 
-    const addToCart = id => {
-        showSpinner()
+    //     navigate(`/search?q=${query}`)
+    // }
 
-        try {
-            addVehicleToCart(sessionStorage.token, id, error => {
-                if (error) {
-                    showSpinner()
-                    onFeedback(error.message)
-                    return
-                }
+    const goToHome = () => navigate('/home')
+    const goToProfile = () => navigate('/profile')
+    const email = () => navigate('/email')
+    const goToUnregister = () => navigate('/unregister')
 
-                setCart(cart.map(vehicle => {
-                    if (vehicle.id === id)
-                        return { ...vehicle, qty: vehicle.qty + 1 }
-
-                    return vehicle
-
-                }))
-                hideSpinner()
-            })
-        } catch ({ message }) {
-            hideSpinner()
-            onFeedback(message, 'warn')
-        }
-    }
-
-    const removeFromCart = id => {
-        showSpinner()
-
-        try {
-            removeVehicleFromCart(sessionStorage.token, id, error => {
-                if (error) {
-                    hideSpinner()
-                    onFeedback(error.message)
-                    return
-                }
-
-                setCart(cart.reduce((accum, vehicle) => {
-                    if (vehicle.id === id) {
-                        if (vehicle.qty < 2)
-                            return accum
-
-                        vehicle = { ...vehicle, qty: vehicle.qty - 1 }
-                    }
-
-                    accum.push(vehicle)
-
-                    return accum
-                }, []))
-
-                hideSpinner()
-            })
-        } catch ({ message }) {
-            hideSpinner()
-            onFeedback(message, 'warn')
-        }
-    }
-
-    const goToFavs = () => {
-
-        try {
-            retrieveFavVehicles(sessionStorage.token, (error, favs) => {
-                if (error) {
-                    onFeedback(error)
-                    return
-                }
-
-                setFavs(favs)
-                setView('favs')
-            })
-        } catch ({ message }) {
-            onFeedback(message)
-        }
-    }
-
-    const goToItem = vehicleId => {
-        showSpinner()
-        try {
-            retrieveVehicle(sessionStorage.token, vehicleId, (error, vehicle) => {
-                if (error) {
-                    onFeedback(error.message)
-                    return
-                }
-                setVehicle(vehicle)
-                setView('search')
-            })
-        } catch ({ message }) {
-            onFeedback(message)
-        }
+    function HomeIcon(props) {
+        return (
+            <SvgIcon {...props}>
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+            </SvgIcon>
+        );
     }
 
 
-    const toggleFav = id => {
-        showSpinner()
-        try {
-            toggleFavVehicle(sessionStorage.token, id, error => {
-                if (error) {
-                    alert(error.message)
-                    return
-                }
+    const sendEmail = () => {
 
-                if (vehicle && vehicle.id === id)
-                    setVehicle({ ...vehicle, isFav: !vehicle.isFav })
+        const { token } = sessionStorage
+        // llamar a tu función del logic y le pasarás como parámetros todo lo requerido
+        // token, miId, el idDestino, subject, 
 
-                if (vehicles.length)
-                    setVehicles(vehicles.map(vehicle => {
-                        if (vehicle.id === id) {
-                            return { ...vehicle, isFav: !vehicle.isFav }
-                        }
 
-                        return vehicle
-                    }))
-
-                if (favs.length)
-                    setFavs(favs.filter(vehicle => vehicle.id !== id))
-
-            })
-        } catch ({ message }) {
-            alert(message)
-        }
     }
 
-    const updatePassword = (oldPassword, password) => {
-        showSpinner()
-        try {
-            updateUserPassword(sessionStorage.token, oldPassword, password, error => {
-                if (error) {
-
-                    onFeedback(error.message)
-                    hideSpinner()
-                    return
-                }
-
-                onFeedback('success', 'Contraseña cambiada correctamente.')
-                hideSpinner()
-            })
-        } catch ({ message }) {
-
-            hideSpinner()
-            onFeedback(message, 'warn')
-        }
-    }
-
-    const unregister = password => {
-        showSpinner()
-        try {
-            unregisterUser(sessionStorage.token, password, error => {
-                if (error) {
-                    onFeedback(error.message)
-                    hideSpinner()
-                    return
-                }
-                onFeedback('success', 'Usuario eliminado correctamente.')
-                hideSpinner()
-                onSignOut()
-            })
-        } catch ({ message }) {
-            hideSpinner()
-            onFeedback(message, 'warn')
-        }
-    }
 
     return <>
-        <div className="layout">
-            <div>
-                <Header goToProfile={goToProfile} goToSearch={goToSearch} goToFavs={goToFavs} goToCart={goToCart} onSignOut={onSignOut} name={name}>
-
-                </Header>
+    <div className="wrap">
+            <div className="header">
+                <div className='header--user'>
+                    <p>Hello, <span>{name ? name : 'World'}</span>!</p>
+                </div>
+                <div className='header--title'>
+                    <h1>MyNutriMethod</h1>
+                </div>
+                <div className="header--menu">
+                    <div className="header--menu__items">          
+                        <HomeIcon color="primary" onClick={goToHome}/>
+                    </div>
+                    <div className="header--menu__items">
+                        <Badge badgeContent={1} color="primary">
+                            <MailIcon color="secondary" onClick={email} color="action" />
+                        </Badge>
+                    </div>
+                    <div className="header--menu__items">
+                        <AccountCircle color="primary" onClick={goToProfile}></AccountCircle>
+                    </div>
+                    <div className="header--menu__items">
+                        <LogoutIcon color="primary" onClick={onSignOut}></LogoutIcon>
+                    </div>
+                </div>
             </div>
-
             <div className="center">
-                {
-                    view === 'profile' &&
-                    <Profile
-                        onBack={goToHome}
-                        onPasswordUpdate={updatePassword}
-                        onUnregister={unregister}
-                        showSpinner={showSpinner}
-                        hideSpinner={hideSpinner}
-                        onFeedback={onFeedback}>
-                    </Profile>
-                }
-
-                {
-                    view === 'search' && <>
-
-                        <Search onSearch={search} query={query}></Search>
-
-                        {!vehicle && <Results items={vehicles} onItem={goToItem} onToggleFav={toggleFav} ></Results>}
-
-                        {vehicle && <Detail item={vehicle} onBack={clearVehicle} onToggleFav={toggleFav} onBuyItem={addToCart} > </Detail>}
-
-                    </>
-                }
-                {view === 'favs' && <Favs items={favs} onItem={goToItem} onToggleFav={toggleFav} />}
-
-                {view === 'cart' && <Cart items={cart} onItem={goToItem} onRemove={removeFromCart} onAdd={addToCart} />}
+                <Routes>
+                        <Route path="/home" element={<HomeLanding onSignOut={onSignOut} />} />
+                        <Route path="/profile" element={<Profile onSignOut={onSignOut} />} />
+                        <Route path="/email" element={<ListMyEmails />} />
+                        <Route path="/email" element={<NewEmail />} />
+                        <Route path="/unregister" element={<Unregister goToUnregister={goToUnregister} onBack={goToProfile} />} />
+                </Routes>
             </div>
-            <Footer>
-
-            </Footer>
-        </div>
+            <div className="footer">
+                <p>footer</p>
+            </div>
+    </div>
     </>
 }
 

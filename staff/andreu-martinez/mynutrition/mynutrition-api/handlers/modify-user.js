@@ -13,8 +13,7 @@ module.exports = (req, res) => {
 
         modifyUser(id, data)
             .then(() => res.status(204).send())
-            .catch(error => handleError(error,res))
-
+            .catch(error => handleError(error, res))
     } catch (error) {
         handleError(error, res)
     }

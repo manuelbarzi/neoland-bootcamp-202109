@@ -25,7 +25,7 @@ function unregisterUser(token, password, callback) {
         }
     }
 
-    xhr.open('DELETE', 'localhost:8000/api/users/')
+    xhr.open('DELETE', 'https://b00tc4mp.herokuapp.com/api/v2/users')
 
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 

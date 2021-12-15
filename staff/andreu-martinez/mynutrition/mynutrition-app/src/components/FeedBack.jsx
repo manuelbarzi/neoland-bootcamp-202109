@@ -1,23 +1,31 @@
 import logger from '../logger.js'
-// import './feedback.sass'
+import './Feedback.sass'
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
+function Feedback({ level, message, onAccept }) {
+    logger.debug('Feedback -> render')
 
-function FeedBack({level, message, onAccept}){
-    if(level === 'success')
-    logger.info(message)
-    else if(level==='warn')
-    logger.warn(message)
+    if (level === 'success')
+        logger.info(message)
+    else if (level === 'warn')
+        logger.warn(message)
     else if (level === 'error')
-    logger.error(message)
+        logger.error(message)
 
     const className = `feedback__text ${level ? `feedback__text--${level}` : ''}`
 
-    return <div className="feedback container container--vertical container--full">
-        <div className="panel container container--vertical container--gapped">
+    return <div className="feedback">
+        <div className="panel">
             <p className={className}>{message}</p>
-            <button className="button" onClick={onAccept}>Accept</button>
+            <Button type="submit" onClick={onAccept}
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 3, mb: 2 }}
+                        >Accept</Button>
+            {/* <button className="button button--dark" onClick={onAccept}>Accept</button> */}
         </div>
     </div>
 }
 
-export default FeedBack
+export default Feedback

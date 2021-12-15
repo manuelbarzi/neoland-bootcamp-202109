@@ -1,22 +1,29 @@
-const { models: { User } } = require('mynutrition-data')
-const { validateId, validatePassword } = require('./helpers/validators')
-const { NotFoundError, CredentialsError } = require('mynutrition-errors')
-const bcrypt = require('bcryptjs')
+const { readFile, writeFile } = require('fs')
 
-function unregisterUser(id, password) {
-    validateId(id)
-    validatePassword(password)
+function unregisterUser(id, password, callback) {
+    readFile('./users.json', 'utf8', (error, json) => {
+        if (error) return callback(error)
 
-    return User.findById(id)
-        .then(user => {
-            if (!user) throw new NotFoundError(`User not found with the id: ${id}`)
+        const users = JSON.parse(json)
 
-            if (!bcrypt.compareSync(password, user.password)) throw new CredentialsError('invalid password to delete account')
-            
-            return User.deleteOne({_id: id})
-                  .then(() => { })    
+        const index = users.findIndex(user => user.id === id)
+
+        if (index < 0) return callback(new Error(`user with id ${id} not found`))
+
+        const user = users[index]
+
+        if (user.password !== password) return callback(new Error(`wrong credentials`))
+
+        users.splice(index, 1)
+
+        const json2 = JSON.stringify(users, null, 4)
+
+        writeFile('./users.json', json2, error => {
+            if (error) return callback(error)
+
+            callback(null)
         })
-
+    })
 }
 
 module.exports = unregisterUser

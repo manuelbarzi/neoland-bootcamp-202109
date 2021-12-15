@@ -1,29 +1,27 @@
-.feedback 
-    width: 50vp
-    height: 50vp
-    background-color: rgba(36, 46, 6, 0.8)
-    position: absolute
-    left: 50%
-    top: 50%
-    transform: translate(-50%, -50%)
+.feedback
+	display: flex
+	align-content: center
+	justify-content: center
+	align-items: center
+	width: 100vw
+	height: 100vh
+	background-color: rgba(0, 0, 0, 0.3)
+	position: absolute
+	top: 0
+	left: 0
 
+	&__text
+		color: black
+		font-family: 'Bebas Neue'
 
-.feedback__text 
-    color: rgb(211, 252, 178)
-    font-family: 'Bebas Neue'
+	&__text--info
+		color: blue
 
+	&__text--warn
+		color: yellow
 
-.feedback__text--info 
-    color: blue
+	&__text--success
+		color: green
 
-
-.feedback__text--warn 
-    color: yellow
-
-
-.feedback__text--success 
-    color: green
-
-
-.feedback__text--error 
-    color: red
+	&__text--error
+		color: red

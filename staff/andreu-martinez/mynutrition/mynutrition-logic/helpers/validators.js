@@ -92,6 +92,14 @@ function validateNumber(number) {
     if (typeof number !== 'number') throw new TypeError(`${number} is not a number`)
 }
 
+function validateSubject(subject){
+    if (!subject.trim().length) throw new FormatError('subject is empty or blank')
+}
+
+function validateBody(body){
+    if (!body.trim().length) throw new FormatError('body is empty or blank')
+}
+
 module.exports = {
     validateId,
     validateUsername,
@@ -104,5 +112,7 @@ module.exports = {
     validateDate,
     validateCreditCardCVV,
     validateString,
-    validateNumber
+    validateNumber,
+    validateSubject,
+    validateBody
 }

@@ -1,11 +1,9 @@
 module.exports = {
     registerUser: require('./register-user'),
     authenticateUser: require('./authenticate-user'),
-    retrieveUser: require('./retrieve-user'),
+    retrieveUsers: require('./retrieve-users'),
+    retrieveUsersForEmail: require('./retrieve-users-for-email'),
     modifyUser: require('./modify-user'),
     unregisterUser: require('./unregister-user'),
-    searchVehicles: require('./search-vehicles'),
-    addCreditCardToUser: require('./add-credit-card-to-user'),
-    registerProperty: require('./register-property'),
-    retrieveOwnersFromProperty: require('./retrieve-owners-from-property')
+    sendEmail: require('./send-email')
 }

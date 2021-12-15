@@ -1,4 +1,4 @@
-const { CredentialsError, ConflictError, FormatError, NotFoundError } = require('../../../mynutrition-errors')
+const { CredentialsError, ConflictError, FormatError, NotFoundError } = require('mynutrition-errors')
 const { JsonWebTokenError, TokenExpiredError } = require('jsonwebtoken')
 
 function handleError(error, res) {

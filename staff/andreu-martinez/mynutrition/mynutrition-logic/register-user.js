@@ -10,19 +10,21 @@ const bcrypt = require('bcryptjs')
  * @param {*} password 
  * @param {*} callback 
  */
-function registerUser(name, username, password) {
+function registerUser(role, name, username, password) {
     validateName(name)
     validateUsername(username)
     validatePassword(password)
 
-    return User.create({ name, username, password: bcrypt.hashSync(password) })
-        .then(() => { })
-        .catch(error => {
+    return (async () => {
+        try {
+            await User.create({ role, name, username, password: bcrypt.hashSync(password) })
+        } catch (error) {
             if (error.code === 11000)
                 throw new ConflictError(`user with username ${username} already exists`)
 
             throw error
-        })
+        }
+    })() // IIFE
 }
 
 module.exports = registerUser

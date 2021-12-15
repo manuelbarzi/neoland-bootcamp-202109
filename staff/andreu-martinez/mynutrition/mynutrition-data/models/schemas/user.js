@@ -1,5 +1,4 @@
 const { Schema } = require('mongoose')
-const creditCard = require('./credit-card')
 
 const user = new Schema({
     name: {
@@ -43,10 +42,12 @@ const user = new Schema({
             }
         ]
     },
-    creditCards: {
-        type: [creditCard]
-    },
-    
+    role: {
+        type: String,
+        required: true,
+        enum: ['client', 'manager', 'admin'],
+        default: 'client'
+    }
 })
 
 module.exports = user

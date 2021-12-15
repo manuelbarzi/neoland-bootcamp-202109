@@ -1,40 +1,94 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import logger from '../logger'
 import Unregister from './Unregister'
+import UpdatePassword from './UpdatePassword'
+import { updateUserPassword, unregisterUser } from '../logic'
+import AppContext from './AppContext'
+import '../style.sass'
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
+function Profile({ onSignOut, onBack }) {
+    logger.debug('Profile -> render')
 
-function Profile({ onPasswordUpdate, onBack, onUnregister }) {
-   
-    const [view, setView] = useState('update-password')
+    const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext)
+
+    const [view, setView] = useState('profile')
+
+    const goToProfile = () => setView('profile')
 
     const goToUnregister = () => setView('unregister')
 
     const goToUpdatePassword = () => setView('update-password')
 
-    return <>
-        {
-            view === 'update-password' &&
-            <form className="home__update--password center" onSubmit={event => {
-                event.preventDefault()
+    const updatePassword = (oldPassword, password) => {
+        onFlowStart()
 
-                const { target: { oldPassword: { value: oldPassword }, password: { value: password } } } = event
+        try {
+            updateUserPassword(sessionStorage.token, oldPassword, password, error => {
+                if (error) {
+                    onFlowEnd()
 
-                onPasswordUpdate(oldPassword, password)
+                    onFeedback(error.message)
 
-            }}>
-                <input className="field" type="password" name="oldPassword" id="oldPassword" placeholder="old password" />
-                <input className="field" type="password" name="password" id="password" placeholder="new password" />
-                <div className="container">
-                    <button className="button" onClick={event => onBack()}>Close</button>
-                    <button className="button" >Update</button>
-                    <button className="button" onClick={event => goToUnregister()}>Unregister</button>
-                </div>
-            </form>
+                    return
+                }
+
+                onFlowEnd()
+
+                onFeedback('Password updated', 'success')
+            })
+        } catch ({ message }) {
+            onFlowEnd()
+
+            onFeedback(message, 'warn')
         }
-        {view === 'unregister' && <Unregister onBack={goToUpdatePassword} onUnregister={onUnregister} />}
+    }
 
-        
-    </>
+    const unregister = password => {
+        onFlowStart()
 
+        try {
+            unregisterUser(sessionStorage.token, password, error => {
+                if (error) {
+                    onFlowEnd()
+
+                    onFeedback(error.message)
+
+                    return
+                }
+
+                logger.info('User unregistered')
+
+                onFlowEnd()
+
+                onFeedback('User unregistered', 'success')
+
+                onSignOut()
+            })
+        } catch ({ message }) {
+            onFlowEnd()
+
+            onFeedback(message, 'warn')
+        }
+    }
+
+    return <>
+            {view === 'profile' &&
+                <div><Button onClick={goToUnregister} fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                >Unregister</Button>
+                    <Button onClick={goToUpdatePassword} fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >Update Password</Button></div>
+            }
+
+            {view === 'update-password' && <UpdatePassword onBack={goToProfile}/> }
+
+            {view === 'unregister' && <Unregister onBack={goToProfile}/>}
+            </>
 }
 
-export default Profile
+        export default Profile

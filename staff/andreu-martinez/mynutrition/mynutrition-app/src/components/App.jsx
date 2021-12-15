@@ -1,112 +1,63 @@
-import { useState, useEffect } from 'react'
-import { retrieveUser } from '../logic'
-import Spinner from './Spinner'
-import Landing from './Landing'
-import Login from './SignIn'
-import Register from './SignUp'
+import { useState } from 'react'
+import logger from '../logger'
+import SignUp from './SignUp'
+// import SignInSide from './SignInSide'
+import SignIn from './SignIn'
 import Home from './Home'
-import FeedBack from './FeedBack'
-import Header from './Header'
+import Spinner from './Spinner'
+import Feedback from './Feedback'
+import AppContext from './AppContext'
 
 function App() {
+    logger.debug('App -> render')
 
-    const [view, setView] = useState(sessionStorage.token ? 'home' : "landing")
-    const [name, setName] = useState(null)
-    const [spinner, setSpinner] = useState(null)
+    const [view, setView] = useState(sessionStorage.token ? 'home' : 'signin')
+    const [spinner, setSpinner] = useState(sessionStorage.token ? true : false)
     const [feedback, setFeedback] = useState(null)
     const [level, setLevel] = useState(null)
 
-    const gotoLogin = () => setView('login')
-    const gotoRegister = () => setView('register')
-    const showSpinner = () => setSpinner(true)
-    const hideSpinner = () => setSpinner(false)
-
-
-    const gotoHome = (name) => {
-        setView('home')
-        setName(name)
-    }
-
     const resetTokenAndGoToLanding = () => {
         delete sessionStorage.token
-        setView('landing')
-        hideSpinner()
+
+        setView('signin')
+        setSpinner(false)
     }
 
-    useEffect(() => {
-        const { token } = sessionStorage
+    const goToSignIn = () => setView('signin')
 
-        if (token) {
-            try {
-                retrieveUser(token, (error, user) => {
-                    if (error) {
-                        alert(error.message)
-                        resetTokenAndGoToLanding()
-                        return
-                    }
+    const goToSignUp = () => setView('signup')
 
-                    var name = user.name
-                    setName(name)
-                    setView('home')
-                    hideSpinner()
-                })
-            } catch ({ message }) {
-                showFeedback(message, 'warn')
-                resetTokenAndGoToLanding()
+    const showSpinner = () => setSpinner(true)
 
-                return
-            }
-        }
-    })
+    const hideSpinner = () => setSpinner(false)
+
+    const goToHome = () => setView('home')
 
     const acceptFeedback = () => setFeedback(null)
-    
+
     const showFeedback = (message, level = 'error') => {
         setFeedback(message)
         setLevel(level)
     }
 
     return <>
-        {
-            view === "landing" && <Landing
-                gotoLogin={gotoLogin}
-                gotoRegister={gotoRegister}
-            ></Landing>
-        }
+        <AppContext.Provider value={{
+            onFlowStart: showSpinner,
+            onFlowEnd: hideSpinner,
+            onFeedback: showFeedback
+        }}>
 
-        {
-            view === "login" && <Login
-                gotoRegister={gotoRegister}
-                gotoHome={gotoHome}
-                showSpinner={showSpinner}
-                hideSpinner={hideSpinner}
-                showFeedback={showFeedback}
-            ></Login>
-        }
+            {view === 'signup' && <SignUp onSignUp={goToSignUp} onSignIn={goToSignIn} />}
 
-        {
-            view === "register" && <Register
-                gotoLogin={gotoLogin}
-                showSpinner={showSpinner}
-                hideSpinner={hideSpinner}
-                showFeedback={showFeedback}
-            ></Register>
-        }
+            {view === 'signin' && <SignIn onSignedIn={goToHome} x={1} />}
 
-        {
-            view === "home" && <Home
-                name={name}
-                onSignOut={resetTokenAndGoToLanding}
-                showSpinner={showSpinner}
-                hideSpinner={hideSpinner}
-                onFeedback={showFeedback}
-                acceptFeedback={acceptFeedback}
-            ></Home>
-        }
-        {spinner && <Spinner />}
-        {feedback && <FeedBack level={level} message={feedback} onAccept={acceptFeedback} />}
-    </ >
+            {view === 'home' && <Home onSignOut={resetTokenAndGoToLanding} onAuthError={resetTokenAndGoToLanding} />}
+
+            {feedback && <Feedback level={level} message={feedback} onAccept={acceptFeedback} />}
+
+            {spinner && <Spinner />}
+        </AppContext.Provider>
+    </>
 }
 
 export default App
-

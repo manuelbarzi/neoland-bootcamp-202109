@@ -2,9 +2,10 @@ const { registerUser } = require('mynutrition-logic')
 const handleError = require('./helpers/handle-error')
 
 module.exports = (req, res) => {
-    const { body: { name, username, password } } = req
+    const { body: { role, name, username, password } } = req
+
     try {
-        registerUser(name, username, password)
+        registerUser(role, name, username, password)
             .then(() => res.status(201).send())
             .catch(error => handleError(error, res))
     } catch (error) {

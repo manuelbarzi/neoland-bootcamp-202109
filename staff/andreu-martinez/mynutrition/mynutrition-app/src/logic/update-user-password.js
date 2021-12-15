@@ -30,7 +30,7 @@ function updateUserPassword(token, oldPassword, password, callback) {
         }
     }
 
-    xhr.open('PATCH', 'localhost:8000/api/users')
+    xhr.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
 
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 

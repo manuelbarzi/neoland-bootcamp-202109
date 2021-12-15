@@ -1,11 +1,6 @@
-/**
- * TODO
- * 
- * @param {*} username 
- * @param {*} password 
- * @param {*} callback 
- */
- function signinUser(username, password, callback) {
+import context from './context'
+
+function signInUser(username, password) {
     if (typeof username !== 'string') throw new TypeError(`${username} is not a string`)
     if (!username.trim().length) throw new Error('username is empty or blank')
     if (/\r?\n|\r|\t| /g.test(username)) throw new Error('username has blank spaces')
@@ -16,35 +11,27 @@
     if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
     if (password.length < 6) throw new Error('password has less than 6 characters')
 
-    if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
+    return (async () => {
+        const res = await fetch(`${context.API_URL}/users/auth`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        })
 
-    const xhr = new XMLHttpRequest
+        const { status } = res
 
-    xhr.onload = () => {
-        const { status, responseText } = xhr
+        if (status === 200) {
+            const { token } = await res.json()
 
-        if (status === 401) {
-            const response = JSON.parse(responseText)
+            return token
+        } else if (status === 401) {
+            const { error } = await res.json()
 
-            const message = response.error
-
-            callback(new Error(message))
-        } else if (status === 200) {
-            const response = JSON.parse(responseText)
-
-            const token = response.token
-
-            callback(null, token)
-        }
-    }
-
-    xhr.open('POST', 'localhost:8000/api/users/auth')
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    const body = { username, password }
-
-    xhr.send(JSON.stringify(body))
+            throw new Error(error)
+        } else throw new Error('unknown error')
+    })()
 }
 
-export default signinUser
+export default signInUser
