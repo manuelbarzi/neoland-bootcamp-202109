@@ -10,7 +10,7 @@ const item = new Schema({
         type: String,
         required: true
     },
-    collection: {
+    pattern: {
         type: String,
         required: true
     },

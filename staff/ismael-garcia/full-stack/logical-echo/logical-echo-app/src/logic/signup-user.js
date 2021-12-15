@@ -1,4 +1,4 @@
-// - - - - - registering - - - - -
+const { validateName, validateUsername, validatePassword, validateCallback } = require('./helpers/validators')
 /**
  * Registers a user in the application.
  * 
@@ -8,24 +8,13 @@
  * @param {function} callback The callback function to manage the response.
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
- * @throws {Error} When any of the arguments does not contain the correct format.
+ * @throws {FormatError} When any of the arguments does not contain the correct format.
  */
  function signUpUser(name, username, password, callback) {
-    if (typeof name !== 'string') throw new TypeError(name + ' is not a string')
-    if (!name.trim().length) throw new Error('name is empty or blank')
-    if (name.trim() !== name) throw new Error('blank spaces around name')
-
-    if (typeof username !== 'string') throw new TypeError(username + ' is not a string')
-    if (!username.trim().length) throw new Error('username is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(username)) throw new Error('username has blank spaces')
-    if (username.length < 4) throw new Error('username has less than 4 characters')
-
-    if (typeof password !== 'string') throw new TypeError(password + ' is not a string')
-    if (!password.trim().length) throw new Error('password is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
-    if (password.length < 5) throw new Error('password has less than 6 characters')
-
-    if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
+    validateName(name)
+    validateUsername(username)
+    validatePassword(password)
+    validateCallback(callback)
 
     const xhr = new XMLHttpRequest()
 
@@ -44,7 +33,7 @@
         }
     }
 
-    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.open('POST', 'https://localhost/users')
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 

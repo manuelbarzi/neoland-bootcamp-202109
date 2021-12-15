@@ -15,7 +15,7 @@ describe('registerItem', () => {
     it('should suceed with new item', async () => {
         const id = 'zarap05644828'
         const store = 'Zara'
-        const collection = 'Woman'
+        const pattern = 'Woman'
         const name = 'CAMISETA CUT OUT LIFE'
         const images = ['https://static.zara.net/photos///2021/I/0/1/p/5644/828/250/2/w/860/5644828250_1_1_1.jpg?ts=1629456820622', 'https://static.zara.net/photos///2021/I/0/1/p/5644/828/250/2/w/860/5644828250_2_1_1.jpg?ts=1629455569144']
         const price = '15,95 EUR'
@@ -23,7 +23,7 @@ describe('registerItem', () => {
         const description = 'Camiseta de cuello redondo y manga sisa. Detalle de aberturas laterales. Detalle de parche Life combinado a contraste.'
         const colors = ['Blanco']
 
-        const item = { id, store, collection, name, images, price, url, description, colors }
+        const item = { id, store, pattern, name, images, price, url, description, colors }
 
         const res = await registerItem(item)
             
@@ -33,7 +33,7 @@ describe('registerItem', () => {
      
         expect(registered).to.exist
         expect(registered.store).to.equal(store)
-        expect(registered.collection).to.equal(collection)
+        expect(registered.pattern).to.equal(pattern)
         expect(registered.name).to.equal(name)
         expect(registered.images[0]).to.equal(images[0])
         expect(registered.images[1]).to.equal(images[1])
@@ -50,7 +50,7 @@ describe('registerItem', () => {
             item = {
                 id: 'zarap05644828',
                 store: 'Zara',
-                collection: 'Woman',
+                pattern: 'Woman',
                 name: 'CAMISETA CUT OUT LIFE',
                 images: ['https://static.zara.net/photos///2021/I/0/1/p/5644/828/250/2/w/860/5644828250_1_1_1.jpg?ts=1629456820622', 'https://static.zara.net/photos///2021/I/0/1/p/5644/828/250/2/w/860/5644828250_2_1_1.jpg?ts=1629455569144'],
                 price: '15,95 EUR',
@@ -99,7 +99,7 @@ describe('registerItem', () => {
                 item = {
                     id: 'zarap05644828',
                     store: 'Zara',
-                    collection: 'Woman',
+                    pattern: 'Woman',
                     name: 'CAMISETA CUT OUT LIFE',
                     images: ['https://static.zara.net/photos///2021/I/0/1/p/5644/828/250/2/w/860/5644828250_1_1_1.jpg?ts=1629456820622', 'https://static.zara.net/photos///2021/I/0/1/p/5644/828/250/2/w/860/5644828250_2_1_1.jpg?ts=1629455569144'],
                     price: '15,95 EUR',
@@ -173,35 +173,35 @@ describe('registerItem', () => {
                 })
             })
 
-            describe('when collection is not valid', () => {
-                it('should fail when collection is not a string', () => {
-                    item.collection = true 
-                    expect(() => registerItem(item)).to.throw(TypeError, 'collection is not a string')
+            describe('when pattern is not valid', () => {
+                it('should fail when pattern is not a string', () => {
+                    item.pattern = true 
+                    expect(() => registerItem(item)).to.throw(TypeError, 'pattern is not a string')
 
-                    item.collection = []
-                    expect(() => registerItem(item)).to.throw(TypeError, 'collection is not a string')
+                    item.pattern = []
+                    expect(() => registerItem(item)).to.throw(TypeError, 'pattern is not a string')
 
-                    item.collection = {}
-                    expect(() => registerItem(item)).to.throw(TypeError, 'collection is not a string')
+                    item.pattern = {}
+                    expect(() => registerItem(item)).to.throw(TypeError, 'pattern is not a string')
 
-                    item.collection = () => {}
-                    expect(() => registerItem(item)).to.throw(TypeError, 'collection is not a string')
+                    item.pattern = () => {}
+                    expect(() => registerItem(item)).to.throw(TypeError, 'pattern is not a string')
 
-                    item.collection = 123
-                    expect(() => registerItem(item)).to.throw(TypeError, 'collection is not a string')
+                    item.pattern = 123
+                    expect(() => registerItem(item)).to.throw(TypeError, 'pattern is not a string')
                 })
 
-                it('should fail when collection is empty', () => {
-                    item.collection = ''
-                    expect(() => registerItem(item)).to.throw(FormatError, 'collection is empty or blank')
+                it('should fail when pattern is empty', () => {
+                    item.pattern = ''
+                    expect(() => registerItem(item)).to.throw(FormatError, 'pattern is empty or blank')
 
-                    item.collection = '   '
-                    expect(() => registerItem(item)).to.throw(FormatError, 'collection is empty or blank')
+                    item.pattern = '   '
+                    expect(() => registerItem(item)).to.throw(FormatError, 'pattern is empty or blank')
                 })
 
-                it('should fail when collection has spaces around', () => {
-                    item.collection = '  Woman  '
-                    expect(() => registerItem(item)).to.throw(FormatError, 'blank spaces around collection')
+                it('should fail when pattern has spaces around', () => {
+                    item.pattern = '  Woman  '
+                    expect(() => registerItem(item)).to.throw(FormatError, 'blank spaces around pattern')
                 })
             })
  

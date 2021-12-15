@@ -1,11 +1,9 @@
-function toggleFavVehicle(token, id, callback) {
-    if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
-    if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
+import { validateCallback, validateItemId, validateToken } from './helpers/validators'
 
-    if (typeof id !== 'string') throw new TypeError(`${id} is not a string`)
-    if (!id.trim().length) throw new Error('id is empty or blank')
-
-    if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
+function toggleFavItem(token, id, callback) {
+    validateToken(token)
+    validateItemId(id)
+    validateCallback(callback)
 
     const xhr = new XMLHttpRequest()
 
@@ -23,7 +21,7 @@ function toggleFavVehicle(token, id, callback) {
 
             const user = JSON.parse(response)
 
-            const { favs = [] } = user // estudiar esta línea
+            const { favs = [] } = user
 
             const index = favs.indexOf(id)
 
@@ -48,7 +46,7 @@ function toggleFavVehicle(token, id, callback) {
                 }
             }
 
-            xhr2.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+            xhr2.open('PATCH', 'https://localhost/users')
 
             xhr2.setRequestHeader('Authorization', `Bearer ${token}`)
 
@@ -60,11 +58,11 @@ function toggleFavVehicle(token, id, callback) {
         }
     }
 
-    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.open('GET', 'https://localhost/users')
 
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
     xhr.send()
 }
 
-export default toggleFavVehicle
+export default toggleFavItem

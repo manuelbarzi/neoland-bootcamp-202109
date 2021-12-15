@@ -1,4 +1,5 @@
-// ----- showing details when clicking on search results items -----
+import { validateItemId, validateCallback } from "./helpers/validators"
+
 /**
  * Retrieves the details of the selected item.
  * 
@@ -7,8 +8,9 @@
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
  */
- function retrieveVehicle(token, id, callback) {
-    if (typeof id !== 'string') throw new TypeError(`${id} is not a string`)
+ function retrieveItem(id, callback) {
+    validateItemId(id)
+    validateCallback(callback)
 
     const xhr = new XMLHttpRequest()
 
@@ -34,27 +36,27 @@
                 const { status, responseText } = xhr2
 
                 if (status === 200) {
-                    const vehicle = JSON.parse(responseText)
+                    const item = JSON.parse(responseText)
 
-                    if (!vehicle) return callback(new Error(`no vehicle found with id ${id}`))
+                    if (!item) return callback(new Error(`no item found with id ${id}`))
 
-                    vehicle.isFav = favs.includes(vehicle.id)
+                    item.isFav = favs.includes(item.id)
 
-                    callback(null, vehicle)
+                    callback(null, item)
                 }
             }
 
-            xhr2.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/${id}`)
+            xhr2.open('GET', `https://localhost/items/${id}`)
 
             xhr2.send() 
         }
     }
 
-    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.open('GET', 'https://localhost/users')
 
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`) // esto por qué?
 
     xhr.send()
 }
 
-export default retrieveVehicle
+export default retrieveItem

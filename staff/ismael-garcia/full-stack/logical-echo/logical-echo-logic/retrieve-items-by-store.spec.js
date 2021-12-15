@@ -17,6 +17,7 @@ describe('retrieveItemsByStore', () => {
     it('should suceed with correct store for existing items', async () => { 
         const id = 'zarap05644828'
         const store = 'Zara'
+        const pattern = 'Woman'
         const name = 'CAMISETA CUT OUT LIFE'
         const images = ['https://static.zara.net/photos///2021/I/0/1/p/5644/828/250/2/w/860/5644828250_1_1_1.jpg?ts=1629456820622', 'https://static.zara.net/photos///2021/I/0/1/p/5644/828/250/2/w/860/5644828250_2_1_1.jpg?ts=1629455569144']
         const price = '15,95 EUR'
@@ -24,7 +25,7 @@ describe('retrieveItemsByStore', () => {
         const description = 'Camiseta de cuello redondo y manga sisa. Detalle de aberturas laterales. Detalle de parche Life combinado a contraste.'
         const colors = ['Blanco']
 
-        item = { id, store, name, images, price, url, description, colors }
+        item = { id, store, pattern, name, images, price, url, description, colors }
 
         await Item.create(item)
 
@@ -32,6 +33,7 @@ describe('retrieveItemsByStore', () => {
 
         expect(res[0]).to.exist
         expect(res[0].store).to.equal(store)
+        expect(res[0].pattern).to.equal(pattern)
         expect(res[0].name).to.equal(name)
         expect(res[0].images[0]).to.equal(images[0])
         expect(res[0].images[1]).to.equal(images[1])

@@ -1,4 +1,4 @@
-// - - - - - retrieving user - - - - -
+const { validateToken, validateCallback } = require('./helpers/validators')
 /**
  * Retrieves the info about the user from the server.
  * 
@@ -10,10 +10,8 @@
  */
  function retrieveUser(token, callback) {
     // if (!token) throw new Error('invalid token')
-    if (typeof token !== 'string') throw new TypeError(token + ' is not a string')
-    if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
-
-    if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
+    validateToken(token)
+    validateCallback(callback)
 
     const xhr = new XMLHttpRequest()
 
@@ -36,7 +34,7 @@
         }
     }
 
-    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.open('GET', 'https://localhost/users')
 
     xhr.setRequestHeader('Authorization', 'Bearer ' + token)
 

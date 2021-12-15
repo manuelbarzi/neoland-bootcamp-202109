@@ -1,8 +1,8 @@
-function retrieveFavVehicles(token, callback) {
-    if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
-    if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
+import { validateCallback, validateToken } from './helpers/validators'
 
-    if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
+function retrieveFavItems(token, callback) {
+    validateToken(token)
+    validateCallback(callback)
 
     const xhr = new XMLHttpRequest()
 
@@ -24,7 +24,7 @@ function retrieveFavVehicles(token, callback) {
 
             if (favs.length) {
                 let count = 0
-                const vehicles = []
+                const items = []
 
                 favs.forEach((id, index) => {
                     const xhr2 = new XMLHttpRequest()
@@ -33,23 +33,23 @@ function retrieveFavVehicles(token, callback) {
                         const { status, responseText } = xhr2
 
                         if (status === 200) {
-                            const vehicle = JSON.parse(responseText)
+                            const item = JSON.parse(responseText)
 
-                            if (!vehicle) return callback(new Error(`no vehicle found with id ${id}`))
+                            if (!item) return callback(new Error(`no item found with id ${id}`))
 
                             count++
 
-                            vehicles[index] = vehicle
+                            items[index] = item
 
                             if (count === favs.length) {
-                                vehicles.forEach(vehicle => vehicle.isFav = true)
+                                items.forEach(item => item.isFav = true)
 
-                                callback(null, vehicles)
+                                callback(null, items)
                             }
                         }
                     }
 
-                    xhr2.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/${id}`)
+                    xhr2.open('GET', `https://localhost/items/${id}`)
 
                     xhr2.send()
                 })
@@ -57,11 +57,11 @@ function retrieveFavVehicles(token, callback) {
         }
     }
 
-    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.open('GET', 'https://localhost/users')
 
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
     xhr.send()
 }
 
-export default retrieveFavVehicles
+export default retrieveFavItems

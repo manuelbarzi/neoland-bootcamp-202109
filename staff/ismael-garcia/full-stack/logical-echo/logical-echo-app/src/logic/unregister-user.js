@@ -1,4 +1,4 @@
-// - - - - - unregistering - - - - -
+const { validateToken, validatePassword, validateCallback } = require('./helpers/validators')
 /**
  * Unregisters the user in the application.
  * 
@@ -10,15 +10,9 @@
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
  function unregisterUser(token, password, callback) {
-    if (typeof token !== 'string') throw new TypeError(token + ' is not a string')
-    if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
-
-    if (typeof password !== 'string') throw new TypeError(password + ' is not a string')
-    if (!password.trim().length) throw new Error('password is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
-    if (password.length < 5) throw new Error('password has less than 6 characters')
-
-    if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
+    validateToken(token)
+    validatePassword(password)
+    validateCallback(callback)
 
     const xhr = new XMLHttpRequest()
 
@@ -37,7 +31,7 @@
         }
     }
 
-    xhr.open('DELETE', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.open('DELETE', 'https://localhost/users')
 
     xhr.setRequestHeader('Authorization', 'Bearer ' + token)
 

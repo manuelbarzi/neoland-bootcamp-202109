@@ -1,0 +1,20 @@
+{
+  "name": "logical-echo-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "logical-echo-errors": "file:../logical-echo-errors",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.1.1"
+  },
+  "devDependencies": {
+    "react-scripts": "5.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  }
+}

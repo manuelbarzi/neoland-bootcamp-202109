@@ -1,30 +1,18 @@
-// - - - - - updating user's password - - - - -
+const { validateToken, validateCallback, validateData } = require('./helpers/validators')
 /**
- * Updates the user's password in the application.
+ * Updates the user's profile in the application.
  * 
  * @param {string} token The token sent by the server when the user is authorized.
- * @param {string} oldPassword The old password that the user wants to change.
- * @param {string} password The new password that the user wants to set.
+ * @param {object} data An object that can contain name, username, password and new password.
  * @param {function} callback The callback function to manage the response.
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
- function updateUserPassword(token, oldPassword, password, callback) {
-    if (typeof token !== 'string') throw new TypeError(token + ' is not a string')
-    if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
-
-    if (typeof oldPassword !== 'string') throw new TypeError(oldPassword + ' is not a string')
-    if (!oldPassword.trim().length) throw new Error('old password is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(oldPassword)) throw new Error('oldPassword has blank spaces')
-    if (oldPassword.length < 5) throw new Error('oldPassword has less than 6 characters')
-
-    if (typeof password !== 'string') throw new TypeError(password + ' is not a string')
-    if (!password.trim().length) throw new Error('password is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
-    if (password.length < 5) throw new Error('password has less than 6 characters')
-
-    if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
+ function updateUserProfile(token, data, callback) {
+    validateToken(token)
+    validateData(data)
+    validateCallback(callback)
 
     const xhr = new XMLHttpRequest()
 
@@ -43,15 +31,15 @@
         }
     }
 
-    xhr.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.open('PATCH', 'https://localhost/users')
 
     xhr.setRequestHeader('Authorization', 'Bearer ' + token)
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const body = { oldPassword, password }
+    const body = data
 
     xhr.send(JSON.stringify(body))
 }
 
-export default updateUserPassword
+export default updateUserProfile

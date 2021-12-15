@@ -1,27 +1,21 @@
 import signUpUser from './signup-user'
 import signInUser from './signin-user'
 import retrieveUser from './retrieve-user'
-import updateUserPassword from './update-user-password'
+import updateUserProfile from './update-user-profile'
 import unregisterUser from './unregister-user'
-import searchVehicles from './search-vehicles'
-import retrieveVehicle from './retrieve-vehicle'
-import toggleFavVehicle from './toggle-fav-vehicle'
-import retrieveFavVehicles from './retrieve-fav-vehicles'
-import addVehicleToCart from './add-vehicle-to-cart'
-import removeVehicleFromCart from './remove-vehicle-from-cart'
-import retrieveVehiclesCart from './retrieve-vehicles-cart'
+import retrieveItem from './retrieve-item'
+import toggleFavItem from './toggle-fav-item'
+import retrieveFavItems from './retrieve-fav-items'
+import retrieveItemsCollection from './retrieve-items-collection'
 
 export {
     signInUser,
     signUpUser,
     retrieveUser,
-    updateUserPassword,
+    updateUserProfile,
     unregisterUser,
-    searchVehicles,
-    retrieveVehicle,
-    toggleFavVehicle,
-    retrieveFavVehicles,
-    addVehicleToCart,
-    removeVehicleFromCart,
-    retrieveVehiclesCart
+    retrieveItem,
+    toggleFavItem,
+    retrieveFavItems,
+    retrieveItemsCollection
 }

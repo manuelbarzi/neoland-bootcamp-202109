@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-// const { registerItem } = require('./register-item');
+const { registerItem } = require('./register-item');
 const { writeFile } = require("fs").promises;
 const logger = require("../utils/my-logger");
 
@@ -89,7 +89,9 @@ const logger = require("../utils/my-logger");
 
     logger.debug(`scraped item ${JSON.stringify(items)}`)
 
-    await writeFile("items-zara.json", JSON.stringify(items, null, 4));
+    // await writeFile("items-zara.json", JSON.stringify(items, null, 4));
+
+    await items.forEach(item => registerItem(item))
 
     await browser.close();
 
