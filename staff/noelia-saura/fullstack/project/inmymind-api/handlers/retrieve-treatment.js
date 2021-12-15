@@ -17,8 +17,14 @@ module.exports = (req, res) => {
         const { sub: id } = payload
 
         const user_id = id
-       console.log(user_id)
-        retrieveTreatment(user_id, new Date(date))
+
+        const dateFormat = ''
+
+        if (date) {
+            dateFormat = new Date(date)
+        }
+       
+        retrieveTreatment(user_id, dateFormat)
             .then(treatment => res.json(treatment))
             .catch(error => handleError(error, res))
     } catch (error) {

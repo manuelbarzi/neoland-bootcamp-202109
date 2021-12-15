@@ -4,26 +4,33 @@ const { validateId, validateDate } = require('./helpers/validators')
 
 function retrieveTreatment(user_id, date) {
     validateId(user_id)
-    validateDate(date)
 
-    const day = (date.getDate() < 10 ? '0' : '') + date.getDate()
-    const month = date.getMonth() + 1
-    const year = date.getFullYear()
+    let filter={user_id:user_id}
 
-    const dateFormat = year + '-' + month + '-' + day
+    if(date){
+        validateDate(date)
 
-    return Treatment.find({ user_id: user_id, date: dateFormat }).lean()
-        .then(treatment => {
-            for (let index = 0; index < treatment.length; index++) {
+        const day = (date.getDate() < 10 ? '0' : '') + date.getDate()
+        const month = date.getMonth() + 1
+        const year = date.getFullYear()
+    
+        const dateFormat = year + '-' + month + '-' + day
 
-                delete treatment[index]._id
-                delete treatment[index].user_id
-                delete treatment[index].__v
+        filter={user_id:user_id,date: dateFormat}
+    }
+
+    return Treatment.find(filter).sort({ date: -1}).lean()
+        .then(treatments => {
+            for (let index = 0; index < treatments.length; index++) {
+
+                treatments[index].id=treatments[index]._id.toString()
+
+                delete treatments[index]._id
+                delete treatments[index].user_id
+                delete treatments[index].__v
 
             }
-            // treatment.id = treatment._id.toString()
-
-            console.log(treatment,dateFormat,user_id)
+        
             return treatment
         })
 }

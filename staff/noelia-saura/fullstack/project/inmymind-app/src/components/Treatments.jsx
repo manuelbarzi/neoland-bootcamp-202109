@@ -1,18 +1,18 @@
 import logger from "../logger";
 import AppContext from "./AppContext";
 import { useEffect, useState, useContext } from "react";
-import { addNote, retrieveNotes } from "../logic";
-import Note from "./Note";
+import { addTreatment, retrieveTreatment } from "../logic";
+import Treatment from "./Treatment";
 
-function Notes({ onBack }) {
-  logger.debug("Notes->render");
+function Treatments({ onBack }) {
+  logger.debug("Treatments->render");
 
   const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext);
 
-  const [notes, setNotes] = useState([]);
+  const [treatments, setTreaments] = useState([]);
 
   useEffect(async () => {
-    logger.debug("Note -> useEffect (componentDidMount)");
+    logger.debug("Treatment -> useEffect (componentDidMount)");
 
     const { token } = sessionStorage;
 
@@ -20,7 +20,7 @@ function Notes({ onBack }) {
       try {
         onFlowStart();
 
-        setNotes(await retrieveNotes(token));
+        setTreaments(await retrieveTreatment(token));
 
         onFlowEnd();
       } catch ({ message }) {
@@ -52,9 +52,9 @@ function Notes({ onBack }) {
           try {
             onFlowStart();
 
-            await addNote(content.value, date.value, sessionStorage.token);
+            await addTreatment(content.value, date.value, sessionStorage.token);
 
-            setNotes(await retrieveNotes(sessionStorage.token));
+            setTreaments(await retrieveTreatment(sessionStorage.token));
 
             onFlowEnd();
           } catch ({ message }) {
@@ -65,22 +65,22 @@ function Notes({ onBack }) {
         }}
       >
         <div className="">
-          <h2 className="addnote">Add Note</h2>
-          <input className="container notes" name="date" type="date" />
+          <h2 className="addtreatment">Add Treatment</h2>
+          <input className="container treatments" name="date" type="date" />
           <textarea
-            className="container notes notes__size"
+            className="container treatments treatments__size"
             name="content"
             rows="10"
             cols="50"
-            placeholder="Write your note here"
+            placeholder="Write your treatment here"
           ></textarea>
-          <button className="button container button--addnote">Add Note</button>
+          <button className="button container button--addtreatment">Add Treatment</button>
         </div>
       </form>
 
-      {notes.map((noteItem) => (
-        <div key={noteItem.id}>
-          <Note note={noteItem} />
+      {treatments.map((treatmentItem) => (
+        <div key={treatmentItem.id}>
+          <Treatment treatment={treatmentItem} />
         </div>
       ))}
 
@@ -88,4 +88,4 @@ function Notes({ onBack }) {
   );
 }
 
-export default Notes;
+export default Treatments;

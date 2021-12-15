@@ -6,6 +6,13 @@ import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useQueryParams } from "../hooks";
 import { retrieveUser } from "../logic";
 import AppContext from "./AppContext";
+import Calendar from 'react-calendar';
+import Notes from "./Notes";
+import Treatment from "./Treatment";
+import Diary from "./Diary";
+import Disorder from "./Disorder";
+
+import 'react-calendar/dist/Calendar.css';
 
 function Home({ onSignOut, onAuthError }) {
   logger.debug("Home -> render");
@@ -22,6 +29,10 @@ function Home({ onSignOut, onAuthError }) {
   const navigate = useNavigate();
 
   const location = useLocation();
+
+  const goToHome = () => {
+    navigate('/')
+  }
 
   useEffect(async () => {
     logger.debug("Home -> useEffect (componentDidMount)");
@@ -46,6 +57,8 @@ function Home({ onSignOut, onAuthError }) {
 
         onAuthError();
       }
+    }else{
+      onSignOut()
     }
   }, []);
 
@@ -55,12 +68,16 @@ function Home({ onSignOut, onAuthError }) {
     navigate(`/search?q=${query}`);
   };
 
+  const cacaMas = (date) => {
+    console.log(date)
+  }
+
   const doSignOut = () => {
     navigate('/')
     onSignOut()
   }
 
-  const toggleProfle = () => {
+  const toggleProfile = () => {
     if (location.pathname === "/profile") {
       navigate('/')
     } else {
@@ -70,7 +87,34 @@ function Home({ onSignOut, onAuthError }) {
 
   // const goToSearch = () => search(query);
 
-  const gotoNotes = ()=> navigate("/notes")
+  const toggleNotes = () => {
+    if (location.pathname === "/notes") {
+      navigate('/')
+    } else {
+      navigate('/notes')
+    }
+  }
+  const toggleTreatment = () => {
+    if (location.pathname === "/treatment") {
+      navigate('/')
+    } else {
+      navigate('/treatment')
+    }
+  }
+  const toggleDiary = () => {
+    if (location.pathname === "/diary") {
+      navigate('/')
+    } else {
+      navigate('/diary')
+    }
+  }
+  const toggleDisorder = () => {
+    if (location.pathname === "/disorder") {
+      navigate('/')
+    } else {
+      navigate('/disorder')
+    }
+  }
 
   const image = process.env.PUBLIC_URL + "/logo.png";
   const text = "In My Mind";
@@ -81,10 +125,10 @@ function Home({ onSignOut, onAuthError }) {
         <img className="logo--home__image" src={image} />
         <h1 className="logo--home__text">{text}</h1>
         <button
-          className={`button button-medium  ${
+          className={`button button-medium dropdown  ${
             location.pathname === "/profile" && "button--dark"
           }`}
-          onClick={toggleProfle}
+          onClick={toggleProfile}
         >
           <svg viewBox="0 0 100 80" width="30" height="20">
             <rect width="100" height="15"></rect>
@@ -93,15 +137,24 @@ function Home({ onSignOut, onAuthError }) {
           </svg>
         </button>
       </div>
-      
+      <div>
+      <button className={`button button-medium button--home ${location.pathname === "/Diary" && "button--dark"}`} onClick={toggleDiary}>Diary</button>
+        <button className={`button button-medium button--home ${location.pathname === "/Disorder" && "button--dark"}`} onClick={toggleDisorder}>Problem</button>
+      </div>
       <div className="container">
-        <button className={`button button-medium ${location.pathname === "/notes" && "button--dark"}`} onClick={gotoNotes}>Notes</button>
-        
+        <button className={`button button-medium button--home ${location.pathname === "/notes" && "button--dark"}`} onClick={toggleNotes}>Notes</button>
+        <button className={`button button-medium button--home ${location.pathname === "/treatment" && "button--dark"}`} onClick={toggleTreatment}>Treatment</button>
       </div>
 
       <Routes>
-        <Route path="/profile" element={<Profile onBack={() => {}} onSignOut={doSignOut} />} />
+        <Route path="/profile" element={<Profile onBack={goToHome} onSignOut={doSignOut} />} />
+        <Route path='/notes' element={<Notes onBack={goToHome} />}/>
+        <Route path='/treatment' element={<Treatment />}/>
+        {/* <Route path='/Diary' element={<Diary />}/>
+        <Route path='/Disorder' element={<Disorder />}/> */}
       </Routes>
+
+      { location.pathname === "/"  || location.pathname === "/profile" ? <Calendar onchange={cacaMas}/> : ''}
 
     </div>
   );

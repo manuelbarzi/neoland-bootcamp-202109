@@ -9,7 +9,6 @@ import Home from './Home'
 import Spinner from './Spinner'
 import Feedback from './Feedback'
 import AppContext from './AppContext'
-import Profile from './Profile'
 
 function App() {
     logger.debug('App -> render')
@@ -44,8 +43,7 @@ function App() {
         setView('landing')
         setSpinner(false)
     }
-
-
+    
     return <>
         <AppContext.Provider value={{
             onFlowStart: showSpinner,
@@ -71,9 +69,7 @@ function App() {
 
             {view === 'home' &&
                 <Home onSignOut={resetTokenAndGoToLanding} onAuthError={resetTokenAndGoToLanding} />}
-
-            {view === 'profile' && <Profile/>}
-
+      
             {feedback && <Feedback level={level} message={feedback} onAccept={acceptFeedback} />}
 
             {spinner && <Spinner />}

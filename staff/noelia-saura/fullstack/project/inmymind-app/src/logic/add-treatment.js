@@ -1,6 +1,6 @@
-function addNote(content, date, token) {
+function addTreatment(content, date, token) {
     return (async () => {
-        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/notes`, {
+        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/treatments`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -23,4 +23,4 @@ function addNote(content, date, token) {
     })()
 }
 
-export default addNote
+export default addTreatment

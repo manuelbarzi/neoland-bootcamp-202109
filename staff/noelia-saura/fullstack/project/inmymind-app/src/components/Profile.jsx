@@ -71,15 +71,15 @@ function Profile({ onBack, onSignOut}) {
     }
 
     return <>
-    <button className="button" onClick={onBack}>Go back</button>
-    <button className='button'onClick={gotoupdatepassword}>Update password</button>
-    <button className='button' onClick={gotounregister}>Unregister</button>
-    <button className="button button-medium button" onClick={onSignOut}> Sign out </button>
+   <div className="">
+    <button className='button dropdown-content dropdown-content__updatepassword'onClick={gotoupdatepassword}>Update password</button>
+    <button className='button dropdown-content dropdown-content__unregister' onClick={gotounregister}>Unregister</button>
+    <button className="button button-medium button dropdown-content dropdown-content__signout" onClick={onSignOut}> Sign out </button>
    
     {view === 'update-password' && <UpdatePassword onBack={gotoprofile} onUpdatePassword={updatePassword}/>}
     
     {view === 'unregister' && <Unregister onBack={gotoprofile} onUnregister={unregister} />}
-        
+    </div>  
     </>
 }
 

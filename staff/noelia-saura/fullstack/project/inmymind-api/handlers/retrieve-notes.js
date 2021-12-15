@@ -1,5 +1,5 @@
 const { retrieveNotes } = require('inmymind-logic')
-const { handleError} = require('./helpers')
+const { handleError } = require('./helpers')
 const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
 
@@ -17,8 +17,15 @@ module.exports = (req, res) => {
         const { sub: id } = payload
 
         const user_id = id
-       
-        retrieveNotes(user_id, new Date(date))
+
+        const dateFormat = ''
+
+        if (date) {
+            dateFormat = new Date(date)
+        }
+        
+
+        retrieveNotes(user_id, dateFormat)
             .then(note => res.json(note))
             .catch(error => handleError(error, res))
     } catch (error) {
