@@ -1,5 +1,5 @@
-import logger from '../../utils/logger'
-import './Logo.css'
+import logger from '../utils/logger'
+// import './Logo.css'
 
 function Logo({ image, text }) {
     logger.debug('Logo -> render')

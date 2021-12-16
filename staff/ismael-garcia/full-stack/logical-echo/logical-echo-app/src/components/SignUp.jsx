@@ -6,7 +6,7 @@ function SignUp({ onSignUp, onSignIn }) {
     return <form className="register container container--vertical container--gapped" onSubmit={event => {
         event.preventDefault()
 
-        const { target: { name: { value: name },username: { value: username}, password: { value: password } } } = event 
+        const { target: { name: { value: name }, username: { value: username}, password: { value: password } } } = event 
 
         onSignUp(name, username, password)
     }}>

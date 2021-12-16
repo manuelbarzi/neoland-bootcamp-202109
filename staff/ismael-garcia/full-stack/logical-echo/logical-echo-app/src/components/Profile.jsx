@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import logger from '../utils/logger'
 import Unregister from './Unregister'
-import { updateUserPassword, unregisterUser } from '../logic'
+import { updateUserProfile, unregisterUser } from '../logic'
 
 function Profile({ onBack, onFlowStart, onFlowEnd, onModal, onSignOut }) {
     logger.debug('Profile -> render')
@@ -16,7 +16,7 @@ function Profile({ onBack, onFlowStart, onFlowEnd, onModal, onSignOut }) {
         onFlowStart()
         
         try {
-            updateUserPassword(sessionStorage.token, oldPassword, password, error => {
+            updateUserProfile(sessionStorage.token, oldPassword, password, error => {
                 if (error) {
                     onFlowEnd()
 

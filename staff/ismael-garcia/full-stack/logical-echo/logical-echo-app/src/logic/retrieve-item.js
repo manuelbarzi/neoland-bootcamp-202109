@@ -8,7 +8,7 @@ import { validateItemId, validateCallback } from "./helpers/validators"
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
  */
- function retrieveItem(id, callback) {
+ function retrieveItem(token, id, callback) {
     validateItemId(id)
     validateCallback(callback)
 

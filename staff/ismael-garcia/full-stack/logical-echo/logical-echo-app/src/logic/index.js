@@ -7,6 +7,7 @@ import retrieveItem from './retrieve-item'
 import toggleFavItem from './toggle-fav-item'
 import retrieveFavItems from './retrieve-fav-items'
 import retrieveItemsCollection from './retrieve-items-collection'
+import searchItems from './search-items'
 
 export {
     signInUser,
@@ -17,5 +18,6 @@ export {
     retrieveItem,
     toggleFavItem,
     retrieveFavItems,
-    retrieveItemsCollection
+    retrieveItemsCollection,
+    searchItems
 }

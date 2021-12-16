@@ -1,18 +1,18 @@
-import logger from '../../utils/logger.js'
+import logger from '../utils/logger.js'
 import { useState, useEffect } from 'react'
-import { retrieveFavVehicles, toggleFavVehicle } from '../../logic'
-import './Favs.css'
+import { retrieveFavItems, toggleFavItem } from '../logic'
+// import './Favs.css'
 
 function Favs({ onBack, onItem, onFlowStart, onFlowEnd, onModal }) {
     logger.debug('Favs -> render')
 
-    const [vehicles, setVehicles] = useState()
+    const [items, setItems] = useState()
 
     useEffect(() => {
         onFlowStart()
 
         try {
-            retrieveFavVehicles(sessionStorage.token, (error, vehicles) => {
+            retrieveFavItems(sessionStorage.token, (error, items) => {
                 if (error) {
                     onFlowEnd()
 
@@ -21,7 +21,7 @@ function Favs({ onBack, onItem, onFlowStart, onFlowEnd, onModal }) {
                     return
                 }
 
-                setVehicles(vehicles)
+                setItems(items)
 
                 onFlowEnd()
             })
@@ -36,7 +36,7 @@ function Favs({ onBack, onItem, onFlowStart, onFlowEnd, onModal }) {
         onFlowStart()
 
         try {
-            toggleFavVehicle(sessionStorage.token, id, error => {
+            toggleFavItem(sessionStorage.token, id, error => {
                 if (error) {
                     onFlowEnd()
 
@@ -45,7 +45,7 @@ function Favs({ onBack, onItem, onFlowStart, onFlowEnd, onModal }) {
                     return
                 }
 
-                setVehicles(vehicles.filter(vehicle => vehicle.id !== id))
+                setItems(items.filter(item => item.id !== id))
 
                 onFlowEnd()
             })
@@ -59,10 +59,10 @@ function Favs({ onBack, onItem, onFlowStart, onFlowEnd, onModal }) {
     return <>
         <button className='button button--medium' onClick={onBack}>Go back</button>
 
-        {vehicles && vehicles.length ?
+        {items && items.length ?
         <ul className="favs container container--vertical">
             {
-                vehicles.map(({ id, name, thumbnail, image, price, isFav }) => <li key={id}className="home__results-item" onClick={() => onItem(id)}>
+                items.map(({ id, name, thumbnail, image, price, isFav }) => <li key={id}className="home__results-item" onClick={() => onItem(id)}>
                     <h2>{name}</h2>
                     <span>{price}$</span>
                     <img className="favs__image" src={thumbnail || image} alt='' />
