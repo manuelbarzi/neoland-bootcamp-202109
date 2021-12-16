@@ -1,6 +1,6 @@
 function deleteTreatment(token, treatmentId, callback) {
     return (async () => {
-        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/treatments`, {
+        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/treatments/${treatmentId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -21,10 +21,8 @@ function deleteTreatment(token, treatmentId, callback) {
             }
 
             callback(new Error(message))
-        } else if (status === 204) {
-            callback(null)
         }
-    })
+    })()
 }
 
 export default deleteTreatment

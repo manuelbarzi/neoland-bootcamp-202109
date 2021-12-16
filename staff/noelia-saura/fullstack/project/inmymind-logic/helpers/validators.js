@@ -4,7 +4,6 @@ function validateId(id) {
     if (typeof id !== 'string') throw new TypeError('id is not a string')
     if (!id.trim().length) throw new FormatError('id is empty or blank')
     if (/\r?\n|\r|\t| /g.test(id)) throw new FormatError('id has blank spaces')
-    if (id.length !== 24) throw new FormatError('id doesn\'t have 24 characters')
 }
 
 function validateUsername(username) {

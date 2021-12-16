@@ -4,11 +4,13 @@ import retrieveUser from './retrieve-user'
 import updateUserPassword from './update-user-password'
 import unregisterUser from './unregister-user'
 import retrieveNotes from './retrieve-notes'
-import retrieveTreatment from './retrieve-treatment'
+import retrieveTreatments from './retrieve-treatment'
 import deleteNote from './delete-note'
 import deleteTreatment from './delete-treatment'
 import addNote from './add-note'
 import addTreatment from './add-treatment'
+import addDiary from './add-diary'
+import retrieveDiary from './retrieve-diary'
 import context from './context'
 
 export {
@@ -20,8 +22,10 @@ export {
     retrieveNotes,
     addNote,
     addTreatment,
-    retrieveTreatment,
+    retrieveTreatments,
     deleteNote,
     deleteTreatment,
+    addDiary,
+    retrieveDiary,
     context,
 }

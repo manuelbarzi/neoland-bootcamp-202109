@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { deleteTreatment } from "../logic";
 import "./Treatment.sass";
 
-function Treatment({treatment }) {
+function Treatment({treatment, deleteTreatment }) {
   logger.debug("Treatment->render");
   
 
@@ -19,9 +19,8 @@ function Treatment({treatment }) {
 
   
 
-  const doDeleteTreatment = () => {
-     deleteTreatment(sessionStorage.token, treatment.id)
-     
+  const doDeleteTreatment= () => {
+    deleteTreatment(treatment.id)
   }
 
   return (

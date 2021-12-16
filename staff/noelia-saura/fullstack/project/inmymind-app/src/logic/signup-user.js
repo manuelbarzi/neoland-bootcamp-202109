@@ -12,6 +12,7 @@
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
 function signupUser(name, username, password, gender,email,age) {
+    // TODO validate args
     
     return (async () => {
         const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/users`, {

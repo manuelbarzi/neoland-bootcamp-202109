@@ -66,7 +66,7 @@ mongoose.connect(MONGO_URL)
 
         api.delete('/treatments/:id',jsonBodyParser, deleteTreatment)
 
-        api.delete('/unregister:id',jsonBodyParser,unregisterUser)
+        api.delete('/unregister/:id',jsonBodyParser,unregisterUser)
 
         api.all('*', (req, res) => {
             res.status(404).json({ message: 'sorry, this endpoint isn\'t available' })

@@ -30,22 +30,22 @@ describe('unregisterUser', () => {
             .then(user => userId = user.id)
     })
 
-    describe('When user already exists', () => {
+    describe('when user already exists', () => {
 
-        it('Should succeed when user is deleted from data base', () => {
+        it('should succeed when user is deleted from data base', () => {
             const { password } = user
 
             return unregisterUser(userId, password)
                 .then(response => {
                     expect(response).to.equal('User deleted successfully')
                 })
-                .catch(() => { throw new CredentialsError('Wrong password') })
+               // .catch(() => { throw new CredentialsError('Wrong password') })
         })
 
-        it('Should fail with wrong password', () => {
+        it('should fail with wrong password', () => {
 
             return unregisterUser(userId, '11111111')
-                .then(() => { throw new Error('Should not reach this point.') })
+                .then(() => { throw new Error('should not reach this point.') })
                 .catch(error => {
                     expect(error).to.exist
                     expect(error).to.be.instanceOf(CredentialsError)

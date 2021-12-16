@@ -1,36 +1,30 @@
 import logger from "../logger";
 import AppContext from "./AppContext";
 import { useEffect, useState, useContext } from "react";
-import { addNote, retrieveNotes, deleteNote } from "../logic";
-import Note from "./Note";
+import { addDiary, retrieveDiary } from "../logic";
+import Diary from "./Diary";
 
-function Notes({ onBack }) {
-  logger.debug("Notes->render");
+function Diaries({ onBack }) {
+  logger.debug("Diaries->render");
 
   const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext);
 
   const { token } = sessionStorage;
-  
-  const [notes, setNotes] = useState([]);
 
-  const getNotes = async() => {
-    const notes = await (retrieveNotes(token));
-    setNotes(notes);
+  const [diaries, setDiaries] = useState([]);
+
+  const getDiaries=()=>{
+    setDiaries(retrieveDiary(token))
   }
 
-  const doDeleteNote = async(noteId) => {
-    await deleteNote(sessionStorage.token, noteId)
-    getNotes()
-}
-
   useEffect(async () => {
-    logger.debug("Note -> useEffect (componentDidMount)");
+    logger.debug("Diary -> useEffect (componentDidMount)");
 
     if (token) {
       try {
         onFlowStart();
 
-        getNotes();
+        setDiaries(await retrieveDiary(token));
 
         onFlowEnd();
       } catch ({ message }) {
@@ -62,9 +56,9 @@ function Notes({ onBack }) {
           try {
             onFlowStart();
 
-            await addNote(content.value, date.value, sessionStorage.token);
+            await addDiary(content.value, date.value, sessionStorage.token);
 
-            getNotes();
+            setDiaries(await retrieveDiary(sessionStorage.token));
 
             onFlowEnd();
           } catch ({ message }) {
@@ -75,22 +69,20 @@ function Notes({ onBack }) {
         }}
       >
         <div className="">
-          <h2 className="addnote">Add Note</h2>
-          <input className="container notes" name="date" type="date" />
-          <textarea
-            className="container notes notes__size"
-            name="content"
-            rows="10"
-            cols="50"
-            placeholder="Write your note here"
-          ></textarea>
-          <button className="button container button--addnote">Add Note</button>
+          <h2 className="diary">Add Diary</h2>
+          <input className="container diaries" name="date" type="date" />
+          <h3>Estado emocional</h3>
+          <input type="radio" name='enfadado' value='enfadado' />Enfadado
+          <br />
+          <input type="radio" name='triste' value='triste' />Triste
+          <br />
+          <button className="button container button--diary">Add Diary</button>
         </div>
       </form>
 
-      {notes.map((noteItem) => (
-        <div key={noteItem.id}>
-          <Note note={noteItem} deleteNote={doDeleteNote} />
+      {diaries.map((diaryItem) => (
+        <div key={diaryItem.id}>
+          <Diary diary={diaryItem} />
         </div>
       ))}
 
@@ -98,4 +90,4 @@ function Notes({ onBack }) {
   );
 }
 
-export default Notes;
+export default Diaries;

@@ -8,8 +8,8 @@ import { retrieveUser } from "../logic";
 import AppContext from "./AppContext";
 import Calendar from 'react-calendar';
 import Notes from "./Notes";
-import Treatment from "./Treatment";
-import Diary from "./Diary";
+import Treatments from "./Treatments";
+import Diaries from "./Diaries";
 import Disorder from "./Disorder";
 
 import 'react-calendar/dist/Calendar.css';
@@ -94,18 +94,18 @@ function Home({ onSignOut, onAuthError }) {
       navigate('/notes')
     }
   }
-  const toggleTreatment = () => {
-    if (location.pathname === "/treatment") {
+  const toggleTreatments = () => {
+    if (location.pathname === "/treatments") {
       navigate('/')
     } else {
-      navigate('/treatment')
+      navigate('/treatments')
     }
   }
-  const toggleDiary = () => {
-    if (location.pathname === "/diary") {
+  const toggleDiaries = () => {
+    if (location.pathname === "/diaries") {
       navigate('/')
     } else {
-      navigate('/diary')
+      navigate('/diaries')
     }
   }
   const toggleDisorder = () => {
@@ -138,20 +138,20 @@ function Home({ onSignOut, onAuthError }) {
         </button>
       </div>
       <div>
-      <button className={`button button-medium button--home ${location.pathname === "/Diary" && "button--dark"}`} onClick={toggleDiary}>Diary</button>
-        <button className={`button button-medium button--home ${location.pathname === "/Disorder" && "button--dark"}`} onClick={toggleDisorder}>Problem</button>
+      <button className={`button button-medium button--home ${location.pathname === "/diaries" && "button--dark"}`} onClick={toggleDiaries}>Diaries</button>
+        <button className={`button button-medium button--home ${location.pathname === "/disorder" && "button--dark"}`} onClick={toggleDisorder}>Problem</button>
       </div>
       <div className="container">
         <button className={`button button-medium button--home ${location.pathname === "/notes" && "button--dark"}`} onClick={toggleNotes}>Notes</button>
-        <button className={`button button-medium button--home ${location.pathname === "/treatment" && "button--dark"}`} onClick={toggleTreatment}>Treatment</button>
+        <button className={`button button-medium button--home ${location.pathname === "/treatments" && "button--dark"}`} onClick={toggleTreatments}>Treatment</button>
       </div>
 
       <Routes>
         <Route path="/profile" element={<Profile onBack={goToHome} onSignOut={doSignOut} />} />
         <Route path='/notes' element={<Notes onBack={goToHome} />}/>
-        <Route path='/treatment' element={<Treatment />}/>
-        {/* <Route path='/Diary' element={<Diary />}/>
-        <Route path='/Disorder' element={<Disorder />}/> */}
+        <Route path='/treatments' element={<Treatments onBack={goToHome} />}/>
+        <Route path='/Diaries' element={<Diaries onBack={goToHome}/>}/>
+        {/* <Route path='/Disorder' element={<Disorder />}/> */}
       </Routes>
 
       { location.pathname === "/"  || location.pathname === "/profile" ? <Calendar onchange={cacaMas}/> : ''}

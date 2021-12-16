@@ -13,7 +13,7 @@ function unregisterUser(id, password, callback) {
             
             if (user.password === password) {
                 return user.remove(id)
-                    .then(() => 'User deleted successfully')
+                    .then(() => undefined)
             } else throw new CredentialsError('Wrong password')
         })
 

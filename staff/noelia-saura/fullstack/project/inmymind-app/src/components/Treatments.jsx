@@ -1,7 +1,7 @@
 import logger from "../logger";
 import AppContext from "./AppContext";
 import { useEffect, useState, useContext } from "react";
-import { addTreatment, retrieveTreatment } from "../logic";
+import { addTreatment, retrieveTreatments,deleteTreatment } from "../logic";
 import Treatment from "./Treatment";
 
 function Treatments({ onBack }) {
@@ -9,7 +9,19 @@ function Treatments({ onBack }) {
 
   const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext);
 
+  const { token } = sessionStorage;
+
   const [treatments, setTreaments] = useState([]);
+
+  const getTreatment = async() => {
+    const treatments = await (retrieveTreatments(token));
+    setTreaments(treatments);
+  }
+
+  const doDeleteTreatment = async(treatmentId) => {
+    await deleteTreatment(sessionStorage.token, treatmentId)
+    getTreatment()
+}
 
   useEffect(async () => {
     logger.debug("Treatment -> useEffect (componentDidMount)");
@@ -20,7 +32,7 @@ function Treatments({ onBack }) {
       try {
         onFlowStart();
 
-        setTreaments(await retrieveTreatment(token));
+        setTreaments(await retrieveTreatments(token));
 
         onFlowEnd();
       } catch ({ message }) {
@@ -54,7 +66,7 @@ function Treatments({ onBack }) {
 
             await addTreatment(content.value, date.value, sessionStorage.token);
 
-            setTreaments(await retrieveTreatment(sessionStorage.token));
+            getTreatment();
 
             onFlowEnd();
           } catch ({ message }) {
@@ -65,7 +77,7 @@ function Treatments({ onBack }) {
         }}
       >
         <div className="">
-          <h2 className="addtreatment">Add Treatment</h2>
+          <h2 className="addtreatments">Add Treatment</h2>
           <input className="container treatments" name="date" type="date" />
           <textarea
             className="container treatments treatments__size"
@@ -74,13 +86,13 @@ function Treatments({ onBack }) {
             cols="50"
             placeholder="Write your treatment here"
           ></textarea>
-          <button className="button container button--addtreatment">Add Treatment</button>
+          <button className="button container button--addtreatments">Add Treatment</button>
         </div>
       </form>
 
       {treatments.map((treatmentItem) => (
         <div key={treatmentItem.id}>
-          <Treatment treatment={treatmentItem} />
+          <Treatment treatment={treatmentItem} deleteTreatment={doDeleteTreatment}/>
         </div>
       ))}
 

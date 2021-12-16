@@ -17,8 +17,14 @@ module.exports = (req, res) => {
         const { sub: id } = payload
 
         const user_id = id
-       
-        retrieveDiary(user_id, new Date(date))
+
+        const dateFormat = ''
+
+        if (date) {
+            dateFormat = new Date(date)
+        }
+               
+        retrieveDiary(user_id, dateFormat)
             .then(note => res.json(note))
             .catch(error => handleError(error, res))
     } catch (error) {

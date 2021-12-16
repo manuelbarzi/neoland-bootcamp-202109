@@ -23,7 +23,7 @@ function retrieveTreatment(user_id, date) {
         .then(treatments => {
             for (let index = 0; index < treatments.length; index++) {
 
-                treatments[index].id=treatments[index]._id.toString()
+                treatments[index].id = treatments[index]._id.toString()
 
                 delete treatments[index]._id
                 delete treatments[index].user_id
@@ -31,7 +31,7 @@ function retrieveTreatment(user_id, date) {
 
             }
         
-            return treatment
+            return treatments
         })
 }
 

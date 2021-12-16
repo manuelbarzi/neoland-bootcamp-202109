@@ -1,12 +1,12 @@
 function deleteNote(token, noteId, callback) {
+    // TODO validate arguments
     return (async () => {
-        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/notes`, {
+        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/notes/${noteId}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ noteId })
+            }
         })
 
         const { status, responseText } = res
@@ -21,10 +21,8 @@ function deleteNote(token, noteId, callback) {
             }
 
             callback(new Error(message))
-        } else if (status === 204) {
-            callback(null)
-        }
-    })
+        } 
+    })()
 }
 
 export default deleteNote
