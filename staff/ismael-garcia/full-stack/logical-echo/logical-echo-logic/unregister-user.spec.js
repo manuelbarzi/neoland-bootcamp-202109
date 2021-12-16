@@ -6,7 +6,7 @@ const { expect } = require('chai')
 const unregisterUser = require('./unregister-user')
 const { mongoose, models: { User } } = require('logical-echo-data')
 const { Types: { ObjectId } } = mongoose
-const { CredentialsError, FormatError, ConflictError, NotFoundError } = require('logical-echo-errors')
+const { CredentialsError, FormatError, NotFoundError } = require('logical-echo-errors')
 const bcrypt = require('bcryptjs')
 
 const { env: { MONGO_URL } } = process
@@ -32,17 +32,18 @@ describe('unregisterUser', () => {
 
     it('should suceed with existing id and correct password', async () => {
         let { password } = user 
-
+        
         const res = await unregisterUser(userId, password)
 
         expect(res).to.be.undefined
     
         const user2 = await User.findById(userId)   
 
-        expect(user2).to.be.undefined
+        expect(user2).to.be.null
     })
 
     it('should fail with non-existing id', async () => {
+        debugger 
         const { username, password } = user
 
         const userId = ObjectId().toString()

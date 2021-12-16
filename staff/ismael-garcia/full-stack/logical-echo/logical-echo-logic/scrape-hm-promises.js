@@ -1,7 +1,7 @@
 const puppeteer = require("puppeteer");
 // const { registerItem } = require('./register-item');
 const { writeFile } = require("fs").promises;
-const logger = require("../utils/my-logger");
+const logger = require("../logical-echo-api/utils/my-logger");
 
 logger.debug("start scraping");
 

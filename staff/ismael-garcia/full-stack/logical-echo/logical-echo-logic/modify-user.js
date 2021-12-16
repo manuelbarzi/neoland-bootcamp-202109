@@ -8,19 +8,19 @@ const bcrypt = require('bcryptjs')
  * @param {*} id 
  * @param {*} data 
  */
-function modifyUser(id, data) { 
+function modifyUser(id, data) {
     validateId(id)
     validateData(data)
 
     return (async () => {
         try {
             const user = await User.findById(id).lean()
-            debugger 
+            
             if (!user) throw new NotFoundError(`user with id ${id} not found`)
             
-            const { password } = data 
+            let { password } = data 
         
-            if (password !== user.password) throw new CredentialsError('wrong password')
+            if (!bcrypt.compareSync(password, user.password)) throw new CredentialsError('wrong password')
             
             if (data.newPassword) {
                 password = data.newPassword 
@@ -43,7 +43,7 @@ function modifyUser(id, data) {
             
             throw error
         }
-    })
+    })()
 }
 
 module.exports = modifyUser

@@ -30,7 +30,7 @@ describe('modifyUser', () => {
         userId = user2.id
     })
 
-    it('should suceed with existing id and correct password', async () => {
+    it('should succeed with existing id and correct password', async () => {
         let { name, username, password } = user 
 
         name += '-updated'

@@ -21,7 +21,6 @@
     "logical-echo-data": "file:../logical-echo-data",
     "logical-echo-errors": "file:../logical-echo-errors",
     "logical-echo-logic": "file:../logical-echo-logic",
-    "puppeteer": "^12.0.1",
     "winston": "^3.3.3"
   },
   "devDependencies": {

@@ -1,10 +1,16 @@
-const puppeteer = require("puppeteer");
-const { registerItem } = require('./register-item');
-const { writeFile } = require("fs").promises;
-const logger = require("../utils/my-logger");
+require('dotenv').config()
+const { env: { MONGO_URL } } = process
 
-(async () => {
+const { mongoose } = require('logical-echo-data')
+const puppeteer = require("puppeteer");
+// const { writeFile } = require("fs").promises;
+const logger = require("../logical-echo-api/utils/my-logger");
+const registerItem = require("./register-item");
+
+
+(async () => { 
   try {
+
     logger.debug("start scraping")
 
     const browser = await puppeteer.launch()
@@ -21,17 +27,18 @@ const logger = require("../utils/my-logger");
 
     await page.waitForSelector(".product-link.product-grid-product__link.link")
 
-    const hrefs = await page.evaluate(() => {
-      const anchors = Array.from(
-        document.querySelectorAll(
-          ".product-link.product-grid-product__link.link"
-        )
-      );
+    // const hrefs = await page.evaluate(() => {
+    //   const anchors = Array.from(
+    //     document.querySelectorAll(
+    //       ".product-link.product-grid-product__link.link"
+    //     )
+    //   );
 
-      const mappedHrefs = anchors.map((anchor) => anchor.href);
+    //   const mappedHrefs = anchors.map((anchor) => anchor.href);
 
-      return mappedHrefs;
-    });
+    //   return mappedHrefs;
+    // });
+    const hrefs = await page.$$eval('.product-link.product-grid-product__link.link', links => links.map(a => a.href));
 
     const promises = hrefs.map(async (href) => {
       logger.debug(`scraping page ${href}`)
@@ -50,6 +57,10 @@ const logger = require("../utils/my-logger");
         const item = await page.evaluate(() => {
           const urlPart = window.location.href.slice(-14, -5)
           const id = `zara${urlPart}`
+
+          const store = 'Zara'
+
+          const pattern = 'Woman'
 
           const name = document.querySelector(".product-detail-info__name").innerText
 
@@ -72,7 +83,7 @@ const logger = require("../utils/my-logger");
 
           const colors = onlyOneColor ? [onlyOneColor] : colorSelection
 
-          const item = { id, name, images, price, url, description, colors }
+          const item = { id, store, pattern, name, images, price, url, description, colors }
 
           return item
         });
@@ -86,14 +97,31 @@ const logger = require("../utils/my-logger");
     });
 
     const items = await Promise.all(promises);
+    const filterItems = items.filter(item => true) // aquí filtras para no meter repetidos
 
     logger.debug(`scraped item ${JSON.stringify(items)}`)
 
+    await browser.close();
+
     // await writeFile("items-zara.json", JSON.stringify(items, null, 4));
 
-    await items.forEach(item => registerItem(item))
+    await mongoose.connect(MONGO_URL)
 
-    await browser.close();
+    const creates = filterItems.map(async item => {
+ 
+      return await registerItem(item)
+
+    })
+
+    await Promise.all( creates )
+
+    // for (let i = 0; i < items.length; i++) {
+    //   const item = items[i]
+
+    //   await registerItem(item)
+    // }
+
+    mongoose.disconnect()
 
     logger.debug("end scraping");
   } catch (error) {
