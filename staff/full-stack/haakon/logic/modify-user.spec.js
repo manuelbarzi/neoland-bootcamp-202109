@@ -16,18 +16,18 @@ describe('modifyUser', () => {
 
     let user, userId
 
-    beforeEach(() => {
+    beforeEach(async () => {
         user = {
             name: 'Wendy Pan',
             username: 'wendypan',
             password: '123123123'
         }
 
-        return User.create({ ...user, password: bcrypt.hashSync(user.password) })
-            .then(user => userId = user.id)
+        const _user = await User.create({ ...user, password: bcrypt.hashSync(user.password) })
+        userId = _user.id
     })
 
-    it('should succeed updating name and username on a pre-existing user', () => {
+    it('should succeed updating name and username on a pre-existing user', async () => {
         let { name, username } = user
 
         name += '-updated'
@@ -35,35 +35,27 @@ describe('modifyUser', () => {
 
         const data = { name, username }
 
-        return modifyUser(userId, data)
-            .then(res => {
-                expect(res).to.be.undefined
-
-                return User.findById(userId)
-            })
-            .then(user => {
-                expect(user.name).to.equal(name)
-                expect(user.username).to.equal(username)
-            })
+        const res = await modifyUser(userId, data)
+        expect(res).to.be.undefined
+        const _user = await User.findById(userId)
+        expect(_user.name).to.equal(name)
+        expect(_user.username).to.equal(username)
     })
 
-    it('should succeed updating password on a pre-existing user', () => {
+    it('should succeed updating password on a pre-existing user', async () => {
         const { password: oldPassword } = user
 
         const password = oldPassword + '-updated'
 
         const data = { oldPassword, password }
 
-        return modifyUser(userId, data)
-            .then(res => {
-                expect(res).to.be.undefined
-
-                return User.findById(userId)
-            })
-            .then(user => expect(bcrypt.compareSync(password, user.password)).to.be.true)
+        const res = await modifyUser(userId, data)
+        expect(res).to.be.undefined
+        const _user = await User.findById(userId)
+        return expect(bcrypt.compareSync(password, _user.password)).to.be.true
     })
 
-    it('should fail updating password on a pre-existing user when old password is wrong', () => {
+    it('should fail updating password on a pre-existing user when old password is wrong', async () => {
         let { password: oldPassword } = user
 
         const password = oldPassword + '-updated'
@@ -72,81 +64,79 @@ describe('modifyUser', () => {
 
         const data = { oldPassword, password }
 
-        return modifyUser(userId, data)
-            .then(() => { throw new Error('should not reach this point') })
-            .catch(error => {
-                expect(error).to.exist
-                expect(error).to.be.instanceOf(CredentialsError)
-                expect(error.message).to.equal('wrong password')
-            })
+        try {
+            await modifyUser(userId, data)
+            throw new Error('should not reach this point')
+        } catch (error) {
+            expect(error).to.exist
+            expect(error).to.be.instanceOf(CredentialsError)
+            expect(error.message).to.equal('wrong password')
+        }
     })
 
     describe('when another user already exists', () => {
         let user2
 
-        beforeEach(() => {
+        beforeEach(async () => {
             user2 = {
                 name: 'Peter Pan',
                 username: 'peterpan',
                 password: '123123123'
             }
 
-            return User.create(user2)
+            await User.create(user2)
         })
 
-        it('should fail on updating username to a one that already exists', () => {
+        it('should fail on updating username to a one that already exists', async () => {
             const username = user2.username
 
-            return modifyUser(userId, { username })
-                .then(() => { throw new Error('should not reach this point') })
-                .catch(error => {
-                    expect(error).to.exist
-                    expect(error).to.be.instanceOf(ConflictError)
-                    expect(error.message).to.equal(`user with username ${username} already exists`)
-                })
+            try {
+                await modifyUser(userId, { username })
+                throw new Error('should not reach this point')
+            } catch (error) {
+                expect(error).to.exist
+                expect(error).to.be.instanceOf(ConflictError)
+                expect(error.message).to.equal(`user with username ${username} already exists`)
+            }
         })
     })
 
-    it('should fail when user id does not correspond to any user', () => {
+    it('should fail when user id does not correspond to any user', async () => {
         const userId = ObjectId().toString()
 
-        return modifyUser(userId, {})
-            .then(() => { throw new Error('should not reach this point') })
-            .catch(error => {
-                expect(error).to.exist
-                expect(error).to.be.instanceOf(NotFoundError)
-                expect(error.message).to.equal(`user with id ${userId} not found`)
-            })
+        try {
+            await modifyUser(userId, {})
+            throw new Error('should not reach this point')
+        } catch (error) {
+            expect(error).to.exist
+            expect(error).to.be.instanceOf(NotFoundError)
+            expect(error.message).to.equal(`user with id ${userId} not found`)
+        }
     })
 
     describe('when parameters are not valid', () => {
         describe('when id is not valid', () => {
             it('should fail when id is not a string', () => {
                 expect(() => modifyUser(true, {}, () => { })).to.throw(TypeError, 'id is not a string')
-
                 expect(() => modifyUser(123, {}, () => { })).to.throw(TypeError, 'id is not a string')
-
                 expect(() => modifyUser({}, {}, () => { })).to.throw(TypeError, 'id is not a string')
-
                 expect(() => modifyUser(() => { }, {}, () => { })).to.throw(TypeError, 'id is not a string')
-
                 expect(() => modifyUser([], {}, () => { })).to.throw(TypeError, 'id is not a string')
             })
 
             it('should fail when id is empty or blank', () => {
                 expect(() => modifyUser('', {}, () => { })).to.throw(FormatError, 'id is empty or blank')
-
                 expect(() => modifyUser('   ', {}, () => { })).to.throw(FormatError, 'id is empty or blank')
             })
 
             it('should fail when id has spaces', () => {
                 expect(() => modifyUser(' abcd1234abcd1234abcd1234 ', {}, () => { })).to.throw(FormatError, 'id has blank spaces')
-
                 expect(() => modifyUser('abcd 1234abc d1234abc d1234', {}, () => { })).to.throw(FormatError, 'id has blank spaces')
             })
 
-            it('should fail when id length is different from 24 characters', () => {
-                expect(() => modifyUser('abc', {}, () => { })).to.throw(FormatError, 'id doesn\'t have 24 characters')
+            it('should fail when id is not valid', () => {
+                const wrongMongoId = '61b8d031158b2213c7cc37b'
+                expect(() => modifyUser(wrongMongoId)).to.throw(FormatError, 'id is not valid')
             })
         })
 
@@ -291,8 +281,8 @@ describe('modifyUser', () => {
         })
     })
 
-    after(() =>
-        User.deleteMany()
-            .then(() => mongoose.disconnect())
-    )
+    after(async () => {
+        await User.deleteMany()
+        await mongoose.disconnect()
+    })
 })

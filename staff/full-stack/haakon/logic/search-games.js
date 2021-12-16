@@ -10,16 +10,19 @@ function searchGames(query) {
     // $regex: `\\b[${query}]\\w*\\b`, $options: 'gi'
     const regex = new RegExp(query, 'i')
 
-    return Game.find({ name: regex }).lean()
-        .then(games => {
-            if (!games) throw new NotFoundError(`game with that ${query} doesn't found`)
+    return (async () => {
+        const _games = await Game.find({ name: regex }).lean()
 
-            games.forEach(game => {
-                delete game.__v
-            })
+        if (!_games) throw new NotFoundError(`game with that ${query} doesn't found`)
 
-            return games
+        _games.forEach(game => {
+            game.id = game._id.toString()
+            delete game._id
+            delete game.__v
         })
+
+        return _games
+    })()
 }
 
 module.exports = searchGames

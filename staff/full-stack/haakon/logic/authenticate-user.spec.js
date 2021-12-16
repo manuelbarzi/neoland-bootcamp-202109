@@ -15,61 +15,65 @@ describe('authenticateUser', () => {
 
     let user, userId
 
-    beforeEach(() => {
+    beforeEach(async () => {
         user = {
             name: 'Wendy Pan',
             username: 'wendypan',
             password: '123123123'
         }
 
-        return User.create({ ...user, password: bcrypt.hashSync(user.password) })
-            .then(user => userId = user.id)
+        const _user = await User.create({ ...user, password: bcrypt.hashSync(user.password) })
+        return userId = _user.id
     })
 
-    it('should succeed with correct credentials for an already existing user', () => {
+    it('should succeed with correct credentials for an already existing user', async () => {
         const { username, password } = user
 
-        return authenticateUser(username, password)
-            .then(id => {
-                expect(id).to.exist
-                expect(id).to.equal(userId)
-            })
+        const id = await authenticateUser(username, password)
+        expect(id).to.exist
+        expect(id).to.equal(userId)
     })
 
-    it('should fail with incorrect password', () => {
+    it('should fail with incorrect password', async () => {
         const { username, password } = user
 
-        return authenticateUser(username, password + '-wrong')
-            .then(() => { throw new Error('should not reach this point') })
-            .catch(error => {
-                expect(error).to.exist
-                expect(error).to.be.instanceOf(CredentialsError)
-                expect(error.message).to.equal('wrong credentials')
-            })
+        try {
+            await authenticateUser(username, password + '-wrong')
+
+            throw new Error('should not reach this point')
+        } catch (error) {
+            expect(error).to.exist
+            expect(error).to.be.instanceOf(CredentialsError)
+            expect(error.message).to.equal('wrong credentials')
+        }
     })
 
-    it('should fail with incorrect username', () => {
+    it('should fail with incorrect username', async () => {
         const { username, password } = user
 
-        return authenticateUser(username + '-wrong', password)
-            .then(() => { throw new Error('should not reach this point') })
-            .catch(error => {
-                expect(error).to.exist
-                expect(error).to.be.instanceOf(CredentialsError)
-                expect(error.message).to.equal('wrong credentials')
-            })
+        try {
+            await authenticateUser(username + '-wrong', password)
+
+            throw new Error('should not reach this point')
+        } catch (error) {
+            expect(error).to.exist
+            expect(error).to.be.instanceOf(CredentialsError)
+            expect(error.message).to.equal('wrong credentials')
+        }
     })
 
-    it('should fail with incorrect username and password', () => {
+    it('should fail with incorrect username and password', async () => {
         const { username, password } = user
 
-        return authenticateUser(username + '-wrong', password + '-wrong')
-            .then(() => { throw new Error('should not reach this point') })
-            .catch(error => {
-                expect(error).to.exist
-                expect(error).to.be.instanceOf(CredentialsError)
-                expect(error.message).to.equal('wrong credentials')
-            })
+        try {
+            await authenticateUser(username + '-wrong', password + '-wrong')
+
+            throw new Error('should not reach this point')
+        } catch (error) {
+            expect(error).to.exist
+            expect(error).to.be.instanceOf(CredentialsError)
+            expect(error.message).to.equal('wrong credentials')
+        }
     })
 
     describe('when parameters are not valid', () => {
@@ -134,8 +138,8 @@ describe('authenticateUser', () => {
         })
     })
 
-    after(() =>
-        User.deleteMany()
-            .then(() => mongoose.disconnect())
-    )
+    after(async () => {
+        await User.deleteMany()
+        await mongoose.disconnect()
+    })
 })

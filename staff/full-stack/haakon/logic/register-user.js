@@ -7,8 +7,7 @@ const bcrypt = require('bcryptjs')
  * TODO doc me
  * @param {*} name 
  * @param {*} username 
- * @param {*} password 
- * @param {*} callback 
+ * @param {*} password
  */
 
 function registerUser(name, username, password) {

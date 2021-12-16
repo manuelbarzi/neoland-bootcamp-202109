@@ -5,7 +5,7 @@ function validateId(id) {
     if (typeof id !== 'string') throw new TypeError('id is not a string')
     if (!id.trim().length) throw new FormatError('id is empty or blank')
     if (/\r?\n|\r|\t| /g.test(id)) throw new FormatError('id has blank spaces')
-    if (id.length !== 24) throw new FormatError('id doesn\'t have 24 characters')
+    if (!mongoose.isValidObjectId(id)) throw new FormatError('id is not valid')
 }
 
 function validateUsername(username) {
@@ -73,10 +73,6 @@ function validateQuery(query) {
     if (!query.trim().length) throw new FormatError('query is empty or blank')
 }
 
-function validateMongoId(id) {
-    if (!mongoose.isValidObjectId(id)) throw new FormatError('id is not valid')
-}
-
 module.exports = {
     validateId,
     validateUsername,
@@ -85,6 +81,5 @@ module.exports = {
     validateData,
     validateName,
     validateCallback,
-    validateQuery,
-    validateMongoId
+    validateQuery
 }

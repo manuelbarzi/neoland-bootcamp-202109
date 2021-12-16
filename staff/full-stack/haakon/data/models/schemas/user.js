@@ -43,7 +43,13 @@ const user = new Schema({
             }
         ]
     },
-    gameFavs: [
+    favGames: [
+        {
+            type: ObjectId,
+            ref: 'Game'
+        }
+    ],
+    queueGames: [
         {
             type: ObjectId,
             ref: 'Game'
