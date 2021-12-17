@@ -10,7 +10,9 @@ const {
     authenticateUser, 
     retrieveUser, 
     modifyUser,
-    unregisterUser
+    unregisterUser,
+    searchItems,
+    retrieveItemsByStore
 } = require('./handlers')
 
 const logger = require('./utils/my-logger')
@@ -39,7 +41,11 @@ logger.info('starting server')
 
         api.patch('/users', jsonBodyParser, modifyUser)
 
-        api.patch('/users', jsonBodyParser, unregisterUser)
+        api.delete('/users', jsonBodyParser, unregisterUser)
+
+        api.get('/items', searchItems)
+
+        api.get('/items/store', retrieveItemsByStore)
 
         api.all('*', (req, res) => {
             res.status(404).json({ message: 'sorry, this endpoint is not available' })

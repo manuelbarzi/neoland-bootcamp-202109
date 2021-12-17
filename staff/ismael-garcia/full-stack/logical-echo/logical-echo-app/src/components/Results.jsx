@@ -37,6 +37,7 @@ function Results({ onItem, onFlowStart, onFlowEnd, onModal }) {
         }
     }, [query])
 
+
     const toggleFav = id => {
         onFlowStart()
 
@@ -70,10 +71,10 @@ function Results({ onItem, onFlowStart, onFlowEnd, onModal }) {
     return items.length ?
         <ul className="results container container--vertical">
             {
-                items.map(({ id, name, thumbnail, image, price, isFav }) => <li key={id}className="home__results-item" onClick={() => onItem(id)}>
+                items.map(({ id, name, images, price, isFav }) => <li key={id}className="home__results-item" onClick={() => onItem(id)}>
                     <h2>{name}</h2>
-                    <span>{price}$</span>
-                    <img src={thumbnail || image} alt='' />
+                    <span>{price}</span>
+                    <img src={images[0]} alt='' />
                     <button className="button" onClick={event => {
                             event.stopPropagation()
 

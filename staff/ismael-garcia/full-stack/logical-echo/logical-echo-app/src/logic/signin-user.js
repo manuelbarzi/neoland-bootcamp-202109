@@ -1,16 +1,16 @@
-const { validateUsername, validatePassword, validateCallback } = require('./helpers/validators')
+const { validateEmail, validatePassword, validateCallback } = require('./helpers/validators')
 /**
  * Logs a user in the application.
  * 
- * @param {string} username The username of the user to be logged in.
+ * @param {string} email The email of the user to be logged in.
  * @param {string} password The password of the user to be logged in.
  * @param {function} callback The callback function to manage the response.
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
- function signInUser(username, password, callback) {
-    validateUsername(username)
+ function signInUser(email, password, callback) {
+    validateEmail(email)
     validatePassword(password)
     validateCallback(callback)
 
@@ -38,7 +38,7 @@ const { validateUsername, validatePassword, validateCallback } = require('./help
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 
-    const body = { username, password }
+    const body = { email, password }
 
     xhr.send(JSON.stringify(body))
 }

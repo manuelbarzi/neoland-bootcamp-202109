@@ -1,26 +1,24 @@
-const { validateName, validateUsername, validatePassword } = require('./helpers/validators')
+const { validateEmail, validatePassword } = require('./helpers/validators')
 const { ConflictError } = require('logical-echo-errors')
 const { models: { User } } = require('logical-echo-data')
 const bcrypt = require('bcryptjs')
 
 /**
- * TODO doc me
- * @param {*} name 
- * @param {*} username 
+ * TODO doc me 
+ * @param {*} email 
  * @param {*} password 
  */
-function registerUser(name, username, password) {
-    validateName(name)
-    validateUsername(username)
+function registerUser(email, password) {
+    validateEmail(email)
     validatePassword(password)
 
     return (async () => {
         try {
-            await User.create({ name, username, password: bcrypt.hashSync(password) })
+            await User.create({ email, password: bcrypt.hashSync(password) })
 
         } catch (error) {
             if (error.code === 11000)
-                throw new ConflictError(`user with username ${username} already exists`)
+                throw new ConflictError(`user with email ${email} already exists`)
 
             throw error
         }

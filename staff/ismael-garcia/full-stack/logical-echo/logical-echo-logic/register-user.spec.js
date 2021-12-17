@@ -14,21 +14,17 @@ describe('registerUser', () => {
     beforeEach(() => User.deleteMany())
 
     it('should suceed with new user', async () => {
-        const name = 'Wendy Pan'
-        const username = 'wendypan'
+        const email = 'wendypan@gmail.com'
         const password = '123123123'
 
-        const res = await registerUser(name, username, password)
+        const res = await registerUser(email, password)
             
         expect(res).to.be.undefined
 
-        const user = await User.findOne({ username })
+        const user = await User.findOne({ email })
      
         expect(user).to.exist
-        expect(user.name).to.equal(name)
-        expect(user.username).to.equal(username)
-        // expect(user.password).to.equal(password)
-
+        expect(user.email).to.equal(email)
         expect(bcrypt.compareSync(password, user.password)).to.be.true      
     })
 
@@ -37,8 +33,7 @@ describe('registerUser', () => {
 
         beforeEach(() => {
             user = {
-                name: 'Wendy Pan',
-                username: 'wendypan',
+                email: 'wendypan@gmail.com',
                 password: '123123123'
             }
 
@@ -46,73 +41,45 @@ describe('registerUser', () => {
         })
 
         it('should fail when user already exists', async () => {
-            const { name, username, password } = user
+            const { email, password } = user
 
             try {
-                await registerUser(name, username, password)
+                await registerUser(email, password)
 
                 throw new Error('should not reach this point')
 
             } catch(error) {
                 expect(error).to.exist
                 expect(error).to.be.instanceOf(ConflictError) 
-                expect(error.message).to.equal(`user with username ${username} already exists`)
+                expect(error.message).to.equal(`user with email ${email} already exists`)
             }
         })
     })
 
     describe('when parameters are not valid', () => {
-        describe('when name is not valid', () => {
-            it('should fail when name is not a string', () => {
-                expect(() => registerUser(true, 'wendypan', '123123123')).to.throw(TypeError, 'name is not a string')
+        describe('when email is not valid', () => {
+            it('should fail when email is not valid', () => {
+                expect(() => registerUser(true, '123123123')).to.throw(TypeError, 'email is not valid')
 
-                expect(() => registerUser(123, 'wendypan', '123123123')).to.throw(TypeError, 'name is not a string')
+                expect(() => registerUser(123, '123123123')).to.throw(TypeError, 'email is not valid')
 
-                expect(() => registerUser({}, 'wendypan', '123123123')).to.throw(TypeError, 'name is not a string')
+                expect(() => registerUser({}, '123123123')).to.throw(TypeError, 'email is not valid')
 
-                expect(() => registerUser(() => {}, 'wendypan', '123123123')).to.throw(TypeError, 'name is not a string')
+                expect(() => registerUser(() => {}, '123123123')).to.throw(TypeError, 'email is not valid')
 
-                expect(() => registerUser([], 'wendypan', '123123123')).to.throw(TypeError, 'name is not a string')
+                expect(() => registerUser([], '123123123')).to.throw(TypeError, 'email is not valid')
             })
 
-            it('should fail when name is empty', () => {
-                expect(() => registerUser('', 'wendypan', '123123123')).to.throw(FormatError, 'name is empty or blank')
+            it('should fail when email is empty', () => {
+                expect(() => registerUser('', '123123123')).to.throw(FormatError, 'email is empty or blank')
 
-                expect(() => registerUser('   ', 'wendypan', '123123123')).to.throw(FormatError, 'name is empty or blank')
+                expect(() => registerUser('   ', '123123123')).to.throw(FormatError, 'email is empty or blank')
             })
 
-            it('should fail when name has spaces around', () => {
-                expect(() => registerUser(' Wendy Pan ', 'wendypan', '123123123')).to.throw(FormatError, 'blank spaces around name')
-            })
-        })
+            it('should fail when email has spaces', () => {
+                expect(() => registerUser(' wendypan@gmail.com ', '123123123')).to.throw(FormatError, 'email has blank spaces')
 
-        describe('when username is not valid', () => {
-            it('should fail when username is not a string', () => {
-                expect(() => registerUser('Wendy Pan', true, '123123123')).to.throw(TypeError, 'username is not a string')
-
-                expect(() => registerUser('Wendy Pan', 123, '123123123')).to.throw(TypeError, 'username is not a string')
-
-                expect(() => registerUser('Wendy Pan', {}, '123123123')).to.throw(TypeError, 'username is not a string')
-
-                expect(() => registerUser('Wendy Pan', () => {}, '123123123')).to.throw(TypeError, 'username is not a string')
-
-                expect(() => registerUser('Wendy Pan', [], '123123123')).to.throw(TypeError, 'username is not a string')
-            })
-
-            it('should fail when username is empty', () => {
-                expect(() => registerUser('Wendy Pan', '', '123123123')).to.throw(FormatError, 'username is empty or blank')
-
-                expect(() => registerUser('Wendy Pan', '   ', '123123123')).to.throw(FormatError, 'username is empty or blank')
-            })
-
-            it('should fail when username has spaces', () => {
-                expect(() => registerUser('Wendy Pan', ' wendypan ', '123123123')).to.throw(FormatError, 'username has blank spaces')
-
-                expect(() => registerUser('Wendy Pan', 'wendy pan', '123123123')).to.throw(FormatError, 'username has blank spaces')
-            })
-
-            it('should fail when username length is less that 4 characters', () => {
-                expect(() => registerUser('Wendy Pan', 'wp', '123123123')).to.throw(FormatError, 'username has less than 4 characters')
+                expect(() => registerUser('wendy pan@gmail.com', '123123123')).to.throw(FormatError, 'email has blank spaces')
             })
         })
 

@@ -63,16 +63,12 @@ function Detail({ onBack, onFlowStart, onFlowEnd, onModal }) {
         {item && <>
             <button type="button" className="button button--medium" onClick={onBack}>Back to Results</button>
             <h2>{item.name}</h2>
-            <img className="home__detail-image" src={item.image} alt="" />
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quas sapiente veritatis, magni natus necessitatibus velit aliquam enim iste? Beatae velit explicabo temporibus et blanditiis! Deleniti nemo voluptatem cumque nam.</p>
-            <time>{item.year}</time>
+            <img className="home__detail-image" src={item.images[0]} alt="" />
+            <p>{item.description}</p>
             <span>{item.price}</span>
-            <button className='button' onClick={() => toggleFav(id)}>{item.isFav ? '🧡' : '🤍'}</button>
-            <span>{item.color}</span>
-            <span>{item.style}</span>
-            <span>{item.collection}</span>
-            <span>{item.maker}</span>
-            <a href={item.url}>original</a>
+            <button type='button' className='button' onClick={() => toggleFav(id)}>{item.isFav ? '🧡' : '🤍'}</button>
+            <span>{item.colors}</span>
+            <a href={item.url}>Visit the store</a>
         </>}
     </div>
 }

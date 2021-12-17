@@ -13,13 +13,6 @@ function validateName(name) {
     if (name.trim() !== name) throw new FormatError('blank spaces around name')
 }
 
-function validateUsername(username) {
-    if (typeof username !== 'string') throw new TypeError('username is not a string')
-    if (!username.trim().length) throw new FormatError('username is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(username)) throw new FormatError('username has blank spaces')
-    if (username.length < 4) throw new FormatError('username has less than 4 characters')
-}
-
 function validatePassword(password) {
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (!password.trim().length) throw new FormatError('password is empty or blank')
@@ -39,18 +32,19 @@ function validateToken(token) {
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
 }
 
+function validateQuery(query) {
+    if (typeof query !== 'string') throw new TypeError(`${query} is not a string`)
+}
+
 function validateData(data) {
     if (typeof data !== 'object' || data.constructor.name !== 'Object') throw new TypeError('data is not an object')
 
-    const { name, username, password, newPassword } = data
+    const { newEmail, password, newPassword } = data
 
     validatePassword(password)
 
-    if (typeof name !== 'undefined')
-        validateName(name)
-
-    if (typeof username !== 'undefined')
-        validateUsername(username)
+    if (typeof newEmail !== 'undefined')
+        validateEmail(newEmail)
 
     if (typeof newPassword !== 'undefined')
         validateNewPassword(newPassword)
@@ -160,9 +154,9 @@ function validateEmail(email) {
 module.exports = {
     validateId,
     validateName,
-    validateUsername,
     validatePassword,
     validateNewPassword,
+    validateQuery,
     validateToken,
     validateData,
     validateCallback,

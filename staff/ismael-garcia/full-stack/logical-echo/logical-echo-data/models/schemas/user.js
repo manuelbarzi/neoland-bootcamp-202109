@@ -1,29 +1,6 @@
 const { Schema } = require('mongoose')
 
 const user = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-        validate: [
-            {
-                validator(username) {
-                    return username.length > 3
-                },
-                message: 'username should have at least 4 characters'
-            },
-            {
-                validator(username) {
-                    return !username.includes(' ')
-                },
-                message: 'username should not have white spaces'
-            }
-        ]
-    },
     password: {
         type: String,
         required: true,
@@ -44,6 +21,8 @@ const user = new Schema({
     },
     email: {
         type: String,
+        required: true,
+        unique: true,
         validate: {
             validator(email) { 
                 return String(email)
