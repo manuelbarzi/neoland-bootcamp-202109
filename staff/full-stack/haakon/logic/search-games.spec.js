@@ -42,19 +42,14 @@ describe('searchGames', () => {
         describe('when query is not valid', () => {
             it('should fail when query is not a string', () => {
                 expect(() => searchGames(true)).to.throw(TypeError, 'query is not a string')
-
                 expect(() => searchGames(123)).to.throw(TypeError, 'query is not a string')
-
                 expect(() => searchGames({})).to.throw(TypeError, 'query is not a string')
-
                 expect(() => searchGames(() => { })).to.throw(TypeError, 'query is not a string')
-
                 expect(() => searchGames([])).to.throw(TypeError, 'query is not a string')
             })
 
             it('should fail when query is empty or blank', () => {
                 expect(() => searchGames('')).to.throw(FormatError, 'query is empty or blank')
-
                 expect(() => searchGames('   ')).to.throw(FormatError, 'query is empty or blank')
             })
         })

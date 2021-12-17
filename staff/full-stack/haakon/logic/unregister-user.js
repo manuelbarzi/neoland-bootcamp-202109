@@ -1,29 +1,22 @@
-const { readFile, writeFile } = require('fs')
+const { models: { User } } = require('data')
+const { NotFoundError, CredentialsError } = require('customs-errors')
+const { validateId, validatePassword } = require('./helpers/validators')
+const bcrypt = require('bcryptjs')
 
-function unregisterUser(id, password, callback) {
-    readFile('./users.json', 'utf8', (error, json) => {
-        if (error) return callback(error)
+function unregisterUser(id, password) {
+    validateId(id)
+    validatePassword(password)
 
-        const users = JSON.parse(json)
+    return (async () => {
+        const user = await User.findById(id)
 
-        const index = users.findIndex(user => user.id === id)
+        if (!user) throw new NotFoundError(`user with id ${id} not found`)
 
-        if (index < 0) return callback(new Error(`user with id ${id} not found`))
+        if (!bcrypt.compareSync(password, user.password)) throw new CredentialsError('Wrong password')
 
-        const user = users[index]
+        await user.delete(id)
 
-        if (user.password !== password) return callback(new Error(`wrong credentials`))
-
-        users.splice(index, 1)
-
-        const json2 = JSON.stringify(users, null, 4)
-
-        writeFile('./users.json', json2, error => {
-            if (error) return callback(error)
-
-            callback(null)
-        })
-    })
+        return ('User deleted successfully')
+    })()
 }
-
 module.exports = unregisterUser

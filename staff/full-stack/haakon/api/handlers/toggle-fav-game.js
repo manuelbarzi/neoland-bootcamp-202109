@@ -2,7 +2,7 @@ const { toggleFavGame } = require('logic')
 const { handleError, validateAuthorizationAndExtractPayload } = require('./helpers')
 
 module.exports = (req, res) => {
-    const { headers: { authorization }, body: gameId } = req
+    const { headers: { authorization }, body: { gameId } } = req
 
     try {
         const { sub: id } = validateAuthorizationAndExtractPayload(authorization)

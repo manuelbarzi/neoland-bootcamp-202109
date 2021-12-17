@@ -1,3 +1,3 @@
-functon retrieveFavGames(userId) {
+// functon retrieveFavGames(userId) {
 
-}
+// }

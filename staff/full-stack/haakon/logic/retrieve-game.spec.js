@@ -48,13 +48,11 @@ describe('retrieveGame', () => {
 
         it('should fail when id is empty or blank', () => {
             expect(() => retrieveGame('')).to.throw(FormatError, 'id is empty or blank')
-
             expect(() => retrieveGame('   ')).to.throw(FormatError, 'id is empty or blank')
         })
 
         it('should fail when id has spaces', () => {
             expect(() => retrieveGame(' abcd1234abcd1234abcd1234 ')).to.throw(FormatError, 'id has blank spaces')
-
             expect(() => retrieveGame('abcd 1234abc d1234abc d1234')).to.throw(FormatError, 'id has blank spaces')
         })
 
@@ -63,7 +61,6 @@ describe('retrieveGame', () => {
             expect(() => retrieveGame(wrongMongoId)).to.throw(FormatError, 'id is not valid')
         })
     })
-
 
     after(() =>
         mongoose.disconnect()

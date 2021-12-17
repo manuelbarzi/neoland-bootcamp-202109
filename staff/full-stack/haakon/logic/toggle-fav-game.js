@@ -1,20 +1,30 @@
-// const { validateId } = require('./helpers/validators')
-// const { NotFoundError } = require('customs-errors')
-// const { models: { User }, mongoose } = require('data')
+const { validateId } = require('./helpers/validators')
+const { NotFoundError } = require('customs-errors')
+const { models: { User, Game } } = require('data')
 
-// async function toggleFavGame(userId, gameId) {
-//     debugger
-//     validateId(userId)
-//     // Validate gameId
-//     const user = await User.findById({ userId })
+function toggleFavGame(userId, gameId) {
+    debugger
+    validateId(userId)
+    validateId(gameId)
 
-//     if (!user) throw new NotFoundError(`user with id ${userId} not found`)
+    return (async () => {
+        const game = await Game.findById(gameId).lean()
 
-//     user.gameFavs = user.gameFavs.concat(gameId)
+        if (!game) throw new NotFoundError(`game with id ${gameId} not found`)
 
-//     await user.save()
-// }
+        const user = await User.findById(userId)
 
-// module.exports = toggleFavGame
+        if (!user) throw new NotFoundError(`user with id ${userId} not found`)
+
+        const index = user.favGames.findIndex(id => id.toString() === gameId)
+
+        if (index < 0) user.favGames.push(gameId)
+        else user.favGames.splice(index, 1)
+
+        await user.save()
+    })()
+}
+
+module.exports = toggleFavGame
 
 // Comprobrar que el gameId existe
