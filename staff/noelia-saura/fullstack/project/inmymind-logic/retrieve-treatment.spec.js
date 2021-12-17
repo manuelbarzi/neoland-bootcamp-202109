@@ -15,15 +15,16 @@ describe('retrieveTreatment', () => {
 
     let treatment, treatmentId
 
-    beforeEach(() => {
+    beforeEach(async() => {
         treatment = {
             content: "New treatment",
             date: new Date("Thu, 09 Dec 2021 00:00:00 GMT"),
             user_id: "61ad1ad9799afee83e26c8b4"
         }
-
-        return Treatment.create(treatment)
-            .then(treatment => treatmentId = treatment.id)
+        const _treatment=Treatment.create(treatment)
+        
+        treatmentId= _treatment.id
+        
     })
 
     // it('should succeed with correct id for an already existing treatment', () => {
@@ -98,8 +99,12 @@ describe('retrieveTreatment', () => {
         })
     })
 
-    after(() =>
-        Treatment.deleteMany()
-            .then(() => mongoose.disconnect())
-    )
+    after(async() =>{
+        await Treatment.deleteMany()
+        await mongoose.disconnect()
+    })
+    // after(() =>
+    //     Treatment.deleteMany()
+    //         .then(() => mongoose.disconnect())
+    // )
 })

@@ -16,7 +16,7 @@ describe('retrieveDiary', () => {
 
     let diary, diaryId
 
-    beforeEach(() => {
+    beforeEach( async () => {
         diary = {
             user_id: "61ad1ad9799afee83e26c8b4",
             date: new Date("Thu, 09 Dec 2021 00:00:00 GMT"),
@@ -40,39 +40,46 @@ describe('retrieveDiary', () => {
             gotostreet: false,
             timetostreet: "30 minutos"
         }
+        
+        const _diary=Diary.create(diary)
 
-        return Diary.create(diary)
-            .then(diary => diaryId = diary.id)
+        diaryId=_diary.id
+     
     })
 
-    it('should succeed with correct id for an already existing diary', () => {
-        const date = new Date("Thu, 09 Dec 2021 00:00:00 GMT")
-        const user_id = "61ad1ad9799afee83e26c8b4"
-        const emotional = "Feliz"
-        const timesleep = 8
-        const timetowakeup = "23:00h - 07:00h"
-        const qualitysleep = 4
-        const hydrate = true
-        const quantityhydrate = 4
-        const exercise = false
-        const meditation = false
-        const earlywakeup = true
-        const makethebed = true
-        const cleanface = true
-        const cleanteeth = false
-        const shower = true
-        const order = false
-        const cleanhouse = false
-        const changesheets = false
-        const cooking = false
-        const gotostreet = false
-        const timetostreet = "30 minutos"
+    it('should succeed with correct id for an already existing diary', async() => {
+        // const date = new Date("Thu, 09 Dec 2021 00:00:00 GMT")
+        // const user_id = "61ad1ad9799afee83e26c8b4"
+        // const emotional = "Feliz"
+        // const timesleep = 8
+        // const timetowakeup = "23:00h - 07:00h"
+        // const qualitysleep = 4
+        // const hydrate = true
+        // const quantityhydrate = 4
+        // const exercise = false
+        // const meditation = false
+        // const earlywakeup = true
+        // const makethebed = true
+        // const cleanface = true
+        // const cleanteeth = false
+        // const shower = true
+        // const order = false
+        // const cleanhouse = false
+        // const changesheets = false
+        // const cooking = false
+        // const gotostreet = false
+        // const timetostreet = "30 minutos"   
 
-        return retrieveDiary(user_id, date)
-            .then(diaries => {
-                const diary = diaries[0]
+        const { date, user_id, emotional, timesleep, timetowakeup, qualitysleep,
+        hydrate,quantityhydrate,exercise,meditation,earlywakeup,makethebed,cleanface,
+        cleanteeth,shower, order, cleanhouse,changesheets,cooking,gotostreet,timetostreet}=diary
 
-                expect(diary).to.exist
+        try {
+            await retrieveDiary(user_id, date)
+            throw new Error ('should not reach this point')
+            
+        }catch(error){
+            expect(diary).to.exist
                 expect(diary.date.toString()).to.equal(date.toString())
                 expect(diary.emotional).to.equal(emotional)
                 expect(diary.timesleep).to.equal(timesleep)
@@ -93,7 +100,35 @@ describe('retrieveDiary', () => {
                 expect(diary.cooking).to.equal(cooking)
                 expect(diary.gotostreet).to.equal(gotostreet)
                 expect(diary.timetostreet).to.equal(timetostreet)
-             })
+        }
+
+        // //try catch
+        // return retrieveDiary(user_id, date)
+        //     .then(diaries => {
+        //         const diary = diaries[0]
+
+        //         expect(diary).to.exist
+        //         expect(diary.date.toString()).to.equal(date.toString())
+        //         expect(diary.emotional).to.equal(emotional)
+        //         expect(diary.timesleep).to.equal(timesleep)
+        //         expect(diary.timetowakeup).to.equal(timetowakeup)
+        //         expect(diary.qualitysleep).to.equal(qualitysleep)
+        //         expect(diary.hydrate).to.equal(hydrate)
+        //         expect(diary.quantityhydrate).to.equal(quantityhydrate)
+        //         expect(diary.exercise).to.equal(exercise)
+        //         expect(diary.meditation).to.equal(meditation)
+        //         expect(diary.earlywakeup).to.equal(earlywakeup)
+        //         expect(diary.makethebed).to.equal(makethebed)
+        //         expect(diary.cleanface).to.equal(cleanface)
+        //         expect(diary.cleanteeth).to.equal(cleanteeth)
+        //         expect(diary.shower).to.equal(shower)
+        //         expect(diary.order).to.equal(order)
+        //         expect(diary.cleanhouse).to.equal(cleanhouse)
+        //         expect(diary.changesheets).to.equal(changesheets)
+        //         expect(diary.cooking).to.equal(cooking)
+        //         expect(diary.gotostreet).to.equal(gotostreet)
+        //         expect(diary.timetostreet).to.equal(timetostreet)
+        //      })
     })
 
     // it('should fail with incorrect id', () => {
@@ -151,8 +186,12 @@ describe('retrieveDiary', () => {
         })
     })
 
-    after(() =>
-        Diary.deleteMany()
-            .then(() => mongoose.disconnect())
-    )
+    after(async() =>{
+        await Diary.deleteMany()
+        await mongoose.disconnect()
+    })
+    // after(() =>
+    //     Diary.deleteMany()
+    //         .then(() => mongoose.disconnect())
+    // )
 })

@@ -1,4 +1,4 @@
-function retrieveDiary(token, date='') {
+const retrieveDiary= (token, date='') =>{
     
     const dateGet = date ? '?date=' + date : ''
     

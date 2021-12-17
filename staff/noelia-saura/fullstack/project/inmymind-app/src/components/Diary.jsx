@@ -22,7 +22,25 @@ function Diary({diary }) {
           <div className="diary__title__date">{dateFormat(diary.date)}</div>
         </div>
 
-        <div className="diary__content">{diary.content}</div>
+        <div className="diary__content">{diary.emotional}</div>
+        <div className="diary__content">{diary.timesleep}</div>
+        <div className="diary__content">{diary.timetowakeup}</div>
+        <div className="diary__content">{diary.qualitysleep}</div>
+        <div className="diary__content">{diary.hydrate}</div>
+        <div className="diary__content">{diary.quantityhydrate}</div>
+        <div className="diary__content">{diary.exercise}</div>
+        <div className="diary__content">{diary.meditation}</div>
+        <div className="diary__content">{diary.earlywakeup}</div>
+        <div className="diary__content">{diary.makethebed}</div>
+        <div className="diary__content">{diary.cleanface}</div>
+        <div className="diary__content">{diary.cleanteeth}</div>
+        <div className="diary__content">{diary.shower}</div>
+        <div className="diary__content">{diary.order}</div>
+        <div className="diary__content">{diary.cleanhouse}</div>
+        <div className="diary__content">{diary.changesheets}</div>
+        <div className="diary__content">{diary.cooking}</div>
+        <div className="diary__content">{diary.gotostreet}</div>
+        <div className="diary__content">{diary.timetostreet}</div>
       </div>
     </>
   );

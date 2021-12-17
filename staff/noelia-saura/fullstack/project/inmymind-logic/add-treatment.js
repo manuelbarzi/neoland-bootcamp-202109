@@ -2,18 +2,20 @@ const { validateTreatment,validateId,validateDate } = require('./helpers/validat
 const { models: { Treatment } } = require('inmymind-data')
 
 
-function addTreatment(content,date,user_id) {
+const addTreatment = (content,date,user_id)=> {
     
     validateTreatment(content)
     validateId(user_id)
     validateDate(date)
 
-    return Treatment.create({content,date,user_id})
-        .then(() => { })
-        .catch(error => {
-            
-            throw error
-        })
+    return (async()=>{
+        const treatment = await Treatment.create({content,date,user_id})
+        
+        if(!treatment)throw error
+
+        return treatment.id
+    })()
+   
 }
 
 module.exports = addTreatment

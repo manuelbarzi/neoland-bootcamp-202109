@@ -1,4 +1,4 @@
-function addTreatment(content, date, token) {
+const addTreatment=(content, date, token) => {
     return (async () => {
         const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/treatments`, {
             method: 'POST',

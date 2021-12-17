@@ -7,7 +7,7 @@
  * @param {*} password 
  * @param {*} callback 
  */
-function signinUser(username, password) {
+const signinUser= (username, password)=>{
     return (async () => {
         const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/users/auth`, {
             method: 'POST',

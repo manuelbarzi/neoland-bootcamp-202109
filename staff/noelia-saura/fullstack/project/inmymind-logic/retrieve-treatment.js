@@ -2,7 +2,7 @@ const { models: { Treatment } } = require('inmymind-data')
 const { validateId, validateDate } = require('./helpers/validators')
 
 
-function retrieveTreatment(user_id, date) {
+const retrieveTreatment = (user_id, date) => {
     validateId(user_id)
 
     let filter={user_id:user_id}
@@ -18,21 +18,26 @@ function retrieveTreatment(user_id, date) {
 
         filter={user_id:user_id,date: dateFormat}
     }
-
-    return Treatment.find(filter).sort({ date: -1}).lean()
-        .then(treatments => {
-            for (let index = 0; index < treatments.length; index++) {
-
-                treatments[index].id = treatments[index]._id.toString()
-
-                delete treatments[index]._id
-                delete treatments[index].user_id
-                delete treatments[index].__v
-
-            }
+    
+    return (async ()=>{
+        const treatments = await Treatment.find(filter).sort({ date: -1}).lean()
         
-            return treatments
-        })
+        if (!treatments) throw new NotFoundError(`treatments with id ${id} not found`)
+
+        for (let index = 0; index < treatments.length; index++) {
+
+            treatments[index].id = treatments[index]._id.toString()
+
+            delete treatments[index]._id
+            delete treatments[index].user_id
+            delete treatments[index].__v
+
+        }
+    
+        return treatments
+    
+    })()
+    
 }
 
 module.exports = retrieveTreatment

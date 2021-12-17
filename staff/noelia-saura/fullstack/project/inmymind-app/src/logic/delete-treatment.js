@@ -1,4 +1,4 @@
-function deleteTreatment(token, treatmentId, callback) {
+const deleteTreatment=(token, treatmentId)=>{
     return (async () => {
         const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/treatments/${treatmentId}`, {
             method: 'DELETE',
@@ -9,19 +9,18 @@ function deleteTreatment(token, treatmentId, callback) {
             body: JSON.stringify({ treatmentId })
         })
 
-        const { status, responseText } = res
-
-        if (status === 400 || status === 401) {
-            const response = JSON.parse(responseText)
-
-            const message = response.error
-
-            if('jwt expired'=== message){
+         const { status} = res
+        if(status === 204)
+            return
+        else if (status === 400 || status === 401) {
+            const{error}= await res.json()
+           
+            if('jwt expired'=== error){
                 delete sessionStorage.token
             }
+            throw new Error(error)
 
-            callback(new Error(message))
-        }
+        }else throw new Error('unknown error') 
     })()
 }
 

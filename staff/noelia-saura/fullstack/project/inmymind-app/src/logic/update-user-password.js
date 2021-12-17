@@ -1,31 +1,26 @@
-function updateUserPassword(token, oldPassword, password, callback) {
-       const xhr = new XMLHttpRequest()
+const updateUserPassword=(token, oldPassword, password)=> {
+    return (async () => {
+        const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/notes/${password}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        })
 
-    xhr.onload = () => {
-        const { status, responseText } = xhr
-
-        if (status === 400 || status === 401) {
-            const response = JSON.parse(responseText)
-            
-            const message = response.error
-            if('jwt expired'=== message){
+        const { status} = res
+        if(status === 204)
+            return
+        else if (status === 400 || status === 401) {
+            const{error}= await res.json()
+           
+            if('jwt expired'=== error){
                 delete sessionStorage.token
             }
-            callback(new Error(message))
-        } else if (status === 204) {
-            callback(null)
-        }
-    }
+            throw new Error(error)
 
-    xhr.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    const body = { oldPassword, password }
-
-    xhr.send(JSON.stringify(body))
+        }else throw new Error('unknown error') 
+    })()
 }
 
 export default updateUserPassword

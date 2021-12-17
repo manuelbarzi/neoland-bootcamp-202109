@@ -1,20 +1,15 @@
 const { retrieveNotes } = require('inmymind-logic')
-const { handleError } = require('./helpers')
-const jwt = require('jsonwebtoken')
-const { env: { SECRET } } = process
+const { handleError, extractUserIdFromToken } = require('./helpers')
+
 
 module.exports = (req, res) => {
-    const { headers: { authorization } } = req
+    
 
     try {
 
         const date = req.query.date
 
-        const [, token] = authorization.split(' ')
-
-        const payload = jwt.verify(token, SECRET)
-
-        const { sub: id } = payload
+        const id = extractUserIdFromToken(req)
 
         const user_id = id
 

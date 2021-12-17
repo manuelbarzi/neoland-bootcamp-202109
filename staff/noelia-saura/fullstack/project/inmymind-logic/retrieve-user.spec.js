@@ -15,7 +15,7 @@ describe('retrieveUser', () => {
 
     let user, userId
 
-    beforeEach(() => {
+    beforeEach(async () => {
         user = {
             name: 'Wendy Pan',
                 username: 'wendypan',
@@ -24,32 +24,33 @@ describe('retrieveUser', () => {
                 age: 26,
                 email: 'wendypan@gmail.com',
         }
+        const _user=User.create(user)
 
-        return User.create(user)
-            .then(user => userId = user.id)
+        userId= _user.id
+        
     })
 
-    it('should succeed with correct id for an already existing user', () => {
+    it('should succeed with correct id for an already existing user', async () => {
         const { name, username } = user
 
-        return retrieveUser(userId)
-            .then(user => {
-                expect(user).to.exist
-                expect(user.name).to.equal(name)
-                expect(user.username).to.equal(username)
-            })
+        const _user = await retrieveUser(userId)
+
+        expect(_user).to.exist
+        expect(_user.name).to.equal(name)
+        expect(_user.username).to.equal(username)
     })
 
-    it('should fail with incorrect id', () => {
+    it('should fail with incorrect id', async () => {
         userId = new ObjectId().toString()
 
-        return retrieveUser(userId)
-            .then(() => { throw new Error('should not reach this point') })
-            .catch(error => {
-                expect(error).to.exist
+        try {
+            await retrieveUser(userId)
+            throw new Error('should not reach this point')
+        }catch(error){
+            expect(error).to.exist
                 expect(error).to.be.instanceOf(NotFoundError)
                 expect(error.message).to.equal(`user with id ${userId} not found`)
-            })
+        }
     })
 
     describe('when parameters are not valid', () => {
@@ -84,8 +85,8 @@ describe('retrieveUser', () => {
         })
     })
 
-    after(() =>
-        User.deleteMany()
-            .then(() => mongoose.disconnect())
-    )
+    after(async() =>{
+        await User.deleteMany()
+        await mongoose.disconnect()
+    })
 })

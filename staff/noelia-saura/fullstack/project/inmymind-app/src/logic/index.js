@@ -11,6 +11,8 @@ import addNote from './add-note'
 import addTreatment from './add-treatment'
 import addDiary from './add-diary'
 import retrieveDiary from './retrieve-diary'
+import addDisorder from './add-disorder'
+import retrieveDisorder from './retrieve-disorder'
 import context from './context'
 
 export {
@@ -27,5 +29,7 @@ export {
     deleteTreatment,
     addDiary,
     retrieveDiary,
+    addDisorder,
+    retrieveDisorder,
     context,
 }

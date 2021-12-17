@@ -2,7 +2,7 @@ const { models: { Note } } = require('inmymind-data')
 const { validateId, validateDate } = require('./helpers/validators')
 
 
-function retrieveNotes(user_id, date) {
+const retrieveNotes = (user_id, date)=>{
     validateId(user_id)
 
     let filter = { user_id: user_id };
@@ -19,21 +19,22 @@ function retrieveNotes(user_id, date) {
         filter = { user_id: user_id, date: dateFormat };
     }
 
-    return Note.find(filter).sort( { date: -1 } ).lean()
-    
-        .then(notes => {
-            for (let index = 0; index < notes.length; index++) {
+    return (async ()=>{
+        const notes = await Note.find(filter).sort( { date: -1 } ).lean()
+        if (!notes) throw new NotFoundError(`notes with id ${id} not found`)
 
-                notes[index].id = notes[index]._id.toString()
+        for (let index = 0; index < notes.length; index++) {
 
-                delete notes[index]._id
-                delete notes[index].user_id
-                delete notes[index].__v
+            notes[index].id = notes[index]._id.toString()
 
-            }
-        
-            return notes
-        })
+            delete notes[index]._id
+            delete notes[index].user_id
+            delete notes[index].__v
+            
+     }
+     return notes
+     })()
+
 }
 
 module.exports = retrieveNotes

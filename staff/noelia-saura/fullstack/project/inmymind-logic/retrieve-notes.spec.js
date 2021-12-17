@@ -15,15 +15,16 @@ describe('retrieveNotes', () => {
 
     let note, noteId
 
-    beforeEach(() => {
+    beforeEach(async () => {
         note = {
             content: "New note",
             date: new Date("Thu, 09 Dec 2021 00:00:00 GMT"),
             user_id: "61ad1ad9799afee83e26c8b4"
         }
 
-        return Note.create(note)
-            .then(note => noteId = note.id)
+        const _note= Note.create(note)
+        userId=_user.id
+        
     })
 
     it('should succeed with correct id for an already existing note', () => {
@@ -96,8 +97,12 @@ describe('retrieveNotes', () => {
         })
     })
 
-    after(() =>
-        Note.deleteMany()
-            .then(() => mongoose.disconnect())
-    )
+    after(async() =>{
+        await Note.deleteMany()
+        await mongoose.disconnect()
+    })
+    // after(() =>
+    //     Note.deleteMany()
+    //         .then(() => mongoose.disconnect())
+    // )
 })

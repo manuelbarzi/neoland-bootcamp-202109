@@ -3,39 +3,41 @@ const { validateId, validateData } = require('./helpers/validators')
 const { NotFoundError, ConflictError, CredentialsError } = require('inmymind-errors')
 const bcrypt = require('bcryptjs')
 
-function modifyUser(id, data) {
+const modifyUser = (id, data) => {
     validateId(id)
     validateData(data)
 
-    return User.findById(id)
-        .then(user => {
-            if (!user) throw new NotFoundError(`user with id ${id} not found`)
+    return (async () => {
+        const user = await User.findById(id)
 
-            const { password, oldPassword } = data
+        if (!user) throw new NotFoundError(`user with id ${id} not found`)
 
-            if (password) {
-                if (!bcrypt.compareSync(oldPassword, user.password))
-                    throw new CredentialsError('wrong password')
-                else
-                    delete data.oldPassword
-            }
+        const { password, oldPassword } = data
 
-            for (const property in data) {
-                if (property === 'password')
-                    user[property] = bcrypt.hashSync(data[property])
-                else
-                    user[property] = data[property]
-            }
+        if (password) {
+            if (!bcrypt.compareSync(oldPassword, user.password))
+                throw new CredentialsError('wrong password')
+            else
+                delete data.oldPassword
+        }
 
-            return user.save()
-                .catch(error => {
-                    if (error.code === 11000)
-                        throw new ConflictError(`user with username ${data.username} already exists`)
+        for (const property in data) {
+            if (property === 'password')
+                user[property] = bcrypt.hashSync(data[property])
+            else
+                user[property] = data[property]
+        }
 
-                    throw error
-                })
-                .then(() => { })
-        })
+        try {
+            await user.save()
+        } catch (error) {
+
+            if (error.code === 11000)
+                throw new ConflictError(`user with username ${data.username} already exists`)
+
+            throw error
+        }
+    })()
 }
 
 module.exports = modifyUser

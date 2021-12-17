@@ -1,6 +1,6 @@
 
 
-function retrieveUser(token) {
+const retrieveUser=(token)=>{
     
     return (async () => {
         const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/users/`, {

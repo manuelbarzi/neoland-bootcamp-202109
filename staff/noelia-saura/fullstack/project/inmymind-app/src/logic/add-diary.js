@@ -1,4 +1,4 @@
-function addDiary(
+const addDiary = (
     date,
     emotional,
     timesleep,
@@ -19,7 +19,7 @@ function addDiary(
     cooking,
     gotostreet,
     timetostreet, 
-    token) {
+    token) => {
     return (async () => {
         const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/diaries`, {
             method: 'POST',

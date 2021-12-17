@@ -11,7 +11,7 @@
  * @throws {TypeError} When any of the arguments does not match the correct type.
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
-function signupUser(name, username, password, gender,email,age) {
+const signupUser=(name, username, password, gender,email,age)=>{
     // TODO validate args
     
     return (async () => {

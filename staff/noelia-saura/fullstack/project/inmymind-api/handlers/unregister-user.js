@@ -1,15 +1,12 @@
 const { unregisterUser } = require('inmymind-logic')
-const jwt = require('jsonwebtoken')
-const handleError = require('./helpers/handle-error')
-const { env: { SECRET } } = process
+const {handleError, extractUserIdFromToken} = require('./helpers')
+
 
 module.exports = (req, res) => {
-    const { headers: { authorization }, body: { password } } = req
+    const {body: { password } } = req
 
     try {
-        const [, token] = authorization.split(' ')
-
-        const { sub: id } = jwt.verify(token, SECRET)
+        const id = extractUserIdFromToken(req)
 
         unregisterUser(id, password)
             .then(() => res.status(201).send())

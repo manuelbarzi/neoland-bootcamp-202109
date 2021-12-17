@@ -1,4 +1,4 @@
-function retrieveNotes(token, date='') {
+const retrieveNotes=(token, date='')=>{
     
     const dateGet = date ? '?date=' + date : ''
     

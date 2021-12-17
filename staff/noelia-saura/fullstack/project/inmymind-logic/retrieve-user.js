@@ -2,23 +2,23 @@ const { models: { User } } = require('inmymind-data')
 const { validateId } = require('./helpers/validators')
 const { NotFoundError } = require('inmymind-errors')
 
-function retrieveUser(id) {
+const retrieveUser=(id)=> {
     validateId(id)
 
-    return User.findById(id).lean()
-        .then(user => {
-            if (!user) throw new NotFoundError(`user with id ${id} not found`)
+    return( async()=>{
+        const user = await User.findById(id).lean()
+        if (!user) throw new NotFoundError(`user with id ${id} not found`)
+       
+        user.id = user._id.toString()
 
-            user.id = user._id.toString()
+        delete user._id
 
-            delete user._id
+        delete user.password
 
-            delete user.password
+        delete user.__v
 
-            delete user.__v
-
-            return user
-        })
+        return user
+    })()
 }
 
 module.exports = retrieveUser

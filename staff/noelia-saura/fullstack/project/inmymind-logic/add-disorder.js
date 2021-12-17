@@ -2,7 +2,7 @@ const { validateId, validateDate, validateString, validateNumber, validateBoolea
 const { models: { Disorder } } = require('inmymind-data')
 
 
-function addDisorder(
+const addDisorder = (
     date,
     user_id,
     symptom,
@@ -26,7 +26,7 @@ function addDisorder(
     irritable,
     afraid,
     overthinking,
-    causedstate) {
+    causedstate) => {
 
     validateId(user_id)
     validateDate(date)
@@ -53,37 +53,37 @@ function addDisorder(
     validateNumber(overthinking)
     validateBoolean(negativestate)
 
-    return Disorder.create({
-        date,
-        user_id,
-        symptom,
-        relax,
-        negativestate,
-        breathe,
-        initiatives,
-        whichinitiatives,
-        overreaction,
-        tremblehands,
-        paralyzed,
-        nerves,
-        worried,
-        whichworried,
-        live,
-        sad,
-        verysleep,
-        panic,
-        enthuse,
-        value,
-        irritable,
-        afraid,
-        overthinking,
-        causedstate
-    })
-        .then(() => { })
-        .catch(error => {
-
-            throw error
+    return (async () => {
+        const disorder = await Disorder.create({
+            date,
+            user_id,
+            symptom,
+            relax,
+            negativestate,
+            breathe,
+            initiatives,
+            whichinitiatives,
+            overreaction,
+            tremblehands,
+            paralyzed,
+            nerves,
+            worried,
+            whichworried,
+            live,
+            sad,
+            verysleep,
+            panic,
+            enthuse,
+            value,
+            irritable,
+            afraid,
+            overthinking,
+            causedstate
         })
+        if(!disorder) throw error
+
+        return disorder.id
+    })()
 }
 
 module.exports = addDisorder

@@ -1,4 +1,4 @@
-function addNote(content, date, token) {
+const addNote = (content, date, token) =>{
     return (async () => {
         const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/notes`, {
             method: 'POST',

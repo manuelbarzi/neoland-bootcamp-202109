@@ -9,16 +9,18 @@ const bcrypt = require('bcryptjs')
  * @param {*} password 
  * @returns 
  */
-function authenticateUser(username, password) {
+
+const authenticateUser = (username, password) => {
     validateUsername(username)
     validatePassword(password)
     
-    return User.findOne({ username })
-        .then(user => {
-            if (!user || !bcrypt.compareSync(password, user.password)) throw new CredentialsError('wrong credentials')
+    return(async () => {
+        const user = await User.findOne({username})
+        if (!user || !bcrypt.compareSync(password, user.password)) throw new CredentialsError('wrong credentials')
 
-            return user.id
-        })
+        return user.id
+    })()
+
 }
 
 module.exports = authenticateUser

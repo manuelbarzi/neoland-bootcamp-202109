@@ -2,7 +2,7 @@ const { validateId, validateDate, validateString, validateNumber, validateBoolea
 const { models: { Diary } } = require('inmymind-data')
 
 
-function addDiary(
+const addDiary=(
     date,
     user_id,
     emotional,
@@ -23,9 +23,8 @@ function addDiary(
     changesheets,
     cooking,
     gotostreet,
-    timetostreet) {
-
-    
+    timetostreet) => {
+   
     validateDate(date)
     validateId(user_id)
     validateString(emotional)
@@ -48,34 +47,35 @@ function addDiary(
     validateBoolean(cooking)
     validateBoolean(gotostreet)
 
-    return Diary.create({
-        date,
-        user_id,
-        emotional,
-        timesleep,
-        timetowakeup,
-        qualitysleep,
-        hydrate,
-        quantityhydrate,
-        exercise,
-        meditation,
-        earlywakeup,
-        makethebed,
-        cleanface,
-        cleanteeth,
-        shower,
-        order,
-        cleanhouse,
-        changesheets,
-        cooking,
-        gotostreet,
-        timetostreet
-    })
-        .then(() => { })
-        .catch(error => {
-
-            throw error
+    return(async()=>{
+        const diary=await Diary.create({
+            date,
+            user_id,
+            emotional,
+            timesleep,
+            timetowakeup,
+            qualitysleep,
+            hydrate,
+            quantityhydrate,
+            exercise,
+            meditation,
+            earlywakeup,
+            makethebed,
+            cleanface,
+            cleanteeth,
+            shower,
+            order,
+            cleanhouse,
+            changesheets,
+            cooking,
+            gotostreet,
+            timetostreet
         })
+        if(!diary) throw error
+
+        return diary.id
+    })()
+    
 }
 
 module.exports = addDiary

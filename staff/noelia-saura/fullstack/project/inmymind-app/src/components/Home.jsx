@@ -10,7 +10,7 @@ import Calendar from 'react-calendar';
 import Notes from "./Notes";
 import Treatments from "./Treatments";
 import Diaries from "./Diaries";
-import Disorder from "./Disorder";
+import Disorders from "./Disorders";
 
 import 'react-calendar/dist/Calendar.css';
 
@@ -109,10 +109,10 @@ function Home({ onSignOut, onAuthError }) {
     }
   }
   const toggleDisorder = () => {
-    if (location.pathname === "/disorder") {
+    if (location.pathname === "/disorders") {
       navigate('/')
     } else {
-      navigate('/disorder')
+      navigate('/disorders')
     }
   }
 
@@ -151,7 +151,7 @@ function Home({ onSignOut, onAuthError }) {
         <Route path='/notes' element={<Notes onBack={goToHome} />}/>
         <Route path='/treatments' element={<Treatments onBack={goToHome} />}/>
         <Route path='/Diaries' element={<Diaries onBack={goToHome}/>}/>
-        {/* <Route path='/Disorder' element={<Disorder />}/> */}
+        <Route path='/Disorders' element={<Disorders onBack={goToHome}/>}/>
       </Routes>
 
       { location.pathname === "/"  || location.pathname === "/profile" ? <Calendar onchange={cacaMas}/> : ''}
