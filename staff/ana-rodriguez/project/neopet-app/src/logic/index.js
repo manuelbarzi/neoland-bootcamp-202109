@@ -1,14 +1,14 @@
-import registerUser from './register-user'
-import authUser from './auth-user'
-import retrieveUser from './retrieve-user'
-import changePass from './changePass'
-import changeUser from './changeUser'
-import unregisterUser from './unregister'
-import registerClients from './register-clients'
-import registerPet from './register-pet'
-import searchClient from './search-client'
-import searchPet from './search-pet'
-import modifyPets from './modify-pets'
+import registerUser from './registerUser';
+import authUser from './authUser';
+import retrieveUser from './retrieveUser';
+import changePass from './changePass';
+import unregisterUser from './unregister';
+import registerClient from './registerClient';
+import registerPet from './registerPet';
+import searchClients from './searchClients';
+import searchPets from './searchPets';
+import modifyPets from './modifyPet';
+import modifyClient from './modifyClient';
 // import search from './search'
 // import retrieveSearch from './retrieve-search'
 
@@ -17,13 +17,12 @@ export {
     authUser,
     retrieveUser,
     changePass,
-    changeUser,
     unregisterUser,
-    registerClients,
+    registerClient,
     registerPet,
-    searchClient,
-    searchPet,
+    searchClients,
+    searchPets,
     modifyPets,
-    // search,
-    // retrieveSearch,
+    modifyClient,
+  
 }

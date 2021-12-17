@@ -8,8 +8,8 @@ function ResultClient({ items }) {
     return <ul className="results">
         {
             items.map(({ id, firstName, lastName, phone }) =>
-                <Link to={"/home/clientPet/file/" + id}>
-                    <li key={id} className="result">
+                <Link key={id} to={"/home/clientPet/file/" + id}>
+                    <li className="result">
                         {firstName} {lastName} - {phone}
                     </li>
                 </Link>

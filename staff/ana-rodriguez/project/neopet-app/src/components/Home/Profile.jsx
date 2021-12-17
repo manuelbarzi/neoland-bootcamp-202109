@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, Outlet,Navigate } from 'react-router-dom';
+import { Link, Outlet, Navigate } from 'react-router-dom';
+import './Home.css';
 
 
 function Profile() {
@@ -8,10 +9,10 @@ function Profile() {
 
     return <>
         <nav className="nav__buttons">
-            <Link to='/home/profile/changepass'> <button className="button">Change Password</button></Link>
-            <Link to='/home/profile/changeuser'><button className="button">Change User</button></Link>
-            <Link to='/home/profile/unregister' ><button className="button">Unregister</button></Link>
-            <Link to='/home'> <button className="button">Log out</button></Link>
+            <ul>
+           <li><Link to='/home/profile/changepass'> <button className="button"><img src="http://localhost:3000/changePass.png" />Cambio contraseña</button></Link></li>
+           <li><Link to='/home/profile/unregister' ><button className="button"><img src="http://localhost:3000/emoji-sad.png"/>Unregister</button></Link></li>
+            </ul>
         </nav>
         <div>
             <Outlet />

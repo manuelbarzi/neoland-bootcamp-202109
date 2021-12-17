@@ -1,6 +1,6 @@
 import React from "react";
 import{Link,Navigate} from "react-router-dom";
-import './Unregister.css';
+import './styles/Unregister.css';
 
 function Unregister(props){
     if(typeof sessionStorage.token === 'string')

@@ -4,8 +4,8 @@ function Combo({items,onSelect,className='',campoPendiente=''}){
         <option value=""></option>
         {
             items.map(
-                ({id,valor}) =>
-                <option value={id} key={id} >{valor}</option>
+                ({id,value}) =>
+                <option value={id} key={id} >{value}</option>
             )
         }
     </select>

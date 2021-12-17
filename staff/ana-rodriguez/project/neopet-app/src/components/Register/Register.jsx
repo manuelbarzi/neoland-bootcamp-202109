@@ -8,9 +8,8 @@ function Register(props){
     const {registerVisual} = props
     
 return <>
-    <form className="Register_container" onSubmit={event => { // Esta es la función que dispara la funcionalidad
-        event.preventDefault() // Esto sirve para no refrescar la página al hacer submit
-        // Recuperar la info del usuario de los inputs y pasársela al registerVisual como parámetros
+    <form className="Register_container" onSubmit={event => { 
+        event.preventDefault() 
         
         const name = event.target.name.value
         const username = event.target.username.value

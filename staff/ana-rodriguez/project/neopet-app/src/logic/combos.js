@@ -1,7 +1,9 @@
-function getListas(nombreLista, callback, queryString){
+// TODO move all to english
+
+function getLists(nameList, callback, queryString){
     const xhr = new XMLHttpRequest;
 
-    let url = '/lista/'+ nombreLista;
+    let url = '/list/'+ nameList;
     url += queryString ? queryString : '';
 
     xhr.onload = function () {
@@ -18,2169 +20,2154 @@ function getListas(nombreLista, callback, queryString){
     xhr.send();
 }
 
-export const getEspecies = function (callback){
-    // getListas('especies',callback);
+export const getSpecies = function (callback){
+    // getLists('species',callback);
     callback(null,[
         {
             "id": 0,
-            "valor": "Canina"
+            "value": "Canina"
         }, {
             "id": 1,
-            "valor": "Felina"
+            "value": "Felina"
         }, {
             "id": 2,
-            "valor": "Roedor"
+            "value": "Roedor"
         },  {
             "id": 3,
-            "valor": "Conejo"
+            "value": "Conejo"
         }, {
             "id":4,
-            "valor": "Huron"
+            "value": "Huron"
         },{
-            "id": 5,
-            "valor": "Reptil"
-        }, {
-            "id": 6,
-            "valor": "Ave"
-        }, {
-            "id": 7,
-            "valor": "Equina"
-        }, {
-           "id": 8,
-           "valor": "Bovina" 
-        }, {
-            "id": 9,
-            "valor": "Ovina"
-        }, {
-            "id": 10,
-            "valor": "Porcina"
+            "id":5,
+            "value": "Ave"
         }
     ]);
 }
 
-export const getRazaById = function (id, callback){
-    // const queryString = '?especie='+id;
-    // getListas ('razas', callback, queryString);
-    const razas = [
+export const getRaceById = function (id, callback){
+    // const queryString = '?specie='+id;
+    // getLists ('razas', callback, queryString);
+    const racesList = [
         {
             "id": 0,
-            "especie": 0,
-            "valor": "Affenpinscher"
+            "specie": 0,
+            "value": "Affenpinscher"
         }, {
             "id": 1,
-            "especie": 0,
-            "valor": "Airedale Terrier"
+            "specie": 0,
+            "value": "Airedale Terrier"
         }, {
             "id": 2,
-            "especie": 0,
-            "valor": "Akita Americano"
+            "specie": 0,
+            "value": "Akita Americano"
         }, {
             "id": 3,
-            "especie": 0,
-            "valor": "Akita Inu"
+            "specie": 0,
+            "value": "Akita Inu"
         }, {
             "id": 4,
-            "especie": 0,
-            "valor": "Alaskan Malamute"
+            "specie": 0,
+            "value": "Alaskan Malamute"
         }, {
             "id": 5,
-            "especie": 0,
-            "valor": "American Staffordshire Terrier"
+            "specie": 0,
+            "value": "American Staffordshire Terrier"
         }, {
             "id": 6,
-            "especie": 0,
-            "valor": "Antiguo perro de muestra danés"
+            "specie": 0,
+            "value": "Antiguo perro de muestra danés"
         }, {
             "id": 7,
-            "especie": 0,
-            "valor": "Azawakh"
+            "specie": 0,
+            "value": "Azawakh"
         }, {
             "id": 8,
-            "especie": 0,
-            "valor": "Azul de Gascuña"
+            "specie": 0,
+            "value": "Azul de Gascuña"
         }, {
             "id": 9,
-            "especie": 0,
-            "valor": "Basenji"
+            "specie": 0,
+            "value": "Basenji"
         }, {
             "id": 10,
-            "especie": 0,
-            "valor": "Basset artesiano de Normandía"
+            "specie": 0,
+            "value": "Basset artesiano de Normandía"
         }, {
             "id": 11,
-            "especie": 0,
-            "valor": "Basset de los Alpes"
+            "specie": 0,
+            "value": "Basset de los Alpes"
         }, {
             "id": 12,
-            "especie": 0,
-            "valor": "Basset Hound"
+            "specie": 0,
+            "value": "Basset Hound"
         }, {
             "id": 13,
-            "especie": 0,
-            "valor": "Basset leonado de Bretaña"
+            "specie": 0,
+            "value": "Basset leonado de Bretaña"
         }, {
             "id": 14,
-            "especie": 0,
-            "valor": "Beagle"
+            "specie": 0,
+            "value": "Beagle"
         }, {
             "id": 15,
-            "especie": 0,
-            "valor": "Beagle-Harrier"
+            "specie": 0,
+            "value": "Beagle-Harrier"
         }, {
             "id": 16,
-            "especie": 0,
-            "valor": "Beauceron"
+            "specie": 0,
+            "value": "Beauceron"
         }, {
             "id": 17,
-            "especie": 0,
-            "valor": "Bedlington Terrier"
+            "specie": 0,
+            "value": "Bedlington Terrier"
         }, {
             "id": 18,
-            "especie": 0,
-            "valor": "Bergamasco"
+            "specie": 0,
+            "value": "Bergamasco"
         }, {
             "id": 19,
-            "especie": 0,
-            "valor": "Bichón boloñés"
+            "specie": 0,
+            "value": "Bichón boloñés"
         }, {
             "id": 20,
-            "especie": 0,
-            "valor": "Bichón frisé"
+            "specie": 0,
+            "value": "Bichón frisé"
         }, {
             "id": 21,
-            "especie": 0,
-            "valor": "Bichón Habanero"
+            "specie": 0,
+            "value": "Bichón Habanero"
         }, {
             "id": 22,
-            "especie": 0,
-            "valor": "Bichón maltés"
+            "specie": 0,
+            "value": "Bichón maltés"
         }, {
             "id": 23,
-            "especie": 0,
-            "valor": "Billy"
+            "specie": 0,
+            "value": "Billy"
         }, {
             "id": 24,
-            "especie": 0,
-            "valor": "Black and Tan Coonhound"
+            "specie": 0,
+            "value": "Black and Tan Coonhound"
         }, {
             "id": 25,
-            "especie": 0,
-            "valor": "Bobtail"
+            "specie": 0,
+            "value": "Bobtail"
         }, {
             "id": 26,
-            "especie": 0,
-            "valor": "Boerboel"
+            "specie": 0,
+            "value": "Boerboel"
         }, {
             "id": 27,
-            "especie": 0,
-            "valor": "Border collie"
+            "specie": 0,
+            "value": "Border collie"
         }, {
             "id": 28,
-            "especie": 0,
-            "valor": "Border Terrier"
+            "specie": 0,
+            "value": "Border Terrier"
         }, {
             "id": 29,
-            "especie": 0,
-            "valor": "Borzoi"
+            "specie": 0,
+            "value": "Borzoi"
         }, {
             "id": 30,
-            "especie": 0,
-            "valor": "Boston terrier"
+            "specie": 0,
+            "value": "Boston terrier"
         }, {
             "id": 31,
-            "especie": 0,
-            "valor": "Bóxer"
+            "specie": 0,
+            "value": "Bóxer"
         }, {
             "id": 32,
-            "especie": 0,
-            "valor": "Boyero de Appenzell"
+            "specie": 0,
+            "value": "Boyero de Appenzell"
         }, {
             "id": 33,
-            "especie": 0,
-            "valor": "Boyero de Berna"
+            "specie": 0,
+            "value": "Boyero de Berna"
         }, {
             "id": 34,
-            "especie": 0,
-            "valor": "Boyero de Entlebuch"
+            "specie": 0,
+            "value": "Boyero de Entlebuch"
         }, {
             "id": 35,
-            "especie": 0,
-            "valor": "Boyero de Flandes"
+            "specie": 0,
+            "value": "Boyero de Flandes"
         }, {
             "id": 36,
-            "especie": 0,
-            "valor": "Boyero de las Ardenas"
+            "specie": 0,
+            "value": "Boyero de las Ardenas"
         }, {
             "id": 37,
-            "especie": 0,
-            "valor": "Braco alemán"
+            "specie": 0,
+            "value": "Braco alemán"
         }, {
             "id": 38,
-            "especie": 0,
-            "valor": "Braco alemán de pelo corto"
+            "specie": 0,
+            "value": "Braco alemán de pelo corto"
         }, {
             "id": 39,
-            "especie": 0,
-            "valor": "Braco Alemán de Pelo Duro"
+            "specie": 0,
+            "value": "Braco Alemán de Pelo Duro"
         }, {
             "id": 40,
-            "especie": 0,
-            "valor": "Braco austriaco negro y fuego"
+            "specie": 0,
+            "value": "Braco austriaco negro y fuego"
         }, {
             "id": 41,
-            "especie": 0,
-            "valor": "Braco de Ariège"
+            "specie": 0,
+            "value": "Braco de Ariège"
         }, {
             "id": 42,
-            "especie": 0,
-            "valor": "Braco de Auvernia"
+            "specie": 0,
+            "value": "Braco de Auvernia"
         }, {
             "id": 43,
-            "especie": 0,
-            "valor": "Braco de Borbón"
+            "specie": 0,
+            "value": "Braco de Borbón"
         }, {
             "id": 44,
-            "especie": 0,
-            "valor": "Braco de Weimar"
+            "specie": 0,
+            "value": "Braco de Weimar"
         }, {
             "id": 45,
-            "especie": 0,
-            "valor": "Braco eslovaco de pelo duro"
+            "specie": 0,
+            "value": "Braco eslovaco de pelo duro"
         }, {
             "id": 46,
-            "especie": 0,
-            "valor": "Braco francés"
+            "specie": 0,
+            "value": "Braco francés"
         }, {
             "id": 47,
-            "especie": 0,
-            "valor": "Braco húngaro"
+            "specie": 0,
+            "value": "Braco húngaro"
         }, {
             "id": 48,
-            "especie": 0,
-            "valor": "Braco Italiano"
+            "specie": 0,
+            "value": "Braco Italiano"
         }, {
             "id": 49,
-            "especie": 0,
-            "valor": "Braco Saint-Germain"
+            "specie": 0,
+            "value": "Braco Saint-Germain"
         }, {
             "id": 50,
-            "especie": 0,
-            "valor": "Briquet grifón vendeano"
+            "specie": 0,
+            "value": "Briquet grifón vendeano"
         }, {
             "id": 51,
-            "especie": 0,
-            "valor": "Broholmer"
+            "specie": 0,
+            "value": "Broholmer"
         }, {
             "id": 52,
-            "especie": 0,
-            "valor": "Buhund noruego"
+            "specie": 0,
+            "value": "Buhund noruego"
         }, {
             "id": 53,
-            "especie": 0,
-            "valor": "Bull Terrier"
+            "specie": 0,
+            "value": "Bull Terrier"
         }, {
             "id": 54,
-            "especie": 0,
-            "valor": "Bulldog Americano"
+            "specie": 0,
+            "value": "Bulldog Americano"
         }, {
             "id": 55,
-            "especie": 0,
-            "valor": "Bulldog francés"
+            "specie": 0,
+            "value": "Bulldog francés"
         }, {
             "id": 56,
-            "especie": 0,
-            "valor": "Bulldog inglés"
+            "specie": 0,
+            "value": "Bulldog inglés"
         }, {
             "id": 57,
-            "especie": 0,
-            "valor": "Bullmastiff"
+            "specie": 0,
+            "value": "Bullmastiff"
         }, {
             "id": 58,
-            "especie": 0,
-            "valor": "Cairn Terrier"
+            "specie": 0,
+            "value": "Cairn Terrier"
         }, {
             "id": 59,
-            "especie": 0,
-            "valor": "Cane Corso"
+            "specie": 0,
+            "value": "Cane Corso"
         }, {
             "id": 60,
-            "especie": 0,
-            "valor": "Caniche"
+            "specie": 0,
+            "value": "Caniche"
         }, {
             "id": 61,
-            "especie": 0,
-            "valor": "Cavalier King Charles Spaniel"
+            "specie": 0,
+            "value": "Cavalier King Charles Spaniel"
         }, {
             "id": 62,
-            "especie": 0,
-            "valor": "Cazador de alces noruego"
+            "specie": 0,
+            "value": "Cazador de alces noruego"
         }, {
             "id": 63,
-            "especie": 0,
-            "valor": "Chihuahua"
+            "specie": 0,
+            "value": "Chihuahua"
         }, {
             "id": 64,
-            "especie": 0,
-            "valor": "Chow Chow"
+            "specie": 0,
+            "value": "Chow Chow"
         }, {
             "id": 65,
-            "especie": 0,
-            "valor": "Cirneco del Etna"
+            "specie": 0,
+            "value": "Cirneco del Etna"
         }, {
             "id": 66,
-            "especie": 0,
-            "valor": "Clumber Spaniel"
+            "specie": 0,
+            "value": "Clumber Spaniel"
         }, {
             "id": 67,
-            "especie": 0,
-            "valor": "Cobrador de pelo liso"
+            "specie": 0,
+            "value": "Cobrador de pelo liso"
         }, {
             "id": 68,
-            "especie": 0,
-            "valor": "Cobrador de pelo rizado"
+            "specie": 0,
+            "value": "Cobrador de pelo rizado"
         }, {
             "id": 69,
-            "especie": 0,
-            "valor": "Cocker Spaniel americano"
+            "specie": 0,
+            "value": "Cocker Spaniel americano"
         }, {
             "id": 70,
-            "especie": 0,
-            "valor": "Cocker Spaniel inglés"
+            "specie": 0,
+            "value": "Cocker Spaniel inglés"
         }, {
             "id": 71,
-            "especie": 0,
-            "valor": "Collie barbudo"
+            "specie": 0,
+            "value": "Collie barbudo"
         }, {
             "id": 72,
-            "especie": 0,
-            "valor": "Collie de pelo corto"
+            "specie": 0,
+            "value": "Collie de pelo corto"
         }, {
             "id": 73,
-            "especie": 0,
-            "valor": "Collie de pelo largo"
+            "specie": 0,
+            "value": "Collie de pelo largo"
         }, {
             "id": 74,
-            "especie": 0,
-            "valor": "Corgi galés de Pembroke"
+            "specie": 0,
+            "value": "Corgi galés de Pembroke"
         }, {
             "id": 75,
-            "especie": 0,
-            "valor": "Cotón de Tulear"
+            "specie": 0,
+            "value": "Cotón de Tulear"
         }, {
             "id": 76,
-            "especie": 0,
-            "valor": "Crestado chino"
+            "specie": 0,
+            "value": "Crestado chino"
         }, {
             "id": 77,
-            "especie": 0,
-            "valor": "Crestado rodesiano"
+            "specie": 0,
+            "value": "Crestado rodesiano"
         }, {
             "id": 78,
-            "especie": 0,
-            "valor": "Cursinu"
+            "specie": 0,
+            "value": "Cursinu"
         }, {
             "id": 79,
-            "especie": 0,
-            "valor": "Dálmata"
+            "specie": 0,
+            "value": "Dálmata"
         }, {
             "id": 80,
-            "especie": 0,
-            "valor": "Dandie Dinmont"
+            "specie": 0,
+            "value": "Dandie Dinmont"
         }, {
             "id": 81,
-            "especie": 0,
-            "valor": "Dóberman"
+            "specie": 0,
+            "value": "Dóberman"
         }, {
             "id": 82,
-            "especie": 0,
-            "valor": "Dogo argentino"
+            "specie": 0,
+            "value": "Dogo argentino"
         }, {
             "id": 83,
-            "especie": 0,
-            "valor": "Dogo de Burdeos"
+            "specie": 0,
+            "value": "Dogo de Burdeos"
         }, {
             "id": 84,
-            "especie": 0,
-            "valor": "Dogo del Tíbet"
+            "specie": 0,
+            "value": "Dogo del Tíbet"
         }, {
             "id": 85,
-            "especie": 0,
-            "valor": "Dogo mallorquín"
+            "specie": 0,
+            "value": "Dogo mallorquín"
         }, {
             "id": 86,
-            "especie": 0,
-            "valor": "Drever"
+            "specie": 0,
+            "value": "Drever"
         }, {
             "id": 87,
-            "especie": 0,
-            "valor": "Eurasier"
+            "specie": 0,
+            "value": "Eurasier"
         }, {
             "id": 88,
-            "especie": 0,
-            "valor": "Field Spaniel"
+            "specie": 0,
+            "value": "Field Spaniel"
         }, {
             "id": 89,
-            "especie": 0,
-            "valor": "Fila Brasileiro"
+            "specie": 0,
+            "value": "Fila Brasileiro"
         }, {
             "id": 90,
-            "especie": 0,
-            "valor": "Fila de San Miguel"
+            "specie": 0,
+            "value": "Fila de San Miguel"
         }, {
             "id": 91,
-            "especie": 0,
-            "valor": "Fox Terrier"
+            "specie": 0,
+            "value": "Fox Terrier"
         }, {
             "id": 92,
-            "especie": 0,
-            "valor": "Foxhound americano"
+            "specie": 0,
+            "value": "Foxhound americano"
         }, {
             "id": 93,
-            "especie": 0,
-            "valor": "Foxhound inglés"
+            "specie": 0,
+            "value": "Foxhound inglés"
         }, {
             "id": 94,
-            "especie": 0,
-            "valor": "Galgo afgano"
+            "specie": 0,
+            "value": "Galgo afgano"
         }, {
             "id": 95,
-            "especie": 0,
-            "valor": "Galgo español"
+            "specie": 0,
+            "value": "Galgo español"
         }, {
             "id": 96,
-            "especie": 0,
-            "valor": "Galgo inglés"
+            "specie": 0,
+            "value": "Galgo inglés"
         }, {
             "id": 97,
-            "especie": 0,
-            "valor": "Galgo italiano"
+            "specie": 0,
+            "value": "Galgo italiano"
         }, {
             "id": 98,
-            "especie": 0,
-            "valor": "Galgo polaco"
+            "specie": 0,
+            "value": "Galgo polaco"
         }, {
             "id": 99,
-            "especie": 0,
-            "valor": "Gascon saintongeois"
+            "specie": 0,
+            "value": "Gascon saintongeois"
         }, {
             "id": 100,
-            "especie": 0,
-            "valor": "Golden Retriever"
+            "specie": 0,
+            "value": "Golden Retriever"
         }, {
             "id": 101,
-            "especie": 0,
-            "valor": "Gordon Setter"
+            "specie": 0,
+            "value": "Gordon Setter"
         }, {
             "id": 102,
-            "especie": 0,
-            "valor": "Gran basset grifón vendeano"
+            "specie": 0,
+            "value": "Gran basset grifón vendeano"
         }, {
             "id": 103,
-            "especie": 0,
-            "valor": "Gran boyero suizo"
+            "specie": 0,
+            "value": "Gran boyero suizo"
         }, {
             "id": 104,
-            "especie": 0,
-            "valor": "Gran danés"
+            "specie": 0,
+            "value": "Gran danés"
         }, {
             "id": 105,
-            "especie": 0,
-            "valor": "Gran grifón vendeano"
+            "specie": 0,
+            "value": "Gran grifón vendeano"
         }, {
             "id": 106,
-            "especie": 0,
-            "valor": "Gran Munsterlander"
+            "specie": 0,
+            "value": "Gran Munsterlander"
         }, {
             "id": 107,
-            "especie": 0,
-            "valor": "Gran sabueso anglo-francés blanco y naranja"
+            "specie": 0,
+            "value": "Gran sabueso anglo-francés blanco y naranja"
         }, {
             "id": 108,
-            "especie": 0,
-            "valor": "Gran sabueso anglo-francés blanco y negro"
+            "specie": 0,
+            "value": "Gran sabueso anglo-francés blanco y negro"
         }, {
             "id": 109,
-            "especie": 0,
-            "valor": "Gran sabueso anglo-francés tricolor"
+            "specie": 0,
+            "value": "Gran sabueso anglo-francés tricolor"
         }, {
             "id": 110,
-            "especie": 0,
-            "valor": "Grifón de Bruselas"
+            "specie": 0,
+            "value": "Grifón de Bruselas"
         }, {
             "id": 111,
-            "especie": 0,
-            "valor": "Grifón de muestra bohemio de pelo duro"
+            "specie": 0,
+            "value": "Grifón de muestra bohemio de pelo duro"
         }, {
             "id": 112,
-            "especie": 0,
-            "valor": "Grifón de muestra de pelo duro"
+            "specie": 0,
+            "value": "Grifón de muestra de pelo duro"
         }, {
             "id": 113,
-            "especie": 0,
-            "valor": "Grifón leonado de Bretaña"
+            "specie": 0,
+            "value": "Grifón leonado de Bretaña"
         }, {
             "id": 114,
-            "especie": 0,
-            "valor": "Grifón Nivernais"
+            "specie": 0,
+            "value": "Grifón Nivernais"
         }, {
             "id": 115,
-            "especie": 0,
-            "valor": "Harrier"
+            "specie": 0,
+            "value": "Harrier"
         }, {
             "id": 116,
-            "especie": 0,
-            "valor": "Hokkaido"
+            "specie": 0,
+            "value": "Hokkaido"
         }, {
             "id": 117,
-            "especie": 0,
-            "valor": "Hovawart"
+            "specie": 0,
+            "value": "Hovawart"
         }, {
             "id": 118,
-            "especie": 0,
-            "valor": "Husky siberiano"
+            "specie": 0,
+            "value": "Husky siberiano"
         }, {
             "id": 119,
-            "especie": 0,
-            "valor": "Jack Russell Terrier"
+            "specie": 0,
+            "value": "Jack Russell Terrier"
         }, {
             "id": 120,
-            "especie": 0,
-            "valor": "Jämthund"
+            "specie": 0,
+            "value": "Jämthund"
         }, {
             "id": 121,
-            "especie": 0,
-            "valor": "Kai"
+            "specie": 0,
+            "value": "Kai"
         }, {
             "id": 122,
-            "especie": 0,
-            "valor": "Kelpie australiano"
+            "specie": 0,
+            "value": "Kelpie australiano"
         }, {
             "id": 123,
-            "especie": 0,
-            "valor": "Kerry Blue Terrier"
+            "specie": 0,
+            "value": "Kerry Blue Terrier"
         }, {
             "id": 124,
-            "especie": 0,
-            "valor": "King Charles Spaniel"
+            "specie": 0,
+            "value": "King Charles Spaniel"
         }, {
             "id": 125,
-            "especie": 0,
-            "valor": "Kishu"
+            "specie": 0,
+            "value": "Kishu"
         }, {
             "id": 126,
-            "especie": 0,
-            "valor": "Komondor"
+            "specie": 0,
+            "value": "Komondor"
         }, {
             "id": 127,
-            "especie": 0,
-            "valor": "Kromfohrländer"
+            "specie": 0,
+            "value": "Kromfohrländer"
         }, {
             "id": 128,
-            "especie": 0,
-            "valor": "Kuvasz"
+            "specie": 0,
+            "value": "Kuvasz"
         }, {
             "id": 129,
-            "especie": 0,
-            "valor": "Labrador Retriever"
+            "specie": 0,
+            "value": "Labrador Retriever"
         }, {
             "id": 130,
-            "especie": 0,
-            "valor": "Lagotto Romagnolo"
+            "specie": 0,
+            "value": "Lagotto Romagnolo"
         }, {
             "id": 131,
-            "especie": 0,
-            "valor": "Laika de Siberia occidental"
+            "specie": 0,
+            "value": "Laika de Siberia occidental"
         }, {
             "id": 132,
-            "especie": 0,
-            "valor": "Laika de Siberia oriental"
+            "specie": 0,
+            "value": "Laika de Siberia oriental"
         }, {
             "id": 133,
-            "especie": 0,
-            "valor": "Laika ruso europeo"
+            "specie": 0,
+            "value": "Laika ruso europeo"
         }, {
             "id": 134,
-            "especie": 0,
-            "valor": "Lakeland Terrier"
+            "specie": 0,
+            "value": "Lakeland Terrier"
         }, {
             "id": 135,
-            "especie": 0,
-            "valor": "Landseer"
+            "specie": 0,
+            "value": "Landseer"
         }, {
             "id": 136,
-            "especie": 0,
-            "valor": "Lebrel escocés"
+            "specie": 0,
+            "value": "Lebrel escocés"
         }, {
             "id": 137,
-            "especie": 0,
-            "valor": "Lebrel húngaro"
+            "specie": 0,
+            "value": "Lebrel húngaro"
         }, {
             "id": 138,
-            "especie": 0,
-            "valor": "Lebrel irlandés"
+            "specie": 0,
+            "value": "Lebrel irlandés"
         }, {
             "id": 139,
-            "especie": 0,
-            "valor": "Leonberger"
+            "specie": 0,
+            "value": "Leonberger"
         }, {
             "id": 140,
-            "especie": 0,
-            "valor": "Lhasa Apso"
+            "specie": 0,
+            "value": "Lhasa Apso"
         }, {
             "id": 141,
-            "especie": 0,
-            "valor": "Lulú de Pomerania"
+            "specie": 0,
+            "value": "Lulú de Pomerania"
         }, {
             "id": 142,
-            "especie": 0,
-            "valor": "Lundehund"
+            "specie": 0,
+            "value": "Lundehund"
         }, {
             "id": 143,
-            "especie": 0,
-            "valor": "Manchester Terrier"
+            "specie": 0,
+            "value": "Manchester Terrier"
         }, {
             "id": 144,
-            "especie": 0,
-            "valor": "Mastín del Pirineo"
+            "specie": 0,
+            "value": "Mastín del Pirineo"
         }, {
             "id": 145,
-            "especie": 0,
-            "valor": "Mastín español"
+            "specie": 0,
+            "value": "Mastín español"
         }, {
             "id": 146,
-            "especie": 0,
-            "valor": "Mastín inglés"
+            "specie": 0,
+            "value": "Mastín inglés"
         }, {
             "id": 147,
-            "especie": 0,
-            "valor": "Mastín napolitano"
+            "specie": 0,
+            "value": "Mastín napolitano"
         }, {
             "id": 148,
-            "especie": 0,
-            "valor": "Mudi"
+            "specie": 0,
+            "value": "Mudi"
         }, {
             "id": 149,
-            "especie": 0,
-            "valor": "Münsterländer pequeño"
+            "specie": 0,
+            "value": "Münsterländer pequeño"
         }, {
             "id": 150,
-            "especie": 0,
-            "valor": "Otterhound"
+            "specie": 0,
+            "value": "Otterhound"
         }, {
             "id": 151,
-            "especie": 0,
-            "valor": "Papillón"
+            "specie": 0,
+            "value": "Papillón"
         }, {
             "id": 152,
-            "especie": 0,
-            "valor": "Parson Russell Terrier"
+            "specie": 0,
+            "value": "Parson Russell Terrier"
         }, {
             "id": 153,
-            "especie": 0,
-            "valor": "Pastor alemán"
+            "specie": 0,
+            "value": "Pastor alemán"
         }, {
             "id": 154,
-            "especie": 0,
-            "valor": "Pastor belga"
+            "specie": 0,
+            "value": "Pastor belga"
         }, {
             "id": 155,
-            "especie": 0,
-            "valor": "Pastor Blanco Suizo"
+            "specie": 0,
+            "value": "Pastor Blanco Suizo"
         }, {
             "id": 156,
-            "especie": 0,
-            "valor": "Pastor de Anatolia"
+            "specie": 0,
+            "value": "Pastor de Anatolia"
         }, {
             "id": 157,
-            "especie": 0,
-            "valor": "Pastor de Bosnia-Herzegovina y Croacia"
+            "specie": 0,
+            "value": "Pastor de Bosnia-Herzegovina y Croacia"
         }, {
             "id": 158,
-            "especie": 0,
-            "valor": "Pastor de Brie"
+            "specie": 0,
+            "value": "Pastor de Brie"
         }, {
             "id": 159,
-            "especie": 0,
-            "valor": "Pastor de Karst"
+            "specie": 0,
+            "value": "Pastor de Karst"
         }, {
             "id": 160,
-            "especie": 0,
-            "valor": "Pastor de las islas Shetland"
+            "specie": 0,
+            "value": "Pastor de las islas Shetland"
         }, {
             "id": 161,
-            "especie": 0,
-            "valor": "Pastor de los Pirineos"
+            "specie": 0,
+            "value": "Pastor de los Pirineos"
         }, {
             "id": 162,
-            "especie": 0,
-            "valor": "Pastor de Maremma"
+            "specie": 0,
+            "value": "Pastor de Maremma"
         }, {
             "id": 163,
-            "especie": 0,
-            "valor": "Pastor de Picardía"
+            "specie": 0,
+            "value": "Pastor de Picardía"
         }, {
             "id": 164,
-            "especie": 0,
-            "valor": "Pastor de Tatra"
+            "specie": 0,
+            "value": "Pastor de Tatra"
         }, {
             "id": 165,
-            "especie": 0,
-            "valor": "Pastor del Cáucaso"
+            "specie": 0,
+            "value": "Pastor del Cáucaso"
         }, {
             "id": 166,
-            "especie": 0,
-            "valor": "Pastor eslovaco"
+            "specie": 0,
+            "value": "Pastor eslovaco"
         }, {
             "id": 167,
-            "especie": 0,
-            "valor": "Pastor finlandés de Laponia"
+            "specie": 0,
+            "value": "Pastor finlandés de Laponia"
         }, {
             "id": 168,
-            "especie": 0,
-            "valor": "Pastor ganadero australiano"
+            "specie": 0,
+            "value": "Pastor ganadero australiano"
         }, {
             "id": 169,
-            "especie": 0,
-            "valor": "Pastor holandés"
+            "specie": 0,
+            "value": "Pastor holandés"
         }, {
             "id": 170,
-            "especie": 0,
-            "valor": "Pastor islandés"
+            "specie": 0,
+            "value": "Pastor islandés"
         }, {
             "id": 171,
-            "especie": 0,
-            "valor": "Pastor lapón de Suecia"
+            "specie": 0,
+            "value": "Pastor lapón de Suecia"
         }, {
             "id": 172,
-            "especie": 0,
-            "valor": "Pastor mallorquín"
+            "specie": 0,
+            "value": "Pastor mallorquín"
         }, {
             "id": 173,
-            "especie": 0,
-            "valor": "Pastor ovejero australiano"
+            "specie": 0,
+            "value": "Pastor ovejero australiano"
         }, {
             "id": 174,
-            "especie": 0,
-            "valor": "Pastor polaco de las llanuras"
+            "specie": 0,
+            "value": "Pastor polaco de las llanuras"
         }, {
             "id": 175,
-            "especie": 0,
-            "valor": "Pastor rumano de Mioritza"
+            "specie": 0,
+            "value": "Pastor rumano de Mioritza"
         }, {
             "id": 176,
-            "especie": 0,
-            "valor": "Pastor ucraniano"
+            "specie": 0,
+            "value": "Pastor ucraniano"
         }, {
             "id": 177,
-            "especie": 0,
-            "valor": "Pastor Yugoslavo"
+            "specie": 0,
+            "value": "Pastor Yugoslavo"
         }, {
             "id": 178,
-            "especie": 0,
-            "valor": "Pekinés"
+            "specie": 0,
+            "value": "Pekinés"
         }, {
             "id": 179,
-            "especie": 0,
-            "valor": "Pequeño Basset Grifón vendeano"
+            "specie": 0,
+            "value": "Pequeño Basset Grifón vendeano"
         }, {
             "id": 180,
-            "especie": 0,
-            "valor": "Pequeño Brabantino"
+            "specie": 0,
+            "value": "Pequeño Brabantino"
         }, {
             "id": 181,
-            "especie": 0,
-            "valor": "Pequeño perro león"
+            "specie": 0,
+            "value": "Pequeño perro león"
         }, {
             "id": 182,
-            "especie": 0,
-            "valor": "Pequeño perro ruso"
+            "specie": 0,
+            "value": "Pequeño perro ruso"
         }, {
             "id": 183,
-            "especie": 0,
-            "valor": "Pequeño sabueso de Suiza"
+            "specie": 0,
+            "value": "Pequeño sabueso de Suiza"
         }, {
             "id": 184,
-            "especie": 0,
-            "valor": "Perdiguero alemán"
+            "specie": 0,
+            "value": "Perdiguero alemán"
         }, {
             "id": 185,
-            "especie": 0,
-            "valor": "Perdiguero de Burgos"
+            "specie": 0,
+            "value": "Perdiguero de Burgos"
         }, {
             "id": 186,
-            "especie": 0,
-            "valor": "Perdiguero de Drente"
+            "specie": 0,
+            "value": "Perdiguero de Drente"
         }, {
             "id": 187,
-            "especie": 0,
-            "valor": "Perdiguero frisón"
+            "specie": 0,
+            "value": "Perdiguero frisón"
         }, {
             "id": 188,
-            "especie": 0,
-            "valor": "Perdiguero portugués"
+            "specie": 0,
+            "value": "Perdiguero portugués"
         }, {
             "id": 189,
-            "especie": 0,
-            "valor": "Perro de agua americano"
+            "specie": 0,
+            "value": "Perro de agua americano"
         }, {
             "id": 190,
-            "especie": 0,
-            "valor": "Perro de agua español"
+            "specie": 0,
+            "value": "Perro de agua español"
         }, {
             "id": 191,
-            "especie": 0,
-            "valor": "Perro de agua francés"
+            "specie": 0,
+            "value": "Perro de agua francés"
         }, {
             "id": 192,
-            "especie": 0,
-            "valor": "Perro de agua frisón"
+            "specie": 0,
+            "value": "Perro de agua frisón"
         }, {
             "id": 193,
-            "especie": 0,
-            "valor": "Perro de agua irlandés"
+            "specie": 0,
+            "value": "Perro de agua irlandés"
         }, {
             "id": 194,
-            "especie": 0,
-            "valor": "Perro de agua portugués"
+            "specie": 0,
+            "value": "Perro de agua portugués"
         }, {
             "id": 195,
-            "especie": 0,
-            "valor": "Perro de Canaán"
+            "specie": 0,
+            "value": "Perro de Canaán"
         }, {
             "id": 196,
-            "especie": 0,
-            "valor": "Perro de Castro Laboreiro"
+            "specie": 0,
+            "value": "Perro de Castro Laboreiro"
         }, {
             "id": 197,
-            "especie": 0,
-            "valor": "Perro de caza polaco"
+            "specie": 0,
+            "value": "Perro de caza polaco"
         }, {
             "id": 198,
-            "especie": 0,
-            "valor": "Perro de Chindo"
+            "specie": 0,
+            "value": "Perro de Chindo"
         }, {
             "id": 199,
-            "especie": 0,
-            "valor": "Perro de Groenlandia"
+            "specie": 0,
+            "value": "Perro de Groenlandia"
         }, {
             "id": 200,
-            "especie": 0,
-            "valor": "Perro de la Sierra de la Estrela"
+            "specie": 0,
+            "value": "Perro de la Sierra de la Estrela"
         }, {
             "id": 201,
-            "especie": 0,
-            "valor": "Perro de montaña de Formosa"
+            "specie": 0,
+            "value": "Perro de montaña de Formosa"
         }, {
             "id": 202,
-            "especie": 0,
-            "valor": "Perro de montaña de los Pirineos"
+            "specie": 0,
+            "value": "Perro de montaña de los Pirineos"
         }, {
             "id": 203,
-            "especie": 0,
-            "valor": "Perro de Montaña del Atlas"
+            "specie": 0,
+            "value": "Perro de Montaña del Atlas"
         }, {
             "id": 204,
-            "especie": 0,
-            "valor": "Perro de muestra alemán de pelo cerdoso"
+            "specie": 0,
+            "value": "Perro de muestra alemán de pelo cerdoso"
         }, {
             "id": 205,
-            "especie": 0,
-            "valor": "Perro de muestra alemán de pelo duro"
+            "specie": 0,
+            "value": "Perro de muestra alemán de pelo duro"
         }, {
             "id": 206,
-            "especie": 0,
-            "valor": "Perro de osos de Carelia"
+            "specie": 0,
+            "value": "Perro de osos de Carelia"
         }, {
             "id": 207,
-            "especie": 0,
-            "valor": "Perro de San Huberto"
+            "specie": 0,
+            "value": "Perro de San Huberto"
         }, {
             "id": 208,
-            "especie": 0,
-            "valor": "Perro esquimal canadiense"
+            "specie": 0,
+            "value": "Perro esquimal canadiense"
         }, {
             "id": 209,
-            "especie": 0,
-            "valor": "Perro Finlandés de Laponia"
+            "specie": 0,
+            "value": "Perro Finlandés de Laponia"
         }, {
             "id": 210,
-            "especie": 0,
-            "valor": "Perro lobo checoslovaco"
+            "specie": 0,
+            "value": "Perro lobo checoslovaco"
         }, {
             "id": 211,
-            "especie": 0,
-            "valor": "Perro lobo de Saarloos"
+            "specie": 0,
+            "value": "Perro lobo de Saarloos"
         }, {
             "id": 212,
-            "especie": 0,
-            "valor": "Perro pastor catalán"
+            "specie": 0,
+            "value": "Perro pastor catalán"
         }, {
             "id": 213,
-            "especie": 0,
-            "valor": "Perro pastor croata"
+            "specie": 0,
+            "value": "Perro pastor croata"
         }, {
             "id": 214,
-            "especie": 0,
-            "valor": "Perro pastor de Asia central"
+            "specie": 0,
+            "value": "Perro pastor de Asia central"
         }, {
             "id": 215,
-            "especie": 0,
-            "valor": "Perro pastor portugués"
+            "specie": 0,
+            "value": "Perro pastor portugués"
         }, {
             "id": 216,
-            "especie": 0,
-            "valor": "Perro sin pelo del Perú"
+            "specie": 0,
+            "value": "Perro sin pelo del Perú"
         }, {
             "id": 217,
-            "especie": 0,
-            "valor": "Perro tejonero de Westfalia"
+            "specie": 0,
+            "value": "Perro tejonero de Westfalia"
         }, {
             "id": 218,
-            "especie": 0,
-            "valor": "Pharaoh Hound"
+            "specie": 0,
+            "value": "Pharaoh Hound"
         }, {
             "id": 219,
-            "especie": 0,
-            "valor": "Pinscher"
+            "specie": 0,
+            "value": "Pinscher"
         }, {
             "id": 220,
-            "especie": 0,
-            "valor": "Pinscher austríaco"
+            "specie": 0,
+            "value": "Pinscher austríaco"
         }, {
             "id": 221,
-            "especie": 0,
-            "valor": "Podenco canario"
+            "specie": 0,
+            "value": "Podenco canario"
         }, {
             "id": 222,
-            "especie": 0,
-            "valor": "Podenco ibicenco"
+            "specie": 0,
+            "value": "Podenco ibicenco"
         }, {
             "id": 223,
-            "especie": 0,
-            "valor": "Podenco portugués"
+            "specie": 0,
+            "value": "Podenco portugués"
         }, {
             "id": 224,
-            "especie": 0,
-            "valor": "Pointer inglés"
+            "specie": 0,
+            "value": "Pointer inglés"
         }, {
             "id": 225,
-            "especie": 0,
-            "valor": "Poitevino"
+            "specie": 0,
+            "value": "Poitevino"
         }, {
             "id": 226,
-            "especie": 0,
-            "valor": "Porcelana"
+            "specie": 0,
+            "value": "Porcelana"
         }, {
             "id": 227,
-            "especie": 0,
-            "valor": "Presa Canario"
+            "specie": 0,
+            "value": "Presa Canario"
         }, {
             "id": 228,
-            "especie": 0,
-            "valor": "Pudelpointer"
+            "specie": 0,
+            "value": "Pudelpointer"
         }, {
             "id": 229,
-            "especie": 0,
-            "valor": "Pug"
+            "specie": 0,
+            "value": "Pug"
         }, {
             "id": 230,
-            "especie": 0,
-            "valor": "Puli"
+            "specie": 0,
+            "value": "Puli"
         }, {
             "id": 231,
-            "especie": 0,
-            "valor": "Pumi"
+            "specie": 0,
+            "value": "Pumi"
         }, {
             "id": 232,
-            "especie": 0,
-            "valor": "Rafeiro do Alentejo"
+            "specie": 0,
+            "value": "Rafeiro do Alentejo"
         }, {
             "id": 233,
-            "especie": 0,
-            "valor": "Ratonero holandés"
+            "specie": 0,
+            "value": "Ratonero holandés"
         }, {
             "id": 234,
-            "especie": 0,
-            "valor": "Retriever de Chesapeake"
+            "specie": 0,
+            "value": "Retriever de Chesapeake"
         }, {
             "id": 235,
-            "especie": 0,
-            "valor": "Retriever de Nueva Escocia"
+            "specie": 0,
+            "value": "Retriever de Nueva Escocia"
         }, {
             "id": 236,
-            "especie": 0,
-            "valor": "Ridgeback tailandés"
+            "specie": 0,
+            "value": "Ridgeback tailandés"
         }, {
             "id": 237,
-            "especie": 0,
-            "valor": "Rottweiler"
+            "specie": 0,
+            "value": "Rottweiler"
         }, {
             "id": 238,
-            "especie": 0,
-            "valor": "Sabueso anglo-francés de tamaño mediano"
+            "specie": 0,
+            "value": "Sabueso anglo-francés de tamaño mediano"
         }, {
             "id": 239,
-            "especie": 0,
-            "valor": "Sabueso artesiano"
+            "specie": 0,
+            "value": "Sabueso artesiano"
         }, {
             "id": 240,
-            "especie": 0,
-            "valor": "Sabueso bávaro de montaña"
+            "specie": 0,
+            "value": "Sabueso bávaro de montaña"
         }, {
             "id": 241,
-            "especie": 0,
-            "valor": "Sabueso de Bosnia de pelo cerdoso"
+            "specie": 0,
+            "value": "Sabueso de Bosnia de pelo cerdoso"
         }, {
             "id": 242,
-            "especie": 0,
-            "valor": "Sabueso de Hamilton"
+            "specie": 0,
+            "value": "Sabueso de Hamilton"
         }, {
             "id": 243,
-            "especie": 0,
-            "valor": "Sabueso de Hannover"
+            "specie": 0,
+            "value": "Sabueso de Hannover"
         }, {
             "id": 244,
-            "especie": 0,
-            "valor": "Sabueso de Hygen"
+            "specie": 0,
+            "value": "Sabueso de Hygen"
         }, {
             "id": 245,
-            "especie": 0,
-            "valor": "Sabueso de Istria de pelo corto"
+            "specie": 0,
+            "value": "Sabueso de Istria de pelo corto"
         }, {
             "id": 246,
-            "especie": 0,
-            "valor": "Sabueso de Istria de pelo duro"
+            "specie": 0,
+            "value": "Sabueso de Istria de pelo duro"
         }, {
             "id": 247,
-            "especie": 0,
-            "valor": "Sabueso de montaña de Montenegro"
+            "specie": 0,
+            "value": "Sabueso de montaña de Montenegro"
         }, {
             "id": 248,
-            "especie": 0,
-            "valor": "Sabueso de Schiller"
+            "specie": 0,
+            "value": "Sabueso de Schiller"
         }, {
             "id": 249,
-            "especie": 0,
-            "valor": "Sabueso de Småland"
+            "specie": 0,
+            "value": "Sabueso de Småland"
         }, {
             "id": 250,
-            "especie": 0,
-            "valor": "Sabueso del Ariège"
+            "specie": 0,
+            "value": "Sabueso del Ariège"
         }, {
             "id": 251,
-            "especie": 0,
-            "valor": "Sabueso del Tirol"
+            "specie": 0,
+            "value": "Sabueso del Tirol"
         }, {
             "id": 252,
-            "especie": 0,
-            "valor": "Sabueso del Valle de Save"
+            "specie": 0,
+            "value": "Sabueso del Valle de Save"
         }, {
             "id": 253,
-            "especie": 0,
-            "valor": "Sabueso eslovaco"
+            "specie": 0,
+            "value": "Sabueso eslovaco"
         }, {
             "id": 254,
-            "especie": 0,
-            "valor": "Sabueso español"
+            "specie": 0,
+            "value": "Sabueso español"
         }, {
             "id": 255,
-            "especie": 0,
-            "valor": "Sabueso estirio de pelo áspero"
+            "specie": 0,
+            "value": "Sabueso estirio de pelo áspero"
         }, {
             "id": 256,
-            "especie": 0,
-            "valor": "Sabueso finlandés"
+            "specie": 0,
+            "value": "Sabueso finlandés"
         }, {
             "id": 257,
-            "especie": 0,
-            "valor": "Sabueso francés blanco y naranja"
+            "specie": 0,
+            "value": "Sabueso francés blanco y naranja"
         }, {
             "id": 258,
-            "especie": 0,
-            "valor": "Sabueso francés blanco y negro"
+            "specie": 0,
+            "value": "Sabueso francés blanco y negro"
         }, {
             "id": 259,
-            "especie": 0,
-            "valor": "Sabueso francés tricolor"
+            "specie": 0,
+            "value": "Sabueso francés tricolor"
         }, {
             "id": 260,
-            "especie": 0,
-            "valor": "Sabueso Halden"
+            "specie": 0,
+            "value": "Sabueso Halden"
         }, {
             "id": 261,
-            "especie": 0,
-            "valor": "Sabueso helénico"
+            "specie": 0,
+            "value": "Sabueso helénico"
         }, {
             "id": 262,
-            "especie": 0,
-            "valor": "Sabueso italiano"
+            "specie": 0,
+            "value": "Sabueso italiano"
         }, {
             "id": 263,
-            "especie": 0,
-            "valor": "Sabueso noruego"
+            "specie": 0,
+            "value": "Sabueso noruego"
         }, {
             "id": 264,
-            "especie": 0,
-            "valor": "Sabueso polaco"
+            "specie": 0,
+            "value": "Sabueso polaco"
         }, {
             "id": 265,
-            "especie": 0,
-            "valor": "Sabueso serbio"
+            "specie": 0,
+            "value": "Sabueso serbio"
         }, {
             "id": 266,
-            "especie": 0,
-            "valor": "Sabueso suizo"
+            "specie": 0,
+            "value": "Sabueso suizo"
         }, {
             "id": 267,
-            "especie": 0,
-            "valor": "Sabueso tricolor serbio"
+            "specie": 0,
+            "value": "Sabueso tricolor serbio"
         }, {
             "id": 268,
-            "especie": 0,
-            "valor": "Saluki"
+            "specie": 0,
+            "value": "Saluki"
         }, {
             "id": 269,
-            "especie": 0,
-            "valor": "Samoyedo"
+            "specie": 0,
+            "value": "Samoyedo"
         }, {
             "id": 270,
-            "especie": 0,
-            "valor": "San Bernardo"
+            "specie": 0,
+            "value": "San Bernardo"
         }, {
             "id": 271,
-            "especie": 0,
-            "valor": "Schapendoes neerlandés"
+            "specie": 0,
+            "value": "Schapendoes neerlandés"
         }, {
             "id": 272,
-            "especie": 0,
-            "valor": "Schipperke"
+            "specie": 0,
+            "value": "Schipperke"
         }, {
             "id": 273,
-            "especie": 0,
-            "valor": "Schnauzer"
+            "specie": 0,
+            "value": "Schnauzer"
         }, {
             "id": 274,
-            "especie": 0,
-            "valor": "Sealyham terrier"
+            "specie": 0,
+            "value": "Sealyham terrier"
         }, {
             "id": 275,
-            "especie": 0,
-            "valor": "Setter inglés"
+            "specie": 0,
+            "value": "Setter inglés"
         }, {
             "id": 276,
-            "especie": 0,
-            "valor": "Setter irlandés"
+            "specie": 0,
+            "value": "Setter irlandés"
         }, {
             "id": 277,
-            "especie": 0,
-            "valor": "Setter irlandés rojo y blanco"
+            "specie": 0,
+            "value": "Setter irlandés rojo y blanco"
         }, {
             "id": 278,
-            "especie": 0,
-            "valor": "Shar Pei"
+            "specie": 0,
+            "value": "Shar Pei"
         }, {
             "id": 279,
-            "especie": 0,
-            "valor": "Shiba Inu"
+            "specie": 0,
+            "value": "Shiba Inu"
         }, {
             "id": 280,
-            "especie": 0,
-            "valor": "Shih Tzu"
+            "specie": 0,
+            "value": "Shih Tzu"
         }, {
             "id": 281,
-            "especie": 0,
-            "valor": "Shikoku Inu"
+            "specie": 0,
+            "value": "Shikoku Inu"
         }, {
             "id": 282,
-            "especie": 0,
-            "valor": "Skye Terrier"
+            "specie": 0,
+            "value": "Skye Terrier"
         }, {
             "id": 283,
-            "especie": 0,
-            "valor": "Sloughi"
+            "specie": 0,
+            "value": "Sloughi"
         }, {
             "id": 284,
-            "especie": 0,
-            "valor": "Spaniel azul de Picardía"
+            "specie": 0,
+            "value": "Spaniel azul de Picardía"
         }, {
             "id": 285,
-            "especie": 0,
-            "valor": "Spaniel bretón"
+            "specie": 0,
+            "value": "Spaniel bretón"
         }, {
             "id": 286,
-            "especie": 0,
-            "valor": "Spaniel de Pont-Audemer"
+            "specie": 0,
+            "value": "Spaniel de Pont-Audemer"
         }, {
             "id": 287,
-            "especie": 0,
-            "valor": "Spaniel francés"
+            "specie": 0,
+            "value": "Spaniel francés"
         }, {
             "id": 288,
-            "especie": 0,
-            "valor": "Spaniel holandés"
+            "specie": 0,
+            "value": "Spaniel holandés"
         }, {
             "id": 289,
-            "especie": 0,
-            "valor": "Spaniel japonés"
+            "specie": 0,
+            "value": "Spaniel japonés"
         }, {
             "id": 290,
-            "especie": 0,
-            "valor": "Spaniel picardo"
+            "specie": 0,
+            "value": "Spaniel picardo"
         }, {
             "id": 291,
-            "especie": 0,
-            "valor": "Spaniel tibetano"
+            "specie": 0,
+            "value": "Spaniel tibetano"
         }, {
             "id": 292,
-            "especie": 0,
-            "valor": "Spinone italiano"
+            "specie": 0,
+            "value": "Spinone italiano"
         }, {
             "id": 293,
-            "especie": 0,
-            "valor": "Spitz de Norrbotten"
+            "specie": 0,
+            "value": "Spitz de Norrbotten"
         }, {
             "id": 294,
-            "especie": 0,
-            "valor": "Spitz finlandés"
+            "specie": 0,
+            "value": "Spitz finlandés"
         }, {
             "id": 295,
-            "especie": 0,
-            "valor": "Spitz japonés"
+            "specie": 0,
+            "value": "Spitz japonés"
         }, {
             "id": 296,
-            "especie": 0,
-            "valor": "Springer spaniel galés"
+            "specie": 0,
+            "value": "Springer spaniel galés"
         }, {
             "id": 297,
-            "especie": 0,
-            "valor": "Springer Spaniel inglés"
+            "specie": 0,
+            "value": "Springer Spaniel inglés"
         }, {
             "id": 298,
-            "especie": 0,
-            "valor": "Staffordshire bull terrier"
+            "specie": 0,
+            "value": "Staffordshire bull terrier"
         }, {
             "id": 299,
-            "especie": 0,
-            "valor": "Sussex Spaniel"
+            "specie": 0,
+            "value": "Sussex Spaniel"
         }, {
             "id": 300,
-            "especie": 0,
-            "valor": "Teckel"
+            "specie": 0,
+            "value": "Teckel"
         }, {
             "id": 301,
-            "especie": 0,
-            "valor": "Terranova"
+            "specie": 0,
+            "value": "Terranova"
         }, {
             "id": 302,
-            "especie": 0,
-            "valor": "Terrier alemán"
+            "specie": 0,
+            "value": "Terrier alemán"
         }, {
             "id": 303,
-            "especie": 0,
-            "valor": "Terrier australiano"
+            "specie": 0,
+            "value": "Terrier australiano"
         }, {
             "id": 304,
-            "especie": 0,
-            "valor": "Terrier brasileño"
+            "specie": 0,
+            "value": "Terrier brasileño"
         }, {
             "id": 305,
-            "especie": 0,
-            "valor": "Terrier checo"
+            "specie": 0,
+            "value": "Terrier checo"
         }, {
             "id": 306,
-            "especie": 0,
-            "valor": "Terrier de Norfolk y Terrier de Norwich"
+            "specie": 0,
+            "value": "Terrier de Norfolk y Terrier de Norwich"
         }, {
             "id": 307,
-            "especie": 0,
-            "valor": "Terrier escocés"
+            "specie": 0,
+            "value": "Terrier escocés"
         }, {
             "id": 308,
-            "especie": 0,
-            "valor": "Terrier galés"
+            "specie": 0,
+            "value": "Terrier galés"
         }, {
             "id": 309,
-            "especie": 0,
-            "valor": "Terrier Glen de Imaal irlandés"
+            "specie": 0,
+            "value": "Terrier Glen de Imaal irlandés"
         }, {
             "id": 310,
-            "especie": 0,
-            "valor": "Terrier inglés miniatura"
+            "specie": 0,
+            "value": "Terrier inglés miniatura"
         }, {
             "id": 311,
-            "especie": 0,
-            "valor": "Terrier irlandés"
+            "specie": 0,
+            "value": "Terrier irlandés"
         }, {
             "id": 312,
-            "especie": 0,
-            "valor": "Terrier irlandés de pelo suave"
+            "specie": 0,
+            "value": "Terrier irlandés de pelo suave"
         }, {
             "id": 313,
-            "especie": 0,
-            "valor": "Terrier japonés"
+            "specie": 0,
+            "value": "Terrier japonés"
         }, {
             "id": 314,
-            "especie": 0,
-            "valor": "Terrier ruso negro"
+            "specie": 0,
+            "value": "Terrier ruso negro"
         }, {
             "id": 315,
-            "especie": 0,
-            "valor": "Terrier tibetano"
+            "specie": 0,
+            "value": "Terrier tibetano"
         }, {
             "id": 316,
-            "especie": 0,
-            "valor": "Tosa Inu"
+            "specie": 0,
+            "value": "Tosa Inu"
         }, {
             "id": 317,
-            "especie": 0,
-            "valor": "Vallhund sueco"
+            "specie": 0,
+            "value": "Vallhund sueco"
         }, {
             "id": 318,
-            "especie": 0,
-            "valor": "Vizsla"
+            "specie": 0,
+            "value": "Vizsla"
         }, {
             "id": 319,
-            "especie": 0,
-            "valor": "Volpino italiano"
+            "specie": 0,
+            "value": "Volpino italiano"
         }, {
             "id": 320,
-            "especie": 0,
-            "valor": "Westie"
+            "specie": 0,
+            "value": "Westie"
         }, {
             "id": 321,
-            "especie": 0,
-            "valor": "Whippet"
+            "specie": 0,
+            "value": "Whippet"
         }, {
             "id": 322,
-            "especie": 0,
-            "valor": "Xoloitzcuintle"
+            "specie": 0,
+            "value": "Xoloitzcuintle"
         }, {
             "id": 323,
-            "especie": 0,
-            "valor": "Yorkshire Terrier"
+            "specie": 0,
+            "value": "Yorkshire Terrier"
         }, {
             "id": 324,
-            "especie": 1,
-            "valor": "Abisinio"
+            "specie": 1,
+            "value": "Abisinio"
         }, {
             "id": 325,
-            "especie": 1,
-            "valor": "American Shorthair"
+            "specie": 1,
+            "value": "American Shorthair"
         }, {
             "id": 326,
-            "especie": 1,
-            "valor": "American Wirehair"
+            "specie": 1,
+            "value": "American Wirehair"
         }, {
             "id": 327,
-            "especie": 1,
-            "valor": "Angora turco"
+            "specie": 1,
+            "value": "Angora turco"
         }, {
             "id": 328,
-            "especie": 1,
-            "valor": "Azul ruso"
+            "specie": 1,
+            "value": "Azul ruso"
         }, {
             "id": 329,
-            "especie": 1,
-            "valor": "Balinés"
+            "specie": 1,
+            "value": "Balinés"
         }, {
             "id": 330,
-            "especie": 1,
-            "valor": "Bengala"
+            "specie": 1,
+            "value": "Bengala"
         }, {
             "id": 331,
-            "especie": 1,
-            "valor": "Birmano"
+            "specie": 1,
+            "value": "Birmano"
         }, {
             "id": 332,
-            "especie": 1,
-            "valor": "Bobtail Americano"
+            "specie": 1,
+            "value": "Bobtail Americano"
         }, {
             "id": 333,
-            "especie": 1,
-            "valor": "Bobtail japonés"
+            "specie": 1,
+            "value": "Bobtail japonés"
         }, {
             "id": 334,
-            "especie": 1,
-            "valor": "Bombay"
+            "specie": 1,
+            "value": "Bombay"
         }, {
             "id": 335,
-            "especie": 1,
-            "valor": "Bosque de Noruega"
+            "specie": 1,
+            "value": "Bosque de Noruega"
         }, {
             "id": 336,
-            "especie": 1,
-            "valor": "British Longhair"
+            "specie": 1,
+            "value": "British Longhair"
         }, {
             "id": 337,
-            "especie": 1,
-            "valor": "British Shorthair"
+            "specie": 1,
+            "value": "British Shorthair"
         }, {
             "id": 338,
-            "especie": 1,
-            "valor": "Burmilla"
+            "specie": 1,
+            "value": "Burmilla"
         }, {
             "id": 339,
-            "especie": 1,
-            "valor": "California Spangled"
+            "specie": 1,
+            "value": "California Spangled"
         }, {
             "id": 340,
-            "especie": 1,
-            "valor": "Californian Rex"
+            "specie": 1,
+            "value": "Californian Rex"
         }, {
             "id": 341,
-            "especie": 1,
-            "valor": "Cartujo"
+            "specie": 1,
+            "value": "Cartujo"
         }, {
             "id": 342,
-            "especie": 1,
-            "valor": "Ceilán"
+            "specie": 1,
+            "value": "Ceilán"
         }, {
             "id": 343,
-            "especie": 1,
-            "valor": "Chausie"
+            "specie": 1,
+            "value": "Chausie"
         }, {
             "id": 344,
-            "especie": 1,
-            "valor": "Cornish Rex"
+            "specie": 1,
+            "value": "Cornish Rex"
         }, {
             "id": 345,
-            "especie": 1,
-            "valor": "Curl americano"
+            "specie": 1,
+            "value": "Curl americano"
         }, {
             "id": 346,
-            "especie": 1,
-            "valor": "Cymric"
+            "specie": 1,
+            "value": "Cymric"
         }, {
             "id": 347,
-            "especie": 1,
-            "valor": "Devon Rex"
+            "specie": 1,
+            "value": "Devon Rex"
         }, {
             "id": 348,
-            "especie": 1,
-            "valor": "Don Sphynx"
+            "specie": 1,
+            "value": "Don Sphynx"
         }, {
             "id": 349,
-            "especie": 1,
-            "valor": "Exótico"
+            "specie": 1,
+            "value": "Exótico"
         }, {
             "id": 350,
-            "especie": 1,
-            "valor": "Gato común"
+            "specie": 1,
+            "value": "Gato común"
         }, {
             "id": 351,
-            "especie": 1,
-            "valor": "Gato común europeo"
+            "specie": 1,
+            "value": "Gato común europeo"
         }, {
             "id": 352,
-            "especie": 1,
-            "valor": "Gato esfinge"
+            "specie": 1,
+            "value": "Gato esfinge"
         }, {
             "id": 353,
-            "especie": 1,
-            "valor": "Gato Siberiano"
+            "specie": 1,
+            "value": "Gato Siberiano"
         }, {
             "id": 354,
-            "especie": 1,
-            "valor": "Gato Van turco"
+            "specie": 1,
+            "value": "Gato Van turco"
         }, {
             "id": 355,
-            "especie": 1,
-            "valor": "German Rex"
+            "specie": 1,
+            "value": "German Rex"
         }, {
             "id": 356,
-            "especie": 1,
-            "valor": "Habana Brown"
+            "specie": 1,
+            "value": "Habana Brown"
         }, {
             "id": 357,
-            "especie": 1,
-            "valor": "Highland Fold y Highland Straight"
+            "specie": 1,
+            "value": "Highland Fold y Highland Straight"
         }, {
             "id": 358,
-            "especie": 1,
-            "valor": "Himalayo"
+            "specie": 1,
+            "value": "Himalayo"
         }, {
             "id": 359,
-            "especie": 1,
-            "valor": "Javanés"
+            "specie": 1,
+            "value": "Javanés"
         }, {
             "id": 360,
-            "especie": 1,
-            "valor": "Khao Manee"
+            "specie": 1,
+            "value": "Khao Manee"
         }, {
             "id": 361,
-            "especie": 1,
-            "valor": "Korat"
+            "specie": 1,
+            "value": "Korat"
         }, {
             "id": 362,
-            "especie": 1,
-            "valor": "LaPerm"
+            "specie": 1,
+            "value": "LaPerm"
         }, {
             "id": 363,
-            "especie": 1,
-            "valor": "Maine Coon"
+            "specie": 1,
+            "value": "Maine Coon"
         }, {
             "id": 364,
-            "especie": 1,
-            "valor": "Manx"
+            "specie": 1,
+            "value": "Manx"
         }, {
             "id": 365,
-            "especie": 1,
-            "valor": "Mau egipcio"
+            "specie": 1,
+            "value": "Mau egipcio"
         }, {
             "id": 366,
-            "especie": 1,
-            "valor": "Munchkin"
+            "specie": 1,
+            "value": "Munchkin"
         }, {
             "id": 367,
-            "especie": 1,
-            "valor": "Nebelung"
+            "specie": 1,
+            "value": "Nebelung"
         }, {
             "id": 368,
-            "especie": 1,
-            "valor": "Ocicat"
+            "specie": 1,
+            "value": "Ocicat"
         }, {
             "id": 369,
-            "especie": 1,
-            "valor": "Oriental"
+            "specie": 1,
+            "value": "Oriental"
         }, {
             "id": 370,
-            "especie": 1,
-            "valor": "Persa"
+            "specie": 1,
+            "value": "Persa"
         }, {
             "id": 371,
-            "especie": 1,
-            "valor": "Persa Chinchilla"
+            "specie": 1,
+            "value": "Persa Chinchilla"
         }, {
             "id": 372,
-            "especie": 1,
-            "valor": "Peterbald"
+            "specie": 1,
+            "value": "Peterbald"
         }, {
             "id": 373,
-            "especie": 1,
-            "valor": "Pixie Bob"
+            "specie": 1,
+            "value": "Pixie Bob"
         }, {
             "id": 374,
-            "especie": 1,
-            "valor": "Ragamuffin"
+            "specie": 1,
+            "value": "Ragamuffin"
         }, {
             "id": 375,
-            "especie": 1,
-            "valor": "Ragdoll"
+            "specie": 1,
+            "value": "Ragdoll"
         }, {
             "id": 376,
-            "especie": 1,
-            "valor": "Safari"
+            "specie": 1,
+            "value": "Safari"
         }, {
             "id": 377,
-            "especie": 1,
-            "valor": "Sagrado de Birmania"
+            "specie": 1,
+            "value": "Sagrado de Birmania"
         }, {
             "id": 378,
-            "especie": 1,
-            "valor": "Savannah"
+            "specie": 1,
+            "value": "Savannah"
         }, {
             "id": 379,
-            "especie": 1,
-            "valor": "Scottish Fold"
+            "specie": 1,
+            "value": "Scottish Fold"
         }, {
             "id": 380,
-            "especie": 1,
-            "valor": "Selkirk Rex"
+            "specie": 1,
+            "value": "Selkirk Rex"
         }, {
             "id": 381,
-            "especie": 1,
-            "valor": "Siamés"
+            "specie": 1,
+            "value": "Siamés"
         }, {
             "id": 382,
-            "especie": 1,
-            "valor": "Siamés thai"
+            "specie": 1,
+            "value": "Siamés thai"
         }, {
             "id": 383,
-            "especie": 1,
-            "valor": "Singapura"
+            "specie": 1,
+            "value": "Singapura"
         }, {
             "id": 384,
-            "especie": 1,
-            "valor": "Snowshoe"
+            "specie": 1,
+            "value": "Snowshoe"
         }, {
             "id": 385,
-            "especie": 1,
-            "valor": "Sokoke"
+            "specie": 1,
+            "value": "Sokoke"
         }, {
             "id": 386,
-            "especie": 1,
-            "valor": "Somalí"
+            "specie": 1,
+            "value": "Somalí"
         }, {
             "id": 387,
-            "especie": 1,
-            "valor": "Tiffany"
+            "specie": 1,
+            "value": "Tiffany"
         }, {
             "id": 388,
-            "especie": 1,
-            "valor": "Tonkinés"
+            "specie": 1,
+            "value": "Tonkinés"
         }, {
             "id": 389,
-            "especie": 1,
-            "valor": "Toyger"
+            "specie": 1,
+            "value": "Toyger"
         }, {
             "id": 390,
-            "especie": 1,
-            "valor": "York Chocolate"
+            "specie": 1,
+            "value": "York Chocolate"
         }, {
             "id": 394,
-            "especie": 2,
-            "valor": "Hamster"
+            "specie": 2,
+            "value": "Hamster"
         }, {
             "id": 395,
-            "especie": 2,
-            "valor": "Chinchilla"
+            "specie": 2,
+            "value": "Chinchilla"
         }, {
             "id": 396,
-            "especie": 2,
-            "valor": "Jerbo"
+            "specie": 2,
+            "value": "Jerbo"
         }, {
             "id": 397,
-            "especie": 2,
-            "valor": "Rata"
+            "specie": 2,
+            "value": "Rata"
         }, {
             "id": 398,
-            "especie": 2,
-            "valor": "Ratón"
+            "specie": 2,
+            "value": "Ratón"
         }, {
             "id": 399,
-            "especie": 2,
-            "valor": "Ardilla"
+            "specie": 2,
+            "value": "Ardilla"
         }, {
             "id": 400,
-            "especie": 2,
-            "valor": "Cobaya"
+            "specie": 2,
+            "value": "Cobaya"
         }, {
             "id": 401,
-            "especie": 2,
-            "valor": "Degús"
+            "specie": 2,
+            "value": "Degús"
         }, {
             "id": 402,
-            "especie": 2,
-            "valor": "Lirón"
+            "specie": 2,
+            "value": "Lirón"
         }, {
             "id": 403,
-            "especie": 3,
-            "valor": "Angora"
+            "specie": 3,
+            "value": "Angora"
         }, {
             "id": 404,
-            "especie": 3,
-            "valor": "Belier"
+            "specie": 3,
+            "value": "Belier"
         }, {
             "id": 404,
-            "especie": 3,
-            "valor": "Hotot"
+            "specie": 3,
+            "value": "Hotot"
         }, {
             "id": 405,
-            "especie": 3,
-            "valor": "Holandes/toy"
+            "specie": 3,
+            "value": "Holandes/toy"
         }, {
             "id": 404,
-            "especie": 4,
-            "valor": "Hurón"
+            "specie": 4,
+            "value": "Hurón"
         }, {
             "id": 405,
-            "especie": 5,
-            "valor": "Iguana"
+            "specie": 5,
+            "value": "Iguana"
         }, {
             "id": 406,
-            "especie": 5,
-            "valor": "Camaleón"
+            "specie": 5,
+            "value": "Camaleón"
         }, {
             "id": 407,
-            "especie": 5,
-            "valor": "Geco"
+            "specie": 5,
+            "value": "Geco"
         }, {
             "id": 408,
-            "especie": 5,
-            "valor": "Tortuga"
+            "specie": 5,
+            "value": "Tortuga"
         }, {
             "id": 409,
-            "especie": 5,
-            "valor": "Serpiente"
+            "specie": 5,
+            "value": "Serpiente"
         }, {
             "id": 410,
-            "especie": 5,
-            "valor": "Rana"
+            "specie": 5,
+            "value": "Rana"
         }, {
             "id": 411,
-            "especie": 6,
-            "valor": "Agaporni Fisher"
+            "specie": 6,
+            "value": "Agaporni Fisher"
         }, {
             "id": 412,
-            "especie": 6,
-            "valor": "Agaporni Personata"
+            "specie": 6,
+            "value": "Agaporni Personata"
         }, {
             "id": 413,
-            "especie": 6,
-            "valor": "Agaporni Roseicolli"
+            "specie": 6,
+            "value": "Agaporni Roseicolli"
         }, {
             "id": 414,
-            "especie": 6,
-            "valor": "Loro Yaco"
+            "specie": 6,
+            "value": "Loro Yaco"
         }, {
             "id": 415,
-            "especie": 6,
-            "valor": "Loro Guacamayo"
+            "specie": 6,
+            "value": "Loro Guacamayo"
         }, {
             "id": 416,
-            "especie": 6,
-            "valor": "Cacatua"
+            "specie": 6,
+            "value": "Cacatua"
         }, {
             "id": 417,
-            "especie": 6,
-            "valor": "Ninfa"
+            "specie": 6,
+            "value": "Ninfa"
         }, {
             "id": 418,
-            "especie": 6,
-            "valor": "Periquito"
+            "specie": 6,
+            "value": "Periquito"
         }, {
             "id": 419,
-            "especie": 6,
-            "valor": "Diamante Mandarin"
+            "specie": 6,
+            "value": "Diamante Mandarin"
         }, {
             "id": 420,
-            "especie": 6,
-            "valor": "Canario"
+            "specie": 6,
+            "value": "Canario"
         }, {
             "id": 421,
-            "especie": 6,
-            "valor": "Gallina"
+            "specie": 6,
+            "value": "Gallina"
         }, {
             "id": 422,
-            "especie": 7,
-            "valor": "Akhal-Teke"
+            "specie": 7,
+            "value": "Akhal-Teke"
         }, {
             "id": 423,
-            "especie": 7,
-            "valor": "Apaloosa"
+            "specie": 7,
+            "value": "Apaloosa"
         }, {
             "id": 424,
-            "especie": 7,
-            "valor": "AraApaloosa"
+            "specie": 7,
+            "value": "AraApaloosa"
         }, {
             "id": 425,
-            "especie": 7,
-            "valor": "Árabe"
+            "specie": 7,
+            "value": "Árabe"
         }, {
             "id": 426,
-            "especie": 7,
-            "valor": "Árabe-portugués"
+            "specie": 7,
+            "value": "Árabe-portugués"
         }, {
             "id": 427,
-            "especie": 7,
-            "valor": "Asturcón"
+            "specie": 7,
+            "value": "Asturcón"
         }, {
             "id": 428,
-            "especie": 7,
-            "valor": "Aveliñés"
+            "specie": 7,
+            "value": "Aveliñés"
         }, {
             "id": 429,
-            "especie": 7,
-            "valor": "Azteca"
+            "specie": 7,
+            "value": "Azteca"
         }, {
             "id": 430,
-            "especie": 7,
-            "valor": "Albino"
+            "specie": 7,
+            "value": "Albino"
         }, {
             "id": 431,
-            "especie": 7,
-            "valor": "Alter Real"
+            "specie": 7,
+            "value": "Alter Real"
         }, {
             "id": 432,
-            "especie": 7,
-            "valor": "AngloArgentino"
+            "specie": 7,
+            "value": "AngloArgentino"
         }, {
             "id": 433,
-            "especie": 7,
-            "valor": "Bardigiano"
+            "specie": 7,
+            "value": "Bardigiano"
         }, {
             "id": 434,
-            "especie": 7,
-            "valor": "Bereber"
+            "specie": 7,
+            "value": "Bereber"
         }, {
             "id": 435,
-            "especie": 7,
-            "valor": "Bretón"
+            "specie": 7,
+            "value": "Bretón"
         }, {
             "id": 436,
-            "especie": 7,
-            "valor": "Buckskin"
+            "specie": 7,
+            "value": "Buckskin"
         }, {
             "id": 437,
-            "especie": 7,
-            "valor": "Budyonny"
+            "specie": 7,
+            "value": "Budyonny"
         }, {
             "id": 438,
-            "especie": 7,
-            "valor": "Basuto"
+            "specie": 7,
+            "value": "Basuto"
         }, {
             "id": 439,
-            "especie": 7,
-            "valor": "Caballo Altái"
+            "specie": 7,
+            "value": "Caballo Altái"
         }, {
             "id": 440,
-            "especie": 7,
-            "valor": "Caballo andaluz"
+            "specie": 7,
+            "value": "Caballo andaluz"
         }, {
             "id": 441,
-            "especie": 7,
-            "valor": "Caballo de las retuertas"
+            "specie": 7,
+            "value": "Caballo de las retuertas"
         }, {
             "id": 442,
-            "especie": 7,
-            "valor": "Caballo de las Murgues"
+            "specie": 7,
+            "value": "Caballo de las Murgues"
         }, {
             "id": 443,
-            "especie": 7,
-            "valor": "Caballo de Merens"
+            "specie": 7,
+            "value": "Caballo de Merens"
         }, {
             "id": 444,
-            "especie": 7,
-            "valor": "Caballo de los Outer Banks"
+            "specie": 7,
+            "value": "Caballo de los Outer Banks"
         }, {
             "id": 445,
-            "especie": 7,
-            "valor": "Caballo ibérico"
+            "specie": 7,
+            "value": "Caballo ibérico"
         }, {
             "id": 446,
-            "especie": 7,
-            "valor": "Caballo de polo"
+            "specie": 7,
+            "value": "Caballo de polo"
         }, {
             "id": 447,
-            "especie": 7,
-            "valor": "Caballo de pura raza gallega"
+            "specie": 7,
+            "value": "Caballo de pura raza gallega"
         }, {
             "id": 448,
-            "especie": 7,
-            "valor": "Caballo catalán"
+            "specie": 7,
+            "value": "Caballo catalán"
         }, {
             "id": 449,
-            "especie": 7,
-            "valor": "Caballo mallorquín"
+            "specie": 7,
+            "value": "Caballo mallorquín"
         }, {
             "id": 450,
-            "especie": 7,
-            "valor": "Caballo marismeño"
+            "specie": 7,
+            "value": "Caballo marismeño"
         }, {
             "id": 451,
-            "especie": 7,
-            "valor": "Caballo Marwari"
+            "specie": 7,
+            "value": "Caballo Marwari"
         }, {
             "id": 452,
-            "especie": 7,
-            "valor": "Caballo menorquín"
+            "specie": 7,
+            "value": "Caballo menorquín"
         }, {
             "id": 453,
-            "especie": 7,
-            "valor": "Caballo morab"
+            "specie": 7,
+            "value": "Caballo morab"
         }, {
             "id": 454,
-            "especie": 7,
-            "valor": "Chileno"
+            "specie": 7,
+            "value": "Chileno"
         }, {
             "id": 455,
-            "especie": 7,
-            "valor": "Chilote"
+            "specie": 7,
+            "value": "Chilote"
         }, {
             "id": 456,
-            "especie": 7,
-            "valor": "Criollo Colombiano"
+            "specie": 7,
+            "value": "Criollo Colombiano"
         }, {
             "id": 457,
-            "especie": 7,
-            "valor": "Caballo Costarricense de Paso"
+            "specie": 7,
+            "value": "Caballo Costarricense de Paso"
         }, {
             "id": 458,
-            "especie": 7,
-            "valor": "Caballo criollo"
+            "specie": 7,
+            "value": "Caballo criollo"
         }, {
             "id": 459,
-            "especie": 7,
-            "valor": "Camargués"
+            "specie": 7,
+            "value": "Camargués"
         }, {
             "id": 460,
-            "especie": 7,
-            "valor": "Darashouri"
+            "specie": 7,
+            "value": "Darashouri"
         }, {
             "id": 461,
-            "especie": 7,
-            "valor": "Don"
+            "specie": 7,
+            "value": "Don"
         }, {
             "id": 462,
-            "especie": 7,
-            "valor": "Dülmener Wildpferd"
+            "specie": 7,
+            "value": "Dülmener Wildpferd"
         }, {
             "id": 463,
-            "especie": 7,
-            "valor": "Falabella"
+            "specie": 7,
+            "value": "Falabella"
         }, {
             "id": 464,
-            "especie": 7,
-            "valor": "Francés de silla"
+            "specie": 7,
+            "value": "Francés de silla"
         }, {
             "id": 465,
-            "especie": 7,
-            "valor": "Freiberg"
+            "specie": 7,
+            "value": "Freiberg"
         }, {
             "id": 466,
-            "especie": 7,
-            "valor": "Frisón"
+            "specie": 7,
+            "value": "Frisón"
         }, {
             "id": 467,
-            "especie": 7,
-            "valor": "Gelder"
+            "specie": 7,
+            "value": "Gelder"
         }, {
             "id": 468,
-            "especie": 7,
-            "valor": "Gotland"
+            "specie": 7,
+            "value": "Gotland"
         }, {
             "id": 469,
-            "especie": 7,
-            "valor": "Hackney"
+            "specie": 7,
+            "value": "Hackney"
         }, {
             "id": 470,
-            "especie": 7,
-            "valor": "Haflinger"
+            "specie": 7,
+            "value": "Haflinger"
         }, {
             "id": 471,
-            "especie": 7,
-            "valor": "Hannoveriano"
+            "specie": 7,
+            "value": "Hannoveriano"
         }, {
             "id": 472,
-            "especie": 7,
-            "valor": "Holstein"
+            "specie": 7,
+            "value": "Holstein"
         }, {
             "id": 473,
-            "especie": 7,
-            "valor": "Iberoamericano"
+            "specie": 7,
+            "value": "Iberoamericano"
         }, {
             "id": 474,
-            "especie": 7,
-            "valor": "Irish Cob"
+            "specie": 7,
+            "value": "Irish Cob"
         }, {
             "id": 475,
-            "especie": 7,
-            "valor": "Irish Hunter"
+            "specie": 7,
+            "value": "Irish Hunter"
         }, {
             "id": 476,
-            "especie": 7,
-            "valor": "Islandés"
+            "specie": 7,
+            "value": "Islandés"
         }, {
             "id": 477,
-            "especie": 7,
-            "valor": "Jaca navarra"
+            "specie": 7,
+            "value": "Jaca navarra"
         }, {
             "id": 478,
-            "especie": 7,
-            "valor": "Jomud"
+            "specie": 7,
+            "value": "Jomud"
         }, {
             "id": 479,
-            "especie": 7,
-            "valor": "Karabakh"
+            "specie": 7,
+            "value": "Karabakh"
         }, {
             "id": 480,
-            "especie": 7,
-            "valor": "Kentucky mountain"
+            "specie": 7,
+            "value": "Kentucky mountain"
         }, {
             "id": 481,
-            "especie": 7,
-            "valor": "Kustanair"
+            "specie": 7,
+            "value": "Kustanair"
         }, {
             "id": 482,
-            "especie": 7,
-            "valor": "Konik"
+            "specie": 7,
+            "value": "Konik"
         }, {
             "id": 483,
-            "especie": 7,
-            "valor": "Lipizzano"
+            "specie": 7,
+            "value": "Lipizzano"
         }, {
             "id": 484,
-            "especie": 7,
-            "valor": "Lokai"
+            "specie": 7,
+            "value": "Lokai"
         }, {
             "id": 485,
-            "especie": 7,
-            "valor": "Losino"
+            "specie": 7,
+            "value": "Losino"
         }, {
             "id": 486,
-            "especie": 7,
-            "valor": "Monchino"
+            "specie": 7,
+            "value": "Monchino"
         }, {
             "id": 487,
-            "especie": 7,
-            "valor": "Mongol"
+            "specie": 7,
+            "value": "Mongol"
         }, {
             "id": 488,
-            "especie": 7,
-            "valor": "Morab"
+            "specie": 7,
+            "value": "Morab"
         }, {
             "id": 489,
-            "especie": 7,
-            "valor": "Morgan Horse"
+            "specie": 7,
+            "value": "Morgan Horse"
         }, {
             "id": 490,
-            "especie": 7,
-            "valor": "Mustang"
+            "specie": 7,
+            "value": "Mustang"
         }, {
             "id": 491,
-            "especie": 7,
-            "valor": "Nonius"
+            "specie": 7,
+            "value": "Nonius"
         }, {
             "id": 492,
-            "especie": 7,
-            "valor": "Oldenburgues"
+            "specie": 7,
+            "value": "Oldenburgues"
         }, {
             "id": 493,
-            "especie": 7,
-            "valor": "Palomino"
+            "specie": 7,
+            "value": "Palomino"
         }, {
             "id": 494,
-            "especie": 7,
-            "valor": "Pura Raza Paso Fino"
+            "specie": 7,
+            "value": "Pura Raza Paso Fino"
         }, {
             "id": 495,
-            "especie": 7,
-            "valor": "Caballo Peruano de Paso (CPP)"
+            "specie": 7,
+            "value": "Caballo Peruano de Paso (CPP)"
         }, {
             "id": 496,
-            "especie": 7,
-            "valor": "Percherón"
+            "specie": 7,
+            "value": "Percherón"
         }, {
             "id": 497,
-            "especie": 7,
-            "valor": "Piebald"
+            "specie": 7,
+            "value": "Piebald"
         }, {
             "id": 498,
-            "especie": 7,
-            "valor": "Pinto"
+            "specie": 7,
+            "value": "Pinto"
         }, {
             "id": 499,
-            "especie": 7,
-            "valor": "Pottoka"
+            "specie": 7,
+            "value": "Pottoka"
         }, {
             "id": 500,
-            "especie": 7,
-            "valor": "Petramo"
+            "specie": 7,
+            "value": "Petramo"
         }, {
             "id": 501,
-            "especie": 7,
-            "valor": "Przewalski"
+            "specie": 7,
+            "value": "Przewalski"
         }, {
             "id": 502,
-            "especie": 7,
-            "valor": "Quarter Horse"
+            "specie": 7,
+            "value": "Quarter Horse"
         }, {
             "id": 503,
-            "especie": 7,
-            "valor": "Rocky Mountain Horse"
+            "specie": 7,
+            "value": "Rocky Mountain Horse"
         }, {
             "id": 504,
-            "especie": 7,
-            "valor": "Salernitano"
+            "specie": 7,
+            "value": "Salernitano"
         }, {
             "id": 505,
-            "especie": 7,
-            "valor": "San Fratelano"
+            "specie": 7,
+            "value": "San Fratelano"
         }, {
             "id": 506,
-            "especie": 7,
-            "valor": "Poni de Shetland"
+            "specie": 7,
+            "value": "Poni de Shetland"
         }, {
             "id": 507,
-            "especie": 7,
-            "valor": "Silla americano"
+            "specie": 7,
+            "value": "Silla americano"
         }, {
             "id": 508,
-            "especie": 7,
-            "valor": "Tennessee Walking"
+            "specie": 7,
+            "value": "Tennessee Walking"
         }, {
             "id": 509,
-            "especie": 7,
-            "valor": "Tersk"
+            "specie": 7,
+            "value": "Tersk"
         }, {
             "id": 510,
-            "especie": 7,
-            "valor": "Tinker"
+            "specie": 7,
+            "value": "Tinker"
         }, {
             "id": 511,
-            "especie": 7,
-            "valor": "Torik"
+            "specie": 7,
+            "value": "Torik"
         }, {
             "id": 512,
-            "especie": 7,
-            "valor": "Trakehner"
+            "specie": 7,
+            "value": "Trakehner"
         }, {
             "id": 513,
-            "especie": 7,
-            "valor": "Ucraniano"
+            "specie": 7,
+            "value": "Ucraniano"
         }, {
             "id": 514,
-            "especie": 7,
-            "valor": "Waler"
+            "specie": 7,
+            "value": "Waler"
         },
         //Mestizos
         {
             "id": 515,
-            "especie":0,
-            "valor":"Mestizo"
+            "specie":0,
+            "value":"Mestizo"
         },
         {
             "id": 515,
-            "especie":1,
-            "valor":"Mestizo"
+            "specie":1,
+            "value":"Mestizo"
         },
         {
             "id": 515,
-            "especie":2,
-            "valor":"Mestizo"
+            "specie":2,
+            "value":"Mestizo"
         },
         {
             "id": 515,
-            "especie":3,
-            "valor":"Mestizo"
+            "specie":3,
+            "value":"Mestizo"
         },
         {
             "id": 515,
-            "especie":4,
-            "valor":"Mestizo"
+            "specie":4,
+            "value":"Mestizo"
         },
         {
             "id": 515,
-            "especie":5,
-            "valor":"Mestizo"
+            "specie":5,
+            "value":"Mestizo"
         },
         {
             "id": 515,
-            "especie":6,
-            "valor":"Mestizo"
+            "specie":6,
+            "value":"Mestizo"
         },
         {
             "id": 515,
-            "especie":7,
-            "valor":"Mestizo"
+            "specie":7,
+            "value":"Mestizo"
         },
     ];
-    const raza = razas.filter((raza)=>{
-       return raza.especie===id
+    const result = racesList.filter((race)=>{
+       return race.specie===id
     });
 
-    callback(null,raza);
+    callback(null,result);
 }
 
-export const getGenero = function (callback){
-    // getListas ('genero',callback);
+export const getGenre = function (callback){
+    // getLists ('genero',callback);
     callback(null,[
         {
             "id": "M",
-            "valor": "Macho"
+            "value": "Macho"
         },{
             "id": "H",
-            "valor": "Hembra"
+            "value": "Hembra"
         }
     ]);
 }
