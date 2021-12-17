@@ -1,24 +1,20 @@
-const { models: { User } } = require ('../nts-data')
+const { models: { User } } = require('../nts-data')
 const { validateId } = require('./helpers/validators')
 const { NotFoundError } = require('../nts-errors')
+const { sanitizeUser } = require('./helpers/sanitizers')
 
 function retrieveUser(id) {
     validateId(id)
 
-    return User.findById(id).lean()
-        .then(user => {
-            if (!user) throw new NotFoundError(`user with id ${id} not found`)
-        
-            user.id = user._id.toString()
+    return (async () => {
+        const user = await User.findById(id).lean()
 
-            delete user._id
-            
-            delete user.password
+        if (!user) throw new NotFoundError(`user with id ${id} not found`)
 
-            delete user.__v
+        sanitizeUser(user)
 
-            return user
-        })
+        return user
+    })()
 }
 
 module.exports = retrieveUser

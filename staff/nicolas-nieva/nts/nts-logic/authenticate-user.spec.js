@@ -4,6 +4,7 @@ const { expect } = require('chai')
 const authenticateUser = require('./authenticate-user')
 const { mongoose, models: { User } } = require('../nts-data')
 const { CredentialsError, FormatError } = require('../nts-errors')
+const bcrypt = require ('bcryptjs')
 
 const { env: { MONGO_URL } } = process
 
@@ -14,61 +15,73 @@ describe('authenticateUser', () => {
 
     let user, userId
 
-    beforeEach(() => {
+    beforeEach(async () => {
         user = {
             name: 'Wendy Pan',
             username: 'wendypan',
-            password: '123123123'
+            password: '123123123',
+            address: 'joan pol 35',
+            location: 'Barcelona',
+            province: 'Barcelona',
+            email: 'asd@asd.com',
+            phone: 644830315
         }
 
-        return User.create(user)
-            .then(user => userId = user.id)
+        const user2 = await User.create ({ ...user, password: bcrypt.hashSync(user.password) })
+
+        userId = user2.id
+
     })
 
-    it('should succeed with correct credentials for an already existing user', () => {
+    it('should succeed with correct credentials for an already existing user', async () => {
         const { username, password } = user
 
-        return authenticateUser(username, password)
-            .then(id => {
+        id = await authenticateUser(username, password)
+
                 expect(id).to.exist
                 expect(id).to.equal(userId)
             })
-    })
 
-    it('should fail with incorrect password', () => {
+    it('should fail with incorrect password', async () => {
         const { username, password } = user
 
-        return authenticateUser(username, password + '-wrong,')
-            .then(() => { throw new Error('should not reach this point') })
-            .catch(error => {
+        try {
+            await authenticateUser(username, password + '-wrong,')
+            
+            throw new Error('should not reach this point')
+        }catch(error) {
                 expect(error).to.exist
                 expect(error).to.be.instanceOf(CredentialsError)
                 expect(error.message).to.equal('wrong credentials')
-            })
+            }
     })
 
-    it('should fail with incorrect username', () => {
+    it('should fail with incorrect username', async () => {
         const { username, password } = user
 
-        return authenticateUser(username + '-wrong', password)
-            .then(() => { throw new Error('should not reach this point') })
-            .catch(error => {
+        try {
+            await authenticateUser(username + '-wrong,', password )
+            
+            throw new Error('should not reach this point')
+        } catch(error) {
                 expect(error).to.exist
                 expect(error).to.be.instanceOf(CredentialsError)
                 expect(error.message).to.equal('wrong credentials')
-            })
+            }
     })
 
-    it('should fail with incorrect username and password', () => {
+    it('should fail with incorrect username and password', async () => {
         const { username, password } = user
 
-        return authenticateUser(username + '-wrong', password + '-wrong')
-        .then(() => { throw new Error('should not reach this point') })
-        .catch(error => {
-            expect(error).to.exist
-            expect(error).to.be.instanceOf(CredentialsError)
-            expect(error.message).to.equal ('wrong credentials')
-        })
+        try {
+            await authenticateUser(username + '-wrong,', password + '-wrong')
+            
+            throw new Error('should not reach this point')
+        } catch(error) {
+                expect(error).to.exist
+                expect(error).to.be.instanceOf(CredentialsError)
+                expect(error.message).to.equal('wrong credentials')
+            }
     })
 
     describe('when parameters are not valid', () => {
@@ -98,7 +111,7 @@ describe('authenticateUser', () => {
             })
 
             it('should fail when username length is less that 4 characters', () => {
-                expect(() => authenticateUser('wp', '123123123', () => { })).to.throw(FormatError, 'username has less than 4 characters')
+                expect(() => authenticateUser('wp', '123123123', () => { })).to.throw(FormatError, 'username has less than 6 characters')
             })
         })
 
@@ -131,6 +144,36 @@ describe('authenticateUser', () => {
                 expect(() => authenticateUser('wendypan', '123123', () => { })).to.throw(FormatError, 'password has less than 8 characters')
             })
         })
+       
+        // describe('when location is not valid', () => {
+        //     it('should fail when location is not a string', () => {
+        //         expect(() => authenticateUser(true, '123123123', () => { })).to.throw(TypeError, 'location is not a string')
+
+        //         expect(() => authenticateUser(123, '123123123', () => { })).to.throw(TypeError, 'location is not a string')
+
+        //         expect(() => authenticateUser({}, '123123123', () => { })).to.throw(TypeError, 'location is not a string')
+
+        //         expect(() => authenticateUser(() => { }, '123123123', () => { })).to.throw(TypeError, 'location is not a string')
+
+        //         expect(() => authenticateUser([], '123123123', () => { })).to.throw(TypeError, 'location is not a string')
+        //     })
+
+        //     // it('should fail when location is empty', () => {
+        //     //     expect(() => authenticateUser('', '123123123', () => { })).to.throw(FormatError, 'location is empty or blank')
+
+        //     //     expect(() => authenticateUser('   ', '123123123', () => { })).to.throw(FormatError, 'location is empty or blank')
+        //     // })
+
+        //     // it('should fail when location has spaces', () => {
+        //     //     expect(() => authenticateUser(' wendypan ', '123123123', () => { })).to.throw(FormatError, 'location has blank spaces')
+
+        //     //     expect(() => authenticateUser('wendy pan', '123123123', () => { })).to.throw(FormatError, 'location has blank spaces')
+        //     // })
+
+        //     // it('should fail when location length is less that 4 characters', () => {
+        //     //     expect(() => authenticateUser('wp', '123123123', () => { })).to.throw(FormatError, 'location has less than 4 characters')
+        //     // })
+        // })
     })
 
     after(() => 

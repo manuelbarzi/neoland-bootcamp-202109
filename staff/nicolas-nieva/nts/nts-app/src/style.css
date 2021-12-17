@@ -1,0 +1,182 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+/* resets */
+
+* {
+    /* border: 1px dashed black; */
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+body {
+	margin: 0;
+	width: 100%;
+	height: 100vh;
+font-family: 'Bebas Neue', ;
+	
+	color: #fff;
+	background: linear-gradient(-45deg, #4A61E0, #4FCDC4, #C7B2F7, #F39C12);
+	background-size: 400% 400%;
+	animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+/* compos */
+
+/* .button {
+    border-radius: 20px;
+    border-style: solid;
+    border-width: 1px;
+    margin: 5px;
+    padding: 10px;
+    background-color: transparent;
+    font-size: 1rem;
+    cursor: pointer;
+} */
+
+.button:hover {
+    letter-spacing: 0.8em;
+    background-color:#4FCDC4;
+  }
+  
+  .button {
+    color: white;
+  }
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    border-width: 1px;
+    margin: 5px;
+    padding: 10px;
+    font-size: 0.5rem;
+    height: 5em;
+    width: 60%;
+    padding: 1.0em auto;
+    padding: 10px;
+    margin: 1em auto;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: none;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    transition: all 0.4s cubic-bezier(.4,0,.2,1);
+   
+  }
+
+  .welcome {
+    width: 9ch;
+    animation: typing 2s steps(9), blink .5s step-end infinite alternate;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid;
+    font-family: monospace;
+    font-size: 2em;
+  }
+  .center_welcome {
+    height: 20vh;
+    /*This part is important for centering*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0
+    }
+  }
+      
+  @keyframes blink {
+    50% {
+      border-color: transparent
+    }
+  }
+
+.button--medium {
+    min-width: 7.5rem;
+}
+
+.field {
+    border-radius: 6px;
+    border-style:groove;
+    border-width: 1px;
+    margin: 5px;
+    padding: 10px;
+    background-color: transparent;
+    font-size: 0.8rem;
+    font-family:monospace;
+    box-shadow: inset 3px 3px 7px #4A61E0, inset -3px -3px 7px #C7B2F7;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.container--vertical {
+    flex-direction: column;
+}
+
+.container--gapped {
+    margin: 1rem;
+}
+
+.container--full {
+    height: 100%;
+}
+
+.spinner__image {
+    width: 10vw;
+    height: 10vw;
+}
+
+.home__results {
+    list-style: none;
+}
+
+.home__result {
+    cursor: pointer;
+}
+
+.home__detail-image {
+    max-width: 80vw;
+}
+
+.gridi {
+
+  display: grid;
+    grid-template-columns: repeat(auto-fit minmax(200, 1fr));
+
+}
+
+li {
+      
+    display: block;
+    cursor: pointer;
+    border-style: solid;
+    list-style: none;
+}

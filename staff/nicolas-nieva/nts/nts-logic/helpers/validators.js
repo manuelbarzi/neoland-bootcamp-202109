@@ -1,4 +1,5 @@
 const { FormatError, ConflictError } = require('../../nts-errors')
+const { models: { User, Reservation } } = require('./../../nts-data')
 
 function validateId(id) {
     if (typeof id !== 'string') throw new TypeError('id is not a string')
@@ -11,7 +12,7 @@ function validateUsername(username) {
     if (typeof username !== 'string') throw new TypeError('username is not a string')
     if (!username.trim().length) throw new FormatError('username is empty or blank')
     if (/\r?\n|\r|\t| /g.test(username)) throw new FormatError('username has blank spaces')
-    if (username.length < 4) throw new FormatError('username has less than 4 characters')
+    if (username.length < 6) throw new FormatError('username has less than 6 characters')
 }
 
 function validatePassword(password) {
@@ -32,6 +33,39 @@ function validateName(name) {
     if (typeof name !== 'string') throw new TypeError('name is not a string')
     if (!name.trim().length) throw new FormatError('name is empty or blank')
     if (name.trim() !== name) throw new FormatError('blank spaces around name')
+}
+
+function validateMail (email) {
+    if (email.trim() !== email) throw new Error('email spaces around name')
+    // if (/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g.test(email)) throw new FormatError('email is not correct')
+}
+
+function validateText(text) {
+    if (typeof text !== 'string') throw new TypeError('text is not a string')
+    if (!text.trim().length) throw new FormatError('text is empty or blank')
+}
+
+function validatePhone(phone) {
+    if (typeof phone !== 'number') throw new TypeError('phone is not a number')
+    if (phone === '') throw new FormatError('phone is empty or blank')
+}
+
+function validateAddress(address) {
+    if (typeof address !== 'string') throw new TypeError('address is not a string')
+    if (!address.trim().length) throw new FormatError('address is empty or blank')
+    if (address.trim() !== address) throw new FormatError('blank spaces around address')
+}
+
+function validateProvince(province) {
+    if (typeof province !== 'string') throw new TypeError('province is not a string')
+    if (!province.trim().length) throw new FormatError('province is empty or blank')
+    if (province.trim() !== province) throw new FormatError('blank spaces around province')
+}
+
+function validateLocation(location) {
+    if (typeof location !== 'string') throw new TypeError('location is not a string')
+    if (!location.trim().length) throw new FormatError('location is empty or blank')
+    if (location.trim() !== location) throw new FormatError('blank spaces around location')
 }
 
 function validateData(data) {
@@ -59,9 +93,17 @@ function validateData(data) {
     }
 }
 
-function validateCallback(callback) {
-    if (typeof callback !== 'function') throw new TypeError('callback is not a function')
+const checkIfUserExist = async (userId) => {
+    const user = (await User.findById ({_id: userId}))
+    if (!user) throw new NotFoundError (`user with id ${userId} not found`)
 }
+
+const checkIfUserExistInReservation = async (userId, reservationId) => {
+        const reservation = await Reservation.findById ({_id: reservationId})
+        if (!reservation) throw new NotFoundError (`reservation with id ${reservationId} not found`)
+        if (!(reservation.agency === userId)) throw new NotFoundError (`user with id ${userId} not found`)}
+
+
 
 module.exports = {
     validateId,
@@ -70,5 +112,10 @@ module.exports = {
     validateOldPassword,
     validateData,
     validateName,
-    validateCallback
+    validateMail,
+    validatePhone,
+    validateAddress,
+    validateProvince,
+    validateLocation,
+    validateText
 }

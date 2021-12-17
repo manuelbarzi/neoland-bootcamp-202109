@@ -1,20 +1,19 @@
-const { unregisterUser } = require('users')
+const { unregisterUser } = require('./../../nts-logic')
 const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
-const handleError = require('./helpers/handle-error')
+const { handleError, validateAuthorizationAndExtractPayload } = require('./helpers')
 
-module.exports = (req, res) => {
+
+module.exports = async (req, res) => {
 
     const { headers: { authorization }, body: { password } } = req
     try {
-        const [, token] = authorization.split(' ')
-        const { sub: id } = jwt.verify(token, SECRET)
+        const { sub: id } = validateAuthorizationAndExtractPayload(authorization)
 
-        unregisterUser(id, password)
-            .then(() => res.status(201).send())
-            .catch(error => handleError(error, res))
-
-    } catch (error) {
+       await unregisterUser(id, password)
+           res.status(201).send()
+          
+        } catch (error) {
         handleError(error, res)
     }
 }

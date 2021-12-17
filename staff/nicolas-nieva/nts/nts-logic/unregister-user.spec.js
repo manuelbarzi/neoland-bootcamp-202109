@@ -5,20 +5,25 @@ const unregisterUser = require('./unregister-user')
 const { mongoose, models: { User } } = require('../nts-data')
 const { CredentialsError, FormatError, NotFoundError } = require('../nts-errors')
 const { Types: { ObjectId } } = mongoose
-const { env: { MONGO_URL} } = process
+const { env: { MONGO_URL } } = process
 
-describe('unregisterUser', () => {
-    before(() => mongoose.connect( MONGO_URL))
+describe.only('unregisterUser', () => {
+    before(() => mongoose.connect(MONGO_URL))
 
     beforeEach(() => User.deleteMany())
-    
+
     let user, userId
 
     beforeEach(() => {
         user = {
             name: 'Wendy Pan',
             username: 'wendypan',
-            password: '123123123'
+            password: '123123123',
+            address: 'joan pol 35',
+            location: 'Barcelona',
+            province: 'Barcelona',
+            email: 'asd@asd.com',
+            phone: 644830315
         }
 
         return User.create(user)
@@ -30,7 +35,6 @@ describe('unregisterUser', () => {
 
         it('Should succeed when user is deleted from data base', () => {
             const { password } = user
-        debugger
             return unregisterUser(userId, password)
                 .then(response => {
                     expect(response).to.equal('User deleted successfully')

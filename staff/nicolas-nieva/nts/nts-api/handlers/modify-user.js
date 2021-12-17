@@ -1,43 +1,16 @@
-const { modifyUser } = require ('users')
-const jwt = require ('jsonwebtoken')
-const { NotFoundError, ConflictError, CredentialsError } = require('../../nts-errors')
-const { env: { SECRET } } = process
+const { modifyUser } = require('./../../nts-logic')
+const { handleError, validateAuthorizationAndExtractPayload } = require('../../nts-api/handlers/helpers')
 
-module.exports = (req, res) => {
-    
-const { headers: { authorization }, body: data } = req
+module.exports = async ( req, res) => {
 
-try {
-    const [, token] = authorization.split(' ')
+    const { headers: { authorization }, body:  data   } = req
 
-    const { sub: id } = jwt.verify(token, SECRET)
+    try {
+         const { sub: id } = validateAuthorizationAndExtractPayload(authorization)
 
-    modifyUser(id, data, function (error) {
-        if (error) {
-            const { message } = error
-            let status = 500
-
-            if (error instanceof NotFoundError)
-                status = 404
-            else if (error instanceof ConflictError)
-                status = 409
-            else if (error instanceof CredentialsError)
-                status = 401
-
-            return res.status(status).json({ error: error.message })
-        }
-
-        res.status(201).send()
-
-    })
-} catch (error) {
-    let status = 500
-
-    if (error instanceof TypeError || error instanceof FormatError)
-            status = 400
-        else if (error instanceof ConflictError)
-            status = 409
-
-        res.status(status).json({ error: error.message })
-}
+        await modifyUser(id, data)
+            res.status(204).send()
+    } catch (error) {
+        handleError(error, res)
+    }
 }

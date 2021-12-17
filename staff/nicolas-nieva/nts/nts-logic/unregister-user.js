@@ -1,32 +1,27 @@
-const { models: { User } } = require ('../nts-data')
+const { models: { User } } = require('../nts-data')
 const { NotFoundError, CredentialsError } = require('../nts-errors')
-const { validateId, validatePassword} = require('./helpers/validators')
+const { validateId, validatePassword } = require('./helpers/validators')
+const bcrypt = require('bcryptjs')
 
-/**
- * Unregistering a user in the application.
- * 
- * @param {string} token The token to authenticate the retrieve user.
- * @param {Object} user The password of the user to be unregistered.
- * @param {function} callback The callback function to manage the response.
- * 
- * @throws {TypeError} When any of the arguments does not match the correct type.
- * @throws {Error} When any of the arguments does not contain the correct format.
- */
-
-function unregisterUser(id, password){
+function unregisterUser(id, password) {
     validateId(id)
     validatePassword(password)
 
-    return User.findById(id) 
-        .then (user => {
-            if (!user) throw new NotFoundError(`user with id ${id} not found`)
-            if (user.password === password) {
-               return user.delete(id)
-               .then(()=> 'User deleted successfully') 
-            } 
-            else throw new CredentialsError ('Wrong password') 
+    return (async () => {
+        const user = await User.findById(id)
+        debugger
+        if (!user) throw new NotFoundError(`user with id ${id} not found`)
 
-        })    
+        // Si el password que pasamos por parametro es igual password del usuario encontrado entonces eliminMOA AL USUARIO
+        if (bcrypt.compareSync(password, user.password)) {
+
+            await user.delete(id)
+
+            return ('User deleted successfully')
+        }
+        else {
+          throw new CredentialsError('Wrong password')
+        }
+    })()
 }
-
 module.exports = unregisterUser

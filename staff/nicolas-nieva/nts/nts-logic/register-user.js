@@ -1,27 +1,35 @@
-const { validateName, validateUsername, validatePassword } = require('./helpers/validators')
-const { ConflictError} = require('../nts-errors')
+const { validateName,
+    validateUsername, 
+    validatePassword,
+    validateMail, 
+    validateAddress, 
+    validatePhone, 
+    validateProvince, 
+    validateLocation } = require('./helpers/validators')
+const { ConflictError } = require('../nts-errors')
 const { models: { User } } = require('../nts-data')
+const bcrypt = require('bcryptjs')
 
-/**
- * TODO doc me
- * @param {*} name 
- * @param {*} username 
- * @param {*} password 
- * @param {*} callback 
- */
-function registerUser(name, username, password) {
+function registerUser(name, username, password, email, address, phone, province, location, country) {
     validateName(name)
     validateUsername(username)
     validatePassword(password)
+    // validateMail(email)
+    // validatePhone(phone)
+    // validateAddress(address)ç
+    // validateProvince(province)
+    // validateLocation(location)
 
-    return User.create({ name, username, password })
-        .then(() => { })
-        .catch(error => {
+    return (async () => {
+        try {
+            await User.create({ name, username, password: bcrypt.hashSync(password), email, address , phone, province, location, country})
+        } catch (error) {
             if (error.code === 11000)
-                throw new ConflictError(`user with username ${username} already exists`)
+                throw new ConflictError(`user with username ${username, email} already exists`)
 
             throw error
-        })
+        }
+    })()
 }
 
 module.exports = registerUser

@@ -4,6 +4,7 @@ const { expect } = require('chai')
 const registerUser = require('./register-user')
 const { mongoose, models: { User } } = require('../nts-data')
 const { ConflictError, FormatError } = require('../nts-errors')
+const bcrypt = require('bcryptjs')
 
 const { env: { MONGO_URL } } = process
 
@@ -16,8 +17,14 @@ describe('registerUser', () => {
         const name = 'Wendy Pan'
         const username = 'wendypan'
         const password = '123123123'
+        const email = 'aaddsad@asda.com'
+        const address = 'ramon tullo 3'
+        const phone = 644830315
+        const province = 'barcelona'
+        const location = 'el masnou'
+        const country = 'espana'
 
-        return registerUser(name, username, password)
+        return registerUser(name, username, password, email, address, phone, province, location, country)
             .then(res => {
                 expect(res).to.be.undefined
 
@@ -27,7 +34,9 @@ describe('registerUser', () => {
                 expect(user).to.exist
                 expect(user.name).to.equal(name)
                 expect(user.username).to.equal(username)
-                expect(user.password).to.equal(password)
+                expect(bcrypt.compareSync(password, user.password)).to.be.true
+                expect(user.email).to.equal(email)
+                expect(user.phone).to.equal(phone)
             })
     })
 
@@ -38,23 +47,28 @@ describe('registerUser', () => {
             user = {
                 name: 'Wendy Pan',
                 username: 'wendypan',
-                password: '123123123'
+                password: '123123123',
+                email: 'asd@asd.com',
+                address: 'joan pol 35',
+                phone: 644830315,
+                province: 'Barcelona',
+                location: 'Barcelona'
             }
 
-            return User.create(user)
+            return User.create({ ...user, password: bcrypt.hashSync(user.password) })
         })
 
         it('should fail when user already exists', () => {
-            const { name, username, password } = user
+            const { name, username, password, email, address, phone, province, location, country } = user
 
-            return registerUser(name, username, password)
-                .then(() => { throw new Error ('should not reach this point') })
+            return registerUser(name, username, password, email, address, phone, province, location, country)
+                .then(() => { throw new Error('should not reach this point') })
                 .catch(error => {
                     expect(error).to.exist
                     expect(error).to.be.instanceOf(ConflictError)
-                    expect(error.message).to.equal(`user with username ${username} already exists`)
+                    expect(error.message).to.equal(`user with username ${username, email} already exists`)
                 })
-                
+
         })
     })
 
@@ -108,8 +122,8 @@ describe('registerUser', () => {
                 expect(() => registerUser('Wendy Pan', 'wendy pan', '123123123', () => { })).to.throw(FormatError, 'username has blank spaces')
             })
 
-            it('should fail when username length is less that 4 characters', () => {
-                expect(() => registerUser('Wendy Pan', 'wp', '123123123', () => { })).to.throw(FormatError, 'username has less than 4 characters')
+            it('should fail when username length is less that 6 characters', () => {
+                expect(() => registerUser('Wendy Pan', 'wp', '123123123', () => { })).to.throw(FormatError, 'username has less than 6 characters')
             })
         })
 
@@ -145,7 +159,7 @@ describe('registerUser', () => {
 
     })
 
-    after(() => 
+    after(() =>
         User.deleteMany()
             .then(() => mongoose.disconnect())
     )

@@ -1,6 +1,8 @@
 const { model } = require('mongoose')
-const { user } = require('./schemas')
+const { user, reservation, note } = require('./schemas')
 
 module.exports = {
-    User: model('User', user)
+    User: model('User', user),
+    Reservation: model ('Reservation', reservation),
+    Note: model ('Note', note)
 }

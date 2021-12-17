@@ -1,15 +1,15 @@
-require ('dotenv').config()
+require('dotenv').config()
 
 const { expect } = require('chai')
 const retrieveUser = require('./retrieve-user')
-const { mongoose, models: { User } } = require ('../nts-data')
+const { mongoose, models: { User } } = require('../nts-data')
 const { Types: { ObjectId } } = mongoose
 const { NotFoundError, FormatError } = require('../nts-errors')
 
 const { env: { MONGO_URL } } = process
 
 describe('retrieveUser', () => {
-    before (() => mongoose.connect (MONGO_URL))
+    before(() => mongoose.connect(MONGO_URL))
 
     beforeEach(() => User.deleteMany())
 
@@ -19,38 +19,43 @@ describe('retrieveUser', () => {
         user = {
             name: 'Wendy Pan',
             username: 'wendypan',
-            password: '123123123'
+            password: '123123123',
+            address: 'joan pol 35',
+            location: 'Barcelona',
+            province: 'Barcelona',
+            email: 'asd@asd.com',
+            phone: 644830315
         }
 
-        return User.create(user) 
-            .then (user => userId = user.id)
+        return User.create(user)
+            .then(user => userId = user.id)
     })
 
-    it ('should succeed with correct id for an already existing user', () =>{
+    it('should succeed with correct id for an already existing user', () => {
         const { name, username } = user
 
         return retrieveUser(userId)
             .then(user => {
-            expect(user).to.exist
-            expect (user.name).to.equal (name)
-            expect (user.username).to.equal(username)
-        })
+                expect(user).to.exist
+                expect(user.name).to.equal(name)
+                expect(user.username).to.equal(username)
+            })
     })
 
-    it ('should fail with incorrect id', () => {
+    it('should fail with incorrect id', () => {
         userId = new ObjectId().toString()
 
-        retrieveUser(userId) 
-            .then(() => {throw new Error ('should not reach this point') })
+        retrieveUser(userId)
+            .then(() => { throw new Error('should not reach this point') })
             .catch(FormatError => {
                 expect(FormatError).to.exist
                 expect(error).to.be.instanceOf(NotFoundError)
                 expect(error.message).to.equal(`user with id ${userId} not found`)
-        })
+            })
     })
 
-    describe('when parameters are not valid', ()=> {
-        describe ('when id is not valid', () => {
+    describe('when parameters are not valid', () => {
+        describe('when id is not valid', () => {
             it('should fail when id is not a string', () => {
                 expect(() => retrieveUser(true, () => { })).to.throw(TypeError, 'id is not a string')
 
@@ -60,7 +65,7 @@ describe('retrieveUser', () => {
 
                 expect(() => retrieveUser(() => { }, () => { })).to.throw(TypeError, 'id is not a string')
 
-                expect(() => retrieveUser([], () => { })).to.throw(TypeError, 'id is not a string')               
+                expect(() => retrieveUser([], () => { })).to.throw(TypeError, 'id is not a string')
             })
 
             it('should fail when id is empty or blank', () => {
@@ -79,11 +84,11 @@ describe('retrieveUser', () => {
                 expect(() => retrieveUser('abc', () => { })).to.throw(FormatError, 'id doesn\'t have 24 characters')
             })
         })
-        
+
     })
 
     after(() =>
-    User.deleteMany()
-        .then(() => mongoose.disconnect())
+        User.deleteMany()
+            .then(() => mongoose.disconnect())
     )
 })
