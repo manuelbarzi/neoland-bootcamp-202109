@@ -7,7 +7,13 @@ const { registerUser,
     authenticateUser,
     retrieveUser,
     modifyUser,
-    unregisterUser } = require('./handlers')
+    unregisterUser,
+    retrieveChampion,
+    retrieveItem,
+    createBuild,
+    deleteBuild,
+    retrieveBuilds,
+} = require('./handlers')
 const cors = require('cors')
 const corsOptions = {
     "Access-Control-Allow-Methods": ['GET', 'PUT', 'POST', 'DELETE']}    
@@ -35,6 +41,16 @@ mongoose.connect(MONGO_URL)
             api.patch('/users', jsonBodyParser, modifyUser)
 
             api.delete("/users", jsonBodyParser, unregisterUser)
+
+            api.get("/champions", jsonBodyParser, retrieveChampion)
+
+            api.get("/items", jsonBodyParser, retrieveItem)
+
+            api.post("/builds", jsonBodyParser, createBuild)
+
+            api.delete("/builds", jsonBodyParser, deleteBuild)
+            
+            api.get("/builds", jsonBodyParser, retrieveBuilds)
 
             api.all('*', (req, res) => {
                 res.status(404).json({ message: 'sorry, this endpoint isn\'t available' })

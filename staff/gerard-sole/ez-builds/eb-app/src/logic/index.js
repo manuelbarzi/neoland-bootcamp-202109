@@ -1,13 +1,17 @@
-import signupUser from './signup.logic'
-import signinUser from './signin.logic'
-import updateUserPassword from './updatePassword.logic'
-import retrieveUser from './retrieveUser.logic'
-import unregisterUser from './unregisterUser.logic'
+import signupUser from './signup'
+import signinUser from './signin'
+import retrieveUser from './retrieveUser'
+import unregisterUser from './unregisterUser'
+import updateUserPassword from './updateUserPassword'
+import retrieveChampions from './retrieveChampions'
+import retrieveChampion from './retrieveChampion'
 
 export {
     signinUser,
     signupUser,
     retrieveUser,
     updateUserPassword,
-    unregisterUser
+    unregisterUser,
+    retrieveChampions,
+    retrieveChampion
 }

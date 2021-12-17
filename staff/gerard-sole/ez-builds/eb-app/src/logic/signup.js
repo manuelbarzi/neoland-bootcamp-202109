@@ -42,7 +42,7 @@
         }
     }
 
-    xhr.open('POST', 'https://localhost:27017/users')
+    xhr.open('POST', 'http://localhost:8000/api/users')
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 

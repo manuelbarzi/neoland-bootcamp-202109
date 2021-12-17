@@ -20,20 +20,21 @@ describe('retrieveChampion', () => {
             title: 'la Espada de los Oscuros',
             key: 266
         }
-
         const champion2 = await Champion.create(champion)
     })
 
     it('should succeed with correct name for an already existing champion', async () => {
         const { name, title, key } = champion
+        let query = name
 
-        const champion2 = await retrieveChampion(name)
-
-        expect(champion2).to.exist
-        expect(champion2.name).to.equal(name)
-        expect(champion2.title).to.equal(title)
-        expect(champion2.key).to.equal(key)
-        
+        const champions = await retrieveChampion(query)
+        champions.forEach(champion2 => {
+            expect(champion2).to.exist
+            expect(champion2.name).to.equal(name)
+            expect(champion2.title).to.equal(title)
+            expect(champion2.key).to.equal(key)
+        })
+            
     })
 
     it('should fail with incorrect name', async () => {
@@ -49,22 +50,22 @@ describe('retrieveChampion', () => {
 
     describe('when parameters are not valid', () => {
         describe('when name is not valid', () => {
-            it('should fail when name is not a string', () => {
-                expect(() => retrieveChampion(true, () => { })).to.throw(TypeError, 'name is not a string')
+            it('should fail when query is not a string', () => {
+                expect(() => retrieveChampion(true, () => { })).to.throw(TypeError, 'query is not a string')
 
-                expect(() => retrieveChampion(123, () => { })).to.throw(TypeError, 'name is not a string')
+                expect(() => retrieveChampion(123, () => { })).to.throw(TypeError, 'query is not a string')
 
-                expect(() => retrieveChampion({}, () => { })).to.throw(TypeError, 'name is not a string')
+                expect(() => retrieveChampion({}, () => { })).to.throw(TypeError, 'query is not a string')
 
-                expect(() => retrieveChampion(() => { }, () => { })).to.throw(TypeError, 'name is not a string')
+                expect(() => retrieveChampion(() => { }, () => { })).to.throw(TypeError, 'query is not a string')
 
-                expect(() => retrieveChampion([], () => { })).to.throw(TypeError, 'name is not a string')
+                expect(() => retrieveChampion([], () => { })).to.throw(TypeError, 'query is not a string')
             })
 
-            it('should fail when name is empty or blank', () => {
-                expect(() => retrieveChampion('', () => { })).to.throw(FormatError, 'name is empty or blank')
+            it('should fail when query is empty or blank', () => {
+                expect(() => retrieveChampion('', () => { })).to.throw(FormatError, 'query is empty or blank')
 
-                expect(() => retrieveChampion('   ', () => { })).to.throw(FormatError, 'name is empty or blank')
+                expect(() => retrieveChampion('   ', () => { })).to.throw(FormatError, 'query is empty or blank')
             })
          })
     })

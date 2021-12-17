@@ -1,15 +1,13 @@
-const { unregisterUser } = require('eb-data')
+const { unregisterUser } = require('eb-logics')
 const jwt = require('jsonwebtoken')
-const handleError = require('./helpers/handle-error')
+const { handleError, validateAuthorizationAndExtractPayload } = require('./helpers')
 const { env: { SECRET } } = process
 
 module.exports = (req, res) => {
     const { headers: { authorization }, body: { password } } = req
 
     try {
-        const [, token] = authorization.split(' ')
-
-        const { sub: id } = jwt.verify(token, SECRET)
+        const { sub: id } = validateAuthorizationAndExtractPayload(authorization)
 
         unregisterUser(id, password)
             .then(() => res.status(201).send())

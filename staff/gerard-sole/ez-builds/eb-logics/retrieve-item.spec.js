@@ -7,8 +7,8 @@ const { Types: { ObjectId } } = mongoose
 const { NotFoundError, FormatError } = require('eb-errors')
 
 const { env: { MONGO_URL } } = process
-
 describe('retrieveItem', () => {
+
     before(() => mongoose.connect(MONGO_URL))
 
     beforeEach(() => Item.deleteMany())
@@ -30,8 +30,8 @@ describe('retrieveItem', () => {
         const item2 = await retrieveItem(name)
 
         expect(item2).to.exist
-        expect(item2.name).to.equal(name)
-        expect(item2.key).to.equal(key)
+        expect(name).to.equal(name)
+        expect(key).to.equal(key)
         
     })
 
@@ -49,21 +49,21 @@ describe('retrieveItem', () => {
     describe('when parameters are not valid', () => {
         describe('when name is not valid', () => {
             it('should fail when name is not a string', () => {
-                expect(() => retrieveItem(true, () => { })).to.throw(TypeError, 'name is not a string')
+                expect(() => retrieveItem(true, () => { })).to.throw(TypeError, 'query is not a string')
 
-                expect(() => retrieveItem(123, () => { })).to.throw(TypeError, 'name is not a string')
+                expect(() => retrieveItem(123, () => { })).to.throw(TypeError, 'query is not a string')
 
-                expect(() => retrieveItem({}, () => { })).to.throw(TypeError, 'name is not a string')
+                expect(() => retrieveItem({}, () => { })).to.throw(TypeError, 'query is not a string')
 
-                expect(() => retrieveItem(() => { }, () => { })).to.throw(TypeError, 'name is not a string')
+                expect(() => retrieveItem(() => { }, () => { })).to.throw(TypeError, 'query is not a string')
 
-                expect(() => retrieveItem([], () => { })).to.throw(TypeError, 'name is not a string')
+                expect(() => retrieveItem([], () => { })).to.throw(TypeError, 'query is not a string')
             })
 
             it('should fail when name is empty or blank', () => {
-                expect(() => retrieveItem('', () => { })).to.throw(FormatError, 'name is empty or blank')
+                expect(() => retrieveItem('', () => { })).to.throw(FormatError, 'query is empty or blank')
 
-                expect(() => retrieveItem('   ', () => { })).to.throw(FormatError, 'name is empty or blank')
+                expect(() => retrieveItem('   ', () => { })).to.throw(FormatError, 'query is empty or blank')
             })
          })
     })

@@ -1,49 +1,53 @@
-require('dotenv').config()
+require( 'dotenv' ).config()
 
-const { expect } = require('chai')
-const createBuild = require('./create-build.js')
-const { mongoose, models: { Build, User } } = require('eb-data')
-const { ConflictError, FormatError } = require('eb-errors')
+const { expect } = require( 'chai' )
+const createBuild = require( './create-build.js' )
+const { mongoose, models: { Build, User } } = require( 'eb-data' )
+const { ConflictError, FormatError } = require( 'eb-errors' )
+const { Types: { ObjectId } } = mongoose
 
 const { env: { MONGO_URL } } = process
 
-describe('createBuild', () => {
+describe( 'createBuild', () => {
+    debugger
+    before( () => mongoose.connect( MONGO_URL ) )
 
-    before(() => mongoose.connect(MONGO_URL))
+    beforeEach( () => Build.deleteMany() )
+    beforeEach( () => User.deleteMany() )
 
-      beforeEach(() => Build.deleteMany())
+    let build, user, userId
 
-let build, user, userId
-
-    beforeEach(() => {
+    beforeEach( () => {
         user = {
-            name: 'Wendy Pan',  
+            name: 'Wendy Pan',
             username: 'wendypan',
             password: '123123123'
         }
 
-        return  User.create(user)
-            .then(user => userId = user.id)
-    })
-debugger
-    it('Should succeed with new build', () => {
-        const items = ['61b872fc9bb30b33dbf65c87', '61b872fc9bb30b33dbf65c88', '61b872fc9bb30b33dbf65c89' , '61b872fc9bb30b33dbf65c8a', '61b872fc9bb30b33dbf65c8d', '61b872fc9bb30b33dbf65c99']
-        const champion = '61b872fc9bb30b33dbf65b4c' 
+        return User.create( user )
+            .then( user => userId = new ObjectId(user.id) )
+    } )
+    it( 'Should succeed with new build', async () => {
 
-        return createBuild(items, champion, userId)
-            .then(() => Build.findOne({ build }))
-            .then(Build => {
-                const { champion, items, userId } = Build
-                expect(Build).to.exist
-                expect(champion).to.deep.equal(champion)
-                expect(items).to.deep.equal(items)
-                expect(userId).to.deep.equal(userId)
-            })
-    })
+        const arrItemsId2 = [ new ObjectId('61b872fc9bb30b33dbf65c87'), new ObjectId('61b872fc9bb30b33dbf65c88'), new ObjectId('61b872fc9bb30b33dbf65c89'), new ObjectId('61b872fc9bb30b33dbf65c8a'), new ObjectId('61b872fc9bb30b33dbf65c8d'), new ObjectId('61b872fc9bb30b33dbf65c99')]
+        const championId2 = new ObjectId('61b872fc9bb30b33dbf65b4c')
 
-    after(() => 
-        User.deleteMany().then(() =>
+        const res = await createBuild( arrItemsId2, championId2, userId )
+
+        const build = await Build.findOne( user.id )
+
+        const { champion, items, userId: resUserId } = build
+
+        expect( build ).to.exist
+        expect( champion ).to.deep.equal( championId2 )
+        expect( items ).to.deep.equal(arrItemsId2 )
+        expect( resUserId ).to.deep.equal( userId )
+
+    } )
+
+    after( () =>
+        User.deleteMany().then( () =>
             Build.deleteMany()
         )
-            .then(() => mongoose.disconnect()))
-})
+            .then( () => mongoose.disconnect() ) )
+} )

@@ -1,5 +1,5 @@
 function retrieveUser(token, callback) {
-    // if (!token) throw new Error('invalid token')
+    if (!token) throw new Error('invalid token')
     if (typeof token !== 'string') throw new TypeError(token + ' is not a string')
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
 
@@ -25,10 +25,12 @@ function retrieveUser(token, callback) {
         }
     }
 
-    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.open('GET', 'http://localhost:8000/api/users')
 
     xhr.setRequestHeader('Authorization', 'Bearer ' + token)
 
     xhr.send()
 }
+
+
 export default retrieveUser

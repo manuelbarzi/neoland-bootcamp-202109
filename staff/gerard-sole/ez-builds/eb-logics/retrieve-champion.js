@@ -1,15 +1,17 @@
-const { validateName } = require( './helpers/validators' )
+const { validateQuery } = require( './helpers/validators' )
 const { NotFoundError } = require( 'eb-errors' )
 const { mongoose: { models: { Champion } } } = require( 'eb-data' )
 
-function retrieveChampion( name ) {
-    validateName( name )
+function retrieveChampion( query ) {
+   
+    var regex = new RegExp(`\\b${query}`, 'gi') 
+    validateQuery( query )
 
-    return Champion.findOne( { name } )
-        .then( Champion => {
-            if ( !Champion ) throw new NotFoundError( 'Wrong Name' )
+    return Champion.find( { name: regex } )
+        .then( Champions => {
+            if ( !Champions ) throw new NotFoundError( 'champions not found' )
 
-            return Champion
+            return Champions
         } )
 }
 

@@ -7,6 +7,8 @@ const retrieveChampion = require('./retrieve-champion')
 const retrieveItem = require('./retrieve-item')
 const createBuild = require('./create-build')
 const deleteBuild = require('./delete-build')
+const retrieveBuildsByChampion = require('./retrieve-builds-by-champion')
+const retrieveBuildsByUser = require('./retrieve-builds-by-user')
 
 module.exports = {
     registerUser,
@@ -17,5 +19,7 @@ module.exports = {
     retrieveChampion,
     retrieveItem,
     createBuild,
-    deleteBuild
+    deleteBuild,
+    retrieveBuildsByChampion,
+    retrieveBuildsByUser
 }

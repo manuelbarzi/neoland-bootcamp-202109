@@ -69,9 +69,14 @@ function validateItems(items) {
 }
 
 function validateChampion(champion) {
-    if (typeof champion !== 'string') throw new TypeError('Champion is not a string')
+    if (!champion instanceof Object) throw new TypeError('Champion is not an object')
 }
 
+
+function validateQuery(query) {
+    if (typeof query !== 'string') throw new TypeError('query is not a string')
+    if (!query.trim().length) throw new FormatError('query is empty or blank')
+}
 
 module.exports = {
     validateId,
@@ -82,5 +87,6 @@ module.exports = {
     validateName,
     validateCallback,
     validateItems,
-    validateChampion
+    validateChampion,
+    validateQuery
 }

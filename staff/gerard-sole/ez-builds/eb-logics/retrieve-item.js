@@ -1,15 +1,16 @@
-const { validateName } = require( './helpers/validators' )
+const { validateQuery } = require( './helpers/validators' )
 const { NotFoundError } = require( 'eb-errors' )
 const { mongoose: { models: { Item } } } = require( 'eb-data' )
 
-function retrieveItem( name ) {
-    validateName( name )
+function retrieveItem( query ) {
+    validateQuery( query )
+    const regex = new RegExp( query, 'i' )
 
-    return Item.findOne( { name } )
-        .then( Item => {
-            if ( !Item ) throw new NotFoundError( 'Wrong Name' )
+    return Item.find( { name: regex } ).lean()
+        .then( item => {
+            if ( !item ) throw new NotFoundError( 'Wrong Name' )
 
-            return Item
+            return item
         } )
 }
 

@@ -1,4 +1,4 @@
-const { authenticateUser } = require('eb-data')
+const { authenticateUser } = require('eb-logics')
 const jwt = require('jsonwebtoken')
 const handleError = require('./helpers/handle-error')
 const { env: { SECRET } } = process

@@ -10,9 +10,9 @@ const build = new Schema({
         type: ObjectId,
         ref: 'Item'
     }],
-    userId: {      
+    user: {      
         type: ObjectId,
-        ref: 'user',
+        ref: 'User',
         required: true
     }
 

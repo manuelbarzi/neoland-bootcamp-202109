@@ -2,16 +2,18 @@ const { validateItems, validateChampion, validateId } = require( './helpers/vali
 const { ConflictError } = require( 'eb-errors' )
 const { models: { Build } } = require('eb-data')
 
-function createBuild( items, champion, userId ) {
-    validateItems (items) 
-    validateChampion( champion )
-    validateId( userId )
+function createBuild(items, champion, user) {
 
-    return Build.create( { items, champion, userId } )
-        .then( () => { } )
-        .catch( error => {
-            throw error
-        } )
+    validateItems(items)
+    validateChampion(champion)
+
+    return (async () => {
+        try {
+            await Build.create({items, champion, user})
+        } catch (error) {
+        throw error
+        }
+    })()
 }
 
 module.exports = createBuild

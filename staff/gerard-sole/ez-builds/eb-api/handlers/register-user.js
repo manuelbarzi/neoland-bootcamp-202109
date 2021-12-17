@@ -1,4 +1,4 @@
-const { registerUser } = require('eb-data')
+const { registerUser } = require('eb-logics')
 const handleError = require('./helpers/handle-error')
 
 module.exports = (req, res) => {
