@@ -1,5 +1,4 @@
 const { Schema } = require('mongoose')
-const creditCard = require('./credit-card')
 
 const user = new Schema({
     name: {
@@ -56,8 +55,8 @@ const user = new Schema({
             }
         ]
     },
-    creditCards: {
-        type: [creditCard]
+    favorites: {
+        type: [String]
     }
 })
 

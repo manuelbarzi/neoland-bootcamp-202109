@@ -27,7 +27,7 @@ function retrieveUser(id) {
 
         delete user.__v
 
-        return user
+        return user.save()
     })()
 }
 

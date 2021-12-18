@@ -1,8 +1,36 @@
-function retrieveFavVehicles(token, callback) {
-    if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
-    if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
+import context from './context'
+const { validateId } = require('crowdaids-logic/helpers/validators')
 
-    if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
+function retrieveFavVehicles(token, callback) {
+    validateId(token)
+
+    /*return (async () => {
+        const res = await fetch(`${context.API_URL}/users`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+
+        const { status } = res
+
+        if (status === 404 ||status === 401) {
+            const { error } = res.json()
+
+            throw new Error(error)
+        } else if (status === 200) {
+            const user = await res.json()
+
+            const { favorites } = user
+
+            if (favorites.length) {
+                let count = 0
+                const beaches = []
+
+                
+            }
+        }
+    })()*/
 
     const xhr = new XMLHttpRequest
 

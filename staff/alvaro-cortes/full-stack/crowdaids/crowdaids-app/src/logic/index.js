@@ -6,14 +6,8 @@ import updateUserPassword  from "./update-user-password";
 import unregisterUser  from "./unregister-user";
 import searchBeaches  from "./search-beaches";
 import retrieveBeach  from "./retrieve-beach";
-import toggleFavoriteVehicle from "./toggle-favorite-vehicle";
-import retrieveFavVehicles from "./retrieve-favorites-vehicles";
-import addToCart from "./add-to-cart";
-import retrieveCartVehicles from "./retrieve-cart-vehicles";
-import removeFromCart from "./remove-vehicle-from-cart";
-import addComent from "./add-comment";
-import retrieveComment from "./retrieve-comments";
-import removeComment from "./remove-comment";
+import toggleFavoriteBeach from "./toggle-favorite-beach";
+import retrieveFavBeaches from "./retrieve-favorites-beaches";
 import context from "./context"
 
 export {
@@ -25,13 +19,7 @@ export {
     unregisterUser,
     searchBeaches,
     retrieveBeach,
-    toggleFavoriteVehicle,
-    retrieveFavVehicles,
-    addToCart,
-    retrieveCartVehicles,
-    removeFromCart,
-    addComent,
-    retrieveComment,
-    removeComment,
+    toggleFavoriteBeach,
+    retrieveFavBeaches,
     context
 }

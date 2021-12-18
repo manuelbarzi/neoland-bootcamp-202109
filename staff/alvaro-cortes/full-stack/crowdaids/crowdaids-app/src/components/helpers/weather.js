@@ -6,7 +6,7 @@ const weatherNow = (array=[], time='') => {
         if (array[i].timestamp == time) {
             weather = array[i].temperature.toString()
 
-            weather = weather.slice(0, 1)
+            weather = weather.slice(0, 2)
             response.push(weather)
             differentIcon = array[i].condition
             response.push(differentIcon)
@@ -15,7 +15,7 @@ const weatherNow = (array=[], time='') => {
         } else {
             weather = array[i].temperature.toString()
 
-            weather = weather.slice(0, 1)
+            weather = weather.slice(0, 2)
             response.push(weather)
             differentIcon = array[i].condition
             response.push(differentIcon)

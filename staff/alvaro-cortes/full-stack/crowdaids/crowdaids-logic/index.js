@@ -9,6 +9,8 @@ const retrieveSwellConditionsText = require('./retrieve-swell-conditions-text')
 const retrieveWeatherConditions = require('./retrieve-weather-conditions')
 const retrieveWindConditions = require('./retrieve-wind-conditions')
 const retrieveTides = require('./retrieve-tides')
+const toggleFavBeach = require('./toggle-fav-beach')
+const retrieveFavBeaches = require('./retrieve-fav-beaches')
 
 module.exports = {
     registerUser,
@@ -21,5 +23,7 @@ module.exports = {
     retrieveSwellConditionsText,
     retrieveWeatherConditions,
     retrieveWindConditions,
-    retrieveTides
+    retrieveTides,
+    toggleFavBeach,
+    retrieveFavBeaches
 }

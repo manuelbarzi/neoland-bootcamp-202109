@@ -1,16 +1,17 @@
-const { modifyUser } = require('crowdaids-logic')
+const { retrieveFavBeaches } = require('crowdaids-logic')
 const { handleError, validateAuthorizationAndExtractPayload } = require('./helpers')
 
 module.exports = async (req, res) => {
-    const { headers: { authorization }, body: { data } } = req
+    const { headers: { authorization } } = req
 
     try {
         const { sub: id } = validateAuthorizationAndExtractPayload(authorization)
 
-        await modifyUser(id, data)
-
-        res.status(204).send()
+        const favs = await retrieveFavBeaches(id)
+        
+        res.json(favs)
     } catch (error) {
         handleError(error, res)
     }
 }
+

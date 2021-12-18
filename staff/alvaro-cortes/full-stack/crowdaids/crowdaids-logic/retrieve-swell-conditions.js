@@ -6,7 +6,7 @@ function retrieveSwellConditions(id) {
     validateId(id)
 
     return (async () => {
-        const res = await fetch(`http://services.surfline.com/kbyg/spots/forecasts/wave?spotId=${id}&days=1&intervalHours=1`, {
+        const res = await fetch(`http://services.surfline.com/kbyg/spots/forecasts/wave?spotId=${id}&days=6&intervalHours=1`, {
             method: 'GET'
         })
 

@@ -12,7 +12,7 @@ import cablack from '../assets/cablack.png'
 function Search({ onSearch, user }) {
     logger.info("Search -> render")
 
-    const { showSpinner, hideSpinner, showModal } = useContext(AppContext)
+    const { showSpinner, hideSpinner, showModal, goToHome } = useContext(AppContext)
 
     const [modalProfile, setModalProfile] = useState(false)
 
@@ -29,7 +29,7 @@ function Search({ onSearch, user }) {
                 onSearch(query)
                 event.target.reset()
             }}>
-                <span id="logoNav"><img src={cablack} style={{width: "35px"}}/></span>
+                <button id="logoNav" onClick={() => goToHome()}><img src={cablack} style={{width: "35px"}}/></button>
                 <span><input id="input--search" type="text" placeholder="Busca una playa" name="query" />
                 <button className="button button--grey">Buscar</button></span> 
                 <span className="container--name"> Bienvenido, {user} <BsPersonCircle onMouseOver={showModalProfile} /></span>

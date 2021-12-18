@@ -1,17 +1,17 @@
-const arroWind = (array, time) => {
-    let arrow;
+const arroWind = (array, time='') => {
+    if (!array)
+        return 0
+
+    let info = array[0]
 
     for (let i = 0; i < array.length; i++) {
-        if (array[i].timestamp == time) {
-            arrow = array[i].direction
+        if (array[i].timestamp === time) {
+            info = array[i]
 
-            return arrow
-        } else {
-            arrow = array[0].direction
-
-            return arrow
+            break
         }
     }
+    return info? info.direction : 0
 }
 
 export default arroWind

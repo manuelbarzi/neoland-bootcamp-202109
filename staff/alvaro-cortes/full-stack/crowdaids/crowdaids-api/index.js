@@ -11,7 +11,9 @@ const {
     retrieveSwellConditionsText,
     retrieveWeatherConditions,
     retrieveWindConditions,
-    retrieveTides
+    retrieveTides,
+    toggleFavBeach,
+    retrieveFavBeaches
 } = require('./handlers')
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -47,6 +49,10 @@ logger.info('Starting server');
         api.patch('/users', jsonBodyParser, modifyUser)
 
         api.delete('/users', jsonBodyParser, unregisterUser)
+        
+        api.patch('/users/:beachId', toggleFavBeach)
+
+        api.get('/users/favorites', retrieveFavBeaches)
 
         api.get('/forecast/site', searchBeaches)
 

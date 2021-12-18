@@ -31,9 +31,9 @@ function retrieveBeach(token, id) {
         } else if (status === 200) {
             const user = await res.json()
 
-            const { favs = [] } = user
+            const { favorites } = user
 
-            const res2 = await fetch(`http://localhost:8000/api/forecast/swell?spotId=${id}&days=1&intervalHours=1`, {
+            const res2 = await fetch(`http://localhost:8000/api/forecast/swell?spotId=${id}&days=6&intervalHours=1`, {
                 method: 'GET'
             })
 
@@ -46,7 +46,9 @@ function retrieveBeach(token, id) {
 
                 if (!swellCondition) throw new Error(`No swell conditions found with id ${id}`)
 
-                swellCondition.isFav = favs.includes(swellCondition._id)
+                swellCondition.id = id
+
+                swellCondition.isFav = favorites.includes(swellCondition.id)
 
                 dataBeach.push(swellCondition)
 
@@ -63,7 +65,7 @@ function retrieveBeach(token, id) {
 
                     dataBeach.push(swellConditionText)
 
-                    const res4 = await fetch(`http://localhost:8000/api/forecast/weather?spotId=${id}&days=1&intervalHours=1`, {
+                    const res4 = await fetch(`http://localhost:8000/api/forecast/weather?spotId=${id}&days=6&intervalHours=1`, {
                         method: 'GET'
                     })
 
@@ -76,7 +78,7 @@ function retrieveBeach(token, id) {
 
                         dataBeach.push(weatherCondition)
 
-                        const res5 = await fetch(`http://localhost:8000/api/forecast/tides?spotId=${id}&days=1`, {
+                        const res5 = await fetch(`http://localhost:8000/api/forecast/tides?spotId=${id}&days=6`, {
                             method: 'GET'
                         })
 
@@ -89,7 +91,7 @@ function retrieveBeach(token, id) {
 
                             dataBeach.push(tides)
 
-                            const res6 = await fetch(`http://localhost:8000/api/forecast/wind?spotId=${id}&days=1&intervalHours=1`, {
+                            const res6 = await fetch(`http://localhost:8000/api/forecast/wind?spotId=${id}&days=6&intervalHours=1`, {
                                 method: 'GET'
                             })
 

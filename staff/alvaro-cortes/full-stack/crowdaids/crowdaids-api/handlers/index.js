@@ -9,5 +9,7 @@ module.exports = {
     retrieveSwellConditionsText: require('./retrieve-swell-conditions-text'),
     retrieveWeatherConditions: require('./retrieve-weather-conditions'),
     retrieveWindConditions: require('./retrieve-wind-conditions'),
-    retrieveTides: require('./retrieve-tides')
+    retrieveTides: require('./retrieve-tides'),
+    toggleFavBeach: require('./toggle-fav-beach'),
+    retrieveFavBeaches: require('./retrieve-fav-beaches')
 }

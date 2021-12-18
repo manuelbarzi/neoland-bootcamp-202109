@@ -1,3 +1,6 @@
+import context from './context'
+const { validateId } = require('crowdaids-logic/helpers/validators')
+
 /**
  * Function to toggle on favorites a vehicle.
  * 
@@ -6,16 +9,57 @@
  * @param {function} callback The function to manage the errors.
  */
 
-function toggleFavoriteVehicle(token, id, callback) {
-    if (typeof token !== "string") throw new TypeError(`${token} is not a string`)
-    if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error("Invalid token")
+function toggleFavoriteBeach(token, id) {
+    validateId(token)
+    validateId(id)
 
-    if (typeof id !== "string") throw new TypeError(`${id} is not a string`)
-    if (!id.trim().length) throw new Error("id is empty or blank.")
+    return (async () => {
+        const res = await fetch(`${context.API_URL}/users`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
 
-    if (typeof callback !== "function") throw new TypeError(`${callback} is not a function`)
+        const { status } = res
 
-    const xhr = new XMLHttpRequest
+        if (status === 401 || status === 404) {
+            const { error } = res.json()
+
+            throw new Error(error)
+        } else if (status === 200) {
+            const user = await res.json()
+
+            const { favorites = [] } = user
+
+            const index = favorites.indexOf(id)
+
+            if (index < 0)
+                favorites.push(id)
+            else
+                favorites.splice(index, 1)
+
+            await fetch(`${process.env.REACT_APP_API_URL}/users/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(favorites)
+            })
+
+            if (status === 401 || status === 404) {
+                const { error } = res.json()
+    
+                throw new Error(error)
+            } else if (status === 200) {
+                return
+            }
+        }
+    })()
+}
+
+/*const xhr = new XMLHttpRequest
 
     xhr.onload = () => {
         const { status, responseText } = xhr
@@ -72,7 +116,6 @@ function toggleFavoriteVehicle(token, id, callback) {
 
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
-    xhr.send()
-}
+    xhr.send()*/
 
-export default toggleFavoriteVehicle
+export default toggleFavoriteBeach

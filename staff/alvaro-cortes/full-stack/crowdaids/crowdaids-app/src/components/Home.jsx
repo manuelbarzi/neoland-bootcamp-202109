@@ -13,7 +13,7 @@ import AppContext from './AppContext'
 function Home() {
     logger.info("Home -> constructor")
 
-    const { showSpinner, hideSpinner, showModal } = useContext(AppContext)
+    const { showSpinner, hideSpinner, showModal, goToHome } = useContext(AppContext)
 
     const [user, setUser] = useState(null) // user.name
     const [beach, setBeach] = useState({}) // region y nameBeach
@@ -47,10 +47,10 @@ function Home() {
         }
     }, [])
 
-    const search = query => {
+    const search = (query) => {
         setQuery(query)
 
-        navigate(`/search?q=${query}`)
+        navigate(query ? `/search?q=${query}` : '/')
     }
 
     const goToItem = (beach, id) => {
@@ -77,7 +77,9 @@ function Home() {
                 } />
 
                 <Route path="forecast/:name/:id" element={
-                    <Detail onGoBack={goToSearch} beach={beach}/>
+                    <Detail
+                        onGoBack={goToSearch}
+                        beach={beach} />
                 } />
             </Route>
         </Routes>

@@ -17,7 +17,9 @@ function toxy(lon, lat) {
     const y = lat2tile(vlat, 9)
     arrayXY.push(y)
 
-    return arrayXY
+    let string = x + '/' + y
+
+    return string
 }
 
 export default toxy

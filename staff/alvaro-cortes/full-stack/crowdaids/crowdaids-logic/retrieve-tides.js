@@ -6,7 +6,7 @@ function retrieveTides(id) {
     validateId(id)
 
     return (async () => {
-        const res = await fetch(`http://services.surfline.com/kbyg/spots/forecasts/tides?spotId=${id}&days=1`, {
+        const res = await fetch(`http://services.surfline.com/kbyg/spots/forecasts/tides?spotId=${id}&days=6`, {
             method: 'GET'
         })
 

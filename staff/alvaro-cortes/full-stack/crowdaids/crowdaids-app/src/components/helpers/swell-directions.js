@@ -22,7 +22,7 @@ const swellDirections = (array=[], time='') => {
             directionMin = directionMin.slice(0, 6)
             response.push(direction)
 
-            return (<><span>Oleaje primario: {direction}°</span><br /><span className="color--swell">Oleaje secundario: {directionMin}°</span></>)
+            return (<><span className="color--swell">Primario: {direction}°</span><br /><span>Secundario: {directionMin}°</span></>)
         }
     }
 }

@@ -1,17 +1,17 @@
 const arrowSwell = (array, time) => {
-    let arrow;
+    if (!array)
+        return 0
 
-    for (let i = 0; i < array.length; i++) {
-        if (array[i].timestamp == time) {
-            arrow = array[i].swells[0].direction
+    let info = array[0]
 
-            return arrow
-        } else {
-            arrow = array[0].swells[0].direction
-
-            return arrow
+    for (let i = 0; i < array.length; i++)
+        if (array[i].timestamp === time) {
+            info = array[i]
+            
+            break
         }
-    }
+        
+    return info.swells? info.swells[0].direction : 0
 }
 
 export default arrowSwell

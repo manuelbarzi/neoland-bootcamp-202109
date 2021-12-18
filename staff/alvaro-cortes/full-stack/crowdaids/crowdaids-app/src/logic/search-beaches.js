@@ -35,7 +35,7 @@ function searchBeaches(token, query) {
         } else if (status === 200) {
             const user = await res.json()
 
-            const { favs = [] } = user
+            const { favorites } = user
 
             const res2 = await fetch(`http://localhost:8000/api/forecast/site?q=${query}`, {
                 method: 'GET'
@@ -49,7 +49,7 @@ function searchBeaches(token, query) {
                 const arrayBeaches = beaches[0].hits.hits
 
                 arrayBeaches.forEach(beach => {
-                    beach.isFav = favs.includes(beach._id)
+                    beach.isFav = favorites.includes(beach._id)
                 })
 
                 return arrayBeaches

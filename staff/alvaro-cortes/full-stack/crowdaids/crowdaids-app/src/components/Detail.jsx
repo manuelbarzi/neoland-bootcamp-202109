@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import { retrieveBeach } from '../logic';
+import { useState, useEffect, useContext } from 'react';
+import { retrieveBeach, toggleFavoriteBeach } from '../logic';
 import {
     toxy,
     heigthMaxMin,
@@ -12,22 +12,18 @@ import {
     arrowSwell,
     arroWind,
     swellDirections,
-    mapBeach,
     dayForecast
 }
     from './helpers';
-import { IconContext } from "react-icons";
-import { ImArrowDown } from "react-icons/im";
-import { TiArrowDownOutline } from "react-icons/ti";
 import './Home.sass';
-import { useContext } from 'react';
 import AppContext from './AppContext';
 import InformationNow from './InformationNow';
+import WeekForecast from './WeekForecast';
 
 import logger from '../logger'
 
 
-function Detail({ onGoBack, beach }) {
+function Detail({ beach }) {
 
     logger.info("Detail -> render")
 
@@ -35,6 +31,7 @@ function Detail({ onGoBack, beach }) {
     const { name, breadCrumbs } = beach
 
     const [beachInfo, setBeachInfo] = useState([])
+    const [fav, setFav] = useState(null)
     const { id } = useParams()
 
     useEffect(async () => {
@@ -50,6 +47,8 @@ function Detail({ onGoBack, beach }) {
 
                 setBeachInfo(beachInformation)
 
+                setFav(beachInformation[0])
+
                 hideSpinner()
 
             } catch ({ message }) {
@@ -61,9 +60,9 @@ function Detail({ onGoBack, beach }) {
     }, [id])
 
     const utcActual = () => getUtcBeach(beachInfo[0]?.data?.wave[0]?.utcOffset)
-    
+
     const maxMin = () => heigthMaxMin(beachInfo[0]?.data?.wave, utcActual)
-    
+
     const tide = () => tideNow(beachInfo[3]?.data?.tides, utcActual)
 
     const wind = () => windNow(beachInfo[4]?.data?.wind, utcActual)
@@ -72,26 +71,73 @@ function Detail({ onGoBack, beach }) {
 
     const swellDir = () => swellDirections(beachInfo[0]?.data?.wave, utcActual)
 
-    //const coordMap = toxy('coord.lon', 'coord.lat')
+    const coordMap = () => toxy(beachInfo[0]?.associated?.location?.lon, beachInfo[0]?.associated?.location?.lat)
 
-    //const arrS = arrowSwell('arrayUTC', 'utcActual')
+    const arrS = () => arrowSwell(beachInfo[0]?.data?.wave, utcActual)
 
-    //const arrW = arroWind('arrayWind', 'utcActual')
+    const arrW = () => arroWind(beachInfo[4]?.data?.wind, utcActual)
+
+    const createDayFor = () => {
+        let arr = []
+        const time = 24
+        for (let i = 0; i < 6; i++) {
+
+            arr.push(
+                dayForecast(
+                    beachInfo[0]?.data?.wave,
+                    beachInfo[4]?.data?.wind,
+                    beachInfo[2]?.data?.weather,
+                    beachInfo[0]?.data?.wave[time * i]?.timestamp)
+            )
+        }
+        return arr
+    }
+
+    const arrDayFor = createDayFor()
+
+    const toggleFavorite = async (id) => {
+
+        try {
+            showSpinner()
+
+            await toggleFavoriteBeach(sessionStorage.token, id)
+
+            hideSpinner()
+
+            setFav({ ...fav, isFav: !fav.isFav})
+
+
+        } catch ({ message }) {
+            hideSpinner()
+
+            showModal(message)
+        }
+    }
+
 
     return <>
-        <div className="container__results--title">
-            <h3>{breadCrumbs}</h3>
-            <h1 id="title__beach">Informe actual de surf de {name}</h1>
-        </div>
-        <div className="">
-            <InformationNow
-                maxMin={maxMin}
-                tide={tide}
-                wind={wind}
-                weather={weather}
-                swellDir={swellDir} />
-
-            {/*MEtes el otro compo con lo que te falta*/}
+        <div>
+            <div className="results--title">
+                <h3>{breadCrumbs}</h3>
+                <h1 className="title__beach">{name}</h1>
+            </div>
+            <div className="grid">
+                <InformationNow
+                    maxMin={maxMin}
+                    tide={tide}
+                    wind={wind}
+                    weather={weather}
+                    swellDir={swellDir}
+                    coordMap={coordMap}
+                    arrS={arrS}
+                    arrW={arrW}
+                    toggleFavorite={toggleFavorite}
+                    beachInfo={beachInfo}
+                    fav={fav}
+                    id={id}
+                />
+                <WeekForecast arrDayFor={arrDayFor} />
+            </div>
         </div>
     </>
 }
