@@ -127,7 +127,6 @@ function FilePet({ pet }) {
             <h1 className="title_file">Mascota - {name}</h1>
             <div className="file">
                 <div className="file_data">
-                    <p>Registrado: {date}</p>
                     <p>Edad: {age}</p>
                     <p>Genero: {genre}</p>
                     <p>Especie: {specie}</p>
