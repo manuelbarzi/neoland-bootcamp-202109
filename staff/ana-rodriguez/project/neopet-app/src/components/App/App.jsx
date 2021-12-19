@@ -14,6 +14,8 @@ import Unregister from "../Home/Forms/Unregister";
 import { registerUser, authUser, retrieveUser, unregisterUser, changePass } from '../../logic';
 import RegisterClientPet from '../Home/Forms/RegisterClientPet';
 import File from '../Home/Forms/File/File';
+import RegisterNewPet from '../Home/Forms/RegisterNewPet';
+import FileClient from '../Home/Forms/File/FileClient';
 
 
 function App() {
@@ -93,6 +95,7 @@ function App() {
                     <Route path="/home/clientPet/registerClientPet" element={<RegisterClientPet />} />
                     <Route path="/home/clientPet/search" element={<Search />} />
                     <Route path="/home/clientPet/file/:clientId" element={<File/>}/>
+                    <Route path="/home/clientPet/registerNewPet/:clientId" element={<RegisterNewPet/>}/>
                 </Route>
                 <Route path="/home/profile" element={<Profile />}>
                     <Route path="/home/profile/changepass" element={<ChangePass changePassVisual={changePassVisual} />} />

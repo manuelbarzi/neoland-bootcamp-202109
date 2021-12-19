@@ -13,7 +13,7 @@ function ClientPet() {
             <ul>
                 <li><Link to='/home/clientPet/registerClientPet'><button className="button"><img src="http://localhost:3000/registro.png" />Registro de Cliente y Mascota</button></Link></li>
                 <li><Link to='/home/clientPet/search'><button className="button"><img src="http://localhost:3000/buscar.png" />Buscar cliente o mascota</button></Link></li>
-                <li><Link to='/home'> <button className="button"><img src="http://localhost:3000/atras.png" />Atrás</button></Link></li>
+                <li><Link to='/home'> <button className="button"><img src="http://localhost:3000/atras.png" />Volver</button></Link></li>
             </ul>
         </nav>
         <div id='search__container'>

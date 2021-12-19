@@ -1,4 +1,4 @@
-function unregisterUser(token,password,callback) {
+function unregisterUser(token, password) {
     if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
 
@@ -7,31 +7,22 @@ function unregisterUser(token,password,callback) {
     if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
     if (password.length < 6) throw new Error('password has less than 6 characters')
 
-    if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
-    return new Promise((resolve, reject) => {
+    return (async () => {
+
+        const removeUser = await fetch('https://b00tc4mp.herokuapp.com/api/v2/users', {
+            method: 'DELETE',
+            hesders: { 'Authorization': `Bearer ${token}` }
+        })
+        if (removeUser.status === 200) {
+            const deleteResult = await removeUser.json();
+            return deleteResult;
+        } else if (removeUser.status === 401 || removeUser.status === 404) {
+            const { error } = await removeUser.json();
+            throw new Error(error)
+        } else throw new Error('Error eliminando Cliente')
 
 
-        const xhr = new XMLHttpRequest
-        const pass = {
-            password: password
-        }
-
-        xhr.onload = function () {
-
-            const status = xhr.status
-
-            if (status === 401) callback(new Error('password wrong'))
-            else if (status === 404) callback(new Error('page not found'))
-            else if (status === 400) callback(new Error('wrong credential'))
-            else if (status === 204) callback()
-        }
-
-        xhr.open('DELETE', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-        xhr.setRequestHeader('Authorization', 'Bearer ' + token)
-        xhr.setRequestHeader('Content-Type', 'application/json')
-        xhr.send(JSON.stringify(pass))
-
-    })
+    })()
 }
 
 

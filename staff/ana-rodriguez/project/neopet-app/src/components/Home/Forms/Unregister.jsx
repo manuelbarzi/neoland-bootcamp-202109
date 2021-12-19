@@ -1,11 +1,9 @@
 import React from "react";
-import{Link,Navigate} from "react-router-dom";
+import{Link} from "react-router-dom";
 import './styles/Unregister.css';
 
 function Unregister(props){
-    if(typeof sessionStorage.token === 'string')
-    return<Navigate to ="/profile"/>
-
+  
   const {unregisterVisual} = props
 
     return<>
@@ -19,11 +17,12 @@ function Unregister(props){
        
     }}>
         <div className="input">
+            <h1>Unregister</h1>
         <input className="Unregister" type="password" placeholder="password" name="password"/>
         </div>
         <div className="buttons">
                 <button className="unregister_button" type="submit">Unregister</button> 
-                <Link to="../../profile"><button className="button" type="button">Go Back</button></Link>    
+                <Link to="../../profile"><button className="go_button" type="button">Go Back</button></Link>    
             </div>
     </form>
     </>

@@ -5,10 +5,24 @@ import changePass from './changePass';
 import unregisterUser from './unregister';
 import registerClient from './registerClient';
 import registerPet from './registerPet';
+import registerUserClient from './registerUserClient';
 import searchClients from './searchClients';
 import searchPets from './searchPets';
-import modifyPets from './modifyPet';
 import modifyClient from './modifyClient';
+import getFilePet from './getFilePet';
+
+import registerDeparasite from './filePet/registerDeparasite';
+import registerNotes from './filePet/registerNotes';
+import registerVaccine from './filePet/registerVaccine';
+import registerWeight from './filePet/registerWeight';
+
+import deletePet from './filePet/deletePet';
+import deleteDeparasites from './filePet/deleteDeparasites';
+import deleteNotes from './filePet/deleteNotes';
+import deleteVaccines from './filePet/deleteVaccines';
+import deleteWeights from './filePet/deleteWeights';
+import deleteClient from './filePet/deleteClient';
+
 // import search from './search'
 // import retrieveSearch from './retrieve-search'
 
@@ -20,9 +34,19 @@ export {
     unregisterUser,
     registerClient,
     registerPet,
+    registerUserClient,
     searchClients,
     searchPets,
-    modifyPets,
     modifyClient,
-  
+    getFilePet,
+    registerDeparasite,
+    registerNotes,
+    registerVaccine,
+    registerWeight,
+    deletePet,
+    deleteDeparasites,
+    deleteNotes,
+    deleteVaccines,
+    deleteWeights,
+    deleteClient
 }

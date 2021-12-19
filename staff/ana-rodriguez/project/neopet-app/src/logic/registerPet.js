@@ -3,8 +3,6 @@ const registerPet = (token, clientId, pet) => {
     if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
 
-    if (typeof clientId !== 'string') throw new TypeError(clientId + 'is not a string')
-
     if (typeof pet !== 'object') throw new TypeError( 'is not a object')
 debugger;
     return (async () => {

@@ -18,7 +18,7 @@ const searchPets = (token, pet) => {
         if (res.status === 200) { // status = 200 -> token valid
             let url;
             if (name) {
-                url = "http://localhost:8000/pets?name=" + name
+                url = "http://localhost:8000/pets?q=" + name
             } else if (clientId) {
                 url = "http://localhost:8000/pets?client=" + clientId
             }

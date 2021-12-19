@@ -1,11 +1,8 @@
 import React from 'react';
-import{Link,Navigate} from 'react-router-dom';
+import{Link} from 'react-router-dom';
 import './styles/ChangePass.css'
 
 function ChangePass(props) {
-
-    if(typeof sessionStorage.token === 'string')
-    return<Navigate to ="/profile"/>
 
     const {changePassVisual} = props
     return <>
@@ -18,6 +15,7 @@ function ChangePass(props) {
             changePassVisual(oldpassword,password)
   
         }}>
+            <h1>Cambio de contraseña</h1>
             <div className="changepass_inputs">
                 <input className="changepass" type="password" placeholder="password" name="oldpassword" />
                 <input className="changepass" type="password" placeholder="newpassword" name="password" />

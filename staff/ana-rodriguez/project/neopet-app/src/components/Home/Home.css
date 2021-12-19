@@ -61,7 +61,7 @@
   top: calc(50% - 1.75em);
 }
 
-#search__container {
+#search__container,#profile__container {
   display: flex;
   flex-flow: column;
   height: calc(100vh - 115px);

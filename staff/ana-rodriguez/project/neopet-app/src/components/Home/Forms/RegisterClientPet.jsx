@@ -1,8 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from "react";
 import { getSpecies, getGenre, getRaceById } from '../../../logic/combos';
-import registerPet from '../../../logic/registerPet';
-import registerClient from '../../../logic/registerClient';
+import {registerPet,registerClient,registerUserClient}from '../../../logic';
 import Combo from '../../Forms-components/Combo';
 import './styles/RegisterClientPet.css';
 import { useNavigate } from 'react-router-dom';
@@ -14,9 +13,9 @@ function RegisterClientPet() {
     const [genre, setGenre] = useState([]);
     // const [petCount, setPetCount] = useState([0]);
     const navigate = useNavigate();
-    let valueComboSpecie;
-    let valueComboRace;
-    let valueComboGenre;
+    const [valueComboSpecie,setComboSpecie] = useState('');
+    const [valueComboRace,setComboRace] = useState('');
+    const [valueComboGenre,setComboGenre] = useState('');
     useEffect(() => {
         getSpecies((err, res) => {
             setSpecies(res);
@@ -29,41 +28,24 @@ function RegisterClientPet() {
 
     function specieSelect(event) {
         const id = event.target.value;
-        valueComboSpecie = id;
+        setComboSpecie(species.find(obj=>obj.id === parseInt(id)).value);
         getRaceById(parseInt(id), (err, res) => {
             setRace(res);
-        });
+        })
     };
     //Aquí guardo los valores de los combo, en las tres funciones
     function raceSelect(event) {
         const id = event.target.value;
-        valueComboRace = id;
-        // if(valorComboRaza === "515"){
-        //     setMestizo(true);
-        // }else{
-        //     setMestizo(false);
-        // }
+        setComboRace(race.find(obj=>obj.id === parseInt(id)).value);
     }
 
     function genreSelect(event) {
         const id = event.target.value;
-        valueComboGenre = id;
+        setComboGenre(genre.find(obj=>obj.id === id).value);
     }
-    // function addPet(e) {
-    //     e.preventDefault();
-    //     setPetCount([...petCount, petCount.length]);
-    // };
-
-    // function removePet(event) {
-    //     event.preventDefault();
-    //     if (petCount.length > 1) {
-    //         const newPetCount = petCount.slice(0, -1);
-    //         setPetCount([...newPetCount]);
-    //     };
-    // };
 
     const registerClientOnSubmit = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
         try {
             //CLIENT
             const client = {
@@ -88,28 +70,25 @@ function RegisterClientPet() {
                 layer: event.target.layer.value,
                 genre: valueComboGenre,
                 age: event.target.age.value,
-                pedigree: event.target.pedigree.value,
+                pedigree: event.target.pedigree.checked,
                 passport: event.target.passport.value,
-                alta: event.target.alta.value,
-            };
+                date: event.target.date.value,
+            }
 
             /**
              * registra el cliente
              */
             const newClient = await registerClient(sessionStorage.token, client)
 
-            // const newPet = 
+            await registerUserClient(newClient.id,client.email,client.document)
+
             await registerPet(sessionStorage.token, newClient.id, pet)
 
-            //manejamos que hacemos cuándo ambos están registrados
-            alert('cliente y mascota registradas correctamente');
+            alert('cliente y mascota registradas correctamente')
 
-            // TODO: Enviar a la ficha
-            navigate('/file/' + newClient.id)
+            navigate('/home/clientPet/file/' + newClient.id)
         }
         catch (err) {
-            // Manejo el error
-            // TODO: Feedback;
             alert(err.message)
         }
     };
@@ -143,7 +122,7 @@ function RegisterClientPet() {
                     <label htmlFor="pedigree">Pedigree</label><input className="reCliPet" id='pedigree' type="checkbox" name="pedigree" />
                 </div>
                 <label>Pasaporte<input className="reCliPet" type="text" name="passport" /></label>
-                <label>Alta<input className="reCliPet" type="text" name="alta" /></label>
+                <label>Alta<input className="reCliPet" type="text" name="date" /></label>
             </div>
 
             <button className="button_CliPet" type="submit">Enviar<img src="http://localhost:3000/prescripcion.png"></img></button>

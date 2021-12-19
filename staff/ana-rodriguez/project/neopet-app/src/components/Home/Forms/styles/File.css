@@ -21,9 +21,15 @@
     margin: 7px;
     align-items: center;
 }
-
-.file_container li{
+.file_container li:not(:last-child){
+    margin-left: 20px;
+    padding: 5px;
+}
+.file_container li:last-child{
     list-style-type: none;
+    margin-left: 0;
+    display: flex;
+    align-items: center;
 }
 
 .file_container button {
@@ -60,4 +66,16 @@ textarea{
 
 .file_container button.alert{
     background-color: orangered;
+}
+
+.file_data{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: rgba(255,255,255,.5);
+    padding: 10px;
+    margin: 10px 0;
+    color:black;
+}
+.file_data p{
+    margin: 5px 0;
 }

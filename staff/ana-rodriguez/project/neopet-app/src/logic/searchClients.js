@@ -17,13 +17,13 @@ const searchClients = (token, client) => {
         if (res.status === 200) {
             let url;
             if (firstName && lastName) {
-                url = "http://localhost:8000/clients?firstName=" + firstName + "&lastName=" + lastName;
+                url = "http://localhost:8000/clients?q=" + firstName + " " + lastName;
             }
             else if (firstName) {
-                url = "http://localhost:8000/clients?firstName=" + firstName
+                url = "http://localhost:8000/clients?q=" + firstName
             }
             else if (lastName) {
-                url = "http://localhost:8000/clients?lastName=" + lastName
+                url = "http://localhost:8000/clients?q=" + lastName
             }
             else if (id) {
                 url = "http://localhost:8000/clients?id=" + id

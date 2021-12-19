@@ -1,199 +1,62 @@
 {
   "clients": [
     {
-      "firstName": "Pepito",
-      "lastName": "Grillo",
-      "phone": "+34 712 345 678",
-      "email": "pepigri@gmail.com",
-      "document": "00000000T",
-      "address": "calle Disney nº2, Disney,Pais Italia",
+      "firstName": "Peter",
+      "lastName": "Parker",
+      "phone": "987654321",
+      "direction": "Calle New York 89",
+      "email": "parker@mail.com",
+      "document": "12345678P",
       "id": 1
     },
     {
-      "firstName": "Peter",
-      "lastName": "Pan",
-      "phone": "+34 712 555 666",
-      "email": "peterpan@gmail.com",
-      "document": "00000001S",
-      "address": "Calle Nunca Jamas nº8 Nunca Jamas,Pais Nunca jamas",
+      "firstName": "Pedro",
+      "lastName": "Picapiedra",
+      "phone": "666666666",
+      "direction": "Calle Narnia 38",
+      "email": "yo@mail.com",
+      "document": "12345678A",
       "id": 2
-    },
-    {
-      "firstName": "Wendy",
-      "lastName": "Pan",
-      "phone": "+34 712 777 333",
-      "email": "wendypan@gmail.com",
-      "document": "00000001F",
-      "address": "Calle Nunca Jamas nº8 Nunca Jamas,Pais Nunca jamas",
-      "id": 3
-    },
-    {
-      "firstName": "Ana",
-      "lastName": "Rodriguez",
-      "phone": "+34 712 456 234",
-      "email": "anaro@gmail.com",
-      "document": "12312318I",
-      "address": "Calle Micky Mouse nº10 Disney,Pais Nunca jamas",
-      "id": 4
-    },
-    {
-      "firstName": "Ana",
-      "lastName": "García",
-      "phone": "+34 712 111 222",
-      "email": "anagarcia@gmail.com",
-      "document": "123234234P",
-      "address": "Calle Micky Mouse nº10 Disney,Pais Nunca jamas",
-      "id": 5
-    },
-    {
-      "firstName": "Pedro",
-      "lastName": "Picapiedra",
-      "phone": "666666666",
-      "address": "Calle Narnia 38",
-      "email": "picapiedra@mail.com",
-      "document": "65432148H",
-      "id": 6
-    },
-    {
-      "firstName": "Pedro",
-      "lastName": "Picapiedra",
-      "phone": "666666666",
-      "address": "Calle Narnia 38",
-      "email": "kasjbfjh@asmvbfnmn.com",
-      "document": "asdasdawdaevwved",
-      "id": 7
     }
-    
   ],
   "pets": [
     {
-      "id": 1,
-      "client": 1,
-      "name": "Rechonchito",
-      "age": 6,
-      "gender": "male",
-      "species": "canine",
-      "race": "bulldog",
-      "pedigree": true,
-      "chip": "1234X",
-      "date": "2021-12-01"
-    },
-    {
-      "id": 2,
-      "client": 2,
-      "name": "Mary",
-      "age": 3,
-      "gender": "female",
-      "species": "feline",
-      "race": "eurepan common",
-      "pedigree": false,
-      "chip": "234234Y",
-      "date": "2021-12-07"
-    },
-    {
-      "id": 3,
-      "client": 2,
-      "name": "John",
-      "age": 3.5,
-      "gender": "male",
-      "species": "feline",
-      "race": "eurepan common",
-      "pedigree": false,
-      "chip": "1234123Z",
-      "date": "2021-12-07",
-      "vacunas": [
-        {
-          "fecha": "",
-          "producto": ""
-        }
-      ],
-      "desparasitaciones": [
-        {
-          "fecha": "",
-          "producto": ""
-        }
-      ],
-      "notas": [
-        {
-          "fecha": "",
-          "texto": ""
-        }
-      ]
-    },
-    {
-      "id": 4,
-      "client": 3,
-      "name": "Nani",
-      "age": 4,
-      "gender": "female",
-      "species": "canine",
-      "race": "san bernard",
-      "pedigree": true,
-      "chip": "345435U",
-      "date": "2021-12-05"
-    },
-    {
-      "client": 4,
-      "name": "Marvel",
-      "age": 2,
-      "gender": "male",
-      "species": "feline",
-      "race": "european common",
-      "pedigree": false,
-      "chip": "1234k",
-      "date": "2021-12-09",
-      "id": 5,
-      "weigth":"6.5kg",
-      "vaccines": [
-        {
-          "date": "10/10/2021",
-          "product": "Pfizer",
-          "vaccine":"Covid"
-        },
-        {
-          "date": "10/10/2021",
-          "product": "Corolla",
-          "vaccine":"Rabia"
-        }
-      ],
-      "deparasite": [
-        {
-          "date": "",
-          "product": ""
-        }
-      ],
-      "notes": [
-        {
-          "date": "10/10/2020",
-          "note": "Ladronzuelo...."
-        }
-      ]
-    },
-    {
-      "name": "Dino",
-      "chip": "45646dsfa",
+      "name": "Coco",
+      "chip": "7894511ixIXONCWE546884",
       "tatoo": "",
-      "hair": "corto",
-      "layer": "marron",
-      "age": "10/12/2017",
-      "pedigree": "on",
+      "specie": "Canina",
+      "race": "Border collie",
+      "mestizo": "",
+      "hair": "Largo",
+      "layer": "Negro y Blanco",
+      "genre": "Macho",
+      "age": "12/09/2021",
+      "pedigree": true,
       "passport": "",
-      "alta": "12/12/2021",
-      "client": 6,
-      "id": 6
+      "date": "19/12/2021",
+      "client": 1,
+      "id": 1
     },
-    
     {
-      "id": 9,
-      "client": 3,
-      "name": "Rechonchito",
-      "age": 3,
-      "gender": "male",
-      "species": "feline",
-      "race": "eurepan common",
+      "name": "artuyui",
+      "chip": "ASDSF5649872DA566513",
+      "tatoo": "NO",
+      "specie": "Canina",
+      "race": "Affenpinscher",
+      "mestizo": "",
+      "hair": "corto",
+      "layer": "Canela",
+      "genre": "Macho",
+      "age": "12/05/2010",
       "pedigree": false,
-      "chip": "234334OP",
-      "date": "2020-11-01"
+      "passport": "549875fwsf",
+      "date": "",
+      "client": 2,
+      "id": 2
     }
-  ]
+  ],
+  "weigth": [],
+  "notes": [],
+  "vaccines": [],
+  "deparasite": []
 }

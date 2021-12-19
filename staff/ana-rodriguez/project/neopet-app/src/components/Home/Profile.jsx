@@ -14,7 +14,7 @@ function Profile() {
            <li><Link to='/home/profile/unregister' ><button className="button"><img src="http://localhost:3000/emoji-sad.png"/>Unregister</button></Link></li>
             </ul>
         </nav>
-        <div>
+        <div id='profile__container'>
             <Outlet />
         </div>
     </>
