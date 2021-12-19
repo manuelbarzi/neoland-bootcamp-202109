@@ -12,6 +12,7 @@ import addVehicleToCart from './add-vehicle-to-cart'
 import removeVehicleFromCart from './remove-vehicle-from-cart'
 import addComent from "./add-coment";
 import retrieveComment from "./retrieve-coments";
+import authorizeUser from './authorize-user';
 import context from './context'
 
 
@@ -30,5 +31,6 @@ export {
     addVehicleToCart,
     removeVehicleFromCart,
     addComent,
-    retrieveComment
+    retrieveComment,
+    authorizeUser
 }

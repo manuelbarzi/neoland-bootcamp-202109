@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './style.css';
 import App from './components/App.jsx';
+import { BrowserRouter as Router } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
 import { context } from './logic'
 
@@ -10,7 +11,9 @@ context.API_URL = process.env.REACT_APP_API_URL
 
 ReactDOM.render(
   <React.StrictMode>
+    <Router>
     <App />
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

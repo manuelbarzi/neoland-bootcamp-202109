@@ -1,12 +1,11 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState } from 'react'
+import Search from "./Search"
 import Results from './Results'
 import ResultDetails from './ResultDetails'
 import Profile from './Profile'
 import UnRegister from './Unregister'
 import Favs from './Favs'
 import Cart from './Cart'
-import AppContext from './AppContext'
-
 
 
 //Logical
@@ -14,7 +13,9 @@ import AppContext from './AppContext'
 import {
   updateUserPassword,
   unregisterUser,
-  retrieveUser,
+  searchVehicles,
+  retrieveVehicle,
+  toggleFav,
   retrieveFavVehicles,
   retrieveVehiclesCart,
   addVehicleToCart,
@@ -22,10 +23,7 @@ import {
 } from '../logic/index'
 
 
-function Home({showSpinner, hideSpinner, showModal, onSignOut, toggleFav, showDetails}) {
-
-  const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
-
+function Home({ onSignOut, showSpinner, hideSpinner, showModal }) {
   const [view, setView] = useState('search')
   const [vehicles, setVehicles] = useState([])
   const [vehicle, setVehicle] = useState({})
@@ -38,32 +36,7 @@ function Home({showSpinner, hideSpinner, showModal, onSignOut, toggleFav, showDe
   const goToResults = () => setView('results')
   const goToUnregister = () => setView('unregister')
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(async () => {
 
-    const { token } = sessionStorage
-    
-    if (token) {
-        try {
-            onFlowStart()
-    
-            const user = await retrieveUser(token)
-
-            onFlowEnd()
-            
-            const { username } = user
-            
-            setUsername(username)
-        } catch ({ message }) {
-            onFlowEnd()
-            
-            // onModal ()
-
-            // onAuthError()
-        }
-    }
-}, [])
-  
 
   const updatePassword = (oldPassword, password) => {
     showSpinner()
@@ -262,13 +235,13 @@ function Home({showSpinner, hideSpinner, showModal, onSignOut, toggleFav, showDe
         <button className="button button-medium button" onClick={() => onSignOut()}>Sign out</button>
       </div>
 
-      {/* {(view === 'search' || view === 'results') && <Search onSubmitSearch={search} />} */}
-      {view === 'results' && <Results items={vehicles} onVehicle={showDetails} onToggleFav={onToggleFav} />}
+      {(view === 'search' || view === 'results') && <Search  />}
+      {view === 'results' && <Results items={vehicles} onToggleFav={onToggleFav} />}
       {view === 'profile' && <Profile onGoBack={goToResults} onSubmitUpdate={updatePassword} onUnRegister={goToUnregister} />}
-      {view === 'favs' && <Favs onGoback={goToResults} items={favs} onToggleFav={onToggleFav} onVehicle={showDetails} />}
+      {view === 'favs' && <Favs onGoback={goToResults} items={favs} onToggleFav={onToggleFav}  />}
       {view === 'details' && <ResultDetails item={vehicle} onBack={goToResults} onToggleFav={onToggleFav} onAddToCart={addToCart} />}
       {view === 'unregister' && <UnRegister onSubmitUnRegister={unRegister} onGoBack={goToProfile} showModal={showModal} />}
-      {view === 'cart' && <Cart items={cart} onBack={goToResults} onAdd={addToCart} onRemove={removeFromCart} onVehicle={showDetails} />}
+      {view === 'cart' && <Cart items={cart} onBack={goToResults} onAdd={addToCart} onRemove={removeFromCart}  />}
 
     </div>
   </>

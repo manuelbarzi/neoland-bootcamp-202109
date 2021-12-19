@@ -1,4 +1,4 @@
-function UnRegister({ onSubmitUnRegister, onGoBack }) {
+function Unregister({ onUnregister, onBack}) {
     return <>
         <div className="unregister container container--vertical container--gapped">
             <form className="container container--vertical" onSubmit={(event) => {
@@ -6,12 +6,12 @@ function UnRegister({ onSubmitUnRegister, onGoBack }) {
 
                 const password = event.target.password.value
 
-                onSubmitUnRegister(password)
+                onUnregister(password)
             }}  >
                 <input className="field" type="password" name="password" id="password" placeholder="password" />
 
                 <div className="container">
-                    <button className="button button--medium" onClick={() => onGoBack()}>Go back</button>
+                    <button className="button button--medium" onClick={() => onBack()}>Go back</button>
                     <button className="button button--medium button--dark">Unregister</button>
                 </div>
             </form>
@@ -19,4 +19,4 @@ function UnRegister({ onSubmitUnRegister, onGoBack }) {
     </>
 }
 
-export default UnRegister
+export default Unregister

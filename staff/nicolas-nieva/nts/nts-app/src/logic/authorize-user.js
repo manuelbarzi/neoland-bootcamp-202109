@@ -1,28 +1,29 @@
 import context from './context'
 
-function signinUser(username, password) {
-    //to do validates
-    
+function authorizeUser(username, password) {
+    //todo validates
+ 
     return (async () => {
-        const res = await fetch(`${context.API_URL}/users`, {
+        const res = await fetch(`${context.API_URL}/users/auth`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(username, password)
         })
-        
+
         const { status } = res
 
-        if (status === 201)
-            return
-        else if (status === 409 || status === 400) {
+        if (status === 200) {
+            const { token } = await res.json()
+
+            return token
+        } else if (status === 401) {
             const { error } = await res.json()
 
             throw new Error(error)
-        } else throw new Error('unknoun error')
+        } else throw new Error('unknown error')
     })()
 }
 
-
-export default signinUser
+export default authorizeUser
