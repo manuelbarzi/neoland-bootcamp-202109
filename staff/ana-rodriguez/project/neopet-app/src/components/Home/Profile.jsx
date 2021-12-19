@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link, Outlet, Navigate } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import './Home.css';
 
 
 function Profile() {
-
-    //Comprobar si hay token
 
     return <>
         <nav className="nav__buttons">

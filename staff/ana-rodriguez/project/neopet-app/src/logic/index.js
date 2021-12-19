@@ -9,7 +9,6 @@ import registerUserClient from './registerUserClient';
 import searchClients from './searchClients';
 import searchPets from './searchPets';
 import modifyClient from './modifyClient';
-import getFilePet from './getFilePet';
 
 import registerDeparasite from './filePet/registerDeparasite';
 import registerNotes from './filePet/registerNotes';
@@ -22,6 +21,11 @@ import deleteNotes from './filePet/deleteNotes';
 import deleteVaccines from './filePet/deleteVaccines';
 import deleteWeights from './filePet/deleteWeights';
 import deleteClient from './filePet/deleteClient';
+
+import getVaccines from './filePet/getVaccines';
+import getDeparasite from './filePet/getDeparasite';
+import getWeight from './filePet/getWeigth';
+import getNotes from './filePet/getNotes';
 
 // import search from './search'
 // import retrieveSearch from './retrieve-search'
@@ -38,7 +42,6 @@ export {
     searchClients,
     searchPets,
     modifyClient,
-    getFilePet,
     registerDeparasite,
     registerNotes,
     registerVaccine,
@@ -48,5 +51,9 @@ export {
     deleteNotes,
     deleteVaccines,
     deleteWeights,
-    deleteClient
+    deleteClient,
+    getDeparasite,
+    getNotes,
+    getVaccines,
+    getWeight
 }

@@ -1,4 +1,4 @@
-const getDesparasite = (token, petId) => {
+const getDeparasite = (token, petId) => {
 
     if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
     if (typeof petId !== 'number') throw new TypeError(`${petId} is not a number`)
@@ -13,6 +13,8 @@ const getDesparasite = (token, petId) => {
 
             const getDeparasites = await fetch("http://localhost:8000/deparasite?petId=" + petId, {})
             if (getDeparasites.status === 200) {
+                const deparasite = await getDeparasites.json()
+                return deparasite
 
             } else if (getDeparasites.status === 401 || getDeparasites.status === 404) {
                 const { error } = await getDeparasites.json()
@@ -28,4 +30,4 @@ const getDesparasite = (token, petId) => {
 
 }
 
-export default getDesparasite
+export default getDeparasite

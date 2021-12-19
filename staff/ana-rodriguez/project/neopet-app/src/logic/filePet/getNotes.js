@@ -15,8 +15,8 @@ const getNotes = (token, petId) => {
 
             const getNotes = await fetch("http://localhost:8000/notes?petId=" + petId, {})
             if (getNotes.status === 200) {
-                const notes = await getNotes.json(); // Array de notas
-                FilePet.notes = notes; // añado las notas al objeto a retornar
+                const notes = await getNotes.json()
+                return notes
 
             } else if (getNotes.status === 401 || getNotes.status === 404) {
                 const { error } = await getNotes.json()

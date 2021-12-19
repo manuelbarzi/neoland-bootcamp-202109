@@ -1,25 +1,44 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getFilePet, registerDeparasite, registerNotes, registerVaccine, registerWeight, deleteNotes, deleteDeparasites, deleteVaccines, deleteWeights, deletePet } from '../../../../logic';
+import { getFilePet, registerDeparasite, registerNotes, registerVaccine, registerWeight, deleteNotes, deleteDeparasites, deleteVaccines, deleteWeights, deletePet, getWeight, getNotes,getVaccines, getDeparasite } from '../../../../logic';
 import { useState, useEffect } from 'react';
 
 
 function FilePet({ pet }) {
     // destructuring del objeto pet pasado por params
-    const { id, hair, layer, age, genre, specie, race, pedigree, chip, date, name,tatoo,passport } = pet;
-    // Hook para datos de la consulta de 
-    // vaccines, deparasite, notes, weigth
+    const { id, hair, layer, age, genre, specie, race, pedigree, chip, date, name, tatoo, passport } = pet;
+   
     const [filePet, setFilePet] = useState([]);
 
     // Carga Inicial de la mascota
     useEffect(() => {
         (async () => {
+
             try {
-                const gettedFile = await getFilePet(sessionStorage.token, id);
-                setFilePet(gettedFile);//Guardo el objetode la lógica
-            } catch (err) {
-                alert(err);
-                if (err.message === 'invalid token') {
+
+                let FilePet = {
+                    weight: [],
+                    vaccines: [],
+                    deparasite: [],
+                    notes: []
+                }
+                const vaccinesGetted = await getVaccines(sessionStorage.token, id)
+                FilePet.vaccines = vaccinesGetted
+
+                const deparasiteGetted = await getDeparasite(sessionStorage.token, id)
+                FilePet.deparasite = deparasiteGetted
+
+                const weigthGetted = await getWeight(sessionStorage.token, id)
+                FilePet.weight = weigthGetted
+
+                const notesGetted = await getNotes(sessionStorage.token, id)
+                FilePet.notes = notesGetted
+
+                setFilePet(FilePet)
+
+            } catch (error) {
+                alert(error)
+                if (error.message === 'invalid token') {
                     navigate('/login')
                 }
             }
@@ -113,7 +132,7 @@ function FilePet({ pet }) {
                     <p>Genero: {genre}</p>
                     <p>Especie: {specie}</p>
                     <p>Raza: {race}</p>
-                    <p>Pedigree: {pedigree?'Si':'No'}</p>
+                    <p>Pedigree: {pedigree ? 'Si' : 'No'}</p>
                     <p>Chip: {chip}</p>
                     <p>Alta: {date}</p>
                     <p>Pelo: {hair}</p>

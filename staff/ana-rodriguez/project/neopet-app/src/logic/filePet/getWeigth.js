@@ -15,7 +15,7 @@ const getWeigths = (token, petId) => {
 
             if (getWeigths.status === 200) {
                 const weigth = await getWeigths.json();
-                return weigth //devuelvo el objeto con todos los datos
+                return weigth 
 
             } else if (getWeigths.status === 401 || getWeigths.status === 404) {
                 const { error } = await getWeigths.json()

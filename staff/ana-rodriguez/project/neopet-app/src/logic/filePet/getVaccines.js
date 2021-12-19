@@ -14,8 +14,8 @@ const getVaccines = (token, petId) => {
             const getVaccines = await fetch("http://localhost:8000/vaccines?petId=" + petId, {})
             if (getVaccines.status === 200) {
 
-                const vaccines = await getVaccines.json(); // Array de vacunas
-                FilePet.vaccines = vaccines; // añado las vacunas al objeto a retornar 
+                const vaccines = await getVaccines.json()
+                 return vaccines
             } else if (getVaccines.status === 401 || getVaccines.status === 404) {
                 const { error } = await getVaccines.json()
                 throw new Error(error)
