@@ -1,11 +1,14 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { updateUserProfile, unregisterUser } from '../logic'
+import AppContext from './AppContext'
 import logger from '../utils/logger'
 import Unregister from './Unregister'
 import Update from './Update'
-import { updateUserProfile, unregisterUser } from '../logic'
 
-function Profile({ onBack, onFlowStart, onFlowEnd, onModal, onSignOut }) {
+function Profile({ onBack, onSignOut }) {
     logger.debug('Profile -> render')
+
+    const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
 
     const [view, setView] = useState(null)
     

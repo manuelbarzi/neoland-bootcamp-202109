@@ -1,5 +1,4 @@
 require('dotenv').config()
-
 const express = require('express')
 const bodyParser = require('body-parser')
 const { mongoose } = require('logical-echo-data')
@@ -19,7 +18,7 @@ const logger = require('./utils/my-logger')
 
 const { env: { PORT, MONGO_URL }, argv: [, , port = PORT || 8080] } = process
 
-logger.info('starting server')
+logger.info('starting server');
 
 (async () => {
     try {
@@ -60,7 +59,6 @@ logger.info('starting server')
 
             process.exit(0)
         })
-
     } catch (error) {
         logger.error(error)
     }

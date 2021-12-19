@@ -1,45 +1,38 @@
+import context from './context'
 const { validateToken, validatePassword, validateCallback } = require('./helpers/validators')
 /**
  * Unregisters the user in the application.
  * 
  * @param {string} token The token sent by the server when the user is authorized.
  * @param {string} password The password of the user to be unregistered.
- * @param {function} callback The callback function to manage the response.
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
- function unregisterUser(token, password, callback) {
+ function unregisterUser(token, password) {
     validateToken(token)
     validatePassword(password)
-    validateCallback(callback)
 
-    const xhr = new XMLHttpRequest()
+    return (async () => {
+        const res = await fetch(`${context.API_URL}/users`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ password })
+        })
 
-    xhr.onload = () => {
-        const { status, responseText } = xhr
+        const { status } = res 
 
-        if (status === 400 || status === 401) {
-            const response = JSON.parse(responseText)
+        if (status === 204)
+            return  
+        else if (status === 400 || status === 401) {
+            const { error } = await res.json()
 
-            const message = response.error
-
-            callback(new Error(message))
-
-        } else if (status === 204) {
-            callback(null)
-        }
-    }
-
-    xhr.open('DELETE', 'https://localhost/users')
-
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token)
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    const body = { password }
-
-    xhr.send(JSON.stringify(body))
+            throw new Error(error)
+        } else throw new Error('Unknown error')
+    })()
 }
 
 export default unregisterUser

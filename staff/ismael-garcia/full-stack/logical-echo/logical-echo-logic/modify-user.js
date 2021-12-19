@@ -39,7 +39,7 @@ function modifyUser(id, data) {
         
         } catch (error) {
             if (error.code === 11000)
-                throw new ConflictError(`user with username ${data.username} already exists`)
+                throw new ConflictError(`user with email ${data.email} already exists`)
             
             throw error
         }

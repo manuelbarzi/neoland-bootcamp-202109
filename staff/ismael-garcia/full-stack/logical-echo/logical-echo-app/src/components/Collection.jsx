@@ -1,12 +1,12 @@
 import { useQueryParams } from '../hooks'
 import { useState, useEffect, useContext } from 'react'
-import { searchItems, toggleFavItem } from '../logic'
+import { retrieveItemsCollection, toggleFavItem } from '../logic'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
-// import './Results.css'
+// import './Collection.css'
 
-function Results({ onItem }) {
-    logger.debug('Results -> render')
+function Collection({ onItem }) {
+    logger.debug('Collection -> render')
 
     const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
 
@@ -14,7 +14,7 @@ function Results({ onItem }) {
 
     const queryParams = useQueryParams()
 
-    const query = queryParams.get('q')
+    const store = queryParams.get('store')
 
     useEffect(async () => {
         const { token } = sessionStorage
@@ -22,7 +22,7 @@ function Results({ onItem }) {
         try {
             onFlowStart()
 
-            const items = await searchItems(token, query)
+            const items = await retrieveItemsCollection(token, store)
                 
             onFlowEnd()
                 
@@ -33,7 +33,7 @@ function Results({ onItem }) {
 
             onModal(message, 'warn')
         }
-    }, [query])
+    }, [store])
 
 
     const toggleFav = id => {
@@ -85,4 +85,4 @@ function Results({ onItem }) {
         null
 }
 
-export default Results
+export default Collection

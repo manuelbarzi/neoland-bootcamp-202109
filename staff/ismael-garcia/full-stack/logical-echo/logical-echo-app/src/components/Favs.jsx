@@ -1,10 +1,13 @@
-import logger from '../utils/logger.js'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import AppContext from './AppContext'
 import { retrieveFavItems, toggleFavItem } from '../logic'
+import logger from '../utils/logger.js'
 // import './Favs.css'
 
-function Favs({ onBack, onItem, onFlowStart, onFlowEnd, onModal }) {
+function Favs({ onBack, onItem }) {
     logger.debug('Favs -> render')
+
+    const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
 
     const [items, setItems] = useState()
 

@@ -4,6 +4,7 @@ import Logo from './Logo'
 import Home from './Home'
 import Spinner from './Spinner'
 import Modal from './Modal'
+import AppContext from './AppContext'
 import '../assets/logical-echo-logo.png'
 
 function App() {
@@ -27,17 +28,19 @@ function App() {
 
 
     return <>
-        <Logo image="../assets/logical-echo-logo.png" text='Logical Echo' />
+        <AppContext.Provider value={{
+            onFlowStart: showSpinner,
+            onFlowEnd: hideSpinner,
+            onModal: showModal
+        }}>
+            <Logo image="../assets/logical-echo-logo.png" text='Logical Echo' />
 
-        {<Home  
-            onFlowStart={showSpinner}
-            onFlowEnd={hideSpinner}
-            onModal={showModal} 
-        />}
+            {<Home />}
 
-        {spinner && <Spinner />}
+            {spinner && <Spinner />}
 
-        {modal && <Modal level={level} message={modal} onAccept={acceptModal} />}
+            {modal && <Modal level={level} message={modal} onAccept={acceptModal} />}
+        </AppContext.Provider>
     </>
 }
 

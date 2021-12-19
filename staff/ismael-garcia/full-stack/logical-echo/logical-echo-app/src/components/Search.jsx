@@ -17,10 +17,18 @@ function Search({ onSearch, onStore, query }) {
             <button type="button" className="button button--medium button--dark" onClick={event => {
                 event.preventDefault()
 
-                onStore('Zara')
+                onStore('Zara') 
             }}>Zara</button>
-            <button type="button" className="button button--medium button--dark">H&M</button>
-            <button type="button" className="button button--medium button--dark">Mango</button>
+            <button type="button" className="button button--medium button--dark" onClick={event => {
+                event.preventDefault()
+
+                onStore('HM')
+            }}>H&M</button>
+            <button type="button" className="button button--medium button--dark" onClick={event => {
+                event.preventDefault()
+
+                onStore('Mango')
+            }}>Mango</button>
         </form>
 
         <Outlet />

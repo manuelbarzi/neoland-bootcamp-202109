@@ -1,10 +1,6 @@
 const { Schema } = require('mongoose')
 
 const subscription = new Schema({
-    user_id: {
-        type: String,
-        unique: true
-    },
     email: {
         type: String,
         required: true,

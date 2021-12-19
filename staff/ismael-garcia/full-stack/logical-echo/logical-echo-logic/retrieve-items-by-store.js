@@ -6,9 +6,9 @@ function retrieveItemsByStore(store) {
     validateStore(store)
 
     return (async () => {
-        const items = await Item.find({ store: store }).exec()
+        const items = await Item.find({ store: store }, 'id name images price').exec()
 
-        if (!items.length) throw new NotFoundError(`items with store ${store} not found`)
+        if (!items.length) throw new NotFoundError(`no items found from ${store} store`)
 
         return items
     })()

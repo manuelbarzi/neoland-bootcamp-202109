@@ -1,62 +1,55 @@
-import { validateStore, validateCallback } from "./helpers/validators"
+import context from './context'
+import { validateStore, validateToken } from "./helpers/validators"
 
 /**
  * Retrieves the details of the selected item.
  * 
  * @param {string} store The store from which all the items will be retrieved.
- * @param {function} callback The callback function to manage the response.
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
  */
- function retrieveItemsCollection(token, store, callback) {
+ function retrieveItemsCollection(token, store) {
+    if (token)
+        validateToken(token)
+
     validateStore(store)
-    validateCallback(callback)
 
-    const xhr = new XMLHttpRequest()
+    return (async () => {
+        const res = await fetch(`${context.API_URL}/users`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
 
-    xhr.onload = () => {
-        const { status, responseText } = xhr
+        const { status } = res 
 
         if (status === 401 || status === 404) {
-            const response = JSON.parse(responseText)
+            const { error } = res.json()
 
-            const message = response.error
-
-            callback(new Error(message))
+            throw new Error(error)
         } else if (status === 200) {
-            const response = responseText
-            
-            const user = JSON.parse(response)
+            const user = await res.json()
 
-            const { favs = [] } = user
+            const { favs = [] } = user 
 
-            const xhr2 = new XMLHttpRequest()
+            const res2 = await fetch(`http://localhost:8000/api/items/store?q=${store}`, {
+                method: 'GET'
+            })
 
-            xhr2.onload = () => {
-                const { status, responseText } = xhr2
+            const { status } = res2 
 
-                if (status === 200) {
-                    const items = JSON.parse(responseText)
+            if (status === 200) {
+                const items = await res2.json()
 
-                    if (!items) return callback(new Error(`no items found with store ${store}`))
+                items.forEach(item => {
+                    item.isFav = favs.includes(item.id)
+                })
 
-                    items.forEach(item => item.isFav = favs.includes(item.id))
-
-                    callback(null, items)
-                }
+                return items 
             }
-
-            xhr2.open('GET', `https://localhost/items/${store}`)
-
-            xhr2.send() 
-        }
-    }
-
-    xhr.open('GET', 'https://localhost/users')
-
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-
-    xhr.send()
+        } else throw new Error('Unknown error')
+    })()
 }
 
 export default retrieveItemsCollection

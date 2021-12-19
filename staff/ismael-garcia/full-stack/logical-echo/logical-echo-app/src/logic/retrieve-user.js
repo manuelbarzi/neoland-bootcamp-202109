@@ -1,44 +1,35 @@
-const { validateToken, validateCallback } = require('./helpers/validators')
+import context from './context'
+const { validateToken } = require('./helpers/validators')
 /**
  * Retrieves the info about the user from the server.
  * 
  * @param {string} token The token sent by the server when the user is authorized.
- * @param {function} callback The callback function to manage the response.
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
- function retrieveUser(token, callback) {
-    // if (!token) throw new Error('invalid token')
+ function retrieveUser(token) {
     validateToken(token)
-    validateCallback(callback)
 
-    const xhr = new XMLHttpRequest()
+    return (async () => {
+        const res = await fetch(`${context.API_URL}/users`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
 
-    xhr.onload = () => {
-        const { status, responseText } = xhr
+        const { status } = res 
 
-        if (status === 401 || status === 404) {
-            const response = JSON.parse(responseText)
+        if (status === 200)
+            return await res.json()
 
-            const message = response.error
+        else if (status === 401 || status === 404) {
+            const { error } = await res.json()
 
-            callback(new Error(message))
-
-        } else if (status === 200) {
-            const response = responseText
-
-            const user = JSON.parse(response)
-
-            callback(null, user)
-        }
-    }
-
-    xhr.open('GET', 'https://localhost/users')
-
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token)
-
-    xhr.send()
+            throw new Error(error)
+        } else throw new Error('Unknown error')
+    })()
 }
 
 export default retrieveUser

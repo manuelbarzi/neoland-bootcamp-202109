@@ -1,12 +1,14 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { signUpUser, signInUser, retrieveUser } from '../logic'
+import AppContext from './AppContext'
 import logger from '../utils/logger'
 import SignUp from './SignUp'
 import SignIn from './SignIn'
-import { signUpUser, signInUser, retrieveUser } from '../logic'
 
-
-function Account({ onBack, onFlowStart, onFlowEnd, onModal }) {
+function Account({ onBack }) {
     logger.debug('Account -> render')
+
+    const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
 
     const [view, setView] = useState('signin')
 

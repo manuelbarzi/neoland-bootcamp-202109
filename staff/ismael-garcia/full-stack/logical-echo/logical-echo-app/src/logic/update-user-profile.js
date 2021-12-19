@@ -1,45 +1,38 @@
-const { validateToken, validateCallback, validateData } = require('./helpers/validators')
+import context from './context'
+const { validateToken, validateData } = require('./helpers/validators')
 /**
  * Updates the user's profile in the application.
  * 
  * @param {string} token The token sent by the server when the user is authorized.
- * @param {object} data An object that can contain name, username, password and new password.
- * @param {function} callback The callback function to manage the response.
+ * @param {object} data An object that contains password and can contain new email and new password.
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
- function updateUserProfile(token, data, callback) {
+ function updateUserProfile(token, data) {
     validateToken(token)
     validateData(data)
-    validateCallback(callback)
 
-    const xhr = new XMLHttpRequest()
+    return (async () => {
+        const res = await fetch(`${context.API_URL}/users`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(data)
+        })
 
-    xhr.onload = () => {
-        const { status, responseText } = xhr
+        const { status } = res 
 
-        if (status === 400 || status === 401) {
-            const response = JSON.parse(responseText)
+        if (status === 204)
+            return  
+        else if (status === 400 || status === 401) {
+            const { error } = await res.json()
 
-            const message = response.error
-
-            callback(new Error(message))
-
-        } else if (status === 204) {
-            callback(null)
-        }
-    }
-
-    xhr.open('PATCH', 'https://localhost/users')
-
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token)
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    const body = data
-
-    xhr.send(JSON.stringify(body))
+            throw new Error(error)
+        } else throw new Error('Unknown error')
+    })()
 }
 
 export default updateUserProfile

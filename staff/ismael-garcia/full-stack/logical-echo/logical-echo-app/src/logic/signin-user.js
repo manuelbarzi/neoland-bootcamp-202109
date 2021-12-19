@@ -1,46 +1,40 @@
-const { validateEmail, validatePassword, validateCallback } = require('./helpers/validators')
+import context from './context'
+const { validateEmail, validatePassword } = require('./helpers/validators')
 /**
  * Logs a user in the application.
  * 
  * @param {string} email The email of the user to be logged in.
  * @param {string} password The password of the user to be logged in.
- * @param {function} callback The callback function to manage the response.
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
- function signInUser(email, password, callback) {
+ function signInUser(email, password) {
     validateEmail(email)
     validatePassword(password)
-    validateCallback(callback)
 
-    const xhr = new XMLHttpRequest()
+    return (async () => {
+        const res = await fetch(`${context.API_URL}/users/auth`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        })
 
-    xhr.onload = () => {
-        const { status, responseText } = xhr
+        const { status } = res 
 
-        if (status === 401) {
-            const response = JSON.parse(responseText)
+        if (status === 200) {
+            const { token } = await res.json()
 
-            const message = response.error
+            return token 
+        } else if (status === 401) {
+            const { error } = await res.json()
 
-            callback(new Error(message))
-        } else if (status === 200) {
-            const response = JSON.parse(responseText) 
-
-            const token = response.token
-
-            callback(null, token)
-        }
-    }
-
-    xhr.open('POST', 'https://localhost/users/auth')
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    const body = { email, password }
-
-    xhr.send(JSON.stringify(body))
+            throw new Error(error)
+        } else throw new Error('Unknown error')
+    })()
 }
+
 
 export default signInUser

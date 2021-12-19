@@ -1,11 +1,14 @@
-import logger from '../utils/logger'
-// import './Detail.css'
+import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { retrieveItem, toggleFavItem } from '../logic'
-import { useState, useEffect } from 'react'
+import AppContext from './AppContext'
+import logger from '../utils/logger'
+// import './Detail.css'
 
-function Detail({ onBack, onFlowStart, onFlowEnd, onModal }) { 
+function Detail({ onBack }) { 
     logger.debug('Detail -> render')
+
+    const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
 
     const { id } = useParams()
     const [item, setItem] = useState()
