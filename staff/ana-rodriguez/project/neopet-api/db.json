@@ -3,7 +3,7 @@
     {
       "firstName": "Peter",
       "lastName": "Parker",
-      "phone": "987654321",
+      "phone": "98765432110",
       "direction": "Calle New York 89",
       "email": "parker@mail.com",
       "document": "12345678P",
@@ -53,6 +53,15 @@
       "email": "wendy@mail.com",
       "document": "12345678W",
       "id": 6
+    },
+    {
+      "firstName": "Peter",
+      "lastName": "Pan",
+      "phone": "654897123",
+      "direction": "Calle Nunca Jamás 59",
+      "email": "peter@mail.com",
+      "document": "12345678Q",
+      "id": 7
     }
   ],
   "pets": [
@@ -174,6 +183,40 @@
       "date": "20/12/2021",
       "client": "6",
       "id": 7
+    },
+    {
+      "name": "Kiko",
+      "chip": "hsdfkwf65451jkbkxw",
+      "tatoo": "",
+      "specie": "Canina",
+      "race": "Bichón maltés",
+      "mestizo": "",
+      "hair": "Largo",
+      "layer": "Blanco",
+      "genre": "Macho",
+      "age": "21/11/2021",
+      "pedigree": false,
+      "passport": "",
+      "date": "20/12/2021",
+      "client": 7,
+      "id": 8
+    },
+    {
+      "name": "Sally",
+      "chip": "",
+      "tatoo": "",
+      "specie": "Felina",
+      "race": "Azul ruso",
+      "mestizo": "",
+      "hair": "Semilargo",
+      "layer": "Azul",
+      "genre": "Hembra",
+      "age": "11/01/2018",
+      "pedigree": false,
+      "passport": "",
+      "date": "20/12/2021",
+      "client": "7",
+      "id": 9
     }
   ],
   "weigth": [
@@ -212,6 +255,12 @@
       "date": "20/12/2021",
       "weigth": "52Kg",
       "id": 6
+    },
+    {
+      "petId": 8,
+      "date": "20/12/2021",
+      "weigth": "6Kg",
+      "id": 7
     }
   ],
   "notes": [
@@ -244,6 +293,24 @@
       "date": "20/12/2021",
       "note": "Está castrada con fecha de 25/09/2021",
       "id": 5
+    },
+    {
+      "petId": 8,
+      "date": "20/12/2021",
+      "note": "El dueño es un poco tacaño",
+      "id": 6
+    },
+    {
+      "petId": 8,
+      "date": "20/12/2021",
+      "note": "hola mundo",
+      "id": 7
+    },
+    {
+      "petId": 8,
+      "date": "20/12/2021",
+      "note": "hello world",
+      "id": 8
     }
   ],
   "vaccines": [
@@ -281,6 +348,20 @@
       "product": "",
       "nota": "Rabia",
       "id": 5
+    },
+    {
+      "petId": 8,
+      "date": "20/12/2021",
+      "product": "",
+      "nota": "Trivalente",
+      "id": 6
+    },
+    {
+      "petId": 8,
+      "date": "20/12/2021",
+      "product": "Pfizer",
+      "nota": "2ml",
+      "id": 7
     }
   ],
   "deparasite": [
@@ -307,6 +388,18 @@
       "date": "20/12/2021",
       "product": "Desparasitado interna y externamente",
       "id": 4
+    },
+    {
+      "petId": 8,
+      "date": "20/12/2021",
+      "product": "Desparasitado interna y externamente",
+      "id": 5
+    },
+    {
+      "petId": 8,
+      "date": "20/12/2021",
+      "product": "limpieza dientes",
+      "id": 6
     }
   ]
 }

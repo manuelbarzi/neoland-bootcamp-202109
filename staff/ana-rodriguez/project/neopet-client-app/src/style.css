@@ -1,0 +1,26 @@
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    outline: none;
+    border: 0;
+    background: transparent;
+    text-decoration: none;
+    border-radius: 0;
+    font-size: 16x;
+}
+
+body {
+    background-image: url('https://us.123rf.com/450wm/foreverrich/foreverrich1609/foreverrich160900223/63780345-fondo-azul-suave-gradiente.jpg?ver=6');
+    background-size: cover;
+    color:rgb(9, 93, 149);
+    min-height:100vh;
+}
+
+
+ hr{
+     border: solid 1px black;
+     width: 100%;
+ }
+
