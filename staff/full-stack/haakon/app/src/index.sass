@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&display=swap")
+
+// Variables
+$bg-color: #151515
+$text-color: #fff
+$input-color: rgba(0,0,0,.3)
+
+*
+    box-sizing: border-box
+
+body
+    font-family: "Exo 2", sans-serif
+    background: url(https://placeimg.com/1000/1000/tech)
+    color: $text-color
+    min-height: 100vh
+    margin: 20px
+
+img
+    display: block
+    max-width: 100%
+
+/* Components */
+.input
+    background-color: $input-color
+    padding: .6em .9em
+    border: none
+    border-radius: .5em
+    width: 100%
+    font: inherit
+
+.input::placeholder
+    color: $text-color
+
+.btn
+    background-color: $text-color
+    color: $bg-color
+    padding: .6em
+    border: none
+    border-radius: .5em
+    width: 100%
+    font: inherit
+    cursor: pointer
+    box-shadow: 0 0 20px 0 hsl(0deg 0% 100% / 20%)
+
+    &--white
+        background-color: #ffffff
+        color: #007bff

@@ -17,6 +17,11 @@ const {
 
 const logger = require('./utils/my-logger')
 
+const cors = require('cors')
+const corsOptions = {
+    "Access-Control-Allow-Methods": ['GET', 'PUT', 'POST', 'DELETE']
+}
+
 const { env: { PORT, MONGO_URL }, argv: [, , port = PORT || 8080] } = process
 
 logger.info('starting server')
@@ -24,6 +29,8 @@ logger.info('starting server')
 mongoose.connect(MONGO_URL)
     .then(() => {
         const server = express()
+
+        server.use(cors(corsOptions))
 
         const api = express.Router()
 
