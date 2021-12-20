@@ -1,6 +1,7 @@
 const { models: { User } } = require('logical-echo-data')
 const { validateId } = require('./helpers/validators')
 const { NotFoundError } = require('logical-echo-errors')
+const { sanitizeDocument } = require('./helpers/sanitizers')
 
 function retrieveUser(id) {
     validateId(id)
@@ -10,12 +11,9 @@ function retrieveUser(id) {
         
         if (!user) throw new NotFoundError(`user with id ${id} not found`)
 
-        user.id = user._id.toString()
-        delete user._id 
+        sanitizeDocument(user)
 
         delete user.password
-
-        delete user.__v 
 
         return user
     })()

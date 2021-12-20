@@ -1,14 +1,16 @@
 const { retrieveItem } = require('logical-echo-logic')
-const handleError = require('./helpers/handle-error')
+const { handleError, validateAuthorizationAndExtractPayload } = require('./helpers')
 
 module.exports = async (req, res) => {
-    const { query: { id } } = req // ver cómo se coge el id
+    const { headers: { authorization }, query: { itemid } } = req
 
     try {
-        const item = await retrieveItem(id)
+        const { sub: id } = validateAuthorizationAndExtractPayload(authorization)
 
-        res.json(item)
-    
+        const item = await retrieveItem(id, itemid)
+
+        res.json(JSON.stringify(item))
+
     } catch (error) {
         handleError(error, res)
     }

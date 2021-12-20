@@ -13,13 +13,13 @@ function unregisterUser(id, password) {
     validateId(id)
     validatePassword(password)
 
-
     return (async () => {
-        const user = await User.findById(id).lean()
-        
-        if (!user || !bcrypt.compareSync(password, user.password)) throw new CredentialsError('wrong credentials')
-        
         try {
+            const user = await User.findById(id).lean()
+            
+            if (!user || !bcrypt.compareSync(password, user.password)) throw new CredentialsError('wrong credentials')
+        
+        
             // await User.deleteOne({ _id: ObjectId(id) })
             await user.remove()
             

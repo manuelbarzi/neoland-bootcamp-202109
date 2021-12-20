@@ -21,6 +21,12 @@ function modifyUser(id, data) {
             let { password } = data 
         
             if (!bcrypt.compareSync(password, user.password)) throw new CredentialsError('wrong password')
+
+            if (data.newEmail) {
+                data.email = data.newEmail 
+
+                delete data.newEmail 
+            }
             
             if (data.newPassword) {
                 password = data.newPassword 
@@ -29,7 +35,7 @@ function modifyUser(id, data) {
             }
 
             for (const key in data) {
-                if (key === 'newPassword')
+                if (key === 'password')
                     user[key] = bcrypt.hashSync(data[key])
                 else
                     user[key] = data[key]        

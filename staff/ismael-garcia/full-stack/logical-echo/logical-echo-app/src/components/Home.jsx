@@ -12,6 +12,8 @@ import Account from './Account'
 import Profile from './Profile'
 import Favs from './Favs'
 import Newsletter from './Newsletter'
+import Button from '@mui/material/Button'
+import { Typography } from '@mui/material'
 
 
 function Home() {
@@ -35,24 +37,26 @@ function Home() {
 
             const { token } = sessionStorage
 
-            try {
-                onFlowStart()
-
-                const user = await retrieveUser(token)
-                    
-                if (user) 
-                    setView('profile')
-
-                onFlowEnd()
-
-            } catch ({ message }) {
-                onFlowEnd()
-
-                onModal(message, 'warn')
-
-                resetToken()
-
-                return
+            if (token) {
+                try {
+                    onFlowStart()
+    
+                    const user = await retrieveUser(token)
+                        
+                    if (user) 
+                        setView('profile')
+    
+                    onFlowEnd()
+    
+                } catch ({ message }) {
+                    onFlowEnd()
+    
+                    onModal(message, 'warn')
+    
+                    resetToken()
+    
+                    return
+                }
             }
         }
         homeUseEffect();
@@ -73,7 +77,7 @@ function Home() {
     const search = query => {
         setQuery(query)
 
-        navigate(`/search?q=${query}`)
+        navigate(`/items?q=${query}`)
     }
 
     const registerForNewsletter = async (email) => {
@@ -112,7 +116,9 @@ function Home() {
         }
     }
 
-    const goToCollection = store => navigate(`/items?q=${store}`)
+    const goToSearch = () => navigate('/search')
+
+    const goToCollection = store => navigate(`/items/store?q=${store}`)
 
     const goToAccount = () => navigate('/account')
 
@@ -120,7 +126,7 @@ function Home() {
 
     const goToNewsletter = () => navigate('/newsletter')
 
-    const goToItem = id => navigate(`/items/${id}`)
+    const goToItem = id => navigate(`/items/item?itemid=${id}`)
 
     const goToProfile = () => navigate('/profile')
 
@@ -128,20 +134,46 @@ function Home() {
 
 
     return <div id="home" className="container container--vertical container--gapped">
-            <h1>Join conscious, committed life!</h1>
+            <Typography>Join conscious, committed life!</Typography>
+
+            <div>
+                <Button type="button" className={`button button--medium ${location.pathname === '/newsletter' && 'button--dark'}`} onClick={goToNewsletter}>Newsletter</Button>
+
+                <Button type="button" className={`button button--medium ${location.pathname === '/search' && 'button--dark'}`} onClick={goToSearch}>Search</Button>
+            </div>
             
             <div className="container">
-                {view === 'account' && <button type="button" className={`button button--medium ${location.pathname === '/account' && 'button--dark'}`} onClick={goToAccount}>Login</button>}
-                {view === 'profile' && <button type="button" className={`button button--medium ${location.pathname === '/profile' && 'button--dark'}`} onClick={goToProfile}>Profile</button>}
-                <button type="button" className={`button button--medium ${location.pathname === '/newsletter' && 'button--dark'}`} onClick={goToNewsletter}>Newsletter</button>
-                <button type="button" className={`button button-medium ${location.pathname === '/favs' && 'button--dark'}`} onClick={goToFavs}>Favs</button>
+                {view === 'account' && <Button type="button" className={`button button--medium ${location.pathname === '/account' && 'button--dark'}`} onClick={goToAccount}>Login</Button>}
+
+                {view === 'profile' && <Button type="button" className={`button button--medium ${location.pathname === '/profile' && 'button--dark'}`} onClick={goToProfile}>Profile</Button>}
+                
+                <Button type="button" className={`button button-medium ${location.pathname === '/favs' && 'button--dark'}`} onClick={goToFavs}>Favs</Button>
+
+            </div>
+
+            <div>
+                <Button type="button" className="button button--medium button--dark" onClick={event => {
+                    goToCollection('Zara') 
+                }}>Zara</Button>
+
+                <Button type="button" className="button button--medium button--dark" onClick={event => {
+                    goToCollection('HM')
+                }}>H&M</Button>
+
+                <Button type="button" className="button button--medium button--dark" onClick={event => {
+                    goToCollection('Mango')
+                }}>Mango</Button>
+
             </div>
 
             <Routes>
-                <Route path="/" element={<Search onSearch={search} onStore={goToCollection} query={query}/>}>
+                <Route path="/search" element={<Search onSearch={search} query={query}/>}>
                     <Route path="items" element={<Results onItem={goToItem} onToggle={toggleFav} />} />
-                    <Route path="items/store" element={<Collection onItem={goToItem} onToggle={toggleFav} />} />
-                    <Route path="items/:id" element={<Detail onBack={goBackToHome} onToggle={toggleFav} />} />
+                    <Route path="items/item" element={<Detail onBack={goBackToHome} onToggle={toggleFav} />} />
+                </Route>
+
+                <Route path="/store" element={<Collection onItem={goToItem} onToggle={toggleFav} />}>
+                    
                 </Route>
 
                 <Route path="/account" element={<Account onBack={goBackToHome} />} />

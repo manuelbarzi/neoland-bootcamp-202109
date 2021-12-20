@@ -16,11 +16,11 @@ function Profile({ onBack, onSignOut }) {
     
     const goToUpdate = () => setView('update')
 
-    const update = async (newEmail, password, newPassword) => {
+    const update = async (data) => {
         try {
             onFlowStart()
 
-            await updateUserProfile(sessionStorage.token, newEmail, password, newPassword)
+            await updateUserProfile(sessionStorage.token, data)
 
             onFlowEnd()
 

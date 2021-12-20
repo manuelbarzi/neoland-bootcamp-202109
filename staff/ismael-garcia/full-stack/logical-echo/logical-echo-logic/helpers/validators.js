@@ -60,10 +60,10 @@ function validateString(string) {
     if (!string.trim().length) throw new FormatError('string is empty or blank')
 }
 
-function validateItemId(itemId) {
-    if (typeof itemId !== 'string') throw new TypeError('id is not a string')
-    if (!itemId.trim().length) throw new FormatError('id is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(itemId)) throw new FormatError('id has blank spaces')
+function validateItemId(item_id) {
+    if (typeof item_id !== 'string') throw new TypeError('item_id is not a string')
+    if (!item_id.trim().length) throw new FormatError('item_id is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(item_id)) throw new FormatError('item_id has blank spaces')
 }
 
 function validateStore(store) {
@@ -121,9 +121,9 @@ function validateNumber(number) {
 function validateItem(item) {
     if (typeof item !== 'object' || item.constructor.name !== 'Object') throw new TypeError('item is not an object')
 
-    const { id, store, pattern, name, images, price, url, description, colors } = item
+    const { item_id, store, pattern, name, images, price, url, description, colors } = item
     
-    validateItemId(id)
+    validateItemId(item_id)
 
     validateStore(store)
 

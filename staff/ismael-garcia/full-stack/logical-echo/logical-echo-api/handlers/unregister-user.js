@@ -2,7 +2,7 @@ const { unregisterUser } = require('logical-echo-logic')
 const { handleError, validateAuthorizationAndExtractPayload } = require('./helpers')
 
 module.exports = async (req, res) => {
-    const { headers: { authorization }, body: password } = req 
+    const { headers: { authorization }, body: { password } } = req 
 
     try {
         const { sub: id } = validateAuthorizationAndExtractPayload(authorization)

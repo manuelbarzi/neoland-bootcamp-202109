@@ -1,7 +1,9 @@
 import logger from '../utils/logger'
 import { Outlet } from 'react-router-dom'
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button'
 
-function Search({ onSearch, onStore, query }) {
+function Search({ onSearch, query }) {
     logger.debug('Search -> render')
 
     return <>
@@ -12,23 +14,9 @@ function Search({ onSearch, onStore, query }) {
 
             onSearch(query)
         }}>
-            <input className="field" type="text" name="query" id="query" placeholder="Search Criteria" defaultValue={query} />
-            <button type="submit" className="button button--medium button--dark">Search</button>
-            <button type="button" className="button button--medium button--dark" onClick={event => {
-                event.preventDefault()
-
-                onStore('Zara') 
-            }}>Zara</button>
-            <button type="button" className="button button--medium button--dark" onClick={event => {
-                event.preventDefault()
-
-                onStore('HM')
-            }}>H&M</button>
-            <button type="button" className="button button--medium button--dark" onClick={event => {
-                event.preventDefault()
-
-                onStore('Mango')
-            }}>Mango</button>
+            <TextField id="standard-search" label="Search field" type="search" variant="standard" className="field" name="query" placeholder="Search Criteria" defaultValue={query} />
+            <Button type="submit" className="button button--medium button--dark">Search</Button>
+        
         </form>
 
         <Outlet />

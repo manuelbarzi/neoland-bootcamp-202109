@@ -3,7 +3,7 @@ const { CredentialsError } = require('logical-echo-errors')
 const { models: { User } } = require('logical-echo-data')
 const bcrypt = require('bcryptjs')
 
-function authenticateUser (email, password) {
+function authenticateUser(email, password) {
     validateEmail(email)
     validatePassword(password)
 

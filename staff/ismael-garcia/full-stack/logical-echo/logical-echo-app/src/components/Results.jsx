@@ -40,7 +40,7 @@ function Results({ onItem, onToggle }) {
         resultsUseEffect();
     }, [query]);
 
-    return items.length ?
+    return items && items.length ?
         <ul className="results container container--vertical">
             {
                 items.map(({ id, name, images, price, isFav }) => <li key={id}className="home__results-item" onClick={() => onItem(id)}>

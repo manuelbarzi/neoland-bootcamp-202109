@@ -1,16 +1,20 @@
 const { models: { Item } } = require('logical-echo-data')
-const { validateItemId } = require('./helpers/validators')
+const { validateItemId, validateId } = require('./helpers/validators')
 const { NotFoundError } = require('logical-echo-errors')
+const { sanitizeDocument } = require('./helpers/sanitizers')
 
-function retrieveItem(id) {
-    validateItemId(id)
+function retrieveItem(id, item_id) {
+    validateId(id)
+    validateItemId(item_id)
 
     return (async () => {
-        const item = await Item.findOne({ id: id }).exec()
+        const item = await Item.findOne({ item_id }).lean()
 
         if (!item) throw new NotFoundError('no item found')
 
-        return item
+        sanitizeDocument(item)
+
+        return item 
     })()
 }
 

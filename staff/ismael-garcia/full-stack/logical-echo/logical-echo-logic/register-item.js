@@ -11,7 +11,7 @@ function registerItem(item) {
 
         } catch (error) {
             if (error.code === 11000)
-                throw new ConflictError(`item with id ${item.id} already exists`)
+                throw new ConflictError(`item with id ${item.item_id} already exists`)
 
             throw error
         }

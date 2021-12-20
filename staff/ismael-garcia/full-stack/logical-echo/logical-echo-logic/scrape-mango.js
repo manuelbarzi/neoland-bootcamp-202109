@@ -49,7 +49,7 @@ const logger = require("../logical-echo-api/utils/my-logger");
             try {
                 const item = await page.evaluate(() => {
                     const urlPart = window.location.href.slice(-13, -5)
-                    const id = `mango${urlPart}`
+                    const item_id = `mango${urlPart}`
 
                     const store = 'Mango'
 
@@ -69,7 +69,7 @@ const logger = require("../logical-echo-api/utils/my-logger");
                     const colorSpans = Array.from(document.querySelectorAll('.color-container > img'))
                     const colors = colorSpans.map(span => span.alt)
 
-                    const item = { id, store, pattern, name, images, price, url, description, colors }
+                    const item = { item_id, store, pattern, name, images, price, url, description, colors }
 
                     return item
                 })

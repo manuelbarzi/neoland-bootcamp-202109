@@ -55,7 +55,7 @@ const logger = require("../logical-echo-api/utils/my-logger");
       try {
         const item = await page.evaluate(() => {
           const urlPart = window.location.href.slice(-15, -5)
-          const id = `hm${urlPart}`
+          const item_id = `hm${urlPart}`
 
           const store = 'HM'
 
@@ -83,7 +83,7 @@ const logger = require("../logical-echo-api/utils/my-logger");
           );
           const colors = colorSpans.map(span => span.title);
 
-          const item = { id, store, pattern, name, images, price, url, description, colors };
+          const item = { item_id, store, pattern, name, images, price, url, description, colors };
 
           return item;
         });

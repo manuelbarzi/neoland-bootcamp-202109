@@ -8,11 +8,11 @@ import { validateItemId, validateToken } from "./helpers/validators"
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
  */
- function retrieveItem(token, id) {
+ function retrieveItem(token, item_id) {
     if (token)
         validateToken(token)
 
-    validateItemId(id)
+    validateItemId(item_id)
 
     return (async () => {
         const res = await fetch(`${context.API_URL}/users`, {
@@ -33,16 +33,19 @@ import { validateItemId, validateToken } from "./helpers/validators"
 
             const { favs = [] } = user 
 
-            const res2 = await fetch(`http://localhost:8000/api/items/${id}`, {
-                method: 'GET'
+            const res2 = await fetch(`http://localhost:8000/api/items/item?itemid=${item_id}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             })
 
             const { status } = res2 
 
             if (status === 200) {
-                const item = await res2.json()
+                const item = await JSON.parse(res2)
 
-                item.isFav = favs.includes(item.id)               
+                item.isFav = favs.includes(item.item_id)               
 
                 return item 
             }

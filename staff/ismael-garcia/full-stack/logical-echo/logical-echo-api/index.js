@@ -46,7 +46,7 @@ logger.info('starting server');
 
         api.get('/items', searchItems)
 
-        api.get('/items/:id', retrieveItem)
+        api.get('/items/item', retrieveItem) // with params: items/item/ghty5h352d
 
         api.get('/items/store', retrieveItemsByStore)
 

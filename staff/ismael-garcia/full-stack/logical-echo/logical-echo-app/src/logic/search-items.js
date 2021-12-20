@@ -33,16 +33,19 @@ const { validateToken, validateQuery } = require('./helpers/validators')
             const { favs = [] } = user 
 
             const res2 = await fetch(`http://localhost:8000/api/items?q=${query}`, {
-                method: 'GET'
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             })
 
             const { status } = res2 
 
             if (status === 200) {
-                const items = await res2.json()
+                const items = await JSON.parse(res2)
 
                 items.forEach(item => {
-                    item.isFav = favs.includes(item.id)
+                    item.isFav = favs.includes(item.item_id)
                 })
 
                 return items 

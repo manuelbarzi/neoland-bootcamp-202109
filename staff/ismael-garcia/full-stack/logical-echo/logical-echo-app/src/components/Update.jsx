@@ -8,7 +8,9 @@ function Update({ onUpdate, onBack }) {
 
         const { target: { newEmail: { value: newEmail }, password: { value: password }, newPassword: { value: newPassword } } } = event
 
-        onUpdate(newEmail, password, newPassword)
+        const data = { password, newEmail, newPassword }
+
+        onUpdate(data)
     }}>
         <input className="field" type="email" name="newEmail" id="register-email" placeholder="New Email" />
         <input className="field" type="password" name="password" id="register-password" placeholder="Password" required />
