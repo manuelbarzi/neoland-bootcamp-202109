@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext } from "react";
 import logger from "../logger";
 import "./Home.sass";
-import Profile from "./Profile";
+import UpdatePassword from "./UpdatePassword";
+import Unregister from "./Unregister";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useQueryParams } from "../hooks";
 import {
@@ -10,6 +11,8 @@ import {
   retrieveNotes,
   retrieveTreatments,
   retrieveUser,
+  updateUserPassword,
+  unregisterUser,
 } from "../logic";
 import AppContext from "./AppContext";
 import Calendar from "react-calendar";
@@ -30,6 +33,8 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
+import Menu from "./Menu";
 
 function Home({ onSignOut, onAuthError }) {
   logger.debug("Home -> render");
@@ -171,23 +176,73 @@ function Home({ onSignOut, onAuthError }) {
     setExpanded(isExpanded ? panel : false);
   };
 
+  const updatePassword = (oldPassword, password) => {
+    onFlowStart();
+
+    try {
+      updateUserPassword(
+        sessionStorage.token,
+        oldPassword,
+        password,
+        (error) => {
+          if (error) {
+            onFlowEnd();
+
+            onFeedback(error.message);
+
+            return;
+          }
+
+          onFlowEnd();
+
+          onFeedback("Password updated", "success");
+        }
+      );
+    } catch ({ message }) {
+      onFlowEnd();
+
+      onFeedback(message, "warn");
+    }
+  };
+
+  const unregister = (password) => {
+    onFlowStart();
+
+    try {
+      unregisterUser(sessionStorage.token, password, (error) => {
+        if (error) {
+          onFlowEnd();
+
+          onFeedback(error.message);
+
+          return;
+        }
+
+        logger.info("User unregistered");
+
+        onFlowEnd();
+
+        onFeedback("User unregistered", "success");
+
+        onSignOut();
+      });
+    } catch ({ message }) {
+      onFlowEnd();
+
+      onFeedback(message, "warn");
+    }
+  };
+
   return (
     <div className="container container--gapped container--vertical">
       <div className="logo--home container">
-        <img className="logo--home__image" src={image} />
-        <h1 className="logo--home__text">{text}</h1>
-        <button
-          className={`button--dropdown button-medium dropdown  ${
-            location.pathname === "/profile" && "button--dark"
-          }`}
-          onClick={toggleProfile}
-        >
-          <svg viewBox="0 0 100 80" width="30" height="20">
-            <rect width="100" height="15"></rect>
-            <rect y="30" width="100" height="15"></rect>
-            <rect y="60" width="100" height="15"></rect>
-          </svg>
-        </button>
+        <div className="logo--home__box" onClick={goToHome}>
+          <img className="logo--home__image" src={image} />
+          <h1 className="logo--home__text">{text}</h1>
+        </div>
+        <div>
+          <Menu signout={doSignOut} />
+        </div>
       </div>
       <div>
         <button
@@ -227,105 +282,110 @@ function Home({ onSignOut, onAuthError }) {
       </div>
 
       <Routes>
-        <Route
-          path="/profile"
-          element={<Profile onBack={goToHome} onSignOut={doSignOut} />}
-        />
         <Route path="/notes" element={<Notes onBack={goToHome} />} />
         <Route path="/treatments" element={<Treatments onBack={goToHome} />} />
         <Route path="/diaries" element={<Diaries onBack={goToHome} />} />
         <Route path="/disorders" element={<Disorders onBack={goToHome} />} />
+        <Route
+          path="/update-password"
+          element={<UpdatePassword onUpdatePassword={updatePassword} />}
+        />
+        <Route
+          path="/unregister"
+          element={<Unregister onUnregister={unregister} />}
+        />
       </Routes>
 
-      {location.pathname === "/" || location.pathname === "/profile" ? (
-        <Calendar onChange={changeDate} />
-      ) : (
-        ""
-      )}
-
       {location.pathname === "/" && (
-        <div className="accordion">
-          <Accordion
-            expanded={expanded === "notes"}
-            onChange={handleChange("notes")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
+        <>
+          <Calendar onChange={changeDate} />
+          <div className="accordion">
+            <Accordion
+              expanded={expanded === "notes"}
+              onChange={handleChange("notes")}
             >
-              <Typography sx={{ color: "text.secondary" }}>Notes</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              {notes.map((noteItem) => (
-                <div key={noteItem.id}>
-                  <Note note={noteItem} showDelete={false} />
-                </div>
-              ))}
-            </AccordionDetails>
-          </Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography sx={{ color: "text.secondary" }}>Notes</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                {notes.map((noteItem) => (
+                  <div key={noteItem.id}>
+                    <Note note={noteItem} showDelete={false} />
+                  </div>
+                ))}
+              </AccordionDetails>
+            </Accordion>
 
-          <Accordion
-            expanded={expanded === "treatments"}
-            onChange={handleChange("treatments")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
+            <Accordion
+              expanded={expanded === "treatments"}
+              onChange={handleChange("treatments")}
             >
-              <Typography sx={{ color: "text.secondary" }}>
-                Treatments
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              {treatments.map((treatmentItem) => (
-                <div key={treatmentItem.id}>
-                  <Treatment treatment={treatmentItem} />
-                </div>
-              ))}
-            </AccordionDetails>
-          </Accordion>
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography sx={{ color: "text.secondary" }}>
+                  Treatments
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                {treatments.map((treatmentItem) => (
+                  <div key={treatmentItem.id}>
+                    <Treatment treatment={treatmentItem} />
+                  </div>
+                ))}
+              </AccordionDetails>
+            </Accordion>
 
-          <Accordion
-            expanded={expanded === "Diaries"}
-            onChange={handleChange("Diaries")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
+            <Accordion
+              expanded={expanded === "Diaries"}
+              onChange={handleChange("Diaries")}
             >
-              <Typography sx={{ color: "text.secondary" }}>Diaries</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              {diaries.map((diaryItem) => (
-                <div key={diaryItem.id}>
-                  <Diary diary={diaryItem} />
-                </div>
-              ))}
-            </AccordionDetails>
-          </Accordion>
-          <Accordion
-            expanded={expanded === "disorder"}
-            onChange={handleChange("disorder")}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1bh-content"
-              id="panel1bh-header"
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography sx={{ color: "text.secondary" }}>
+                  Diaries
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                {diaries.map((diaryItem) => (
+                  <div key={diaryItem.id}>
+                    <Diary diary={diaryItem} />
+                  </div>
+                ))}
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "disorder"}
+              onChange={handleChange("disorder")}
             >
-              <Typography sx={{ color: "text.secondary" }}>Problem</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              {disorders.map((disorderItem) => (
-          <div key={disorderItem.id}>
-            <Disorder disorder={disorderItem} />
+              <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography sx={{ color: "text.secondary" }}>
+                  Problem
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                {disorders.map((disorderItem) => (
+                  <div key={disorderItem.id}>
+                    <Disorder disorder={disorderItem} />
+                  </div>
+                ))}
+              </AccordionDetails>
+            </Accordion>
           </div>
-        ))}
-            </AccordionDetails>
-          </Accordion>
-        </div>
+        </>
       )}
     </div>
   );

@@ -1,11 +1,9 @@
 import logger from '../logger'
 
-function UpdatePassword({ onUpdatePassword, onBack }) {
+function UpdatePassword({ onUpdatePassword }) {
     logger.debug('UpdatePassword -> render')
 
     return <div className="updatepassword container container--vertical">
-        <button className="button" onClick={onBack}>Go back</button>
-
         <form className="container container--vertical" onSubmit={event => {
                 event.preventDefault()
 

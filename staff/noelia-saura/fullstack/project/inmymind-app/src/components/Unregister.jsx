@@ -1,10 +1,9 @@
 import logger from '../logger'
 
-function Unregister({ onUnregister, onBack }) {
+function Unregister({ onUnregister }) {
     logger.debug('Unregister -> render')
 
     return <div className="unregister container container--vertical">
-        <button className="button" onClick={onBack}>Go back</button>
 
         <form className="container container--vertical" onSubmit={event => {
             event.preventDefault()
