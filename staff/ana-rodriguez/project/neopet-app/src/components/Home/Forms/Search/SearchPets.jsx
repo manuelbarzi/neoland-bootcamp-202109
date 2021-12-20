@@ -4,20 +4,23 @@ import { searchPets } from '../../../../logic';
 import '../styles/Search.css';
 
 
-function SearchPets() {
+function SearchPets({toogleSpinner}) {
 
   const [list, setList] = useState([]);
 
   const search = async (event) => {
     event.preventDefault()
     try {
+      toogleSpinner(true)
+
       const pet = { name: event.target.name.value }
       const result = await searchPets(sessionStorage.token, pet);
       setList(result);
+      toogleSpinner(false)
     }
     catch (error) {
-      // TODO: Feedback;
-      debugger;
+      toogleSpinner(false)
+    
     }
 
   }

@@ -12,6 +12,7 @@ const modifyClient = (token, clientId, client) => {
         })
 
         if (res.status === 200) {
+
             const clientPatch = await fetch('http://localhost:8000/clients/' + clientId, {
                 method: 'PATCH',
                 headers: {
@@ -19,6 +20,7 @@ const modifyClient = (token, clientId, client) => {
                 },
                 body: JSON.stringify(client)
             })
+
             if (clientPatch.status === 200) {
                 const clientUpdated = await clientPatch.json();
                 return clientUpdated;

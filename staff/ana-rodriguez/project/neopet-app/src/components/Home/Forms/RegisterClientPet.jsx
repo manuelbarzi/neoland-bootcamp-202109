@@ -6,7 +6,7 @@ import Combo from '../../Forms-components/Combo';
 import './styles/RegisterClientPet.css';
 import { useNavigate } from 'react-router-dom';
 
-function RegisterClientPet() {
+function RegisterClientPet({toogleSpinner}) {
     const [species, setSpecies] = useState([]);
     const [race, setRace] = useState([]);
     // const [mestizo, setMestizo] = useState(false);
@@ -47,6 +47,7 @@ function RegisterClientPet() {
     const registerClientOnSubmit = async (event) => {
         event.preventDefault()
         try {
+            toogleSpinner(true)
             //CLIENT
             const client = {
                 firstName: event.target.firstName.value,
@@ -86,10 +87,13 @@ function RegisterClientPet() {
 
             alert('cliente y mascota registradas correctamente')
 
+            toogleSpinner(false)
+
             navigate('/home/clientPet/file/' + newClient.id)
         }
         catch (err) {
             alert(err.message)
+            toogleSpinner(false)
         }
     };
 

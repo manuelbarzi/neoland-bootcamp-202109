@@ -2,26 +2,31 @@ import React from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
 
-import { modifyClient, deleteClient } from '../../../../logic';
+import { modifyClient, deleteClient} from '../../../../logic';
 
-function FileClient({ client }) {
+function FileClient({ client, toogleSpinner }) {
 
     const navigate = useNavigate();
 
     const updateFileClient = async (event) => {
+        event.preventDefault()
         try {
+            toogleSpinner(true)
+
             const clientForm = {
                 phone: event.target.phone.value,
                 direction: event.target.direction.value,
                 email: event.target.email.value
             }
-
             const updatedClient = await modifyClient(sessionStorage.token, client.id, clientForm);
-
+            toogleSpinner(false)
+            
             window.location.reload();
-        } catch (err) {
-            alert(err);
-            if (err.message === 'invalid token') {
+        } catch (error) {
+
+            alert(error);
+            toogleSpinner(false)
+            if (error.message === 'invalid token') {
                 navigate('/login')
             }
         }
@@ -35,13 +40,18 @@ function FileClient({ client }) {
         if (window.confirm('¿Seguro que quieres eliminar al cliente?')) {
 
             try {
+                toogleSpinner(true)
+
                 const token = sessionStorage.token
                 await deleteClient(token, client.id)
                 alert('cliente eliminado')
+                toogleSpinner(false)
                 navigate('/home')
-            } catch (err) {
-                alert(err);
-                if (err.message === 'invalid token') {
+
+            } catch (error) {
+                alert(error)
+                toogleSpinner(false)
+                if (error.message === 'invalid token') {
                     navigate('/login')
                 }
             }
@@ -54,11 +64,11 @@ function FileClient({ client }) {
             <div className="input_file">
                 <br />
                 <label>Teléfono:
-                    <input className="input_reCliPet" type="text" name="phone" value={client.phone} /></label>
+                    <input className="input_reCliPet" type="text" name="phone" defaultValue={client.phone} /></label>
                 <label>Direccción:
-                    <input className="input_reCliPet" type="text" name="direction" value={client.direction} /></label>
+                    <input className="input_reCliPet" type="text" name="direction" defaultValue={client.direction} /></label>
                 <label>Email:
-                    <input className="input_reCliPet" type="text" name="email" value={client.email} /></label>
+                    <input className="input_reCliPet" type="text" name="email" defaultValue={client.email} /></label>
             </div>
             <div className="button_file">
                 <button className="but_note" type='submit'>Guardar</button>

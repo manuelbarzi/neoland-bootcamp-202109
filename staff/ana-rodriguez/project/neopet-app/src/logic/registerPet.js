@@ -4,7 +4,7 @@ const registerPet = (token, clientId, pet) => {
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
 
     if (typeof pet !== 'object') throw new TypeError( 'is not a object')
-debugger;
+
     return (async () => {
         const res = await fetch('https://b00tc4mp.herokuapp.com/api/v2/users', {
             headers: {

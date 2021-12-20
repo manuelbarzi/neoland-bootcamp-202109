@@ -1,10 +1,15 @@
 import React from 'react';
-import{Link} from 'react-router-dom';
+import{Link, useNavigate} from 'react-router-dom';
 import './styles/ChangePass.css'
 
-function ChangePass(props) {
+function ChangePass({changePassVisual}) {
 
-    const {changePassVisual} = props
+    const navigate = useNavigate()
+
+    const goBack = (event) => {
+        navigate("../../profile");
+    }
+
     return <>
         <form className="changePass_container" onSubmit={event => {
             event.preventDefault()
@@ -23,7 +28,7 @@ function ChangePass(props) {
 
             <div className="buttons">
                 <button className="change_button" type="submit">Change Password</button> 
-                <Link to="../../profile"><button className="go_button" type="button">Go Back</button></Link>    
+                <button className="change_button" type="button" onClick={event=>goBack(event)}>Go Back</button>  
             </div>
         </form>
     </>

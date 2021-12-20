@@ -17,6 +17,42 @@
       "email": "yo@mail.com",
       "document": "12345678A",
       "id": 2
+    },
+    {
+      "firstName": "Juan",
+      "lastName": "Fernandez",
+      "phone": "654987321",
+      "direction": "Calle Falsa 887",
+      "email": "juan@email.com",
+      "document": "65498732J",
+      "id": 3
+    },
+    {
+      "firstName": "Ana",
+      "lastName": "Rodríguez",
+      "phone": "654321987",
+      "direction": "Calle Falsa 56",
+      "email": "an@mail.com",
+      "document": "45678989A",
+      "id": 4
+    },
+    {
+      "firstName": "Ana",
+      "lastName": "Rodríguez",
+      "phone": "654321987",
+      "direction": "Calle Falsa 85",
+      "email": "anani@mail.com",
+      "document": "45678989B",
+      "id": 5
+    },
+    {
+      "firstName": "Wendy",
+      "lastName": "Pan",
+      "phone": "654987321",
+      "direction": "Calle Nunca Jamás 54",
+      "email": "wendy@mail.com",
+      "document": "12345678W",
+      "id": 6
     }
   ],
   "pets": [
@@ -53,10 +89,224 @@
       "date": "",
       "client": 2,
       "id": 2
+    },
+    {
+      "name": "Kiko",
+      "chip": "5464JKASDX54651SDA",
+      "tatoo": "",
+      "specie": "Canina",
+      "race": "Yorkshire Terrier",
+      "mestizo": "",
+      "hair": "Largo",
+      "layer": "Negro, Fuego",
+      "genre": "Macho",
+      "age": "12/05/2021",
+      "pedigree": true,
+      "passport": "",
+      "date": "19/12/2021",
+      "client": 3,
+      "id": 3
+    },
+    {
+      "name": "Kika",
+      "chip": "AJXXAC468413ASX46ASD",
+      "tatoo": "",
+      "specie": "Canina",
+      "race": "Yorkshire Terrier",
+      "mestizo": "",
+      "hair": "Largo",
+      "layer": "Negro, Fuego",
+      "genre": "Hembra",
+      "age": "06/09/2021",
+      "pedigree": false,
+      "passport": "",
+      "date": "19/12/2021",
+      "client": "3",
+      "id": 4
+    },
+    {
+      "name": "Marvel",
+      "chip": "LAHDNCF546531DCA546AC",
+      "tatoo": "",
+      "specie": "Felina",
+      "race": "Gato común europeo",
+      "mestizo": "",
+      "hair": "Corto",
+      "layer": "Negro",
+      "genre": "Macho",
+      "age": "01/05/2019",
+      "pedigree": false,
+      "passport": "",
+      "date": "18/12/2021",
+      "client": 5,
+      "id": 5
+    },
+    {
+      "name": "Nana",
+      "chip": "SFSF456846VVS8466VV5",
+      "tatoo": "",
+      "specie": "Canina",
+      "race": "San Bernardo",
+      "mestizo": "",
+      "hair": "Medio",
+      "layer": "Canela y blanco",
+      "genre": "Hembra",
+      "age": "05/08//2014",
+      "pedigree": false,
+      "passport": "",
+      "date": "20/12/2021",
+      "client": 6,
+      "id": 6
+    },
+    {
+      "name": "Dino",
+      "chip": "",
+      "tatoo": "",
+      "specie": "Felina",
+      "race": "Mestizo",
+      "mestizo": "X Persa",
+      "hair": "Largo",
+      "layer": "Blanco",
+      "genre": "Macho",
+      "age": "15/11/2021",
+      "pedigree": false,
+      "passport": "",
+      "date": "20/12/2021",
+      "client": "6",
+      "id": 7
     }
   ],
-  "weigth": [],
-  "notes": [],
-  "vaccines": [],
-  "deparasite": []
+  "weigth": [
+    {
+      "petId": 2,
+      "date": "19/12/2021",
+      "weigth": "5",
+      "id": 1
+    },
+    {
+      "petId": 3,
+      "date": "19/12/2021",
+      "weigth": "3Kg",
+      "id": 2
+    },
+    {
+      "petId": 4,
+      "date": "19/12/2021",
+      "weigth": "2kg",
+      "id": 3
+    },
+    {
+      "petId": 5,
+      "date": "19/12/2021",
+      "weigth": "6Kg",
+      "id": 4
+    },
+    {
+      "petId": 5,
+      "date": "19/12/2021",
+      "weigth": "6Kg",
+      "id": 5
+    },
+    {
+      "petId": 6,
+      "date": "20/12/2021",
+      "weigth": "52Kg",
+      "id": 6
+    }
+  ],
+  "notes": [
+    {
+      "petId": 2,
+      "date": "19/12/2021",
+      "note": "Dueño tacaño",
+      "id": 1
+    },
+    {
+      "petId": 3,
+      "date": "19/12/2021",
+      "note": "Perro gruñón",
+      "id": 2
+    },
+    {
+      "petId": 5,
+      "date": "19/12/2021",
+      "note": "Gato ladronzuelo",
+      "id": 3
+    },
+    {
+      "petId": 6,
+      "date": "20/12/2021",
+      "note": "OIAKNXOISAD",
+      "id": 4
+    },
+    {
+      "petId": 6,
+      "date": "20/12/2021",
+      "note": "Está castrada con fecha de 25/09/2021",
+      "id": 5
+    }
+  ],
+  "vaccines": [
+    {
+      "petId": 2,
+      "date": "19/12/2021",
+      "product": "",
+      "nota": "Trivalente",
+      "id": 1
+    },
+    {
+      "petId": 3,
+      "date": "19/12/2021",
+      "product": "",
+      "nota": "Trivalent",
+      "id": 2
+    },
+    {
+      "petId": 4,
+      "date": "19/12/2021",
+      "product": "",
+      "nota": "Rabia",
+      "id": 3
+    },
+    {
+      "petId": 5,
+      "date": "19/12/2021",
+      "product": "",
+      "nota": "Trivalente",
+      "id": 4
+    },
+    {
+      "petId": 6,
+      "date": "20/12/2021",
+      "product": "",
+      "nota": "Rabia",
+      "id": 5
+    }
+  ],
+  "deparasite": [
+    {
+      "petId": 2,
+      "date": "19/12/2021",
+      "product": "Desparasitado interna y externamente",
+      "id": 1
+    },
+    {
+      "petId": 3,
+      "date": "19/12/2021",
+      "product": "Desparasitado interna y externamente",
+      "id": 2
+    },
+    {
+      "petId": 5,
+      "date": "19/12/2021",
+      "product": "Interna y externa",
+      "id": 3
+    },
+    {
+      "petId": 6,
+      "date": "20/12/2021",
+      "product": "Desparasitado interna y externamente",
+      "id": 4
+    }
+  ]
 }

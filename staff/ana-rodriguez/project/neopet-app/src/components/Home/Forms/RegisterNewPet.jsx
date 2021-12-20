@@ -5,7 +5,8 @@ import { getSpecies, getGenre, getRaceById } from '../../../logic/combos';
 import Combo from '../../Forms-components/Combo';
 import { registerPet } from "../../../logic";
 
-function RegisterNewPet() {
+
+function RegisterNewPet({ toogleSpinner }) {
 
     const { clientId } = useParams() // Obtiene el parametro por url definido en el router
 
@@ -16,69 +17,72 @@ function RegisterNewPet() {
 
     const navigate = useNavigate()
 
-    const [valueComboSpecie,setComboSpecie] = useState('');
-    const [valueComboRace,setComboRace] = useState('');
-    const [valueComboGenre,setComboGenre] = useState('');
+    const [valueComboSpecie, setComboSpecie] = useState('')
+    const [valueComboRace, setComboRace] = useState('')
+    const [valueComboGenre, setComboGenre] = useState('')
 
     useEffect(() => {
         getSpecies((err, res) => {
             setSpecies(res);
-        });
+        })
         getGenre((err, res) => {
             setGenre(res)
-        });
+        })
     }, []
-    );
+    )
 
     function specieSelect(event) {
-        debugger
+
         const id = event.target.value;
-        setComboSpecie(species.find(obj=>obj.id === parseInt(id)).value);
+        setComboSpecie(species.find(obj => obj.id === parseInt(id)).value);
         getRaceById(parseInt(id), (err, res) => {
             setRace(res);
         })
     };
     //Aquí guardo los valores de los combo, en las tres funciones
     function raceSelect(event) {
-        debugger
+
         const id = event.target.value;
-        setComboRace(race.find(obj=>obj.id === parseInt(id)).value);
+        setComboRace(race.find(obj => obj.id === parseInt(id)).value);
     }
 
     function genreSelect(event) {
-        debugger
+
         const id = event.target.value;
-        setComboGenre(genre.find(obj=>obj.id === id).value);
+        setComboGenre(genre.find(obj => obj.id === id).value);
     }
 
     const addPet = async (event) => {
         event.preventDefault()
 
-        try{
+        try {
+            toogleSpinner(true)
 
-        const pet = {
-            name: event.target.name.value,
-            chip: event.target.chip.value,
-            tatoo: event.target.tatoo.value,
-            specie: valueComboSpecie,
-            race: valueComboRace,
-            mestizo: event.target.mestizo.value,
-            hair: event.target.hair.value,
-            layer: event.target.layer.value,
-            genre: valueComboGenre,
-            age: event.target.age.value,
-            pedigree: event.target.pedigree.checked,
-            passport: event.target.passport.value,
-            date: event.target.date.value,
-            client:clientId
-        }
-debugger;
-          const NewPet = await registerPet(sessionStorage.token, clientId, pet )
-          alert('mascota registrada correctamente')
-          navigate('/home/clientPet/file/'+ clientId )
+            const pet = {
+                name: event.target.name.value,
+                chip: event.target.chip.value,
+                tatoo: event.target.tatoo.value,
+                specie: valueComboSpecie,
+                race: valueComboRace,
+                mestizo: event.target.mestizo.value,
+                hair: event.target.hair.value,
+                layer: event.target.layer.value,
+                genre: valueComboGenre,
+                age: event.target.age.value,
+                pedigree: event.target.pedigree.checked,
+                passport: event.target.passport.value,
+                date: event.target.date.value,
+                client: clientId
+            }
+            
+            const NewPet = await registerPet(sessionStorage.token, clientId, pet)
+            alert('mascota registrada correctamente')
+            toogleSpinner(false)
+            navigate('/home/clientPet/file/' + clientId)
 
         } catch (error) {
-            alert(error);
+            alert(error)
+            toogleSpinner(false)
             if (error.message === 'invalid token') {
                 navigate('/login')
             }

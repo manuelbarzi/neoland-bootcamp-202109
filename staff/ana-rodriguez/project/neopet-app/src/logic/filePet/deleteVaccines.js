@@ -7,7 +7,6 @@ const deleteVaccines = (token, petId) => {
             headers: { 'Authorization': `Bearer ${token}` }
         })
         if (res.status === 200) {
-            debugger;
             const removeVaccines = await fetch("http://localhost:8000/vaccines?petId="+petId, {
                 method: 'DELETE'
             });

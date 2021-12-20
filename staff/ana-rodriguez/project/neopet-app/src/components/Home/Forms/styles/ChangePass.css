@@ -34,15 +34,7 @@
     margin: 0 auto;
     display: block;
 }
-
-.go_button {
-    padding: 8px;
-    color: #fff;
-    border: 2px solid rgb(10, 6, 6);
-    text-align: center;
-    font-size: 1.05em;
-    cursor: pointer;
-    background-color: #093d7d;
-    margin: 0 auto;
-    display: block;
+.buttons{
+    display: flex;
+    justify-content: space-around;
 }

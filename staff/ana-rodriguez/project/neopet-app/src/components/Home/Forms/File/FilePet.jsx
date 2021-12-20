@@ -4,7 +4,7 @@ import { getFilePet, registerDeparasite, registerNotes, registerVaccine, registe
 import { useState, useEffect } from 'react';
 
 
-function FilePet({ pet }) {
+function FilePet({ pet, toogleSpinner }) {
     // destructuring del objeto pet pasado por params
     const { id, hair, layer, age, genre, specie, race, pedigree, chip, date, name, tatoo, passport } = pet;
    
@@ -15,9 +15,10 @@ function FilePet({ pet }) {
         (async () => {
 
             try {
+                toogleSpinner(true)
 
                 let FilePet = {
-                    weight: [],
+                    weigth: [],
                     vaccines: [],
                     deparasite: [],
                     notes: []
@@ -29,15 +30,17 @@ function FilePet({ pet }) {
                 FilePet.deparasite = deparasiteGetted
 
                 const weigthGetted = await getWeight(sessionStorage.token, id)
-                FilePet.weight = weigthGetted
+                FilePet.weigth = weigthGetted
 
                 const notesGetted = await getNotes(sessionStorage.token, id)
                 FilePet.notes = notesGetted
 
                 setFilePet(FilePet)
+                toogleSpinner(false)
 
             } catch (error) {
                 alert(error)
+                toogleSpinner(false)
                 if (error.message === 'invalid token') {
                     navigate('/login')
                 }
@@ -58,6 +61,8 @@ function FilePet({ pet }) {
         let note;
 
         try {
+            toogleSpinner(true)
+
             if (event.target.weigth.value) {
                 weigth = {
                     petId: id,
@@ -71,7 +76,7 @@ function FilePet({ pet }) {
                     date: currentDate,
                     product: event.target.product.value || '',
                     nota: event.target.nota.value || ''
-                };
+                }
             }
             if (event.target.deparasite.value) {
                 deparasite = {
@@ -88,18 +93,21 @@ function FilePet({ pet }) {
                 }
             }
 
-            const token = sessionStorage.token;
+            const token = sessionStorage.token
 
-            const regVaccine = vaccine ? await registerVaccine(token, vaccine) : null;
-            const regDeparasite = deparasite ? await registerDeparasite(token, deparasite) : null;
-            const regNote = note ? await registerNotes(token, note) : null;
-            const regWeight = weigth ? await registerWeight(token, weigth) : null;
+            const regVaccine = vaccine ? await registerVaccine(token, vaccine) : null
+            const regDeparasite = deparasite ? await registerDeparasite(token, deparasite) : null
+            const regNote = note ? await registerNotes(token, note) : null
+            const regWeight = weigth ? await registerWeight(token, weigth) : null
 
-            window.location.reload();
+            toogleSpinner(false)
 
-        } catch (err) {
-            alert(err);
-            if (err.message === 'invalid token') {
+            window.location.reload()
+
+        } catch (error) {
+            alert(error)
+            toogleSpinner(false)
+            if (error.message === 'invalid token') {
                 navigate('/login')
             }
         }
@@ -110,12 +118,15 @@ function FilePet({ pet }) {
         if (window.confirm('¿Seguro que quieres eliminar la mascota?')) {
 
             try {
+                toogleSpinner(true)
+
                 const token = sessionStorage.token
                 await deletePet(token, id)
-            } catch (err) {
-                debugger;
-                alert(err);
-                if (err.message === 'invalid token') {
+                toogleSpinner(false)
+            } catch (error) {
+                alert(error)
+                toogleSpinner(false)
+                if (error.message === 'invalid token') {
                     navigate('/login')
                 }
             }

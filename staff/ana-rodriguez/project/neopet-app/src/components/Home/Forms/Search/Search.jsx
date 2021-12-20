@@ -4,12 +4,12 @@ import SearchPets from './SearchPets';
 import '../styles/Search.css';
 
 
-function Search(){
+function Search({toogleSpinner}){
 
     return<>
-        <SearchClients></SearchClients>
+        <SearchClients toogleSpinner={toogleSpinner}></SearchClients>
         <br />
-        <SearchPets></SearchPets>
+        <SearchPets toogleSpinner={toogleSpinner}></SearchPets>
     </>
  
 }

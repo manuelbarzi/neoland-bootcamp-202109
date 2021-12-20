@@ -4,13 +4,15 @@ import { searchClients } from '../../../../logic';
 import '../styles/Search.css';
 
 
-function SearchClients() {
+function SearchClients({toogleSpinner}) {
 
   const [list, setList] = useState([]);
 
   const search = async (event) => {
     event.preventDefault();
     try {
+      toogleSpinner(true)
+
       const client = {
         firstName: event.target.firstName.value,
         lastName: event.target.lastName.value
@@ -18,9 +20,9 @@ function SearchClients() {
 
       const result = await searchClients(sessionStorage.token, client);
       setList(result);
+      toogleSpinner(false)
     } catch (err) {
-      // Manejo el error
-      // TODO: Feedback;
+      toogleSpinner(false)
     }
   };
 
