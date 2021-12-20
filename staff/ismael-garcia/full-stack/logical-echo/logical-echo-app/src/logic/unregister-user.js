@@ -1,5 +1,5 @@
 import context from './context'
-const { validateToken, validatePassword, validateCallback } = require('./helpers/validators')
+const { validateToken, validatePassword } = require('./helpers/validators')
 /**
  * Unregisters the user in the application.
  * 

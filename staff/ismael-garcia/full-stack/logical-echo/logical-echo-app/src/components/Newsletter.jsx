@@ -1,7 +1,7 @@
 import logger from '../utils/logger'
 
 function Newsletter({ onNewsletter, onBack }) {
-    logger.debug('SignUp -> render')
+    logger.debug('Newsletter -> render')
 
     return <form className="register container container--vertical container--gapped" onSubmit={event => {
         event.preventDefault()
@@ -18,7 +18,7 @@ function Newsletter({ onNewsletter, onBack }) {
                 event.preventDefault()
                 
                 onBack()
-                }}>Go Back</button>
+            }}>Go Back</button>
         </div>
     </form>
 }

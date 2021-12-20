@@ -8,7 +8,7 @@ function searchItems(query) {
     return (async () => {
         const items = await Item.find({ name: /{query}/i } , 'id name images price').exec();
         
-        if (!items) throw new NotFoundError('No items found for your query')
+        if (!items.length) throw new NotFoundError('No items found for your query')
 
         return items
     })()

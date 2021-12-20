@@ -1,11 +1,11 @@
 import { useQueryParams } from '../hooks'
 import { useState, useEffect, useContext } from 'react'
-import { searchItems, toggleFavItem } from '../logic'
+import { searchItems } from '../logic'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
 // import './Results.css'
 
-function Results({ onItem }) {
+function Results({ onItem, onToggle }) {
     logger.debug('Results -> render')
 
     const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
@@ -16,55 +16,29 @@ function Results({ onItem }) {
 
     const query = queryParams.get('q')
 
-    useEffect(async () => {
-        const { token } = sessionStorage
+    useEffect(() => {
+        async function resultsUseEffect() {
+            logger.debug('Results -> useEffect')
         
-        try {
-            onFlowStart()
+            const { token } = sessionStorage
+            
+            try {
+                onFlowStart()
 
-            const items = await searchItems(token, query)
-                
-            onFlowEnd()
-                
-            setItems(items)
-
-        } catch ({ message }) {
-            onFlowEnd()
-
-            onModal(message, 'warn')
-        }
-    }, [query])
-
-
-    const toggleFav = id => {
-        onFlowStart()
-
-        try {
-            toggleFavItem(sessionStorage.token, id, error => {
-                if (error) {
-                    onFlowEnd()
-
-                    onModal(error.message)
-
-                    return
-                }
-
-                setItems(items.map(item => {
-                    if (item.id === id) {
-                        return { ...item, isFav: !item.isFav}
-                    }
-
-                    return item
-                }))
-
+                const items = await searchItems(token, query)
+                    
                 onFlowEnd()
-            })
-        } catch ({ message }) {
-            onFlowEnd()
+                    
+                setItems(items)
 
-            onModal(message, 'warn')
+            } catch ({ message }) {
+                onFlowEnd()
+
+                onModal(message, 'warn')
+            }
         }
-    }
+        resultsUseEffect();
+    }, [query]);
 
     return items.length ?
         <ul className="results container container--vertical">
@@ -76,7 +50,7 @@ function Results({ onItem }) {
                     <button className="button" onClick={event => {
                             event.stopPropagation()
 
-                            toggleFav(id)
+                            onToggle(id)
                         }}>{isFav ? '🧡' : '🤍'}</button>
                 </li>)
             }

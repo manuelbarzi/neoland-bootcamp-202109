@@ -20,7 +20,7 @@ function Update({ onUpdate, onBack }) {
                 event.preventDefault()
                 
                 onBack()
-                }}>Go Back</button>
+            }}>Go Back</button>
         </div>
     </form>
 }

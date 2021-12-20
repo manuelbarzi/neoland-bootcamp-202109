@@ -16,23 +16,15 @@ function Profile({ onBack, onSignOut }) {
     
     const goToUpdate = () => setView('update')
 
-    const update = (newEmail, password, newPassword) => {
-        onFlowStart()
-        
+    const update = async (newEmail, password, newPassword) => {
         try {
-            updateUserProfile(sessionStorage.token, newEmail, password, newPassword, error => {
-                if (error) {
-                    onFlowEnd()
+            onFlowStart()
 
-                    onModal(error.message)
+            await updateUserProfile(sessionStorage.token, newEmail, password, newPassword)
 
-                    return
-                }
+            onFlowEnd()
 
-                onFlowEnd()
-
-                onModal('Profile updated', 'success')
-            })
+            onModal('Profile updated', 'success')
         } catch ({ message }) {
             onFlowEnd()
 
@@ -40,27 +32,19 @@ function Profile({ onBack, onSignOut }) {
         }
     }
 
-    const unregister = password => {
-        onFlowStart()
-
+    const unregister = async (password) => {
         try {
-            unregisterUser(sessionStorage.token, password, error => {
-                if (error) {
-                    onFlowEnd()
+            onFlowStart()
 
-                    onModal()
+            await unregisterUser(sessionStorage.token, password)
 
-                    return
-                }
+            logger.info('User unregistered')
 
-                logger.info('User unregistered')
+            onFlowEnd()
 
-                onFlowEnd()
+            onModal('User unregistered', 'success')
 
-                onModal('User unregistered', 'success')
-
-                onSignOut()
-            })
+            onSignOut()
         } catch ({ message }) {
             onFlowEnd()
 

@@ -6,10 +6,6 @@ const clickedItem = new Schema({
         required: true,
         unique: true
     },
-    url: {
-        type: String,
-        required: true
-    },
     date: {
         type: Date,
         required: true

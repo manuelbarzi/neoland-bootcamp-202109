@@ -34,6 +34,9 @@ const user = new Schema({
     },
     favs: {
         type: Array
+    },
+    searchs: {
+        type: Array
     }
 })
 

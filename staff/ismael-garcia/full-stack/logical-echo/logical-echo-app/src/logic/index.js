@@ -8,6 +8,7 @@ import toggleFavItem from './toggle-fav-item'
 import retrieveFavItems from './retrieve-fav-items'
 import retrieveItemsCollection from './retrieve-items-collection'
 import searchItems from './search-items'
+import registerSubscription from './register-subscription'
 
 export {
     signInUser,
@@ -19,5 +20,6 @@ export {
     toggleFavItem,
     retrieveFavItems,
     retrieveItemsCollection,
-    searchItems
+    searchItems,
+    registerSubscription
 }

@@ -16,23 +16,15 @@ function Account({ onBack }) {
     
     const goToSignIn = () => setView('signin')
 
-    const signUp = (email, password) => {
-        onFlowStart()
-
+    const signUp = async (email, password) => {
         try {
-            signUpUser(email, password, error => {
-                if (error) {
-                    onFlowEnd()
+            onFlowStart()
 
-                    onModal(error.message)
+            await signUpUser(email, password)
 
-                    return
-                }
+            onFlowEnd()
 
-                onBack()
-
-                onFlowEnd()
-            })
+            onModal('Account created', 'success')
         } catch ({ message }) {
             onFlowEnd()
 
@@ -40,41 +32,15 @@ function Account({ onBack }) {
         }
     }
 
-    const signIn = (email, password) => {
-        onFlowStart()
-
+    const signIn = async (email, password) => {
         try {
-            signInUser(email, password, (error, token) => {
-                if (error) {
-                    onFlowEnd()
+            onFlowStart()
 
-                    onModal(error.message)
+            const token = await signInUser(email, password)
+            
+            sessionStorage.token = token
 
-                    return
-                }
-
-                sessionStorage.token = token
-
-                try {
-                    retrieveUser(token, (error) => {
-                        if (error) {
-                            onFlowEnd()
-
-                            onModal(error.message)
-
-                            return
-                        }
-
-                        onBack()
-                        
-                        onFlowEnd()
-                    })
-                } catch ({ message }) {
-                    onFlowEnd()
-
-                    onModal(message, 'warn')
-                }
-            })
+            onBack()
         } catch ({ message }) {
             onFlowEnd()
 

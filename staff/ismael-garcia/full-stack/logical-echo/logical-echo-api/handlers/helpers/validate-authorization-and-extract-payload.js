@@ -1,4 +1,4 @@
-// const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
 const { env: { SECRET } } = process
 
 function validateAuthorizationAndExtractPayload(authorization) {

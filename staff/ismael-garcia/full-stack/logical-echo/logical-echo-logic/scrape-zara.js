@@ -1,16 +1,13 @@
 require('dotenv').config()
 const { env: { MONGO_URL } } = process
-
 const { mongoose } = require('logical-echo-data')
 const puppeteer = require("puppeteer");
-// const { writeFile } = require("fs").promises;
 const logger = require("../logical-echo-api/utils/my-logger");
 const registerItem = require("./register-item");
 
 
 (async () => { 
   try {
-
     logger.debug("start scraping")
 
     const browser = await puppeteer.launch()
@@ -27,18 +24,18 @@ const registerItem = require("./register-item");
 
     await page.waitForSelector(".product-link.product-grid-product__link.link")
 
-    // const hrefs = await page.evaluate(() => {
-    //   const anchors = Array.from(
-    //     document.querySelectorAll(
-    //       ".product-link.product-grid-product__link.link"
-    //     )
-    //   );
+    const hrefs = await page.evaluate(() => {
+      const anchors = Array.from(
+        document.querySelectorAll(
+          ".product-link.product-grid-product__link.link"
+        )
+      );
 
-    //   const mappedHrefs = anchors.map((anchor) => anchor.href);
+      const mappedHrefs = anchors.map((anchor) => anchor.href);
 
-    //   return mappedHrefs;
-    // });
-    const hrefs = await page.$$eval('.product-link.product-grid-product__link.link', links => links.map(a => a.href));
+      return mappedHrefs;
+    });
+    // const hrefs = await page.$$eval('.product-link.product-grid-product__link.link', links => links.map(a => a.href));
 
     const promises = hrefs.map(async (href) => {
       logger.debug(`scraping page ${href}`)
@@ -97,29 +94,19 @@ const registerItem = require("./register-item");
     });
 
     const items = await Promise.all(promises);
-    const filterItems = items.filter(item => true) // aquí filtras para no meter repetidos
+    const filteredItems = items.filter(item => true) // filter to dismiss repeated items
 
     logger.debug(`scraped item ${JSON.stringify(items)}`)
 
     await browser.close();
 
-    // await writeFile("items-zara.json", JSON.stringify(items, null, 4));
-
     await mongoose.connect(MONGO_URL)
 
-    const creates = filterItems.map(async item => {
- 
+    const creates = filteredItems.map(async item => {
       return await registerItem(item)
-
     })
 
-    await Promise.all( creates )
-
-    // for (let i = 0; i < items.length; i++) {
-    //   const item = items[i]
-
-    //   await registerItem(item)
-    // }
+    await Promise.all(creates)
 
     mongoose.disconnect()
 

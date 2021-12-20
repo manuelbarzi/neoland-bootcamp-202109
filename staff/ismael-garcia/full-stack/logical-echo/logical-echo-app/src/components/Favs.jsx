@@ -4,7 +4,7 @@ import { retrieveFavItems, toggleFavItem } from '../logic'
 import logger from '../utils/logger.js'
 // import './Favs.css'
 
-function Favs({ onBack, onItem }) {
+function Favs({ onBack, onItem, onToggle }) {
     logger.debug('Favs -> render')
 
     const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
@@ -12,52 +12,24 @@ function Favs({ onBack, onItem }) {
     const [items, setItems] = useState()
 
     useEffect(() => {
-        onFlowStart()
+        async function favsUseEffect() {
+            try {
+                onFlowStart()
 
-        try {
-            retrieveFavItems(sessionStorage.token, (error, items) => {
-                if (error) {
-                    onFlowEnd()
-
-                    onModal(error.message)
-
-                    return
-                }
+                const items = await retrieveFavItems(sessionStorage.token)
 
                 setItems(items)
 
                 onFlowEnd()
-            })
-        } catch ({ message }) {
-            onFlowEnd()
 
-            onModal(message, 'warn')
-        }
+            } catch ({ message }) {
+                onFlowEnd()
+
+                onModal(message, 'warn')
+            }
+        } favsUseEffect();
     }, []);
 
-    const toggleFav = id => {
-        onFlowStart()
-
-        try {
-            toggleFavItem(sessionStorage.token, id, error => {
-                if (error) {
-                    onFlowEnd()
-
-                    onModal(error.message)
-
-                    return
-                }
-
-                setItems(items.filter(item => item.id !== id))
-
-                onFlowEnd()
-            })
-        } catch ({ message }) {
-            onFlowEnd()
-
-            onModal(message, 'warn')
-        }
-    }
 
     return <>
         <button className='button button--medium' onClick={onBack}>Go back</button>
@@ -72,7 +44,7 @@ function Favs({ onBack, onItem }) {
                     <button className="button" onClick={event => {
                             event.stopPropagation()
 
-                            toggleFav(id)
+                            onToggle(id)
                         }}>{isFav ? '🧡' : '🤍'}</button>
                 </li>)
             }

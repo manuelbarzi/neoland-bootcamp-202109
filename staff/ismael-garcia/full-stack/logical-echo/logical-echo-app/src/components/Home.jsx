@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { useQueryParams } from '../hooks'
-import { retrieveUser } from '../logic'
+import { retrieveUser, registerSubscription, toggleFavItem } from '../logic'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
@@ -27,27 +27,27 @@ function Home() {
 
     const [query, setQuery] = useState(queryParams.get('q'))
     const [view, setView] = useState('account')
+    const [items, setItems] = useState([])
 
     useEffect(() => {
-        logger.debug('Home -> useEffect')
+        async function homeUseEffect() {
+            logger.debug('Home -> useEffect')
 
-        const { token } = sessionStorage
+            const { token } = sessionStorage
 
-        if (token) {
             try {
                 onFlowStart()
 
-                retrieveUser(token, (error) => {
-                    if (error) {
-                        alert(error.message)
-
-                        return
-                    }
-
+                const user = await retrieveUser(token)
+                    
+                if (user) 
                     setView('profile')
-                    onFlowEnd()
-                })
+
+                onFlowEnd()
+
             } catch ({ message }) {
+                onFlowEnd()
+
                 onModal(message, 'warn')
 
                 resetToken()
@@ -55,7 +55,8 @@ function Home() {
                 return
             }
         }
-    }, [])
+        homeUseEffect();
+      }, []);
 
     const resetToken = () => {
         delete sessionStorage.token
@@ -73,6 +74,42 @@ function Home() {
         setQuery(query)
 
         navigate(`/search?q=${query}`)
+    }
+
+    const registerForNewsletter = async (email) => {
+        try {
+            onFlowStart()
+
+            await registerSubscription(email)
+            
+            onFlowEnd()
+        } catch ({ message }) {
+            onFlowEnd()
+
+            onModal(message, 'warn')
+        }
+    }
+
+    const toggleFav = async (id) => {
+        try {
+            onFlowStart()
+
+            await toggleFavItem(sessionStorage.token, id)
+
+            setItems(items.map(item => {
+                if (item.id === id) {
+                    return { ...item, isFav: !item.isFav}
+                }
+
+                return item
+            }))
+
+            onFlowEnd()
+        } catch ({ message }) {
+            onFlowEnd()
+
+            onModal(message, 'warn')
+        }
     }
 
     const goToCollection = store => navigate(`/items?q=${store}`)
@@ -102,17 +139,17 @@ function Home() {
 
             <Routes>
                 <Route path="/" element={<Search onSearch={search} onStore={goToCollection} query={query}/>}>
-                    <Route path="search" element={<Results onItem={goToItem} />} />
-                    <Route path="items" element={<Collection onItem={goToItem} />} />
-                    <Route path="items/:id" element={<Detail onBack={goBackToHome} />} />
+                    <Route path="items" element={<Results onItem={goToItem} onToggle={toggleFav} />} />
+                    <Route path="items/store" element={<Collection onItem={goToItem} onToggle={toggleFav} />} />
+                    <Route path="items/:id" element={<Detail onBack={goBackToHome} onToggle={toggleFav} />} />
                 </Route>
 
                 <Route path="/account" element={<Account onBack={goBackToHome} />} />
                 <Route path="/profile" element={<Profile onBack={goBackToHome} onSignOut={signOut} />} />
 
-                <Route path="/favs" element={<Favs onBack={goBackToHome} onItem={goToItem} />} />
+                <Route path="/favs" element={<Favs onBack={goBackToHome} onItem={goToItem} onToggle={toggleFav} />} />
 
-                <Route path="/newsletter" element={<Newsletter onBack={goBackToHome} onItem={goToItem} />} />
+                <Route path="/newsletter" element={<Newsletter onBack={goBackToHome} onNewsletter={registerForNewsletter} />} />
             </Routes>
         </div>
 }

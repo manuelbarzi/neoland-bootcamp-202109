@@ -1,11 +1,11 @@
 import { useQueryParams } from '../hooks'
 import { useState, useEffect, useContext } from 'react'
-import { retrieveItemsCollection, toggleFavItem } from '../logic'
+import { retrieveItemsCollection } from '../logic'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
 // import './Collection.css'
 
-function Collection({ onItem }) {
+function Collection({ onItem, onToggle }) {
     logger.debug('Collection -> render')
 
     const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
@@ -16,55 +16,29 @@ function Collection({ onItem }) {
 
     const store = queryParams.get('store')
 
-    useEffect(async () => {
-        const { token } = sessionStorage
+    useEffect(() => {
+        async function collectionUseEffect() {
+            logger.debug('Collection -> useEffect')
         
-        try {
-            onFlowStart()
+            const { token } = sessionStorage
+            
+            try {
+                onFlowStart()
 
-            const items = await retrieveItemsCollection(token, store)
-                
-            onFlowEnd()
-                
-            setItems(items)
-
-        } catch ({ message }) {
-            onFlowEnd()
-
-            onModal(message, 'warn')
-        }
-    }, [store])
-
-
-    const toggleFav = id => {
-        onFlowStart()
-
-        try {
-            toggleFavItem(sessionStorage.token, id, error => {
-                if (error) {
-                    onFlowEnd()
-
-                    onModal(error.message)
-
-                    return
-                }
-
-                setItems(items.map(item => {
-                    if (item.id === id) {
-                        return { ...item, isFav: !item.isFav}
-                    }
-
-                    return item
-                }))
-
+                const items = await retrieveItemsCollection(token, store)
+                    
                 onFlowEnd()
-            })
-        } catch ({ message }) {
-            onFlowEnd()
+                    
+                setItems(items)
 
-            onModal(message, 'warn')
+            } catch ({ message }) {
+                onFlowEnd()
+
+                onModal(message, 'warn')
+            }
         }
-    }
+        collectionUseEffect();
+    }, [store]);
 
     return items.length ?
         <ul className="results container container--vertical">
@@ -76,7 +50,7 @@ function Collection({ onItem }) {
                     <button className="button" onClick={event => {
                             event.stopPropagation()
 
-                            toggleFav(id)
+                            onToggle(id)
                         }}>{isFav ? '🧡' : '🤍'}</button>
                 </li>)
             }

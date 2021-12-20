@@ -5,7 +5,7 @@ import Home from './Home'
 import Spinner from './Spinner'
 import Modal from './Modal'
 import AppContext from './AppContext'
-import '../assets/logical-echo-logo.png'
+import image from '../assets/logical-echo-logo.png'
 
 function App() {
     logger.debug('App -> render')
@@ -33,7 +33,7 @@ function App() {
             onFlowEnd: hideSpinner,
             onModal: showModal
         }}>
-            <Logo image="../assets/logical-echo-logo.png" text='Logical Echo' />
+            <Logo image={image} text='Logical Echo' />
 
             {<Home />}
 

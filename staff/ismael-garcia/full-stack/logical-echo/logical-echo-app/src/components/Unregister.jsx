@@ -16,9 +16,9 @@ function Unregister({ onUnregister, onBack }) {
             <div className="container">
                 <button type="submit" className="button button--medium">Unregister</button>
                 <button type="button" className="button button--medium button--dark" onClick={(event) => {
-                event.preventDefault()
-                
-                onBack()
+                    event.preventDefault()
+                    
+                    onBack()
                 }}>Go Back</button>
             </div>
         </form>

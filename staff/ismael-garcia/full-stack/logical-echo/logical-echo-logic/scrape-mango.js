@@ -1,12 +1,10 @@
 require('dotenv').config()
-
+const { env: { MONGO_URL } } = process
 const { mongoose } = require('logical-echo-data')
 const puppeteer = require("puppeteer");
 const registerItem = require('./register-item');
-// const { writeFile } = require("fs").promises;
 const logger = require("../logical-echo-api/utils/my-logger");
 
-const { env: { MONGO_URL } } = process
 
 (async () => {
     try {
@@ -26,14 +24,14 @@ const { env: { MONGO_URL } } = process
 
         await page.waitForSelector("._6vE5I");
 
-        // const hrefs = await page.evaluate(() => {
-        //     const anchors = Array.from(document.querySelectorAll('._6vE5I'))
+        const hrefs = await page.evaluate(() => {
+            const anchors = Array.from(document.querySelectorAll('._6vE5I'))
 
-        //     const mappedHrefs = anchors.map((anchor) => anchor.href)
+            const mappedHrefs = anchors.map((anchor) => anchor.href)
 
-        //     return mappedHrefs
-        // })
-        const hrefs = await page.$$eval('._6vE5I', links => links.map(a => a.href));
+            return mappedHrefs
+        })
+        // const hrefs = await page.$$eval('._6vE5I', links => links.map(a => a.href));
 
         const promises = hrefs.map(async (href) => {
             logger.debug(`scraping page ${href}`)
@@ -86,18 +84,24 @@ const { env: { MONGO_URL } } = process
 
         const items = await Promise.all(promises)
 
+        const filteredItems = items.filter(item => true)
+
         logger.debug(`scraped item ${JSON.stringify(items)}`)
 
-        for (let i = 0; i < items.length; i++) {
-            const item = items[i]
-      
-            await registerItem(item)
-          }
-
         await browser.close()
+
+        await mongoose.connect(MONGO_URL)
+
+        const creates = filteredItems.map(async item => {
+        return await registerItem(item)
+        })
+
+        await Promise.all(creates)
+
+        mongoose.disconnect()
 
         logger.debug("end scraping")
     } catch (error) {
         logger.error(error)
     }
-})()
+})();
