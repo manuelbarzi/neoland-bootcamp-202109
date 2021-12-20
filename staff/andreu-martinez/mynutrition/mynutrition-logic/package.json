@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cryptr": "^6.0.2",
     "mynutrition-data": "file:../mynutrition-data",
     "mynutrition-errors": "file:../mynutrition-errors",
     "xmlhttprequest": "^1.8.0"

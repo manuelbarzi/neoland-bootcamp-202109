@@ -1,14 +1,13 @@
-import { useState, useContext } from 'react'
-import logger from '../logger'
-import Unregister from './Unregister'
-import { updateUserPassword, unregisterUser } from '../logic'
+import { useContext } from 'react'
+import { updatePassword } from '../logic'
 import AppContext from './AppContext'
 import '../style.sass'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-function updatePassword({onBack}) {
+function UpdateUserPassword({onBack}) {
 
+    const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext)
 
     return <>
         <div className="container">
@@ -17,24 +16,27 @@ function updatePassword({onBack}) {
 
                 const { target: { oldPassword: { value: oldPassword }, password: { value: password } } } = event
 
-                updatePassword(oldPassword, password)
+                updatePassword(sessionStorage.token, oldPassword, password)
+                debugger
             }}>
+            
                 <div><TextField
                     margin="normal"
                     fullWidth
-                    id="oldpassword"
+                    type="password"
+                    id="oldPassword"
                     label="Old Password"
-                    name="oldpassword"
+                    name="oldPassword"
                     autoComplete="old-password"
                     autoFocus
                 /></div>
                 <div><TextField
                     margin="normal"
                     fullWidth
-                    name="newpassword"
+                    name="password"
                     label="New Password"
-                    type="newpassword"
-                    id="newpassword"
+                    type="password"
+                    id="password"
                     autoComplete="new-password"
                 /></div>
                     <div><Button type="submit"
@@ -47,10 +49,11 @@ function updatePassword({onBack}) {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                         >Back</Button></div>
-
             </form>
         </div>
+            
     </>
+        
 }
 
-export default updatePassword
+export default UpdateUserPassword

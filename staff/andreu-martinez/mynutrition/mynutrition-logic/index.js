@@ -2,8 +2,12 @@ module.exports = {
     registerUser: require('./register-user'),
     authenticateUser: require('./authenticate-user'),
     retrieveUsers: require('./retrieve-users'),
-    retrieveUsersForEmail: require('./retrieve-users-for-email'),
+    retrieveUser: require('./retrieve-user'),
+    findUserById: require('./find-user'),
     modifyUser: require('./modify-user'),
     unregisterUser: require('./unregister-user'),
-    sendEmail: require('./send-email')
+    sendMessage: require('./send-message'),
+    retrieveMessages: require('./retrieve-messages'),
+    retrieveMessageById: require('./retrieve-message-by-id'),
+    setMessageToRead: require('./set-message-to-read')
 }

@@ -1,4 +1,6 @@
-const { Schema, Types : { ObjectId } } = require('mongoose')
+const { Schema } = require('mongoose')
+
+const { Types : { ObjectId } } = Schema
 
 
 const message = new Schema({
@@ -8,10 +10,12 @@ const message = new Schema({
     },
     from: {
         type: ObjectId,
+        ref: 'User',
         required: true
     },
     to: {
         type: ObjectId,
+        ref: 'User',
         required: true
     },
     subject: {
@@ -22,10 +26,16 @@ const message = new Schema({
         type: String,
         required: true
     },
-    date: {
+    sentDate: {
         type: Date,
         required: true,
         default: Date.now
+        
+    },
+    read: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 })
 

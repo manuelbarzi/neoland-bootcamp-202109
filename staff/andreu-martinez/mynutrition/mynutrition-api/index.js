@@ -8,12 +8,17 @@ const {
     registerUser,
     authenticateUser,
     retrieveUsers,
-    retrieveUsersForEmail,
+    retrieveUser,
+    findUserById,
+    unregisterUser,
     modifyUser,
-    sendEmail,
+    sendMessage,
+    retrieveMessages,
+    retrieveMessageById,
 } = require('./handlers')
 
 const logger = require('./utils/my-logger')
+
 
 const { env: { PORT, MONGO_URL }, argv: [, , port = PORT || 8080] } = process
 
@@ -26,6 +31,7 @@ logger.info('starting server');
         const server = express()
 
         server.use(cors())
+        server.options('*', cors());
 
         const api = express.Router()
 
@@ -37,14 +43,22 @@ logger.info('starting server');
 
         api.get('/users', retrieveUsers)
 
-        api.get('/listusers', retrieveUsersForEmail)
+        api.get('/user', retrieveUser)
+
+        api.delete('/user', unregisterUser)
+
+        api.get('/finduser', findUserById)
 
         api.patch('/users', jsonBodyParser, modifyUser)
 
-        api.post('/emails', jsonBodyParser, sendEmail)
+        api.post('/messages', jsonBodyParser, sendMessage)
+
+        api.get('/messages', jsonBodyParser, retrieveMessages)
+
+        api.get('/messagebyid', jsonBodyParser, retrieveMessageById)
 
         api.all('*', (req, res) => {
-            res.status(404).json({ message: 'sorry, this endpoint isn\'t available' })
+            res.status(404).json({ error: 'sorry, this endpoint isn\'t available' })
         })
 
         server.use('/api', api)

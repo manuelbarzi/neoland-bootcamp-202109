@@ -3,13 +3,6 @@ const { ConflictError } = require('mynutrition-errors')
 const { models: { User } } = require('mynutrition-data')
 const bcrypt = require('bcryptjs')
 
-/**
- * TODO doc me
- * @param {*} name 
- * @param {*} username 
- * @param {*} password 
- * @param {*} callback 
- */
 function registerUser(role, name, username, password) {
     validateName(name)
     validateUsername(username)

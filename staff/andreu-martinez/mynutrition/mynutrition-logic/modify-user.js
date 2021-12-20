@@ -1,4 +1,4 @@
-const { mongoose, models: { User } } = require('mynutrition-data')
+const { models: { User } } = require('mynutrition-data')
 const { validateId, validateData } = require('./helpers/validators')
 const { NotFoundError, ConflictError, CredentialsError } = require('mynutrition-errors')
 const bcrypt = require('bcryptjs')

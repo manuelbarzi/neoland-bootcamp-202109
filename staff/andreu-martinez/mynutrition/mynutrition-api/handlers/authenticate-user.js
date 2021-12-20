@@ -9,7 +9,7 @@ debugger
     try {
         authenticateUser(username, password)
             .then(id => {
-                const token = jwt.sign({ sub: id, exp: Math.floor(Date.now() / 1000) + 3600 }, SECRET)
+                const token = jwt.sign({ sub: id, exp: Math.floor(Date.now() / 1000) + 360000 }, SECRET)
 
                 res.json({ token })
             })

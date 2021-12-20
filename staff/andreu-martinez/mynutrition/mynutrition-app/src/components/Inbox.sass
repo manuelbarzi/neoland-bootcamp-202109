@@ -1,0 +1,50 @@
+.inbox-container
+    display: flex
+    flex-direction: column
+    width: 100%
+    padding: 30px
+
+.inbox-topbar
+    display: flex
+    flex-direction: row
+    justify-content: flex-start
+    width: 100%
+    padding: 10px
+
+.messages__container
+    display: flex
+    flex-direction: row  
+    padding: 3px  
+   
+.messages
+    display: flex
+    flex-direction: row
+    flex-wrap: wrap
+    flex: 1 1 0
+    justify-content: flex-start
+    padding: 3px
+    border-radius: 10px
+    text-align: right
+    gap: 10px
+    width: 0
+
+    &__item1
+        flex-grow: 1
+    &__item2
+        flex-grow: 2
+    &__item3
+        flex-grow: 9
+    &__item4
+        flex-grow: 1
+    &__new
+        background-color: rgb(207, 220, 250)
+    
+    &:hover
+        cursor: pointer
+        transform: scale(1.01)
+        transition: transform .1s
+        background-color: rgb(227, 248, 252)
+
+.multiSelectorCheckBox
+    vertical-align: bottom
+    margin-right: 5px

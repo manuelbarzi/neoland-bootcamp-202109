@@ -11,7 +11,7 @@ const bcrypt = require('bcryptjs')
 
 const { env: { MONGO_URL } } = process
 
-describe.only('sendMessage', ()=>{
+describe.only('sendMessage', () => {
 
     let user1;
     let user2
@@ -43,21 +43,17 @@ describe.only('sendMessage', ()=>{
     beforeEach(() => Message.deleteMany())
 
     it('should succeed with new message', async () =>{
-       
-        const parentId = new ObjectId
+       debugger
         const from = user1._id
         const to = user2._id
         const subject = 'Nueva dieta'
         const body = 'Esta es tu nueva dieta'
         const date = new Date('Fri, 10 Dec 2021 00:00:00 GMT')
 
-        const res = await sendMessage(parentId, from, to, subject, body, date)
-        expect(res).to.be.undefined
-
-        const find = bcrypt.hashSync(subject)
-        
-        const message = await Message.findOne({find})
+        const res = await sendMessage(null, from, to, subject, body, date)
+        //expect(res).to.be.undefined
         debugger
+        const message = await Message.findOne({_id: new ObjectId(res)})
         expect(message).to.exist
         expect(message.from.toString()).to.equal(from.toString())
         expect(message.to.toString()).to.equal(to.toString())
@@ -70,30 +66,29 @@ describe.only('sendMessage', ()=>{
 
     it('should succeed when responding a message', async () =>{
 
-        const parentId = new ObjectId
         const from = user1._id.toString()
         const to = user2._id.toString()
         const subject = 'Nueva dieta'
         const body = 'Esta es tu nueva dieta'
         const date = new Date('Fri, 10 Dec 2021 00:00:00 GMT')
-        const res = await Message.create({parentId, from, to, subject, body, date})
+        const res = await sendMessage(null, from, to, subject, body, date)
 
-        const re_parentId = res._id
-        const re_from = user2._id.toString()
-        const re_to = user1._id.toString()
+        const re_parentId = res
+        const re_from = user1._id.toString()
+        const re_to = user2._id.toString()
         const re_subject = 'Re Nueva dieta'
         const re_body = 'Gracias'
         const re_date = new Date('Fri, 10 Dec 2021 00:00:00 GMT')
 
         const res2 = await sendMessage(re_parentId, re_from, re_to, re_subject, re_body, re_date)
-        expect(res2).to.be.undefined   
+        //expect(res2).to.be.defined   
         debugger
-        const message = await Message.findOne({parent: re_parentId})
+        const message = await Message.findOne({_id: new ObjectId(res2)})
         expect(message.from.toString()).to.equal(re_from.toString())
-        expect(message.to.toString()).to.equal(re_to.toString())
-        expect(bcrypt.compareSync(re_subject, message.subject)).to.be.true
+        expect(message.to.toString()).to.equal(to.toString())
+        expect(bcrypt.compareSync(re_subject, message.subject )).to.be.true
         expect(bcrypt.compareSync(re_body, message.body)).to.be.true
-        expect(message.date.toString()).to.equal(re_date.toString())     
+        expect(message.date.toString()).to.equal(re_date.toString())   
     })
 
     describe('when parameters are not valid', () => {

@@ -1,14 +1,15 @@
 import context from './context'
 
-function retrieveUser(token) {
+function findUserById(token, id) {
     if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
 
     return (async () => {
-        const res = await fetch(`${context.API_URL}/user`, {
+        const res = await fetch(`${context.API_URL}/finduser`, {
             headers: {
                 'Authorization': `Bearer ${token}`
-            }
+            },
+            body: JSON.stringify(id)
         })
 
         const { status } = res
@@ -23,4 +24,4 @@ function retrieveUser(token) {
     })()
 }
 
-export default retrieveUser
+export default findUserById

@@ -1,18 +1,18 @@
 const { models: { User } } = require('mynutrition-data')
-const { validateId } = require('./helpers/validators')
 const { NotFoundError } = require('mynutrition-errors')
+const { sanitizeDocument } = require('./helpers/sanitizers') 
 
-async function retrieveUsers(id) {
-    validateId(id)
+async function retrieveUsers() {
     
-    const user = await User.findById(id).lean()
-    if (!user)
-        throw new NotFoundError(`user with id ${id} not found`)
-    user.id = user._id.toString()
-    delete user._id
-    delete user.password
-    delete user.__v
-    return user
+    const users = await User.find({}).lean()
+    
+    if (!users)
+        throw new NotFoundError(`Database is empty`)
+    
+    users.forEach(sanitizeDocument)
+    // users.forEach( e => sanitizeDocument ( e ))
+
+    return users
 }
 
 module.exports = retrieveUsers

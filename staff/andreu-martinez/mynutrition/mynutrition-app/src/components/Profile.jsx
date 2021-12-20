@@ -1,14 +1,15 @@
 import { useState, useContext } from 'react'
-import logger from '../logger'
-import Unregister from './Unregister'
-import UpdatePassword from './UpdatePassword'
-import { updateUserPassword, unregisterUser } from '../logic'
 import AppContext from './AppContext'
+import logger from '../logger'
+import UpdateUserPassword from './UpdateUserPassword'
+import Unregister from './Unregister'
+import { updatePassword, unregisterUser } from '../logic'
+
 import '../style.sass'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-function Profile({ onSignOut, onBack }) {
+function Profile({ onSignOut }) {
     logger.debug('Profile -> render')
 
     const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext)
@@ -21,11 +22,11 @@ function Profile({ onSignOut, onBack }) {
 
     const goToUpdatePassword = () => setView('update-password')
 
-    const updatePassword = (oldPassword, password) => {
+    const UpdatePassword = (oldPassword, password) => {
         onFlowStart()
 
         try {
-            updateUserPassword(sessionStorage.token, oldPassword, password, error => {
+            updatePassword(sessionStorage.token, oldPassword, password, error => {
                 if (error) {
                     onFlowEnd()
 
@@ -45,7 +46,7 @@ function Profile({ onSignOut, onBack }) {
         }
     }
 
-    const unregister = password => {
+    const onUnregister = password => {
         onFlowStart()
 
         try {
@@ -85,10 +86,10 @@ function Profile({ onSignOut, onBack }) {
                     >Update Password</Button></div>
             }
 
-            {view === 'update-password' && <UpdatePassword onBack={goToProfile}/> }
+            {view === 'update-password' && <UpdateUserPassword onBack={goToProfile}/> }
 
-            {view === 'unregister' && <Unregister onBack={goToProfile}/>}
+            {view === 'unregister' && <Unregister onBack={goToProfile} onUnregister={onUnregister}/>}
             </>
 }
 
-        export default Profile
+export default Profile

@@ -1,4 +1,6 @@
-function unregisterUser(token, password, callback) {
+import context from './context'
+
+function unregisterUser(token, password) {
     if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
 
@@ -7,33 +9,25 @@ function unregisterUser(token, password, callback) {
     if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
     if (password.length < 6) throw new Error('password has less than 6 characters')
 
-    if (typeof callback !== 'function') throw new TypeError(`${callback} is not a function`)
+    return (async () => {
+        const res = await fetch(`${context.API_URL}/users/`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ password })
+        })
 
-    const xhr = new XMLHttpRequest
+        const { status } = res
 
-    xhr.onload = () => {
-        const { status, responseText } = xhr
+        if (status === 201)
+            return
+        else if (status === 409 || status === 400) {
+            const { error } = await res.json()
 
-        if (status === 400 || status === 401) {
-            const response = JSON.parse(responseText)
-
-            const message = response.error
-
-            callback(new Error(message))
-        } else if (status === 204) {
-            callback(null)
-        }
-    }
-
-    xhr.open('DELETE', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    const body = { password }
-
-    xhr.send(JSON.stringify(body))
+            throw new Error(error)
+        } else throw new Error('unknown error')
+    })()
 }
 
 export default unregisterUser

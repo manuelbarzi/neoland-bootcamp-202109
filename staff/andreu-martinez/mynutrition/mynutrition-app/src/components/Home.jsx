@@ -2,21 +2,19 @@ import { useState, useEffect, useContext } from 'react'
 import logger from '../logger'
 import './Home.sass'
 import Profile from './Profile'
-import ListMyEmails from './ListMyEmails'
+import Inbox from './Inbox'
 import HomeLanding from './HomeLanding'
-import SignIn from './SignIn'
-import NewEmail from './NewEmail'
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
-import { useQueryParams } from '../hooks'
-import { retrieveUser } from '../logic'
+import { Routes, Route, useNavigate } from 'react-router-dom'
+import { retrieveUser, retrieveMessages, retrieveUsers, sendMessage, retrieveMessageById } from '../logic'
 import AppContext from './AppContext'
+
+
+///MUI
 import Badge from '@mui/material/Badge'
 import MailIcon from '@mui/icons-material/Mail'
 import SvgIcon from '@mui/material/SvgIcon'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import LogoutIcon from '@mui/icons-material/Logout';
-import Unregister from './Unregister'
-
 
 
 function Home({ onSignOut, onAuthError }) {
@@ -25,14 +23,12 @@ function Home({ onSignOut, onAuthError }) {
     const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext)
 
     const [name, setName] = useState(null)
-
-    const queryParams = useQueryParams()
-
-    // const [query, setQuery] = useState(queryParams.get('q'))
+    const [messageCount, setMessageCount] = useState()
 
     const navigate = useNavigate()
-
-    const location = useLocation()
+    const goToHome = () => navigate('/home')
+    const goToProfile = () => navigate('/profile')
+    const goToMessages = () => navigate('/inbox')
 
     useEffect(async () => {
         logger.debug('Home -> useEffect (componentDidMount)')
@@ -42,14 +38,15 @@ function Home({ onSignOut, onAuthError }) {
         if (token) {
             try {
                 onFlowStart()
-
-                const user = await retrieveUser(token)
+                const res = await retrieveMessages(token)
+                const res2 = await retrieveUser(token)
+                const foo = res.reduce((previousValue, { read }) => !read ? previousValue + 1 : 0, 0)
+                setMessageCount(foo)
 
                 onFlowEnd()
 
-                const { name } = user
+                setName(res2.name)
 
-                setName(name)
             } catch ({ message }) {
                 onFlowEnd()
 
@@ -60,16 +57,21 @@ function Home({ onSignOut, onAuthError }) {
         }
     }, [])
 
-    // const search = query => {
-    //     setQuery(query)
+    
 
-    //     navigate(`/search?q=${query}`)
+    // const getMessageById = async (id) =>{
+    //     try{
+    //         onFlowStart()
+    //         const openedMessage = await retrieveMessageById(sessionStorage.token, id)
+    //         onFlowEnd()
+
+    //         return openedMessage
+    //     }catch({message}){
+    //         onFlowEnd()
+    
+    //         onFeedback(message, 'warn')
+    //     }
     // }
-
-    const goToHome = () => navigate('/home')
-    const goToProfile = () => navigate('/profile')
-    const email = () => navigate('/email')
-    const goToUnregister = () => navigate('/unregister')
 
     function HomeIcon(props) {
         return (
@@ -78,17 +80,6 @@ function Home({ onSignOut, onAuthError }) {
             </SvgIcon>
         );
     }
-
-
-    const sendEmail = () => {
-
-        const { token } = sessionStorage
-        // llamar a tu función del logic y le pasarás como parámetros todo lo requerido
-        // token, miId, el idDestino, subject, 
-
-
-    }
-
 
     return <>
     <div className="wrap">
@@ -104,8 +95,8 @@ function Home({ onSignOut, onAuthError }) {
                         <HomeIcon color="primary" onClick={goToHome}/>
                     </div>
                     <div className="header--menu__items">
-                        <Badge badgeContent={1} color="primary">
-                            <MailIcon color="secondary" onClick={email} color="action" />
+                        <Badge badgeContent={messageCount} color="primary">
+                            <MailIcon color="secondary" onClick={goToMessages} color="action" />
                         </Badge>
                     </div>
                     <div className="header--menu__items">
@@ -120,9 +111,7 @@ function Home({ onSignOut, onAuthError }) {
                 <Routes>
                         <Route path="/home" element={<HomeLanding onSignOut={onSignOut} />} />
                         <Route path="/profile" element={<Profile onSignOut={onSignOut} />} />
-                        <Route path="/email" element={<ListMyEmails />} />
-                        <Route path="/email" element={<NewEmail />} />
-                        <Route path="/unregister" element={<Unregister goToUnregister={goToUnregister} onBack={goToProfile} />} />
+                        <Route path="/inbox" element={<Inbox />} />
                 </Routes>
             </div>
             <div className="footer">
