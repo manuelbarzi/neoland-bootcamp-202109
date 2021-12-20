@@ -1,24 +1,27 @@
 import React from 'react';
 import logger from '../logger'
 import { IconContext } from "react-icons";
-import { BsPersonCircle, BsSlack } from "react-icons/bs";
-import { Outlet } from 'react-router-dom';
+import { BsPersonCircle } from "react-icons/bs";
+import { Outlet, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useContext } from 'react'
 import AppContext from './AppContext'
 import ModalProfile from './ModalProfile';
 import cablack from '../assets/cablack.png'
 
-function Search({ onSearch, user }) {
+function Search({ onSearch, goToProfile, user }) {
     logger.info("Search -> render")
 
-    const { showSpinner, hideSpinner, showModal, goToHome } = useContext(AppContext)
+    const { goToHome } = useContext(AppContext)
 
     const [modalProfile, setModalProfile] = useState(false)
+    const navigate = useNavigate()
 
     const showModalProfile = () => setModalProfile(true)
 
     const closeModalProfile = () => setModalProfile(false)
+
+    const goToFavorites = () => navigate('/favs')
 
     return <>
         <IconContext.Provider value={{ color: "black", size: "1.2em", style: { verticalAlign: 'middle' }, className: "iconP" }}>
@@ -38,7 +41,10 @@ function Search({ onSearch, user }) {
 
             </div>
 
-            {modalProfile && <ModalProfile closeProfile={closeModalProfile} />}
+            {modalProfile && <ModalProfile 
+            closeProfile={closeModalProfile}
+            goToFavorites={goToFavorites}
+            goToProfile={goToProfile} />}
             <Outlet />
         </IconContext.Provider>
     </>

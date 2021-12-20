@@ -1,6 +1,6 @@
 const { models: { User } } = require('crowdaids-data')
 const { validateId, validatePassword } = require('./helpers/validators')
-const { NotFoundError, CredentialsError } = require('crowdaids-errors')
+const { CredentialsError } = require('crowdaids-errors')
 const bcrypt = require('bcryptjs')
 
 /**
@@ -20,11 +20,9 @@ function unregisterUser(id, password) {
     return (async () => {
         const user = await User.findById(id)
 
-        if (!user) throw new NotFoundError(`user with id ${id} not found`)
-
-        if (user.password !== password) throw new CredentialsError('Wrong password')
+        if (!user || !bcrypt.compareSync(password, user.password)) throw new CredentialsError('Wrong password')
        
-        else if (!bcrypt.compareSync(password, user.password)) {
+        else if (bcrypt.compareSync(password, user.password)) {
             await user.remove()
 
             return ('User deleted successfully')

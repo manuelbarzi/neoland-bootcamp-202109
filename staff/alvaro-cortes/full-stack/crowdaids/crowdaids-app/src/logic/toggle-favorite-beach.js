@@ -9,7 +9,7 @@ const { validateId } = require('crowdaids-logic/helpers/validators')
  * @param {function} callback The function to manage the errors.
  */
 
-function toggleFavoriteBeach(token, id) {
+function toggleFavoriteBeach(token, id, name) {
     validateId(token)
     validateId(id)
 
@@ -35,11 +35,12 @@ function toggleFavoriteBeach(token, id) {
             const index = favorites.indexOf(id)
 
             if (index < 0)
+
                 favorites.push(id)
             else
                 favorites.splice(index, 1)
 
-            await fetch(`${process.env.REACT_APP_API_URL}/users/${id}`, {
+            await fetch(`${process.env.REACT_APP_API_URL}/users/${name}/${id}`, {
                 method: 'PATCH',
                 headers: {
                     'Authorization': `Bearer ${token}`,

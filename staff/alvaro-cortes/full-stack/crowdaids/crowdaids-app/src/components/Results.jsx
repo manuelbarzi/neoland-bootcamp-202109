@@ -43,20 +43,22 @@ function Results({ onItem, onToggleFavorite }) {
         }
     }, [query])
 
-    const toggleFavorite = async (id) => {
+    const toggleFavorite = async (id, name) => {
 
         try {
             showSpinner()
 
-            await toggleFavoriteBeach(sessionStorage.token, id)
+            await toggleFavoriteBeach(sessionStorage.token, id, name)
 
             hideSpinner()
 
-            /*beaches.map((beach) => {
-                beach.isFav = !beach.isFav
-            })
-            setBeaches({ ...beaches, beaches: beaches})*/
+            setBeaches(beaches.map(beach => {
+                if (beach._id === id) {
+                    return { ...beach, isFav: !beach.isFav }
+                }
 
+                return beach
+            }))
 
         } catch ({ message }) {
             hideSpinner()
@@ -76,7 +78,7 @@ function Results({ onItem, onToggleFavorite }) {
                                 <h2 className="title--search"><span onClick={event => {
                                     event.stopPropagation()
 
-                                    toggleFavorite(_id)
+                                    toggleFavorite(_id, name)
                                 }}>{isFav ? <BsStarFill /> : <BiStar />}</span>{name} | <span className="location--name"> {breadCrumbs} </span> </h2>
                             </IconContext.Provider>
                         </div>

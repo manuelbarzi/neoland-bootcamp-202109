@@ -47,7 +47,6 @@ function SignIn() {
             </div><input type="text" placeholder="Usuario" id="username"></input>
             <input type="password" placeholder="Contraseña" id="password"></input>
             <div className="container">
-                
                 <button className="button">Iniciar Sesión</button>
             </div>
             <hr />

@@ -5,6 +5,11 @@ import logger from '../logger'
 import Search from './Search'
 import Results from './Results'
 import Detail from './Detail'
+import Favorites from './Favorites'
+import Profile from './Profile'
+import ChangeData from './Change-data'
+import ChangePassword from './Change-password'
+import Unregister from './Unregister'
 import { retrieveUser } from '../logic'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import { useQuery } from '../hooks'
@@ -59,18 +64,26 @@ function Home() {
         setBeach(beach)
     }
 
-    const goToSearch = () => search(query)
+    const goToProfile = () => navigate('/profile')
 
-    const goToFavorites = () => navigate('/favs')
+    const goToChangeData = () => navigate('/change-data')
+
+    const goToChangePassword = () => navigate('/change-password')
+
+    const goToUnregister = () => navigate('/unregister')
+
+    const goToSearch = () => search(query)
 
     return <>
         <Routes>
-            <Route path="/" element={<Search
-                user={user}
-                onSearch={search}
-                query={query}
-                onItem={goToItem}
-            />}>
+            <Route path="/" element={
+                <Search
+                    user={user}
+                    onSearch={search}
+                    query={query}
+                    onItem={goToItem}
+                    goToProfile={goToProfile}
+                />}>
 
                 <Route path="search" element={
                     <Results onItem={goToItem} />
@@ -80,6 +93,33 @@ function Home() {
                     <Detail
                         onGoBack={goToSearch}
                         beach={beach} />
+                } />
+
+                <Route path="/favs" element={
+                    <Favorites
+                        onItem={goToItem} />
+                } />
+
+                <Route path="/profile" element={
+                    <Profile
+                        goToChangeData={goToChangeData}
+                        goToChangePassword={goToChangePassword}
+                        goToUnregister={goToUnregister} />
+                } />
+
+                <Route path='/change-data' element={
+                    <ChangeData
+                        goToProfile={goToProfile} />
+                } />
+
+                <Route path='/change-password' element={
+                    <ChangePassword
+                        goToProfile={goToProfile} />
+                } />
+
+                <Route path='/unregister' element={
+                    <Unregister
+                        goToProfile={goToProfile} />
                 } />
             </Route>
         </Routes>

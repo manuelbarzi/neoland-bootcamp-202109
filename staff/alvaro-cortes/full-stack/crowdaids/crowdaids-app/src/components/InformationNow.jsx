@@ -8,7 +8,7 @@ import { BsStarFill } from "react-icons/bs";
 import { mapBeach } from './helpers'
 import logger from '../logger'
 
-function InformationNow({ maxMin, tide, wind, weather, swellDir, coordMap, arrS, arrW, fav, toggleFavorite, id }) {
+function InformationNow({ maxMin, tide, wind, weather, swellDir, coordMap, arrS, arrW, fav, toggleFavorite, id, name }) {
     logger.info('InformationNow -> render')
 
     return (
@@ -17,7 +17,7 @@ function InformationNow({ maxMin, tide, wind, weather, swellDir, coordMap, arrS,
                 <div id="favorites">
                     <h2>INFORME ACTUAL DE SURF </h2>
                     <IconContext.Provider value={{ color: '#d8a600', size: "1em", style: { verticalAlign: 'middle' } }}>
-                        <span className="favorite--icon" onClick={() => toggleFavorite(id)}>{fav?.isFav ? <BsStarFill /> : <BiStar />} Agregar a favoritos</span>
+                        <span className="favorite--icon" onClick={() => toggleFavorite(id, name)}>{fav?.isFav ? <BsStarFill /> : <BiStar />} Agregar a favoritos</span>
                     </IconContext.Provider>
                 </div>
                 <div className="map" style={{ backgroundImage: `url(${`https://api.maptiler.com/maps/basic/256/9/${coordMap()}.png?key=7aiwCGhglRXo4QbAr4RI`})` }} >

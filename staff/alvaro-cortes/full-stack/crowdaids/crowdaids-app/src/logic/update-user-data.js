@@ -1,5 +1,5 @@
 import context from './context'
-const { validateToken, validateName, validateUsername, validateEmail, validatePassword } = require('crowdaids-logic/helpers/validators')
+const { validateToken, validateData } = require('crowdaids-logic/helpers/validators')
 
 /**
  * Updating the user data in the application.
@@ -13,16 +13,14 @@ const { validateToken, validateName, validateUsername, validateEmail, validatePa
 
 function updateUserData(token, user) {
     validateToken(token)
-    validateName(user.name)
-    validateUsername(user.username)
-    validateEmail(user.email)
+    validateData(user)
 
     return (async () => {
         const res = await fetch(`${context.API_URL}/users`, {
             method: 'PATCH',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(user)
         })

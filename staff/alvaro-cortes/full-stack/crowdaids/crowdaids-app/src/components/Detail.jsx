@@ -95,16 +95,26 @@ function Detail({ beach }) {
 
     const arrDayFor = createDayFor()
 
-    const toggleFavorite = async (id) => {
+    const toggleFavorite = async (id, name) => {
 
         try {
             showSpinner()
 
-            await toggleFavoriteBeach(sessionStorage.token, id)
+            await toggleFavoriteBeach(sessionStorage.token, id, name)
 
             hideSpinner()
 
-            setFav({ ...fav, isFav: !fav.isFav})
+            //setFav({ ...fav, isFav: !fav.isFav})
+
+            setBeachInfo(beachInfo.map(beach => {
+                if (beach) {
+                    setFav({ ...fav, isFav: !fav.isFav})
+                    return { ...beach, isFav: !beach.isFav}
+                }
+
+
+                return beach
+            }))
 
 
         } catch ({ message }) {
@@ -135,6 +145,7 @@ function Detail({ beach }) {
                     beachInfo={beachInfo}
                     fav={fav}
                     id={id}
+                    name={name}
                 />
                 <WeekForecast arrDayFor={arrDayFor} />
             </div>

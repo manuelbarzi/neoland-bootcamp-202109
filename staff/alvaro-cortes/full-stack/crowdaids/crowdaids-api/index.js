@@ -19,7 +19,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const { mongoose } = require('crowdaids-data')
 const cors = require('cors')
-const corsOptions = { "Access-Control-Allow-Methods": ['GET', 'PUT', 'POST', 'DELETE'] }
+const corsOptions = { "Access-Control-Allow-Methods": ['GET', 'PUT', 'PATCH', 'POST', 'DELETE'] }
 
 const logger = require('./utils/my-logger')
 
@@ -45,12 +45,12 @@ logger.info('Starting server');
         api.post('/users/auth', jsonBodyParser, authenticateUser)
 
         api.get('/users', retrieveUser)
-
+        
         api.patch('/users', jsonBodyParser, modifyUser)
 
         api.delete('/users', jsonBodyParser, unregisterUser)
         
-        api.patch('/users/:beachId', toggleFavBeach)
+        api.patch('/users/:nameBeach/:beachId',  toggleFavBeach)
 
         api.get('/users/favorites', retrieveFavBeaches)
 

@@ -230,7 +230,7 @@ describe('modifyUser', () => {
 
             describe('when email is not valid', () => {
                 it('should fail when email is not a string', () => {
-                    debugger
+                  
                     expect(() => modifyUser('abcd1234abcd1234abcd1234', { email: true }, () => { })).to.throw(TypeError, 'email is not a string')
     
                     expect(() => modifyUser('abcd1234abcd1234abcd1234', { email: 123 }, () => { })).to.throw(TypeError, 'email is not a string')

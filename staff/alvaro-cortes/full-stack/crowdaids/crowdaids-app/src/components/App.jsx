@@ -6,7 +6,6 @@ import Spinner from './Spinner'
 import SignIn from './SignIn'
 import SignUp from './SignUp'
 import Home from './Home'
-import Profile from './Profile'
 import AppContext from './AppContext'
 
 function App() {
@@ -39,19 +38,11 @@ function App() {
 
     const hideSpinner = () => setSpinner(false)
 
-    const goToProfile = () => setView("profile")
-
     const goToHome = () => setView("home")
 
     const goToSignUp = () => setView("register")
 
     const goToSignIn = () => setView("login")
-
-    const goToUnregister = () => setView("unregister")
-
-    const goToChangePassword = () => setView("change--password")
-
-    const goToChangeData = () => setView("modify")
 
     return <>
         <AppContext.Provider value={{
@@ -61,11 +52,7 @@ function App() {
             goToHome: goToHome,
             goToSignIn: goToSignIn,
             goToSignUp: goToSignUp,
-            resetTokenAndGoToLogin: resetTokenAndGoToLogin,
-            goToProfile: goToProfile,
-            goToUnregister: goToUnregister,
-            goToChangePassword: goToChangePassword,
-            goToChangeData: goToChangeData
+            resetTokenAndGoToLogin: resetTokenAndGoToLogin
         }}>
 
             {view === "register" && <SignUp></SignUp>}
@@ -75,8 +62,6 @@ function App() {
 
             {view === "home" &&
                 <Home name={name} ></Home>}
-
-            {view === "profile" && <Profile></Profile>}
 
             {spinner && <Spinner></Spinner>}
 

@@ -49,7 +49,7 @@ function searchBeaches(token, query) {
                 const arrayBeaches = beaches[0].hits.hits
 
                 arrayBeaches.forEach(beach => {
-                    beach.isFav = favorites.includes(beach._id)
+                    beach.isFav = favorites.some(fav => fav.idBeach === beach._id)
                 })
 
                 return arrayBeaches

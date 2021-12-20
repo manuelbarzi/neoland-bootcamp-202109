@@ -8,7 +8,7 @@ const { Types: { ObjectId } } = mongoose
 
 const { env: { MONGO_URL } } = process
 
-describe('toggleFavBeach', () => {
+describe.only('toggleFavBeach', () => {
 
     before(() => mongoose.connect(MONGO_URL))
 
@@ -31,31 +31,36 @@ describe('toggleFavBeach', () => {
 
     it('Should succeed when beach is added on favorites', async () => {
         const newFav = '590927576a2e4300134fbed8'
+        const name = 'La Paloma'
 
-        const res = await toggleFavBeach(userId, newFav)
+        const res = await toggleFavBeach(userId, newFav, name)
 
         expect(res).to.exist
-        expect(res.favorites).to.have.deep.members([newFav])
+        expect(res.favorites).to.have.deep.members([{ idBeach: newFav, nameBeach: name }])
     })
 
-    let user1
+    let user1, favorites
 
     it('Should succed when beach is remove from favorites', async () => {
+        favorites = {
+            idBeach: '590927576a2e4300134fbed8',
+            nameBeach: 'La Paloma'
+        }
         user1 = {
             name: 'Peter Pan',
             username: 'peterpan',
             email: 'peter@pan.com',
             password: '123123123',
-            favorites: '590927576a2e4300134fbed8'
+            favorites
         }
 
         const user3 = await User.create(user1)
 
         userId = user3.id
 
-        const { favorites } = user1
-        
-        const res = await toggleFavBeach(userId, favorites)
+        const { favorites: { idBeach, nameBeach } } = user1
+        debugger
+        const res = await toggleFavBeach(userId, idBeach, nameBeach)
 
         expect(res).to.exist
         expect(res.favorites).to.have.deep.members([])
@@ -66,7 +71,7 @@ describe('toggleFavBeach', () => {
         const newFav = '590927576a2e4300134fbed8'
 
         try {
-            await toggleFavBeach(userId, newFav)
+            await toggleFavBeach(userId, newFav, 'La Paloma')
 
             throw new Error('should not reach this point')
         } catch (error) {
@@ -113,7 +118,7 @@ describe('toggleFavBeach', () => {
 
                 expect(() => toggleFavBeach('61bcb41451bd1ac2246f74da', [])).to.throw(TypeError, 'id is not a string')
 
-                expect(() => toggleFavBeach('61bcb41451bd1ac2246f74da', () => { }, )).to.throw(TypeError, 'id is not a string')
+                expect(() => toggleFavBeach('61bcb41451bd1ac2246f74da', () => { },)).to.throw(TypeError, 'id is not a string')
 
                 expect(() => toggleFavBeach('61bcb41451bd1ac2246f74da', {})).to.throw(TypeError, 'id is not a string')
             })
@@ -130,6 +135,27 @@ describe('toggleFavBeach', () => {
 
             it('Should fail when id length is less than 24 characters', () => {
                 expect(() => toggleFavBeach('61bcb41451bd1ac2246f74da', '1111111111111')).to.throw(FormatError, 'id has less than 24 characters')
+            })
+        })
+
+        describe('When nameBeach is not valid', () => {
+            it('Should fail when nameBeach is not a string', () => {
+                expect(() => toggleFavBeach('61bcb41451bd1ac2246f74da', '590927576a2e4300134fbed8', true)).to.throw(TypeError, 'name is not a string')
+
+                expect(() => toggleFavBeach('61bcb41451bd1ac2246f74da', '590927576a2e4300134fbed8', 123)).to.throw(TypeError, 'name is not a string')
+
+                expect(() => toggleFavBeach('61bcb41451bd1ac2246f74da', '590927576a2e4300134fbed8', {})).to.throw(TypeError, 'name is not a string')
+
+                expect(() => toggleFavBeach('61bcb41451bd1ac2246f74da', '590927576a2e4300134fbed8', () => { })).to.throw(TypeError, 'name is not a string')
+
+                expect(() => toggleFavBeach('61bcb41451bd1ac2246f74da', '590927576a2e4300134fbed8', [])).to.throw(TypeError, 'name is not a string')
+
+            })
+
+            it('should fail when nameBeach is empty', () => {
+                expect(() => toggleFavBeach('61bcb41451bd1ac2246f74da', '590927576a2e4300134fbed8', '')).to.throw(FormatError, 'name is empty or blank')
+
+                expect(() => toggleFavBeach('61bcb41451bd1ac2246f74da', '590927576a2e4300134fbed8', '  ')).to.throw(FormatError, 'name is empty or blank')
             })
         })
     })

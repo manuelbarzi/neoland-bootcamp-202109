@@ -48,7 +48,7 @@ function retrieveBeach(token, id) {
 
                 swellCondition.id = id
 
-                swellCondition.isFav = favorites.includes(swellCondition.id)
+                swellCondition.isFav = favorites.some(fav => fav.idBeach === swellCondition.id)
 
                 dataBeach.push(swellCondition)
 

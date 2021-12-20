@@ -56,8 +56,9 @@ const user = new Schema({
         ]
     },
     favorites: {
-        type: [String]
-    }
-})
+        type: [Object]
+    },
+}
+)
 
 module.exports = user
