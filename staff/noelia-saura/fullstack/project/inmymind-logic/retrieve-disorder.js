@@ -27,6 +27,7 @@ const retrieveDisorder = (user_id, date) => {
         if (!disorder) throw new NotFoundError(`disorder with id ${id} not found`)
 
         for (let index = 0; index < disorder.length; index++) {
+            disorder[index].id = disorder[index]._id.toString()
 
             delete disorder[index]._id
             delete disorder[index].user_id

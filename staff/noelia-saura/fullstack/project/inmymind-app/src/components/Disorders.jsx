@@ -3,6 +3,12 @@ import AppContext from "./AppContext";
 import { useEffect, useState, useContext } from "react";
 import { addDisorder, retrieveDisorder } from "../logic";
 import Disorder from "./Disorder";
+import * as React from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 function Disorders({ onBack }) {
   logger.debug("Disorders->render");
@@ -36,6 +42,21 @@ function Disorders({ onBack }) {
     }
   }, []);
 
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  const dateFormat = (date) => {
+    const d = new Date(date);
+    const day = (d.getDate() < 10 ? "0" : "") + d.getDate();
+    const month = d.getMonth() + 1;
+    const year = d.getFullYear();
+
+    return day + "-" + month + "-" + year;
+  };
+
   return (
     <>
       <button className="button--goback" onClick={onBack}>
@@ -44,12 +65,11 @@ function Disorders({ onBack }) {
           src="https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-back-basic-ui-elements-flatart-icons-outline-flatarticons.png"
         />
       </button>
-
       <form
         className="container container--vertical container--gapped"
         onSubmit={async (event) => {
           event.preventDefault();
-          debugger;
+
           const {
             target: {
               date,
@@ -78,33 +98,37 @@ function Disorders({ onBack }) {
             },
           } = event;
 
+          const parseBool = (b) => {
+            return b == "true";
+          };
+
           try {
             onFlowStart();
 
             await addDisorder(
-              symptom.value,
-              relax.value,
-              negativestate.value,
-              breathe.value,
-              initiatives.value,
-              whichinitiatives.value,
-              overreaction.value,
-              tremblehands.value,
-              paralyzed.value,
-              nerves.value,
-              worried.value,
-              whichworried.value,
-              live.value,
-              sad.value,
-              verysleep.value,
-              panic.value,
-              enthuse.value,
-              value.value,
-              irritable.value,
-              afraid.value,
-              overthinking.value,
-              causedstate.value,
               date.value,
+              symptom.value,
+              parseInt(relax.value),
+              parseBool(negativestate.value),
+              parseInt(breathe.value),
+              parseInt(initiatives.value),
+              whichinitiatives.value,
+              parseInt(overreaction.value),
+              parseInt(tremblehands.value),
+              parseInt(paralyzed.value),
+              parseInt(nerves.value),
+              parseInt(worried.value),
+              whichworried.value,
+              parseInt(live.value),
+              parseInt(sad.value),
+              parseInt(verysleep.value),
+              parseInt(panic.value),
+              parseInt(enthuse.value),
+              parseInt(value.value),
+              parseInt(irritable.value),
+              parseInt(afraid.value),
+              parseInt(overthinking.value),
+              causedstate.value,
               sessionStorage.token
             );
 
@@ -118,7 +142,7 @@ function Disorders({ onBack }) {
           }
         }}
       >
-        <div className="">
+        <div>
           <h2 className="adddisorder">Add Disorder</h2>
           <input
             className="container disorders"
@@ -132,7 +156,9 @@ function Disorders({ onBack }) {
           <div className="symptom">
             <h3>Sintomas</h3>
             <div className="symptom--input">
-              <div className="symptom--input__left">
+    
+
+                <div className="input--select">
                 <input
                   id="symptom"
                   type="radio"
@@ -140,6 +166,9 @@ function Disorders({ onBack }) {
                   defaultValue="estres"
                 />
                 <label htmlFor="symptom">Estres</label>
+                </div>
+
+                <div className="input--select"> 
                 <input
                   id="symptom"
                   type="radio"
@@ -147,6 +176,9 @@ function Disorders({ onBack }) {
                   defaultValue="ansiedad"
                 />
                 <label htmlFor="symptom">Ansiedad</label>
+                </div>
+
+                <div className="input--select">
                 <input
                   id="symptom"
                   type="radio"
@@ -155,7 +187,10 @@ function Disorders({ onBack }) {
                 />
                 <label htmlFor="symptom">Triste</label>
               </div>
-              <div className="symptom--input__right">
+              
+              
+
+              <div className="input--select">
                 <input
                   id="symptom"
                   type="radio"
@@ -163,6 +198,9 @@ function Disorders({ onBack }) {
                   defaultValue="nervioso"
                 />
                 <label htmlFor="symptom">Nervioso</label>
+              </div>
+
+              <div className="input--select">
                 <input
                   id="symptom"
                   type="radio"
@@ -170,6 +208,9 @@ function Disorders({ onBack }) {
                   defaultValue="fatiga"
                 />
                 <label htmlFor="symptom">Fatiga</label>
+                </div>
+
+                <div className="input--select">
                 <input
                   id="symptom"
                   type="radio"
@@ -177,8 +218,8 @@ function Disorders({ onBack }) {
                   defaultValue="depresion"
                 />
                 <label htmlFor="symptom">Depresión</label>
-              </div>
-            </div>
+                </div>
+            
             <input
               className="input--text"
               id="symptom"
@@ -187,6 +228,7 @@ function Disorders({ onBack }) {
             />
             <label htmlFor="symptom"></label>
 
+          </div>
             <div>
               <h3 htmlFor="quantity">Me costo relajarme</h3>
               <div>
@@ -556,11 +598,29 @@ function Disorders({ onBack }) {
         </div>
       </form>
 
-      {disorders.map((disorderItem) => (
-        <div key={disorderItem.id}>
-          <Disorder disorder={disorderItem} />
-        </div>
-      ))}
+      <div className='accordion'>
+        {disorders.map((disorderItem) => (
+          <Accordion
+            expanded={expanded === disorderItem.id}
+            onChange={handleChange(disorderItem.id)}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ color: "text.secondary" }}>
+                {dateFormat(disorderItem.date)}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div key={disorderItem.id}>
+                <Disorder disorder={disorderItem} />
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        ))}
+      </div>
     </>
   );
 }

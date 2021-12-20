@@ -5,42 +5,36 @@ function Diary({diary }) {
   logger.debug("Diary->render");
   
 
-  const dateFormat = (date) => {
-    const d = new Date(date);
-    const day = (d.getDate() < 10 ? "0" : "") + d.getDate();
-    const month = d.getMonth() + 1;
-    const year = d.getFullYear();
-
-    return day + "-" + month + "-" + year;
-  };
+  const parseBoolToString = (bool) => {
+    if (bool) {
+      return 'Si';
+    }
+    return 'No'
+  }
 
 
   return (
     <>
       <div className="diary">
-        <div className="diary__title">
-          <div className="diary__title__date">{dateFormat(diary.date)}</div>
-        </div>
-
-        <div className="diary__content">{diary.emotional}</div>
-        <div className="diary__content">{diary.timesleep}</div>
-        <div className="diary__content">{diary.timetowakeup}</div>
-        <div className="diary__content">{diary.qualitysleep}</div>
-        <div className="diary__content">{diary.hydrate}</div>
-        <div className="diary__content">{diary.quantityhydrate}</div>
-        <div className="diary__content">{diary.exercise}</div>
-        <div className="diary__content">{diary.meditation}</div>
-        <div className="diary__content">{diary.earlywakeup}</div>
-        <div className="diary__content">{diary.makethebed}</div>
-        <div className="diary__content">{diary.cleanface}</div>
-        <div className="diary__content">{diary.cleanteeth}</div>
-        <div className="diary__content">{diary.shower}</div>
-        <div className="diary__content">{diary.order}</div>
-        <div className="diary__content">{diary.cleanhouse}</div>
-        <div className="diary__content">{diary.changesheets}</div>
-        <div className="diary__content">{diary.cooking}</div>
-        <div className="diary__content">{diary.gotostreet}</div>
-        <div className="diary__content">{diary.timetostreet}</div>
+        <div className="diary__content">Emoción: {diary.emotional}</div>
+        <div className="diary__content">Tiempo de sueño: {diary.timesleep}</div>
+        <div className="diary__content">Hora de despertarse: {diary.timetowakeup}</div>
+        <div className="diary__content">Calidad del sueño: {diary.qualitysleep}</div>
+        <div className="diary__content">Hidratarse: {parseBoolToString(diary.hydrate)}</div>
+        <div className="diary__content">Cantidad de hidratación: {diary.quantityhydrate}</div>
+        <div className="diary__content">Ejercicio: {parseBoolToString(diary.exercise)}</div>
+        <div className="diary__content">Meditacion: {parseBoolToString(diary.meditation)}</div>
+        <div className="diary__content">Dormir tarde: {parseBoolToString(diary.earlywakeup)}</div>
+        <div className="diary__content">Hacer la cama: {parseBoolToString(diary.makethebed)}</div>
+        <div className="diary__content">Limpiar la cara: {parseBoolToString(diary.cleanface)}</div>
+        <div className="diary__content">Limpiar los dientes: {parseBoolToString(diary.cleanteeth)}</div>
+        <div className="diary__content">Ducharse: {parseBoolToString(diary.shower)}</div>
+        <div className="diary__content">Ordenar: {parseBoolToString(diary.order)}</div>
+        <div className="diary__content">Limpiar la casa: {parseBoolToString(diary.cleanhouse)}</div>
+        <div className="diary__content">Cambiar las sabanas: {parseBoolToString(diary.changesheets)}</div>
+        <div className="diary__content">Cocinar: {parseBoolToString(diary.cooking)}</div>
+        <div className="diary__content">Salir a la calle: {parseBoolToString(diary.gotostreet)} </div>
+        <div className="diary__content">Tiempo en la calle: {diary.timetostreet}</div>
       </div>
     </>
   );

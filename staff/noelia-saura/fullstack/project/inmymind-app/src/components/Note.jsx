@@ -2,7 +2,7 @@ import logger from "../logger";
 import { deleteNote } from "../logic";
 import "./Note.sass";
 
-function Note({note, deleteNote}) {
+function Note({note, deleteNote, showDelete}) {
   logger.debug("Note->render");
 
 
@@ -23,13 +23,12 @@ function Note({note, deleteNote}) {
     <>
       <div className="note">
         <div className="note__title">
-          <div className="note__title__date">{dateFormat(note.date)}</div>
           <div className="note__title__actions">
-            <div className="note__title__actions__button">
+            {showDelete && <div className="note__title__actions__button">
               <button onClick={doDeleteNote} >
                 <img src="https://img.icons8.com/material-outlined/24/000000/trash--v1.png" />
               </button>
-            </div>
+            </div>}
           </div>
         </div>
 

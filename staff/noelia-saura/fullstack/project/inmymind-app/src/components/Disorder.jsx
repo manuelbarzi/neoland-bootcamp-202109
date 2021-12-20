@@ -4,47 +4,41 @@ import "./Disorder.sass";
 function Disorder({disorder}) {
   logger.debug("Disorder->render");
 
-
-  const dateFormat = (date) => {
-    const d = new Date(date);
-    const day = (d.getDate() < 10 ? "0" : "") + d.getDate();
-    const month = d.getMonth() + 1;
-    const year = d.getFullYear();
-
-    return day + "-" + month + "-" + year;
-  };
-
  
+  const parseBoolToString = (bool) => {
+    if (bool) {
+      return 'Si';
+    }
+    return 'No'
+  }
 
   return (
     <>
       <div className="disorder">
-        <div className="disorder__title">
-          <div className="disorder__title__date">{dateFormat(disorder.date)}</div>
-        </div>
+        
 
-        <div className="disorder__content">{disorder.symptom}</div>
-        <div className="disorder__content">{disorder.relax}</div>
-        <div className="disorder__content">{disorder.negativestate}</div>
-        <div className="disorder__content">{disorder.breathe}</div>
-        <div className="disorder__content">{disorder.initiatives}</div>
-        <div className="disorder__content">{disorder.whichinitiatives}</div>
-        <div className="disorder__content">{disorder.overreaction}</div>
-        <div className="disorder__content">{disorder.tremblehands}</div>
-        <div className="disorder__content">{disorder.paralyzed}</div>
-        <div className="disorder__content">{disorder.nerves}</div>
-        <div className="disorder__content">{disorder.worried}</div>
-        <div className="disorder__content">{disorder.whichworried}</div>
-        <div className="disorder__content">{disorder.live}</div>
-        <div className="disorder__content">{disorder.sad}</div>
-        <div className="disorder__content">{disorder.verysleep}</div>
-        <div className="disorder__content">{disorder.panic}</div>
-        <div className="disorder__content">{disorder.enthuse}</div>
-        <div className="disorder__content">{disorder.value}</div>
-        <div className="disorder__content">{disorder.irritable}</div>
-        <div className="disorder__content">{disorder.afraid}</div>
-        <div className="disorder__content">{disorder.overthinking}</div>
-        <div className="disorder__content">{disorder.causedstate}</div>
+        <div className="disorder__content">Simptomas: {disorder.symptom}</div>
+        <div className="disorder__content">Relajación: {disorder.relax}</div>
+        <div className="disorder__content">Sentimientos negativos: {parseBoolToString(disorder.negativestate)}</div>
+        <div className="disorder__content">Probleas para respirar: {disorder.breathe}</div>
+        <div className="disorder__content">Dificultades tomar deciones: {disorder.initiatives}</div>
+        <div className="disorder__content">Que dificultades tuviste: {disorder.whichinitiatives}</div>
+        <div className="disorder__content">Reaccionase exagerado: {disorder.overreaction}</div>
+        <div className="disorder__content">Tenia temblo en las manos: {disorder.tremblehands}</div>
+        <div className="disorder__content">Sentia parlización: {disorder.paralyzed}</div>
+        <div className="disorder__content">Tenia muchos nervios: {disorder.nerves}</div>
+        <div className="disorder__content">Situaciones de panico: {disorder.worried}</div>
+        <div className="disorder__content">Que situaciones tuviste: {disorder.whichworried}</div>
+        <div className="disorder__content">Desmotivado para vivir: {disorder.live}</div>
+        <div className="disorder__content">Sentimiento de triste o depresión: {disorder.sad}</div>
+        <div className="disorder__content">Tenia sueño excesivo: {disorder.verysleep}</div>
+        <div className="disorder__content">Nivel de panico: {disorder.panic}</div>
+        <div className="disorder__content">Te sientes entusiasmado por algo: {disorder.enthuse}</div>
+        <div className="disorder__content">Te sientes desvalorado: {disorder.value}</div>
+        <div className="disorder__content">Te sientes irritado: {disorder.irritable}</div>
+        <div className="disorder__content">Tienes miedo: {disorder.afraid}</div>
+        <div className="disorder__content">Sobrepiensas demasiado: {disorder.overthinking}</div>
+        <div className="disorder__content">Cual ha sido el causante de este sentimiento: {disorder.causedstate}</div>
        </div>
     </>
   );

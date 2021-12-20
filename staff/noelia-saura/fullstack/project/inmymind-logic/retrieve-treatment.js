@@ -25,7 +25,6 @@ const retrieveTreatment = (user_id, date) => {
         if (!treatments) throw new NotFoundError(`treatments with id ${id} not found`)
 
         for (let index = 0; index < treatments.length; index++) {
-
             treatments[index].id = treatments[index]._id.toString()
 
             delete treatments[index]._id

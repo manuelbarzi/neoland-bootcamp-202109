@@ -3,6 +3,12 @@ import AppContext from "./AppContext";
 import { useEffect, useState, useContext } from "react";
 import { addNote, retrieveNotes, deleteNote } from "../logic";
 import Note from "./Note";
+import * as React from 'react';
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 function Notes({ onBack }) {
   logger.debug("Notes->render");
@@ -40,6 +46,21 @@ function Notes({ onBack }) {
       }
     }
   }, []);
+
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  const dateFormat = (date) => {
+    const d = new Date(date);
+    const day = (d.getDate() < 10 ? "0" : "") + d.getDate();
+    const month = d.getMonth() + 1;
+    const year = d.getFullYear();
+
+    return day + "-" + month + "-" + year;
+  };
 
   return (
     <>
@@ -88,12 +109,32 @@ function Notes({ onBack }) {
         </div>
       </form>
 
-      {notes.map((noteItem) => (
-        <div key={noteItem.id}>
-          <Note note={noteItem} deleteNote={doDeleteNote} />
-        </div>
-      ))}
-
+      <div className='accordion'>
+        {notes.map((noteItem) => (
+          <Accordion
+            expanded={expanded === noteItem.id}
+            onChange={handleChange(noteItem.id)}
+          >
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1bh-content"
+              id="panel1bh-header"
+            >
+              <Typography sx={{ color: "text.secondary" }}>
+                {dateFormat(noteItem.date)}
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <div key={noteItem.id}>
+                <Note
+                  note={noteItem}
+                  deleteNote={doDeleteNote} showDelete={true} 
+                  />
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        ))}
+      </div>
     </>
   );
 }

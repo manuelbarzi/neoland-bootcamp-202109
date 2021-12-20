@@ -26,6 +26,7 @@ const retrieveDiary = (user_id, date) => {
         if(!diary) throw new NotFoundError(`diary with id ${id} not found`)
         
         for (let index = 0; index < diary.length; index++) {
+            diary[index].id = diary[index]._id.toString()
 
             delete diary[index]._id
             delete diary[index].user_id

@@ -13,7 +13,7 @@ module.exports = (req, res) => {
 
         const user_id = id
 
-        const dateFormat = ''
+        let dateFormat = ''
 
         if (date) {
             dateFormat = new Date(date)
