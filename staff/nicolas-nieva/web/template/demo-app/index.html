@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App Demo</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="logic.js" defer></script>
+    <script src="main.js" defer></script>
+</head>
+
+<body class="body-bg">
+    <!-- Empieza ahora la página LANDING -->
+    <div class="bgf">
+        <div class="landing pagelayout container--hide">
+            <div class="landing__title title">
+                <h1>WELCOME</h1>
+            </div>
+            <div class="landing__subtitle layout__subtitle">
+                <p>Single page aplication</p>
+            </div>
+            <div class="landing__buttons">
+                <button class="button button__in">SIGN IN</button>
+                <button class="button button__up">SIGN UP</button>
+            </div>
+        </div>
+
+        <!-- Empieza ahora la página SIGN IN -->
+
+        <div class="sign-in pagelayout container--hide">
+            <div class="sign-in__title title">
+                <h1>SIGN IN</h1>
+            </div>
+            <div class="sign-in__subtitle layout__subtitle">
+                <p>Fill to test</p>
+            </div>
+            <form action="" class="sign-in__form">
+                <div class="sign-in__inputs">
+                    <input type="text" class="input" name="username" placeholder="username" />
+                    <input type="password" class="input" name="password" placeholder="Password" />
+                </div>
+                <div class="sign-in__buttons">
+                    <button type="submit" class="button">SIGN IN</button>
+                    <p id="p-link">Go to <a class="link">Sign Up</a></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Empieza ahora la página SIGN UP -->
+
+        <div class="sign-up pagelayout container--hide">
+            <div class="sign-up__title title">
+                <h1>SIGN UP</h1>
+            </div>
+            <div class="sign-up__subtitle layout__subtitle">
+                <p>Register to test</p>
+            </div>
+            <form action="" class="sign-up__form">
+                <div class="sign-up__inputs">
+                    <input type="text" class="input" name="name" placeholder="Name" />
+                    <input type="email" class="input" name="email" placeholder="Email" />
+                    <input type="text" class="input" name="username" placeholder="Username" />
+                    <input type="password" class="input" name="password" placeholder="Password" />
+                </div>
+                <div class="sign-up__checkbox">
+                    <input type="checkbox" class="checkbox" name="checkbox" id="checkbox" />
+                    <label for="checkbox" class="checkbox__label">I accept Whatever</label>
+                </div>
+                <div class="sign-up__buttons">
+                    <button type="submit" class="button">SIGN UP</button>
+                    <p id="p-link">Go to <a class="link">Sign IN</a></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Empieza ahora la página THANK YOU -->
+
+        <div class="thank-you pagelayout container--hide">
+            <div class="thank-you__title title title--font-height">
+                <h1>Thanks for register</h1>
+            </div>
+            <div class="thank-you__subtitle layout__subtitle">
+                <p>Go to SIGN IN to test the aplication</p>
+            </div>
+            <form action="" class="thank-you__form">
+                <div class="thank-you__buttons">
+                    <button class="button">SIGN IN</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Empieza ahora la página HOME -->
+
+        <div class="home pagelayout container--hide">
+            <div class="home__title title">
+                <h1>Hello!!</h1>
+            </div>
+            <div class="home__subtitle layout__subtitle">
+                <p>Welcome home <span class="name"></span>!</p>
+            </div>
+
+            <div class="buttons">
+                <button class="button">PROFILE</button>
+                <button class="button">SIGN OUT</button>
+            </div>
+
+            <form class="home__search container">
+                <input class="field" type="text" name="query" id="query" placeholder="criteria" />
+                <button class="button">Search</button>
+            </form>
+
+            <ul class="home__results"></ul>
+
+            <div class="home__detail container--hide">
+                <h2>title</h2><button class="button">Back</button>
+                <img class="home__detail-image"
+                    src="https://previews.123rf.com/images/wuk/wuk1710/wuk171000023/88766953-child-crash-test-dummy-sitting-in-a-car.jpg"
+                    alt="">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quas sapiente veritatis, magni natus
+                    necessitatibus velit aliquam enim iste? Beatae velit explicabo temporibus et blanditiis! Deleniti
+                    nemo voluptatem cumque nam.</p>
+                <time>2021</time>
+                <span>100 $</span>
+                <span>color</span>
+                <span>style</span>
+                <span>collection</span>
+                <span>maker</span>
+                <a href="http://">original</a>
+            </div>
+        </div>
+   
+
+
+
+
+    <!-- PROFILE -->
+
+    <div class="profile pagelayout container--hide">
+        <div class="profile__title title">
+            <h1>PROFILE</h1>
+        </div>
+        <div class="profile__form pagelayout">
+            <form class="profile__inputs">
+                <input class="input" type="password" name="oldPassword" id="oldPassword"
+                    placeholder="current password" />
+                <input class="input" type="password" name="password" id="password" placeholder="new password" />
+
+                <div class="button__profile">
+                    <button class="button">Go back</button>
+                    <button class="button">Update</button>
+                </div>
+            </form>
+        </div>
+
+        <button class="button unregister--button">Unregister</button>
+    </div>
+
+
+    <!-- unregister -->
+
+    <div class="unregister container--hide">
+        <div class="unregister pagelayout">
+            <div class="unregister__title title">
+                <h1>Unregister</h1>
+            </div>
+            <form class="pagelayout form__unregister">
+                <input class="input" type="password" name="password" id="pass" placeholder="password" />
+
+                <div class="unregister__buttons">
+                    <button class="button">Go back</button>
+                    <button class="button unregister--button">Unregister</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- spinner loading -->
+
+    <div class="spinner container--full">
+        <img class="spinner__image" src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt="" />
+    </div>
+
+</div>
+
+    </div>
+</body>
+
+</html>

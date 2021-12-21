@@ -1,0 +1,1 @@
+console.log(invertPhrase('hola mundo paola mariana'))
