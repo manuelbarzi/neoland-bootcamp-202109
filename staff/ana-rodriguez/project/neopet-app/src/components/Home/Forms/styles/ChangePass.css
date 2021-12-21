@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+.changePass_container {
+    font-family: 'Montserrat', sans-serif;
+    margin: 15px;
+    padding: 15px;
+    border: solid 1px;
+    width: 42%;
+    min-height: 32%;
+}
+
+.changepass {
+    margin: 5px;
+    height: 50px;
+    width: 300px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    align-items: center;
+    border: none;
+    border-bottom: 1px solid;
+    color: rgb(5, 90, 146);
+}
+
+.change_button {
+    padding: 8px;
+    color: #fff;
+    border: 2px solid rgb(10, 6, 6);
+    text-align: center;
+    font-size: 1.05em;
+    cursor: pointer;
+    background-color: #093d7d;
+    margin: 0 auto;
+    display: block;
+}
+.buttons{
+    display: flex;
+    justify-content: space-around;
+}
