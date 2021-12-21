@@ -17,8 +17,6 @@ function retrieveUser(id) {
 
         delete user.__v
 
-        delete user.creditCards
-
         return user
     })()
 }

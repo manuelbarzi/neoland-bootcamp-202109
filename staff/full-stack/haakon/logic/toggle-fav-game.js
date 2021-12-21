@@ -3,7 +3,6 @@ const { NotFoundError } = require('customs-errors')
 const { models: { User, Game } } = require('data')
 
 function toggleFavGame(userId, gameId) {
-    debugger
     validateId(userId)
     validateId(gameId)
 

@@ -6,6 +6,7 @@ const unregisterUser = require('./unregister-user')
 const searchGames = require('./search-games')
 const retrieveGame = require('./retrieve-game')
 const toggleFavGame = require('./toggle-fav-game')
+const retrieveFavGames = require('./retrieve-fav-games')
 
 module.exports = {
     registerUser,
@@ -15,5 +16,6 @@ module.exports = {
     unregisterUser,
     searchGames,
     retrieveGame,
-    toggleFavGame
+    toggleFavGame,
+    retrieveFavGames
 }
