@@ -4,6 +4,7 @@ import { retrieveUser, registerSubscription, toggleFavItem } from '../logic'
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
+import Navbar from '.Navbar'
 import Search from './Search'
 import Results from './Results'
 import Collection from './Collection'
@@ -12,8 +13,6 @@ import Account from './Account'
 import Profile from './Profile'
 import Favs from './Favs'
 import Newsletter from './Newsletter'
-import Button from '@mui/material/Button'
-import { Typography } from '@mui/material'
 
 
 function Home() {
@@ -28,56 +27,53 @@ function Home() {
     const queryParams = useQueryParams()
 
     const [query, setQuery] = useState(queryParams.get('q'))
-    const [view, setView] = useState('account')
+    const [view, setView] = useState('loggedOut')
     const [items, setItems] = useState([])
 
-    useEffect(() => {
-        async function homeUseEffect() {
-            logger.debug('Home -> useEffect')
+    // useEffect(() => {
+    //     (async () => {
+    //         logger.debug('Home -> useEffect')
 
-            const { token } = sessionStorage
+    //         const { token } = sessionStorage
 
-            if (token) {
-                try {
-                    onFlowStart()
+    //         if (token) {
+    //             try {
+    //                 onFlowStart()
     
-                    const user = await retrieveUser(token)
+    //                 const user = await retrieveUser(token)
                         
-                    if (user) 
-                        setView('profile')
+    //                 if (user) 
+    //                     setView('loggedIn')
     
-                    onFlowEnd()
+    //                 onFlowEnd()
     
-                } catch ({ message }) {
-                    onFlowEnd()
+    //             } catch ({ message }) {
+    //                 onFlowEnd()
     
-                    onModal(message, 'warn')
+    //                 onModal(message, 'warn')
     
-                    resetToken()
+    //                 resetToken()
     
-                    return
-                }
-            }
-        }
-        homeUseEffect();
-      }, []);
+    //                 return
+    //             }
+    //         }
+    //     })()
+    //   }, []);
 
     const resetToken = () => {
         delete sessionStorage.token
 
+        setView('loggedOut')
+
         onFlowEnd()
     }
 
-    const signOut = () => {
-        resetToken()
-
-        setView('account')
-    }
+    const signOut = () => resetToken()
 
     const search = query => {
         setQuery(query)
 
-        navigate(`/items?q=${query}`)
+        navigate(`/search/items?q=${query}`)
     }
 
     const registerForNewsletter = async (email) => {
@@ -94,14 +90,14 @@ function Home() {
         }
     }
 
-    const toggleFav = async (id) => {
+    const toggleFav = async (item_id) => {
         try {
             onFlowStart()
 
-            await toggleFavItem(sessionStorage.token, id)
+            await toggleFavItem(sessionStorage.token, item_id)
 
             setItems(items.map(item => {
-                if (item.id === id) {
+                if (item.item_id === item_id) {
                     return { ...item, isFav: !item.isFav}
                 }
 
@@ -118,7 +114,7 @@ function Home() {
 
     const goToSearch = () => navigate('/search')
 
-    const goToCollection = store => navigate(`/items/store?q=${store}`)
+    const goToCollection = store => navigate(`/search/store?q=${store}`)
 
     const goToAccount = () => navigate('/account')
 
@@ -126,55 +122,50 @@ function Home() {
 
     const goToNewsletter = () => navigate('/newsletter')
 
-    const goToItem = id => navigate(`/items/item?itemid=${id}`)
+    const goToItem = item_id => navigate(`/search/items/item?q=${item_id}`)
 
     const goToProfile = () => navigate('/profile')
 
     const goBackToHome = () => navigate('/')
 
 
-    return <div id="home" className="container container--vertical container--gapped">
-            <Typography>Join conscious, committed life!</Typography>
+    return <>
+        <div id="home" className="container container--vertical container--gapped">
+            <h1>Join conscious, committed life!</h1>
 
-            <div>
-                <Button type="button" className={`button button--medium ${location.pathname === '/newsletter' && 'button--dark'}`} onClick={goToNewsletter}>Newsletter</Button>
+            <Navbar onLogin={goToAccount} onProfile={goToProfile} onNewsletter={goToNewsletter} onFavs={goToFavs} onSearch={goToSearch} ></Navbar>
+            {/* <div>
+                <button type='button' className={`button button--medium ${location.pathname === '/newsletter' && 'button--dark'}`} onClick={goToNewsletter}>Newsletter</button>
 
-                <Button type="button" className={`button button--medium ${location.pathname === '/search' && 'button--dark'}`} onClick={goToSearch}>Search</Button>
+                <button type='button' className={`button button--medium ${location.pathname === '/search' && 'button--dark'}`} onClick={goToSearch}>Search</button>
             </div>
             
             <div className="container">
-                {view === 'account' && <Button type="button" className={`button button--medium ${location.pathname === '/account' && 'button--dark'}`} onClick={goToAccount}>Login</Button>}
+                {view === 'loggedOut' && <button type='button' className={`button button--medium ${location.pathname === '/account' && 'button--dark'}`} onClick={goToAccount}>Login</button>}
 
-                {view === 'profile' && <Button type="button" className={`button button--medium ${location.pathname === '/profile' && 'button--dark'}`} onClick={goToProfile}>Profile</Button>}
+                {view === 'loggedIn' && <button type='button' className={`button button--medium ${location.pathname === '/profile' && 'button--dark'}`} onClick={goToProfile}>Profile</button>}
                 
-                <Button type="button" className={`button button-medium ${location.pathname === '/favs' && 'button--dark'}`} onClick={goToFavs}>Favs</Button>
+                <button type='button' className={`button button-medium ${location.pathname === '/favs' && 'button--dark'}`} onClick={goToFavs}>Favs</button>
 
-            </div>
+            </div> */}
 
             <div>
-                <Button type="button" className="button button--medium button--dark" onClick={event => {
-                    goToCollection('Zara') 
-                }}>Zara</Button>
+                <button type='button' className="button button--medium button--dark" onClick={() => goToCollection('Zara')}>Zara</button>
 
-                <Button type="button" className="button button--medium button--dark" onClick={event => {
-                    goToCollection('HM')
-                }}>H&M</Button>
+                <button type='button' className="button button--medium button--dark" onClick={() => goToCollection('HM')}>H&M</button>
 
-                <Button type="button" className="button button--medium button--dark" onClick={event => {
-                    goToCollection('Mango')
-                }}>Mango</Button>
+                <button type='button' className="button button--medium button--dark" onClick={() => goToCollection('Mango')}>Mango</button>
 
             </div>
 
             <Routes>
-                <Route path="/search" element={<Search onSearch={search} query={query}/>}>
-                    <Route path="items" element={<Results onItem={goToItem} onToggle={toggleFav} />} />
-                    <Route path="items/item" element={<Detail onBack={goBackToHome} onToggle={toggleFav} />} />
-                </Route>
+                <Route path="/" element= {<h1>Hola Isma</h1>}/>
+                <Route path="search" element={<Search onSearch={search} query={query}/>} />
+                <Route path="search/items" element={<Results onItem={goToItem} onToggle={toggleFav} />} />
 
-                <Route path="/store" element={<Collection onItem={goToItem} onToggle={toggleFav} />}>
-                    
-                </Route>
+                <Route path="search/items/item" element={<Detail onBack={goBackToHome} onToggle={toggleFav} />} />
+
+                <Route path="search/store" element={<Collection onItem={goToItem} onToggle={toggleFav} />} />
 
                 <Route path="/account" element={<Account onBack={goBackToHome} />} />
                 <Route path="/profile" element={<Profile onBack={goBackToHome} onSignOut={signOut} />} />
@@ -183,7 +174,9 @@ function Home() {
 
                 <Route path="/newsletter" element={<Newsletter onBack={goBackToHome} onNewsletter={registerForNewsletter} />} />
             </Routes>
+
         </div>
+    </>
 }
 
 export default Home

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Route, Routes } from 'react-router-dom'
 import logger from '../utils/logger'
 import Logo from './Logo'
 import Home from './Home'
@@ -37,9 +36,7 @@ function App() {
         }}>
             <Logo image={image} text='Logical Echo' />
 
-            <Routes>
-                <Route path="/" element={<Home />} />
-            </Routes>
+            <Home />
 
             {spinner && <Spinner />}
 

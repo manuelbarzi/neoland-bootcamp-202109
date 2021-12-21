@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
 
         const items = await retrieveItemsByStore(id, q)
 
-        res.json(JSON.stringify(items))
+        res.json(items)
     
     } catch (error) {
         handleError(error, res)

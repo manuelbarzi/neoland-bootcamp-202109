@@ -44,11 +44,11 @@ logger.info('starting server');
 
         api.delete('/users', jsonBodyParser, unregisterUser)
 
-        api.get('/items', searchItems)
+        api.get('/search/items', searchItems)
 
-        api.get('/items/item', retrieveItem) // with params: items/item/ghty5h352d
+        api.get('/search/items/item', retrieveItem) // with params: items/item/ghty5h352d
 
-        api.get('/items/store', retrieveItemsByStore)
+        api.get('/search/store', retrieveItemsByStore)
 
         api.post('/subscriptions', jsonBodyParser, registerSubscription)
 

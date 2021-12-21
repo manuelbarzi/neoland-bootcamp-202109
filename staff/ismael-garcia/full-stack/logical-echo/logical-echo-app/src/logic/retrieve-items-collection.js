@@ -33,18 +33,19 @@ import { validateStore, validateToken } from "./helpers/validators"
 
             const { favs = [] } = user 
 
-            const res2 = await fetch(`http://localhost:8000/api/items/store?q=${store}`, {
+            const res2 = await fetch(
+                `http://localhost:8000/api/search/store/?q=${store}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             })
 
-            const { status } = res2 
+            const { status } = res2
 
             if (status === 200) {
-                const items = await JSON.parse(res2)
-
+                const items = await res2.json()
+                
                 items.forEach(item => {
                     item.isFav = favs.includes(item.item_id)
                 })

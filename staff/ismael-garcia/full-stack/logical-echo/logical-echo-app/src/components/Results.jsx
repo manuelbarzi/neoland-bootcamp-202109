@@ -17,16 +17,17 @@ function Results({ onItem, onToggle }) {
     const query = queryParams.get('q')
 
     useEffect(() => {
-        async function resultsUseEffect() {
+        (async () => {
             logger.debug('Results -> useEffect')
         
             const { token } = sessionStorage
             
             try {
+
                 onFlowStart()
 
                 const items = await searchItems(token, query)
-                    
+
                 onFlowEnd()
                     
                 setItems(items)
@@ -36,21 +37,20 @@ function Results({ onItem, onToggle }) {
 
                 onModal(message, 'warn')
             }
-        }
-        resultsUseEffect();
+        })()
     }, [query]);
 
     return items && items.length ?
         <ul className="results container container--vertical">
             {
-                items.map(({ id, name, images, price, isFav }) => <li key={id}className="home__results-item" onClick={() => onItem(id)}>
+                items.map(({ item_id, name, images, price, isFav }) => <li key={item_id}className="home__results-item" onClick={() => onItem(item_id)}>
                     <h2>{name}</h2>
                     <span>{price}</span>
                     <img src={images[0]} alt='' />
                     <button className="button" onClick={event => {
                             event.stopPropagation()
 
-                            onToggle(id)
+                            onToggle(item_id)
                         }}>{isFav ? '🧡' : '🤍'}</button>
                 </li>)
             }

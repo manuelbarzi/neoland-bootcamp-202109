@@ -33,7 +33,7 @@ import { validateItemId, validateToken } from "./helpers/validators"
 
             const { favs = [] } = user 
 
-            const res2 = await fetch(`http://localhost:8000/api/items/item?itemid=${item_id}`, {
+            const res2 = await fetch(`http://localhost:8000/api/search/items/item/?q=${item_id}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -43,7 +43,7 @@ import { validateItemId, validateToken } from "./helpers/validators"
             const { status } = res2 
 
             if (status === 200) {
-                const item = await JSON.parse(res2)
+                const item = res2.json()
 
                 item.isFav = favs.includes(item.item_id)               
 

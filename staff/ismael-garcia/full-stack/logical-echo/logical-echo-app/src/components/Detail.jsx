@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
+import { useQueryParams } from '../hooks'
 import { retrieveItem } from '../logic'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
@@ -10,29 +11,35 @@ function Detail({ onBack, onToggle }) {
 
     const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
 
-    const { id } = useParams()
+    // const { id } = useParams()
     const [item, setItem] = useState()
 
+    const queryParams = useQueryParams()
+
+    const item_id = queryParams.get('q')
+
     useEffect(() => {
-        async function detailUseEffect() {
+        (async () => {
             logger.debug('Detail -> useEffect')
+
+            const { token } = sessionStorage
 
             try {
                 onFlowStart()
 
-                const item = await retrieveItem(sessionStorage.token, id) 
-
-                setItem(item)
+                const item = await retrieveItem(token, item_id) 
 
                 onFlowEnd()
+
+                setItem(item)
                 
             } catch ({ message }) {
                 onFlowEnd()
 
                 onModal(message, 'warn')
             }
-        } detailUseEffect();
-    }, [id]);
+        })()
+    }, [item_id]);
 
     return <div className="container container--vertical">
         {item && <>
@@ -41,7 +48,7 @@ function Detail({ onBack, onToggle }) {
             <img className="home__detail-image" src={item.images[0]} alt="" />
             <p>{item.description}</p>
             <span>{item.price}</span>
-            <button type='button' className='button' onClick={() => onToggle(id)}>{item.isFav ? '🧡' : '🤍'}</button>
+            <button type='button' className='button' onClick={() => onToggle(item_id)}>{item.isFav ? '🧡' : '🤍'}</button>
             <span>{item.colors}</span>
             <a href={item.url}>Visit the store</a>
         </>}
