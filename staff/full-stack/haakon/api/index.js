@@ -9,10 +9,10 @@ const {
     authenticateUser,
     retrieveUser,
     modifyUser,
-    searchVehicles,
     searchGames,
     retrieveGame,
-    toggleFavGame
+    toggleFavGame,
+    retrieveFavGames
 } = require('./handlers')
 
 const logger = require('./utils/my-logger')
@@ -44,13 +44,13 @@ mongoose.connect(MONGO_URL)
 
         api.patch('/users', jsonBodyParser, modifyUser)
 
-        api.get('/hotwheels/vehicles', searchVehicles)
-
         api.get('/games', searchGames)
 
         api.get('/games/:gameId', retrieveGame)
 
         api.patch('/users/favs', jsonBodyParser, toggleFavGame)
+
+        api.get('/users/favs', retrieveFavGames)
 
         api.all('*', (req, res) => {
             res.status(404).json({ message: 'sorry, this endpoint isn\'t available' })
