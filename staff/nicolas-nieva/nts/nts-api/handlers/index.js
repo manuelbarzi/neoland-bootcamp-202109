@@ -4,13 +4,14 @@ module.exports = {
     retrieveUser: require ('./retrieve-user'),
     modifyUser: require ('./modify-user'),
     unregisterUser: require ('./unregister-user'),
+
     createReservation: require ('./create-reservation'),
-    addNoteToReservation: require ('./add-note-to-reservation') ,
-    deleteNoteFromReservation: require ('./delete-note-from-reservation'),
     modifyReservation: require ('./modify-reservation'),
     deleteReservation: require ('./delete-reservation'),
     searchReservations: require ('./search-reservations'),
     retrieveReservation: require ('./retrieve-reservation'),
-    retrieveReservations: require ('./retrieve-reservations')
+    retrieveReservations: require ('./retrieve-reservations'),
 
+    addNoteToReservation: require ('./add-note-to-reservation') ,
+    deleteNoteFromReservation: require ('./delete-note-from-reservation')
 }

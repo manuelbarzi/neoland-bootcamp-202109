@@ -21,14 +21,15 @@ const { registerUser,
 
 const cors = require('cors')
 const corsOptions = {
-    "Access-Control-Allow-Methods": ['GET', 'PUT', 'POST', 'DELETE']}    
+    'Access-Control-Allow-Methods': ['GET', 'PUT', 'POST', 'DELETE']
+}
 
 const { env: { PORT, MONGO_URL }, argv: [, , port = PORT || 8080] } = process;
 
-(async() => {
-    try{
+(async () => {
+    try {
         await mongoose.connect(MONGO_URL)
-        
+
         const server = express()
 
         server.use(cors(corsOptions))
@@ -37,32 +38,21 @@ const { env: { PORT, MONGO_URL }, argv: [, , port = PORT || 8080] } = process;
 
         const jsonBodyParser = bodyParser.json()
 
-
         api.post('/users', jsonBodyParser, registerUser)
-
-        api.post ('/users/reservations', jsonBodyParser, createReservation)
-
-        api.post ('/users/reservations/note/', jsonBodyParser, addNoteToReservation)
-
         api.post('/users/auth', jsonBodyParser, authenticateUser)
-
         api.get('/users', retrieveUser)
-
-        api.get('/users/reservations/pax', searchReservations)
-        
         api.patch('/users', jsonBodyParser, modifyUser)
-        
-        api.patch ('/users/reservations', jsonBodyParser, modifyReservation)
-        
-        api.delete("/users", jsonBodyParser, unregisterUser)
-        
-        api.delete("/users/reservations", jsonBodyParser, deleteReservation)
-        
-        api.delete("/users/reservations/note", jsonBodyParser, deleteNoteFromReservation)
-        
-        api.get ('/users/allreservations', retrieveReservations)
-        
-        api.get ('/users/reservation/:reservation', retrieveReservation)
+        api.delete('/users', jsonBodyParser, unregisterUser)
+
+        api.post('/reservations', jsonBodyParser, createReservation)
+        api.get('/reservations', retrieveReservations)
+        api.get('/reservations/search', searchReservations)
+        api.get('/reservations/:reservationId', retrieveReservation)
+        api.patch('/reservations/:reservationId', jsonBodyParser, modifyReservation)
+        api.delete('/reservations/:reservationId', jsonBodyParser, deleteReservation)
+
+        api.post('/reservations/:reservationId/notes/', jsonBodyParser, addNoteToReservation)
+        api.delete('/reservations/:reservationId/notes/:noteId', jsonBodyParser, deleteNoteFromReservation)
 
         api.all('*', (req, res) => {
             res.status(404).json({ message: 'sorry, this endpoint isn\'t available' })
@@ -73,7 +63,7 @@ const { env: { PORT, MONGO_URL }, argv: [, , port = PORT || 8080] } = process;
         server.listen(port, () => console.log(`server up and listening on port ${port}`))
 
 
-    }catch (error){
+    } catch (error) {
         console.error(error)
     }
 })()

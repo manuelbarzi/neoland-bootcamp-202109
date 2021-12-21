@@ -3,14 +3,14 @@ const { handleError, validateAuthorizationAndExtractPayload } = require ('./help
 
 module.exports = async (req, res) => {
 
-    const { headers: { authorization }, params: { reservation } } = req
+    const { headers: { authorization }, params: { reservationId } } = req
 
     try {
         const { sub: id } = validateAuthorizationAndExtractPayload (authorization)
 
-        const reservation1 = await retrieveReservation (id, reservation )
+        const reservation = await retrieveReservation (id, reservationId )
 
-        res.json(reservation1)
+        res.json(reservation)
 
     } catch (error) {
         handleError (error, res)
