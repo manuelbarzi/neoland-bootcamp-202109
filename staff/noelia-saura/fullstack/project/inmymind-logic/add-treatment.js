@@ -1,7 +1,16 @@
 const { validateTreatment,validateId,validateDate } = require('./helpers/validators')
 const { models: { Treatment } } = require('inmymind-data')
 
-
+/**
+ * 
+ * @param {string} content 
+ * @param {date} date
+ * @param {string} user_id
+ * @returns {Promise<undefined>}
+ * 
+ * @throws {TypeError}
+ * @throws {FormatError}
+*/
 const addTreatment = (content,date,user_id)=> {
     
     validateTreatment(content)

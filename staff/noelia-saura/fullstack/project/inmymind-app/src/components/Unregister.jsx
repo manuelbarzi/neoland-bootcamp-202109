@@ -4,7 +4,7 @@ function Unregister({ onUnregister }) {
     logger.debug('Unregister -> render')
 
     return <div className="unregister container container--vertical">
-
+    <h3 className='unregister__title'>Unregister</h3>
         <form className="container container--vertical" onSubmit={event => {
             event.preventDefault()
 

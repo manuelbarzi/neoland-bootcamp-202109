@@ -1,8 +1,37 @@
 const { validateId, validateDate, validateString, validateNumber, validateBoolean } = require('./helpers/validators')
 const { models: { Diary } } = require('inmymind-data')
 
+/**
+ * 
+ * @param {date} date Date when occurs this diary
+ * @param {string} user_id
+ * @param {string} emotional 
+ * @param {number} timesleep 
+ * @param {string} timetowakeup 
+ * @param {number} qualitysleep 
+ * @param {boolean} hydrate 
+ * @param {number} quantityhydrate 
+ * @param {boolean} exercise 
+ * @param {boolean} meditation 
+ * @param {boolean} earlywakeup 
+ * @param {boolean} makethebed 
+ * @param {boolean} cleanface 
+ * @param {boolean} cleanteeth 
+ * @param {boolean} shower 
+ * @param {boolean} order 
+ * @param {boolean} cleanhouse 
+ * @param {boolean} changesheets 
+ * @param {boolean} cooking 
+ * @param {boolean} gotostreet 
+ * @param {string} timetostreet Hours
+ * 
+ * @returns {Promise<undefined>}
+ * 
+ * @throws {TypeError}
+ * @throws {FormatError}
+ */
 
-const addDiary=(
+const addDiary= (
     date,
     user_id,
     emotional,

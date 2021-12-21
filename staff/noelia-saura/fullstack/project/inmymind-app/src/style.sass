@@ -11,10 +11,12 @@
     box-sizing: border-box
 
 html, body
-    height: 100%
-    padding: 0
-    margin: 0
-    border: 0
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    min-height: 100%;
+    position: relative;
 
 // compos
 
@@ -124,8 +126,14 @@ html, body
     height: 100%
 
 .landing--footer
-    margin-top: 30px
-    background-color: #cce4f4
+    margin-top: 30px;
+    background-color: #cce4f4;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 45%;
 
 .text--footer
     font-family: 'Source Sans Pro', sans-serif
@@ -142,7 +150,7 @@ html, body
 
 
 .notes
-    width: 250px
+    width: 301px
     font-family: 'Source Sans Pro', sans-serif
     border-radius: 5px
     border-style: solid
@@ -168,7 +176,7 @@ html, body
     margin-left: auto
 
 .treatments
-    width: 250px
+    width: 301px
     font-family: 'Source Sans Pro', sans-serif
     border-radius: 5px
     border-style: solid
@@ -194,7 +202,7 @@ html, body
     margin-left: auto
 
 .diaries
-    width: 250px
+    width: 301px
     font-family: 'Source Sans Pro', sans-serif
     border-radius: 5px
     border-style: solid
@@ -220,7 +228,7 @@ html, body
     margin-left: auto
 
 .disorders
-    width: 250px
+    width: 301px
     font-family: 'Source Sans Pro', sans-serif
     border-radius: 5px
     border-style: solid
@@ -249,3 +257,18 @@ html, body
     width: 100%
     margin-top: 20px
     margin-bottom: 20px
+
+
+.updatepassword
+    &__title
+    color: black;
+    margin: 0rem 1rem 1rem 1rem;
+    font-size: 20px;
+    font-family: 'Source Sans Pro', sans-serif;
+
+.unregister
+    &__title
+    color: black;
+    margin: 0rem 1rem 1rem 1rem;
+    font-size: 20px;
+    font-family: 'Source Sans Pro', sans-serif;

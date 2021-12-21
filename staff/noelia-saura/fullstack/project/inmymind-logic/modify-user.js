@@ -3,6 +3,16 @@ const { validateId, validateData } = require('./helpers/validators')
 const { NotFoundError, ConflictError, CredentialsError } = require('inmymind-errors')
 const bcrypt = require('bcryptjs')
 
+/**
+ * 
+ * @param {string} id
+ * @param {string} data
+ * 
+ * @returns {Promise<undefined>}
+ * 
+ * @throws {TypeError}
+ * @throws {FormatError}
+ */
 const modifyUser = (id, data) => {
     validateId(id)
     validateData(data)

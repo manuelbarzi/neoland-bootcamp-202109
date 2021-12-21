@@ -1,7 +1,16 @@
 const { models: { Treatment } } = require('inmymind-data')
 const { validateId, validateDate } = require('./helpers/validators')
 
-
+/**
+ * 
+ * @param {date} date Date when occurs this diary
+ * @param {string} user_id
+ * 
+ * @returns {Promise<Treatment[]>}
+ * 
+ * @throws {TypeError}
+ * @throws {FormatError}
+*/
 const retrieveTreatment = (user_id, date) => {
     validateId(user_id)
 

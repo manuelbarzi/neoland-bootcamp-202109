@@ -25,7 +25,7 @@ import Diary from "./Diary";
 import Disorder from "./Disorder";
 import Treatment from "./Treatment";
 
-import "react-calendar/dist/Calendar.css";
+import "./Calendar.css";
 
 import * as React from "react";
 import Accordion from "@mui/material/Accordion";
@@ -35,6 +35,11 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import Menu from "./Menu";
+
+import NoteAddIcon from '@mui/icons-material/NoteAdd';
+import TodayIcon from '@mui/icons-material/Today';
+import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 
 function Home({ onSignOut, onAuthError }) {
   logger.debug("Home -> render");
@@ -240,11 +245,12 @@ function Home({ onSignOut, onAuthError }) {
           <img className="logo--home__image" src={image} />
           <h1 className="logo--home__text">{text}</h1>
         </div>
-        <div>
+        <div className="botton--menu">
           <Menu signout={doSignOut} />
         </div>
       </div>
-      <div>
+      
+      {/* <div>
         <button
           className={`button button-medium button--home ${
             location.pathname === "/diaries" && "button--dark"
@@ -253,6 +259,7 @@ function Home({ onSignOut, onAuthError }) {
         >
           Diaries
         </button>
+
         <button
           className={`button button-medium button--home ${
             location.pathname === "/disorder" && "button--dark"
@@ -262,6 +269,7 @@ function Home({ onSignOut, onAuthError }) {
           Problem
         </button>
       </div>
+
       <div className="container">
         <button
           className={`button button-medium button--home ${
@@ -279,7 +287,7 @@ function Home({ onSignOut, onAuthError }) {
         >
           Treatment
         </button>
-      </div>
+      </div> */}
 
       <Routes>
         <Route path="/notes" element={<Notes onBack={goToHome} />} />
@@ -387,6 +395,58 @@ function Home({ onSignOut, onAuthError }) {
           </div>
         </>
       )}
+
+      <div className="footer">
+
+      <div className="footer__duo">
+        <NoteAddIcon/> 
+        <button
+          className={`footer__text ${
+            location.pathname === "/notes" && "button--dark"
+          }`}
+          onClick={toggleNotes}
+        >
+          Notes
+        </button>
+        </div>
+
+        <div className="footer__duo">
+        <TodayIcon/> 
+        <button
+          className={`footer__text ${
+            location.pathname === "/diaries" && "button--dark"
+          }`}
+          onClick={toggleDiaries}
+        >
+          Diaries
+        </button>
+        </div>
+
+        <div className="footer__duo">
+        <LocalHospitalIcon/> 
+        <button
+          className={`footer__text ${
+            location.pathname === "/treatments" && "button--dark"
+          }`}
+          onClick={toggleTreatments}
+        >
+          Treatment
+        </button>
+        </div>
+
+        <div className="footer__duo">
+        <AccountBoxIcon/> 
+        <button
+          className={`footer__text ${
+            location.pathname === "/disorder" && "button--dark"
+          }`}
+          onClick={toggleDisorder}
+        >
+          Problem
+        </button>
+        </div>
+        
+      </div>
     </div>
   );
 }

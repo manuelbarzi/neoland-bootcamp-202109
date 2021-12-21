@@ -1,8 +1,4 @@
-// import {validateToken} from '../../../inmymind-logic/helpers/validators'
-
 const deleteNote=(token, noteId) => {
-    // TODO validate arguments
-// validateToken(token)
 
     return (async () => {
         const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/notes/${noteId}`, {

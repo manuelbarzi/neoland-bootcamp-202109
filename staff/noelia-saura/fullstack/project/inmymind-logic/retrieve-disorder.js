@@ -2,7 +2,16 @@ const { models: { Disorder } } = require('inmymind-data');
 const { NotFoundError } = require('inmymind-errors');
 const { validateId, validateDate } = require('./helpers/validators')
 
-
+/**
+ * 
+ * @param {string} user_id
+ * @param {date} date
+ * 
+ * @returns {Promise<Disorder[]>}
+ * 
+ * @throws {TypeError}
+ * @throws {FormatError}
+*/
 const retrieveDisorder = (user_id, date) => {
     validateId(user_id)
 

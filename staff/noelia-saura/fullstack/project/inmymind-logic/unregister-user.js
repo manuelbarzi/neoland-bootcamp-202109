@@ -2,8 +2,18 @@ const { mongoose, models: { User } } = require('inmymind-data')
 const { validateId, validatePassword } = require('./helpers/validators')
 const { NotFoundError, CredentialsError } = require('inmymind-errors')
 
-
-const unregisterUser = (id, password, callback) => {
+/**
+ * 
+ * @param {string} id 
+ * @param {string} password
+ * @returns {Promise<undefined>}
+ * 
+ * @throws {NotFoundError}
+ * @throws {TypeError}
+ * @throws {FormatError}
+ * @throws {CredentialsError}
+*/
+const unregisterUser = (id, password) => {
     validateId(id)
     validatePassword(password)
 

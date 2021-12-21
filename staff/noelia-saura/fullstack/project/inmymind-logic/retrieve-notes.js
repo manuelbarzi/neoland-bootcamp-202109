@@ -1,7 +1,16 @@
 const { models: { Note } } = require('inmymind-data')
 const { validateId, validateDate } = require('./helpers/validators')
 
-
+/**
+ * 
+ * @param {string} user_id
+ * @param {date} date
+ * 
+ * @returns {Promise<Note[]>}
+ * 
+ * @throws {TypeError}
+ * @throws {FormatError}
+*/
 const retrieveNotes = (user_id, date)=>{
     validateId(user_id)
 

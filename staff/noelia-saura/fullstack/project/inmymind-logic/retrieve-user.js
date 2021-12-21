@@ -2,6 +2,15 @@ const { models: { User } } = require('inmymind-data')
 const { validateId } = require('./helpers/validators')
 const { NotFoundError } = require('inmymind-errors')
 
+/**
+ * 
+ * @param {string} id user's unique id 
+ * @returns {Promise<User[]>}
+ * 
+ * @throws {NotFoundError}
+ * @throws {TypeError}
+ * @throws {FormatError}
+*/
 const retrieveUser=(id)=> {
     validateId(id)
 

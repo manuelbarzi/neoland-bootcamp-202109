@@ -4,6 +4,7 @@ function UpdatePassword({ onUpdatePassword }) {
     logger.debug('UpdatePassword -> render')
 
     return <div className="updatepassword container container--vertical">
+        <h3 className='updatepassword__title'>Update Password</h3>
         <form className="container container--vertical" onSubmit={event => {
                 event.preventDefault()
 

@@ -2,7 +2,16 @@ const { models: { Diary } } = require('inmymind-data');
 const { NotFoundError } = require('inmymind-errors');
 const { validateId, validateDate } = require('./helpers/validators')
 
-
+/**
+ * 
+ * @param {string} user_id
+ * @param {date} date
+ * 
+ * @returns {Promise<Diary[]>}
+ * 
+ * @throws {TypeError}
+ * @throws {FormatError}
+*/
 const retrieveDiary = (user_id, date) => {
     validateId(user_id)
 

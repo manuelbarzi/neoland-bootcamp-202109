@@ -3,7 +3,7 @@
 /**
  * TODO
  * 
- * @param {*} username 
+ * @param {string} username 
  * @param {*} password 
  * @param {*} callback 
  */

@@ -5,11 +5,14 @@ const bcrypt = require('bcryptjs')
 
 /**
  * 
- * @param {*} username 
- * @param {*} password 
- * @returns 
+ * @param {string} username user's unique username
+ * @param {string} password user's password
+ * 
+ * @returns {Promise<Number>}
+ * 
+ * @throws {TypeError}
+ * @throws {FormatError}
  */
-
 const authenticateUser = (username, password) => {
     validateUsername(username)
     validatePassword(password)
