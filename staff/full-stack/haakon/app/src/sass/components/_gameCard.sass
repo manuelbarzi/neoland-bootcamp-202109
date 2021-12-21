@@ -9,7 +9,7 @@
     grid-template-rows: 1fr
 
 .cards__item
-    background-color: goldenrod
+    background-color: $bg-color
     display: flex
     flex-direction: column
     justify-content: center
@@ -18,13 +18,13 @@
     overflow: hidden
 
 .item__botton
-    padding: 1.5em
+    padding: 1em
 
 .botton__row-1
     display: flex
     justify-content: space-between
 
-@media (min-width: 500px)
+@media (min-width: 600px)
     .cards
         grid-template-columns: 1fr 1fr
         grid-template-rows: repeat(5, 1fr)

@@ -9,6 +9,7 @@ const {
     authenticateUser,
     retrieveUser,
     modifyUser,
+    unregisterUser,
     searchGames,
     retrieveGame,
     toggleFavGame,
@@ -43,6 +44,8 @@ mongoose.connect(MONGO_URL)
         api.get('/users', retrieveUser)
 
         api.patch('/users', jsonBodyParser, modifyUser)
+
+        api.delete('/users', jsonBodyParser, unregisterUser)
 
         api.get('/games', searchGames)
 

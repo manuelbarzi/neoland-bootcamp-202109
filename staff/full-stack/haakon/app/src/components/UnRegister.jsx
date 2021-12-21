@@ -1,23 +1,40 @@
+// Styles
 import '../sass/styles.sass'
 
-function UnRegister({ onSubmitUnRegister, onGoBack }) {
-    return <>
-        <h1 className="body__title">Delete Account</h1>
-        <p className="body__paragraph">Are you sure?</p>
-        <form className="unRegister" onSubmit={(event) => {
+// Logic
+import { unregisterUser } from '../logic'
+
+// React
+import { useContext } from 'react'
+import AppContext from './AppContext'
+
+const UnRegister = ({ unRegistered, onGoBack }) => {
+    const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext)
+
+    return <div className='deleteAccount'>
+        <h1 className='deleteAccount__title'>Delete Account</h1>
+        <p className='deleteAccount__description'>Deleting your account is irreversible. Enter your account password to confirm you want to delete your account and all associated user data</p>
+        <form className="deleteAccountForm" onSubmit={async event => {
             event.preventDefault()
 
             const password = event.target.password.value
-
-            onSubmitUnRegister(password)
-        }}  >
-
-
-            <input className="input unRegister__input" type="password" name="password" id="password" placeholder="Password" />
-            <button className="btn unRegister__btn">Unregister</button>
-            <button className="btn unRegister__btn" onClick={() => onGoBack()}>Go back</button>
+            try {
+                onFlowStart()
+                await unregisterUser(sessionStorage.token, password)
+                onFlowEnd()
+                unRegistered()
+            } catch ({ message }) {
+                onFlowEnd()
+                onFeedback(message, 'warn')
+            }
+        }}>
+            <input className="input deleteAccountForm__input" type="password" name="password" id="password" placeholder="Password" />
+            <div className="deleteAccountForm__btns">
+                <button type='submit' className="btn deleteAccountForm__btn">Delete account</button>
+                <button type='button' className="btn btn--dark deleteAccountForm__btn" onClick={() => onGoBack()}>Cancel</button>
+            </div>
         </form>
-    </>
+    </div>
 }
 
 export default UnRegister

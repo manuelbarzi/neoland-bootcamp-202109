@@ -49,7 +49,7 @@ const App = () => {
       {view === 'register' && <Register okRegisterUser={goToPostRegister} handleBtnLogin={goToLogin} />}
       {view === 'post-register' && <PostRegister handleBtnLogin={goToLogin} handleBtnLanding={goToLanding} />}
       {view === 'login' && <Login okAuthenticateUser={goToHome} handleBtnRegister={goToRegister} />}
-      {view === 'home' && <Home onAuthError={resetTokenAndGoToLanding} />}
+      {view === 'home' && <Home onAuthError={resetTokenAndGoToLanding} unRegisterd={resetTokenAndGoToLanding} />}
       {spinner && <Spinner />}
       {feedback && <Feedback level={level} message={feedback} onAccept={acceptFeedback} />}
     </AppContext.Provider>

@@ -6,6 +6,8 @@ import Header from './Header'
 import GameCard from './GameCard'
 import GameDetail from './GameDetail'
 import UserDetail from './UserDetail'
+import UserSettings from './UserSettings'
+import UnRegister from './UnRegister'
 
 // Logic Functions
 import { retrieveUser, retrieveGameDetail } from '../logic'
@@ -17,7 +19,7 @@ import AppContext from './AppContext'
 // Utils
 import logger from '../logger'
 
-const Home = ({ onAuthError }) => {
+const Home = ({ onAuthError, unRegisterd }) => {
     const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext)
 
     const [view, setView] = useState('')
@@ -57,13 +59,17 @@ const Home = ({ onAuthError }) => {
     }
 
     const goToUserDetail = () => setView('user-detail')
+    const goToUserSettings = () => setView('user-settings')
+    const goToDeleteAccount = () => setView('unregister')
 
 
     return <>
         <Header setView={setView} setGames={setGames} setQuery={setQuery} query={query} name={name} onClickAvatar={goToUserDetail}></Header>
         {view === 'game' && <ul className="cards">{games.map(game => < GameCard game={game} handleGame={retrieveGame} />)}</ul>}
         {view === 'game-detail' && <GameDetail gameDetail={gameDetail}></GameDetail>}
-        {view === 'user-detail' && <UserDetail></UserDetail>}
+        {view === 'user-detail' && <UserDetail onSettings={goToUserSettings}></UserDetail>}
+        {view === 'user-settings' && <UserSettings onDeleteAccount={goToDeleteAccount}></UserSettings>}
+        {view === 'unregister' && <UnRegister unRegistered={unRegisterd} ></UnRegister>}
     </>
 }
 

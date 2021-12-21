@@ -1,7 +1,7 @@
 import context from './context'
 
 /**
- * TODO
+ * Unregister a user of a aplication
  * 
  * @param {*} token 
  * @param {*} password 
@@ -22,12 +22,13 @@ const unregisterUser = (token, password) => {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
-            }
+            },
+            body: JSON.stringify({ password })
         })
 
         const { status } = res
 
-        if (status === 204) {
+        if (status === 201) {
             return
         } else if (status === 400 || status === 401) {
             const { error } = await res.json()

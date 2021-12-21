@@ -1,5 +1,10 @@
+// Styles
 import '../sass/styles.sass'
+
+// Logic
 import { registerUser } from '../logic'
+
+// React
 import { useContext } from 'react'
 import AppContext from './AppContext'
 
