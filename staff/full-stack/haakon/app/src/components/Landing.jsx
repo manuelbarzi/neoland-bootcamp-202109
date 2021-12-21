@@ -1,4 +1,4 @@
-import './Landing.sass'
+import '../sass/styles.sass'
 
 function Landing({ handleBtnLogin, handleBtnRegister }) {
     return (

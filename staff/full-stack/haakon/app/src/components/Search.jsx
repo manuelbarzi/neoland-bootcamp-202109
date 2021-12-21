@@ -1,3 +1,5 @@
+// import '../sass/styles.sass'
+
 import React from "react"
 import { searchGames } from "../logic"
 

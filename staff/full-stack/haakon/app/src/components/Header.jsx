@@ -1,4 +1,4 @@
-import './Header.sass'
+import '../sass/styles.sass'
 import Search from './Search'
 
 const Header = ({ setView, setGames, setQuery, query, name, onClickAvatar }) => {

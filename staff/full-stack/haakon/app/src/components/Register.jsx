@@ -1,4 +1,4 @@
-import './Register.sass'
+import '../sass/styles.sass'
 import { registerUser } from '../logic'
 import { useContext } from 'react'
 import AppContext from './AppContext'

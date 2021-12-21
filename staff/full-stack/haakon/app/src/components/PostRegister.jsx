@@ -1,4 +1,4 @@
-import './PostRegister.sass'
+import '../sass/styles.sass'
 
 const PostRegister = ({ handleBtnLogin, handleBtnLanding }) => {
     return <>

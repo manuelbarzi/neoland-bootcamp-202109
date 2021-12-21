@@ -1,4 +1,4 @@
-import './SideBarMenu.sass'
+import '../sass/styles.sass'
 
 const SideBarMenu = () => {
     return (

@@ -1,9 +1,9 @@
 import context from './context'
 
 /**
- * Retrieve the user data.
+ * Retrieve one game detail
  * 
- * @param {string} token The full name of the user to be registered.
+ * @param {string} id The id of the game that will be retrieve
  */
 
 function retrieveGameDetail(id) {

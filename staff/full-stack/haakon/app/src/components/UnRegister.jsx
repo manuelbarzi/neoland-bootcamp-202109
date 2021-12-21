@@ -1,4 +1,4 @@
-import './UnRegister.sass'
+import '../sass/styles.sass'
 
 function UnRegister({ onSubmitUnRegister, onGoBack }) {
     return <>

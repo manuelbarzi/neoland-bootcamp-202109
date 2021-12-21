@@ -1,11 +1,11 @@
-import './GameCard.sass'
+import '../sass/styles.sass'
 
 const GameCard = ({ game, handleGame }) => {
 
     const { id, backgroundImage, name, platform } = game
 
     return <>
-        <li key={id}>
+        <li key={id} className='cards__item'>
             <div className='item__top'>
                 <img src={backgroundImage} alt={name} />
             </div>
