@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap');
+
+h1{
+    color: blueviolet;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    font-family: 'Scheherazade New', serif;
+}
+
+.cool{
+    background-color: chartreuse;
+}
+
+.nice{
+    color: #be710d;;
+}
+
+/*BEM*/
+
+/*field*/
+.field{
+    border-radius: 5px;
+    border-style: solid;
+    margin: 5px;
+}
+
+/*panel*/
+.panel{
+    display: inline-block;
+    background-color: lightgrey;
+    border-color: darkgray;
+    border-style: dashed;
+    border-width: 2px;
+    border-radius: 10px;
+    padding: 5px;
+}
+.panel__title{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1rem;
+}
+
+/*Search*/
+.search {
+    display: inline-block;
+    padding: 0;
+}
+.search__body{
+    margin: 0;
+}
+.search_title {
+    background-color: gray;
+    border-radius: 5px;
+    border-style: solid;
+    color: white;
+}
+.button{
+    border-radius: 5px;
+    border-style: solid;
+    margin: 5px;
+}
+.input { 
+    border-radius: 5px;
+    border-style: solid;
+}
+/*register*/
+.panel--light {
+    background-color: yellow;
+    border-color: salmon;
+  
+}
+
+/*login*/
+.panel--dark
+{
+    background-color: darkgreen;
+    color: white;
+    border-color: yellow;
+}
+/*list*/
+.list{
+    list-style: none;
+    background-color: beige;
+    border-color: salmon;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.list__item{
+color: blue;
+}
+
+/*Cart*/
+.cart{
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+.cart__header{
+    background-color: lightgray;
+
+}
+.cart__footer{
+    background-color: lightpink;
+}
+

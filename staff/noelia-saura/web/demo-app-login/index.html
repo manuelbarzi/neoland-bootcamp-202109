@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing</title>
+    
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+
+<body >
+    
+    <div class="img-background"></div>
+    <div class='two-display'>
+    <div class='img-display'>
+        <h2 style="font-family: 'Dancing Script', cursive;">Makeup and Beauty</h2>
+        <img class='imgmakeup'src="https://img.freepik.com/foto-gratis/retrato-dama-vestida-pantalones-boina-blusa-purpura-chica-pinta-sus-labios-sobre-fondo-rosa_197531-17570.jpg?size=338&ext=jpg" alt="Girlmakeup">
+    </div>
+    <div class="landing-top">
+    <div class="landing container container--vertical container--gapped container--off">
+        
+        <button class="button button--medium button--dark">Login</button>
+        <button class="button button--medium">Register</button>
+    </div>
+
+    <form class="signup container container--vertical container--gapped container--off">
+        <input class="field" type="text" name="name" id="name" placeholder="name">
+        <input class="field" type="text" name="username" id="usernameRegister" placeholder="username">
+        <input class="field" type="password" name="password" id="passwordRegister" placeholder="password">
+        <input class="field" type="mail" name="mail" id="mail" placeholder="mail">
+        <div class="container">
+            <button class="button button--medium">Login</button>
+            <button class="button button--medium button--dark">Register</button>
+        </div>
+    </form>
+
+    <form class="signin container container--vertical container--gapped container--off">
+        <input class="field" type="text" name="username" id="usernameLogin" placeholder="username">
+        <input class="field" type="password" name="password" id="passwordLogin" placeholder="password">
+
+        <div class="container">
+            <button class="button button--medium">Register</button>
+            <button class="button button--medium button--dark">Login</button>
+        </div>
+    </form>
+
+    <div class="post-signup container container--gapped container--vertical container--off" >
+        User registered successfully, now you can proceed to <button class="button button--dark button--medium">Sign in</button>
+    </div>
+
+    <div class="home container--gapped container--vertical container--off">
+        <p>Welcome <span class="name"></span>, go to profile for more details</p>
+        <button class="button button-medium button--dark">Profile</button>
+        <button class="button button-medium button">Logout</button>        
+    </div>
+
+    <div class="profile container container--vertical container--gapped container--off">
+        <form class="container container--vertical">
+            <input class="field" type="password" name="oldPassword" id="oldPassword" placeholder="old password">
+            <input class="field" type="password" name="password" id="newPassword" placeholder="new password">
+            
+            <div class="container">
+                <button class="button button--medium">Go back</button>
+                <button class="button button--medium button--dark">Update</button>
+            </div>
+        </form>
+
+        <button class="button button--medium button--dark">Unregister</button>
+    </div>
+
+    <div class="unregister container container--vertical container--gapped container--off">
+        <form class="container container--vertical">
+            <input class="field" type="password" name="password" id="deletePassword" placeholder="password">
+            
+            <div class="container">
+                <button class="button button--medium">Go back</button>
+                <button class="button button--medium button--dark">Unregister</button>
+            </div>
+        </form>
+    </div>
+    <div class="spinner container--off container container--vertical container--gapped container--full">
+        <img class="spinner__image" src="https://c.tenor.com/axAeNjNIUBsAAAAi/spinner-loading.gif" alt="">
+    </div>
+</div>
+<div class='search search__display'>
+    <form class="home__search container">
+        <h2>Search the products in the store</h2>
+        <input class="field" type="text" name="query" id="query" placeholder="Search">
+        <button class="button button--medium button--dark">Search</button>
+    </form>
+    <div class="home__scroll">
+    <ul class="home__results"></ul>
+    </div>
+</div>
+<!-- Modal -->
+<template id="template-modal">
+    <div class="modal" id="modal"> <!-- Este será la parte oscura de mi modal -->
+        <div class="modal__pop-up" id="modal-content"> <!-- Esto es la parte "visible" -->
+            <h1 class="modal__title" id="modal-title"></h1>
+            <p class="modal__text" id="modal-text"></p>
+            <button class="button button--success" type="button" id="close-modal">Aceptar</button>
+        </div>
+    </div>
+</template>
+</div>
+
+    <script src="logic.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
+
+
+
+
