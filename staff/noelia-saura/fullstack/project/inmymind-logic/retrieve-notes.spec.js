@@ -86,8 +86,5 @@ describe('retrieveNotes', () => {
         await Note.deleteMany()
         await mongoose.disconnect()
     })
-    // after(() =>
-    //     Note.deleteMany()
-    //         .then(() => mongoose.disconnect())
-    // )
+   
 })

@@ -49,5 +49,5 @@ describe('deleteTreatment', () => {
     })
     after(() => 
         Treatment.deleteMany()
-            .then(() => mongoose.disconnet))
+            .then(() => mongoose.disconnect()))
 })

@@ -120,5 +120,5 @@ describe('unregisterUser', () => {
 
     after(() => 
         User.deleteMany()
-            .then(() => mongoose.disconnet))
+            .then(() => mongoose.disconnect()))
 })

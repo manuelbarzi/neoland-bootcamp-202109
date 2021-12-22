@@ -23,17 +23,19 @@ Para ello tendra el usuario que registar todos esos apartados en botones para ac
 
 ![](./images/Use-case.jpeg)
 
-# 📋Technical Description📋
-
 # Flow Chart
 ![](./images/Flow-chart.jpeg)
+
+# 📋Technical block📋
+
+# Blocks
+![](./images/blocks.png)
 
 # Data Model
 ![](./images/Data-model.png)
 
-
-# Blocks
-![](./images/blocks.png)
+# Code coverage
+![](./images/testing.PNG)
 
 # Technologies
 - JavaScript
@@ -47,10 +49,11 @@ Para ello tendra el usuario que registar todos esos apartados en botones para ac
 - MUI
 - React-Calendar
 
-# TODO
+# 📈TODO📈
 - Preguntas con mas orientación psicologica o medica
 - Implementación de base de datos con medicamentos
 - Conexión con profesionales del ambito
 - Recomendaciones mindfulness en caso de ataque de ansiedad,estres,depresión...
 - Adaptación a ordenador de la web
 - Crear la app para Android/ IOS
+- Incrementar covertura de codigo

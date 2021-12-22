@@ -49,5 +49,5 @@ describe('deleteNote', () => {
     })
     after(() => 
         Note.deleteMany()
-            .then(() => mongoose.disconnet))
+            .then(() => mongoose.disconnect()))
 })
