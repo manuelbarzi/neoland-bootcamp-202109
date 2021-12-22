@@ -15,17 +15,18 @@ function Feedback({ level, message, onAccept }) {
 
     const className = `feedback__text ${level ? `feedback__text--${level}` : ''}`
 
-    return <div className="feedback">
-        <div className="panel">
-            <p className={className}>{message}</p>
-            <Button type="submit" onClick={onAccept}
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >Accept</Button>
-            {/* <button className="button button--dark" onClick={onAccept}>Accept</button> */}
+    return <>
+        <div className="feedback">
+            <div className="panel">
+                <p className={className}>{message}</p>
+                <Button type="submit" onClick={onAccept}
+                                fullWidth
+                                variant="contained"
+                                sx={{ mt: 2, mb: 1 }}
+                            >Accept</Button>
+            </div>
         </div>
-    </div>
+    </>
 }
 
 export default Feedback

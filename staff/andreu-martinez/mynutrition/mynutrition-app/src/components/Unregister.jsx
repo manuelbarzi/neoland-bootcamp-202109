@@ -1,19 +1,35 @@
 import logger from '../logger'
 import '../style.sass'
+import { useContext } from 'react'
+import { unregisterUser } from '../logic';
+import AppContext from './AppContext'
+
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-function Unregister({ onUnregister, onBack }) {
+function Unregister({ onBack }) {
     logger.debug('Unregister -> render')
 
-    return <div className="unregister container">
+    const { onFeedback, onFlowStart, onFlowEnd, resetTokenAndGoToLogin } = useContext(AppContext)
 
-        <form onSubmit={event => {
+    return <div className="wrap">
+
+        <form onSubmit={ async event => {
             event.preventDefault()
 
             const { target: { password: { value: password } } } = event 
+debugger
+            // TODO poner el spinner y todo lo que tengas que hacer antes
+            onFlowStart()
+            try{
+                const res = await unregisterUser (sessionStorage.token,password)
+                onFlowEnd()
+                resetTokenAndGoToLogin()
+            } catch ({ message }) {
+                onFlowEnd()
+                onFeedback(message,'error')
+            }
 
-            onUnregister(password)
         }}>
             <div><TextField
                         margin="normal"

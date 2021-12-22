@@ -53,8 +53,12 @@ function NewMessage({onBack , sendParent}) {
                 let userTo = users.find(element => element.name === document.getElementById("to").value)
 
                 const userToId = userTo.id
-
-                await newMessage(subject, body, userToId)
+                if(subject === '' && body === '')
+                    onFeedback('No puede haber campos vacios','warn',)
+                else{
+                    await newMessage(subject, body, userToId)
+                    onFeedback('mensaje enviado correctamente','success',)
+                }
             }
             } >
             <div className='messages--write'>

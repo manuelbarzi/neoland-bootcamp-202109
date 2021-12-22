@@ -1,10 +1,9 @@
 import { useState, useContext, useEffect } from 'react'
+import AppContext from './AppContext'
 import logger from '../logger'
 import './NewMessage.sass'
 import './OpenMessage.sass'
-
 import { retrieveUsers, retrieveMessagesChain } from '../logic'
-import AppContext from './AppContext'
 import NewMessage from './NewMessage'
 
 /// MUI
@@ -13,11 +12,11 @@ import TextField from '@mui/material/TextField'
 import MailIcon from '@mui/icons-material/Mail'
 import Stack from '@mui/material/Stack';
 
-function OpenMessage({ messageToRead, users }) {
+function OpenMessage({ messageToRead, users, setViewInbox }) {
 
     const { id, parent, from, body, subject, sentDate } = messageToRead
 
-    const [view, setView] = useState('')
+    const [view, setView] = useState('inbox')
     const [backButton, setBackButton] = useState()
     const goToNewMessage = () => {
         setBackButton('invisible')
@@ -25,7 +24,7 @@ function OpenMessage({ messageToRead, users }) {
     }
     const hideNewMessage = () => setView('')
 
-    const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext)
+    const { goToProfile, onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext)
 
     const [messageChain, setMessageChain] = useState([])
 
@@ -56,6 +55,9 @@ function OpenMessage({ messageToRead, users }) {
                 <Stack direction="row" spacing={2}>
                     <Button variant="contained" onClick={goToNewMessage} endIcon={<MailIcon />}>
                         Answer
+                    </Button>
+                    <Button variant="contained" onClick={goToProfile} >
+                        Back
                     </Button>
                     {view === 'new-message' &&
                         <Button variant="contained" variant="contained"

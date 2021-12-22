@@ -17,14 +17,16 @@ function App() {
     const [feedback, setFeedback] = useState(null)
     const [level, setLevel] = useState(null)
 
-    const resetTokenAndGoToLanding = () => {
+    const resetTokenAndGoToLogin = () => {
         delete sessionStorage.token
 
         setView('signin')
         setSpinner(false)
     }
 
-    const goToSignUp = () => setView('signup')
+    const goToProfile = () => setView('profile')
+
+    const goToHome = () => setView('home')
 
     const showSpinner = () => setSpinner(true)
 
@@ -62,12 +64,16 @@ function App() {
         <AppContext.Provider value={{
             onFlowStart: showSpinner,
             onFlowEnd: hideSpinner,
-            onFeedback: showFeedback
+            goToHome: goToHome,
+            goToSignIn: goToSignIn,
+            goToProfile: goToProfile,
+            onFeedback: showFeedback,
+            resetTokenAndGoToLogin: resetTokenAndGoToLogin
         }}>
 
             {view === 'signin' && <SignIn onSignedIn={goToSignIn} x={1} />}
 
-            {view === 'home' && <Home onSignOut={resetTokenAndGoToLanding} onAuthError={resetTokenAndGoToLanding} />}
+            {view === 'home' && <Home onSignOut={resetTokenAndGoToLogin} onAuthError={resetTokenAndGoToLogin} />}
 
             {feedback && <Feedback level={level} message={feedback} onAccept={acceptFeedback} />}
 

@@ -10,7 +10,7 @@ function UpdateUserPassword({onBack}) {
     const { onFlowStart, onFlowEnd, onFeedback } = useContext(AppContext)
 
     return <>
-        <div className="container">
+        <div className="wrap">
             <form onSubmit={event => {
                 event.preventDefault()
 

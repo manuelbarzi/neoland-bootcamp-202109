@@ -15,6 +15,11 @@ import MailIcon from '@mui/icons-material/Mail'
 import SvgIcon from '@mui/material/SvgIcon'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import LogoutIcon from '@mui/icons-material/Logout';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
 
 
 function Home({ onSignOut, onAuthError }) {
@@ -60,6 +65,19 @@ function Home({ onSignOut, onAuthError }) {
         }
     }, [])
 
+    function Copyright() {
+        return (
+          <Typography variant="body2" color="text.secondary">
+            {'Copyright © '}
+            <Link color="inherit" href="http://localhost:3000/">
+              MyNutriMethod
+            </Link>{' '}
+            {new Date().getFullYear()}
+            {'.'}
+          </Typography>
+        );
+      }
+
     function HomeIcon(props) {
         return (
             <SvgIcon {...props}>
@@ -83,7 +101,7 @@ function Home({ onSignOut, onAuthError }) {
                     </div>
                     <div className="header--menu__items">
                         <Badge badgeContent={messageCount} color="primary">
-                            <MailIcon color="secondary" onClick={goToMessages} color="action" />
+                            <MailIcon color="secondary" onClick={goToMessages} color="primary" />
                         </Badge>
                     </div>
                     <div className="header--menu__items">
@@ -97,13 +115,15 @@ function Home({ onSignOut, onAuthError }) {
             <div className="center">
                 <Routes>
                         <Route path="/home" element={<HomeLanding onSignOut={onSignOut} />} />
-                        <Route path="/profile" element={<Profile onSignOut={onSignOut} />} />
+                        <Route path="/profile" element={<Profile onSignOut={onSignOut} goToProfile={goToProfile}/>} />
                         <Route path="/inbox" element={<Inbox />} />
                 </Routes>
             </div>
-            <div className="footer">
-                <p>footer</p>
+            <div className='footer'>
+                <Copyright />
             </div>
+          
+
     </div>
     </>
 }

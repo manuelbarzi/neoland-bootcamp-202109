@@ -11,6 +11,7 @@ function authenticateUser(username, password) {
         const user = await User.findOne({ username })
 
         if (!user || !bcrypt.compareSync(password, user.password)) throw new CredentialsError('wrong credentials')
+        //if (!user || password !== user.password) throw new CredentialsError('wrong credentials')
 
         return user.id
     })()

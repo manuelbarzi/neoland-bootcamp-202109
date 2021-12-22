@@ -46,34 +46,6 @@ function Profile({ onSignOut }) {
         }
     }
 
-    const onUnregister = password => {
-        onFlowStart()
-
-        try {
-            unregisterUser(sessionStorage.token, password, error => {
-                if (error) {
-                    onFlowEnd()
-
-                    onFeedback(error.message)
-
-                    return
-                }
-
-                logger.info('User unregistered')
-
-                onFlowEnd()
-
-                onFeedback('User unregistered', 'success')
-
-                onSignOut()
-            })
-        } catch ({ message }) {
-            onFlowEnd()
-
-            onFeedback(message, 'warn')
-        }
-    }
-
     return <>
             {view === 'profile' &&
                 <div><Button onClick={goToUnregister} fullWidth
@@ -88,7 +60,7 @@ function Profile({ onSignOut }) {
 
             {view === 'update-password' && <UpdateUserPassword onBack={goToProfile}/> }
 
-            {view === 'unregister' && <Unregister onBack={goToProfile} onUnregister={onUnregister}/>}
+            {view === 'unregister' && <Unregister onBack={goToProfile}/>}
             </>
 }
 

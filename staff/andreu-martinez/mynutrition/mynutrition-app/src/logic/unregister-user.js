@@ -1,26 +1,23 @@
 import context from './context'
+const { validateToken, validatePassword } = require('./helpers/validators')
 
 function unregisterUser(token, password) {
-    if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
-    if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
-
-    if (typeof password !== 'string') throw new TypeError(`${password} is not a string`)
-    if (!password.trim().length) throw new Error('password is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
-    if (password.length < 6) throw new Error('password has less than 6 characters')
+    validateToken(token)
+    validatePassword(password)
 
     return (async () => {
-        const res = await fetch(`${context.API_URL}/users/`, {
+        const res = await fetch(`${context.API_URL}/users`, {
             method: 'DELETE',
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ password })
+            body: JSON.stringify({password})
         })
 
         const { status } = res
 
-        if (status === 201)
+        if (status === 200)
             return
         else if (status === 409 || status === 400) {
             const { error } = await res.json()

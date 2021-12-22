@@ -106,7 +106,7 @@ debugger
         }
 
         {view === 'open-message' &&
-            <OpenMessage messageToRead={messageToRead} users={users}/>
+            <OpenMessage messageToRead={messageToRead} users={users} setViewInbox={setView}/>
         }
     </>
 

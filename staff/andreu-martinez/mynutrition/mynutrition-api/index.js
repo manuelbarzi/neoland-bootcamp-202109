@@ -48,7 +48,7 @@ logger.info('starting server');
 
         api.get('/user', retrieveUser)
 
-        api.delete('/user', unregisterUser)
+        api.delete('/users', jsonBodyParser, unregisterUser)
 
         api.patch('/users', jsonBodyParser, modifyUser)
 
