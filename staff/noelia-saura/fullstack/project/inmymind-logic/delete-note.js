@@ -17,8 +17,6 @@ const deleteNote = (note_id) => {
     return (async()=>{
         const note = await Note.deleteOne({ _id: note_id })
         if(!note)throw error
-
-        return note.id
     })()
 }
 

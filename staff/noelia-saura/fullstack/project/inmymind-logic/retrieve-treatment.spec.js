@@ -27,36 +27,6 @@ describe('retrieveTreatment', () => {
         
     })
 
-    // it('should succeed with correct id for an already existing treatment', () => {
-    //     const content = "New treatment"
-    //     const date = new Date("Thu, 09 Dec 2021 00:00:00 GMT")
-    //     const user_id = "61ad1ad9799afee83e26c8b4"
-
-    //     return retrieveTreatment(content,date,user_id)
-    //     .then(res => {
-    //         expect(res).to.be.undefined
-
-    //         return Treatment.findOne({ date })
-    //     })
-    //         .then(treatment => {
-    //             expect(treatment).to.exist
-    //             expect(treatment.content).to.equal(content)
-    //             expect(treatment.date.toString()).to.equal(date.toString())
-    //         })
-    // })
-
-    // it('should fail with incorrect id', () => {
-    //     noteId = new ObjectId().toString()
-
-    //     return retrieveTreatment(noteId)
-    //         .then(() => { throw new Error('should not reach this point') })
-    //         .catch(error => {
-    //             expect(error).to.exist
-    //             expect(error).to.be.instanceOf(NotFoundError)
-    //             expect(error.message).to.equal(`treatment with id ${noteId} not found`)
-    //         })
-    // })
-
     describe('when parameters are not valid', () => {
         describe('when id is not valid', () => {
             it('should fail when id is not a string', () => {
@@ -92,10 +62,7 @@ describe('retrieveTreatment', () => {
             ('abcd 1234abc d1234abc d1234', () => { })).to.throw(FormatError, 'id has blank spaces')
             })
 
-            it('should fail when id length is different from 24 characters', () => {
-                expect(() => retrieveTreatment
-            ('abc', () => { })).to.throw(FormatError, 'id doesn\'t have 24 characters')
-            })
+           
         })
     })
 

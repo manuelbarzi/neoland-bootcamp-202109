@@ -101,8 +101,6 @@ const addDiary= (
             timetostreet
         })
         if(!diary) throw error
-
-        return diary.id
     })()
     
 }

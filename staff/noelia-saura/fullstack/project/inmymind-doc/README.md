@@ -33,4 +33,4 @@ Para ello tendra el usuario que registar todos esos apartados en botones para ac
 
 
 # Blocks
-![](./images/blocks.jpg)
+![](./images/blocks.png)

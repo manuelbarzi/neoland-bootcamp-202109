@@ -20,9 +20,7 @@ describe('retrieveUser', () => {
             name: 'Wendy Pan',
                 username: 'wendypan',
                 password: '123123123',
-                gender: 'female',
-                age: 26,
-                email: 'wendypan@gmail.com',
+
         }
         const _user=User.create(user)
 
@@ -30,15 +28,7 @@ describe('retrieveUser', () => {
         
     })
 
-    it('should succeed with correct id for an already existing user', async () => {
-        const { name, username } = user
-
-        const _user = await retrieveUser(userId)
-
-        expect(_user).to.exist
-        expect(_user.name).to.equal(name)
-        expect(_user.username).to.equal(username)
-    })
+    
 
     it('should fail with incorrect id', async () => {
         userId = new ObjectId().toString()
@@ -79,9 +69,6 @@ describe('retrieveUser', () => {
                 expect(() => retrieveUser('abcd 1234abc d1234abc d1234', () => { })).to.throw(FormatError, 'id has blank spaces')
             })
 
-            it('should fail when id length is different from 24 characters', () => {
-                expect(() => retrieveUser('abc', () => { })).to.throw(FormatError, 'id doesn\'t have 24 characters')
-            })
         })
     })
 

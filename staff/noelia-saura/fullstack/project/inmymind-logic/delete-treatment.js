@@ -18,8 +18,6 @@ const deleteTreatment = (treatment_id) => {
         const treatment = await Treatment.deleteOne({_id:treatment_id})
 
         if(!treatment)throw error
-
-        return treatment.id
     })()
 }
 

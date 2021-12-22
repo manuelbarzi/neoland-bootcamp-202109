@@ -21,8 +21,6 @@ const addTreatment = (content,date,user_id)=> {
         const treatment = await Treatment.create({content,date,user_id})
         
         if(!treatment)throw error
-
-        return treatment.id
     })()
    
 }

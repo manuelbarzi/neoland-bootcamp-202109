@@ -19,9 +19,6 @@ describe('authenticateUser', () => {
             name: 'Wendy Pan',
             username: 'wendypan',
             password: '123123123',
-            gender: 'female',
-            age: 26,
-            email: 'wendypan@gmail.com',
         }
         
         const _user = await User.create({ ...user, password: bcrypt.hashSync(user.password) })

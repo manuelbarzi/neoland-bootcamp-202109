@@ -21,9 +21,8 @@ describe('retrieveNotes', () => {
             date: new Date("Thu, 09 Dec 2021 00:00:00 GMT"),
             user_id: "61ad1ad9799afee83e26c8b4"
         }
-
-        const _note= Note.create(note)
-        userId=_user.id
+        return Note.create(note)
+        .then(note => noteId = note.id)
         
     })
 
@@ -42,18 +41,7 @@ describe('retrieveNotes', () => {
             })
     })
 
-    // it('should fail with incorrect id', () => {
-    //     const userId = new ObjectId().toString()
-    //     const date = new Date("Thu, 09 Dec 2021 00:00:00 GMT")
 
-    //     return retrieveNotes(userId, date)
-    //         .then(() => { throw new Error('should not reach this point') })
-    //         .catch(error => {
-    //             expect(error).to.exist
-    //             expect(error).to.be.instanceOf(NotFoundError)
-    //             expect(error.message).to.equal(`note with id ${userId} not found`)
-    //         })
-    // })
 
     describe('when parameters are not valid', () => {
         describe('when id is not valid', () => {
@@ -90,10 +78,7 @@ describe('retrieveNotes', () => {
             ('abcd 1234abc d1234abc d1234', () => { })).to.throw(FormatError, 'id has blank spaces')
             })
 
-            it('should fail when id length is different from 24 characters', () => {
-                expect(() => retrieveNotes
-            ('abc', () => { })).to.throw(FormatError, 'id doesn\'t have 24 characters')
-            })
+           
         })
     })
 

@@ -11,7 +11,7 @@
  * @throws {TypeError} When any of the arguments does not match the correct type.
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
-const signupUser=(name, username, password, gender,email,age)=>{
+const signupUser=(name, username, password)=>{
     // TODO validate args
     
     return (async () => {
@@ -20,7 +20,7 @@ const signupUser=(name, username, password, gender,email,age)=>{
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name, username, password, gender, email,age})
+            body: JSON.stringify({ name, username, password})
         })
 
         const { status } = res

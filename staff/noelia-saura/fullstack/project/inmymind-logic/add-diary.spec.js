@@ -91,7 +91,7 @@ describe('addDiary', () => {
         )
             .then(res => {
                 expect(res).to.be.undefined
-
+                console.log(res)
                 return Diary.findOne({ date })
             })
             .then(diary => {

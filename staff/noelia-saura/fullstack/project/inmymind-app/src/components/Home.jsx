@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import logger from "../logger";
 import "./Home.sass";
-import UpdatePassword from "./UpdatePassword";
 import Unregister from "./Unregister";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useQueryParams } from "../hooks";
@@ -11,7 +10,6 @@ import {
   retrieveNotes,
   retrieveTreatments,
   retrieveUser,
-  updateUserPassword,
   unregisterUser,
 } from "../logic";
 import AppContext from "./AppContext";
@@ -181,34 +179,6 @@ function Home({ onSignOut, onAuthError }) {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const updatePassword = (oldPassword, password) => {
-    onFlowStart();
-
-    try {
-      updateUserPassword(
-        sessionStorage.token,
-        oldPassword,
-        password,
-        (error) => {
-          if (error) {
-            onFlowEnd();
-
-            onFeedback(error.message);
-
-            return;
-          }
-
-          onFlowEnd();
-
-          onFeedback("Password updated", "success");
-        }
-      );
-    } catch ({ message }) {
-      onFlowEnd();
-
-      onFeedback(message, "warn");
-    }
-  };
 
   const unregister = (password) => {
     onFlowStart();
@@ -294,10 +264,6 @@ function Home({ onSignOut, onAuthError }) {
         <Route path="/treatments" element={<Treatments onBack={goToHome} />} />
         <Route path="/diaries" element={<Diaries onBack={goToHome} />} />
         <Route path="/disorders" element={<Disorders onBack={goToHome} />} />
-        <Route
-          path="/update-password"
-          element={<UpdatePassword onUpdatePassword={updatePassword} />}
-        />
         <Route
           path="/unregister"
           element={<Unregister onUnregister={unregister} />}

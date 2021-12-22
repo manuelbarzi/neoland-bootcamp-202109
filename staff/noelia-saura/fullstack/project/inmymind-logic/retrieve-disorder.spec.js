@@ -104,18 +104,6 @@ describe('retrieveDisorder', () => {
             })
     })
 
-    // it('should fail with incorrect id', () => {
-    //     const userId = new ObjectId().toString()
-    //     const date = new Date("Thu, 09 Dec 2021 00:00:00 GMT")
-
-    //     return retrieveDisorder(userId, date)
-    //         .then(() => { throw new Error('should not reach this point') })
-    //         .catch(error => {
-    //             expect(error).to.exist
-    //             expect(error).to.be.instanceOf(NotFoundError)
-    //             expect(error.message).to.equal(`disorder with id ${userId} not found`)
-    //         })
-    // })
 
     describe('when parameters are not valid', () => {
         describe('when id is not valid', () => {
@@ -152,10 +140,6 @@ describe('retrieveDisorder', () => {
             ('abcd 1234abc d1234abc d1234', () => { })).to.throw(FormatError, 'id has blank spaces')
             })
 
-            it('should fail when id length is different from 24 characters', () => {
-                expect(() => retrieveDisorder
-            ('abc', () => { })).to.throw(FormatError, 'id doesn\'t have 24 characters')
-            })
         })
     })
 

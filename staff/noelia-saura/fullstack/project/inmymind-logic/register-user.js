@@ -1,5 +1,5 @@
-const { validateName, validateUsername, validatePassword, validateGender, validateAge, validateEmail} = require('./helpers/validators')
-const { ConflictError } = require('inmymind-errors')
+const { validateName, validateUsername, validatePassword} = require('./helpers/validators')
+const { ConflictError} = require('inmymind-errors')
 const { models: { User } } = require('inmymind-data')
 const bcrypt = require('bcryptjs')
 
@@ -8,9 +8,7 @@ const bcrypt = require('bcryptjs')
  * @param {string} name user's name
  * @param {string} username user's username
  * @param {string} password user's password
- * @param {string} gender user's gender
- * @param {number} age user's age
- * @param {string} email user's email
+
  * 
  * @returns successful registration
  *  
@@ -18,17 +16,15 @@ const bcrypt = require('bcryptjs')
  * @throws {FormatError}
  * @throws {ConflictError}
  */
-const registerUser = (name, username, password, gender, age, email) => {
+function registerUser(name, username, password){
     validateName(name)
     validateUsername(username)
     validatePassword(password)
-    validateGender(gender)
-    validateAge(parseInt(age))
-    validateEmail(email)
     
-    return (async ()=>{
+    
+    return (async()=>{
         try{
-            await User.create({ name, username, password: bcrypt.hashSync(password), gender, age, email })
+            await User.create({ name, username, password: bcrypt.hashSync(password)})
         
         }catch(error){
             if (error.code === 11000)

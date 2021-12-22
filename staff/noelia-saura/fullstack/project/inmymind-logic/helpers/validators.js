@@ -13,24 +13,6 @@ function validateUsername(username) {
     if (username.length < 4) throw new FormatError('username has less than 4 characters')
 }
 
-function validateGender(gender){
-    if (typeof gender !== 'string') throw new TypeError('gender is not a string')
-    if (!gender.trim().length) throw new FormatError('gender is empty or blank')
-    if (/\r?\n|\r|\t| /g.test(gender)) throw new FormatError('gender has blank spaces')
-}
-
-function validateAge(age){
-    if (typeof age !== 'number') throw new TypeError('age is not a number')
-    if (/\r?\n|\r|\t| /g.test(age)) throw new FormatError('age has blank spaces')
-}
-
-function validateEmail(email){
-    if(typeof email !== 'string') throw new TypeError(email +'is not a string')
-    if(!email.trim().length) throw new Error ('email is empty or blank')
-    if(/\r?\n|\r|\t| /g.test(email))throw new Error('email has blank spaces')
-    if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) throw new Error(email + ' is not an e-mail')
-}
-
 function validatePassword(password) {
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (!password.trim().length) throw new FormatError('password is empty or blank')
@@ -120,9 +102,6 @@ module.exports = {
     validateDate,
     validateString,
     validateNumber,
-    validateGender,
-    validateAge,
-    validateEmail,
     validateNote,
     validateTreatment,
     validateBoolean

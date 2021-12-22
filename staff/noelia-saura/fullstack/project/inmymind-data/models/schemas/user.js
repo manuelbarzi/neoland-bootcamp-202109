@@ -43,26 +43,8 @@ const user= new Schema({
             message:'Contraseña contiene espacios'
         }
         ]
-    },
-    email:{
-        type:String,
-        required:true,
-        unique:true,
-        validate:[
-            {validator(email){
-                return !email.includes(' ')
-            },
-            message:'Email contiene espacios'}
-        ]
-    },
-    age:{
-        type:Number,
-        required:true
-    },
-    gender:{
-        type:String, 
-        required:true
     }
+    
     
 })
 

@@ -8,7 +8,6 @@ const {
     registerUser,
     authenticateUser,
     retrieveUser,
-    modifyUser,
     addNote,
     deleteNote,
     addTreatment,
@@ -41,8 +40,6 @@ mongoose.connect(MONGO_URL)
         api.post('/users', jsonBodyParser, registerUser)
 
         api.post('/users/auth', jsonBodyParser, authenticateUser)
-        
-        api.patch('/users', jsonBodyParser, modifyUser)
 
         api.post('/notes',jsonBodyParser, addNote)
 

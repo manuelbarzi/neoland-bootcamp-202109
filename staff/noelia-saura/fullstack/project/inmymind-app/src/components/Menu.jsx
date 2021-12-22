@@ -21,7 +21,6 @@ export default function Menu({ signout }) {
   const anchor = "right";
 
   const homeText = "Home";
-  const updatePasswordText = "Update password";
   const unregisterText = "Unregister";
   const signoutText = "Sign out";
 
@@ -31,9 +30,7 @@ export default function Menu({ signout }) {
     setOpen(!open);
   };
 
-  const updatePassword = () => {
-    navigate("/update-password");
-  };
+
 
   const unregister = () => {
     navigate("/unregister");
@@ -56,12 +53,6 @@ export default function Menu({ signout }) {
             <HomeIcon />
           </ListItemIcon>
           <ListItemText primary={homeText} />
-        </ListItem>
-        <ListItem button key={updatePasswordText} onClick={updatePassword}>
-          <ListItemIcon>
-            <PasswordIcon />
-          </ListItemIcon>
-          <ListItemText primary={updatePasswordText} />
         </ListItem>
         <ListItem button key={unregisterText} onClick={unregister}>
           <ListItemIcon>

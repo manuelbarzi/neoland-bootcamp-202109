@@ -81,8 +81,6 @@ const addDisorder = (
             causedstate
         })
         if(!disorder) throw error
-
-        return disorder.id
     })()
 }
 

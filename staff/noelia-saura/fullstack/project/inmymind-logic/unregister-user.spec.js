@@ -21,9 +21,6 @@ describe('unregisterUser', () => {
             name: 'Wendy Pan',
                 username: 'wendypan',
                 password: '123123123',
-                gender: 'female',
-                age: 26,
-                email: 'wendypan@gmail.com',
         }
 
         return User.create(user)
@@ -37,7 +34,7 @@ describe('unregisterUser', () => {
 
             return unregisterUser(userId, password)
                 .then(response => {
-                    expect(response).to.equal('User deleted successfully')
+                    expect(response).to.equal(undefined)
                 })
                // .catch(() => { throw new CredentialsError('Wrong password') })
         })

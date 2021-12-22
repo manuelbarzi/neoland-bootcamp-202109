@@ -23,8 +23,6 @@ const addNote = (content,date,user_id) => {
             user_id
         })
         if(!note)throw error
-
-        return note.id
     }) ()
 
 }
