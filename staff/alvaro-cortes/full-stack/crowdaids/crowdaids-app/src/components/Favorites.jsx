@@ -59,7 +59,7 @@ function Favorites({ onItem, theme }) {
             <ul className="container__results--ul">
                 <h1>Mis favoritos</h1><hr id="hr--busqueda" />
                 {
-                    beaches.map(({ idBeach, nameBeach, isFav }) => <li key={idBeach} onClick={() => { onItem(nameBeach, idBeach) }}>
+                    beaches.map(({ idBeach, nameBeach, isFav }) => <li key={idBeach} onClick={() => { onItem({name: nameBeach}, idBeach) }}>
                         <div>
                             <IconContext.Provider value={{ color: '#d8a600', size: "1em", style: { verticalAlign: 'middle' } }}>
                                 <h2 className="title--search"><span onClick={event => {

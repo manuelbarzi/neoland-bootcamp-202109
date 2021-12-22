@@ -37,7 +37,7 @@ function Search({ onSearch, goToProfile, user, theme, toggleLamp }) {
                 <span>
                     <input id='input--search' type='text' placeholder='Busca una playa' name='query' />
                     <button className='button button--search'>Buscar</button>
-                    <span id='lamps' onClick={() => toggleLamp()}>{(theme == 'light') ? <BsLightbulb /> : <BsLightbulbOff />}</span>
+                    {/*<span id='lamps' onClick={() => toggleLamp()}>{(theme == 'light') ? <BsLightbulb /> : <BsLightbulbOff />}</span>*/}
                 </span>
                 <span className='container--name'> Bienvenido, {user} <BsPersonCircle onMouseOver={showModalProfile} /></span>
             </form>

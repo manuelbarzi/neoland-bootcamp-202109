@@ -26,6 +26,14 @@ This application offers the possibility to search by an API external (Surfline),
 
 ![delete user](./images/delete-user.jpg)
 
+#### Search Beach
+
+![search beach](./images/search-beach-diag.jpg)
+
+#### Toggle Favorites
+
+![toggle favs](./images/toggle-fav.jpg)
+
 ## Techinal description
 
 ### Block
@@ -107,3 +115,4 @@ This application offers the possibility to search by an API external (Surfline),
         </td>
     </row>
 </table>
+
