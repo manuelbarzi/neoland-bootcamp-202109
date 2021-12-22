@@ -34,3 +34,23 @@ Para ello tendra el usuario que registar todos esos apartados en botones para ac
 
 # Blocks
 ![](./images/blocks.png)
+
+# Technologies
+- JavaScript
+- React
+- Sass
+- NodeJS
+- Express
+- Mongo
+- Mongoose
+- Mocha/Chai
+- MUI
+- React-Calendar
+
+# TODO
+- Preguntas con mas orientación psicologica o medica
+- Implementación de base de datos con medicamentos
+- Conexión con profesionales del ambito
+- Recomendaciones mindfulness en caso de ataque de ansiedad,estres,depresión...
+- Adaptación a ordenador de la web
+- Crear la app para Android/ IOS

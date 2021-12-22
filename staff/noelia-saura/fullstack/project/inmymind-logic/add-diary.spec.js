@@ -129,7 +129,7 @@ describe('addDiary', () => {
                 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4", {},8,"23:00h - 07:00h",4,true,4,false,false,true,true,true,false,true,false,false,false,false,false,"30 minutos")).to.throw(TypeError, '[object Object] is not a string')
                 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4", () => { },8,"23:00h - 07:00h",4,true,4,false,false,true,true,true,false,true,false,false,false,false,false,"30 minutos")).to.throw(TypeError, '() => { } is not a string')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4", () => { },8,"23:00h - 07:00h",4,true,4,false,false,true,true,true,false,true,false,false,false,false,false,"30 minutos")).to.throw(TypeError, '() => { } is not a string')
                 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4", [],8,"23:00h - 07:00h",4,true,4,false,false,true,true,true,false,true,false,false,false,false,false,"30 minutos")).to.throw(TypeError, `${[]} is not a string`)
             })
@@ -148,7 +148,7 @@ describe('addDiary', () => {
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', {}, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a number')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', () => { }, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a number')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', () => { }, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a number')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', [], "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, `${[]} is not a number`)
 
@@ -163,7 +163,7 @@ describe('addDiary', () => {
                 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4", 'Feliz',8,{},4,true,4,false,false,true,true,true,false,true,false,false,false,false,false,"30 minutos")).to.throw(TypeError, '[object Object] is not a string')
                 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4", 'Feliz',8,() => { },4,true,4,false,false,true,true,true,false,true,false,false,false,false,false,"30 minutos")).to.throw(TypeError, '() => { } is not a string')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4", 'Feliz',8,() => { },4,true,4,false,false,true,true,true,false,true,false,false,false,false,false,"30 minutos")).to.throw(TypeError, '() => { } is not a string')
                 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4", 'Feliz',8,[],4,true,4,false,false,true,true,true,false,true,false,false,false,false,false,"30 minutos")).to.throw(TypeError, `${[]} is not a string`)
             })
@@ -183,7 +183,7 @@ describe('addDiary', () => {
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", {}, true, 4, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a number')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", () => { }, true, 4, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a number')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", () => { }, true, 4, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a number')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", [], true, 4, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, `${[]} is not a number`)
 
@@ -197,7 +197,7 @@ describe('addDiary', () => {
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, {}, 4, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a boolean')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, () => { }, 4, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, () => { }, 4, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, [], 4, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, `${[]} is not a boolean`)
 
@@ -212,7 +212,7 @@ describe('addDiary', () => {
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, {}, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a number')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, () => { }, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a number')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, () => { }, false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a number')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, [], false, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, `${[]} is not a number`)
 
@@ -227,7 +227,7 @@ describe('addDiary', () => {
  
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, {}, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a boolean')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, () => { }, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, () => { }, false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, [], false, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, `${[]} is not a boolean`)
 
@@ -242,7 +242,7 @@ describe('addDiary', () => {
  
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, {}, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a boolean')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, () => { }, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, () => { }, true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, [], true, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, `${[]} is not a boolean`)
 
@@ -257,7 +257,7 @@ describe('addDiary', () => {
  
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, {}, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a boolean')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, () => { }, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, () => { }, true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, [], true, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, `${[]} is not a boolean`)
 
@@ -272,7 +272,7 @@ describe('addDiary', () => {
  
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, {}, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a boolean')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, () => { }, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, () => { }, true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, [], true, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, `${[]} is not a boolean`)
 
@@ -287,7 +287,7 @@ describe('addDiary', () => {
  
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, {}, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a boolean')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, () => { }, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, () => { }, false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, [], false, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, `${[]} is not a boolean`)
 
@@ -302,7 +302,7 @@ describe('addDiary', () => {
  
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, {}, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a boolean')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, () => { }, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, () => { }, true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, [], true, false, false, false, false, false, "30 minutos")).to.throw(TypeError, `${[]} is not a boolean`)
 
@@ -317,7 +317,7 @@ describe('addDiary', () => {
  
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, {}, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a boolean')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, () => { }, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, () => { }, false, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, [], false, false, false, false, false, "30 minutos")).to.throw(TypeError, `${[]} is not a boolean`)
 
@@ -332,7 +332,7 @@ describe('addDiary', () => {
  
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, {}, false, false, false, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a boolean')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, () => { }, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, () => { }, false, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, [], false, false, false, false, "30 minutos")).to.throw(TypeError, `${[]} is not a boolean`)
 
@@ -347,7 +347,7 @@ describe('addDiary', () => {
  
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, {}, false, false, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a boolean')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, () => { }, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, () => { }, false, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, [], false, false, false, "30 minutos")).to.throw(TypeError, `${[]} is not a boolean`)
 
@@ -362,7 +362,7 @@ describe('addDiary', () => {
  
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, {}, false, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a boolean')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, () => { }, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, () => { }, false, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, [], false, false, "30 minutos")).to.throw(TypeError, `${[]} is not a boolean`)
 
@@ -377,7 +377,7 @@ describe('addDiary', () => {
  
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, false, {}, false, "30 minutos")).to.throw(TypeError, '[object Object] is not a boolean')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, false, () => { }, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, false, () => { }, false, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, false, [], false, "30 minutos")).to.throw(TypeError, `${[]} is not a boolean`)
 
@@ -392,7 +392,7 @@ describe('addDiary', () => {
  
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, false, false, {}, "30 minutos")).to.throw(TypeError, '[object Object] is not a boolean')
 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, false, false, () => { }, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, false, false, () => { }, "30 minutos")).to.throw(TypeError, '() => { } is not a boolean')
 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"), "61ad1ad9799afee83e26c8b4", 'Feliz', 8, "23:00h - 07:00h", 4, true, 4, false, false, true, true, true, false, true, false, false, false, false, [], "30 minutos")).to.throw(TypeError, `${[]} is not a boolean`)
 
@@ -407,7 +407,7 @@ describe('addDiary', () => {
                 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4", 'Feliz',8,"23:00h - 07:00h",4,true,4,false,false,true,true,true,false,true,false,false,false,false,false,{})).to.throw(TypeError, '[object Object] is not a string')
                 
-                expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4", 'Feliz',8,"23:00h - 07:00h",4,true,4,false,false,true,true,true,false,true,false,false,false,false,false,() => { })).to.throw(TypeError, '() => { } is not a string')
+                // expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4", 'Feliz',8,"23:00h - 07:00h",4,true,4,false,false,true,true,true,false,true,false,false,false,false,false,() => { })).to.throw(TypeError, '() => { } is not a string')
                 
                 expect(() => addDiary(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4", 'Feliz',8,"23:00h - 07:00h",4,true,4,false,false,true,true,true,false,true,false,false,false,false,false,[])).to.throw(TypeError, `${[]} is not a string`)
             })

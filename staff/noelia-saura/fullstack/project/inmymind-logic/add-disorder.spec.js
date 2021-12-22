@@ -145,7 +145,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",{}, 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a string')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",() => { }, 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a string')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",() => { }, 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a string')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",[], 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a string`)
            
@@ -168,7 +168,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', {},true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', () => { },true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', () => { },true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', [],true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
            
@@ -184,7 +184,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,{},2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a boolean')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,() => { },2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a boolean')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,() => { },2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a boolean')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,[],2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a boolean`)
            
@@ -200,7 +200,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,{},3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,() => { },3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,() => { },3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,[],3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
            
@@ -216,7 +216,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,{},'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,() => { },'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,() => { },'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,[],'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
            
@@ -232,7 +232,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,{},2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a string')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,() => { },2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a string')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,() => { },2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a string')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,[],2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a string`)
            
@@ -255,7 +255,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',{},4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',() => { },4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',() => { },4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',[],4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
            
@@ -271,7 +271,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,{},4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,() => { },4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,() => { },4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,[],4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
            
@@ -287,7 +287,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,{},3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,() => { },3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,() => { },3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,[],3,2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
            
@@ -303,7 +303,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,{},2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,() => { },2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,() => { },2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,[],2,'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
            
@@ -319,7 +319,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,{},'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,() => { },'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,() => { },'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,[],'trabajo',4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
            
@@ -335,7 +335,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,{},4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a string')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,() => { },4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a string')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,() => { },4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a string')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,[],4,4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a string`)
            
@@ -358,7 +358,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',{},4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',() => { },4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',() => { },4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',[],4,2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
                 
@@ -374,7 +374,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,{},2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,() => { },2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,() => { },2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,[],2,4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
                 
@@ -390,7 +390,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,{},4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,() => { },4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,() => { },4,3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,[],4,3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
                 
@@ -406,7 +406,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,{},3,3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,() => { },3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,() => { },3,3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,[],3,3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
                 
@@ -422,7 +422,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,{},3,3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,() => { },3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,() => { },3,3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,[],3,3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
                 
@@ -438,7 +438,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,{},3,2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,() => { },3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,() => { },3,2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,[],3,2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
                 
@@ -454,7 +454,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,{},2,1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,() => { },2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,() => { },2,1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,[],2,1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
                 
@@ -470,7 +470,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,{},1,'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,() => { },1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,() => { },1,'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,[],1,'trabajo')).to.throw(TypeError, `${[]} is not a number`)
                 
@@ -486,7 +486,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,{},'trabajo')).to.throw(TypeError, '[object Object] is not a number')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,() => { },'trabajo')).to.throw(TypeError, '() => { } is not a number')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,() => { },'trabajo')).to.throw(TypeError, '() => { } is not a number')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,[],'trabajo')).to.throw(TypeError, `${[]} is not a number`)
                 
@@ -502,7 +502,7 @@ describe('addDisorder', () => {
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,{})).to.throw(TypeError, '[object Object] is not a string')
            
-                expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,() => { })).to.throw(TypeError, '() => { } is not a string')
+                // expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,() => { })).to.throw(TypeError, '() => { } is not a string')
            
                 expect(()=> addDisorder(new Date("Thu, 09 Dec 2021 00:00:00 GMT"),"61ad1ad9799afee83e26c8b4",'Estres', 3,true,2,3,'hablar',2,4,4,3,2,'trabajo',4,4,2,4,3,3,3,2,1,[])).to.throw(TypeError, `${[]} is not a string`)
            

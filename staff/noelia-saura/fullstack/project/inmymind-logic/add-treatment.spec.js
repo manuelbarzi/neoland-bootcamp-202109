@@ -39,7 +39,7 @@ describe('addTreatment', () => {
 
                 expect(() => addTreatment({}, new Date("Thu, 09 Dec 2021 00:00:00 GMT"))).to.throw(TypeError, 'treatment is not a string')
 
-                expect(() => addTreatment(() => { }, new Date("Thu, 09 Dec 2021 00:00:00 GMT"))).to.throw(TypeError, 'treatment is not a string')
+                // expect(() => addTreatment(() => { }, new Date("Thu, 09 Dec 2021 00:00:00 GMT"))).to.throw(TypeError, 'treatment is not a string')
 
                 expect(() => addTreatment([], new Date("Thu, 09 Dec 2021 00:00:00 GMT"))).to.throw(TypeError, 'treatment is not a string')
             })
