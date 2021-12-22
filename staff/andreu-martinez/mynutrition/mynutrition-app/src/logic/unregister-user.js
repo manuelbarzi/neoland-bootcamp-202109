@@ -1,9 +1,9 @@
 import context from './context'
-const { validateToken, validatePassword } = require('./helpers/validators')
+// const { validateToken, validatePassword } = require('./helpers/validators')
 
 function unregisterUser(token, password) {
-    validateToken(token)
-    validatePassword(password)
+    // validateToken(token)
+    // validatePassword(password)
 
     return (async () => {
         const res = await fetch(`${context.API_URL}/users`, {

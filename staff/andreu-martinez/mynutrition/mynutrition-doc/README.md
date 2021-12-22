@@ -10,21 +10,21 @@ This application offers the possibility to search by an API external (Surfline),
 
 ### Use cases
 
-![use cases](./images/use-case.jpg)
+![use cases](./images/Diagrama de caso de uso.jpeg)
 
 ### Activities
 
 #### Register and Login
 
-![register and login](./images/activity-register-login.jpg)
+![register and login](./images/Registrar Usuario.jpg)
 
-#### Modify User
+#### Send Message
 
-![modify user](./images/modify-user.jpg)
+![modify user](./images/Enviar Mensaje a Cliente.jpg)
 
-#### Delete User
+#### Assign diet to a customer
 
-![delete user](./images/delete-user.jpg)
+![delete user](./images/Añadir Dieta a Cliente.jpg)
 
 ## Techinal description
 
