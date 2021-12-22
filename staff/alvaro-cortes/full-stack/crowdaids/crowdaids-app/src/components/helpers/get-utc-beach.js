@@ -1,4 +1,4 @@
-const getUtcBeach = (utc) => {
+const getUtcBeach = (utc = '') => {
     let time = new Date()
     time = time.toString()
     let year = time.slice(13, 15)

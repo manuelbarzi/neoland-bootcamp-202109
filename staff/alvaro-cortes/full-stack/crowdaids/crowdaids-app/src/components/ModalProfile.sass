@@ -1,9 +1,19 @@
 @import ./Modal
-    
+
+.container--profile
+    margin: 5px 0 5px 0
+
 .modal--profile 
-    @include format($min-width: 130px, $max-width: 130px, $min-height: 100px, $max-height: 200px, $back: #F7F7FF, $top: 90, $left: none, $animation: show 1s)
+    @include format($min-width: 130px, $max-width: 180px, $min-height: 100px, $max-height: 250px, $back: #F7F7FF, $top: 90, $left: none, $animation: show 1s)
     right: 0px
-   
+    
+    box-shadow: -5px 5px 8px rgba(209, 209, 209, 0.7)
+
+.button--modal
+    display: inline-flex
+    
+.button--modal:hover
+    border-bottom: 1px solid $ligth-blue-ligth
 
 @keyframes show 
     

@@ -1,4 +1,4 @@
-const arroWind = (array, time='') => {
+const arroWind = (array, time) => {
     if (!array)
         return 0
 

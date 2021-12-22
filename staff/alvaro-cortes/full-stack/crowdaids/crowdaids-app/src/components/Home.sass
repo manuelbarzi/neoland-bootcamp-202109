@@ -1,13 +1,13 @@
 @import ../style
 
+/* ------ containers ------ */
+
 .container__results
     font-family: $font-stack
     color: $grey-dark
     text-align: center
     background-color: $light-blue-with
     font-size: 10px
-    margin: 0 -70px 0 -70px
-    height: fit-content
 
 .container__results--ul
     cursor: pointer
@@ -27,6 +27,10 @@
     box-shadow: 0px -2px 50px $grey-ligth
     text-align: center
     font-size: 10px
+    & :nth-child(1)
+        color: $grey-dark
+    & :nth-child(2)
+        color: $grey-dark
 
 .title__beach
     font-family: 'Noto Sans', sans-serif
@@ -35,17 +39,20 @@
 
 .title--search
     display: inline-block
-    border: 0.5px solid $light-blue-with
+    border: 0.5px solid transparent
     border-radius: 5px
-.result--beach
-    box-shadow: 0px 1px 10px $ligth-blue-ligth
-    margin: 10px 80px 0 80px
-    background-color: $light-blue-with
 
 .title--search:hover
     border: 0.5px solid $grey-dark
     background-color: $grey-dark
     color: $ligth-blue-ligth
+
+.result--beach
+    box-shadow: 0px 1px 10px $ligth-blue-ligth
+    margin: 10px 80px 0 80px
+    background-color: $light-blue-with
+
+/* ------ name beach ------ */
 
 .location--name
     font-size: 10px
@@ -58,14 +65,16 @@
     background-color: transparent
     cursor: pointer
 
+/* ------ lamp ------ */
+
+#lamps
+    width: 1px
+
 @media screen and (min-width: 960px)
     .container--name
         font-family: $font-stack
         color: $grey-dark
         font-weight: 600
-
-    .container__results
-        width: 100%
 
     .result--beach
         margin: 10px -60px 0 80px

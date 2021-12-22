@@ -10,23 +10,21 @@ import Profile from './Profile'
 import ChangeData from './Change-data'
 import ChangePassword from './Change-password'
 import Unregister from './Unregister'
+import Welcome from './Welcome'
 import { retrieveUser } from '../logic'
-import { Routes, Route, useNavigate, useLocation } from 'react-router-dom'
-import { useQuery } from '../hooks'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import AppContext from './AppContext'
 
 function Home() {
     logger.info("Home -> constructor")
 
-    const { showSpinner, hideSpinner, showModal, goToHome } = useContext(AppContext)
+    const { showSpinner, hideSpinner, resetTokenAndGoToLogin } = useContext(AppContext)
 
-    const [user, setUser] = useState(null) // user.name
-    const [beach, setBeach] = useState({}) // region y nameBeach
-
-    const queryParams = useQuery()
+    const [theme, setTheme] = useState('light')
+    const [user, setUser] = useState(null)
+    const [beach, setBeach] = useState({})
     const [query, setQuery] = useState({})
     const navigate = useNavigate()
-    const location = useLocation()
 
     useEffect(async () => {
         logger.info('Home -> useEffect (componentDidMount)')
@@ -44,10 +42,13 @@ function Home() {
                 const { name } = user
 
                 setUser(name)
+
             } catch ({ message }) {
                 hideSpinner()
 
-                showModal('Error', message)
+                navigate('/')
+
+                resetTokenAndGoToLogin()
             }
         }
     }, [])
@@ -60,8 +61,8 @@ function Home() {
 
     const goToItem = (beach, id) => {
         const { name } = beach
-        navigate(`/forecast/${name}/${id}`)
         setBeach(beach)
+        navigate(`/forecast/${name}/${id}`)
     }
 
     const goToProfile = () => navigate('/profile')
@@ -72,57 +73,75 @@ function Home() {
 
     const goToUnregister = () => navigate('/unregister')
 
+    const goHome = () => navigate('/')
+
     const goToSearch = () => search(query)
 
+    const toggleLamp = () => setTheme(theme === 'light' ? 'dark' : 'light')
+
     return <>
-        <Routes>
-            <Route path="/" element={
-                <Search
-                    user={user}
-                    onSearch={search}
-                    query={query}
-                    onItem={goToItem}
-                    goToProfile={goToProfile}
-                />}>
+        <Search
+            user={user}
+            onSearch={search}
+            query={query}
+            onItem={goToItem}
+            goToProfile={goToProfile}
+            toggleLamp={toggleLamp}
+            theme={theme}
+        />
+                <Routes>
+                    <Route path='/' element={
+                        <Welcome
+                            onItem={goToItem}
+                            theme={theme} />
+                    } />
 
-                <Route path="search" element={
-                    <Results onItem={goToItem} />
-                } />
+                    <Route path="/search" element={
+                        <Results
+                            onItem={goToItem}
+                            theme={theme} />
+                    } />
 
-                <Route path="forecast/:name/:id" element={
-                    <Detail
-                        onGoBack={goToSearch}
-                        beach={beach} />
-                } />
+                    <Route path="/forecast/:name/:id" element={
+                        <Detail
+                            onGoBack={goToSearch}
+                            beach={beach}
+                            theme={theme} />
+                    } />
 
-                <Route path="/favs" element={
-                    <Favorites
-                        onItem={goToItem} />
-                } />
+                    <Route path="/favs" element={
+                        <Favorites
+                            onItem={goToItem}
+                            theme={theme} />
+                    } />
 
-                <Route path="/profile" element={
-                    <Profile
-                        goToChangeData={goToChangeData}
-                        goToChangePassword={goToChangePassword}
-                        goToUnregister={goToUnregister} />
-                } />
+                    <Route path="/profile" element={
+                        <Profile
+                            goToChangeData={goToChangeData}
+                            goToChangePassword={goToChangePassword}
+                            goToUnregister={goToUnregister}
+                            goHome={goHome}
+                            theme={theme} />
+                    } />
 
-                <Route path='/change-data' element={
-                    <ChangeData
-                        goToProfile={goToProfile} />
-                } />
+                    <Route path='/change-data' element={
+                        <ChangeData
+                            goToProfile={goToProfile}
+                            theme={theme} />
+                    } />
 
-                <Route path='/change-password' element={
-                    <ChangePassword
-                        goToProfile={goToProfile} />
-                } />
+                    <Route path='/change-password' element={
+                        <ChangePassword
+                            goToProfile={goToProfile}
+                            theme={theme} />
+                    } />
 
-                <Route path='/unregister' element={
-                    <Unregister
-                        goToProfile={goToProfile} />
-                } />
-            </Route>
-        </Routes>
+                    <Route path='/unregister' element={
+                        <Unregister
+                            goToProfile={goToProfile}
+                            theme={theme} />
+                    } />
+                </Routes>
     </>
 }
 

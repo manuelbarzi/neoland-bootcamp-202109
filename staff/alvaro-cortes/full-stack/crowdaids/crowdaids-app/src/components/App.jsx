@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { useState } from 'react'
 import logger from '../logger'
 import Modal from './Modal'
@@ -7,23 +7,26 @@ import SignIn from './SignIn'
 import SignUp from './SignUp'
 import Home from './Home'
 import AppContext from './AppContext'
+import { useNavigate } from 'react-router-dom'
 
 function App() {
-    logger.info("App -> constructor")
+    logger.info('App -> constructor')
 
-    const [view, setView] = useState(sessionStorage.token ? "home" : "login")
+    const [view, setView] = useState(sessionStorage.token ? 'home' : 'login')
     const [name, setName] = useState(null)
     const [spinner, setSpinner] = useState(sessionStorage.token ? true : false)
     const [modal, setModal] = useState(false)
-    const [title, setTitle] = useState("")
-    const [text, setText] = useState("")
+    const [title, setTitle] = useState('')
+    const [text, setText] = useState('')
+    const navigate = useNavigate()
 
     const resetTokenAndGoToLogin = () => {
         delete sessionStorage.token
 
-        setView("login")
+        setView('login')
         setName(null)
         setSpinner(false)
+        navigate('/')
     }
 
     const showModal = (title, text) => {
@@ -38,11 +41,11 @@ function App() {
 
     const hideSpinner = () => setSpinner(false)
 
-    const goToHome = () => setView("home")
+    const goToHome = () => setView('home')
 
-    const goToSignUp = () => setView("register")
+    const goToSignUp = () => setView('register')
 
-    const goToSignIn = () => setView("login")
+    const goToSignIn = () => setView('login')
 
     return <>
         <AppContext.Provider value={{
@@ -55,12 +58,12 @@ function App() {
             resetTokenAndGoToLogin: resetTokenAndGoToLogin
         }}>
 
-            {view === "register" && <SignUp></SignUp>}
+            {view === 'register' && <SignUp></SignUp>}
 
-            {view === "login" &&
+            {view === 'login' &&
                 <SignIn view={view} ></SignIn>}
 
-            {view === "home" &&
+            {view === 'home' &&
                 <Home name={name} ></Home>}
 
             {spinner && <Spinner></Spinner>}

@@ -5,10 +5,10 @@ import { useContext, useEffect, useState } from 'react'
 import { retrieveUser } from '../logic'
 import AppContext from './AppContext'
 
-function Profile({ goToChangeData, goToChangePassword, goToUnregister }) {
+function Profile({ goToChangeData, goToChangePassword, goToUnregister, goHome, theme }) {
     logger.info("Profile -> render")
 
-    const { goToHome, showModal, showSpinner, hideSpinner } = useContext(AppContext)
+    const { showModal, showSpinner, hideSpinner } = useContext(AppContext)
 
     const [user, setUser] = useState(null)
 
@@ -36,7 +36,7 @@ function Profile({ goToChangeData, goToChangePassword, goToUnregister }) {
 
 
     return (
-        <div className="grid__center center">
+        <div className={`${theme} grid__center center`}>
             <aside className="grid__center-aside">
                 <div className="aside1--elements">
                     <button className="button button--config" onClick={() => goToChangeData()}>Modificar tu datos</button>
@@ -48,7 +48,7 @@ function Profile({ goToChangeData, goToChangePassword, goToUnregister }) {
                     <button className="button button--delete" onClick={() => goToUnregister()}>Eliminar usuario</button>
                 </div>
                 <div className="aside1--elements">
-                    <button type="button" className="button button--back--profile" onClick={() => goToHome()}>Volver atrás</button>
+                    <button type="button" className="button button--back--profile" onClick={() => goHome()}>Volver atrás</button>
                 </div>
             </aside>
             <aside className="grid__center-aside">

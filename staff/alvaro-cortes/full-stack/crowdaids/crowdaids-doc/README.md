@@ -6,7 +6,7 @@
 
 ## Functional description
 
-This application offers the possibility to search a beach on the world who has entering on the data base, to see the extended swell forectas to know when is the best time to go surfing. Also, provide information about wich type of wetsuits are best to wear based on the current weather.
+This application offers the possibility to search by an API external (Surfline), a beach on the world who has entering on the data base, to see the extended swell forectas to know when is the best time to go surfing.
 
 ### Use cases
 
@@ -17,6 +17,14 @@ This application offers the possibility to search a beach on the world who has e
 #### Register and Login
 
 ![register and login](./images/activity-register-login.jpg)
+
+#### Modify User
+
+![modify user](./images/modify-user.jpg)
+
+#### Delete User
+
+![delete user](./images/delete-user.jpg)
 
 ## Techinal description
 
@@ -72,7 +80,8 @@ This application offers the possibility to search a beach on the world who has e
 
 ### Code coverage
 
-![code coverage]
+![code coverage](./images/Test1.jpg)
+![code coverage](./images/Test2.jpg)
 
 ### Techonoliges
 

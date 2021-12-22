@@ -8,11 +8,11 @@ import { BsStarFill } from "react-icons/bs";
 import { mapBeach } from './helpers'
 import logger from '../logger'
 
-function InformationNow({ maxMin, tide, wind, weather, swellDir, coordMap, arrS, arrW, fav, toggleFavorite, id, name }) {
+function InformationNow({ maxMin, tide, wind, weather, swellDir, coordMap, arrS, arrW, fav, toggleFavorite, id, name, theme }) {
     logger.info('InformationNow -> render')
 
     return (
-        <div className="grid__center center">
+        <div className={`${theme} grid__center center center1`}>
             <aside className="grid__center-aside">
                 <div id="favorites">
                     <h2>INFORME ACTUAL DE SURF </h2>

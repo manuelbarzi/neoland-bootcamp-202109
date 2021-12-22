@@ -10,7 +10,7 @@ context.API_URL = process.env.REACT_APP_API_URL
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <App />
+      <App /> 
     </Router>
   </React.StrictMode>,
   document.getElementById('root')

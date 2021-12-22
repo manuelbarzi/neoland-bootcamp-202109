@@ -15,7 +15,7 @@ function retrieveUser(id) {
     validateId(id)
 
     return (async () => {
-        const user = await User.findById(id)
+        const user = await User.findById(id).lean()
 
         if (!user) throw new NotFoundError('Wrong ID')
 
@@ -23,11 +23,13 @@ function retrieveUser(id) {
 
         delete user._id
 
+        delete user.id
+
         delete user.password
 
         delete user.__v
 
-        return user.save()
+        return user
     })()
 }
 

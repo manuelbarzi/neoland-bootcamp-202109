@@ -10,7 +10,7 @@ const { validateToken, validateId } = require('crowdaids-logic/helpers/validator
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
 
-function retrieveBeach(token, id) {
+function retrieveBeach(token, id, name, breadCrumbs) {
     validateToken(token)
     validateId(id)
 
@@ -47,6 +47,8 @@ function retrieveBeach(token, id) {
                 if (!swellCondition) throw new Error(`No swell conditions found with id ${id}`)
 
                 swellCondition.id = id
+
+                swellCondition.nameBeach = name
 
                 swellCondition.isFav = favorites.some(fav => fav.idBeach === swellCondition.id)
 

@@ -1,16 +1,16 @@
-import React from 'react';
+import React from 'react'
 import logger from '../logger'
 import { unregisterUser } from '../logic'
 import { useContext } from 'react'
 import AppContext from './AppContext'
 
-function Unregister({ goToProfile }) {
-    logger.info("Unregister -> render")
+function Unregister({ goToProfile, theme }) {
+    logger.info('Unregister -> render')
 
     const { showModal, showSpinner, hideSpinner, resetTokenAndGoToLogin } = useContext(AppContext)
 
     return (
-        <div className="unregister container container--vertical" onSubmit={async event => {
+        <div className={`${theme} container container--vertical`} onSubmit={async event => {
             event.preventDefault()
 
             const { target: { password: { value: password } } } = event
@@ -26,7 +26,7 @@ function Unregister({ goToProfile }) {
 
                 await unregisterUser(token, user)
 
-                showModal("Éxito", "Has eliminado tu cuenta.")
+                showModal('Éxito', 'Has eliminado tu cuenta.')
 
                 hideSpinner()
 
@@ -34,20 +34,20 @@ function Unregister({ goToProfile }) {
 
             } catch ({ message }) {
 
-                showModal("Error", message)
+                showModal('Error', message)
 
                 hideSpinner()
             }
 
             event.target.reset()
         }}>
-            <form className="container container--vertical">
-                <h3 className="titles">Eliminar cuenta</h3>
-                <input type="password" placeholder="Contraseña" id="password" />
+            <form className='container container--vertical'>
+                <h3 className='titles'>Eliminar cuenta</h3>
+                <input type='password' placeholder='Contraseña' id='password' />
 
-                <div className="container">
-                    <button type="button" className="button" onClick={() => goToProfile()}>Volver atrás</button>
-                    <button className="button button--red">Eliminar usuario</button>
+                <div className='container'>
+                    <button type='button' className='button' onClick={() => goToProfile()}>Volver atrás</button>
+                    <button className='button button--red'>Eliminar usuario</button>
                 </div>
             </form>
         </div>

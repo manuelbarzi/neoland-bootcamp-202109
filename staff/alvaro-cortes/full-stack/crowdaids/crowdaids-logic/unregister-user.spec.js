@@ -5,6 +5,7 @@ const unregisterUser = require('./unregister-user')
 const { mongoose, models: { User } } = require('crowdaids-data')
 const { Types: { ObjectId } } = mongoose
 const { CredentialsError, FormatError, NotFoundError } = require('crowdaids-errors')
+const bcrypt = require('bcryptjs')
 
 const { env: { MONGO_URL } } = process
 
@@ -24,7 +25,7 @@ describe('unregisterUser', () => {
             password: '123123123'
         }
 
-        const user2 = await User.create(user)
+        const user2 = await User.create({ ...user, password: bcrypt.hashSync(user.password) })
 
         userId = user2.id
     })

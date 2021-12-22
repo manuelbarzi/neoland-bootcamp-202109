@@ -2,6 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap')
 @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap')
 
+* 
+    box-sizing: border-box
+
+
 /* ------ variables ------ */
 
 $font-stack: 'Quicksand', sans-serif
@@ -12,7 +16,6 @@ $grey-ligth: #B3BFAA
 $ligth-blue-ligth: #C1D9CB
 $light-blue-with: #EAF2E4
 
-
 /* ------- mixins ------- */
 
 @mixin hr-line($hr-heigth: 0.1px, $hr-width: 300px, $hr-back: $grey-ligth, $hr-border: $grey-ligth 0.5px solid)
@@ -20,6 +23,20 @@ $light-blue-with: #EAF2E4
     width: $hr-width
     background-color: $hr-back
     border: $hr-border
+
+@mixin button-mix($font-family: $font-stack, $margin: 5px, $border: 1px $grey-ligth solid, $back: transparent, $width: 180px, $height: 37px, $color: black, $font-size: 0.9rem, $font-weight: 600, $letter-spacing: 1px, $transition: all 0.3s)
+    font-family: $font-family
+    margin: $margin
+    border: $border
+    background-color: $back
+    width: $width
+    height: $height
+    color: $color
+    font-size: $font-size
+    font-weight: $font-weight
+    letter-spacing: $letter-spacing
+    transition: $transition
+
 
 html, body
     padding: 0
@@ -32,6 +49,18 @@ body
     font-family: $font-stack
     flex-grow: 1
 
+/* ------ Themes ------ */
+
+.light
+    background-color: $light-blue-with
+    color: $grey-dark
+
+.dark
+    background-color: $grey-dark
+    color: $light-blue-with
+
+/* ------ titles ------ */
+    
 .titles
     font-family: $font-stack
     color: $grey-dark
@@ -39,21 +68,6 @@ body
 
 hr
     @include hr-line
-
-.hr--comment
-    @include hr-line($hr-back: $grey-medium, $hr-border: $grey-medium 0.1px solid)
-    margin-top: -20px
-
-.top
-    font-family: $font-stack
-    height: 25px
-    width: 100%
-    background-color: black
-    color: #E3D87E
-    text-align: center
-    padding-top: 7px
-    font-size: 12px
-    font-weight: 600
 
 /* ------ containers ------- */
 .container
@@ -65,10 +79,17 @@ hr
     flex-direction: column
 
 .container--search
+    display: flex
     padding: 5px
+    flex-basis: 10%
 
-.container--profile
-    margin: 5px 0 5px 0
+.logo
+    display: flex
+    justify-content: center
+    margin: 20px
+
+.logo--image
+    width: 120px
 
 /* ------ form ------- */
 form
@@ -84,7 +105,7 @@ label
 
 /* ------ inputs ------- */
 input
-    height: 25px
+    height: 37px
     margin: 5px
     border: $grey-ligth 1px solid
     background: transparent
@@ -119,6 +140,9 @@ label > input
     font-weight: 600
     letter-spacing: 1px
     transition: all 0.3s
+
+.button--search
+    @include button-mix($width: 120px)
 
 .button--grey
     border: $ligth-blue-ligth 1px solid
@@ -155,8 +179,19 @@ label > input
 @media screen and (min-width: 960px)
     .container--search
         justify-content: space-between
-    
+
     #input--search
         width: 400px
 
-    
+    .landing
+        display: flex
+        flex-direction: row
+        justify-content: space-evenly
+        align-items: flex-start
+        margin-top: 100px
+
+    .logo
+        display: inline-block
+
+    .logo--image
+        width: 300px

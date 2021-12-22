@@ -1,7 +1,7 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
-import { retrieveBeach, toggleFavoriteBeach } from '../logic';
+import React from 'react'
+import { useParams } from 'react-router-dom'
+import { useState, useEffect, useContext } from 'react'
+import { retrieveBeach, toggleFavoriteBeach } from '../logic'
 import {
     toxy,
     heigthMaxMin,
@@ -14,25 +14,25 @@ import {
     swellDirections,
     dayForecast
 }
-    from './helpers';
-import './Home.sass';
-import AppContext from './AppContext';
-import InformationNow from './InformationNow';
-import WeekForecast from './WeekForecast';
+    from './helpers'
+import './Home.sass'
+import AppContext from './AppContext'
+import InformationNow from './InformationNow'
+import WeekForecast from './WeekForecast'
 
 import logger from '../logger'
 
 
-function Detail({ beach }) {
+function Detail({ beach, theme }) {
 
-    logger.info("Detail -> render")
+    logger.info('Detail -> render')
 
     const { showSpinner, hideSpinner, showModal } = useContext(AppContext)
-    const { name, breadCrumbs } = beach
+    const { breadCrumbs } = beach
 
     const [beachInfo, setBeachInfo] = useState([])
-    const [fav, setFav] = useState(null)
-    const { id } = useParams()
+    const [fav, setFav] = useState([])
+    const { id, name } = useParams()
 
     useEffect(async () => {
 
@@ -43,7 +43,7 @@ function Detail({ beach }) {
 
                 showSpinner()
 
-                const beachInformation = await retrieveBeach(token, id)
+                const beachInformation = await retrieveBeach(token, id, name)
 
                 setBeachInfo(beachInformation)
 
@@ -59,7 +59,7 @@ function Detail({ beach }) {
         }
     }, [id])
 
-    const utcActual = () => getUtcBeach(beachInfo[0]?.data?.wave[0]?.utcOffset)
+    const utcActual = getUtcBeach(beachInfo[0]?.data?.wave[0]?.utcOffset)
 
     const maxMin = () => heigthMaxMin(beachInfo[0]?.data?.wave, utcActual)
 
@@ -104,8 +104,6 @@ function Detail({ beach }) {
 
             hideSpinner()
 
-            //setFav({ ...fav, isFav: !fav.isFav})
-
             setBeachInfo(beachInfo.map(beach => {
                 if (beach) {
                     setFav({ ...fav, isFav: !fav.isFav})
@@ -126,12 +124,12 @@ function Detail({ beach }) {
 
 
     return <>
-        <div>
-            <div className="results--title">
+        <div className={`${theme}`}>
+            <div className='results--title'>
                 <h3>{breadCrumbs}</h3>
-                <h1 className="title__beach">{name}</h1>
+                <h1 className='title__beach'>{beachInfo[0]?.nameBeach}</h1>
             </div>
-            <div className="grid">
+            <div className='grid'>
                 <InformationNow
                     maxMin={maxMin}
                     tide={tide}

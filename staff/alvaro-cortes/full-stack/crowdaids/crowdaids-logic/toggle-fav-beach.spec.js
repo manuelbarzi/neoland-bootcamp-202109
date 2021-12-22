@@ -8,7 +8,7 @@ const { Types: { ObjectId } } = mongoose
 
 const { env: { MONGO_URL } } = process
 
-describe.only('toggleFavBeach', () => {
+describe('toggleFavBeach', () => {
 
     before(() => mongoose.connect(MONGO_URL))
 

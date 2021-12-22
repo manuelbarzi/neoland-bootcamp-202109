@@ -1,17 +1,17 @@
-import React from 'react';
+import React from 'react'
 import './Home.sass'
 import logger from '../logger'
 import { useQuery } from '../hooks'
 import { useState, useEffect } from 'react'
 import { searchBeaches, toggleFavoriteBeach } from '../logic'
 import { useContext } from 'react'
-import { IconContext } from "react-icons";
-import { BiStar } from "react-icons/bi";
-import { BsStarFill } from "react-icons/bs";
+import { IconContext } from "react-icons"
+import { BiStar } from "react-icons/bi"
+import { BsStarFill } from "react-icons/bs"
 import AppContext from './AppContext'
 
-function Results({ onItem, onToggleFavorite }) {
-    logger.info("Results -> render")
+function Results({ onItem, theme }) {
+    logger.info('Results -> render')
 
     const { showSpinner, hideSpinner, showModal } = useContext(AppContext)
 
@@ -38,7 +38,7 @@ function Results({ onItem, onToggleFavorite }) {
             } catch ({ message }) {
                 hideSpinner()
 
-                showModal("Error", message)
+                showModal('Error', message)
             }
         }
     }, [query])
@@ -68,18 +68,18 @@ function Results({ onItem, onToggleFavorite }) {
     }
 
     return beaches && beaches.length ?
-        <div className="container__results">
-            <ul className="container__results--ul">
-                <h1>Resultados de busqueda</h1><hr id="hr--busqueda" />
+        <div className={`${theme} container__results`}>
+            <ul className='container__results--ul'>
+                <h1>Resultados de busqueda</h1><hr id='hr--busqueda' />
                 {
                     beaches.map(({ _id, _source: { name, breadCrumbs }, isFav }) => <li key={_id} onClick={() => { onItem({ name, breadCrumbs }, _id) }}>
                         <div>
-                            <IconContext.Provider value={{ color: '#d8a600', size: "1em", style: { verticalAlign: 'middle' } }}>
-                                <h2 className="title--search"><span onClick={event => {
+                            <IconContext.Provider value={{ color: '#d8a600', size: '1em', style: { verticalAlign: 'middle' } }}>
+                                <h2 className='title--search'><span onClick={event => {
                                     event.stopPropagation()
 
                                     toggleFavorite(_id, name)
-                                }}>{isFav ? <BsStarFill /> : <BiStar />}</span>{name} | <span className="location--name"> {breadCrumbs} </span> </h2>
+                                }}>{isFav ? <BsStarFill /> : <BiStar />}</span>{name} | <span className='location--name'> {breadCrumbs} </span> </h2>
                             </IconContext.Provider>
                         </div>
                     </li>)
@@ -87,7 +87,11 @@ function Results({ onItem, onToggleFavorite }) {
             </ul>
         </div>
         :
-        null
+        <div className="container__results">
+            <ul className="container__results--ul">
+                <h2>No se encontraron resúltados.</h2>
+            </ul>
+        </div>
 }
 
 export default Results
