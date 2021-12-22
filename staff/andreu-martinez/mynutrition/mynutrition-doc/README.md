@@ -1,12 +1,12 @@
-# Crowd Aids
+# My Nutri Method 🍉🍇
 
 ## Introduction
 
-![intro](https://media4.giphy.com/media/5tj9a2cSd8wJfgZreL/giphy.gif?cid=790b761172d48a146125c708f7fe9feba0e1641b2774ba78&rid=giphy.gif&ct=g)
+![intro](https://instagram.fbcn5-2.fna.fbcdn.net/v/t51.2885-15/e35/s1080x1080/157690304_1722545664594041_4171848408105474649_n.jpg?_nc_ht=instagram.fbcn5-2.fna.fbcdn.net&_nc_cat=105&_nc_ohc=u0Eb5qwdKDwAX9Erboz&edm=AP_V10EBAAAA&ccb=7-4&oh=00_AT-cldXO22DiTWZnjQQloCUcQCRw-8JvKdhdRGsMLGipsA&oe=61C9F990&_nc_sid=4f375e)
 
 ## Functional description
 
-This application offers the possibility to search by an API external (Surfline), a beach on the world who has entering on the data base, to see the extended swell forectas to know when is the best time to go surfing.
+The first function of my application allows to communicate between registered users, you can send, read and answer messages to anyone.
 
 ### Use cases
 
