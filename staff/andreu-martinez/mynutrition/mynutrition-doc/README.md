@@ -6,7 +6,7 @@
 
 ## Functional description
 
-This application offers the possibility to search by an API external (Surfline), a beach on the world who has entering on the data base, to see the extended swell forectas to know when is the best time to go surfing.
+The first function of my application allows to communicate between registered users, you can send, read and answer messages to anyone.
 
 ### Use cases
 
