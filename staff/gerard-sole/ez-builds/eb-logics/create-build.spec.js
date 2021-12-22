@@ -9,7 +9,6 @@ const { Types: { ObjectId } } = mongoose
 const { env: { MONGO_URL } } = process
 
 describe( 'createBuild', () => {
-    debugger
     before( () => mongoose.connect( MONGO_URL ) )
 
     beforeEach( () => Build.deleteMany() )
@@ -41,7 +40,6 @@ describe( 'createBuild', () => {
         expect( build ).to.exist
         expect( champion ).to.deep.equal( championId2 )
         expect( items ).to.deep.equal(arrItemsId2 )
-        expect( resUserId ).to.deep.equal( userId )
 
     } )
 

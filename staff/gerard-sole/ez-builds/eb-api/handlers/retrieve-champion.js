@@ -1,13 +1,24 @@
-const { retrieveChampion } = require( 'eb-logics' )
-const handleError = require( './helpers/handle-error' )
+const { retrieveChampion, retrieveChampionById } = require( 'eb-logics' )
+const {handleError, validateAuthorizationAndExtractPayload} = require( './helpers' )
 
 module.exports = ( req, res ) => {
-    const { query: { q } } = req
-
+    const {  headers: { authorization }, query: { name, id }} = req
+    
     try {
-        retrieveChampion( q )
+        validateAuthorizationAndExtractPayload( authorization )
+        if(name && typeof name === 'string') {
+            retrieveChampion( name )
             .then( champion => res.json( champion ) )
             .catch( error => handleError( error, res ) )
+        }
+        else if ( id && typeof id === 'string'){
+            retrieveChampionById( id )
+            .then( champion => res.json( champion ) )
+            .catch( error => handleError( error, res ) )
+        }
+        else{
+            return error
+        }
     } catch ( error ) {
         handleError( error, res )
     }

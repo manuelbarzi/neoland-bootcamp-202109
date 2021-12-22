@@ -1,15 +1,20 @@
-function Search({onSearch, onGoFavs, onGoToCart}) {
-    return <> 
-        <form className="home__search container" onSubmit = {(event) => {
+import { Outlet } from 'react-router-dom'
+
+function Search({ onSearch, query }) {
+
+    return <>
+        <form className="container" onSubmit={event => {
             event.preventDefault()
 
-            const query = event.target.query.value 
+            const query = event.target.query.value // DOM API
 
             onSearch(query)
         }}>
-            <input className="field" type="text" name="query" id="query" placeholder="criteria" />
-            <button className="button button--dark">Search</button>
+            <input className="field" type="text" placeholder="criteria" name="query" defaultValue={query} />
+            <button className="button button--medium button--dark">Search</button>
         </form>
+
+        <Outlet />
     </>
 }
 

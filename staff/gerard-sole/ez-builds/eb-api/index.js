@@ -13,6 +13,7 @@ const { registerUser,
     createBuild,
     deleteBuild,
     retrieveBuilds,
+    retrieveItems,
 } = require('./handlers')
 const cors = require('cors')
 const corsOptions = {
@@ -44,13 +45,15 @@ mongoose.connect(MONGO_URL)
 
             api.get("/champions", jsonBodyParser, retrieveChampion)
 
-            api.get("/items", jsonBodyParser, retrieveItem)
+            api.get("/item", jsonBodyParser, retrieveItem)
 
             api.post("/builds", jsonBodyParser, createBuild)
 
             api.delete("/builds", jsonBodyParser, deleteBuild)
             
             api.get("/builds", jsonBodyParser, retrieveBuilds)
+
+            api.get("/items", jsonBodyParser, retrieveItems )
 
             api.all('*', (req, res) => {
                 res.status(404).json({ message: 'sorry, this endpoint isn\'t available' })

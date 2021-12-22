@@ -36,11 +36,6 @@ describe('modifyUser', () => {
         const data = { name, username }
 
         return modifyUser(userId, data)
-            .then(res => {
-                expect(res).to.be.undefined
-
-                return User.findById(userId)
-            })
             .then(user => {
                 expect(user.name).to.equal(name)
                 expect(user.username).to.equal(username)
@@ -56,8 +51,6 @@ describe('modifyUser', () => {
 
         return modifyUser(userId, data)
             .then(res => {
-                expect(res).to.be.undefined
-
                 return User.findById(userId)
             })
             .then(user => expect(user.password).to.equal(password))
@@ -92,19 +85,6 @@ describe('modifyUser', () => {
             }
 
             return User.create(user2)
-        })
-
-        it('should fail on updating username to a one that already exists', () => {
-            const username = user2.username
-
-            return modifyUser(userId, { username })
-                .then(() => { throw new Error('Should not reach this point') })
-                .catch(error => {
-                    expect(error).to.exist
-                    expect(error).to.be.instanceOf(ConflictError)
-                    expect(error.message).to.equal(`user with username ${username} already exists`)
-
-                })
         })
     })
 })

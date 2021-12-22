@@ -1,17 +1,20 @@
-const { validateQuery } = require( './helpers/validators' )
+const { validateQuery, sanitizer } = require( './helpers' )
 const { NotFoundError } = require( 'eb-errors' )
 const { mongoose: { models: { Item } } } = require( 'eb-data' )
 
-function retrieveItem( query ) {
+const retrieveItem = query => {
     validateQuery( query )
     const regex = new RegExp( query, 'i' )
 
-    return Item.find( { name: regex } ).lean()
-        .then( item => {
-            if ( !item ) throw new NotFoundError( 'Wrong Name' )
+    return ( async () => {
 
-            return item
-        } )
+        const item = await Item.find( { name: regex } ).lean()
+        if ( !item ) throw new NotFoundError( 'Wrong Name' )
+        item.forEach( sanitizer )
+
+        return item
+    } )()
 }
+
 
 module.exports = retrieveItem

@@ -1,17 +1,26 @@
-import signupUser from './signup'
-import signinUser from './signin'
-import retrieveUser from './retrieveUser'
-import unregisterUser from './unregisterUser'
-import updateUserPassword from './updateUserPassword'
-import retrieveChampions from './retrieveChampions'
-import retrieveChampion from './retrieveChampion'
+import signUp from './signup'
+import signIn from './signin'
+import retrieveUser from './retrieve-user'
+import unregisterUser from './unregister-user'
+import updateUserPassword from './update-user-password'
+import searchChampionsByName from './search-champions-by-name'
+import  searchChampionsById  from './search-champions-by-id'
+import context from './context'
+import retrieveBuild from './retrieve-build'
+import retrieveItem from './retrieve-item'
+import retrieveItems from './retrieve-items'
+
 
 export {
-    signinUser,
-    signupUser,
+    signIn,
+    signUp,
     retrieveUser,
     updateUserPassword,
     unregisterUser,
-    retrieveChampions,
-    retrieveChampion
+    searchChampionsByName,
+    searchChampionsById,
+    context,
+    retrieveBuild,
+    retrieveItem,
+    retrieveItems
 }

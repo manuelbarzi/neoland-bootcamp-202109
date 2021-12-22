@@ -7,148 +7,54 @@ import PostSignUp from './PostSignUp'
 import SignIn from './SignIn'
 import Modal from './Modal'
 import { signinUser, signupUser, retrieveUser } from '../logic/index'
-
-// import {searchVehicles} from '../logic/index'
-// import {retrieveVehicle} from '../logic/index'
-// import {unregisterUser} from '../logic/index'
-// import {updateUserPassword} from '../logic/index'
-
+import AppContext from './AppContext'
 
 function App() {
-    const [view, setView] = useState( sessionStorage.token ? '' : 'landing' )
-    const [name, setName] = useState( null )
+
+    const [view, setView] = useState( sessionStorage.token ? 'home' : 'landing' )
     const [modal, setModal] = useState( { state: null, message: null } )
     const openModal = ( message ) => {
-        setModal( { state: true, message } )
-    }
-    const closeModal = () => setModal({state: null})
-    useEffect( () => {
-
-        const { token } = sessionStorage
-
-        if ( token ) {
-            try {
-                retrieveUser( token, ( error, user ) => {
-                    if ( error ) {
-                        openModal( error.message )
-
-                        resetTokenAndGoToLanding()
-
-                        return
-                    }
-
-                    var name = user.name
-
-                    setView( 'home' )
-                    setName( name )
-                } )
-            } catch ( message ) {
-                openModal( message )
-                resetTokenAndGoToLanding()
-
-                return
+                setModal( { state: true, message } )
             }
-        }
-    }, [] )
 
     const resetTokenAndGoToLanding = () => {
         delete sessionStorage.token
 
         setView( 'landing' )
     }
-    const goToSignIn = () => setView( "signin" )
-    const goToSignUp = () => setView( "signup" )
 
-    const signUp = ( name, username, password ) => {
-        try {
-            signupUser( name, username, password, error => {
-                if ( error ) {
-                    openModal( error.message )
+    const goToSignIn = () => setView( 'signin' )
 
-                    return
-                }
+    const goToSignUp = () => setView( 'signup' )
 
-                setView( 'post-signup' )
+    const goToPostSignUp = () => setView( 'post-signup' )
 
-            } )
-        } catch ( error ) {
-            openModal( error.message )
-        }
-    }
+    const goToHome = () => setView( 'home' )
 
-    const signIn = ( username, password ) => {
-        try {
-            signinUser( username, password, ( error, token ) => {
-                if ( error ) {
-                    openModal( error.message )
-                    openModal( error.message )
-                    return
-                }
+    const closeModal = () => setModal( { state: null } )
 
-                sessionStorage.token = token
+    return <>
+        <AppContext.Provider value={{
+            onGoHome: goToHome,
+            onOpenModal: openModal
+        }}>
 
-                try {
-                    retrieveUser( token, ( error, user ) => {
-                        if ( error ) {
-                            openModal( error.message )
+            {view === 'landing' && <Landing
+                onSignIn={goToSignIn}
+                onSignUp={goToSignUp}
+            />}
 
+            {view === 'signup' && <SignUp onSignedUp={goToPostSignUp} onSignIn={goToSignIn} />}
 
+            {view === 'post-signup' && <PostSignUp onSignIn={goToSignIn} />}
 
-                            return
-                        }
+            {view === 'signin' && <SignIn onSignedIn={goToHome} onSignUp={goToSignUp} />}
 
-                        const { name } = user
+            {view === 'home' &&
+                <Home onSignOut={resetTokenAndGoToLanding} onAuthError={resetTokenAndGoToLanding} />}
 
-                        setView( 'home' )
-                        setName( name )
-
-                    } )
-                } catch ( error ) {
-                    openModal( error.message )
-
-
-                }
-            } )
-        } catch ( error ) {
-            openModal( error.message )
-
-        }
-    }
-
-    return (
-        <>
-            {view === "landing" && (
-                <Landing
-                    onSignIn={goToSignIn}
-                    onSignUp={goToSignUp}
-                />
-            )}
-
-            {view === "signin" && (
-                <SignIn onSignUp={goToSignUp} signIn={signIn} />
-            )}
-
-            {view === "signup" && (
-                <SignUp
-                    onSignIn={goToSignIn}
-                    onSignUp={signUp}
-                />
-            )}
-
-            {view === "post-signup" && (
-                <PostSignUp onSignIn={goToSignIn} />
-            )}
-
-            {view === "home" && (
-                <Home name={name}
-                    toLanding={resetTokenAndGoToLanding} 
-                    openModal={openModal}
-                    />
-            )}
-            {modal.state === true && <Modal message={modal.message} onCloseModal={closeModal} />}
-
-        </>
-    )
+        </AppContext.Provider>
+    </>
 }
 
-export default App;
+export default App

@@ -1,18 +1,43 @@
-function Detail( { item, goSearch, onToggleFav, onAddToCart } ) {
-    return <>
+import { useQueryParams } from '../hooks'
+import { retrieveBuild, searchChampionsById } from "../logic"
+import { useEffect, useState } from 'react'
+import Build from './Build'
+
+function Detail( { onBack } ) {
+
+    const [champion, setChampion] = useState( {} )
+    const [builds, setBuilds] = useState( [] )
+
+    const queryParams = useQueryParams()
+    const championId = queryParams.get( 'id' )
+
+    useEffect( () => {
+        ( async () => {
+
+            const champion = await searchChampionsById( sessionStorage.token, championId )
+            setChampion( champion )
+            const builds = await retrieveBuild( sessionStorage.token, championId )
+
+            setBuilds( builds )
+        } )()
+
+    }, [] )
+
+    return champion && champion.id && builds ? <>
         <div className="container container--gapped">
-            <button className="button" onClick={goSearch}>Go back</button>
-            <button className="button button--dark" type="button"onClick={() => onAddToCart(item.id)}>Add to cart</button>
-            <button className="button" type="button" onClick={()=>onToggleFav (item.id)}>{item.isFav? '❤️' : '🤍'}</button>
+            <button className="button" onClick={onBack}>Go back</button>
         </div>
-        <div className="container container--vertical" >
-            <h1>{item.name}</h1>
-            <img src={item.image} />
-            <time>{item.year}</time>
-            <p>{item.description}</p>
-            <span>{item.price} $</span>
+        <div className='champion--container'>
+            <div className="container champion--detail container--vertical" >
+                <img className="results__image" src={`/images/champions/${champion.name.replace( /\'/g, '' ).replace( /\s+/, '' )}.png`} />
+                <h1 className='content'>{champion.name}</h1>
+                <p className='content'>{champion.title}</p>
+                {
+                    builds.map( build => <Build build={build} key={build.id} /> )
+                }
+            </div>
         </div>
-    </>
+    </> : null
 
 }
 

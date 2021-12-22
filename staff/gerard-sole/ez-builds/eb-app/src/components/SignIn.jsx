@@ -1,13 +1,24 @@
-function SignIn( props ) {
+import { signIn } from '../logic'
+import { useContext } from 'react'
+import AppContext from './AppContext'
+
+function SignIn({ onSignUp }) {
+
+    const { onGoHome, onOpenModal } = useContext(AppContext)
+
     return <div className="screen">
-        <form className="signin container container--vertical container--gapped" onSubmit={event => {
+        <form className="signin container container--vertical container--gapped" onSubmit={async (event) => {
             event.preventDefault()
+            
+            const { target: { username: { value: username },  password: { value: password },} } = event
 
-            const username = event.target.username.value
-            const password = event.target.password.value
-
-            props.signIn( username, password )
-
+            try {
+                await signIn( username, password)
+      
+                onGoHome()
+            } catch ( { message } ) {
+                onOpenModal(message)
+            }
         }} >
             <h1 className="container--title">EZ BUILDS</h1>
 
@@ -15,7 +26,7 @@ function SignIn( props ) {
             <input className="field" type="password" name="password" id="password" placeholder="password" />
 
             <div className="container container--gapped">
-                <button className="button button--medium" onClick={() => props.onSignUp()}>Sign up</button>
+                <button className="button button--medium" onClick={() => onSignUp()}>Sign up</button>
                 <button className="button button--medium button--dark">Sign in</button>
             </div>
         </form>

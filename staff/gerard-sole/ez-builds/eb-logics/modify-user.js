@@ -1,36 +1,43 @@
-const { mongoose, models: { User } } = require('eb-data')
-const { validateId, validateData } = require('./helpers/validators')
-const { NotFoundError, ConflictError, CredentialsError } = require('eb-errors')
+const { mongoose, models: { User } } = require( 'eb-data' )
+const { validateId, validateData } = require( './helpers/validators' )
+const { NotFoundError, ConflictError, CredentialsError } = require( 'eb-errors' )
+const { sanitizer } = require( './helpers' )
 
-function modifyUser(id, data,) {
-    validateId(id)
-    validateData(data)
+const modifyUser = ( id, data ) => {
 
-    return User.findById(id)
-        .then(user => {
-            if (!user) throw new NotFoundError(`user with id ${id} not found`)
+    validateId( id )
+    validateData( data )
 
+    return ( async () => {
+
+        try {
+
+            const user = await User.findById( id )
+            if ( !user ) throw new NotFoundError( `user with id ${id} not found` )
             const { password, oldPassword } = data
 
-            if (password) {
-                if (oldPassword !== user.password)
-                    throw new CredentialsError('wrong password')
-                else
-                    delete data.oldPassword
-            }
+            if ( password && oldPassword !== user.password )
 
-            for (const property in data)
+                throw new CredentialsError( 'wrong password' )
+
+            else delete data.oldPassword
+
+            for ( const property in data )
                 user[property] = data[property]
 
-            return user.save()
-                .catch(error => {
-                    if (error.code === 11000)
-                        throw new ConflictError(`user with username ${data.username} already exists`)
+            const newUser = await user.save()
+            sanitizer( newUser )
 
-                    throw error
-                })
-                .then(() => {})
-        })
+            return newUser
+        }
+
+        catch ( error ) {
+
+            throw error
+        }
+
+    } )()
+
 }
 
 module.exports = modifyUser

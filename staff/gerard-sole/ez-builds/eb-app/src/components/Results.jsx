@@ -1,15 +1,54 @@
-function Results({items, onItem, onToggleFav}) {
-   return items.length ? 
-    <> {items.map(item => <div className="container container--vertical" onClick = {() => onItem (item.id)}>
-        <h1>{item.name}</h1>
-        <button className="button button--dark" onClick= {event => {
-        event.stopPropagation()
-        onToggleFav(item.id)}}>{item.isFav? '❤️' : '🤍'}</button>
-        <img src={item.thumbnail || item.image} />
-        <span>{item.price} $</span>
+import { useQueryParams } from '../hooks'
+import { useState, useEffect, useContext, Fragment } from 'react'
+import { searchChampionsByName } from '../logic'
+import AppContext from './AppContext'
+import { useNavigate } from 'react-router-dom'
 
-    </div>)}
-    </>
-    : null
+
+function Results() {
+
+    const { openModal } = useContext( AppContext )
+
+    const [champions, setChampions] = useState()
+
+    const navigate = useNavigate()
+
+    const queryParams = useQueryParams()
+
+    const query = queryParams.get( 'name' )
+
+    const onItem = id => navigate(`/champion/?id=${ id }`)
+
+    useEffect( async () => {
+        try {
+
+            const champions = await searchChampionsByName( sessionStorage.token, query )
+
+            setChampions( champions )
+        } catch ( { message } ) {
+
+            openModal(message)
+        }
+    }, [query] )
+    
+    return champions && champions.length ?
+        <ul className="results container container--vertical">
+            {
+                champions.map( ( { id, name, title } ) =>
+                    <li key={id} className="home__result" onClick={() => onItem( id )}>
+                        <div className='result'>
+                            <img className="results__image" src={`/images/champions/${name.replace( /\'/g, '' ).replace( /\s+/, '' ).replace( /\./g, '' )}.png`} />
+                            <h1>{name}</h1>
+                            <h2>{title}</h2>
+                        </div>
+                    </li>
+                )
+            }
+        </ul>
+        :
+        <div className='notfound'>
+        <h1 className='container--title'>No champion found</h1>
+        </div>
 }
+
 export default Results

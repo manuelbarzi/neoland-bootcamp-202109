@@ -1,18 +1,27 @@
-const { validateQuery } = require( './helpers/validators' )
+const { validateQuery, sanitizer } = require( './helpers' )
 const { NotFoundError } = require( 'eb-errors' )
 const { mongoose: { models: { Champion } } } = require( 'eb-data' )
 
-function retrieveChampion( query ) {
-   
-    var regex = new RegExp(`\\b${query}`, 'gi') 
+const retrieveChampion = query => {
+
+    var regex = new RegExp( `\\b${query}`, 'gi' )
     validateQuery( query )
 
-    return Champion.find( { name: regex } )
-        .then( Champions => {
-            if ( !Champions ) throw new NotFoundError( 'champions not found' )
+    return ( async () => {
+        try {
+            const champions = await Champion.find( { name: regex } ).lean()
 
-            return Champions
-        } )
+            if ( !champions ) throw new NotFoundError( 'champions not found' )
+
+            champions.forEach( sanitizer )
+            
+            return champions
+
+        }
+        catch ( error ) {
+            throw error
+        }
+    } )()
 }
 
 module.exports = retrieveChampion

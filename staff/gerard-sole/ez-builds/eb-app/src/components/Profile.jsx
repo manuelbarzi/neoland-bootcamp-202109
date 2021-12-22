@@ -1,35 +1,84 @@
-import React from "react"
-import ButtonsProfile from "./ButtonsProfile"
-import Password from "./Password"
-import Unregister from "./Unregister"
-import { useState, useEffect } from 'react'
+import { useState, useContext } from 'react'
+import Unregister from './Unregister'
+import { updateUserPassword, unregisterUser } from '../logic'
+import AppContext from './AppContext'
 
-function Profile( { goSearch, onChangePassword, onDeleteAccount } ) {
+function Profile({ onBack, onSignOut }) {
 
-    const [view, setView] = useState( 'profile' )
-   
+    const { openModal } = useContext(AppContext)
+
+    const [view, setView] = useState('update-password')
+
+    const goToUnregister = () => setView('unregister')
+
+    const goToUpdatePassword = () => setView('update-password')
+
+    const updatePassword = (oldPassword, password) => {
+
+        try {
+            updateUserPassword(sessionStorage.token, oldPassword, password, error => {
+                if (error) {
+
+                    openModal(error.message)
+
+                    return
+                }
+
+
+                openModal('Password updated')
+            })
+        } catch ({ message }) {
+
+        }
+    }
+
+    const unregister = password => {
+
+        try {
+            unregisterUser(sessionStorage.token, password, error => {
+                if (error) {
+
+                    openModal(error.message)
+
+                    return
+                }
+
+
+
+                openModal('User unregistered', 'success')
+
+                onSignOut()
+            })
+        } catch ({ message }) {
+
+            openModal(message, 'warn')
+        }
+    }
+
     return <>
-        <div className="container container--vertical">
-            <h2>Your Profile</h2>
-            <button className="button" onClick={() => goSearch()}>Back home</button>
-        </div>
-        {view === 'profile' && <ButtonsProfile
-            goPassword={() => setView( 'password' )}
-            goDeleteUser={() => setView( 'delete' )}
-        ></ButtonsProfile>}
+        {view === 'update-password' && <div className="profile container container--vertical">
+            <button className="button" onClick={onBack}>Go back</button>
 
-        {view === 'password' && <Password
-            onChangePassword={onChangePassword}
-            backProfile={() => setView( 'profile' )}
-        />}
+            <form className="container container--vertical" onSubmit={event => {
+                event.preventDefault()
 
+                const { target: { oldPassword: { value: oldPassword }, password: { value: password } } } = event
 
-        {view === 'delete' && <Unregister
-            onDeleteAccount={onDeleteAccount}
-            backProfile={() => setView( 'profile' )}
-        />}
+                updatePassword(oldPassword, password)
+            }}>
+                <input className="field" type="password" name="oldPassword" id="oldPassword" placeholder="old password" />
+                <input className="field" type="password" name="password" id="password" placeholder="new password" />
+
+                <div className="container">
+                    <button className="button button--medium button--dark">Update</button>
+                </div>
+            </form>
+
+            <button className="button button--medium" onClick={goToUnregister}>Unregister</button>
+        </div>}
+
+        {view === 'unregister' && <Unregister onBack={goToUpdatePassword} onUnregister={unregister} />}
     </>
-
 }
 
 export default Profile

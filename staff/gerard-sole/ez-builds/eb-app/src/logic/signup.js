@@ -1,54 +1,41 @@
-/**
- * Signs up a user in the application.
- * 
- * @param {string} name The full name of the user to be registered.
- * @param {string} username The username of the user to be registered.
- * @param {string} password The password of the user to be registered.
- * @param {function} callback The callback function to manage the response.
- * 
- * @throws {TypeError} When any of the arguments does not match the correct type.
- * @throws {Error} When any of the arguments does not contain the correct format.
- */
- function signupUser(name, username, password, callback) {
-    if (typeof name !== 'string')  throw new TypeError(name + ' is not a string')
+import context from "./context"
+
+function signUp(name, username, password) {
+
+    if (typeof name !== 'string') throw new TypeError(name + ' is not a string')
     if (!name.trim().length) throw new Error('name is empty or blank')
     if (name.trim() !== name) throw new Error('blank spaces around name')
 
-    if (typeof username !== 'string')  throw new TypeError(username + ' is not a string')
+    if (typeof username !== 'string') throw new TypeError(username + ' is not a string')
     if (!username.trim().length) throw new Error('username is empty or blank')
     if (/\r?\n|\r|\t| /g.test(username)) throw new Error('username has blank spaces')
     if (username.length < 4) throw new Error('username has less than 4 characters')
 
-    if (typeof password !== 'string')  throw new TypeError(password + ' is not a string')
+    if (typeof password !== 'string') throw new TypeError(`${password} is not a string`)
     if (!password.trim().length) throw new Error('password is empty or blank')
     if (/\r?\n|\r|\t| /g.test(password)) throw new Error('password has blank spaces')
     if (password.length < 6) throw new Error('password has less than 6 characters')
 
-    if (typeof callback !== 'function') throw new TypeError(callback + ' is not a function')
+    return (async () => {
+        const res = await fetch(`${context.API_URL}/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, username, password })
+        })
 
-    var xhr = new XMLHttpRequest
+        const { status } = res
 
-    xhr.onload = function () {
-        var status = xhr.status
+        if (status === 201)
+            return
+        else if (status === 409 || status === 400) {
+            const { error } = await res.json()
 
-        if (status === 409 || status === 400) {
-            var response = JSON.parse(xhr.responseText)
+            throw new Error(error)
 
-            var message = response.error
-
-            callback(new Error(message))
-        } else if (status === 201) {
-            callback(null)
-        }
-    }
-
-    xhr.open('POST', 'http://localhost:8000/api/users')
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    var body = { name: name, username: username, password: password }
-
-    xhr.send(JSON.stringify(body))
+        } else throw new Error('unknown error')
+    })()
 }
 
-export default signupUser
+export default signUp

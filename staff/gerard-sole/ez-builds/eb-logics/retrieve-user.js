@@ -1,24 +1,29 @@
-const { validateId } = require('./helpers/validators')
-const { NotFoundError } = require('eb-errors')
-const { mongoose: { ObjectId }, models: { User } } = require('eb-data')
+const { validateId } = require( './helpers/validators' )
+const { NotFoundError } = require( 'eb-errors' )
+const { mongoose: { ObjectId }, models: { User } } = require( 'eb-data' )
+const { sanitizer } = require( './helpers' )
 
-function retrieveUser(id) {
-    validateId(id)
+const retrieveUser = id => {
+    validateId( id )
 
-    return User.findById(id)
-        .then(user => {
-            if (!user) throw new NotFoundError('Wrong ID')
+    return ( async () => {
 
-            user.id = user._id.toString()
+        try {
 
-            delete user._id
 
-            delete user.password
+            const user = await User.findById( id )
 
-            delete user.__v
+            if ( !user ) throw new NotFoundError( 'Wrong ID' )
 
+            sanitizer( user )
             return user
-        })
+
+        }
+        catch ( error ) {
+            throw error
+        }
+    } )
+
 }
 
 module.exports = retrieveUser

@@ -7,7 +7,6 @@ module.exports = ( req, res ) => {
     const { headers: { authorization }, body: data } = req
 
     try {
-        debugger
         const payload = validateAuthorizationAndExtractPayload( authorization )
         const { sub: id} = payload
         modifyUser( id, data )

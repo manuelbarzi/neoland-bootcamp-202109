@@ -1,102 +1,52 @@
 import React, { useState } from "react"
 import Search from "./Search"
-import { retrieveChampions, retrieveChampion, unregisterUser, updateUserPassword} from '../logic/index'
+import { searchChampions, unregisterUser, updateUserPassword } from '../logic/index'
 import Results from "./Results"
 import Detail from "./Detail"
+import { useQueryParams } from '../hooks'
 import Profile from "./Profile"
+import { Routes, Route, useNavigate, useLocation, Link } from 'react-router-dom'
 
-function Home( { name, toLanding, openModal } ) {
+function Home( { onSignOut } ) {
+
 
     const [view, setView] = useState( "search" )
-    const [champions, setChampions] = useState( [] )
-    const [champion, setChampion] = useState( null )
+    const queryParams = useQueryParams()
+    const navigate = useNavigate()
+    const goToSearch = () => search( query )
+    const [query, setQuery] = useState( queryParams.get( 'name' ) )
 
-    const goToItem = champion => {
 
-        try {
-            retrieveChampion( sessionStorage.token, champion, ( error, champion ) => {
-                if ( error ) { alert( error.message ) }
-                else {
-                    setChampion( champion );
-                    setView( "search" )
-                }
-            } )
-        } catch ( error ) {
-            alert( error.message )
-        }
-    }
-    
-    const changePassword = ( oldPassword, password ) => {
-        try {
-            updateUserPassword( sessionStorage.token, oldPassword, password, ( error ) => {
-                if ( error ) openModal( error.message )
-                else setView( "search" )
-            } )
-        } catch ( error ) {
-            openModal( error.message )
-        }
+    const search = query => {
+        setQuery( query )
+
+        navigate( `/search/?name=${query}` )
     }
 
-    
-    const deleteAccount = ( password ) => {
-        try {
-            unregisterUser( sessionStorage.token, password, ( error ) => {
-                if ( error ) openModal( error.message )
-                else { toLanding() }
-            } )
-        } catch ( error ) {
-            openModal( error.message )
-        }
-    }
+    const goToProfile = () => navigate( '/profile' )
 
-    const search = ( query ) => {
-        setChampions( [] )
+    const location = useLocation()
 
-        try {
-            retrieveChampions( sessionStorage.token, query, ( error, champions ) => {
-                if ( error ) openModal( error.message )
-                else setChampion( champions )
-            } )
 
-        } catch ( error ) {
-            openModal( error.message )
-        }
+    return <div className="container container--gapped container--vertical">
+            <div className="container ">
+                <button className={`button button-medium ${location.pathname === '/profile' && 'button--dark'}`} onClick={goToProfile}>Profile</button>
+                <button className="button button-medium button" onClick={onSignOut}>Sign out</button>
+            </div>
 
-    }
-    
-    return <div className="home container container--gapped container--vertical">
-        <nav className="nav-bar">
-            <h1 className="nav--title">EZ BULDS</h1>
-            <button className="button button--dark" onClick={() => setView( 'profile' )}>Profile</button>
-            <button className="button button" onClick={() => toLanding()}>Sign out</button>
-            </nav>
-        <div className="container">
-            
+            <Routes>
+                <Route path="/" element={<Search onSearch={search} query={query} />}>
+                    <Route path="search" element={
+                        <Results />
+                    } />
+                    <Route path="champion" element={
+                        <Detail onBack={goToSearch} />
+                    } />
+                </Route>
+
+                <Route path="/profile" element={<Profile onBack={goToSearch} onSignOut={onSignOut} />} />
+            </Routes>
         </div>
-
-        {view === 'search' && <><Search 
-        onSearch={search}
-        ></Search>
-
-
-            {!champion && <Results
-                items={champions}
-                onItem={goToItem}
-            ></Results>}
-
-            {champion && <Detail 
-            item={champion}             
-            goSearch={() => { setChampion( null ); setChampions( [] ) }}
-            ></Detail>}
-        </>}
-
-        {view === 'profile' && <Profile
-            goSearch={() => { setChampion( null ); setView( "search" ); setChampions( [] ) }}
-            onChangePassword={changePassword}
-            onDeleteAccount={deleteAccount}
-            ></Profile>}
-    </div>
-
 }
 
 export default Home

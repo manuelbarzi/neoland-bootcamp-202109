@@ -2,20 +2,27 @@ const { mongoose, models: { User } } = require('eb-data')
 const { validateId, validatePassword } = require('./helpers/validators')
 const { NotFoundError, CredentialsError } = require('eb-errors')
 
-function unregisterUser(id, password, callback) {
+const unregisterUser = (id, password, callback) => {
     validateId(id)
     validatePassword(password)
-
-    return User.findById(id)
-        .then(user => {
-            if (!user) throw new NotFoundError(`user with id ${id} not found`)
-            
+    return (async () => {
+       
+        try {
+        
+        const user = await User.findById(id)
+         if (!user ) throw new NotFoundError(`user with id ${id} not found`)
             if (user.password === password) {
-                return user.remove(id)
-                    .then(() => 'User deleted successfully')
-            } else throw new CredentialsError('Wrong password')
-        })
-
+                user.remove(id)
+ 
+            }
+            else throw new CredentialsError('Wrong password')
+            return 'user dleleted succesfuly'
+        
+    }
+    catch ( error ) {
+        throw error
+    }
+    }) 
 }
 
 module.exports = unregisterUser

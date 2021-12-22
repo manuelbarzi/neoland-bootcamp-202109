@@ -9,4 +9,5 @@ module.exports = {
     createBuild: require('./create-build'),
     deleteBuild: require('./delete-build'),
     retrieveBuilds: require('./retrieve-builds'),
+    retrieveItems: require('./retrieve-items')
 }
