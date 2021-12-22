@@ -10,21 +10,22 @@ The first function of my application allows to communicate between registered us
 
 ### Use cases
 
-![use cases](./images/Diagrama de caso de uso.jpeg)
+![Diagrama de caso de uso](https://user-images.githubusercontent.com/91251587/147166998-ebfe3fc8-39bf-49f8-8900-02cdcf411099.jpeg)
 
 ### Activities
 
 #### Register and Login
 
-![register and login](./images/Registrar Usuario.jpg)
+![Registrar Usuario](https://user-images.githubusercontent.com/91251587/147166979-00515bca-8484-43db-9364-b7d445523d65.png)
 
 #### Send Message
 
-![modify user](./images/Enviar Mensaje a Cliente.jpg)
+![Enviar Mensaje a Cliente](https://user-images.githubusercontent.com/91251587/147166984-0699b7f3-c847-4638-b233-ae83148295bb.png)
 
 #### Assign diet to a customer
 
-![delete user](./images/Añadir Dieta a Cliente.jpg)
+![Añadir Dieta a Cliente](https://user-images.githubusercontent.com/91251587/147166991-6b5cdf34-8f60-48b9-ba89-edfe7f82a9af.png)
+
 
 ## Techinal description
 
@@ -50,7 +51,8 @@ The first function of my application allows to communicate between registered us
 
 ![modify sequence](./images/modify-user-sequence.jpg)
 
-#### Unregister user
+#### Unregister user!
+
 
 ![unregister sequence](./images/unregister-user-sequence.jpg)
 
