@@ -1,8 +1,8 @@
 import context from './context'
 
-function sendMessage(token, to, subject, body){ 
+function sendMessage(token, parentId, to, subject, body){ 
     const newDate = new Date()
-    
+    debugger
     return( async () => {
         const res = await fetch(`${context.API_URL}/messages`,{
             method: 'POST',
@@ -10,7 +10,7 @@ function sendMessage(token, to, subject, body){
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({to, subject, body, newDate })
+            body: JSON.stringify({parentId, to, subject, body, newDate })
         })
 
         const {status} = res

@@ -3,11 +3,12 @@ module.exports = {
     authenticateUser: require('./authenticate-user'),
     retrieveUsers: require('./retrieve-users'),
     retrieveUser: require('./retrieve-user'),
-    findUserById: require('./find-user'),
+    retrieveUserById: require('./retrieve-user-by-id'),
     modifyUser: require('./modify-user'),
     unregisterUser: require('./unregister-user'),
     sendMessage: require('./send-message'),
     retrieveMessages: require('./retrieve-messages'),
-    retrieveMessageById: require('./retrieve-message-by-id'),
+    retrieveMessage: require('./retrieve-message'),
+    retrieveMessagesChain: require('./retrieve-messages-chain'),
     setMessageToRead: require('./set-message-to-read')
 }

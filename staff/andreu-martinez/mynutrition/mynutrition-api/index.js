@@ -9,16 +9,17 @@ const {
     authenticateUser,
     retrieveUsers,
     retrieveUser,
-    findUserById,
+    retrieveUserById,
     unregisterUser,
     modifyUser,
     sendMessage,
     retrieveMessages,
-    retrieveMessageById,
+    retrieveMessage,
+    retrieveMessagesChain,
+    retrieveMessageToRead
 } = require('./handlers')
 
 const logger = require('./utils/my-logger')
-
 
 const { env: { PORT, MONGO_URL }, argv: [, , port = PORT || 8080] } = process
 
@@ -43,11 +44,11 @@ logger.info('starting server');
 
         api.get('/users', retrieveUsers)
 
+        api.get('/userbyid', jsonBodyParser, retrieveUserById)
+
         api.get('/user', retrieveUser)
 
         api.delete('/user', unregisterUser)
-
-        api.get('/finduser', findUserById)
 
         api.patch('/users', jsonBodyParser, modifyUser)
 
@@ -55,7 +56,11 @@ logger.info('starting server');
 
         api.get('/messages', jsonBodyParser, retrieveMessages)
 
-        api.get('/messagebyid', jsonBodyParser, retrieveMessageById)
+        api.get('/messages/:id', jsonBodyParser, retrieveMessage)
+
+        api.get('/messages/:id/chain', jsonBodyParser, retrieveMessagesChain)
+
+        api.patch('/messages/', jsonBodyParser, retrieveMessageToRead) 
 
         api.all('*', (req, res) => {
             res.status(404).json({ error: 'sorry, this endpoint isn\'t available' })

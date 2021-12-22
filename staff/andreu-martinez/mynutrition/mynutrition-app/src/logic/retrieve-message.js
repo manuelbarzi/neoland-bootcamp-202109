@@ -1,12 +1,12 @@
 import context from './context'
 
-const retrieveMessageById = (token, id) => {
+const retrieveMessage = (token, id) => {
     if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
 
     return (async () => {
         const res = await fetch(
-            `${context.API_URL}/messagebyid/?q=${id}`,
+            `${context.API_URL}/messages/${id}`,
             {
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -32,4 +32,4 @@ const retrieveMessageById = (token, id) => {
     })()
 }
 
-export default retrieveMessageById
+export default retrieveMessage

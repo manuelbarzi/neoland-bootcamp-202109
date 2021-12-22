@@ -1,15 +1,15 @@
-const { retrieveMessageById } = require('mynutrition-logic')
+const { retrieveMessage } = require('mynutrition-logic')
 const { handleError, validateAuthorizationAndExtractPayload } = require('./helpers')
 
 module.exports = async (req, res) => {
 
-    const { headers: { authorization }, query: { q }  } = req
+    const { headers: { authorization }, params: { id: messageId }  } = req
 
     try {
 
         const { sub: id } = validateAuthorizationAndExtractPayload(authorization)
 
-        const messageList = await retrieveMessageById(q)
+        const messageList = await retrieveMessage(messageId)
         res.json(messageList)
             
     } catch (error) {

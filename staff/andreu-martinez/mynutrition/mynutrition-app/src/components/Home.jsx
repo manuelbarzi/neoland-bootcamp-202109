@@ -5,7 +5,7 @@ import Profile from './Profile'
 import Inbox from './Inbox'
 import HomeLanding from './HomeLanding'
 import { Routes, Route, useNavigate } from 'react-router-dom'
-import { retrieveUser, retrieveMessages, retrieveUsers, sendMessage, retrieveMessageById } from '../logic'
+import { retrieveUser, retrieveMessages} from '../logic'
 import AppContext from './AppContext'
 
 
@@ -28,7 +28,10 @@ function Home({ onSignOut, onAuthError }) {
     const navigate = useNavigate()
     const goToHome = () => navigate('/home')
     const goToProfile = () => navigate('/profile')
-    const goToMessages = () => navigate('/inbox')
+    const goToMessages = () => {
+        navigate('/inbox')
+    
+    }
 
     useEffect(async () => {
         logger.debug('Home -> useEffect (componentDidMount)')
@@ -57,22 +60,6 @@ function Home({ onSignOut, onAuthError }) {
         }
     }, [])
 
-    
-
-    // const getMessageById = async (id) =>{
-    //     try{
-    //         onFlowStart()
-    //         const openedMessage = await retrieveMessageById(sessionStorage.token, id)
-    //         onFlowEnd()
-
-    //         return openedMessage
-    //     }catch({message}){
-    //         onFlowEnd()
-    
-    //         onFeedback(message, 'warn')
-    //     }
-    // }
-
     function HomeIcon(props) {
         return (
             <SvgIcon {...props}>
@@ -92,7 +79,7 @@ function Home({ onSignOut, onAuthError }) {
                 </div>
                 <div className="header--menu">
                     <div className="header--menu__items">          
-                        <HomeIcon color="primary" onClick={goToHome}/>
+                        <HomeIcon color="primary" onClick={goToHome} />
                     </div>
                     <div className="header--menu__items">
                         <Badge badgeContent={messageCount} color="primary">

@@ -8,7 +8,8 @@ function MyListedMessages({ messages, users, goToMessageToRead}) {
 
     return messages && messages.length ? <>
 
-        {messages.slice(0).reverse().map(({ id, from, subject, body, sentDate, read }) =>
+    {
+        messages.slice(0).reverse().map(({ id, from, subject, body, sentDate, read }) =>
 
             <div className="messages__container">
                 <div>
@@ -29,8 +30,7 @@ function MyListedMessages({ messages, users, goToMessageToRead}) {
                     </div>
                     <div></div>
                     <div className="messages messages__item4">
-                        {sentDate.split("T")[0].split('-').reverse().join('-')}
-
+                        {sentDate.split("T")[0].split('-').reverse().join('-')} / {sentDate.split("T")[1].split(".")[0].replace(/:[^:]*$/,'')}
                     </div>
                 </div>
             </div>

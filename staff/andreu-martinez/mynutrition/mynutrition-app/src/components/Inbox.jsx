@@ -5,7 +5,7 @@ import { useState, useContext, useEffect } from 'react'
 import NewMessage from './NewMessage'
 import OpenMessage from './OpenMessage'
 import MyListedMessages from './MyListedMessages'
-import { retrieveMessages, retrieveMessageById, retrieveUsers } from '../logic'
+import { retrieveMessages, retrieveMessage, retrieveUsers } from '../logic'
 
 ////MUI
 import Button from '@mui/material/Button'
@@ -20,11 +20,11 @@ function Inbox() {
 
     const [view, setView] = useState('my-inbox')
     const goToNewMessage = () => setView('new-message')
-    // const goToReadMessage = () => setView('open-message')
-    const goToInbox = () => setView('my-inbox')
+    // const goToMessageToRead = () => setView('open-message')
+    
     const [messages, setMessages] = useState()
     const [users, setUsers] = useState()
-    const [messageToRead, setMessageToRead] = useState()
+    const [messageToRead, setMessageToRead] = useState([])
 
     useEffect(async () => {
         logger.debug('Results -> useEffect (componentDidMount)')
@@ -48,11 +48,32 @@ function Inbox() {
     }, [])
 
     
+    const goToInbox = async() => {
+        try {
+            onFlowStart()
+
+            const res = await retrieveMessages(sessionStorage.token)
+            const res2 = await retrieveUsers(sessionStorage.token)
+
+            setUsers(res2)
+            setMessages(res)
+
+            onFlowEnd()
+
+        } catch ({ message }) {
+            onFlowEnd()
+
+            onFeedback(message, 'warn')
+        }
+        setView('my-inbox')
+    } 
+
 
     const goToMessageToRead = async (id)=>{
 debugger
         try{
-            const messageToRead = await retrieveMessageById(sessionStorage.token, id)
+
+            const messageToRead = await retrieveMessage(sessionStorage.token, id)
             setMessageToRead(messageToRead)
 
             setView('open-message')
@@ -85,7 +106,7 @@ debugger
         }
 
         {view === 'open-message' &&
-            <OpenMessage messageToRead={messageToRead} />
+            <OpenMessage messageToRead={messageToRead} users={users}/>
         }
     </>
 

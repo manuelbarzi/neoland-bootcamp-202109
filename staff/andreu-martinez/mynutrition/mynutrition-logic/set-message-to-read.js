@@ -1,21 +1,27 @@
-const { ConflictError } = require('mynutrition-errors')
+const { models: { Message }, mongoose: { Types: { ObjectId } } } = require('mynutrition-data')
+const { NotFoundError } = require('mynutrition-errors')
 
-const { models: { Message } } = require('mynutrition-data')
 
-function setMessageToRead(read){
+async function setMessageToRead(myId, data) {
+    // TODO validate args
+    const {id, read} = data
+    var myquery = { _id: ObjectId(id) }
+    var newvalues = { $set: {read: read} }
 
-    return (async () => {
-        try{
+    await Message.updateOne(myquery, newvalues)
 
-            const user = await Message.create({parent, from, to, subject: subject, body: body, sentDate, read})
+    // if(message.to === id)
+    //     await Message.updateOne( {message}, {read: read} )
+    
+    // if(message.to === id)
+    // {
+    //     await Message.updateOne( {message}, {read: read} )
 
-            return user.id // return string with hash id
-            
-        } catch(error){
-            throw error
-        }
-    })()
- 
+
+    //     messagesChain.forEach(sanitizeMessage)
+    //     debugger
+    //     return messagesChain
+    // }
 }
 
 module.exports = setMessageToRead

@@ -2,6 +2,7 @@ const { models: { User } } = require('mynutrition-data')
 const { validateId } = require('./helpers/validators')
 const { NotFoundError } = require('mynutrition-errors')
 const { sanitizeDocument } = require('./helpers/sanitizers')
+
 async function retrieveUser(id) {
     
     validateId(id)
