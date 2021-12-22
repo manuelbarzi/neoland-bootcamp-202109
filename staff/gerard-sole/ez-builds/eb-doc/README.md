@@ -4,7 +4,7 @@
 
 ## App description
 
-In this app new league of legends player have the opportunity to see builds designed for each champion specifically.
+This is an app made to new league of legends players who want to know which objects they should buy with any champion. The user have acces to a build for each champion 
 
 ### User flow
 
@@ -14,6 +14,13 @@ In this app new league of legends player have the opportunity to see builds desi
 
 ![code coverage](./images/codeCoverage.png)
 
+### TODO 
+
+- Add create build
+- Add fav builds
+- Add fav champions
+- Testing of every function
+- Improve styles  
 
 ### Techonoliges
 
@@ -24,3 +31,4 @@ In this app new league of legends player have the opportunity to see builds desi
 - Mongo
 - Mongoose
 - Mocha/Chai
+
