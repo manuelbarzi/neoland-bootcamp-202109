@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react'
 import { searchItems } from '../logic'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
-// import './Results.css'
+import './Results.css'
 
 function Results({ onItem, onToggle }) {
     logger.debug('Results -> render')

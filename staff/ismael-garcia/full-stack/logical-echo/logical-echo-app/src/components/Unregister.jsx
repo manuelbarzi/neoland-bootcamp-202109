@@ -14,12 +14,12 @@ function Unregister({ onUnregister, onBack }) {
             <input className="field" type="password" name="password" id="unregister-password" placeholder="Password" />
 
             <div className="container">
-                <button type="submit" className="button button--medium">Unregister</button>
-                <button type="button" className="button button--medium button--dark" onClick={(event) => {
+                <button type="button" className="button button--medium" onClick={(event) => {
                     event.preventDefault()
                     
                     onBack()
                 }}>Go Back</button>
+                <button type="submit" className="button button--medium button--dark">Unregister</button>
             </div>
         </form>
     </div>

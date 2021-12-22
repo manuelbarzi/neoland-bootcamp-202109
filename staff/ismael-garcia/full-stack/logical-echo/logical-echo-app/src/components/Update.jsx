@@ -13,16 +13,16 @@ function Update({ onUpdate, onBack }) {
         onUpdate(data)
     }}>
         <input className="field" type="email" name="newEmail" id="register-email" placeholder="New Email" />
-        <input className="field" type="password" name="password" id="register-password" placeholder="Password" required />
         <input className="field" type="password" name="newPassword" id="register-newPassword" placeholder="New Password" />
+        <input className="field" type="password" name="password" id="register-password" placeholder="Password" required />
 
         <div className="container">
-            <button type="submit" className="button button--medium">Update</button>
-            <button type="button" className="button button--medium button--dark" onClick={(event) => {
+            <button type="button" className="button button--medium" onClick={(event) => {
                 event.preventDefault()
                 
                 onBack()
             }}>Go Back</button>
+            <button type="submit" className="button button--medium button--dark">Update</button>
         </div>
     </form>
 }

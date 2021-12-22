@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import logger from '../utils/logger'
-import Logo from './Logo'
+// import Logo from './Logo'
 import Home from './Home'
 import Spinner from './Spinner'
 import Modal from './Modal'
 import AppContext from './AppContext'
-import image from '../assets/logical-echo-logo.png'
+// import image from '../assets/logical-echo-logo.png'
 
 
 function App() {
@@ -34,7 +34,6 @@ function App() {
             onFlowEnd: hideSpinner,
             onModal: showModal
         }}>
-            <Logo image={image} text='Logical Echo' />
 
             <Home />
 

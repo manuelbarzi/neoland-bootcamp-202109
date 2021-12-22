@@ -1,4 +1,5 @@
 import logger from '../utils/logger'
+// import './Search.css';
 
 function Search({ onSearch, query }) {
     logger.debug('Search -> render')
@@ -11,7 +12,7 @@ function Search({ onSearch, query }) {
 
             onSearch(query)
         }}>
-            <input className="field" type="text" placeholder="criteria" name="query" defaultValue={query} />
+            <input className="field" type="text" placeholder="Search criteria" name="query" defaultValue={query} />
             <button type="submit" className="button button--medium button--dark">Search</button>
         
         </form>

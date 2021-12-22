@@ -14,7 +14,7 @@ function Newsletter({ onNewsletter, onBack }) {
 
         <div className="container">
             <button type="submit" className="button button--medium button--dark">Register for Newsletter</button>
-            <button type="button" className="button button--medium button--dark" onClick={(event) => {
+            <button type="button" className="button button--medium" onClick={(event) => {
                 event.preventDefault()
                 
                 onBack()

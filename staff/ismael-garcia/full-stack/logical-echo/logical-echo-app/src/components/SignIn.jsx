@@ -20,7 +20,7 @@ function SignIn({ onSignIn, onSignUp, onBack }) {
                 onSignUp()
             }}>Sign up</button>
             <button type="submit" className="button button--medium button--dark">Sign In</button>
-            <button type="button" className="button button--medium button--dark" onClick={(event) => {
+            <button type="button" className="button button--medium" onClick={(event) => {
                 event.preventDefault()
                 
                 onBack()

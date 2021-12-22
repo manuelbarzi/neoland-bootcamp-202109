@@ -14,7 +14,8 @@
   padding-inline-end: 0;
   padding-inline-start: 0;
   cursor: default;
-  /* font-family: 'Courier New', Courier, monospace; */
+  /* font-family: 'Courier New', Courier, monospace;
+  font-weight: 600; */
 }
 
 html,
@@ -28,7 +29,7 @@ body {
 /* ----- titles ----- */
 h1 {
   font-family: 'Courier New', Courier, monospace;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 /* ----- containers ----- */
@@ -52,6 +53,12 @@ h1 {
 
 .container--full {
   height: 100%;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -92,12 +99,17 @@ h1 {
   background-color: salmon;
 }
 
-.button--warning {
-  background-color: salmon;
-}
-
 .button--warning:hover {
   background-color: red;
+}
+
+.fav-button {
+  border-style: none;
+}
+
+/* ----- lists ----- */
+ul {
+  list-style-type: none;
 }
 
 

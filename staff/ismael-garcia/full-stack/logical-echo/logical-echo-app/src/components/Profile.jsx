@@ -53,9 +53,9 @@ function Profile({ onBack, onSignOut }) {
     }
 
     return <>
-        {!view && <div className="profile container container--vertical" id="profile">
+        {!view && <div className="profile container" id="profile">
             <button type="button" className="button button--medium" onClick={onBack}>Go Back</button>
-            <button type="button" className="button button--medium button--warning" onClick={goToUpdate}>Update</button>
+            <button type="button" className="button button--medium button--dark" onClick={goToUpdate}>Update</button>
             <button type="button" className="button button--medium button--warning" onClick={goToUnregister}>Unregister</button>
             <button type="button" className="button button--medium" onClick={onSignOut}>Sign out</button>
         </div>}
