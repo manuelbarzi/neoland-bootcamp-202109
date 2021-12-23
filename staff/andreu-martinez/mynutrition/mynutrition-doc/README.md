@@ -27,7 +27,7 @@ The first function of my application allows to communicate between registered us
 ![Añadir Dieta a Cliente](https://user-images.githubusercontent.com/91251587/147166991-6b5cdf34-8f60-48b9-ba89-edfe7f82a9af.png)
 
 
-## Techinal description
+## Techical description
 
 ### Block
 
@@ -37,7 +37,7 @@ The first function of my application allows to communicate between registered us
 
 ![sending message relation](https://user-images.githubusercontent.com/91251587/147169148-ef8466d4-5a07-408e-b6cb-6d16901d4adb.jpeg)
 
-### Techonoliges
+### Techonologies
 
 <table>
     <row>
