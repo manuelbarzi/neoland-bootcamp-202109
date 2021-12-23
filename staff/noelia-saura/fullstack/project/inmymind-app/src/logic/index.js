@@ -2,6 +2,7 @@ import signupUser from './signup-user'
 import signinUser from './signin-user'
 import retrieveUser from './retrieve-user'
 import unregisterUser from './unregister-user'
+import registerUser from './register-user'
 import retrieveNotes from './retrieve-notes'
 import retrieveTreatments from './retrieve-treatment'
 import deleteNote from './delete-note'
@@ -19,6 +20,7 @@ export {
     signupUser,
     retrieveUser,
     unregisterUser,
+    registerUser,
     retrieveNotes,
     addNote,
     addTreatment,
