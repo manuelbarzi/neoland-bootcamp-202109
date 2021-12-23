@@ -64,3 +64,9 @@ The first function of my application allows to communicate between registered us
         </td>
     </row>
 </table>
+
+### TODO (se lo comió el gato)
+
+- Testing..
+- Css..
+- Validaciones de campos...
