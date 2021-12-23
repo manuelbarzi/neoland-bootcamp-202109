@@ -11,5 +11,6 @@ module.exports = {
     retrieveMessages: require('./retrieve-messages'),
     retrieveMessage: require('./retrieve-message'),
     retrieveMessagesChain: require('./retrieve-messages-chain'),
-    retrieveMessageToRead: require('./set-message-to-read')
+    retrieveMessageToRead: require('./set-message-to-read'),
+    setMessageToRead: require ('./set-message-to-read')
 }

@@ -56,9 +56,6 @@ function OpenMessage({ messageToRead, users, setViewInbox }) {
                     <Button variant="contained" onClick={goToNewMessage} endIcon={<MailIcon />}>
                         Answer
                     </Button>
-                    <Button variant="contained" onClick={goToProfile} >
-                        Back
-                    </Button>
                     {view === 'new-message' &&
                         <Button variant="contained" variant="contained"
                         sx={{ mt: 3, mb: 2 }} onClick={hideNewMessage}>

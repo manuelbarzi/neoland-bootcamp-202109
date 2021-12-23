@@ -1,27 +1,16 @@
 const { models: { Message }, mongoose: { Types: { ObjectId } } } = require('mynutrition-data')
-const { NotFoundError } = require('mynutrition-errors')
+const { validateId } = require('./helpers/validators')
 
+async function setMessageToRead(id, messageId) {
+    validateId(messageId)
+debugger
+    const message = await Message.findById(messageId)
 
-async function setMessageToRead(myId, data) {
-    // TODO validate args
-    const {id, read} = data
-    var myquery = { _id: ObjectId(id) }
-    var newvalues = { $set: {read: read} }
-
-    await Message.updateOne(myquery, newvalues)
-
-    // if(message.to === id)
-    //     await Message.updateOne( {message}, {read: read} )
-    
-    // if(message.to === id)
-    // {
-    //     await Message.updateOne( {message}, {read: read} )
-
-
-    //     messagesChain.forEach(sanitizeMessage)
-    //     debugger
-    //     return messagesChain
-    // }
+    if((message.read === false) && (message.to.toString() === id)){
+        var myquery = { _id: ObjectId(messageId) }
+        var newvalues = { $set: {read: true } }
+        await Message.updateOne(myquery, newvalues)
+    }    
 }
 
 module.exports = setMessageToRead

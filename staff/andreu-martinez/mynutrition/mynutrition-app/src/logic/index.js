@@ -9,6 +9,7 @@ import retrieveMessages from './retrieve-messages'
 import retrieveMessage from './retrieve-message'
 import retrieveMessagesChain from './retrieve-messages-chain'
 import sendMessage from './send-message'
+import setMessageToRead from './set-message-to-read'
 import context from './context'
 
 export {
@@ -23,5 +24,6 @@ export {
     retrieveMessagesChain,
     retrieveUser,
     retrieveUsers,
+    setMessageToRead,
     context
 }

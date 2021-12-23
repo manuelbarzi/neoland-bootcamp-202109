@@ -16,7 +16,7 @@ const {
     retrieveMessages,
     retrieveMessage,
     retrieveMessagesChain,
-    retrieveMessageToRead
+    setMessageToRead
 } = require('./handlers')
 
 const logger = require('./utils/my-logger')
@@ -48,7 +48,7 @@ logger.info('starting server');
 
         api.get('/user', retrieveUser)
 
-        api.delete('/users', jsonBodyParser, unregisterUser)
+        api.delete('/users', jsonBodyParser,unregisterUser)
 
         api.patch('/users', jsonBodyParser, modifyUser)
 
@@ -60,7 +60,7 @@ logger.info('starting server');
 
         api.get('/messages/:id/chain', jsonBodyParser, retrieveMessagesChain)
 
-        api.patch('/messages/', jsonBodyParser, retrieveMessageToRead) 
+        api.patch('/messages', jsonBodyParser, setMessageToRead) 
 
         api.all('*', (req, res) => {
             res.status(404).json({ error: 'sorry, this endpoint isn\'t available' })

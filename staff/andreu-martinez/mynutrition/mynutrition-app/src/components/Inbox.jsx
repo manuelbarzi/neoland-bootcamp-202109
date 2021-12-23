@@ -5,7 +5,7 @@ import { useState, useContext, useEffect } from 'react'
 import NewMessage from './NewMessage'
 import OpenMessage from './OpenMessage'
 import MyListedMessages from './MyListedMessages'
-import { retrieveMessages, retrieveMessage, retrieveUsers } from '../logic'
+import {  setMessageToRead, retrieveMessages, retrieveMessage, retrieveUsers } from '../logic'
 
 ////MUI
 import Button from '@mui/material/Button'
@@ -24,7 +24,7 @@ function Inbox() {
     
     const [messages, setMessages] = useState()
     const [users, setUsers] = useState()
-    const [messageToRead, setMessageToRead] = useState([])
+    const [messageToRead, setMsgToRead] = useState([])
 
     useEffect(async () => {
         logger.debug('Results -> useEffect (componentDidMount)')
@@ -70,11 +70,12 @@ function Inbox() {
 
 
     const goToMessageToRead = async (id)=>{
-debugger
-        try{
 
+        try{
+            debugger
+            setMessageToRead(sessionStorage.token, id)
             const messageToRead = await retrieveMessage(sessionStorage.token, id)
-            setMessageToRead(messageToRead)
+            setMsgToRead(messageToRead)
 
             setView('open-message')
         } catch ({ message }) {
