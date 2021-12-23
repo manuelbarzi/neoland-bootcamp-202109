@@ -19,7 +19,7 @@ Finally there is a virtual assistant chat feature.
 
 ### Activities
 
-#### Search
+#### Search items
 
 ![search](./images/activity-chart.jpg)
 
@@ -53,5 +53,22 @@ Finally there is a virtual assistant chat feature.
         <td>
             <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" title="JS" width="50"/>
         <td>
+        <td>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" title="REACT" width="50"/>
+        </td>
+        <td>
+            <img src="https://www.geekandjob.com/uploads/wiki/2e5b0058b2d38158b21439fe06e9b8fabe3cb139.png" title="EXPRESS" width="100">
+        </td>
+        <td>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/MongoDB_Logo.svg/2560px-MongoDB_Logo.svg.png" title="MONGO" width="100">
+        </td>
     </row>
 </table>
+
+### TO DO ("Mea culpa")
+- Completar testing
+- Arreglar el CSS
+- Sección de tendencias
+- Completar scraping
+- Lógica para preparar y mandar la Newsletter semanal
+- Crear asistente virtual
