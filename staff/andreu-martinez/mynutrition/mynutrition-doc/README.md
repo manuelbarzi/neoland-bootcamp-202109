@@ -33,57 +33,9 @@ The first function of my application allows to communicate between registered us
 
 ![blocks](./images/blocks.jpg)
 
-### Sequences
-
-#### Register user
-
-![register sequence](./images/register-sequence.jpg)
-
-#### Authorization user
-
-![authorization sequence](./images/authorization-sequence.jpg)
-
-#### Retrieve user
-
-![retrieve user sequence](./images/retrieve-user-sequence.jpg)
-
-#### Modify user
-
-![modify sequence](./images/modify-user-sequence.jpg)
-
-#### Unregister user!
-
-
-![unregister sequence](./images/unregister-user-sequence.jpg)
-
-#### Search beach
-
-![search beach sequence](./images/search-beach-sequence.jpg)
-
-#### Retrieve beach
-
-![retrieve beach sequence](./images/retrieve-beach-sequence.jpg)
-
-#### Toggle favorite beach
-
-![toggle favorite beach sequence](./images/toggle-favorite-sequence.jpg)
-
-#### Retrieve favorite beach
-
-![retrieve favorite beach sequence](./images/retrieve-favorite-beach-sequence.jpg)
-
-#### Send info to admin
-
-![send info to admin](./images/send-info-to-admin-sequence.jpg)
-
 ### Data model
 
-![data model](./images/data-model.jpg)
-
-### Code coverage
-
-![code coverage](./images/Test1.jpg)
-![code coverage](./images/Test2.jpg)
+![sending message relation](https://user-images.githubusercontent.com/91251587/147169148-ef8466d4-5a07-408e-b6cb-6d16901d4adb.jpeg)
 
 ### Techonoliges
 
