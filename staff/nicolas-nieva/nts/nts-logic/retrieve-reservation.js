@@ -11,7 +11,9 @@ function retrieveReservation(userId, reservationId) {
     return (async () => {
         await checkIfUserExist(userId)
 
-        const reservation = (await checkIfUserExistInReservation(userId, reservationId))._doc
+        await checkIfUserExistInReservation(userId, reservationId)
+
+        const reservation = await Reservation.findById(reservationId).lean()
         
         sanitizeReservation(reservation)
 

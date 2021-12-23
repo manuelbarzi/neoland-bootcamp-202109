@@ -3,13 +3,13 @@ const { handleError, validateAuthorizationAndExtractPayload } = require('./helpe
 
 
 module.exports = async (req, res) => {
-    const { headers: { authorization }, body: { pax, quantity, product, from, until, state, agent, notes} } = req
+    const { headers: { authorization }, body: { pax, quantity, product, from, until, state, agent, note} } = req
 
 
     try {
         const { sub: id } = validateAuthorizationAndExtractPayload (authorization)
 
-        await createReservation (id, pax, quantity, product, from, until, state, agent, notes)
+        await createReservation (id, pax, quantity, product, from, until, state, agent, note)
         res.status(201).send()
 
     }catch (error){

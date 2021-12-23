@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import reportWebVitals from './reportWebVitals';
 import { context } from './logic'
 
+
 context.API_URL = process.env.REACT_APP_API_URL
 
 

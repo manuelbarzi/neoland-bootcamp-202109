@@ -1,5 +1,5 @@
 import context from './context'
-const { validateName, validateUsername, validatePassword } = require ('nts-logic/helpers/validators')
+const { validateName, validateUsername, validatePassword, validateMail, validateAddress, validateProvince, validateLocation  } = require ('nts-logic/helpers/validators')
 
 
 function signupUser(user) {
@@ -8,12 +8,13 @@ function signupUser(user) {
     validateName (name)
     validateUsername (username)
     validatePassword (password)
-    // Metemos todos los validates
-
+    validateMail(email)
+    validateAddress(address)
+    validateProvince(province)
+    validateLocation(location)
 
     return (async () => {
 
-        // TODO debuggar y explorar bien que es res
         const res = await fetch(
             `${context.API_URL}/users`, {
                 method: 'POST',

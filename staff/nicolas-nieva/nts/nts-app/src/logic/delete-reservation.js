@@ -1,19 +1,17 @@
 import context from './context'
 
 
-function unregisterUser(token, password) {
+function deleteReservation(token, reservationId) {
     if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
-    if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
+    // if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
 
     return (async () => {
         debugger
-        const res = await fetch(`${context.API_URL}/users`, {
+        const res = await fetch(`${context.API_URL}/reservations/${reservationId}`, {
             method: 'DELETE',
             headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': "application/json",
-                
-            },body: JSON.stringify(password)
+                'Authorization': `Bearer ${token}`,      
+            }
         })
 
         const { status } = res
@@ -28,4 +26,4 @@ function unregisterUser(token, password) {
     })()
 }
 
-export default unregisterUser
+export default deleteReservation

@@ -8,12 +8,14 @@ import PostSignUp from "./PostSignUp";
 import Spinner from "./Spinner";
 import Modal from "./Modal";
 import AppContext from './AppContext'
+import { useNavigate } from 'react-router-dom';
 
 
 function App () {
       const [view, setView] = useState (sessionStorage.token ? 'home' : 'landing')
       const [spinner, setSpinner] = useState (sessionStorage.token ? true : false )
       const [modal, setModal] = useState(null)
+      const navigate = useNavigate();
      
       
   // Go to ..
@@ -26,6 +28,7 @@ function App () {
   const goToLanding = () => setView('landing')
   
   const onSignOut = () => {
+    navigate ('/')
     goToLanding()
     resetToken()
   }
@@ -47,7 +50,8 @@ function App () {
       <AppContext.Provider value={{
             onFlowStart: showSpinner,
             onFlowEnd: hideSpinner,
-            onModal: showModal
+            onModal: showModal,
+            onSignOut: onSignOut
         }}>
 
     
@@ -65,7 +69,7 @@ function App () {
       {view === 'home' && <Home 
         onSignOut={onSignOut} />}
 
-      {/* {modal && <Modal  message={modal} onAccept={acceptModal} showModal = {showModal} />} */}
+      
       {modal && <Modal message={modal} onAccept={acceptModal} />}
 
       {spinner && <Spinner  />}  

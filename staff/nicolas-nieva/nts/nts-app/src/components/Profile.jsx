@@ -1,92 +1,111 @@
 import { useState, useContext } from 'react'
 import Unregister from './Unregister'
-import { updateUserPassword, unregisterUser} from '../logic'
+import { updateUserPassword, unregisterUser } from '../logic'
 import AppContext from './AppContext'
+import 'bootstrap/dist/css/bootstrap.css'
+import { Button, Form, Card } from 'react-bootstrap'
 
-function Profile ({ onGoBack, onSignOut}) {
+function Profile({ goToHome }) {
+  const { onFlowStart, onFlowEnd, onModal, onSignOut } = useContext(AppContext)
 
-    const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
+  const [view, setView] = useState('update-password')
 
-    const [view, setView] = useState('update-password')
+  const goToUnregister = () => setView('unregister')
 
-    const goToUnregister = () => setView('unregister')
+  const goToUpdatePassword = () => setView('update-password')
 
-    const goToUpdatePassword = () => setView('update-password')
+  const updatePassword = async (oldPassword, password) => {
+    onFlowStart()
 
-    const updatePassword = async (oldPassword, password) => {
-        onFlowStart()
+    const user = { oldPassword, password }
 
-        const user = { oldPassword, password }
+    try {
+      await updateUserPassword(sessionStorage.token, user)
 
-        try {
-            debugger
-          await updateUserPassword(sessionStorage.token, user) 
-             
-            onFlowEnd()
+      onFlowEnd()
 
-            onModal('Password updated')
-        
+      onModal('Password updated')
     } catch ({ message }) {
-        onFlowEnd()
+      onFlowEnd()
 
-        onModal(message)
+      onModal(message)
     }
-}
+  }
 
-const unregister = password => {
+  const unregister = async (password) => {
+
     onFlowStart()
 
     try {
-        unregisterUser(sessionStorage.token, password, error => {
-            if (error) {
-                onFlowEnd()
+      unregisterUser(sessionStorage.token, password)
 
-                onModal(error.message)
+      onFlowEnd()
 
-                return
-            }
+      onModal('User unregistered')
 
-            onFlowEnd()
-
-            onModal('User unregistered')
-
-            onSignOut()
-        })
+      onSignOut()
     } catch ({ message }) {
-        onFlowEnd()
+      onFlowEnd()
 
-        onModal(message)
+      onModal(message)
     }
+  }
+  return (
+    <>
+      {view === 'update-password' && (
+        <div className='profile container container--vertical'>
+          <Card.Title>Cambiar contraseña</Card.Title>
+          <Form
+            className='container container--vertical'
+            onSubmit={(event) => {
+              event.preventDefault()
+
+              const {
+                target: {
+                  oldPassword: { value: oldPassword },
+                  password: { value: password },
+                },
+              } = event
+
+              updatePassword(oldPassword, password)
+            }}
+          >
+            <Form.Control style={{ width: '200px' }}
+              className='field'
+              type='password'
+              name='oldPassword'
+              id='oldPassword'
+              placeholder='contraseña actual'
+            />
+            <Form.Control style={{ width: '200px' }}
+              className='field'
+              type='password'
+              name='password'
+              id='password'
+              placeholder='nueva contraseña'
+            />
+          </Form>
+         
+          <div className='container container--vertical container--gapped'>
+            <Button className='button'>Actualizar</Button>
+          </div>
+           <Button className='button' onClick={() => goToHome()}>
+            <i class="far fa-arrow-alt-circle-left"></i>
+          </Button>
+          <div className='container container--vertical container--gapped'>
+            <Button variant='warning' onClick={goToUnregister} >
+              Borrar agencia
+            </Button>
+          </div>
+
+        </div>
+      )}
+
+      {view === 'unregister' && (
+        <Unregister onBack={goToUpdatePassword} onUnregister={unregister} />
+      )}
+    </>
+  )
 }
-    
-        return <>
-        {view === 'update-password' && <div className="profile container container--vertical">
-        <button className="button" onClick={onGoBack}>Go back</button>
-        
-        <form className="container container--vertical" onSubmit={event => {
-                event.preventDefault()
-
-                const { target: { oldPassword: { value: oldPassword }, password: { value: password } } } = event
-
-                updatePassword(oldPassword, password)
-            }}>
-                <input className="field" type="password" name="oldPassword" id="oldPassword" placeholder="old password" />
-                <input className="field" type="password" name="password" id="password" placeholder="new password" />
-
-                <div className="container">
-                    <button className="button button--medium button--dark">Update</button>
-                </div>
-            </form>
-
-                    <button className="button button--medium button--dark" onClick={goToUnregister}>Unregister</button>
-                    
-                </div>}
-                    
-                    
-            {view === 'unregister' && <Unregister onBack={goToUpdatePassword} onUnregister={unregister} />}
-
-        </>
-    }
-
 
 export default Profile

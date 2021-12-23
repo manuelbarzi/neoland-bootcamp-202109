@@ -1,7 +1,12 @@
+import 'bootstrap/dist/css/bootstrap.css'
+import { Button, Card } from 'react-bootstrap'
+
 function PostSignUp({ onSignIn }) {
     return <>
-        <p>Te has registrado satisfactoriamente</p>
-        <button type="button" className="button" onClick={() => onSignIn()}>SignIn</button>
+        <Card.Title className='container container--vertical container--gapped'>Te has registrado satisfactoriamente</Card.Title>
+        <div className='container container--vertical container--gapped'>
+        <Button onClick={() => onSignIn()}>Iniciar Sesion</Button>
+        </div>
     </>
 }
 

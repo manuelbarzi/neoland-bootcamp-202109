@@ -1,277 +1,139 @@
 import { useState, useEffect, useContext } from 'react'
-import Results from './Results'
-import ResultDetails from './ResultDetails'
+import { Routes, Route, useNavigate } from 'react-router-dom'
+import Reservations from './Reservations'
+import ReservationDetail from './ReservationDetail'
 import Profile from './Profile'
-import UnRegister from './Unregister'
-import Favs from './Favs'
-import Cart from './Cart'
 import AppContext from './AppContext'
+import NewReservation from './NewReservation'
+import NavBar from './NavBar'
+import Results from './Results'
+import { retrieveUser } from '../logic/index'
+import ModifyReservation from './ModifyReservation'
+import DeleteReservation from './DeleteReservation'
+import AddNoteToReservation from './AddNoteToReservation'
 
 
+function Home({ showDetails }) {
+  const { onFlowStart, onFlowEnd, onModal, onSignOut } = useContext(AppContext)
 
-//Logical
+  const [username, setUsername] = useState(null)
 
-import {
-  updateUserPassword,
-  unregisterUser,
-  retrieveUser,
-  retrieveFavVehicles,
-  retrieveVehiclesCart,
-  addVehicleToCart,
-  removeVehicleFromCart
-} from '../logic/index'
+  const [query, setQuery] = useState({})
 
-
-function Home({showSpinner, hideSpinner, showModal, onSignOut, toggleFav, showDetails}) {
-
-  const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
-
-  const [view, setView] = useState('search')
-  const [vehicles, setVehicles] = useState([])
-  const [vehicle, setVehicle] = useState({})
-  const [favs, setFavs] = useState([])
-  const [cart, setCart] = useState([])
-  const [username, setUsername] = useState (null)
-
-
-  const goToProfile = () => setView('profile')
-  const goToResults = () => setView('results')
-  const goToUnregister = () => setView('unregister')
+  const navigate = useNavigate()
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
-
     const { token } = sessionStorage
-    
+
     if (token) {
-        try {
-            onFlowStart()
-    
-            const user = await retrieveUser(token)
+      try {
+        onFlowStart()
 
-            onFlowEnd()
-            
-            const { username } = user
-            
-            setUsername(username)
-        } catch ({ message }) {
-            onFlowEnd()
-            
-            // onModal ()
+        const user = await retrieveUser(token)
 
-            // onAuthError()
-        }
-    }
-}, [])
-  
+        const { username } = user
 
-  const updatePassword = (oldPassword, password) => {
-    showSpinner()
-    try {
-      updateUserPassword(sessionStorage.token, oldPassword, password, error => {
-        if (error) {
-          showModal(error.message)
-          hideSpinner()
-          return
-        }
-        showModal('Password updated')
-        hideSpinner()
-      })
-    } catch (error) {
-      showModal(error.message)
-      hideSpinner()
-      return
-    }
-    hideSpinner()
-  }
+        setUsername(username)
 
-  const unRegister = (password) => {
-    showSpinner()
-    try {
-      unregisterUser(sessionStorage.token, password, error => {
-        if (error) {
-          showModal(error.message)
-          hideSpinner()
-          return
-        }
-        showModal('User deleted')
+        onFlowEnd()
+      } catch ({ message }) {
+        onFlowEnd()
+
+        onModal()
 
         onSignOut()
-
-        hideSpinner()
-      })
-    } catch (error) {
-      showModal(error.message)
-      hideSpinner()
+      }
     }
+  }, [])
+
+  const search = (query) => {
+    setQuery(query)
+    navigate(`/search?q=${query}`)
   }
 
-  const onToggleFav = id => {
-    showSpinner()
-    try {
-      toggleFav(sessionStorage.token, id, error => {
-        if (error) {
-          hideSpinner()
-
-          showModal(error.message)
-
-          return
-        }
-
-        if (vehicle && vehicle.id === id)
-          setVehicle({ ...vehicle, isFav: !vehicle.isFav })
-
-        if (vehicles.length)
-          setVehicles(vehicles.map(vehicle => {
-            if (vehicle.id === id) {
-              return { ...vehicle, isFav: !vehicle.isFav }
-            }
-
-            return vehicle
-
-          }))
-
-        if (favs.length)
-          setFavs(favs.filter(vehicle => vehicle.id !== id))
-
-        hideSpinner()
-
-      })
-    } catch (error) {
-      hideSpinner()
-      showModal(error.message)
-    }
+  const goToItem = (id) => {
+    navigate(`/reservations/${id}`)
   }
 
-  const goFavs = () => {
-    showSpinner()
-    try {
-      retrieveFavVehicles(sessionStorage.token, (error, favs) => {
-        if (error) {
-          showModal(error.message)
-          hideSpinner()
-          return
-        }
-        hideSpinner()
-        setFavs(favs)
-        setView('favs')
-      })
-
-    } catch (error) {
-      showModal(error.message)
-      hideSpinner()
-
-    }
+  const goToProfile = () => {
+    navigate('/profile')
   }
 
-  const addToCart = id => {
-    showSpinner()
-    try {
-      addVehicleToCart(sessionStorage.token, id, error => {
-        if (error) {
-          hideSpinner()
-
-          showModal(error.message)
-          return
-        }
-        setCart(cart.map(vehicle => {
-          if (vehicle.id === id)
-            return { ...vehicle, qty: vehicle.qty + 1 }
-
-          return vehicle
-        }))
-
-        hideSpinner()
-
-      })
-    } catch (error) {
-      hideSpinner()
-
-      showModal(error.message)
-    }
+  const goToHome = () => {
+    navigate('/')
   }
 
-  const goToCart = () => {
-    showSpinner()
-
-    try {
-      retrieveVehiclesCart(sessionStorage.token, (error, vehicles) => {
-        if (error) {
-          hideSpinner()
-
-          showModal(error.message)
-
-          return
-        }
-
-        setCart(vehicles)
-        setView('cart')
-        hideSpinner()
-      })
-    } catch (error) {
-      hideSpinner()
-
-      showModal(error.message)
-    }
+  const goToReservation = () => {
+    navigate('/newreservation')
   }
 
-  const removeFromCart = id => {
-    showSpinner()
-
-    try {
-      removeVehicleFromCart(sessionStorage.token, id, error => {
-        if (error) {
-          hideSpinner()
-
-          showModal(error.message)
-
-          return
-        }
-
-        setCart(cart.reduce((accum, vehicle) => {
-          if (vehicle.id === id) {
-            if (vehicle.qty < 2)
-              return accum
-
-            vehicle = { ...vehicle, qty: vehicle.qty - 1 }
-          }
-
-          accum.push(vehicle)
-
-          return accum
-        }, []))
-
-        hideSpinner()
-      })
-    } catch (error) {
-      hideSpinner()
-
-      showModal(error.message)
-    }
+  const goToModify = (id) => {
+    navigate(`/modifyreservation/${id}`)
   }
 
-  return <>
-    <div className="home container container--gapped container--vertical">
-      <div className="container">
-        <p>Hello, <span className="name">{username}</span>!</p><br />
-      </div>
-      <div className="container">
-        <button type="button" className="button button-medium button--dark" onClick={() => goToProfile()}>Profile</button>
-        <button className="button button-medium button--dark" onClick={goFavs} >Favs</button>
-        <button className="button" onClick={goToCart}>🛒</button>
-        <button className="button button-medium button" onClick={() => onSignOut()}>Sign out</button>
-      </div>
+  const goToDelete = (id) => {
+    navigate(`/deletereservation/${id}`)
+  }
+  const goToAddNotes = (id) => {
+    navigate(`reservation/addnote/${id}`)
+  }
 
-      {/* {(view === 'search' || view === 'results') && <Search onSubmitSearch={search} />} */}
-      {view === 'results' && <Results items={vehicles} onVehicle={showDetails} onToggleFav={onToggleFav} />}
-      {view === 'profile' && <Profile onGoBack={goToResults} onSubmitUpdate={updatePassword} onUnRegister={goToUnregister} />}
-      {view === 'favs' && <Favs onGoback={goToResults} items={favs} onToggleFav={onToggleFav} onVehicle={showDetails} />}
-      {view === 'details' && <ResultDetails item={vehicle} onBack={goToResults} onToggleFav={onToggleFav} onAddToCart={addToCart} />}
-      {view === 'unregister' && <UnRegister onSubmitUnRegister={unRegister} onGoBack={goToProfile} showModal={showModal} />}
-      {view === 'cart' && <Cart items={cart} onBack={goToResults} onAdd={addToCart} onRemove={removeFromCart} onVehicle={showDetails} />}
+  return (
+    <>
+      <NavBar
+        username={username}
+        goToProfile={goToProfile}
+        onSearch={search}
+        query={query}
+        goToReservation={goToReservation}
+        goToHome={goToHome}
+      />
 
-    </div>
-  </>
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <Reservations
+              goToItem={goToItem}
+            />
+          } x
+        />
+
+        <Route path='/profile' element={<Profile goToHome={goToHome} />} />
+
+        <Route
+          path='/reservations/:id'
+          element={<ReservationDetail goToHome={goToHome} goToModify={goToModify} goToDelete={goToDelete} goToAddNotes={goToAddNotes} />}
+        />
+
+        <Route
+          path='/newreservation'
+          element={<NewReservation goToHome={goToHome} />}
+        />
+
+        <Route
+          path='/modifyreservation/:id'
+          element={<ModifyReservation goToHome={goToHome} />}
+        />
+
+        <Route
+          path='/deletereservation/:id'
+          element={<DeleteReservation goToHome={goToHome} />}
+        />
+
+        <Route
+          path='/reservation/addnote/:id'
+          element={<AddNoteToReservation goToHome={goToHome} />}
+        />
+
+        <Route
+          path='/search'
+          element={<Results goToHome={goToHome} goToItem={goToItem} />}
+        />
+      </Routes>
+    </>
+  )
 }
 
 export default Home

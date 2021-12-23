@@ -1,11 +1,18 @@
-import { signupUser } from "../logic/index";
+import 'bootstrap/dist/css/bootstrap.css';
+import { Form, Button, Card } from 'react-bootstrap';
+import { useContext } from 'react';
+import AppContext from './AppContext';
+
+import { signupUser } from '../logic/index';
 
 function SignUp({ goToPostSignUp, onSignIn }) {
+  const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext);
   return (
     <>
-      <h1 className="container container--vertical">Sign Up</h1>
-      <form
-        className="signup container container--vertical container--gapped"
+      
+      <Card.Title className='container container--vertical'>Registrar agencia</Card.Title>
+      <Form
+        className='container container--vertical'
         onSubmit={async (event) => {
           event.preventDefault();
 
@@ -21,108 +28,108 @@ function SignUp({ goToPostSignUp, onSignIn }) {
           const province = event.target.province.value;
           const location = event.target.location.value;
           const country = event.target.country.value;
-          
+
           const user = {
-              name, 
-              username,
-              password,
-              email,
-              address,
-              phone,
-              province,
-              location,
-              country
-            }
-            
-            
-            try {
-                
-                await signupUser(user); // pSAMOS UN OBJETO
-                
-                goToPostSignUp();
+            name,
+            username,
+            password,
+            email,
+            address,
+            phone,
+            province,
+            location,
+            country,
+          };
 
-                alert("Agencia registrada");
+          try {
+            onFlowStart()
 
-            } catch ({ message }) {
-                alert(message);
-            }
+            await signupUser(user)
 
-            event.target.reset()
-        }}>
+            goToPostSignUp()
 
-        <input
-          className="field"
-          type="text"
-          name="name"
-          id="name"
-          placeholder="nombre agencia"
+            onModal('Agencia registrada')
+
+            onFlowEnd()
+
+          } catch ({ message }) {
+
+            onModal(message)
+            onFlowEnd()
+          }
+
+          event.target.reset();
+        }}
+      >
+        <Form.Control style={{ width: '230px' }}
+          type='text'
+          className='field'
+          name='name'
+          id='name'
+          placeholder='nombre agencia'
         />
-        <input
-          className="field"
-          type="text"
-          name="username"
-          id="username"
-          placeholder="usuario"
+        <Form.Control style={{ width: '230px' }}
+          className='field'
+          type='text'
+          name='username'
+          id='username'
+          placeholder='usuario'
         />
-        <input
-          className="field"
-          type="password"
-          name="password"
-          id="password"
-          placeholder="contraseña"
+        <Form.Control style={{ width: '230px' }}
+          className='field'
+          type='password'
+          name='password'
+          id='password'
+          placeholder='contraseña'
         />
-        <input
-          className="field"
-          type="text"
-          name="email"
-          id="email"
-          placeholder="correo electronico"
+        <Form.Control style={{ width: '230px' }}
+          className='field'
+          type='text'
+          name='email'
+          id='email'
+          placeholder='correo electronico'
         />
-        <input
-          className="field"
-          type="text"
-          name="address"
-          id="address"
-          placeholder="direccion"
+        <Form.Control style={{ width: '230px' }}
+          className='field'
+          type='text'
+          name='address'
+          id='address'
+          placeholder='direccion'
         />
-        <input
-          className="field"
-          type="text"
-          name="phone"
-          id="phone"
-          placeholder="telefono"
+        <Form.Control style={{ width: '230px' }}
+          className='field'
+          type='text'
+          name='phone'
+          id='phone'
+          placeholder='telefono'
         />
-        <input
-          className="field"
-          type="text"
-          name="province"
-          id="province"
-          placeholder="provincia"
+        <Form.Control style={{ width: '230px' }}
+          className='field'
+          type='text'
+          name='province'
+          id='province'
+          placeholder='provincia'
         />
-        <input
-          className="field"
-          type="text"
-          name="location"
-          id="location"
-          placeholder="ciudad"
+        <Form.Control style={{ width: '230px' }}
+          className='field'
+          type='text'
+          name='location'
+          id='location'
+          placeholder='ciudad'
         />
-        <input
-          className="field"
-          type="text"
-          name="country"
-          id="country"
-          placeholder="pais"
+        <Form.Control style={{ width: '230px' }}
+          type='text'
+          name='country'
+          id='country'
+          placeholder='pais'
         />
 
-        <div className="container">
-          <button className="button button--medium" onClick={() => onSignIn()}>
-            Sign in
-          </button>
-          <button className="button button--medium button--dark">
-            Sign up
-          </button>
+        <div className='container container--vertical container--gapped'>
+          <Button className='button' type='submit'>Registrar Agencia</Button>
+          <div className='container--gapped'></div>
+          <Button className='button' onClick={() => onSignIn()}>Iniciar Sesion </Button>
         </div>
-      </form>
+      </Form>
     </>
   );
 }

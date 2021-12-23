@@ -20,7 +20,7 @@
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    background-color:  red;
+    background-color:  rgb(0, 89, 255);
     height: fit-content;
     min-width: 320px;
     max-width: 420px;

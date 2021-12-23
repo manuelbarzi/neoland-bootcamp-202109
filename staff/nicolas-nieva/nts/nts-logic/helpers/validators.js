@@ -45,9 +45,8 @@ function validateText(text) {
     if (!text.trim().length) throw new FormatError('text is empty or blank')
 }
 
-function validatePhone(phone) {
-    if (typeof phone !== 'number') throw new TypeError('phone is not a number')
-    if (phone === '') throw new FormatError('phone is empty or blank')
+function validateNumber(number) {
+    if (typeof number !== 'number') throw new TypeError(`${number} is not a number`)
 }
 
 function validateAddress(address) {
@@ -93,18 +92,6 @@ function validateData(data) {
     }
 }
 
-const checkIfUserExist = async (userId) => {
-    const user = (await User.findById ({_id: userId}))
-    if (!user) throw new NotFoundError (`user with id ${userId} not found`)
-}
-
-const checkIfUserExistInReservation = async (userId, reservationId) => {
-        const reservation = await Reservation.findById ({_id: reservationId})
-        if (!reservation) throw new NotFoundError (`reservation with id ${reservationId} not found`)
-        if (!(reservation.agency === userId)) throw new NotFoundError (`user with id ${userId} not found`)}
-
-
-
 module.exports = {
     validateId,
     validateUsername,
@@ -113,7 +100,7 @@ module.exports = {
     validateData,
     validateName,
     validateMail,
-    validatePhone,
+    validateNumber,
     validateAddress,
     validateProvince,
     validateLocation,

@@ -1,14 +1,14 @@
 import context from './context'
 
-function retrieveUser(token) {
-    if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
-    if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
+function retrieveReservation(token, reservationId) {
+    //todo validators
 
     return (async () => {
-        const res = await fetch(`${context.API_URL}/users`, {
+        const res = await fetch(`${context.API_URL}/reservations/${reservationId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`
+
             }
         })
 
@@ -26,4 +26,4 @@ function retrieveUser(token) {
     })()
 }
 
-export default retrieveUser
+export default retrieveReservation

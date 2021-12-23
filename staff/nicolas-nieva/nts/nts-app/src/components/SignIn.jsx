@@ -1,46 +1,74 @@
-import { authorizeUser } from '../logic'
+import { authorizeUser } from '../logic';
+import 'bootstrap/dist/css/bootstrap.css';
+import { Button, Form, Card } from 'react-bootstrap';
+import AppContext from "./AppContext";
+import { useContext } from "react";
 
 function SignIn({ onSignUp, onSignedIn }) {
-    return (
-        <form className="login container container--vertical" onSubmit={async event => {
-            event.preventDefault()
+  const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext);
+  return (
+    <>
+      <Card.Title className='container container--vertical'>Iniciar Sesion</Card.Title>
+      <Form
+        className='login container container--vertical'
+        onSubmit={async (event) => {
+          event.preventDefault();
 
-            const { target: { username: { value: username }, password: { value: password } } } = event
+          const {
+            target: {
+              username: { value: username },
+              password: { value: password },
+            },
+          } = event;
 
-            const user = {
-                username,
-                password
-            }
+          const user = {
+            username,
+            password,
+          };
 
-            try {
-                // showSpinner()
+          try {
+            onFlowStart()
 
-                const token = await authorizeUser(user)
+            const token = await authorizeUser(user);
 
-                sessionStorage.token = token
+            sessionStorage.token = token;
 
-                // hideSpinner()
+            onFlowEnd()
 
-                onSignedIn()
+            onSignedIn();
+          } catch ({ message }) {
+            onFlowEnd()
+            onModal(message)
+          }
 
-            } catch ({ message }) {
-                // hideSpinner()
+          event.target.reset();
+        }}
+      >
 
-                // showModal("Error", message)
-            }
+        <Form.Group className='mb-3' name='username' controlId='username'>
+          <Form.Label>Usuario</Form.Label>
+          <Form.Control type='string' name='username'/>
+        </Form.Group>
 
-            event.target.reset()
-        }}>
-            <input className="field" type="text" name="username" id="username" placeholder="username" />
-            <input className="field" type="password" name="password" id="password" placeholder="password" />
-
-            <div className="container">
-                <button type="button" className="button button--medium" onClick={() => onSignUp()}>Sign up</button>
-                <button type="submit" className="button button--medium button--dark">Sign in</button>
-            </div>
-        </form>
-    
-    )
+        <Form.Group className='mb-3' name='password' controlId='password'>
+          <Form.Label>Contraseña</Form.Label>
+          <Form.Control
+            type='password'
+            name='password'
+          />
+        </Form.Group>
+        <div className='container--vertical container container--gapped'>
+          <Button type='submit' className='button'>
+            Iniciar Sesion
+          </Button>
+          <div className='container--gapped'></div>
+          <Button type='button' className='button' onClick={() => onSignUp()}>
+            Registrar Agencia
+          </Button>
+        </div>
+      </Form>
+    </>
+  );
 }
 
-export default SignIn
+export default SignIn;

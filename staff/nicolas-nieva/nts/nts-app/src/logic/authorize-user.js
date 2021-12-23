@@ -1,7 +1,9 @@
 import context from './context'
+const { validateUsername, validatePassword } = require ('nts-logic/helpers/validators')
 
 function authorizeUser(username, password) {
-    //todo validates
+    // validateUsername (username)
+    // validatePassword (password)
  
     return (async () => {
         const res = await fetch(`${context.API_URL}/users/auth`, {

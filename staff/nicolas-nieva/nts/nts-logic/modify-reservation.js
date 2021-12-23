@@ -16,6 +16,7 @@ function modifyReservation(userId, reservationId, data) {
         for (const property in data)
             reservation[property] = data[property]
 
+        const { from } = date
 
         await reservation.save()
     })()

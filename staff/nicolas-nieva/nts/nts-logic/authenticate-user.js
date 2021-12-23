@@ -6,8 +6,8 @@ const { validateUsername,
 const bcrypt = require ('bcryptjs')
 
 function authenticateUser(username, password) {
-    validateUsername (username)
-    validatePassword (password)
+    // validateUsername (username)
+    // validatePassword (password)
     
     return (async () => {
         const user = await User.findOne ({ username })

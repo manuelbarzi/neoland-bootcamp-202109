@@ -1,3 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.css'
+import { Button } from 'react-bootstrap'
+
 function Landing({ onSignIn, onSignUp }) {
     return (
         <>
@@ -5,8 +8,9 @@ function Landing({ onSignIn, onSignUp }) {
         <h1 className="welcome">Welcome</h1>
         </div>
         <div className="landing container container--vertical container--gapped">
-            <button type="button" className="button button--medium button--dark" onClick={() => onSignIn()}>Sign in</button>
-            <button type="button" className="button button--medium" onClick={() => onSignUp()}>Sign up</button>
+            <Button  className="button"  onClick={() => onSignUp()}>Registrar Agencia</Button>
+            <div className='container--gapped'></div>
+            <Button  className="button" onClick={() => onSignIn()}>Iniciar Sesion</Button>
         </div>
         </>
     )

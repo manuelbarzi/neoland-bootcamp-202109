@@ -29,7 +29,7 @@ const reservation = new Schema({
     until: {
         type: Date
     },
-    status: {
+    state: {
         type: String,
         enum: ['required', 'confirmed', 'cancelled']
     },

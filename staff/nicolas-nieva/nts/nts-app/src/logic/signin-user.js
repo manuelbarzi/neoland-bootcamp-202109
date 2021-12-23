@@ -1,7 +1,9 @@
 import context from './context'
+const { validateUsername, validatePassword } = require ('nts-logic/helpers/validators')
 
 function signinUser(username, password) {
-    //to do validates
+    // validateUsername (username)
+    // validatePassword (password)
     
     return (async () => {
         const res = await fetch(`${context.API_URL}/users`, {
@@ -20,7 +22,7 @@ function signinUser(username, password) {
             const { error } = await res.json()
 
             throw new Error(error)
-        } else throw new Error('unknoun error')
+        } else throw new Error('unknown error')
     })()
 }
 

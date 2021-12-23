@@ -5,7 +5,6 @@ const { checkIfUserExist, checkIfUserExistInReservation } = require('./helpers/c
 
 
 function addNoteToReservation(userId, reservationId, text) {
-    // TODO check user id exists in db, and reservation agency corresponds to it, etc
     // TODO validate all params: user id, reservation id, text...
 
     validateText(text)
