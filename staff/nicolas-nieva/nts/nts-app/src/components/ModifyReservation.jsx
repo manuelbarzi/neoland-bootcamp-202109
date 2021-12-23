@@ -99,7 +99,7 @@ function ModifyReservation({ goToHome }) {
         />
 
         <div className='container container--vertical container--gapped'>
-          <Button>Modificar Reserva</Button>
+          <Button type= 'submit'>Modificar Reserva</Button>
           </div>
           <div className='container container--vertical container--gapped'>
           <Button onClick={() => goToHome()}><i class="far fa-arrow-alt-circle-left"></i></Button>

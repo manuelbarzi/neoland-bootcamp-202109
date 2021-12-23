@@ -1,14 +1,16 @@
-# Nts
-
 ## Introduction
 
 ![intro](https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/fbc52262225969.5a89af053bacd.gif)
+![nts](./images/nts.png)
+# Nts
+
+
 
 
 Backoffice application to a receptive tourism operator in Argentina, capable of managing reservations for each agency that registers
 
 
-![nts](./images/nts.png)
+
 
 ## Functional description
 
@@ -73,7 +75,7 @@ Backoffice application to a receptive tourism operator in Argentina, capable of 
 - Mongo
 - Mongoose
 
-## TODO (alias "MEA CULPA")
+## TO DO ("MEA CULPA")
 
 - Testing
 - Css 

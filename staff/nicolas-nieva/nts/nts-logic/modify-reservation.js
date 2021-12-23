@@ -11,12 +11,11 @@ function modifyReservation(userId, reservationId, data) {
 
         await checkIfUserExistInReservation(userId, reservationId)
 
-        const reservation = await Reservation.findById({ _id: reservationId, agency: userId })
+        const reservation = await Reservation.findOne({ _id: reservationId, agency: userId })
 
         for (const property in data)
             reservation[property] = data[property]
 
-        const { from } = date
 
         await reservation.save()
     })()
