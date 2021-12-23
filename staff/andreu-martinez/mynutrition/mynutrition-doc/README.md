@@ -48,7 +48,7 @@ The first function of my application allows to communicate between registered us
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Sass_Logo_Color.svg/1200px-Sass_Logo_Color.svg.png" title="SASS" width="50">
         </td>
         <td>
-            ![image](https://user-images.githubusercontent.com/91251587/147212982-9a35a5b4-ed75-4808-b701-0c83f5f04ccc.png)
+            <img src="https://user-images.githubusercontent.com/91251587/147212982-9a35a5b4-ed75-4808-b701-0c83f5f04ccc.png">
         </td>
         <td>
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png" title="REACT" width="50"/>
