@@ -15,7 +15,7 @@ const heigthMaxMin = (array = [], time) => {
             swellMin = swellMin.slice(0, 3)
             response.push(swellMin)
 
-            return <span>{swellMax} - {swellMin} m</span>
+            return <span>{swellMin} - {swellMax} m</span>
         }
     }
 
@@ -28,7 +28,7 @@ const heigthMaxMin = (array = [], time) => {
         swellMin = swellMin.slice(0, 3)
         response.push(swellMin)
 
-        return <span>{swellMax} - {swellMin} m</span>
+        return <span>{swellMin} - {swellMax} m</span>
     }
 }
 

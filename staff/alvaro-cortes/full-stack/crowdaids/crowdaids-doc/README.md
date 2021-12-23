@@ -116,3 +116,17 @@ This application offers the possibility to search by an API external (Surfline),
     </row>
 </table>
 
+### TODO
+
+<ul>
+    <li>
+        <p>Send information like text or image to the admin</p>
+    </li>
+    <li>
+        <p>Create data model beach when the admin receive information from users</p>
+    </li>
+    <li>
+        <p>Add the information beach received by the user, that can be used on a searched beach</p>
+    </li>
+</ul>
+

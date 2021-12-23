@@ -16,7 +16,7 @@ const windNow = (array = [], time) => {
             direction = array[i].direction.toString()
             direction = direction.slice(0, 6)
 
-            return <><span>{wind} kph - {windText}</span><br /><span>{direction}°</span></>
+            return <><span>{wind} kph - {windText}</span><br /><span className="color--wind">{direction}°</span></>
         }
     }
 
