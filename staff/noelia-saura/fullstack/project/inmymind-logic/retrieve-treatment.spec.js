@@ -21,10 +21,24 @@ describe('retrieveTreatment', () => {
             date: new Date("Thu, 09 Dec 2021 00:00:00 GMT"),
             user_id: "61ad1ad9799afee83e26c8b4"
         }
-        const _treatment=Treatment.create(treatment)
+        return Treatment.create(treatment)
+        .then(treatment => treatmentId = treatment.id)
         
-        treatmentId= _treatment.id
-        
+    })
+
+    it('should succeed with correct id for an already existing treatment', () => {
+        const content = "New treatment"
+        const date = new Date("Thu, 09 Dec 2021 00:00:00 GMT")
+        const user_id = "61ad1ad9799afee83e26c8b4"
+
+        return retrieveTreatment(user_id, date)
+            .then(treatments => {
+                const treatment = treatments[0]
+
+                expect(treatment).to.exist
+                expect(treatment.content).to.equal(content)
+                expect(treatment.date.toString()).to.equal(date.toString())
+            })
     })
 
     describe('when parameters are not valid', () => {
@@ -70,8 +84,5 @@ describe('retrieveTreatment', () => {
         await Treatment.deleteMany()
         await mongoose.disconnect()
     })
-    // after(() =>
-    //     Treatment.deleteMany()
-    //         .then(() => mongoose.disconnect())
-    // )
+    
 })

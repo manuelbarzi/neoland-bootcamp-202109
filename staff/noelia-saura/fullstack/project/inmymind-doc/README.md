@@ -24,7 +24,7 @@ Para ello tendra el usuario que registar todos esos apartados en botones para ac
 ![](./images/Use-case.jpeg)
 
 # Flow Chart
-![](./images/Flow-chart.jpeg)
+![](./images/flow-chart2.png)
 
 # 📋Technical block📋
 
@@ -35,7 +35,7 @@ Para ello tendra el usuario que registar todos esos apartados en botones para ac
 ![](./images/Data-model.png)
 
 # Code coverage
-![](./images/testing.PNG)
+![](./images/correctiontesting.PNG)
 
 # Technologies
 - JavaScript
@@ -56,4 +56,4 @@ Para ello tendra el usuario que registar todos esos apartados en botones para ac
 - Recomendaciones mindfulness en caso de ataque de ansiedad,estres,depresión...
 - Adaptación a ordenador de la web
 - Crear la app para Android/ IOS
-- Incrementar covertura de codigo
+- Incrementar cobertura de codigo
