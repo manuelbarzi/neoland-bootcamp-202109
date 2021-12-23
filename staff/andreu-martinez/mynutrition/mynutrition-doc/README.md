@@ -31,7 +31,7 @@ The first function of my application allows to communicate between registered us
 
 ### Block
 
-![blocks](./images/blocks.jpg)
+![flujo de bloques](https://user-images.githubusercontent.com/91251587/147169205-71e719b9-2b01-410c-a7e1-a6cde58fdfc6.jpeg)
 
 ### Data model
 
