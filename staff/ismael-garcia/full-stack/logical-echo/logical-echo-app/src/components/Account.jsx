@@ -5,7 +5,7 @@ import logger from '../utils/logger'
 import SignUp from './SignUp'
 import SignIn from './SignIn'
 
-function Account({ onBack }) {
+function Account({ onBack, onLogin }) {
     logger.debug('Account -> render')
 
     const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
@@ -21,6 +21,8 @@ function Account({ onBack }) {
             onFlowStart()
 
             await signUpUser(email, password)
+
+            onLogin(true)
 
             onFlowEnd()
 

@@ -1,31 +1,25 @@
-import { useQueryParams } from '../hooks'
 import { useState, useEffect, useContext } from 'react'
-import { retrieveItemsCollection } from '../logic'
+import { retrieveTrendingItems } from '../logic'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
-// import './Collection.css'
 
-function Collection({ onItem, onToggle }) {
-    logger.debug('Collection -> render')
+function Trending({ onItem, onToggle }) {
+    logger.debug('Trending -> render')
 
     const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
 
     const [items, setItems] = useState([])
 
-    const queryParams = useQueryParams()
-
-    const store = queryParams.get('q')
-
     const { token } = sessionStorage
 
     useEffect(() => {
         (async () => {
-            logger.debug('Collection -> useEffect')
-            
+            logger.debug('Trending -> useEffect')
+
             try {
                 onFlowStart()
 
-                const items = await retrieveItemsCollection(token, store)
+                const items = await retrieveTrendingItems(token)
 
                 onFlowEnd()
                     
@@ -37,7 +31,7 @@ function Collection({ onItem, onToggle }) {
                 onModal(message, 'warn')
             }
         })()
-    }, [store, token]);
+    }, [token]);
 
     return items && items.length ?
         <div>
@@ -45,10 +39,10 @@ function Collection({ onItem, onToggle }) {
                 {
                     items.map(({ item_id, name, images, price, isFav }) =>
                     <li key={item_id}className="home__results-item" onClick={() => onItem(item_id)}>
-                        <img src={images[0]} alt='' />
                         <h2>{name}</h2>
                         <span>{price}</span>
-                        <button className="button fav-button" onClick={event => {
+                        <img src={images[0]} alt='' />
+                        <button className="button" onClick={event => {
                                 event.stopPropagation()
     
                                 onToggle(item_id)
@@ -62,4 +56,4 @@ function Collection({ onItem, onToggle }) {
         null
 }
 
-export default Collection
+export default Trending

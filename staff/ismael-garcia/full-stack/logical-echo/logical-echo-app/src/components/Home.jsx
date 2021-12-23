@@ -13,8 +13,8 @@ import Account from './Account'
 import Profile from './Profile'
 import Favs from './Favs'
 import Newsletter from './Newsletter'
-import './Home.css';
-
+// import Trending from './Trending'
+import './Home.css'
 
 function Home() {
     logger.debug('Home -> render')
@@ -26,18 +26,19 @@ function Home() {
     const queryParams = useQueryParams()
 
     const [query, setQuery] = useState(queryParams.get('q'))
-    const [view, setView] = useState('loggedOut')
+    const [view, setView] = useState('home')
     const [items, setItems] = useState([])
+    // const [login, setLogin] = useState(false)
 
     const resetToken = () => {
         delete sessionStorage.token
 
-        setView('home')
+        goToHome()
 
         onFlowEnd()
     }
 
-    const signOut = () => resetToken()
+    // const setLoggedIn = () => setLogin(true)
 
     const search = query => {
         setQuery(query)
@@ -87,7 +88,11 @@ function Home() {
         navigate('/search')
     }
 
-    const goToCollection = store => navigate(`/search/store?q=${store}`)
+    const goToCollection = store => {
+        setView('not-home')
+
+        navigate(`/search/store?q=${store}`)
+    }
 
     const goToAccount = () => {
         setView('not-home')
@@ -120,7 +125,8 @@ function Home() {
 
     return <>
         <div id="home" className="container container--vertical container--gapped">
-            <Navbar onLogin={goToAccount} onProfile={goToProfile} onNewsletter={goToNewsletter} onFavs={goToFavs} onSearch={goToSearch} onLoggedOut={resetToken} onHome={goToHome}/>
+
+            <Navbar onLogin={goToAccount} onProfile={goToProfile} onNewsletter={goToNewsletter} onFavs={goToFavs} onSearch={goToSearch} onLoggedOut={resetToken} onHome={goToHome} />
 
             <div className='container container--gapped'>
                 <h1>Join conscious, committed life!</h1>
@@ -139,12 +145,15 @@ function Home() {
             <div>
                 <img className="home-image" src="//st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" />
             </div>
+            {/* <div>
+                <Trending onItem={goToItem} onToggle={toggleFav} />
+            </div> */}
             </>
             }
 
             <Routes>
-                <Route path="/" element={<h1></h1>}/>
-                <Route path="search" element={<Search onSearch={search} query={query}/>} />
+                <Route path="/" element={<h1></h1>} />
+                <Route path="search" element={<Search onSearch={search} query={query} />} />
                 <Route path="search/items" element={<Results onItem={goToItem} onToggle={toggleFav} />} />
 
                 <Route path="search/items/item" element={<Detail onBack={goToHome} onToggle={toggleFav} />} />
@@ -152,7 +161,7 @@ function Home() {
                 <Route path="search/store" element={<Collection onItem={goToItem} onToggle={toggleFav} />} />
 
                 <Route path="/account" element={<Account onBack={goToHome} />} />
-                <Route path="/profile" element={<Profile onBack={goToHome} onSignOut={signOut} />} />
+                <Route path="/profile" element={<Profile onBack={goToHome} onSignOut={resetToken} />} />
 
                 <Route path="/favs" element={<Favs onBack={goToHome} onItem={goToItem} onToggle={toggleFav} />} />
 

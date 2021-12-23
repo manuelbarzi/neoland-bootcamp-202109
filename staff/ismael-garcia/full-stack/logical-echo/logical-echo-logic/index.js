@@ -7,6 +7,9 @@ const searchItems = require('./search-items')
 const retrieveItemsByStore = require('./retrieve-items-by-store')
 const registerSubscription = require('./register-subscription')
 const retrieveItem = require('./retrieve-item')
+const registerClickedItem = require('./register-clicked-item')
+const registerSearch = require('./register-search')
+const retrieveTrendingItems = require('./retrieve-trending-items')
 
 module.exports = {
     registerUser,
@@ -17,5 +20,8 @@ module.exports = {
     searchItems,
     retrieveItemsByStore,
     registerSubscription,
-    retrieveItem
+    retrieveItem,
+    registerClickedItem,
+    registerSearch,
+    retrieveTrendingItems
 }

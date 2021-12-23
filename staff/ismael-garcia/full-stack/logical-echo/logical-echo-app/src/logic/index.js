@@ -9,6 +9,7 @@ import retrieveFavItems from './retrieve-fav-items'
 import retrieveItemsCollection from './retrieve-items-collection'
 import searchItems from './search-items'
 import registerSubscription from './register-subscription'
+import retrieveTrendingItems from './retrieve-trending-items'
 
 export {
     signInUser,
@@ -21,5 +22,6 @@ export {
     retrieveFavItems,
     retrieveItemsCollection,
     searchItems,
-    registerSubscription
+    registerSubscription,
+    retrieveTrendingItems
 }

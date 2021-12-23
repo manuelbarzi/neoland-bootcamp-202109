@@ -1,4 +1,4 @@
-const { retrieveItem } = require('logical-echo-logic')
+const { retrieveItem, registerClickedItem } = require('logical-echo-logic')
 const { handleError, validateAuthorizationAndExtractPayload } = require('./helpers')
 
 module.exports = async (req, res) => {
@@ -6,6 +6,13 @@ module.exports = async (req, res) => {
 
     try {
         const { sub: id } = validateAuthorizationAndExtractPayload(authorization)
+
+        const clickedItem = {
+            item_id: q,
+            date: new Date()
+        }
+
+        await registerClickedItem(clickedItem)
 
         const item = await retrieveItem(id, q)
 

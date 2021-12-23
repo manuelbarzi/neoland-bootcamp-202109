@@ -1,13 +1,15 @@
 const { validateString, validateDate } = require('./helpers/validators')
 const { models: { Search } } = require('logical-echo-data')
 
-function registerSearch(query, date) {
+function registerSearch(search) {
+    const { query, date } = search
+    
     validateString(query)
     validateDate(date)
 
     return (async () => {
         try {
-            await Search.create({ query, date })
+            await Search.create(search)
 
         } catch (error) {
             throw error 

@@ -44,10 +44,10 @@ function Results({ onItem, onToggle }) {
         <ul className="results container container--vertical">
             {
                 items.map(({ item_id, name, images, price, isFav }) => <li key={item_id}className="home__results-item" onClick={() => onItem(item_id)}>
+                    <img src={images[0]} alt='' />
                     <h2>{name}</h2>
                     <span>{price}</span>
-                    <img src={images[0]} alt='' />
-                    <button className="button" onClick={event => {
+                    <button className="button fav-button" onClick={event => {
                             event.stopPropagation()
 
                             onToggle(item_id)

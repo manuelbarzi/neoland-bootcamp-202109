@@ -10,17 +10,19 @@ function Navbar({ onLogin, onProfile, onNewsletter, onFavs, onSearch, onHome }) 
 
     const location = useLocation()
 
-    const [view, setView] = useState('loggedOut')
+    const [view, setView] = useState('')
+
+    const { token } = sessionStorage
 
     useEffect(() => {
         logger.debug('Navbar -> useEffect')
 
-        const { token } = sessionStorage
-
-        if (token)
+        if (token) {
             setView('loggedIn')
-
-      }, []);
+        } else {
+            setView('loggedOut')
+        }
+      }, [token]);
 
     return <>
     <nav className="navbar">

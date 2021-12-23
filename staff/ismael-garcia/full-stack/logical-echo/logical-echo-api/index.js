@@ -13,7 +13,8 @@ const {
     searchItems,
     retrieveItemsByStore,
     registerSubscription,
-    retrieveItem
+    retrieveItem,
+    retrieveTrendingItems
 } = require('./handlers')
 
 const logger = require('./utils/my-logger')
@@ -51,6 +52,8 @@ logger.info('starting server');
         api.get('/search/store', retrieveItemsByStore)
 
         api.post('/subscriptions', jsonBodyParser, registerSubscription)
+
+        api.get('/trends', retrieveTrendingItems)
 
         api.all('*', (req, res) => {
             res.status(404).json({ message: 'sorry, this endpoint is not available' })

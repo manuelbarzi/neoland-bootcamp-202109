@@ -7,5 +7,6 @@ module.exports = {
     searchItems: require('./search-items'),
     retrieveItemsByStore: require('./retrieve-items-by-store'),
     registerSubscription: require('./register-subscription'),
-    retrieveItem: require('./retrieve-item')
+    retrieveItem: require('./retrieve-item'),
+    retrieveTrendingItems: require('./retrieve-trending-items')
 }

@@ -1,13 +1,14 @@
-const { validateString, validateDate } = require('./helpers/validators')
+const { validateItemId, validateDate } = require('./helpers/validators')
 const { models: { ClickedItem } } = require('logical-echo-data')
 
-function registerClickedItem(url, date) {
-    validateString(url)
+function registerClickedItem(clickedItem) {
+    const { item_id, date } = clickedItem
+    validateItemId(item_id)
     validateDate(date)
 
     return (async () => {
         try {
-            await ClickedItem.create({ url, date })
+            await ClickedItem.create(clickedItem)
 
         } catch (error) {
             throw error 
