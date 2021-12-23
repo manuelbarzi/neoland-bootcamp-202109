@@ -1,13 +1,14 @@
 # Nts
 
 ## Introduction
-<img src='https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.behance.net%2Fgallery%2F62225969%2FIBM-Virtual-hotel-concierge&psig=AOvVaw3lg3_Oh6n77eEqAmIXghOu&ust=1640310185834000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCPjYseLl-PQCFQAAAAAdAAAAABAD'>
+
+![intro](https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/fbc52262225969.5a89af053bacd.gif)
 
 
 Backoffice application to a receptive tourism operator in Argentina, capable of managing reservations for each agency that registers
 
 
-![nts]()
+![nts](./images/nts.png)
 
 ## Functional description
 
@@ -20,42 +21,46 @@ Backoffice application to a receptive tourism operator in Argentina, capable of 
 
 ### Use cases
 
-![use cases]('./images/nts-use-cases.jpeg')
+![use cases](./images/nts-use-cases.jpeg)
 
 ### Activities
 
 #### Register and Login
 
-![register and login]('./images/activity-register-login.jpeg')
+![register and login](./images/activity-register-login.jpeg)
 
-### Modify user
+#### Modify user
 
-![modify user] ('./images/modify-user.jpeg')
+![modify](./images/modify-user.jpeg)
 
-### Delete user
+#### Delete user
 
-![delete user] ('./images/delete-user.jpeg')
+![delete](./images/delete-user.jpeg)
 
-## Search 
+#### Search 
 
-## Create Reservation
+![search](./images/search.jpeg)
+
+#### Reservation
+
+![reservation](./images/reservation.jpeg)
+
 
 ## Technical description
 
 ### Blocks
 
-![blocks]('./images/Nts-Page-Api-Data-Base.jpeg')
+![blocks](./images/Nts-Page-Api-Data-Base.jpeg)
 
 ### Sequences
 
 #### Register user && all cases 
 
-![register sequence]('./images/nts-uml.jpeg')
+![register sequence](./images/nts-uml.jpeg)
 
 ### Data model
 
-![data model]('./images/nts-data-model.jpeg')
-
+![data model](./images/nts-data-model.jpeg)
 
 ### Technologies
 
@@ -68,3 +73,10 @@ Backoffice application to a receptive tourism operator in Argentina, capable of 
 - Mongo
 - Mongoose
 
+## TODO (alias "MEA CULPA")
+
+- Testing
+- Css 
+- Validators
+- Fix dates
+- DB with prices and hotel list
