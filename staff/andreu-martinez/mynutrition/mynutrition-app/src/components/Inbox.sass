@@ -1,0 +1,56 @@
+*
+	//border: 1px dashed black
+	
+.inbox-container
+	display: flex
+	flex-direction: column
+	width: 100%
+	padding: 30px
+
+.inbox-topbar
+	display: flex
+	flex-direction: row
+	justify-content: flex-start
+	width: 100%
+	padding: 10px
+
+.messages__container
+	display: flex
+	flex-direction: row  
+	padding: 3px  
+   
+.messages
+	display: flex
+	flex-direction: row
+	flex-wrap: wrap
+	flex: 1 1 0
+	justify-content: flex-start
+	padding: 3px
+	// border-radius: 10px
+	text-align: right
+	gap: 10px
+	width: 0
+	box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)
+
+	&__item1
+		flex-grow: 2
+	&__item2
+		flex-grow: 2
+	&__item3
+		flex-grow: 3
+	&__item4
+		flex-grow: 9
+	&__item5
+		flex-grow: 3
+	&__new
+		background-color: rgb(207, 220, 250)
+	
+	&:hover
+		cursor: pointer
+		transform: scale(1.01)
+		transition: transform .1s
+		background-color: rgb(227, 248, 252)
+
+.multiSelectorCheckBox
+	vertical-align: bottom
+	margin-right: 5px

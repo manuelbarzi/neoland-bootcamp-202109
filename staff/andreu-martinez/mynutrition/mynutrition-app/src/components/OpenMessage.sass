@@ -1,0 +1,66 @@
+*
+	//border: 1px dashed black
+
+textarea
+	width: 100%
+	height: 150px
+	padding: 12px 20px
+	box-sizing: border-box
+	border: 2px solid #ccc
+	border-radius: 4px
+	background-color: #f8f8f8
+	font-size: 16px
+	resize: none
+
+.chain
+	&--container
+		display: flex
+		flex-direction: column
+		flex-basis: auto
+		justify-content: flex-start
+		padding: 2rem
+		width: 50%
+		box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)
+		
+    
+
+
+.message
+	&--container
+		display: flex
+		flex-direction: column
+		text-align: left
+		padding: 1rem
+		width: auto
+		margin-top: 2%
+		margin: 1%	
+		background-color: #a1d3f1
+		border-radius: 10px
+		box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)
+	&--topbar
+		display: flex
+		flex-wrap: wrap
+		border-bottom: 1px
+		padding: 10px
+		background-color: #4393c5
+		border-radius: 5px
+		
+	&--from-date
+		display: flex
+		justify-content: space-between
+		margin-top: 2%
+		padding: 10px
+		background-color: #4393c5
+		border-radius: 5px
+	&--body
+		display: flex
+		justify-content: flex-start
+		text-align: justify
+		margin-top: 2%
+		padding: 10px
+		background-color: #4393c5
+		border-radius: 5px
+
+
+input::-webkit-calendar-picker-indicator
+	display: none !important

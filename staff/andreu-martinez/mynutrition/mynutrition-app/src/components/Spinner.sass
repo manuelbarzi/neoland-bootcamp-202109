@@ -1,0 +1,216 @@
+.spinner
+	background-color: rgba(0, 0, 0, 0.3)
+	position: absolute
+	background-color: black
+	height: 100%
+	width: 100vw
+	top: -15px
+	left: -10px
+	opacity: 0.6
+	z-index: 1
+
+	&__image
+
+
+.lds-ring 
+	display: inline-block
+	position: relative
+	width: 80px
+	height: 80px
+
+.lds-ring div 
+	box-sizing: border-box
+	display: block
+	position: absolute
+	width: 64px
+	height: 64px
+	margin: 8px
+	border: 8px solid #ffffff
+	border-radius: 50%
+	animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite
+	border-color: #556696 transparent transparent transparent
+
+.lds-ring div:nth-child(1) 
+	animation-delay: -0.45s
+
+.lds-ring div:nth-child(2) 
+	animation-delay: -0.3s
+
+.lds-ring div:nth-child(3) 
+	animation-delay: -0.15s
+
+@keyframes lds-ring 
+	0% 
+		transform: rotate(0deg)
+	
+	100% 
+		transform: rotate(360deg)
+	
+
+		
+
+// .watermelon, .slice 
+// 	position: absolute
+// 	width: 100vw
+// 	height: 100vh
+
+
+// .watermelon div, .slice div, i 
+// 	position: absolute
+// 	top: 50%
+// 	left: 50%
+// 	transform: translate(-50%, -50%)
+// 	border-radius: 100%
+
+
+// i 
+// 	border-top: 0.3em solid #626262
+// 	border-bottom: 0.3em solid #626262
+// 	border-left: 0.15em solid #626262
+// 	border-right: 0.15em solid #626262
+// 	border-radius: 0.15em / 0.3em
+
+
+// .watermelon 
+// 	div:first-of-type 
+// 		border: 5.9em solid #90B73F
+// 		border-top: 5.9em solid transparent
+	
+
+// 	div:nth-of-type(2) 
+// 		border: 5.7em solid #D9E38F
+// 		border-top: 5.7em solid transparent
+	
+
+// 	div:nth-of-type(3)
+// 		border: 5.2em solid #FDFAF7
+// 		border-top: 5.2em solid transparent
+	
+
+// 	div:last-of-type 
+// 		border: 5em solid #ff8fa9
+// 		border-top: 5em solid transparent
+		
+// 		i:first-of-type 
+// 			top: 30px
+// 			left: 15px
+// 			transform: rotate(-12deg)
+		
+		
+// 		i:nth-of-type(2) 
+// 			top: 35px
+// 			left: -20px
+// 			transform: rotate(20deg)
+		
+		
+// 		i:nth-of-type(3) 
+// 			top: 10px
+// 			left: 30px
+// 			transform: rotate(100deg)
+		
+		
+// 		i:nth-of-type(4) 
+// 			left: 20px
+// 			top: -5px
+// 			transform: rotate(80deg)
+		
+		
+// 		i:nth-of-type(5) 
+// 			left: -45px
+// 			transform: rotate(90deg)
+		
+		
+// 		i:nth-of-type(6), i:nth-of-type(7)
+// 			left: -30px
+		
+// 		i:nth-of-type(6) 
+// 			top: 15px
+// 			transform: rotate(65deg)
+		
+		
+// 		i:nth-of-type(7) 
+// 			top: -15px
+// 			transform: rotate(102deg)
+		
+		
+// 		i:nth-of-type(8) 
+// 			left: 35px
+// 			top: -20px
+// 			transform: rotate(75deg)
+		
+		
+// 		i:nth-of-type(9) 
+// 			left: -45px
+// 			top: -30px
+// 			transform: rotate(115deg)
+		
+		
+// 		i:last-of-type 
+// 			top: 15px
+// 			left: -5px
+		
+	
+
+
+
+// .slice 
+// 	transform: translateY(-25px)
+// 	animation: gimme 2s ease-in-out infinite alternate
+	
+// 	div 
+// 		top: 50%
+
+// 	div:first-of-type 
+// 		border: 5.9em solid transparent
+// 		border-top: 5.9em solid #90B73F
+	
+
+// 	div:nth-of-type(2) 
+// 		border: 5.7em solid transparent
+// 		border-top: 5.7em solid #D9E38F
+	
+
+// 	div:nth-of-type(3) 
+// 		border: 5.2em solid transparent
+// 		border-top: 5.2em solid #FDFAF7
+	
+
+// 	div:last-of-type 
+// 		border: 5em solid transparent
+// 		border-top: 5em solid #FF8FAA
+		
+// 		i:first-of-type 
+// 			top: -40px
+// 			left: 15px
+// 			transform: rotate(12deg)
+		
+// 		i:nth-of-type(2) 
+// 			top: -45px
+// 			left: -20px
+// 			transform: rotate(-12deg)
+		
+// 		i:nth-of-type(3) 
+// 			top: -50px
+// 			left: 1px
+// 			transform: rotate(6deg)
+		
+		
+// 		i:last-of-type 
+// 			top: -20px
+	
+
+
+// body 
+// 	background-color: #ffeded5e
+
+
+// @keyframes gimme 
+// 	0% 	 
+// 		transform: translateY(-25px)
+// 	10%	
+// 		transform: translateY(-25px)
+// 	90%	
+// 		transform: translateY(0)
+// 	100% 
+// 		transform: translateY(0)
+
