@@ -3,19 +3,24 @@ import context from './context'
 /**
  * Toggle Fav Game
  * 
- * @param {string} id The id that will be toggle
+ * @param {string} userId The user id
+ * @param {string} gameId The id that will be toggle
  */
 
-const toggleFavGame = (id) => {
-    if (typeof id !== 'string') throw new TypeError(`${id} is not a string`)
+const toggleFavGame = (token, gameId) => {
+    if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
+    if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
+
+    if (typeof gameId !== 'string') throw new TypeError(`${gameId} is not a string`)
 
     return (async () => {
         const res = await fetch(`http://localhost:8000/api/users/favs`, {
             method: 'PATCH',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ gameId: id })
+            body: JSON.stringify({ gameId: gameId })
         })
 
         const { status } = res

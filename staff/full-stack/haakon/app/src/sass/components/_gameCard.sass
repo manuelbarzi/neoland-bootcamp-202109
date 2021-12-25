@@ -1,4 +1,4 @@
-.cards
+.gameCards
     list-style: none
     margin: 0
     padding: 0
@@ -8,27 +8,23 @@
     grid-template-columns: 1fr
     grid-template-rows: 1fr
 
-.cards__item
+.gameCard
     background-color: $bg-color
     display: flex
     flex-direction: column
-    justify-content: center
-    align-items: center
     border-radius: .6em
     overflow: hidden
-
-.item__botton
-    padding: 1em
-
-.botton__row-1
-    display: flex
-    justify-content: space-between
+    .gameCardData
+        padding: 1.4em 1.7em
+        .gameCardData__row-1
+            display: flex
+            justify-content: space-between
 
 @media (min-width: 600px)
-    .cards
+    .gameCards
         grid-template-columns: 1fr 1fr
         grid-template-rows: repeat(5, 1fr)
 
 @media (min-width: 700px)
-    .cards
+    .gameCards
         grid-template-columns: repeat(3, 1fr)
