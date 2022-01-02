@@ -5,10 +5,6 @@ const game = new Schema({
     name: {
         type: String,
     },
-    platform: {
-        type: ObjectId,
-        ref: 'Platform'
-    },
     description: {
         type: String
     },
@@ -16,6 +12,27 @@ const game = new Schema({
         type: Date
     },
     backgroundImage: {
+        type: String
+    },
+    screenshots: [{
+        type: String
+    }],
+    platforms: [
+        {
+            type: ObjectId,
+            ref: 'Platform'
+        }
+    ],
+    genres: [
+        {
+            type: ObjectId,
+            ref: 'Genre'
+        }
+    ],
+    score: {
+        type: Number
+    },
+    website: {
         type: String
     }
 })

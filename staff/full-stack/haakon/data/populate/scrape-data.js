@@ -2,7 +2,7 @@ const axios = require('axios')
 const fs = require('fs').promises
 const path = require('path')
 const mongoose = require('mongoose')
-const { models: { Game, Platform } } = require('../index')
+const { models: { Game, Platform, Genre } } = require('../index')
 
 const uri = 'mongodb://localhost/demo'
 
@@ -12,30 +12,78 @@ const uri = 'mongodb://localhost/demo'
 
             await Platform.deleteMany()
             await Game.deleteMany()
+            await Genre.deleteMany()
 
-            const res = await axios.get('https://api.rawg.io/api/platforms?key=8cc91cc3d7094411940ec44617d66d39')
+            debugger
+
+            const res = await axios.get('https://api.rawg.io/api/games?key=8cc91cc3d7094411940ec44617d66d39')
 
             const { results } = res.data
 
-            const insertions = results.map(async ({ name, games }) => {
-                const platform = await Platform.create({ name })
+            const insertions = results.map(async ({ name, released, background_image, metacritic, platforms, genres, short_screenshots }) => {
+                const game = {}
 
-                const insertions = games.map(async ({ id, name }) => {
-                    const game = {}
+                const screenshots = short_screenshots.map(({ image }) => {
+                    const a = image
 
-                    game.name = name
-                    game.platform = platform._id
-
-                    const { data: { released, background_image, description_raw } } = await axios.get(`https://api.rawg.io/api/games/${id}?key=8cc91cc3d7094411940ec44617d66d39`)
-
-                    game.description = description_raw
-                    game.released = released
-                    game.backgroundImage = background_image
-
-                    await Game.create(game)
+                    return a
                 })
 
-                await Promise.all(insertions)
+                await Promise.all(
+                    platforms.map(async item => {
+                        const platform = {
+                            name: item.platform.name
+                        }
+
+                        try {
+                            await Platform.create(platform)
+                        } catch (error) {
+                            if (error.code === 11000)
+                                console.log(error.code);
+                        }
+                    })
+                )
+
+                const _platforms = await Promise.all(
+                    platforms.map(async item => {
+                        const findPlatform = await Platform.findOne({ name: item.platform.name })
+                        return findPlatform._id
+                    })
+                )
+
+                await Promise.all(
+                    genres.map(async genre => {
+                        const _genre = {
+                            name: genre.name
+                        }
+
+                        try {
+                            await Genre.create(_genre)
+
+                        } catch (error) {
+                            if (error.code === 11000)
+                                console.log(error.code);
+                        }
+                    })
+                )
+
+                const _genres = await Promise.all(
+                    genres.map(async genre => {
+                        const findGenre = await Genre.findOne({ name: genre.name })
+                        return findGenre._id
+                    })
+                )
+
+                game.name = name
+                game.released = released
+                game.backgroundImage = background_image
+                game.score = metacritic
+                game.screenshots = screenshots
+                game.platforms = _platforms
+                game.genres = _genres
+
+
+                await Game.create(game)
             })
 
             await Promise.all(insertions)
