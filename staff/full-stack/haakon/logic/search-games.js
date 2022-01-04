@@ -11,12 +11,17 @@ function searchGames(query) {
     const regex = new RegExp(query, 'i')
 
     return (async () => {
-        const _games = await Game.find({ name: regex }).lean()
+        const _games = await Game.find({ name: regex }).populate('platforms', {
+            name: 1
+        }).populate('genres', {
+            name: 1
+        }).lean()
 
         if (!_games) throw new NotFoundError(`game with that ${query} doesn't found`)
 
         _games.forEach(game => {
             game.id = game._id.toString()
+            delete game.screenshots
             delete game._id
             delete game.__v
         })

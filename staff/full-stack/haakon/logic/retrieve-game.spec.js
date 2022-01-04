@@ -10,15 +10,13 @@ describe('retrieveGame', () => {
     before(() => mongoose.connect(MONGO_URL))
 
     it('should succeed when found correct game', async () => {
-        const id = '61b8d030158b2213c7cc367e'
+        const id = '61d227317753c73a12fa98b4'
 
         const game = await retrieveGame(id)
         expect(game).to.be.a('object')
         expect(game.id).to.equal(id)
         expect(game.name).to.to.be.a('string')
         expect(game.name).to.equal('Grand Theft Auto V')
-        expect(game.description).to.to.be.a('string')
-        expect(game.description).to.equal('Rockstar Games went bigger, since their previous installment of the series. You get the complicated and realistic world-building from Liberty City of GTA4 in the setting of lively and diverse Los Santos, from an old fan favorite GTA San Andreas. 561 different vehicles (including every transport you can operate) and the amount is rising with every update. \r\nSimultaneous storytelling from three unique perspectives: \r\nFollow Michael, ex-criminal living his life of leisure away from the past, Franklin, a kid that seeks the better future, and Trevor, the exact past Michael is trying to run away from. \r\nGTA Online will provide a lot of additional challenge even for the experienced players, coming fresh from the story mode. Now you will have other players around that can help you just as likely as ruin your mission. Every GTA mechanic up to date can be experienced by players through the unique customizable character, and community content paired with the leveling system tends to keep everyone busy and engaged.')
         // expect(game.released).to.to.be.instanceOf(Date) // expect to be ? instanceOf Date or Object or i don't know
         // expect(game.released).to.equal('2013-09-17T00:00:00.000Z') // see Date construtor
         expect(game.backgroundImage).to.to.be.a('string')

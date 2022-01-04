@@ -6,11 +6,11 @@ const searchGames = require('./search-games')
 
 const { env: { MONGO_URL } } = process
 
-describe('searchGames', () => {
+describe.only('searchGames', () => {
     before(() => mongoose.connect(MONGO_URL))
 
-    it('should succeed with found correct games', async () => {
-        const query = 'grand'
+    it('should succeed when found correct games', async () => {
+        const query = 'a'
 
         const games = await searchGames(query)
         expect(games).to.be.instanceOf(Array)
@@ -18,10 +18,11 @@ describe('searchGames', () => {
             expect(game).to.exist
             expect(game.id).to.exist
             expect(game.name).to.exist
-            expect(game.platform).to.exist
-            expect(game.description).to.exist
             expect(game.released).to.exist
             expect(game.backgroundImage).to.exist
+            expect(game.platforms).to.exist
+            expect(game.genres).to.exist
+            expect(game.score).to.exist
         })
     })
 
