@@ -12,6 +12,7 @@ function Modal({ level, message, onAccept }) {
         logger.error(message)
 
     const className = `modal__message ${level ? `modal__message--${level}` : ''}`
+
     return <>
         <div className='container container--vertical modal'>
             <div className='container container--vertical modal__panel'>

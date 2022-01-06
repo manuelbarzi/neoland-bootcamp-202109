@@ -37,6 +37,7 @@ function App() {
             {spinner && <Spinner />}
 
             {modal && <Modal level={level} message={modal} onAccept={acceptModal} />}
+            
         </AppContext.Provider>
     </>
 }
