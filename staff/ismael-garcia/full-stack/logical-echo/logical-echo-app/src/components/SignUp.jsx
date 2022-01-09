@@ -14,13 +14,13 @@ function SignUp({ onSignUp, onSignIn, onBack }) {
         <input className="field" type="password" name="password" id="register-password" placeholder="Password" required />
 
         <div className="container">
-            <button type="button" className="button button--medium" onClick={(event) => {
+            <button type="button" className="button button--medium" onClick={event => {
                 event.preventDefault()
 
                 onSignIn()
             }}>Sign in</button>
             <button type="submit" className="button button--medium button--dark">Sign Up</button>
-            <button type="button" className="button button--medium" onClick={(event) => {
+            <button type="button" className="button button--medium" onClick={event => {
                 event.preventDefault()
                 
                 onBack()

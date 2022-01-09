@@ -5,7 +5,7 @@ import logger from '../utils/logger'
 import SignUp from './SignUp'
 import SignIn from './SignIn'
 
-function Account({ onBack, onLogin }) {
+function Account({ onBack }) {
     logger.debug('Account -> render')
 
     const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
@@ -22,11 +22,11 @@ function Account({ onBack, onLogin }) {
 
             await signUpUser(email, password)
 
-            onLogin(true)
-
             onFlowEnd()
 
             onModal('Account created', 'success')
+
+            onBack()
         } catch ({ message }) {
             onFlowEnd()
 
