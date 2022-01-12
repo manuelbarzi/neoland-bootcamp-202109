@@ -13,7 +13,6 @@ import Account from './Account'
 import Profile from './Profile'
 import Favs from './Favs'
 import Newsletter from './Newsletter'
-// import Trending from './Trending'
 import './Home.css'
 
 function Home() {
@@ -28,7 +27,6 @@ function Home() {
     const [query, setQuery] = useState(queryParams.get('q'))
     const [view, setView] = useState('home')
     const [items, setItems] = useState([])
-    // const [login, setLogin] = useState(false)
 
     const resetToken = () => {
         delete sessionStorage.token
@@ -37,8 +35,6 @@ function Home() {
 
         onFlowEnd()
     }
-
-    // const setLoggedIn = () => setLogin(true)
 
     const search = query => {
         setQuery(query)
@@ -145,9 +141,6 @@ function Home() {
             <div>
                 <img className="home-image" src="//st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" />
             </div>
-            {/* <div>
-                <Trending onItem={goToItem} onToggle={toggleFav} />
-            </div> */}
             </>
             }
 
