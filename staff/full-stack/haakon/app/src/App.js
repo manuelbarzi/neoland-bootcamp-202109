@@ -2,35 +2,32 @@ import React from 'react'
 import Home from './pages/Home'
 import SearchGames from './pages/SearchGames'
 import DetailGame from './pages/DetailGame'
-import Header from './components/Header'
-import { Link, Route } from 'wouter'
-import StaticContex from './context/StaticContext'
-import { GamesContextProvider } from './context/GamesContext'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import { Route } from 'wouter'
 
 const App = () => {
   return <>
-    <StaticContex.Provider value={
-      {
-        name: 'Adri',
-        age: 'No me preguntes eso'
-      }
-    }>
-      <GamesContextProvider>
-        <Header></Header>
-        <Route
-          component={Home}
-          path='/'
-        />
-        <Route
-          component={SearchGames}
-          path='/search/:query'
-        />
-        <Route
-          component={DetailGame}
-          path='/game/:id'
-        />
-      </GamesContextProvider>
-    </StaticContex.Provider>
+    <Route
+      component={Home}
+      path='/'
+    />
+    <Route
+      component={SearchGames}
+      path='/search/:query'
+    />
+    <Route
+      component={DetailGame}
+      path='/game/:id'
+    />
+    <Route
+      component={Login}
+      path='/login'
+    />
+    <Route
+      component={Register}
+      path='/register'
+    />
   </>
 }
 

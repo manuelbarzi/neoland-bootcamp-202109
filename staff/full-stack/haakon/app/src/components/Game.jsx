@@ -1,10 +1,7 @@
-import React, { useState } from "react";
 import { Link } from "wouter";
 import '../sass/styles.sass'
 
-export default function Game({ id, backgroundImage, name, platform }) {
-    const [gameId, setGameId] = useState(null)
-
+export default function Game({ id, backgroundImage, name, platforms, genres, score }) {
     return (
         <li key={id} className='gameCard'>
             <div className='gameCardBackground'>
@@ -12,11 +9,11 @@ export default function Game({ id, backgroundImage, name, platform }) {
             </div>
             <div className='gameCardData'>
                 <div className='gameCardData__row-1'>
-                    <p>{platform}</p>
-                    {/* <button>80</button> */}
+                    <div className="gameCardData__row-1__platforms">{platforms.map(({ _id, name }) => <span key={_id}>{name}, </span>)}</div>
+                    <div className="score">{score}</div>
                 </div>
-                <h3 className='gameCardData__row-2'><Link onClick={() => setGameId(id)} to={`/game/${id}`} className="gameCardLink">{name}</Link></h3>
-                <p className='gameCardData__row-3'>Action, Adventure</p>
+                <h3 className='gameCardData__row-2'><Link to={`/game/${id}`} className="gameCardLink">{name}</Link></h3>
+                <div className="gameCardData__row-3">{genres.map(({ _id, name }) => <span key={_id}>{name}, </span>)}</div>
                 <div className='gameCardData__row-4'>
                     <button className='icon'>
                         <div className='far fa-bookmark fa-2x'></div>
@@ -26,7 +23,6 @@ export default function Game({ id, backgroundImage, name, platform }) {
                     </button>
                 </div>
             </div>
-
         </li>
     )
 }

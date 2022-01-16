@@ -1,11 +1,18 @@
-import React, { useContext } from "react"
-import Game from "components/Game"
+import React from "react"
+import GameDetail from "../components/GameDetail"
+import Header from "../components/Header"
 import useGameDetail from "../hooks/useDetailGame"
+import Spinner from "components/Spinner"
 
 export default function DetailGame({ params }) {
     const { id } = params
-    debugger
-    const [loading, game] = useGameDetail(id)
+    const { gameDetail, loading } = useGameDetail(id)
 
-    return <Game game={game} />
+    return <>
+        <Header></Header>
+        {loading
+            ? <Spinner />
+            : <GameDetail gameDetail={gameDetail} />
+        }
+    </>
 }

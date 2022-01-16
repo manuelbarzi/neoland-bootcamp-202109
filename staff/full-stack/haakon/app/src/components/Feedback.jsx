@@ -16,7 +16,7 @@ function Feedback({ level, message, onAccept }) {
     return <div className="feedback">
         <div className="panel">
             <p className={className}>{message}</p>
-            <button className="btn" onClick={onAccept}>Accept</button>
+            <button className="btn btn--dark" onClick={onAccept}>Accept</button>
         </div>
     </div>
 }

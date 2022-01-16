@@ -1,23 +1,22 @@
-import { useContext, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { retrieveGameDetail } from "../logic"
 
 export default function useGameDetail(id) {
     const [loading, setLoading] = useState(false)
-    const [game, setGame] = useState({})
+    const [gameDetail, setGameDetail] = useState({})
 
     useEffect(() => {
         (async () => {
             setLoading(true)
             try {
-                debugger
-                const _game = await retrieveGameDetail(id)
+                const gameDetail = await retrieveGameDetail(id)
+                setGameDetail(gameDetail)
                 setLoading(false)
-                setGame(_game)
-            } catch (message) {
-                console.error(message);
+            } catch ({ message }) {
+                console.log(message);
             }
         })()
     }, [id])
 
-    return { loading, game }
+    return { loading, gameDetail }
 }
