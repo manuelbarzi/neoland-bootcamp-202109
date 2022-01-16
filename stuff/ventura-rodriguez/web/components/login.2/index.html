@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js" defer></script>
+</head>
+<body>
+
+    <!-- landing page -->
+    <section id="landing" class="landing">
+        <h1 class="landing__title">Welcome to my first vanilla app</h1>
+        <article class="landing__control">
+            <button class="button button--warning">Register</button>
+            <button class="button button--success">Log in</button>
+        </article>
+    </section>
+
+
+    <!-- register page -->
+    <form id="register" class="form panel--off">
+        
+        <fieldset class="form__group">
+            <label for="nameRegister" class="form__label">Introduce tu nombre:</label>
+            <input type="text" id="nameRegister" class="form__input" placeholder="Lucatiel"
+            minlength="4" required>
+            <label for="userNameRegister" class="form__label">Introduce tu nombre de usuario:</label>
+            <input type="text" id="userNameRegister" class="form__input" placeholder="lucatielMirrahDSII"
+                autocomplete="username" minlength="4" required>
+            <label for="psswdRegister" class="form__label">Introduce tu contraseña:</label>
+            <input type="password" id="psswdRegister" class="form__input"
+                placeholder="Debe incluir letras y números" autocomplete="current-password" minlength="8" required>
+        </fieldset>
+        <div class="form__box-btn">
+            <button type="button" class="button button--warning">login</button>
+            <button type="submit" class="button button--success">register</button>
+        </div>
+    </form>
+
+
+    <!-- login page -->
+    <form id="logIn" class="form panel--off">
+        
+        <fieldset class="form__group">
+            <label for="userNameLogin" class="form__label">Introduce tu nombre de usuario:</label>
+            <input type="text" id="userNameLogin" class="form__input" autocomplete="username"
+                placeholder="lucatielMirrahDSII" minlength="4" required>
+            <label for="psswdLogin" class="form__label">Introduce tu contraseña:</label>
+            <input type="password" id="psswdLogin" class="form__input" autocomplete="current-password"
+                minlength="8" required>
+        </fieldset>
+        <div class="form__box-btn">
+            <button type="button" class="button button--warning">register</button>
+            <button type="submit" class="button button--success">login</button>
+        </div>
+    </form>
+
+
+    <!-- home page -->
+    <section id="home" class="panel panel--off">
+        <h1 class="panel__title">Bienvenido a la home</h1>
+        <div class="panel__control">
+            <button type="button" class="button button--warning">salir</button>
+            <button type="button" class="button">perfil</button>
+        </div>
+    </section>
+
+    <!-- profile page -->
+    <section id="profile" class="form panel--off">
+
+        <form action="">
+            <fieldset class="form__group">
+                <legend class="form__legend form__legend">Cambiar contraseña</legend>
+                <label for="oldPassword" class="form__label">Introduce tu antigua contraseña:</label>
+                <input type="password" id="oldPassword" class="form__input" autocomplete=""
+                    placeholder="" minlength="8" required>
+                <label for="newPassword" class="form__label">Introduce tu nueva contraseña:</label>
+                <input type="password" id="newPassword" class="form__input" autocomplete=""
+                    minlength="8" required>
+            </fieldset>
+            <div class="form__box-btn">
+                <button type="submit" class="button button--adaptative button--success">editar</button>
+            </div>
+        </form>
+
+        <form action="">
+            <fieldset class="form__group">
+                <legend class="form__legend form__legend">Eliminar usuario</legend>
+                <label for="confirmPassword" class="form__label">Introduce tu contraseña:</label>
+                <input type="password" id="confirmPassword" class="form__input" autocomplete=""
+                    minlength="8" required>
+            </fieldset>
+            <div class="form__box-btn">
+                <button type="submit" class="button button--adaptative button--warning">eliminar cuenta</button>
+            </div>
+        </form>
+
+        <button type="button" class="button button--adaptative">volver</button>
+
+    </section>
+</body>
+</html>
