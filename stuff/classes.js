@@ -90,7 +90,7 @@ class Car extends Vehicle {
         super(brand, model, year, motor, color, plate)
     }
 
-    move() { // overrriding
+    move() { // overriding
         return '🚗💨'
     }
 }
