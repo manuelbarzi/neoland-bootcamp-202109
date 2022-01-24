@@ -19,17 +19,17 @@ const retrieveNotes = (user_id, date)=>{
     if (date) {
         validateDate(date)
 
-        const day = (date.getDate() < 10 ? '0' : '') + date.getDate()
-        const month = date.getMonth() + 1
-        const year = date.getFullYear()
-
-        const dateFormat = year + '-' + month + '-' + day
+        const dateFormat = date.getFullYear() + '-'
+        + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2) 
+            
 
         filter = { user_id: user_id, date: dateFormat };
+
     }
 
     return (async ()=>{
         const notes = await Note.find(filter).sort( { date: -1 } ).lean()
+
         if (!notes) throw new NotFoundError(`notes with id ${id} not found`)
 
         for (let index = 0; index < notes.length; index++) {

@@ -18,7 +18,6 @@ module.exports = (req, res) => {
         if (date) {
             dateFormat = new Date(date)
         }
-        
 
         retrieveNotes(user_id, dateFormat)
             .then(note => res.json(note))

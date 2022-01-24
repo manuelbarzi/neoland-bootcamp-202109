@@ -18,12 +18,10 @@ const retrieveTreatment = (user_id, date) => {
 
     if(date){
         validateDate(date)
-
-        const day = (date.getDate() < 10 ? '0' : '') + date.getDate()
-        const month = date.getMonth() + 1
-        const year = date.getFullYear()
-    
-        const dateFormat = year + '-' + month + '-' + day
+        
+        const dateFormat = date.getFullYear() + '-'
+        + ('0' + (date.getMonth()+1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2) 
+            
 
         filter={user_id:user_id,date: dateFormat}
     }
