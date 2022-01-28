@@ -31,7 +31,7 @@ function retrieveComment(token, id, callback) {
                     if (text.id === id) {
                         count++
     
-                       const texts = text.text
+                       const texts = text
     
                         if (count === 1) {
                             return callback(null, texts)

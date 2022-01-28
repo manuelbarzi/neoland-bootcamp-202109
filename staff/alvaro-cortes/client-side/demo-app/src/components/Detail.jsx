@@ -2,6 +2,8 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react';
 import { retrieveVehicle, addComent, retrieveComment, toggleFavoriteVehicle, addToCart, removeComment } from '../logic';
+import { useDispatch, useSelector } from 'react-redux'
+import { createNote, initNotes, removeNote } from './../reducers/noteReducer'
 import './Home.css'
 import AddedToCart from './Added-to-cart';
 
@@ -10,12 +12,28 @@ import logger from '../logger'
 function Detail({ onGoBack, showSpinner, showModal, hideSpinner }) {
     logger.info('Detail -> render')
 
+    const notes = useSelector(state => state)
+    const dispatch = useDispatch()
+
     const [added, setAdded] = useState(false)
     const [vehicle, setVehicle] = useState()
-    const [comments, setComments] = useState([])
     const { id } = useParams()
 
     const addedTo = () => setAdded(true)
+
+    useEffect(() => {
+        retrieveComment(sessionStorage.token, id, (error, notes) => {
+            if (error) {
+                showModal(error.message)
+
+                hideSpinner()
+
+                return
+            }
+
+            dispatch(initNotes(notes))
+        })
+    }, [dispatch])
 
     useEffect(() => {
         showSpinner()
@@ -30,28 +48,8 @@ function Detail({ onGoBack, showSpinner, showModal, hideSpinner }) {
                     return
                 }
                 hideSpinner()
+
                 setVehicle(vehicle)
-
-                try {
-                    retrieveComment(sessionStorage.token, id, (error, text) => {
-                        if (error) {
-                            showModal(error.message)
-
-                            hideSpinner()
-
-                            return
-                        }
-                        hideSpinner()
-
-                        setComments(text)
-                    })
-
-                } catch ({ message }) {
-                    showModal(message)
-
-                    hideSpinner()
-                }
-
             })
         } catch ({ message }) {
 
@@ -106,65 +104,30 @@ function Detail({ onGoBack, showSpinner, showModal, hideSpinner }) {
         }
     }
 
-    const addComentToVehicle = (id, text) => {
+    const addNote = async (id, text) => {
         showSpinner()
-
         try {
-            addComent(sessionStorage.token, id, text, error => {
-                if (error) {
-                    hideSpinner()
+            await addComent(sessionStorage.token, id, text)
 
-                    showModal(error.message)
+            hideSpinner()
 
-                    return
-                }
-
-                hideSpinner()
-
-                setComments(comments.map(comments => {
-                    if (comments.id === id)
-                        return { ...comments, text: text.push(text) }
-
-                    return comments
-                }))
-            })
+            dispatch(createNote(text, id))
 
         } catch ({ message }) {
             hideSpinner()
 
             showModal(message)
         }
-
     }
 
-    const removeComments = (id, text) => {
-        //showSpinner()
-
+    const deleteNote = async (id, text, indice) => {
+        showSpinner()
         try {
-            removeComment(sessionStorage.token, id, text, error => {
-                if (error) {
-                    showModal(error.message)
+            await removeComment(sessionStorage.token, id, text)
 
-                    hideSpinner()
+            hideSpinner()
 
-                    return
-                }
-
-                hideSpinner()
-
-                setComments(comments.map(comments => {
-                    const comment = comments
-                    if (comment === text) {
-
-                        //const index = comment.indexOf(text)
-
-                        return null
-                    }
-
-                    return comments
-                }))
-
-            })
+            dispatch(removeNote(text, id, indice))
 
         } catch ({ message }) {
             showModal(message)
@@ -173,8 +136,9 @@ function Detail({ onGoBack, showSpinner, showModal, hideSpinner }) {
         }
     }
 
-    function list(comments) {
-        const texts = comments
+    const list = (notes) => {
+        const texts = notes.text
+        const id = notes.id
 
         const list = []
 
@@ -184,7 +148,7 @@ function Detail({ onGoBack, showSpinner, showModal, hideSpinner }) {
                     <li>
                         <h5>Comentario # {i + 1}
                             <span className="button--comment">
-                                <button className="button--cart" onClick={() => removeComments(id, texts[i])}>Eliminar</button>
+                                <button className="button--cart" onClick={() => deleteNote(id, texts[i], i)}>Eliminar</button>
                             </span>
                         </h5> <hr className="hr--comment" />
                         <p className="container--comment--p">{texts[i]}</p>
@@ -221,19 +185,19 @@ function Detail({ onGoBack, showSpinner, showModal, hideSpinner }) {
 
                 const textarea = event.target.textarea.value
 
-                addComentToVehicle(id, textarea)
+                addNote(id, textarea)
             }}>
                 <textarea name="textarea" id="textarea" rows="10" cols="50" placeholder="Deja tu comentario aquí."></textarea>
-                <button type="submit" className="button button--red">Enviar</button>
+                <button className="button button--red">Enviar</button>
             </form>
-            {comments && comments.length ?
-            <ul className="welcome__results--ul ">
-                {
-                    list(comments)
-                }
-            </ul>
-            : 
-            null
+            {notes.text && notes.text.length ?
+                <ul className="welcome__results--ul ">
+                    {
+                        list(notes)
+                    }
+                </ul>
+                :
+                null
             }
         </>}
     </div>

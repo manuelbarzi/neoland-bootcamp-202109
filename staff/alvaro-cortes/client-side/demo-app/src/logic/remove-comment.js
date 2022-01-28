@@ -1,27 +1,26 @@
-function removeComment(token, id, comment, callback) {
+function removeComment(token, id, comment) {
     if (typeof token !== "string") throw new TypeError(`${token} is not a string`)
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error("Invalid token")
 
     if (typeof id !== "string") throw new TypeError(`${id} is not a string`)
     if (!id.trim().length) throw new Error("id is empty or blank.")
 
-    if (typeof callback !== "function") throw new TypeError(`${callback} is not a function`)
+    return (async () => {
+        const res = await fetch('https://b00tc4mp.herokuapp.com/api/v2/users', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
 
-    const xhr = new XMLHttpRequest
-
-    xhr.onload = () => {
-        const { status, responseText } = xhr
+        const { status } = res
 
         if (status === 401 || status === 404) {
-            const response = JSON.parse(responseText)
+            const { error } = await res.json()
 
-            const message = response.error
-
-            callback(new Error(message))
+            throw new Error(error)
         } else if (status === 200) {
-            const response = responseText
-
-            const user = JSON.parse(response)
+            const user = await res.json()
 
             const { comments = [] } = user
 
@@ -35,7 +34,7 @@ function removeComment(token, id, comment, callback) {
 
             if (item == comment) {
 
-                const index = item.indexOf(comment)
+                const index = itemTexts.indexOf(comment)
 
                 if (itemTexts.length === 1) {
                     comments.splice(indexC, 1)
@@ -44,41 +43,26 @@ function removeComment(token, id, comment, callback) {
                 itemTexts.splice(index, 1)
             }
 
-            const xhr2 = new XMLHttpRequest
+            const res2 = await fetch('https://b00tc4mp.herokuapp.com/api/v2/users', {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ comments })
+            })
 
-            xhr2.onload = () => {
-                const { status, responseText } = xhr2
+            const { status } = res2
 
-                if (status === 400 || status === 401) {
-                    const response = JSON.parse(responseText)
+            if (status === 400 || status === 401) {
+                const { error } = await res2.json()
 
-                    const message = response.error
-
-                    callback(new Error(message))
-                } else if (status === 204) {
-                    callback(null)
-                }
+                throw new Error(error)
+            } else if (status === 204) {
+                return
             }
-
-            xhr2.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-            xhr2.setRequestHeader('Authorization', `Bearer ${token}`)
-
-            xhr2.setRequestHeader('Content-Type', 'application/json')
-
-            const body = { comments }
-
-            xhr2.send(JSON.stringify(body))
-
         }
-
-    }
-
-    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-
-    xhr.send()
+    })()
 }
 
 export default removeComment

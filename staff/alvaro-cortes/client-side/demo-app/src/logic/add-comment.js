@@ -1,4 +1,4 @@
-function addComent(token, id, text, callback) {
+function addComent(token, id, text) {
     if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
 
@@ -6,66 +6,58 @@ function addComent(token, id, text, callback) {
 
     if (typeof text !== "string") throw new Error(`${text} is not a string`)
 
-    if (typeof callback !== "function") throw new TypeError(callback + " is not a function")
+    return (async () => {
+        const res = await fetch('https://b00tc4mp.herokuapp.com/api/v2/users', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
 
-    const xhr = new XMLHttpRequest
+        const { status } = res
 
-    xhr.onload = () => {
-        const { status, responseText } = xhr
         if (status === 401 || status === 404) {
-            const response = JSON.parse(responseText)
+            const { error } = await res.json()
 
-            const message = response.Error
-
-            callback(new Error(message))
+            throw new Error(error)
         } else if (status === 200) {
-            const response = responseText
-
-            const user = JSON.parse(response)
+            const user = await res.json()
 
             const { comments = [] } = user
-      
+
             const item = comments.find(item => item.id === id)
 
+            let index
+
             if (item) {
-               item.text.push(text)
-            } else
+                item.text.push(text)
+                index++
+            } else {
                 comments.push({ id, text: [text] })
-
-            const xhr2 = new XMLHttpRequest
-
-            xhr2.onload = () => {
-                const { status, responseText } = xhr2
-
-                if (status === 400 || status === 401) {
-                    const response = JSON.parse(responseText)
-
-                    const message = response.error 
-
-                    callback(new Error(message))
-                } else if (status === 204) {
-                    callback(null)
-                }
+                index = 0
             }
 
-            xhr2.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+            const res2 = await fetch('https://b00tc4mp.herokuapp.com/api/v2/users', {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ comments })
+            })
 
-            xhr2.setRequestHeader('Authorization', `Bearer ${token}`)
+            const { status } = res2
 
-            xhr2.setRequestHeader('Content-Type', 'application/json')
+            if (status === 400 || status === 401) {
+                const { error } = await res2.json()
 
-            const body = { comments }
+                throw new Error(error)
+            } else if (status === 204) {
 
-            xhr2.send(JSON.stringify(body))
+                return index
+            }
         }
-
-    }
-
-    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-
-    xhr.send()
+    })()
 }
 
 export default addComent
