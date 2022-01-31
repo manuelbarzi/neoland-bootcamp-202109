@@ -1,52 +1,40 @@
-function retrieveComment(token, id, callback) {
+function retrieveComment(token, id) {
     if (typeof token !== "string") throw new TypeError(token + " is not a string")
     if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error("Invalid token")
 
-    if (typeof callback !== "function") throw new TypeError(callback + " is not a function")
+    return (async () => {
+        const res = await fetch('https://b00tc4mp.herokuapp.com/api/v2/users', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
 
-    const xhr = new XMLHttpRequest
-
-    xhr.onload = function () {
-        //const status = xhr.status
-        const { status, responseText } = xhr
+        const { status } = res
 
         if (status === 401 || status === 404) {
-            const response = JSON.parse(responseText)
+            const { error } = await res.json()
 
-            const message = response.error
-
-            callback(new Error(message))
+            throw new Error(error)
         } else if (status === 200) {
-            const response = responseText
 
-            const user = JSON.parse(response)
+            const user = await res.json()
 
             const { comments = [] } = user
 
             if (comments.length) {
-                let count = 0
                 
+                let texts = null
+
                 comments.forEach((text) => {
-
-                    if (text.id === id) {
-                        count++
-    
-                       const texts = text
-    
-                        if (count === 1) {
-                            return callback(null, texts)
-                        }
-                    }
+                    if (text.id === id) texts = text
                 })
-            }
-        } else callback(null, [])
-    }
 
-    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Authorization', 'Bearer ' + token)
-
-    xhr.send()
+                return texts
+                
+            } else return []
+        } 
+    })()
 }
 
 export default retrieveComment

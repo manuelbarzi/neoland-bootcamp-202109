@@ -22,17 +22,7 @@ function Detail({ onGoBack, showSpinner, showModal, hideSpinner }) {
     const addedTo = () => setAdded(true)
 
     useEffect(() => {
-        retrieveComment(sessionStorage.token, id, (error, notes) => {
-            if (error) {
-                showModal(error.message)
-
-                hideSpinner()
-
-                return
-            }
-
-            dispatch(initNotes(notes))
-        })
+        dispatch(initNotes(sessionStorage.token, id))
     }, [dispatch])
 
     useEffect(() => {
@@ -107,11 +97,9 @@ function Detail({ onGoBack, showSpinner, showModal, hideSpinner }) {
     const addNote = async (id, text) => {
         showSpinner()
         try {
-            await addComent(sessionStorage.token, id, text)
-
             hideSpinner()
 
-            dispatch(createNote(text, id))
+            dispatch(createNote(text, id, sessionStorage.token))
 
         } catch ({ message }) {
             hideSpinner()
@@ -123,11 +111,11 @@ function Detail({ onGoBack, showSpinner, showModal, hideSpinner }) {
     const deleteNote = async (id, text, indice) => {
         showSpinner()
         try {
-            await removeComment(sessionStorage.token, id, text)
+            //await removeComment(sessionStorage.token, id, text)
 
             hideSpinner()
 
-            dispatch(removeNote(text, id, indice))
+            dispatch(removeNote(text, id, indice, sessionStorage.token))
 
         } catch ({ message }) {
             showModal(message)
@@ -186,6 +174,8 @@ function Detail({ onGoBack, showSpinner, showModal, hideSpinner }) {
                 const textarea = event.target.textarea.value
 
                 addNote(id, textarea)
+
+                event.target.reset()
             }}>
                 <textarea name="textarea" id="textarea" rows="10" cols="50" placeholder="Deja tu comentario aquí."></textarea>
                 <button className="button button--red">Enviar</button>
