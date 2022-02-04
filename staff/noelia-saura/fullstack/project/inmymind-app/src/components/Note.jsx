@@ -1,0 +1,41 @@
+import logger from "../logger";
+import { deleteNote } from "../logic";
+import "./Note.sass";
+
+function Note({note, deleteNote, showDelete}) {
+  logger.debug("Note->render");
+
+
+  const dateFormat = (date) => {
+    const d = new Date(date);
+    const day = (d.getDate() < 10 ? "0" : "") + d.getDate();
+    const month = d.getMonth() + 1;
+    const year = d.getFullYear();
+
+    return day + "-" + month + "-" + year;
+  };
+
+  const doDeleteNote = () => {
+    deleteNote(note.id)
+  }
+
+  return (
+    <>
+      <div className="note">
+        <div className="note__title">
+          <div className="note__title__actions">
+            {showDelete && <div className="note__title__actions__button">
+              <button onClick={doDeleteNote} >
+                <img src="https://img.icons8.com/material-outlined/24/000000/trash--v1.png" />
+              </button>
+            </div>}
+          </div>
+        </div>
+
+        <div className="note__content">{note.content}</div>
+      </div>
+    </>
+  );
+}
+
+export default Note;

@@ -1,0 +1,28 @@
+{
+  "name": "inmymind-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "watch": "nodemon .",
+    "inspect": "node --inspect-brk .",
+    "watch-inspect": "nodemon --inspect-brk .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "inmymind-data": "file:../inmymind-data",
+    "inmymind-errors": "file:../inmymind-errors",
+    "inmymind-logic": "file:../inmymind-logic",
+    "jsonwebtoken": "^8.5.1",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
