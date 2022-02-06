@@ -1,22 +1,18 @@
 # Haakon
 
-![Cyberpunk 2077](https://media.giphy.com/media/fA7rLtaJDIWEzU57CT/giphy.gif "Cyberpunk 2077")
+![Cyberpunk 2077](assets/cover-gif.webp "Cyberpunk 2077")
 
-## Descripción
+## Description
 
-Haakon es una aplicación donde podrás navegar, buscar y explorar en una base de datos de más de 50.000 videojuegos.
+Haakon is an application where you can browse, search and explore a large database.
 
-### **Organiza tu collección**
+You will be able to mark the games you want, the ones you are playing, what you have finished.
 
-Marca los juegos que deseas, los que estás jugando, lo que has finalizado. <!--escribe tus opiniones y valora-->
-
-## Casos de uso
+## Use cases
 
 ![User main functions](assets/user-cases.png)
 
 ![User second functions](assets/user-games-cases.png)
-
-<!-- Other name? -->
 
 ## User Flow
 
