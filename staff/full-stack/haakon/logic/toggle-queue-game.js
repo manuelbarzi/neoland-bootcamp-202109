@@ -1,3 +1,0 @@
-function toggleQueueGame(userId, gameId) {
-
-}

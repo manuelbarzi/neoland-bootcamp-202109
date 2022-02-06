@@ -1,24 +1,34 @@
-const { models: { Game } } = require('data')
+const { models: { Game, User } } = require('data')
 const { validateId } = require('./helpers/validators')
 const { NotFoundError } = require('customs-errors')
 
-function retrieveGame(gameId) {
+function retrieveGame(gameId, userId) {
     validateId(gameId)
+    validateId(userId)
 
-    return Game.findById(gameId).populate('platforms', {
-        name: 1
-    }).populate('genres', {
-        name: 1
-    }).lean()
-        .then(game => {
-            if (!game) throw new NotFoundError(`game with id ${gameId} not found`)
+    return (async () => {
+        const game = await Game.findById(gameId).populate('platforms', {
+            name: 1
+        }).populate('genres', {
+            name: 1
+        }).lean()
 
-            game.id = game._id.toString()
-            delete game._id
-            delete game.__v
+        if (!game) throw new NotFoundError(`game with id ${gameId} not found`)
 
-            return game
-        })
+        game.id = game._id.toString()
+        delete game._id
+        delete game.__v
+
+        const user = await User.findById(userId).lean()
+
+        if (!user) throw new NotFoundError(`user with id ${userId} not found`)
+
+        game.isFav = user.favGames.some(favId => favId.toString() === gameId)
+
+        game.released = new Intl.DateTimeFormat('es').format(game.released)
+
+        return game
+    })()
 }
 
 module.exports = retrieveGame

@@ -6,11 +6,11 @@ import Header from "../components/Header"
 
 export default function SearchGames({ params }) {
     const { query } = params
-    const { loading, games } = useGames({ query })
+    const { spinner, games } = useGames({ query })
 
     return <>
         <Header></Header>
-        {loading
+        {spinner
             ? <Spinner />
             : <ListOfGames games={games} />
         }

@@ -14,13 +14,11 @@ const uri = 'mongodb://localhost/demo'
             await Game.deleteMany()
             await Genre.deleteMany()
 
-            debugger
-
             const res = await axios.get('https://api.rawg.io/api/games?key=8cc91cc3d7094411940ec44617d66d39')
 
             const { results } = res.data
 
-            const insertions = results.map(async ({ name, released, background_image, metacritic, platforms, genres, short_screenshots }) => {
+            const insertions = results.map(async ({ id, name, released, background_image, metacritic, platforms, genres, short_screenshots }) => {
                 const game = {}
 
                 const screenshots = short_screenshots.map(({ image }) => {
@@ -74,6 +72,8 @@ const uri = 'mongodb://localhost/demo'
                     })
                 )
 
+                const { data: { website, description_raw } } = await axios.get(`https://api.rawg.io/api/games/${id}?key=8cc91cc3d7094411940ec44617d66d39`)
+
                 game.name = name
                 game.released = released
                 game.backgroundImage = background_image
@@ -81,7 +81,8 @@ const uri = 'mongodb://localhost/demo'
                 game.screenshots = screenshots
                 game.platforms = _platforms
                 game.genres = _genres
-
+                game.description = description_raw
+                game.website = website
 
                 await Game.create(game)
             })

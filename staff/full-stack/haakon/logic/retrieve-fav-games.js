@@ -1,6 +1,6 @@
 const { validateId } = require('./helpers/validators')
 const { NotFoundError } = require('customs-errors')
-const { models: { User } } = require('data')
+const { models: { User, Game } } = require('data')
 
 function retrieveFavGames(userId) {
     validateId(userId)
@@ -10,9 +10,23 @@ function retrieveFavGames(userId) {
 
         if (!user) throw new NotFoundError(`user with id ${userId} not found`)
 
-        favGames = user.favGames
+        const games = await Game.find({ _id: { $in: user.favGames } }).populate('platforms', {
+            name: 1
+        }).populate('genres', {
+            name: 1
+        }).lean()
 
-        return favGames
+        games.forEach(game => {
+            game.id = game._id.toString()
+            delete game._id
+            delete game.__v
+            delete game.screenshots
+            delete game.description
+            delete game.released
+            delete game.website
+        })
+
+        return games
     })()
 }
 

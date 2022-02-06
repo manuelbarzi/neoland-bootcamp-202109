@@ -11,14 +11,20 @@ const {
     modifyUser,
     unregisterUser,
     searchGames,
+    retrieveAllGames,
     retrieveGame,
     toggleFavGame,
-    retrieveFavGames
+    retrieveFavGames,
+    togglePlayingGame,
+    retrievePlayingGames,
+    togglePlayedGame,
+    retrievePlayedGames
 } = require('./handlers')
 
 const logger = require('./utils/my-logger')
 
 const cors = require('cors')
+
 const corsOptions = {
     "Access-Control-Allow-Methods": ['GET', 'PUT', 'POST', 'DELETE']
 }
@@ -49,11 +55,21 @@ mongoose.connect(MONGO_URL)
 
         api.get('/games', searchGames)
 
+        api.get('/games/all', retrieveAllGames)
+
         api.get('/games/:gameId', retrieveGame)
 
         api.patch('/users/favs', jsonBodyParser, toggleFavGame)
 
         api.get('/users/favs', retrieveFavGames)
+
+        api.patch('/users/playing', jsonBodyParser, togglePlayingGame)
+
+        api.get('/users/playing', retrievePlayingGames)
+
+        api.patch('/users/played', jsonBodyParser, togglePlayedGame)
+
+        api.get('/users/played', retrievePlayedGames)
 
         api.all('*', (req, res) => {
             res.status(404).json({ message: 'sorry, this endpoint isn\'t available' })

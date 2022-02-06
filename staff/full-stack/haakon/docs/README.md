@@ -1,132 +1,85 @@
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://i.kym-cdn.com/photos/images/original/001/775/999/59f.gif" alt="Logo">
-  </a>
+# Haakon
 
-  <h3 align="center">My Proyect</h3>
-</div>
+![Cyberpunk 2077](https://media.giphy.com/media/fA7rLtaJDIWEzU57CT/giphy.gif "Cyberpunk 2077")
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+## Descripción
 
-<!-- ABOUT THE PROJECT -->
+Haakon es una aplicación donde podrás navegar, buscar y explorar en una base de datos de más de 50.000 videojuegos.
 
-## About The Project
+### **Organiza tu collección**
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+Marca los juegos que deseas, los que estás jugando, lo que has finalizado. <!--escribe tus opiniones y valora-->
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
+## Casos de uso
 
-Here's why:
+![User main functions](assets/user-cases.png)
 
--   Your time should be focused on creating something amazing. A project that solves a problem and helps others
--   You shouldn't be doing the same tasks over and over like creating a README from scratch
--   You should implement DRY principles to the rest of your life :smile:
+![User second functions](assets/user-games-cases.png)
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+<!-- Other name? -->
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+## User Flow
 
-### Built With
+### Login to Home
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+![Login to Home Flow](assets/user-flow-landing-to-home.png)
 
--   [JavaScript](https://reactjs.org/)
--   [Sass](https://reactjs.org/)
--   [React.js](https://reactjs.org/)
--   [Express](https://reactjs.org/)
--   [Mongo](https://reactjs.org/)
+### Home to ...
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+![More Flows](assets/user-flow-home-to-other.png)
 
-<!-- ROADMAP -->
+## Functions Flow
 
-## Roadmap
+### Toggle Fav
 
--   [x] Add Changelog
--   [x] Add back to top links
--   [ ] Add Additional Templates w/ Examples
--   [ ] Add "components" document to easily copy & paste sections of the readme
--   [ ] Multi-language Support
-    -   [ ] Chinese
-    -   [ ] Spanish
+![Toggle Fav Function Flow](assets/flow-toggle-fav.png)
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
+### Add to playing
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+![Add Playing Function Flow](assets/flow-add-to-playing.png)
 
-### Use cases
-
-![use cases](./images/use-cases.jpg)
-
-### Activities
-
-#### Register and Login
-
-![register and login](./images/activity-register-login.jpg)
-
-## Technical description
+## Technical Description
 
 ### Blocks
 
-![blocks](./images/blocks.jpg)
+![Infrastructure](assets/sequence-app-to-bd.png)
 
 ### Sequences
 
-#### Register user
+![Data Sequences](assets/data-sequence.png)
 
-![register sequence](./images/register-sequence.jpg)
+### Data Models
 
-### Data model
+![Data Models](assets/data-models.png)
 
-![data model](./images/data-model.jpg)
+### Code Coverage
 
-### Code coverage
+![Code Coverage](assets/logic-api-coverage.png)
 
-![code coverage]('./../images/code-coverage.jpg)
+## Technologies
 
-<!-- ACKNOWLEDGMENTS -->
+<img src="assets/icons/javascript-icon.png" alt="JavaScript" title="JavaScript" height="50px" />
+<img src="assets/icons/mongodb-icon.png" alt="MongoDB" title="MongoDB" height="50px" />
+<img src="assets/icons/mongoose-icon.png" alt="Mongoose" title="Mongoose" height="60px" />
+<img src="assets/icons/reactjs-icon.png" alt="React" title="React" height="50px" />
+<img src="assets/icons/reactrouterdom-icon.png" alt="React Router Dom" title="React Router Dom" height="50px" />
+<img src="assets/icons/expressjs-icon.png" alt="Express" title="Express" height="50px" />
+<img src="assets/icons/nodejs-icon.png" alt="Node Js" title="Node Js" height="50px" />
+<img src="assets/icons/mocha-icon.png" alt="Mocha" title="Mocha" height="50px" />
+<img src="assets/icons/chai-icon.png" alt="Chai" title="Chai" height="50px" />
 
-## Acknowledgments
+## To-Do ✔
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+-   [ ] Add platforms and genres
+-   [ ] Review a game
+-   [ ] Add more categories
+-   [ ] Deploy
+-   [ ] Test in recat
 
--   [Choose an Open Source License](https://choosealicense.com)
--   [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
--   [Malven's Flexbox Cheatsheet](https://flexbox.malven.co/)
--   [Malven's Grid Cheatsheet](https://grid.malven.co/)
--   [Img Shields](https://shields.io)
--   [GitHub Pages](https://pages.github.com)
--   [Font Awesome](https://fontawesome.com)
--   [React Icons](https://react-icons.github.io/react-icons/search)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="https://media4.giphy.com/media/1xVaiS2cP5tAdNYiRt/giphy.gif?cid=790b761126fa14bad61c1777046d11ef97ee83d041258e33&rid=giphy.gif&ct=g" alt="Logo">
-</a>
+<!--
+   Markdown reference
+    - Images
+        ![alt](route 'title')
+    - Link Images
+        [![alt](route 'title')](link)
+ -->

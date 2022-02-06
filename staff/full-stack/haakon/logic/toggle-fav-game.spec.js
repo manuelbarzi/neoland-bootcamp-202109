@@ -12,7 +12,7 @@ describe('toggleFavGame', () => {
     before(() => mongoose.connect(MONGO_URL))
 
     let user, userId
-    const gameId = '61b8d030158b2213c7cc36ba'
+    const gameId = '61f953b5c7c1cf74c3abf357'
     const wrongGameId = '61bc811ecddacb88947a1b26'
     const wrongUserId = '61b8d030158b2213c7cc36ba'
 
@@ -62,9 +62,6 @@ describe('toggleFavGame', () => {
             expect(_user.favGames).to.be.instanceOf(Array)
             expect(_user.favGames.length).to.be.equal(0)
         })
-
-        // Cuando hay mas de un favorito y se agrega
-        // Cuando hay mas de un favorito y se elimina
     })
 
     describe('Unhappy Path', () => {

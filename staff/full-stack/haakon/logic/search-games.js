@@ -11,22 +11,25 @@ function searchGames(query) {
     const regex = new RegExp(query, 'i')
 
     return (async () => {
-        const _games = await Game.find({ name: regex }).populate('platforms', {
+        const games = await Game.find({ name: regex }).populate('platforms', {
             name: 1
         }).populate('genres', {
             name: 1
         }).lean()
 
-        if (!_games) throw new NotFoundError(`game with that ${query} doesn't found`)
+        if (!games.length) throw new NotFoundError(`no game found with that match`)
 
-        _games.forEach(game => {
+        games.forEach(game => {
             game.id = game._id.toString()
-            delete game.screenshots
             delete game._id
             delete game.__v
+            delete game.screenshots
+            delete game.description
+            delete game.released
+            delete game.website
         })
 
-        return _games
+        return games
     })()
 }
 
