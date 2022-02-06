@@ -69,8 +69,8 @@ You will be able to mark the games you want, the ones you are playing, what you 
 -   [ ] Add platforms and genres
 -   [ ] Review a game
 -   [ ] Add more categories
+-   [ ] Test in react
 -   [ ] Deploy
--   [ ] Test in recat
 
 <!--
    Markdown reference
