@@ -66,9 +66,11 @@ You will be able to mark the games you want, the ones you are playing, what you 
 
 ## To-Do ✔
 
--   [ ] Add platforms and genres
+-   [ ] Everyone can see the games and only registered users can access more features
+-   [ ] Add pages platforms and genres in client
+-   [ ] Filter by platforms and genres
 -   [ ] Review a game
--   [ ] Add more categories
+-   [ ] Add stores where to buy
 -   [ ] Test in react
 -   [ ] Deploy
 
