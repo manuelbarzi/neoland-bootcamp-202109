@@ -16,8 +16,7 @@ This is an app made to new league of legends players who want to know which obje
 
 ### Code coverage
 
-![code coverage](./images/codeCoverage.png)
-
+![code coverage](./images/codeCoverage.PNG)
 ### Data models
 
 ![data models](./images/datamodels.png)
