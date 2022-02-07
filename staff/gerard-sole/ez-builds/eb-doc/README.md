@@ -4,21 +4,30 @@
 
 ## App description
 
-This is an app made to new league of legends players who want to know which objects they should buy with any champion. The user have acces to a build for each champion 
+This is an app made to new league of legends players who want to know which objects they should buy with any champion or save and share their own builds. The user have acces to all the builds created by all the users registered in the web app. 
 
 ### User flow
 
-![user flow](./images/flow2.png)
+![user flow 1](./images/flowchart1.png)
+![user flow 2](./images/flowchart2.png)
+### Use cases
+
+![use cases](./images/usecases.png)
 
 ### Code coverage
 
 ![code coverage](./images/codeCoverage.png)
 
+### Data models
+
+![data models](./images/datamodels.png)
+
+### Block
+
+![block](./images/block.png)
+
 ### TODO 
 
-- Add create build
-- Add fav builds
-- Add fav champions
 - Testing of every function
 - Improve styles  
 

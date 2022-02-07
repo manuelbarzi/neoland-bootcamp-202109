@@ -6,13 +6,12 @@ import SignUp from './SignUp'
 import PostSignUp from './PostSignUp'
 import SignIn from './SignIn'
 import Modal from './Modal'
-import { signinUser, signupUser, retrieveUser } from '../logic/index'
 import AppContext from './AppContext'
 
 function App() {
 
     const [view, setView] = useState( sessionStorage.token ? 'home' : 'landing' )
-    const [modal, setModal] = useState( { state: null, message: null } )
+    const [modal, setModal] = useState( { state: false, message: null } )
     const openModal = ( message ) => {
                 setModal( { state: true, message } )
             }
@@ -31,7 +30,7 @@ function App() {
 
     const goToHome = () => setView( 'home' )
 
-    const closeModal = () => setModal( { state: null } )
+    const closeModal = () => setModal( { state: false } )
 
     return <>
         <AppContext.Provider value={{
@@ -52,7 +51,8 @@ function App() {
 
             {view === 'home' &&
                 <Home onSignOut={resetTokenAndGoToLanding} onAuthError={resetTokenAndGoToLanding} />}
-
+            {modal.state && 
+                <Modal message={modal.message} onCloseModal={closeModal}></Modal>}
         </AppContext.Provider>
     </>
 }

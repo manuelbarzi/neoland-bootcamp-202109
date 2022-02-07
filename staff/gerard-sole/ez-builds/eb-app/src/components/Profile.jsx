@@ -5,7 +5,7 @@ import AppContext from './AppContext'
 
 function Profile({ onBack, onSignOut }) {
 
-    const { openModal } = useContext(AppContext)
+    const { onOpenModal } = useContext(AppContext)
 
     const [view, setView] = useState('update-password')
 
@@ -19,13 +19,13 @@ function Profile({ onBack, onSignOut }) {
             updateUserPassword(sessionStorage.token, oldPassword, password, error => {
                 if (error) {
 
-                    openModal(error.message)
+                    onOpenModal(error.message)
 
                     return
                 }
 
 
-                openModal('Password updated')
+                onOpenModal('Password updated')
             })
         } catch ({ message }) {
 
@@ -38,20 +38,20 @@ function Profile({ onBack, onSignOut }) {
             unregisterUser(sessionStorage.token, password, error => {
                 if (error) {
 
-                    openModal(error.message)
+                    onOpenModal(error.message)
 
                     return
                 }
 
 
 
-                openModal('User unregistered', 'success')
+                onOpenModal('User unregistered')
 
                 onSignOut()
             })
         } catch ({ message }) {
 
-            openModal(message, 'warn')
+            onOpenModal(message, 'warn')
         }
     }
 

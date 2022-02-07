@@ -3,7 +3,7 @@ const { NotFoundError } = require( 'eb-errors' )
 const { mongoose: { Types: { ObjectId } }, models: { Build } } = require( 'eb-data' )
 
 
-const retrieveBuildsByChampion =  championId => {
+const retrieveBuildsByChampion =  (championId) => {
 
     validateId( championId )
 
@@ -11,9 +11,9 @@ const retrieveBuildsByChampion =  championId => {
         
         try {
         
-        const builds = await Build.find( { champion: new ObjectId(championId) } ).lean()
+        const builds = await Build.find( { champion: new ObjectId(championId) } ).populate('user').lean()
         if ( !builds ) throw new NotFoundError( 'Wrong ID' )
-        
+    
         builds.forEach(sanitizer)
         return builds
         }

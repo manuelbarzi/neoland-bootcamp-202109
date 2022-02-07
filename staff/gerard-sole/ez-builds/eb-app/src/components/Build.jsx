@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import Item from './Item'
 
 
-const Build = ( { build: { id } } ) => {
+const Build = ( { build: { id, user } } ) => {
 
     const [items, setItems] = useState( [] )
 
@@ -18,11 +18,16 @@ const Build = ( { build: { id } } ) => {
 
     }, [] )
     return items && items.length ? <>
-        <div className='build'>
+        <div className='build__container'>
+            <div className='build__username'>
+            <h2 className='username'>{user.username}</h2>
+            </div>
+            <div className='items'>
 
             {
                 items.map( item => <Item item={item} key={item.id} /> )
             }
+            </div>
 
         </div>
     </> : null

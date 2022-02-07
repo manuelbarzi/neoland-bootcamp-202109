@@ -7,9 +7,12 @@ function retrieveBuildsByUser( user ) {
     validateId(user)
     
     return ( async () => {
-        const builds = await Build.find( { "user": new ObjectId(user) } ).lean()
+        const builds = await Build.find( { "user": new ObjectId(user) } ).populate('champion').lean()
         if ( !builds ) throw new NotFoundError( 'Wrong ID' )
-        builds.forEach(sanitizer)
+        builds.forEach(build => {
+            sanitizer(build)
+            sanitizer(build.champion)
+        })
 
         return builds
     } )() 

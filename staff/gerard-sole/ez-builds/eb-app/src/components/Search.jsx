@@ -10,7 +10,7 @@ function Search({ onSearch, query }) {
 
             onSearch(query)
         }}>
-            <input className="field" type="text" placeholder="criteria" name="query" defaultValue={query} />
+            <input className="field" type="text" placeholder="champion name" name="query" defaultValue={query} />
             <button className="button button--medium button--dark">Search</button>
         </form>
 

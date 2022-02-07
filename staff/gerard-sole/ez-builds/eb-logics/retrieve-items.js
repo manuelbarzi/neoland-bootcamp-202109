@@ -7,7 +7,6 @@ function retrieveItems(buildId) {
 
         const build = await Build.findOne ({ _id: new Object ( buildId ) }).lean()
         const itemsIds = build.items
-        debugger
         const itemsPromise = itemsIds.map( id => Item.findById(id.toString()).lean() ) 
         const items = await Promise.all ( itemsPromise )
         items.forEach(item => {

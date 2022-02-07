@@ -50,14 +50,10 @@ html,body {
     background-color: black;
     color: white;
 }
-/* .item {
-    padding: 15px;
-} */
 .field {
     border-radius: 5px;
     border-style: solid;
     border-width: 3px;
-    /* margin: 5px; */
     padding: 10px;
     font-size: 1rem;
     margin: 5px;
@@ -84,13 +80,15 @@ html,body {
     border: black;
     border-style: solid;
     border-radius: 15px;
-    padding: 100px;
+    padding: 15px;
     justify-content: center;
     align-items: center;
     list-style: none;
 }
 
 .notfound {
+    display: flex;
+    flex-direction: column;
     background-color: rgb(68, 68, 68);
     border: black;
     border-style: solid;
@@ -100,13 +98,14 @@ html,body {
     align-items: center;
 }
 .result{
+    display: flex;
+    flex-direction: row;
     border: black;
     border-style: solid;
     border-radius: 15px;
     padding: 25px;
     margin: 15px;
     width: 400px;
-    height: 300px;
     background-color: rgb(20, 20, 20);
     color: white;
 }
@@ -117,6 +116,8 @@ html,body {
 .results__image {
     border: black;
     border-style: solid;
+    height: 85px;
+    width: 85px;
 }
 .build {
     background-color: rgb(68, 68, 68);
@@ -124,10 +125,31 @@ html,body {
     border-style: solid;
     border-radius: 15px;
     padding: 25px;
+    margin: 10px;
     justify-content: center;
     align-items: center;
     display: flex;
+    flex-direction: column;
+}
+.build__username {
+    display: flex;
+    align-items: flex-start;
+}
+.build__container {
+    background-color: rgb(68, 68, 68);
+    border: black;
+    border-style: solid;
+    border-radius: 15px;
+    padding: 25px;
+    justify-content: center;
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+}
+.items {
+    display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .content {
@@ -189,6 +211,8 @@ html,body {
     padding: 1rem;
     color: black;
     border-radius: 7px;
+    border: black;
+    border-style: solid;  
 }
 
 .modal__title {
@@ -198,6 +222,7 @@ html,body {
 .modal__message {
     color: inherit;
     padding: 12px 0;
+    font-size: 30px;
 }
 
 .modal__button {

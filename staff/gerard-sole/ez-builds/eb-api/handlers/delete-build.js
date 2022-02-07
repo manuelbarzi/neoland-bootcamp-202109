@@ -4,7 +4,7 @@ const {handleError, validateAuthorizationAndExtractPayload} = require('./helpers
 
 module.exports = (req, res) => {
     const { headers: { authorization }, body: {id} } = req
-    
+    debugger
     try {
        validateAuthorizationAndExtractPayload( authorization )
         deleteBuild(id)

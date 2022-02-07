@@ -2,10 +2,12 @@ const { retrieveBuildsByChampion, retrieveBuildsByUser } = require( 'eb-logics' 
 const {handleError, validateAuthorizationAndExtractPayload} = require( './helpers' )
 
 module.exports = ( req, res ) => {
-    const { headers: { authorization }, query: { q: championId } } = req
-    debugger
     try {
+        debugger
+        const { headers: { authorization }, query: { q: championId } } = req
+
         const { sub: userId } = validateAuthorizationAndExtractPayload( authorization )
+
         if ( championId ) {
             retrieveBuildsByChampion( championId )
                 .then( builds => res.json( builds ) )

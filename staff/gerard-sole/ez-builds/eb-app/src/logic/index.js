@@ -6,9 +6,11 @@ import updateUserPassword from './update-user-password'
 import searchChampionsByName from './search-champions-by-name'
 import  searchChampionsById  from './search-champions-by-id'
 import context from './context'
-import retrieveBuild from './retrieve-build'
+import retrieveBuildsByChampion from './retrieve-builds-by-champion'
+import retrieveBuildsByUser from './retrieve-builds-by-user'
 import retrieveItem from './retrieve-item'
 import retrieveItems from './retrieve-items'
+import deleteBuild from './delete-build'
 
 
 export {
@@ -20,7 +22,9 @@ export {
     searchChampionsByName,
     searchChampionsById,
     context,
-    retrieveBuild,
+    deleteBuild,
+    retrieveBuildsByChampion,
+    retrieveBuildsByUser,
     retrieveItem,
     retrieveItems
 }

@@ -38,8 +38,10 @@ function Results() {
                     <li key={id} className="home__result" onClick={() => onItem( id )}>
                         <div className='result'>
                             <img className="results__image" src={`/images/champions/${name.replace( /\'/g, '' ).replace( /\s+/, '' ).replace( /\./g, '' )}.png`} />
+                            <div className='results__text'>
                             <h1>{name}</h1>
                             <h2>{title}</h2>
+                            </div>
                         </div>
                     </li>
                 )
