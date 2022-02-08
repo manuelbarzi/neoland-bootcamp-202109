@@ -111,7 +111,6 @@ function Detail({ onGoBack, showSpinner, showModal, hideSpinner }) {
     const deleteNote = async (id, text, indice) => {
         showSpinner()
         try {
-            //await removeComment(sessionStorage.token, id, text)
 
             hideSpinner()
 
@@ -180,7 +179,7 @@ function Detail({ onGoBack, showSpinner, showModal, hideSpinner }) {
                 <textarea name="textarea" id="textarea" rows="10" cols="50" placeholder="Deja tu comentario aquí."></textarea>
                 <button className="button button--red">Enviar</button>
             </form>
-            {notes.text && notes.text.length ?
+            {notes?.text && notes?.text.length ?
                 <ul className="welcome__results--ul ">
                     {
                         list(notes)

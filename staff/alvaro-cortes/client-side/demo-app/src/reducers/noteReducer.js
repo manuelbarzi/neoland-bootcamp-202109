@@ -9,7 +9,9 @@ export const noteReducer = (state = [], action) => {
 
     if (action.type === '@notes/created') {
 
-        state.text.push(action.payload.text)
+        if (state === null) return action.payload
+        
+        else state.text.push(action.payload.text)
 
         return  { ...state, text: state.text }
     }
