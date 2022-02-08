@@ -6,29 +6,30 @@
 
 This is an app made to new league of legends players who want to know which objects they should buy with any champion or save and share their own builds. The user have acces to all the builds created by all the users registered in the web app. 
 
-### User flow
 
-![user flow 1](./images/flowchart1.png)
-![user flow 2](./images/flowchart2.png)
 ### Use cases
 
 ![use cases](./images/usecases.png)
 
-### Code coverage
+### User flow
 
-![code coverage](./images/codeCoverage.PNG)
+![user flow 1](./images/flowchart1.png)
+![user flow 2](./images/flowchart2.png)
+
+
+
+
+### Blocks
+
+![block](./images/block.png)
+
 ### Data models
 
 ![data models](./images/datamodels.png)
 
-### Block
+### Code coverage
 
-![block](./images/block.png)
-
-### TODO 
-
-- Testing of every function
-- Improve styles  
+![code coverage](./images/codeCoverage.PNG) 
 
 ### Techonoliges
 
@@ -40,3 +41,7 @@ This is an app made to new league of legends players who want to know which obje
 - Mongoose
 - Mocha/Chai
 
+### TODO 
+
+- Testing of every function
+- Improve styles 
