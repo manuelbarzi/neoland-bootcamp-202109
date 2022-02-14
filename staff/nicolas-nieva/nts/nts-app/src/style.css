@@ -87,14 +87,7 @@ font-family: 'Bebas Neue', ;
     min-width: 7.5rem;
 }
 
-.field {
-    width: 20vh;
-    border-width: 1px;
-    margin: 5px;
-    padding: 10px;
-    font-size: 0.8rem;
-    font-family:monospace;
-}
+
 
 .container {
     display: flex;
@@ -164,6 +157,7 @@ li {
 
 .bg-myBlue {
   background-color: rgb(43, 75, 179);
+  box-shadow: 10px 10px 5px rgb(43, 75, 179);
  
 }
 
@@ -187,3 +181,4 @@ li {
   display: flexbox;
   justify-content: flex-end
 }
+

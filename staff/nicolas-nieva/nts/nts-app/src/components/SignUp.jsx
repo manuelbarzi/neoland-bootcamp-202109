@@ -1,3 +1,4 @@
+import './SignUp.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import { Form, Button, Card } from 'react-bootstrap';
 import { useContext } from 'react';
@@ -9,10 +10,12 @@ function SignUp({ goToPostSignUp, onSignIn }) {
   const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext);
   return (
     <>
-      
-      <Card.Title className='container container--vertical'>Registrar agencia</Card.Title>
+      <div></div>
+      < Card className='' >
+      <Card.Body>
+      <Card.Title>Registrar agencia</Card.Title>
       <Form
-        className='container container--vertical'
+        className=''
         onSubmit={async (event) => {
           event.preventDefault();
 
@@ -63,55 +66,55 @@ function SignUp({ goToPostSignUp, onSignIn }) {
       >
         <Form.Control style={{ width: '230px' }}
           type='text'
-          className='field'
+          className=''
           name='name'
           id='name'
           placeholder='nombre agencia'
         />
         <Form.Control style={{ width: '230px' }}
-          className='field'
+          className=''
           type='text'
           name='username'
           id='username'
           placeholder='usuario'
         />
         <Form.Control style={{ width: '230px' }}
-          className='field'
+          className=''
           type='password'
           name='password'
           id='password'
           placeholder='contraseña'
         />
         <Form.Control style={{ width: '230px' }}
-          className='field'
+          className=''
           type='text'
           name='email'
           id='email'
           placeholder='correo electronico'
         />
         <Form.Control style={{ width: '230px' }}
-          className='field'
+          className=''
           type='text'
           name='address'
           id='address'
           placeholder='direccion'
         />
         <Form.Control style={{ width: '230px' }}
-          className='field'
+          className=''
           type='text'
           name='phone'
           id='phone'
           placeholder='telefono'
         />
         <Form.Control style={{ width: '230px' }}
-          className='field'
+          className=''
           type='text'
           name='province'
           id='province'
           placeholder='provincia'
         />
         <Form.Control style={{ width: '230px' }}
-          className='field'
+          className=''
           type='text'
           name='location'
           id='location'
@@ -124,12 +127,15 @@ function SignUp({ goToPostSignUp, onSignIn }) {
           placeholder='pais'
         />
 
-        <div className='container container--vertical container--gapped'>
-          <Button className='button' type='submit'>Registrar Agencia</Button>
-          <div className='container--gapped'></div>
-          <Button className='button' onClick={() => onSignIn()}>Iniciar Sesion </Button>
+        <div className=''>
+          <Button className='' type='submit'>Registrar Agencia</Button>
+          <div className=''></div>
+          <Button className='' onClick={() => onSignIn()}>Iniciar Sesion </Button>
         </div>
+        
       </Form>
+      </Card.Body>
+      </Card>
     </>
   );
 }
