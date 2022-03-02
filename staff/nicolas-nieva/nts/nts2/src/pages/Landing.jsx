@@ -3,11 +3,14 @@ import Register from '../components/Register'
 import Login from '../components/Login';
 import React, { useState } from 'react'
 
-function Landing() {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [view, setView] = useState('')
+function Landing({goToHome}) {
+  const [modalRegister, setModalRegister] = useState(false);
+  const handleCloseRegister = () => setModalRegister(false);
+  const handleShowRegister = () => setModalRegister(true);
+
+  const [modalLogin, setModalLogin] = useState(false);
+  const handleCloseLogin = () => setModalLogin(false);
+  const handleShowLogin = () => setModalLogin(true);
 
   return <>
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -20,14 +23,15 @@ function Landing() {
             <Nav.Link href="">Tarifarios</Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link href="" onClick={() => setView('Register')}>Registrar Agencia</Nav.Link>
-            <Nav.Link href="" onClick={() => setView('Login')}>Iniciar Sesion </Nav.Link>
+            <Nav.Link href="" onClick={handleShowRegister}>Registrar Agencia</Nav.Link>
+            <Nav.Link href="" onClick={handleShowLogin}>Iniciar Sesion </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    {view === 'Register' && <Register  handleClose={handleClose} /> }
-    {view === 'Login' && <Login  handleClose={handleClose}/> }
+   <Register  handleClose={handleCloseRegister} modalRegister={modalRegister} /> 
+   <Login handleClose={handleCloseLogin} modalLogin={modalLogin} goToHome={goToHome} />
+
   </>
 }
 

@@ -1,52 +1,61 @@
 import { Button, Modal, Form } from 'react-bootstrap'
 import { signupUser } from '../logic'
-// import PostRegister from './PostRegister'
+import AppContext from './AppContext';
+import { useContext } from 'react';
 
-function Register({ show, handleClose }) {
+
+function Register({ modalRegister, handleClose}) {
+    
+     const { showModalFeedback, showLoading, hideLoading } = useContext(AppContext);
+
+    
+
     const handleSubmit = async event => {
         event.preventDefault()
 
         const { target: { name: { value: name }, username: { value: username }, email: { value: email }, password: { value: password },
             address: { value: address }, phone: { value: phone }, province: { value: province },
             location: { value: location }, country: { value: country } } } = event
-       
+
 
         const user = {
-                name,
-                username,
-                password,
-                email,
-                address,
-                phone,
-                province,
-                location,
-                country,
-            };
+            name,
+            username,
+            password,
+            email,
+            address,
+            phone,
+            province,
+            location,
+            country,
+        };
         try {
+            showLoading()
+             await signupUser(user)
+            handleClose()
 
-            await signupUser(user)
-
-            alert('agencia registrada')
-
-
+            showModalFeedback ('Registro', 'Agencia Registrada Exitosamente', 'outline-primary')
+           // event.target.reset()
+            hideLoading()
         } catch ({ message }) {
+            showModalFeedback('Error', message, 'danger')
+            // event.target.password.value.password.reset () TODO que se resetee el password
+            hideLoading()
 
-            alert(message)
         }
     }
     return <>
         <Modal
-            show={show}
+            show={modalRegister}
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
         >
             <Modal.Header closeButton>
-                <Modal.Title>Registrarse</Modal.Title>
+                <Modal.Title >Registrarse</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form onSubmit={handleSubmit} 
-                >
+                <Form onSubmit={handleSubmit}>
                     <Form.Control style={{ width: '210px', margin: '20px auto' }}
                         type='text'
                         className='mb-2'
@@ -67,7 +76,7 @@ function Register({ show, handleClose }) {
                         name='password'
                         id='password'
                         placeholder='contraseña'
-                    /> 
+                    />
                     <Form.Control style={{ width: '210px', margin: '20px auto' }}
                         className='mb-2'
                         type='text'
@@ -103,7 +112,7 @@ function Register({ show, handleClose }) {
                         id='location'
                         placeholder='ciudad'
                     />
-                    <Form.Control style={{ width: '210px', margin: '20px auto' }}   
+                    <Form.Control style={{ width: '210px', margin: '20px auto' }}
                         className='mb-5'
                         type='text'
                         name='country'
@@ -111,11 +120,12 @@ function Register({ show, handleClose }) {
                         placeholder='pais'
                     />
                     <Modal.Footer>
-                        <Button style={{ width: '210px', margin: '20px auto' }}   type='submit' variant="primary">Registrar Agencia</Button>
+                        <Button style={{ width: '210px', margin: '20px auto' }} type='submit' variant="primary">Registrar Agencia</Button>
                     </Modal.Footer>
                 </Form>
             </Modal.Body>
         </Modal>
+
     </>
 }
 

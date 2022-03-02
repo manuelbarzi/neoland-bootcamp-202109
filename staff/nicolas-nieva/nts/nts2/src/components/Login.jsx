@@ -1,37 +1,45 @@
 import { Button, Modal, Form } from 'react-bootstrap'
+import {authorizeUser} from '../logic'
+import AppContext from './AppContext';
+import { useContext } from 'react';
 
 
-function Login({ show, handleClose }) {
-    // const handleSubmit = async event => {
-    //     event.preventDefault()
+function Login({ modalLogin, handleClose, goToHome }) {
+    const { showModalFeedback, showLoading, hideLoading } = useContext(AppContext);
+
+    const handleSubmit = async event => {
+        event.preventDefault()
        
+        const {target: {username: {value: username}, password: {value:password}}} = event
 
-    //     const user = {
-    //             name,
-    //             username,
-    //             password,
-    //             email,
-    //             address,
-    //             phone,
-    //             province,
-    //             location,
-    //             country,
-    //         };
-    //     try {
+        const user = {
+                
+                username,
+                password
+            };
+        try {
+            showLoading ()
 
-    //         await signupUser(user)
+            const token = await authorizeUser(user)
+            
+            sessionStorage.token = token;
 
-    //         alert('agencia registrada')
+            handleClose()
 
+            goToHome()
 
-    //     } catch ({ message }) {
+            hideLoading ()
 
-    //         alert(message)
-    //     }
-    // }
+        } catch ({ message }) {
+            
+            showModalFeedback('Error', message, 'danger')
+
+            hideLoading()
+        }
+    }
     return <>
         <Modal
-            show={show}
+            show={modalLogin}
             onHide={handleClose}
             backdrop="static"
             keyboard={false}
@@ -40,24 +48,16 @@ function Login({ show, handleClose }) {
                 <Modal.Title>Iniciar Sesion</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Form 
-                >
-                    <Form.Control style={{ width: '210px', margin: '20px auto' }}
-                        type='text'
-                        className='mb-2'
-                        name='name'
-                        id='name'
-                        placeholder='nombre agencia'
-                    />
-                    <Form.Control style={{ width: '210px', margin: '20px auto' }}
+                <Form onSubmit={handleSubmit}>
+                 <Form.Control style={{ width: '210px', margin: '20px auto' }}
                         className='mb-2'
                         type='text'
                         name='username'
                         id='username'
-                        placeholder='usuario'
+                        placeholder='usuario agencia'
                     />
                     <Form.Control style={{ width: '210px', margin: '20px auto' }}
-                        className='mb-2'
+                        className='mb-4'
                         type='password'
                         name='password'
                         id='password'
@@ -65,11 +65,13 @@ function Login({ show, handleClose }) {
                     /> 
                 
                     <Modal.Footer>
-                        <Button style={{ width: '210px', margin: '20px auto' }}   type='submit' variant="primary">Registrar Agencia</Button>
+                        <Button style={{ width: '210px', margin: '20px auto' }}   type='submit' variant="primary">Iniciar Sesion</Button>
                     </Modal.Footer>
                 </Form>
             </Modal.Body>
         </Modal>
+
+
     </>
 }
 
