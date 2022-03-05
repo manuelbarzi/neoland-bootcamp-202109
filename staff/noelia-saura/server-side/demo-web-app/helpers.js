@@ -1,0 +1,11 @@
+function getUserId(cookie) {
+    let res = null
+    if(cookie){
+        const [, id] = cookie.split('=')
+        res=id
+    }
+    return res
+}
+module.exports = {
+    getUserId
+}
