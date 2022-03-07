@@ -1,5 +1,4 @@
 const { FormatError, ConflictError } = require('../../nts-errors')
-const { models: { User, Reservation } } = require('./../../nts-data')
 
 function validateId(id) {
     if (typeof id !== 'string') throw new TypeError('id is not a string')

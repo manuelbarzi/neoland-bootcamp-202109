@@ -43,8 +43,6 @@ function NewReservation({ goToHome }) {
 
             await createReservation(token, reservation)
 
-            goToHome()
-
             onModal('Reserva creada')
 
             onFlowEnd()
@@ -53,7 +51,6 @@ function NewReservation({ goToHome }) {
             onModal(message)
           }
 
-          event.target.reset()
         }}
       >
         <Form.Control style={{ width: '300px' }}

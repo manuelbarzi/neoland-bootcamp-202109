@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { Navbar, Nav, Button, Form, FormControl, Dropdown } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
 import nts from '../../src/nts.png'
+import './NavBar.css'
 
 function NavBar({ username, goToProfile, onSearch, goToReservation, goToHome }) {
 

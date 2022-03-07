@@ -1,6 +1,6 @@
 import './SignUp.css'
 import 'bootstrap/dist/css/bootstrap.css';
-import { Form, Button, Card } from 'react-bootstrap';
+import { Form, Button} from 'react-bootstrap';
 import { useContext } from 'react';
 import AppContext from './AppContext';
 
@@ -8,13 +8,10 @@ import { signupUser } from '../logic/index';
 
 function SignUp({ goToPostSignUp, onSignIn }) {
   const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext);
+
   return (
     <>
-      <div></div>
-      < Card className='' >
-      <Card.Body>
-      <Card.Title>Registrar agencia</Card.Title>
-      <Form
+      <Form style={{ width: '230px', margin: '20px auto' }}
         className=''
         onSubmit={async (event) => {
           event.preventDefault();
@@ -64,56 +61,56 @@ function SignUp({ goToPostSignUp, onSignIn }) {
           event.target.reset();
         }}
       >
-        <Form.Control style={{ width: '230px' }}
+        <Form.Control 
           type='text'
           className=''
           name='name'
           id='name'
           placeholder='nombre agencia'
         />
-        <Form.Control style={{ width: '230px' }}
+        <Form.Control 
           className=''
           type='text'
           name='username'
           id='username'
           placeholder='usuario'
         />
-        <Form.Control style={{ width: '230px' }}
+        <Form.Control 
           className=''
           type='password'
           name='password'
           id='password'
           placeholder='contraseña'
         />
-        <Form.Control style={{ width: '230px' }}
+        <Form.Control 
           className=''
           type='text'
           name='email'
           id='email'
           placeholder='correo electronico'
         />
-        <Form.Control style={{ width: '230px' }}
+        <Form.Control 
           className=''
           type='text'
           name='address'
           id='address'
           placeholder='direccion'
         />
-        <Form.Control style={{ width: '230px' }}
+        <Form.Control 
           className=''
           type='text'
           name='phone'
           id='phone'
           placeholder='telefono'
         />
-        <Form.Control style={{ width: '230px' }}
+        <Form.Control 
           className=''
           type='text'
           name='province'
           id='province'
           placeholder='provincia'
         />
-        <Form.Control style={{ width: '230px' }}
+        <Form.Control 
           className=''
           type='text'
           name='location'
@@ -134,8 +131,6 @@ function SignUp({ goToPostSignUp, onSignIn }) {
         </div>
         
       </Form>
-      </Card.Body>
-      </Card>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import {useState} from "react";
+  import {useState} from "react";
 import Landing from "./Landing";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
@@ -66,11 +66,9 @@ function App () {
 
       {view === 'postsignup' && <PostSignUp onSignIn={goToSignIn} />}
 
-      {view === 'home' && <Home 
-        onSignOut={onSignOut} />}
-
+      {view === 'home' && <Home  onSignOut={onSignOut} />}
       
-      {modal && <Modal message={modal} onAccept={acceptModal} />}
+      {modal && <Modal message={modal} onAccept={acceptModal}  />}
 
       {spinner && <Spinner  />}  
       </AppContext.Provider>
