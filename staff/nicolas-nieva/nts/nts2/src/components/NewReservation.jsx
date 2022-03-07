@@ -33,13 +33,16 @@ function NewReservation({newReservation, handleCloseNewReservation}) {
           }
 
           try {
-            
             showLoading()
+            
             await createReservation(token, reservation)
 
             showModalFeedback('Nueva Reserva','Reserva creada', 'primary' )
 
+            handleCloseNewReservation ()
+
             hideLoading()
+
           } catch ({ message }) {
             hideLoading()
             showModalFeedback ('Error', message, 'danger')
@@ -116,7 +119,7 @@ function NewReservation({newReservation, handleCloseNewReservation}) {
                         placeholder='nota adicional'
                     />
                     <Modal.Footer>
-                        <Button style={{ width: '210px', margin: '20px auto' }} type='submit' variant="primary">Nueva Reserva</Button>
+                        <Button style={{ width: '210px', margin: '20px auto' }} type='submit' variant="primary" >Nueva Reserva</Button>
                     </Modal.Footer>
                 </Form>
             </Modal.Body>

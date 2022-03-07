@@ -1,11 +1,12 @@
 import AppContext from './AppContext'
 import { useContext } from 'react'
 import { Navbar, Nav, Button, Form, FormControl, NavDropdown, Container } from 'react-bootstrap'
+import { Link, Outlet } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css'
 import nts from './../assets/nts.png'
 import './NavBar.css'
 
-function NavBar({ handleShowNewReservation}) {
+function NavBar({ handleShowNewReservation }) {
 
   const { onSignOut } = useContext(AppContext)
 
@@ -13,25 +14,27 @@ function NavBar({ handleShowNewReservation}) {
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">
-            <img
-              src={nts}
-              width='84px' 
-              height='60px'
-              className="d-inline-block align-top"
-              alt="React Bootstrap logo"
-            />
-          </Navbar.Brand>
+          <Link to='/reservations'>
+            <Navbar.Brand>
+              <img
+                src={nts}
+                width='84px'
+                height='60px'
+                className="d-inline-block align-top"
+                alt="React Bootstrap logo"
+              />
+            </Navbar.Brand>
+          </Link>
           <Form className="d-flex">
-        <FormControl
-          type="search"
-          placeholder="Search"
-          className="me-2"
-          aria-label="Search"
-        />
-        <Button variant="outline-success">Buscar pax</Button>
-      </Form>
-      <Button variant="outline-primary" onClick={handleShowNewReservation}>Nueva Reserva <i class="fas fa-plus-circle"></i></Button>
+            <FormControl
+              type="search"
+              placeholder="Search"
+              className="me-2"
+              aria-label="Search"
+            />
+            <Button variant="outline-success">Buscar pax</Button>
+          </Form>
+          <Button variant="outline-primary" onClick={handleShowNewReservation}>Nueva Reserva <i className="fas fa-plus-circle"></i></Button>
 
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -39,16 +42,19 @@ function NavBar({ handleShowNewReservation}) {
             </Nav>
             <Nav className="me-auto">
               <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                <NavDropdown.Item>Action</NavDropdown.Item>
+                <NavDropdown.Item>Another action</NavDropdown.Item>
+                <NavDropdown.Item>Something</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                <NavDropdown.Item onClick ={onSignOut}>Cerrar Sesion</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Container>
+
       </Navbar>
+      <Outlet />
+
 
     </>
   )

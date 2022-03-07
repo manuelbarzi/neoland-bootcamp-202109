@@ -1,7 +1,6 @@
 import NavBar from "../components/NavBar"
 import Reservations from "../components/Reservations"
-import { Routes, Route, useNavigate } from 'react-router-dom'
-import Profile from "../components/Profile"
+import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
 import { useState, useEffect, useContext } from 'react'
 import { retrieveUser } from './../logic'
 import AppContext from './../components/AppContext';
@@ -9,7 +8,7 @@ import NewReservation from "../components/NewReservation"
 import ReservationDetail from "../components/ReservationDetail"
 
 
-function Home({ goToHome }) {
+function Home() {
     const { showModalFeedback, showLoading, hideLoading, onSignOut } = useContext(AppContext);
     
     
@@ -18,6 +17,7 @@ function Home({ goToHome }) {
     const handleShowNewReservation = () => setNewReservation(true);
 
     const [username, setUsername] = useState(null)
+    const navigate = useNavigate()
 
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,14 +49,14 @@ function Home({ goToHome }) {
         <NewReservation handleCloseNewReservation={handleCloseNewReservation} newReservation={newReservation} />
         <Routes>
            
-            <Route path='/' element={<Reservations />} />
+            <Route path='/'>
+            <Route path='reservations' element={<Reservations  /> } />
+            <Route path='reservations/:id' element={<ReservationDetail  />} /> 
             
-            <Route path='reservation/:id' element={<ReservationDetail /> } />
-
-            
-
+            </Route>
 
         </Routes>
+
     </>
 }
 

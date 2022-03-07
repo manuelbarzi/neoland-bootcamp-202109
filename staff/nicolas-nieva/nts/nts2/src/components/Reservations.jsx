@@ -3,7 +3,7 @@ import AppContext from './AppContext';
 import { retrieveReservations } from '../logic'
 import 'bootstrap/dist/css/bootstrap.css'
 import { ListGroup, ListGroupItem } from 'react-bootstrap'
-import { Routes, Route, useNavigate } from 'react-router-dom'
+import { Routes, Route, useNavigate, Outlet } from 'react-router-dom'
 
 function Reservations() {
   const { showModalFeedback, showLoading, hideLoading } = useContext(AppContext);
@@ -21,10 +21,10 @@ function Reservations() {
       hideLoading()
       setReservations(reservations);
 
-      
+
     } catch ({ message }) {
       hideLoading()
-      showModalFeedback('Error Carga', message, 'danger' )
+      showModalFeedback('Error Carga', message, 'danger')
     }
   }, []);
 
@@ -32,34 +32,22 @@ function Reservations() {
     navigate(`/reservations/${id}`)
   }
 
-
   return reservations && reservations.length ?
-    <ListGroup horizontal>
-
-      {reservations.map(({ id, pax, quantity, from, until, state}) => {
-        <ListGroup.Item key={id} onClick={goToItem}>
-          <ListGroup.Item>{pax}</ListGroup.Item>
-        </ListGroup.Item>
-      })}
-
-    </ListGroup>
+    <>
+      <ListGroup horizontal>
+        {reservations.map(({ id, pax, quantity, from, until, state }) => (
+          <ListGroup.Item onClick={() => goToItem(id)} className='' key={id} >
+            <ListGroup.Item variant="info">Pasajero: {pax} x {quantity} </ListGroup.Item>
+            <ListGroup.Item variant="info">In: {from.slice(0, 9)}</ListGroup.Item>
+            <ListGroup.Item variant="info">Out: {until.slice(0, 9)} </ListGroup.Item>
+            <ListGroup.Item variant="info">Estado: {state}</ListGroup.Item>
+          </ListGroup.Item>
+        ))
+        }
+      </ListGroup>
+    </>
     :
-    <h3>No hay reservas</h3>
-
+    <h3>No hay reservas disponibles</h3>
 }
 
 export default Reservations
-
-
-{/* <ListGroup horizontal onClick={goToItem}>
-{reservations.map(({ id, pax, quantity, from, until, state }) => (
-  <ListGroup.Item className='' key={id} >
-    <ListGroup.Item variant="info">Pasajero: {pax} x {quantity} </ListGroup.Item>
-    <ListGroup.Item variant="info">In: {from.slice(0, 9)}</ListGroup.Item>
-    <ListGroup.Item variant="info">Out: {until.slice(0, 9)} </ListGroup.Item>
-    <ListGroup.Item variant="info">Estado: {state}</ListGroup.Item>
-  </ListGroup.Item>
-))}
-</ListGroup>
-:
-<h3>No hay reservas disponibles</h3> */}

@@ -1,11 +1,15 @@
 import { Button, Modal, Form } from 'react-bootstrap'
-import {authorizeUser} from '../logic'
+import { authorizeUser } from '../logic'
 import AppContext from './AppContext';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom'
 
 
 function Login({ modalLogin, handleClose, goToHome }) {
     const { showModalFeedback, showLoading, hideLoading } = useContext(AppContext);
+    
+    const navigate = useNavigate()
+    
 
     const handleSubmit = async event => {
         event.preventDefault()
@@ -25,7 +29,9 @@ function Login({ modalLogin, handleClose, goToHome }) {
             sessionStorage.token = token;
 
             handleClose()
-
+            
+            navigate('/reservations')
+           
             goToHome()
 
             hideLoading ()

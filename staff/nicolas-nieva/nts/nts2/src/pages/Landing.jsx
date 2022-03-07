@@ -32,6 +32,7 @@ function Landing({goToHome}) {
    <Register  handleClose={handleCloseRegister} modalRegister={modalRegister} /> 
    <Login handleClose={handleCloseLogin} modalLogin={modalLogin} goToHome={goToHome} />
 
+
   </>
 }
 
