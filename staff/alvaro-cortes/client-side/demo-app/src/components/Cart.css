@@ -1,0 +1,143 @@
+.content--cart {
+    display: flex;
+    min-width: 30%;
+    max-width: 30%;
+    min-height: 87.5%;
+    max-height: 100%;
+    background-color: rgba(85, 85, 85, 0.7);
+    position: absolute;
+    z-index: 1;
+    top: 76px;
+    right: 0px;
+    border-top-left-radius: 10px;
+    animation: transfo 1s;
+    animation-fill-mode:forwards;
+}
+
+.pop--up--cart {
+    display: flex;
+    flex-direction: column;
+    background-color:  rgba(85, 85, 85, 0.7);
+    height: fit-content;
+    min-width: 400px;
+    max-width: 420px;
+    margin-left: 0 auto;
+    animation: show 1s;
+    animation-fill-mode: forwards;
+    border-top-left-radius: 10px;
+}
+
+.cart__title {
+    background-color: white;
+    margin-top: 15px;
+    font-size: 1rem;
+    padding: 0.4rem;
+    border: 1px solid rgb(143, 143, 143);
+    color: rgb(170, 45, 45);
+    font-family: 'Noto Sans', sans-serif;
+    text-align: center;
+}
+
+.cart__detail {
+    text-align: center;
+    background-color: white;
+    margin-top: 15px;
+    font-size: 1rem;
+    border: 1px solid rgb(143, 143, 143);
+    padding: 0.4rem;
+    color: rgb(170, 45, 45);
+    font-family: 'Noto Sans', sans-serif;
+    list-style: none;
+}
+
+.x, .x2 {
+    cursor: pointer;
+}
+
+.button--cart {
+    margin: 5px;
+    border: 1px rgb(170, 45, 45) solid;
+    border-radius: 10px;
+    background-color: transparent;
+    width: 60px;
+    height: 25px;
+    color: black;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-style: oblique;
+    transition: all 0.3s;
+}
+
+.button--cart--check {
+    margin: 5px;
+    border: 1px rgb(170, 45, 45) solid;
+    border-radius: 10px;
+    background-color: transparent;
+    width: 170px;
+    height: 30px;
+    color: black;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-style: oblique;
+    transition: all 0.3s;
+}
+
+.button--cart:hover {
+    background-color: rgb(170, 45, 45);
+    color: white;
+}
+
+@keyframes show {
+    
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+}
+
+@keyframes transfo {
+
+    from {
+        transform: translateX(100px) translateY(0px);
+    } to {
+        transform: translateX(-250px) translateY(0px);
+    }
+}
+
+@media screen and (min-width: 960px) {
+    .x {
+        padding-left: 9rem;
+        margin-right: -9rem;
+        cursor: pointer;
+    }
+    
+    .x2 {
+        padding-left: 7rem;
+        margin-right: -7rem;
+        cursor: pointer;
+    }
+
+
+@keyframes show {
+    
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+}
+
+@keyframes transfo {
+
+    from {
+        transform: translateX(600px) translateY(0px);
+    } to {
+        transform: translateX(0px) translateY(0px);
+    }
+}
+}

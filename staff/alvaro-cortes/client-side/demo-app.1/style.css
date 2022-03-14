@@ -1,0 +1,235 @@
+html, body {
+    height: 100;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: linear-gradient(to bottom, #3a3a3a, #D9C5B2);
+    background-image: url(https://png.pngtree.com/thumb_back/fw800/back_our/20190620/ourmid/pngtree-simple-atmosphere-business-gray-background-ppth5-background-image_142920.jpg);
+}
+
+.title-landing {
+    font-family: 'Shadows Into Light Two', cursive;
+    font-size: 3rem;
+    color: rgb(170, 45, 45);
+    text-shadow: 2px 2px 10px rgb(179, 179, 179);
+}
+
+.titles {
+    font-family: 'Noto Sans', sans-serif;
+    color: rgb(170, 45, 45);
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 5px rgb(201, 201, 201);
+}
+
+hr {
+    height: 1px;
+    width: 300px;
+    background-color: brown;
+    border: brown 0.5px solid;
+}
+/* ------ containers ------- */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
+
+.container--vertical {
+    flex-direction: column;
+}
+
+.container--off {
+    display: none;
+}
+
+.container--search {
+   padding: 5px;
+}
+
+.welcome, .register-ok, .welcome__details, .welcome__results {
+    font-family: 'Noto Sans', sans-serif;
+    padding: 30px;
+    color: brown;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.welcome__results {
+    cursor: pointer;
+    list-style: none;
+}
+
+/* ------ form ------- */
+form {
+    border-radius: 5px;
+    text-align: center;
+    padding: 20px;
+    color: white;
+    box-shadow: 2px 2px 5px rgb(56, 56, 56);
+    background-color: #F7F7FF;
+}
+
+/* ------ inputs ------- */
+input {
+    height: 25px;
+    margin: 5px;
+    border: rgb(170, 45, 45) 2px solid;
+    border-radius: 10px;
+    background: transparent;
+    outline: none;
+    color: black;
+    padding: 5px;
+    transition: all 0.4s;
+}
+
+.input--click {
+    border-top-left-radius: 0;
+    box-shadow: 1px 1px 5px grey;
+    
+}
+::placeholder {
+    color: black;
+    font-size: 14px;
+}
+
+/* ------ buttons ------- */
+.button {
+    margin: 5px;
+    border: 2px rgb(170, 45, 45) solid;
+    border-radius: 10px;
+    background-color: transparent;
+    width: 130px;
+    height: 40px;
+    color: black;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-style: oblique;
+    transition: all 0.3s;
+}
+
+.buttons--landing {
+    box-shadow: 2px 2px 10px grey;
+}
+
+.button--red {
+    background-color: rgb(170, 45, 45);
+    color: white;
+    box-shadow: 1px 1px 5px rgb(150, 70, 70);
+}
+
+.button--out--form {
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px grey;
+}
+
+.button:hover {
+    background-color: rgb(170, 45, 45);
+    color: white;
+}
+
+/* ----- Modal ----- */
+
+.modal {
+    display: flex;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+    background-color: rgba(85, 85, 85, 0.7);
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+}
+
+.modal__pop-up {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color:  #f0f0f0;
+    height: fit-content;
+    min-width: 320px;
+    max-width: 420px;
+    margin: auto;
+    border: 2px solid rgb(143, 143, 143);
+    border-radius: 7px;
+}
+
+.modal__title {
+    background-color: white;
+    margin-top: 15px;
+    font-size: 1.6rem;
+    padding: 0.4rem;
+    border-radius: 7px;
+    color: rgb(170, 45, 45);
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.modal__text {
+    margin-top: 12px;
+    padding: 15px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+
+/* ----- spinner ----- */ 
+
+.circulo1 {
+    fill:rgb(170, 45, 45);
+    animation: miAnimacion 1.5s alternate infinite;
+}
+.circulo3 {
+    fill:rgb(179, 102, 102);
+    animation: miAnimacion 1.5s alternate infinite;
+}
+.circulo2 {
+    fill:rgb(165, 144, 144);
+    animation: miAnimacion 1.5s alternate infinite;
+}
+.circulo4 {
+    fill:rgb(165, 144, 144);
+    animation: miAnimacion 1.5s alternate infinite;
+}
+.circulo5 {
+    fill:rgb(165, 144, 144);
+    animation: miAnimacion 1.5s alternate infinite;
+}
+.circulo6 {
+    fill:rgb(165, 144, 144);
+    animation: miAnimacion 1.5s alternate infinite;
+}
+
+.spinner {
+    background-color: black;
+    height: 200vw;
+    width: 100vw;
+    top: -15px;
+    left: -10px;
+    opacity: 0.6;
+    position: absolute;
+    z-index: 1;
+}
+
+#spinner {
+    animation: rotate-out 0.8s linear infinite;
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+
+  @keyframes rotate-out {
+    0% {
+      transform: rotate(0deg)
+    }
+    100% {
+      transform: rotate(180deg)
+    }
+  }
+
