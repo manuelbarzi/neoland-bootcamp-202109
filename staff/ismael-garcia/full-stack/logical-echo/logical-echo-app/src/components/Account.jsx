@@ -16,11 +16,11 @@ function Account({ onBack }) {
     
     const goToSignIn = () => setView('signin')
 
-    const signUp = async (email, password) => {
+    const signUp = async (name, username, email, password) => {
         try {
             onFlowStart()
 
-            await signUpUser(email, password)
+            await signUpUser(name, username, email, password)
 
             onFlowEnd()
 
@@ -34,11 +34,11 @@ function Account({ onBack }) {
         }
     }
 
-    const signIn = async (email, password) => {
+    const signIn = async (username, password) => {
         try {
             onFlowStart()
 
-            const token = await signInUser(email, password)
+            const token = await signInUser(username, password)
             
             sessionStorage.token = token
 

@@ -10,7 +10,6 @@ module.exports = async (req, res) => {
         await registerClickedItem(url, date)
         
         res.status(201).send()
-
     } catch (error) {
         handleError(error, res)
     }

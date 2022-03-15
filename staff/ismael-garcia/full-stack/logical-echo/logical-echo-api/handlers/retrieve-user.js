@@ -10,7 +10,6 @@ module.exports = async (req, res) => {
         const user = await retrieveUser(id)
 
         res.json(user)
-
     } catch (error) {
         handleError(error, res)
     }

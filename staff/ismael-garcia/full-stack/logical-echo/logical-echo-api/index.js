@@ -19,13 +19,13 @@ const {
 
 const logger = require('./utils/my-logger')
 
-const { env: { PORT, MONGO_URL }, argv: [, , port = PORT || 8080] } = process
+const { env: { PORT, MONGO_URI }, argv: [, , port = PORT || 8080] } = process
 
 logger.info('starting server');
 
 (async () => {
     try {
-        await mongoose.connect(MONGO_URL)
+        await mongoose.connect(MONGO_URI || 'mongodb://localhost/test')
             
         const server = express()
 

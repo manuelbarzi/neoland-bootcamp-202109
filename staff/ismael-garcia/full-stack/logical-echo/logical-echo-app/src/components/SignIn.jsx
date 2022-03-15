@@ -6,12 +6,12 @@ function SignIn({ onSignIn, onSignUp, onBack }) {
     return <form className="login container container--vertical container--gapped" onSubmit={event => {
         event.preventDefault()
 
-        const { target: { email: { value: email }, password: { value: password } } } = event
+        const { target: { username: { value: username }, password: { value: password } } } = event
 
-        onSignIn(email, password)
+        onSignIn(username, password)
     }}>
-        <input className="field" type="email" name="email" id="register-email" placeholder="Email" required />
-        <input className="field" type="password" name="password" id="register-password" placeholder="Password" required />
+        <input className="field" type="text" name="username" id="signin-username" placeholder="Username" required />
+        <input className="field" type="password" name="password" id="signin-password" placeholder="Password" required />
 
         <div className="container">
             <button type="button" className="button button--medium" onClick={event => {

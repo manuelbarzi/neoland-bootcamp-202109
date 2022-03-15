@@ -13,6 +13,13 @@ function validateName(name) {
     if (name.trim() !== name) throw new FormatError('blank spaces around name')
 }
 
+function validateUsername(username) {
+    if (typeof username !== 'string') throw new TypeError(username + ' is not a string')
+    if (!username.trim().length) throw new Error('username is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(username)) throw new Error('username has blank spaces')
+    if (username.length < 4) throw new Error('username has less than 4 characters')
+}
+
 function validatePassword(password) {
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (!password.trim().length) throw new FormatError('password is empty or blank')
@@ -154,6 +161,7 @@ function validateEmail(email) {
 module.exports = {
     validateId,
     validateName,
+    validateUsername,
     validatePassword,
     validateNewPassword,
     validateQuery,

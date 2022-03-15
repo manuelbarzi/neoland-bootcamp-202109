@@ -17,7 +17,6 @@ module.exports = async (req, res) => {
         const items = await searchItems(id, q)
 
         res.json(items)
-        
     } catch (error) {
         handleError(error, res)
     }

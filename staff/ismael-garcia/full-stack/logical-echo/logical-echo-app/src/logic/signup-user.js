@@ -1,5 +1,5 @@
 import context from './context'
-const { validateEmail, validatePassword } = require('./helpers/validators')
+const { validateEmail, validatePassword, validateName, validateUsername } = require('./helpers/validators')
 /**
  * Signs up a user in the application.
  * 
@@ -9,7 +9,9 @@ const { validateEmail, validatePassword } = require('./helpers/validators')
  * @throws {TypeError} When any of the arguments does not match the correct type.
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
- function signUpUser(email, password) {
+ function signUpUser(name, username, email, password) {
+    validateName(name)
+    validateUsername(username)
     validateEmail(email)
     validatePassword(password)
 
@@ -19,7 +21,7 @@ const { validateEmail, validatePassword } = require('./helpers/validators')
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ name, username, email, password })
         })
 
         const { status } = res 

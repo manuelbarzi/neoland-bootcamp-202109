@@ -6,10 +6,12 @@ function SignUp({ onSignUp, onSignIn, onBack }) {
     return <form className="register container container--vertical container--gapped" onSubmit={event => {
         event.preventDefault()
 
-        const { target: { email: { value: email }, password: { value: password } } } = event 
+        const { target: { name: { value: name }, username: { value: username }, email: { value: email }, password: { value: password } } } = event 
 
-        onSignUp(email, password)
+        onSignUp(name, username, email, password)
     }}>
+        <input className="field" type="text" name="name" id="register-name" placeholder="Name" required />
+        <input className="field" type="text" name="username" id="register-username" placeholder="Username" required />
         <input className="field" type="email" name="email" id="register-email" placeholder="Email" required />
         <input className="field" type="password" name="password" id="register-password" placeholder="Password" required />
 

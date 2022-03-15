@@ -17,7 +17,6 @@ module.exports = async (req, res) => {
         const item = await retrieveItem(id, q)
 
         res.json(item)
-
     } catch (error) {
         handleError(error, res)
     }

@@ -10,7 +10,6 @@ module.exports = async (req, res) => {
         const items = await retrieveTrendingItems(id)
 
         res.json(items)
-    
     } catch (error) {
         handleError(error, res)
     }

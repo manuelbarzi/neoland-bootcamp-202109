@@ -10,7 +10,6 @@ module.exports = async (req, res) => {
         await registerSubscription(email)
         
         res.status(201).send()
-
     } catch (error) {
         handleError(error, res)
     }
