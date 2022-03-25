@@ -5,7 +5,6 @@ import Spinner from './Spinner'
 import Modal from './Modal'
 import AppContext from './AppContext'
 
-
 function App() {
     logger.debug('App -> render')
 
@@ -24,20 +23,17 @@ function App() {
 
     const acceptModal = () => setModal(null)
 
-
     return <>
         <AppContext.Provider value={{
             onFlowStart: showSpinner,
             onFlowEnd: hideSpinner,
             onModal: showModal
         }}>
-
             <Home />
 
             {spinner && <Spinner />}
 
-            {modal && <Modal level={level} message={modal} onAccept={acceptModal} />}
-            
+            {modal && <Modal level={level} message={modal} onAccept={acceptModal} />}   
         </AppContext.Provider>
     </>
 }

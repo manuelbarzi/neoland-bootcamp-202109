@@ -1,16 +1,19 @@
-const { validateEmail, validatePassword } = require('./helpers/validators')
+const { validateUsername, validatePassword } = require('./helpers/validators')
 const { CredentialsError } = require('logical-echo-errors')
 const { models: { User } } = require('logical-echo-data')
 const bcrypt = require('bcryptjs')
+const { sanitizeDocument } = require( './helpers/sanitizers' )
 
-function authenticateUser(email, password) {
-    validateEmail(email)
+function authenticateUser(username, password) {
+    validateUsername(username)
     validatePassword(password)
 
     return (async () => {
-        const user = await User.findOne({ email })
+        const user = await User.findOne({ username })
         
         if (!user || !bcrypt.compareSync(password, user.password)) throw new CredentialsError('wrong credentials')
+
+        sanitizeDocument(user)
         
         return user.id
     })()

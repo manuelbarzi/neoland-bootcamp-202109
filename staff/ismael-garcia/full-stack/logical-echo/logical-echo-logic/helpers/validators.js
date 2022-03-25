@@ -20,6 +20,16 @@ function validateUsername(username) {
     if (username.length < 4) throw new FormatError('username has less than 4 characters')
 }
 
+function validateEmail(email) {
+    if (typeof email !== 'string') throw new TypeError(email + ' is not a string')
+    if (!email.trim().length) throw new Error('email is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(email)) throw new Error('email has blank spaces')
+    if (!String(email)
+        .toLowerCase()
+        .match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/))
+        throw new FormatError('email has invalid format')
+}
+
 function validatePassword(password) {
     if (typeof password !== 'string') throw new TypeError('password is not a string')
     if (!password.trim().length) throw new FormatError('password is empty or blank')
@@ -34,18 +44,26 @@ function validateNewPassword(newPassword) {
     if (newPassword.length < 8) throw new FormatError('new password has less than 8 characters')
 }
 
+function validateToken(token) {
+    if (typeof token !== 'string') throw new TypeError(`${token} is not a string`)
+    if (!/[a-zA-Z0-9\-_]+?\.[a-zA-Z0-9\-_]+?\.([a-zA-Z0-9\-_]+)$/.test(token)) throw new Error('invalid token')
+}
+
 function validateData(data) {
     if (typeof data !== 'object' || data.constructor.name !== 'Object') throw new TypeError('data is not an object')
 
-    const { name, username, password, newPassword } = data
+    const { newName, newUsername, newEmail, password, newPassword } = data
 
     validatePassword(password)
 
-    if (typeof name !== 'undefined')
-        validateName(name)
+    if (typeof newName !== 'undefined')
+        validateName(newName)
 
-    if (typeof username !== 'undefined')
-        validateUsername(username)
+    if (typeof newUsername !== 'undefined')
+        validateUsername(newUsername)
+
+    if (typeof newEmail !== 'undefined')
+        validateEmail(newEmail)
 
     if (typeof newPassword !== 'undefined')
         validateNewPassword(newPassword)
@@ -146,10 +164,6 @@ function validateItem(item) {
         validateColors(colors)
 }
 
-function validateEmail(email) {
-    if (!String(email).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) throw new TypeError('email is not valid')
-}
-
 function validateQuery(query) {
     if (typeof query !== 'string') throw new TypeError(`${query} is not a string`)
 }
@@ -158,23 +172,24 @@ module.exports = {
     validateId,
     validateName,
     validateUsername,
+    validateEmail,
     validatePassword,
     validateNewPassword,
+    validateToken,
     validateData,
     validateCallback,
     validateString,
-    validateDate,
-    validateArray,
-    validateNumber,
-    validateItem,
-    validateEmail,
     validateItemId,
-    validateImages,
+    validateStore,
+    validatePattern,
     validatePrice,
     validateUrl,
     validateDescription,
+    validateDate,
+    validateArray,
+    validateImages,
     validateColors,
-    validateStore,
-    validatePattern,
+    validateNumber,
+    validateItem,
     validateQuery
 }

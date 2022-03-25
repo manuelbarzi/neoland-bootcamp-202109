@@ -4,7 +4,6 @@ const { NotFoundError, ConflictError, CredentialsError } = require('logical-echo
 const bcrypt = require('bcryptjs')
 
 /**
- * TODO doc me
  * @param {*} id 
  * @param {*} data 
  */
@@ -14,13 +13,25 @@ function modifyUser(id, data) {
 
     return (async () => {
         try {
-            const user = await User.findById(id).lean()
+            const user = await User.findById(id)
             
             if (!user) throw new NotFoundError(`user with id ${id} not found`)
             
             let { password } = data 
         
             if (!bcrypt.compareSync(password, user.password)) throw new CredentialsError('wrong password')
+
+            if (data.newName) {
+                data.name = data.newName 
+
+                delete data.newName 
+            }
+
+            if (data.newUsername) {
+                data.username = data.newUsername 
+
+                delete data.newUsername 
+            }
 
             if (data.newEmail) {
                 data.email = data.newEmail 
@@ -29,7 +40,7 @@ function modifyUser(id, data) {
             }
             
             if (data.newPassword) {
-                password = data.newPassword 
+                data.password = data.newPassword 
 
                 delete data.newPassword 
             }
@@ -42,10 +53,9 @@ function modifyUser(id, data) {
             }
         
             await user.save()
-        
         } catch (error) {
             if (error.code === 11000)
-                throw new ConflictError(`user with email ${data.email} already exists`)
+                throw new ConflictError('user with that username or email already exists')
             
             throw error
         }

@@ -2,7 +2,6 @@ const { models: { User } } = require('logical-echo-data')
 const { validateId, validatePassword } = require('./helpers/validators')
 const { CredentialsError } = require('logical-echo-errors')
 const bcrypt = require('bcryptjs')
-// const { Types: { ObjectId } } = mongoose
 
 /**
  * TODO doc me
@@ -15,14 +14,12 @@ function unregisterUser(id, password) {
 
     return (async () => {
         try {
-            const user = await User.findById(id).lean()
+            const user = await User.findById(id)
             
-            if (!user || !bcrypt.compareSync(password, user.password)) throw new CredentialsError('wrong credentials')
+            if (!user || !bcrypt.compareSync(password, user.password)) 
+                throw new CredentialsError('wrong credentials')
         
-        
-            // await User.deleteOne({ _id: ObjectId(id) })
             await user.remove()
-            
         } catch (error) {
             throw error
         }

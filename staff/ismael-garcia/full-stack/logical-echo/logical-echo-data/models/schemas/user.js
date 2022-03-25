@@ -1,6 +1,37 @@
 const { Schema } = require('mongoose')
 
 const user = new Schema({
+    name: {
+        type: String,
+        required: true,
+        validate: [
+            {
+                validator(name) {
+                    return name.trim() === name
+                },
+                message: 'name should not have white spaces around'
+            }
+        ]
+    },
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        validate: [
+            {
+                validator(username) {
+                    return username.length > 3
+                },
+                message: 'username should have at least 4 characters'
+            },
+            {
+                validator(username) {
+                    return !username.includes(' ')
+                },
+                message: 'username should not have white spaces'
+            }
+        ]
+    },
     email: {
         type: String,
         required: true,

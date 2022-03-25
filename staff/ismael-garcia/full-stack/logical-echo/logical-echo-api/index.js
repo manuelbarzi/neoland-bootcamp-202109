@@ -3,7 +3,6 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const { mongoose } = require('logical-echo-data')
 const cors = require('cors')
-
 const { 
     registerUser, 
     authenticateUser, 
@@ -16,7 +15,6 @@ const {
     retrieveItem,
     retrieveTrendingItems
 } = require('./handlers')
-
 const logger = require('./utils/my-logger')
 
 const { env: { PORT, MONGO_URI }, argv: [, , port = PORT || 8080] } = process

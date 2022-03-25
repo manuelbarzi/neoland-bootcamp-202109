@@ -3,6 +3,8 @@ const { validateEmail, validatePassword, validateName, validateUsername } = requ
 /**
  * Signs up a user in the application.
  * 
+ * @param {string} name The name of the user to be signed up.
+ * @param {string} username The username of the user to be signed up.
  * @param {string} email The email of the user to be signed up.
  * @param {string} password The password of the user to be signed up.
  * 

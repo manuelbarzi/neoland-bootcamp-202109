@@ -49,6 +49,8 @@ function Home() {
             await registerSubscription(email)
             
             onFlowEnd()
+
+            onModal('Registered for newsletter', 'success')
         } catch ({ message }) {
             onFlowEnd()
 
@@ -118,10 +120,8 @@ function Home() {
         navigate('/')
     }
 
-
     return <>
         <div id="home" className="container container--vertical container--gapped">
-
             <Navbar onLogin={goToAccount} onProfile={goToProfile} onNewsletter={goToNewsletter} onFavs={goToFavs} onSearch={goToSearch} onLoggedOut={resetToken} onHome={goToHome} />
 
             <div className='container container--gapped'>
@@ -160,7 +160,6 @@ function Home() {
 
                 <Route path="/newsletter" element={<Newsletter onBack={goToHome} onNewsletter={registerForNewsletter} />} />
             </Routes>
-
         </div>
     </>
 }
