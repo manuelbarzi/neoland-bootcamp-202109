@@ -1,62 +1,64 @@
-import React from 'react'
 import { useQuery } from '../hooks'
 import { useState, useEffect, useContext } from 'react'
 import { searchReservations } from '../logic'
 import AppContext from './AppContext'
 import 'bootstrap/dist/css/bootstrap.css'
-import { ListGroup } from 'react-bootstrap'
+import { ListGroup, Container, Row, Col } from 'react-bootstrap'
 
 function Results({goToItem}) {
+    const { showModalFeedback, showLoading, hideLoading, onSignOut } = useContext(AppContext);
 
-  const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
-
-  const [reservations, setReservations] = useState({})
-
-  const _query = useQuery()
-
-  const query = _query.getParam ('q')
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(async () => {
-    const { token } = sessionStorage
-
-    if (token) {
-      try {
-        onFlowStart()
-
-        const reservations = await searchReservations(token, query)
-
-        onFlowEnd()
-
-        setReservations(reservations)
-
-      } catch ({ message }) {
-        onFlowEnd()
-
-        onModal('No se encontraron reservas con ese nombre')
+    const [reservations, setReservations] = useState({})
+  
+    const _query = useQuery()
+  
+    const query = _query.getParam ('q')
+  
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(async () => {
+      const { token } = sessionStorage
+  
+      if (token) {
+        try {
+          showLoading()
+  
+          const reservations = await searchReservations(token, query)
+  
+          hideLoading()
+  
+          setReservations(reservations)
+  
+        } catch ({ message }) {
+          hideLoading()
+  
+          showModalFeedback('Buscar reserva' , 'No se encontraron reservas con ese nombre', 'danger')
+        }
       }
-    }
-  }, [query])
+    }, [query])
+  
+    return <Container>
+    <Row xs={1} sm={1} md={3} lg={4}>
+      {
+        reservations && reservations.length ?
+          reservations.map(({ id, pax, quantity, from, until, state }) => 
+            <Col className='mx-4 my-4' >
+              <ListGroup>
+              <ListGroup.Item onClick={() => goToItem(id)}> 
+              <ListGroup.Item variant="info">Pax: {pax} x {quantity} </ListGroup.Item>
+                <ListGroup.Item variant="info">In: {from.slice(0, 9)}</ListGroup.Item>
+                <ListGroup.Item variant="info">Out: {until.slice(0, 9)} </ListGroup.Item>
+                <ListGroup.Item variant="info">Estado: {state}</ListGroup.Item>
+              </ListGroup.Item>
+              
+              </ListGroup>
+              </Col>
+          ) 
+          :
+          <h3>Click nueva reserva</h3>
+      }
 
-  return reservations && reservations.length ? (
-    <div className='reservations'>
-      <ul className=''>
-        {reservations.map(({ id, pax, quantity, from, until, state }) => (
-          <ListGroup.Item
-            className='list-reservation'
-            key={id}
-            onClick={() => goToItem(id)}
-          >
-            <span>Pasajero: {pax} </span>
-            <span> x {quantity} </span>
-            <span>In: {from.slice(0, 9)}</span>
-            <span>Out: {until.slice(0, 9)} </span>
-            <span>Estado: {state}</span>
-          </ListGroup.Item>
-        ))}
-      </ul>
-    </div>
-  ) : 'No se encontraron reservas con este nombre'
+    </Row>
+  </Container>
 }
-
-export default Results
+  
+  export default Results

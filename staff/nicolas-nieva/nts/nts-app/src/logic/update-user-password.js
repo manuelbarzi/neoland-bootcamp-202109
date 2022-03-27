@@ -24,7 +24,7 @@ import context from './context'
             const { error } = await res.json()
 
             throw new Error(error)
-        } else throw new Error('unknoun error')
+        } else throw new Error('unknown error')
     })()
 }
 

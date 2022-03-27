@@ -17,7 +17,7 @@ function createReservation(userId, pax, quantity, product, from, until, state, a
 
         const reservation = await Reservation.create({ agency: userId, pax, quantity, product, from, until, state, agent })
 
-        debugger
+        
 
         if (note) {
             reservation.notes.push({ text: note, date: new Date })

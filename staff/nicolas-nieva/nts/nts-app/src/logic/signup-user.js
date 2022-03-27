@@ -1,5 +1,5 @@
 import context from './context'
-const { validateName, validateUsername, validatePassword, validateMail, validateAddress, validateProvince, validateLocation  } = require ('nts-logic/helpers/validators')
+const { validateName, validateUsername, validatePassword, validateMail, validateAddress, validateProvince, validateLocation, validateNumber  } = require ('./../helpers/validators.js')
 
 
 function signupUser(user) {
@@ -12,6 +12,7 @@ function signupUser(user) {
     validateAddress(address)
     validateProvince(province)
     validateLocation(location)
+    // validateNumber(phone)
 
     return (async () => {
 

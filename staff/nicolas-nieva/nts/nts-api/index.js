@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const bodyParser = require('body-parser')
+const path = require('path')
 const { mongoose } = require('../nts-data')
 const { registerUser,
     authenticateUser,
@@ -53,6 +54,8 @@ const { env: { PORT, MONGO_URL }, argv: [, , port = PORT || 8080] } = process;
 
         api.post('/reservations/:reservationId/notes/', jsonBodyParser, addNoteToReservation)
         api.delete('/reservations/:reservationId/notes/:noteId', jsonBodyParser, deleteNoteFromReservation)
+
+        
 
         api.all('*', (req, res) => {
             res.status(404).json({ message: 'sorry, this endpoint isn\'t available' })

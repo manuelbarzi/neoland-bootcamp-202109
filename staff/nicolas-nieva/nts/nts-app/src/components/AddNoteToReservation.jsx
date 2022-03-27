@@ -1,64 +1,72 @@
-import { useParams } from "react-router-dom"
-import { useContext } from "react"
-import AppContext from "./AppContext"
-import "bootstrap/dist/css/bootstrap.css"
-import { Button, Form, FloatingLabel, Card } from "react-bootstrap"
-import { addNoteToReservation } from "../logic"
+import AppContext from './AppContext';
+import { useContext } from 'react';
+import { Button, Modal, Form, FloatingLabel } from 'react-bootstrap'
+import  {addNoteToReservation} from './../logic'
 
-function AddNoteToReservation({ goToHome }) {
-    const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
-    const { id } = useParams()
-    return (
-        <>
-            <Card.Title className="container container--vertical">Añadir nota</Card.Title>
-            <form
-                className="signup container container--vertical container--gapped"
-                onSubmit={async (event) => {
-                    event.preventDefault()
+function AddNoteToReservation({addNoteToReservationModal, handleCloseAddNoteToReservation, id, setNote}) {
+    const { showModalFeedback, showLoading, hideLoading } = useContext(AppContext);
 
-                    const note = event.target.note.value
+    const handleSubmit = async event => {
+        event.preventDefault()
 
-                    const text = {
-                        text:note
-                    }
+        const note = event.target.note.value
 
-                    try {
-                        onFlowStart()
+        const text = {
+            text:note
+        }
 
-                        await addNoteToReservation(sessionStorage.token, text, id)
+        try {
+            showLoading()
 
-                        onModal("Nota añadida")
+            await addNoteToReservation(sessionStorage.token, text, id)
 
-                        goToHome()
+            showModalFeedback('Añadir Nota', 'Nota añadida', 'primary')
 
-                        onFlowEnd()
-                    } catch ({ message }) {
-                        onFlowEnd()
+            setNote (note)
 
-                        onModal(message)
-                    }
+            handleCloseAddNoteToReservation()
 
-                    event.target.reset()
-                }}
-            >
-                
-                <FloatingLabel controlId="note"  label="Datos adicionales">
-                    <Form.Control
-                        as="textarea" name="note"
-                        placeholder="Leave a comment here"
-                        style={{ height: '100px', width: '400px' }}
-                    />
+
+           hideLoading()
+        } catch ({ message }) {
+           hideLoading()
+
+            showLoading('Error', message, 'danger')
+        }
+    
+    }
+
+
+    return <>
+    <Modal
+        show={addNoteToReservationModal}
+        onHide={handleCloseAddNoteToReservation}
+        backdrop="static"
+        keyboard={false}
+    >
+        <Modal.Header closeButton>
+            <Modal.Title>Añadir Nota</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            <Form onSubmit={handleSubmit}>
+            <FloatingLabel label="Comentarios" className="mb-2">
+                <Form.Control 
+                    className="field"
+                    type="text"
+                    name="note"
+                    id="note"
+                    as="textarea"
+                    placeholder="nombre del pasajero"
+                />
                 </FloatingLabel>
-
-                <div className="">
-                    <Button className="button" onClick={() => goToHome()}>
-                    <i class="far fa-arrow-alt-circle-left"></i>
-                    </Button>
-                    <Button className="button" type="submit">Crear nota</Button>
-                </div>
-            </form>
-        </>
-    )
+                <Modal.Footer>
+                    <Button style={{margin: '20px auto' }} type='submit' variant="primary">Añadir Nota</Button>
+                </Modal.Footer>
+            </Form>
+        </Modal.Body>
+    </Modal>
+    
+    </>
 }
 
 export default AddNoteToReservation

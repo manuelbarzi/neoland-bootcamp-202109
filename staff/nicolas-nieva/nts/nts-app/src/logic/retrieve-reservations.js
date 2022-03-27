@@ -19,10 +19,10 @@ function retrieveReservations(token) {
             return await res.json()
 
         } else if (status === 401 || status === 404) {
-            const { error } = res.json()
+            const { error } = await res.json()
 
             throw new Error(error)
-        } else throw new Error('unknow error')
+        } else throw new Error('unknown error')
     })()
 }
 

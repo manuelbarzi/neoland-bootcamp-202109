@@ -1,7 +1,8 @@
 import context from './context'
-const { validateUsername, validatePassword } = require ('nts-logic/helpers/validators')
+const { validateName, validateUsername, validatePassword, validateMail, validateAddress, validateProvince, validateLocation, validateNumber  } = require ('./../helpers/validators.js')
 
-function authorizeUser(username, password) {
+function authorizeUser(user) {
+    const { username, password } = user
     // validateUsername (username)
     // validatePassword (password)
  
@@ -11,7 +12,7 @@ function authorizeUser(username, password) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(username, password)
+            body: JSON.stringify(user)
         })
 
         const { status } = res

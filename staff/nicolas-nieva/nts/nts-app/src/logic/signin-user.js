@@ -1,12 +1,12 @@
 import context from './context'
-const { validateUsername, validatePassword } = require ('nts-logic/helpers/validators')
+// const { validateUsername, validatePassword } = require ('nts-logic/helpers/validators')
 
 function signinUser(username, password) {
     // validateUsername (username)
     // validatePassword (password)
     
     return (async () => {
-        const res = await fetch(`${context.API_URL}/users`, {
+        const res = await fetch(`http://localhost:8000/api/users/auth   `, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

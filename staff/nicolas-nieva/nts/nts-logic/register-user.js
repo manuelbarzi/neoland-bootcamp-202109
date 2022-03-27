@@ -16,7 +16,7 @@ function registerUser(name, username, password, email, address, phone, province,
     validatePassword(password)
     // validateMail(email)
     // validatePhone(phone)
-    // validateAddress(address)ç
+    // validateAddress(address)
     // validateProvince(province)
     // validateLocation(location)
 

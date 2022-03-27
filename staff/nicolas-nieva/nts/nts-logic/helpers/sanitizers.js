@@ -17,6 +17,9 @@ function sanitizeReservation(reservation) {
 
     delete reservation.agency
 
+    reservation.from = new Intl.DateTimeFormat('es-BO').format(reservation.from)
+    reservation.until = new Intl.DateTimeFormat('es-BO').format(reservation.until)
+
     reservation.notes.forEach(sanitizeNote)
 }
 
@@ -26,6 +29,8 @@ function sanitizeNote(note) {
     delete note._id
 
     delete note.__v
+
+    note.date = new Intl.DateTimeFormat('es-BO').format(note.date)
 }
 
 module.exports = {

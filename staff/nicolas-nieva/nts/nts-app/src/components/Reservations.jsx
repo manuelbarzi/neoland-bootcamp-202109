@@ -2,58 +2,59 @@ import { useState, useEffect, useContext } from 'react';
 import AppContext from './AppContext';
 import { retrieveReservations } from '../logic'
 import 'bootstrap/dist/css/bootstrap.css'
-import { ListGroup } from 'react-bootstrap'
+import { ListGroup, ListGroupItem, Container, Row, Col, Card, Form } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
-function Reservations({goToItem}) {
-  const { onFlowStart, onFlowEnd, onModal} = useContext(AppContext);
+function Reservations({ reservation }) {
+  const { showModalFeedback, showLoading, hideLoading } = useContext(AppContext);
   const [reservations, setReservations] = useState([]);
+
+  const navigate = useNavigate()
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(async () => {
     const { token } = sessionStorage;
 
     try {
-        onFlowStart()
+      showLoading()
       const reservations = await retrieveReservations(token);
-
+      hideLoading()
       setReservations(reservations);
 
-      onFlowEnd();
+
     } catch ({ message }) {
-      onFlowEnd();
-
-      onModal();
-
+      hideLoading()
+      showModalFeedback('Error Carga', message, 'danger')
     }
-  },['No tienes reservas creadas']);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reservation]);
 
-  
-  function formatDate (){
-  let date = new Date()
+ 
 
-  let day = date.getDate()
-  let month = date.getMonth() + 1
-  let year = date.getFullYear()
-  
-  }
+  return <Card><Container>
+    <Row xs={1} sm={1} md={3} lg={4}>
+      {
+        reservations && reservations.length ?
+          reservations.map(({ id, pax, quantity, from, until, state }) =>
+            <Col className='mx-4 my-2' >
+              <h3 className='text-center'>Reserva</h3>
+              <ListGroup className='text-center'>
+                <ListGroup.Item onClick={() => navigate(`/reservations/${id}`)}>
+                  <ListGroup.Item variant="info">Pax: {pax} x {quantity} </ListGroup.Item>
+                  <ListGroup.Item variant="info">In: {from.slice(0, 9)}</ListGroup.Item>
+                  <ListGroup.Item variant="info">Out: {until.slice(0, 9)} </ListGroup.Item>
+                  <ListGroup.Item variant="info">Estado: {state}</ListGroup.Item>
+                </ListGroup.Item>
+              </ListGroup>
+            </Col>
+          )
+          :
+          <h3>Aun no hay reservas disponibles</h3>
+      }
 
-  return (
-    <>
-    {/* <Button onClick={() => goToReservation()}>Nueva Reserva</Button> */}
-      <div className='list-reservations'>
-        <ListGroup horizontal>
-          {reservations.map(({ id, pax, quantity, from, until, state }) => (
-            <ListGroup.Item className='' key={id} onClick={() => goToItem(id)}>
-              <ListGroup.Item variant="info">Pasajero: {pax} x {quantity} </ListGroup.Item>
-              <ListGroup.Item variant="info">In: {from.slice(0,9)}</ListGroup.Item>
-              <ListGroup.Item variant="info">Out: {until.slice(0,9)} </ListGroup.Item>
-              <ListGroup.Item variant="info">Estado: {state}</ListGroup.Item>
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
-      </div>
-    </>
-  );
+    </Row>
+  </Container>
+  </Card>
 }
 
 export default Reservations
