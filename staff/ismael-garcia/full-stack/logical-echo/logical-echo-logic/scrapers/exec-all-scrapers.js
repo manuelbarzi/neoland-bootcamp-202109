@@ -1,5 +1,6 @@
 require('dotenv').config()
 const { mongoose, models: { Item } } = require('logical-echo-data')
+const nodeCron = require('node-cron')
 const scrapeHMBabies = require('./scrape-hm-babies')
 const scrapeHMKids = require('./scrape-hm-kids')
 const scrapeHMMan = require('./scrape-hm-man')
@@ -11,19 +12,22 @@ const scrapeZaraWoman = require('./scrape-zara-woman')
 
 const { env: { MONGO_URI } } = process;
 
-(async () => {
+async function execAllScrapers() {
     await mongoose.connect(MONGO_URI)
 
     await Item.deleteMany()
 
-    await scrapeHMBabies()
+    // await scrapeHMBabies()
     // await scrapeHMKids()
-    // await scrapeHMWoman()
+    await scrapeHMWoman()
     // await scrapeHMMan()
-    // await scrapeMangoWoman()
+    await scrapeMangoWoman()
     // await scrapeZaraKids()
-    // await scrapeZaraWoman()
+    await scrapeZaraWoman()
     // await scrapeZaraMan()
 
     await mongoose.disconnect()
-})()
+}
+
+const job = nodeCron.schedule('30 * * * *', execAllScrapers)
+

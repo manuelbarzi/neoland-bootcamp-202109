@@ -1,8 +1,8 @@
 require('dotenv').config()
 const puppeteer = require('puppeteer')
 const logger = require('../../logical-echo-api/utils/my-logger')
-const scrapeHrefs = require('./helpers/scrape-hrefs')
-const scrapeItem = require( './helpers/scrape-item' )
+const scrapeHrefs = require('./scrape-hrefs')
+const scrapeItem = require('./scrape-item')
 const removeDuplicatesFromArrayOfObjects = require('./helpers/remove-duplicates-from-array-of-objects')
 const registerItems = require('../register-items')
 
@@ -10,7 +10,6 @@ function scrapeCollection({ url, selector, infinite_scroll, button_selector, nam
     return (async () => { 
         try {
             const browser = await puppeteer.launch({ 
-                headless: false,
                 args: ['--disable-dev-shm-usage'] 
             })
 
@@ -24,7 +23,7 @@ function scrapeCollection({ url, selector, infinite_scroll, button_selector, nam
             const hrefs = await scrapeHrefs(browser, scrape_hrefs_args)
             console.log(hrefs)
 
-            const hrefs_slice = hrefs.slice(0, 5) // To avoid being blocked by the website due to too many requests.
+            const hrefs_slice = hrefs.slice(0, 30) // To avoid being blocked by the website due to too many requests.
             
             const hrefs_map = hrefs_slice.map(async (href) => {
                 logger.debug(`scraping page ${href}`)

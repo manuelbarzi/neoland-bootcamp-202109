@@ -1,5 +1,5 @@
-const logger = require('../../../logical-echo-api/utils/my-logger')
-const getRandomElementFromArray = require('./get-random-element-from-array')
+const logger = require('../../logical-echo-api/utils/my-logger')
+const getRandomElementFromArray = require('./helpers/get-random-element-from-array')
 
 function scrapeItem (browser, item_selectors) {
     return (async () => {

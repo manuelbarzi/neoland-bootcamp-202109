@@ -1,7 +1,7 @@
-const logger = require('../../../logical-echo-api/utils/my-logger')
-const autoScroll = require('./autoscroll')
-const clickLoadMoreButton = require('./click-load-more-button')
-const getRandomElementFromArray = require('./get-random-element-from-array')
+const logger = require('../../logical-echo-api/utils/my-logger')
+const autoScroll = require('./helpers/autoscroll')
+const clickLoadMoreButton = require('./helpers/click-load-more-button')
+const getRandomElementFromArray = require('./helpers/get-random-element-from-array')
 
 function scrapeHrefs(browser, { url, selector, infinite_scroll, button_selector }) {
     return (async () => { 
