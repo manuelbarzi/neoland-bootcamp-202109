@@ -34,6 +34,9 @@ const item = new Schema({
     },
     colors: {
         type: Array
+    },
+    date: {
+        type: String
     }
 })
 

@@ -3,6 +3,7 @@ const authenticateUser = require('./authenticate-user')
 const retrieveUser = require('./retrieve-user')
 const modifyUser = require('./modify-user')
 const unregisterUser = require('./unregister-user')
+const registerItems = require('./register-items')
 const searchItems = require('./search-items')
 const retrieveItemsByStore = require('./retrieve-items-by-store')
 const registerSubscription = require('./register-subscription')
@@ -17,6 +18,7 @@ module.exports = {
     retrieveUser,
     modifyUser,
     unregisterUser,
+    registerItems,
     searchItems,
     retrieveItemsByStore,
     registerSubscription,

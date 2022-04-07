@@ -1,5 +1,4 @@
 require('dotenv').config()
-
 const { expect } = require('chai')
 const authenticateUser = require('./authenticate-user')
 const { mongoose, models: { User } } = require('logical-echo-data')
