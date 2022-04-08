@@ -1,68 +1,62 @@
-import { validateCallback, validateItemId, validateToken } from './helpers/validators'
-
-function toggleFavItem(token, id, callback) {
+import context from './context'
+import { validateToken, validateItemId } from './helpers/validators'
+/**
+ * Searches for items that meet the query criteria.
+ * 
+ * @param {string} query The search criteria entered by the user in the search form.
+ * 
+ * @throws {TypeError} When any of the arguments does not match the correct type.
+ */
+ function toggleFavItem(token, item_id) {
     validateToken(token)
-    validateItemId(id)
-    validateCallback(callback)
+    validateItemId(item_id)
 
-    const xhr = new XMLHttpRequest()
+    return (async () => {
+        const res = await fetch(`${context.API_URL}/users`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
 
-    xhr.onload = () => {
-        const { status, responseText } = xhr
+        const { status } = res 
 
         if (status === 401 || status === 404) {
-            const response = JSON.parse(responseText)
+            const { error } = res.json()
 
-            const message = response.error
-
-            callback(new Error(message))
+            throw new Error(error)
         } else if (status === 200) {
-            const response = responseText
-
-            const user = JSON.parse(response)
+            const user = await res.json()
 
             const { favs = [] } = user
 
-            const index = favs.indexOf(id)
+            const index = favs.indexOf(item_id)
 
             if (index < 0)
-                favs.push(id)
+                favs.push(item_id)
             else
                 favs.splice(index, 1)
-            
-            const xhr2 = new XMLHttpRequest()
 
-            xhr2.onload = () => {
-                const { status, responseText } = xhr2
+            const res2 = await fetch(`${context.API_URL}/users`, {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ favs })
+            })
 
-                if (status === 400 || status === 401) {
-                    const response = JSON.parse(responseText)
+            const { status } = res2 
 
-                    const message = response.error
-
-                    callback(new Error(message))
-                } else if (status === 204) {
-                    callback(null)
-                }
+            if (status === 204) {
+                return
+            } else {
+                const { error } = await res2.json()
+    
+                throw new Error(error)
             }
-
-            xhr2.open('PATCH', 'https://localhost/users')
-
-            xhr2.setRequestHeader('Authorization', `Bearer ${token}`)
-
-            xhr2.setRequestHeader('Content-Type', 'application/json')
-
-            const body = { favs }
-
-            xhr2.send(JSON.stringify(body))
-        }
-    }
-
-    xhr.open('GET', 'https://localhost/users')
-
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-
-    xhr.send()
+        } else throw new Error('Unknown error')
+    })()
 }
 
 export default toggleFavItem

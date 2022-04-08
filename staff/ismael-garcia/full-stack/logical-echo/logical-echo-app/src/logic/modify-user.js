@@ -1,15 +1,15 @@
 import context from './context'
-const { validateToken, validateData } = require('./helpers/validators')
+import { validateToken, validateData } from './helpers/validators'
 /**
  * Updates the user's profile in the application.
  * 
  * @param {string} token The token sent by the server when the user is authorized.
- * @param {object} data An object that contains password and can contain new email and new password.
+ * @param {object} data An object that contains the values to be updated for one or more of the properties in the user's database document.
  * 
  * @throws {TypeError} When any of the arguments does not match the correct type.
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
- function updateUserProfile(token, data) {
+ function modifyUser(token, data) {
     validateToken(token)
     validateData(data)
 
@@ -35,4 +35,4 @@ const { validateToken, validateData } = require('./helpers/validators')
     })()
 }
 
-export default updateUserProfile
+export default modifyUser

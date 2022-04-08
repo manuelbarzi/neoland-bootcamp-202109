@@ -65,6 +65,12 @@ function validateData(data) {
     if (newPassword) validateNewPassword(newPassword)
 }
 
+function validateItemId(item_id) {
+    if (typeof item_id !== 'string') throw new TypeError('item_id is not a string')
+    if (!item_id.trim().length) throw new FormatError('item_id is empty or blank')
+    if (/\r?\n|\r|\t| /g.test(item_id)) throw new FormatError('item_id has blank spaces')
+}
+
 function validateCallback(callback) {
     if (typeof callback !== 'function') throw new TypeError('callback is not a function')
 }
@@ -91,6 +97,7 @@ module.exports = {
     validateNewPassword,
     validateToken,
     validateData,
+    validateItemId,
     validateCallback,
     validateString,
     validateNumber,

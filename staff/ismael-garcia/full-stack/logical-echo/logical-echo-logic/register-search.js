@@ -10,7 +10,6 @@ function registerSearch(search) {
     return (async () => {
         try {
             await Search.create(search)
-
         } catch (error) {
             throw error 
         }

@@ -1,12 +1,10 @@
 const { searchItems, registerSearch } = require('logical-echo-logic')
-const { handleError, validateAuthorizationAndExtractPayload } = require('./helpers')
+const { handleError } = require('./helpers')
 
 module.exports = async (req, res) => {
-    const { headers: { authorization }, query: { q } } = req
+    const { query: { q } } = req
 
     try {
-        const { sub: id } = validateAuthorizationAndExtractPayload(authorization)
-
         const search = {
             query: q,
             date: new Date()
@@ -14,7 +12,7 @@ module.exports = async (req, res) => {
 
         await registerSearch(search)
 
-        const items = await searchItems(id, q)
+        const items = await searchItems(q)
 
         res.json(items)
     } catch (error) {

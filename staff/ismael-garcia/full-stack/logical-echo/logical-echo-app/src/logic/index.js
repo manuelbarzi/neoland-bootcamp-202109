@@ -1,27 +1,25 @@
-import signUpUser from './signup-user'
-import signInUser from './signin-user'
+import registerUser from './register-user'
+import loginUser from './login-user'
 import retrieveUser from './retrieve-user'
-import updateUserProfile from './update-user-profile'
+import modifyUser from './modify-user'
 import unregisterUser from './unregister-user'
+import searchItems from './search-items'
 import retrieveItem from './retrieve-item'
 import toggleFavItem from './toggle-fav-item'
 import retrieveFavItems from './retrieve-fav-items'
-import retrieveItemsCollection from './retrieve-items-collection'
-import searchItems from './search-items'
 import registerSubscription from './register-subscription'
 import retrieveTrendingItems from './retrieve-trending-items'
 
 export {
-    signInUser,
-    signUpUser,
+    registerUser,
+    loginUser,
     retrieveUser,
-    updateUserProfile,
+    modifyUser,
     unregisterUser,
+    searchItems,
     retrieveItem,
     toggleFavItem,
     retrieveFavItems,
-    retrieveItemsCollection,
-    searchItems,
     registerSubscription,
     retrieveTrendingItems
 }

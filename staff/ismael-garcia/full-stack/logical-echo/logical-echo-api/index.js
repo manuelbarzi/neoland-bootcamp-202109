@@ -3,6 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const { mongoose } = require('logical-echo-data')
 const cors = require('cors')
+const Redis = require('ioredis')
 const { 
     registerUser, 
     authenticateUser, 
@@ -10,9 +11,9 @@ const {
     modifyUser,
     unregisterUser,
     searchItems,
-    retrieveItemsByStore,
     registerSubscription,
     retrieveItem,
+    retrieveFavItems,
     retrieveTrendingItems
 } = require('./handlers')
 const logger = require('./utils/my-logger')
@@ -24,7 +25,39 @@ logger.info('starting server');
 (async () => {
     try {
         await mongoose.connect(MONGO_URI || 'mongodb://localhost/test')
-            
+        
+        const redis = new Redis({
+            host: '127.0.0.1',
+            port: 6379
+        })
+
+        const cache = (req, res, next) => {
+            const { query: { q } } = req
+            const { item_id } = req.params
+
+            if (item_id) {
+                redis.get(item_id, (error, result) => {
+                    if (error) throw error
+    
+                    if (result !== null) {
+                        return res.json(JSON.parse(result))
+                    } else {
+                        return next()
+                    }
+                })
+            } else {
+                redis.get(q, (error, result) => {
+                    if (error) throw error
+    
+                    if (result !== null) {
+                        return res.json(JSON.parse(result))
+                    } else {
+                        return next()
+                    }
+                })
+            }
+        }
+
         const server = express()
 
         server.use(cors())
@@ -43,15 +76,45 @@ logger.info('starting server');
 
         api.delete('/users', jsonBodyParser, unregisterUser)
 
-        api.get('/search/items', searchItems)
+        api.get('/items', cache, async (req, res) => {
+            const { query: { q } } = req
+            
+            const items = await searchItems(q)
 
-        api.get('/search/items/item', retrieveItem) // with params: items/item/ghty5h352d
+            redis.set(q, JSON.stringify(items), "EX", 21600)
 
-        api.get('/search/store', retrieveItemsByStore)
+            return res.json(items)
+        })
+
+        api.get('/items/:item', cache, async (req, res) => {
+            const { item_id } = req.params
+
+            const item = await retrieveItem()
+
+            redis.set(item_id, JSON.stringify(item), "EX", 21600)
+
+            return res.json(item)
+        }) 
+
+        api.get('/items/trend', cache, async (req, res) => {            
+            const trend_items = await retrieveTrendingItems()
+
+            redis.set('trend', JSON.stringify(trend_items), "EX", 21600)
+
+            return res.json(trend_items)
+        })
+
+        api.get('/items/favs', cache, async (req, res) => {
+            const { headers: { authorization } } = req
+
+            const [, token] = authorization.split(' ')
+
+            const favs = await retrieveFavItems(token)
+
+            redis.set(token, JSON.stringify(favs), "EX", 21600)
+        })
 
         api.post('/subscriptions', jsonBodyParser, registerSubscription)
-
-        api.get('/trends', retrieveTrendingItems)
 
         api.all('*', (req, res) => {
             res.status(404).json({ message: 'sorry, this endpoint is not available' })

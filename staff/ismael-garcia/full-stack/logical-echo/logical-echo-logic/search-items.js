@@ -1,10 +1,9 @@
 const { models: { Item } } = require('logical-echo-data')
-const { validateQuery, validateId } = require('./helpers/validators')
+const { validateQuery } = require('./helpers/validators')
 const { NotFoundError } = require('logical-echo-errors')
 const { sanitizeDocument } = require('./helpers/sanitizers')
 
-function searchItems(id, query) {
-    validateId(id)
+function searchItems(query) {
     validateQuery(query)
 
     return (async () => {

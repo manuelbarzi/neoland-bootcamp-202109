@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
 
         const date = new Date()
 
-        await registerClickedItem(url, date)
+        await registerClickedItem(item_id)
         
         res.status(201).send()
     } catch (error) {

@@ -1,5 +1,5 @@
 import context from './context'
-const { validateToken } = require('./helpers/validators')
+import { validateToken } from './helpers/validators'
 /**
  * Retrieves the info about the user from the server.
  * 

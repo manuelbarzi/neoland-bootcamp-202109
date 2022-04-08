@@ -1,7 +1,7 @@
 import context from './context'
 const { validateEmail } = require('./helpers/validators')
 /**
- * Signs up a user in the application.
+ * Register an email for a subscription to the application's newsletter.
  * 
  * @param {string} email The email of the user to be signed up.
  * 

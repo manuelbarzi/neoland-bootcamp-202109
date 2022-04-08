@@ -12,22 +12,34 @@ const scrapeZaraWoman = require('./scrape-zara-woman')
 
 const { env: { MONGO_URI } } = process;
 
-async function execAllScrapers() {
+// async function execAllScrapers() {
+//     await mongoose.connect(MONGO_URI)
+
+//     await Item.deleteMany()
+
+//     // await scrapeHMBabies()
+//     // await scrapeHMKids()
+//     // await scrapeHMWoman()
+//     // await scrapeHMMan()
+//     // await scrapeMangoWoman()
+//     // await scrapeZaraKids()
+//     await scrapeZaraWoman()
+//     // await scrapeZaraMan()
+
+//     await mongoose.disconnect()
+// }
+
+// const job = nodeCron.schedule('* * * * *', execAllScrapers)
+
+(async () => {
     await mongoose.connect(MONGO_URI)
 
     await Item.deleteMany()
 
-    // await scrapeHMBabies()
-    // await scrapeHMKids()
     await scrapeHMWoman()
-    // await scrapeHMMan()
+
     await scrapeMangoWoman()
-    // await scrapeZaraKids()
-    await scrapeZaraWoman()
-    // await scrapeZaraMan()
 
     await mongoose.disconnect()
-}
-
-const job = nodeCron.schedule('30 * * * *', execAllScrapers)
+})()
 

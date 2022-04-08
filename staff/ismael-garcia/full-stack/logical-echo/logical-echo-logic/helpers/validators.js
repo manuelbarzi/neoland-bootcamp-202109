@@ -52,9 +52,10 @@ function validateToken(token) {
 function validateData(data) {
     if (typeof data !== 'object' || data.constructor.name !== 'Object') throw new TypeError('data is not an object')
 
-    const { newName, newUsername, newEmail, password, newPassword } = data
+    const { newName, newUsername, newEmail, password, newPassword, favs } = data
 
-    validatePassword(password)
+    if (typeof newName !== 'undefined' || typeof newUsername !== 'undefined' || typeof newEmail !== 'undefined' || typeof newPassword !== 'undefined')
+        validatePassword(password)
 
     if (typeof newName !== 'undefined')
         validateName(newName)
@@ -67,6 +68,9 @@ function validateData(data) {
 
     if (typeof newPassword !== 'undefined')
         validateNewPassword(newPassword)
+
+    if (typeof favs !== 'undefined')
+        validateArray(favs) 
 }
 
 function validateCallback(callback) {

@@ -1,5 +1,5 @@
 import context from './context'
-const { validateUsername, validatePassword } = require('./helpers/validators')
+import { validateUsername, validatePassword } from './helpers/validators'
 /**
  * Logs a user in the application.
  * 
@@ -9,7 +9,7 @@ const { validateUsername, validatePassword } = require('./helpers/validators')
  * @throws {TypeError} When any of the arguments does not match the correct type.
  * @throws {Error} When any of the arguments does not contain the correct format.
  */
- function signInUser(username, password) {
+ function loginUser(username, password) {
     validateUsername(username)
     validatePassword(password)
 
@@ -37,4 +37,4 @@ const { validateUsername, validatePassword } = require('./helpers/validators')
 }
 
 
-export default signInUser
+export default loginUser
