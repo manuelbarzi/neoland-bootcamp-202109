@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { updateUserProfile, unregisterUser } from '../logic'
+import { modifyUser, unregisterUser } from '../logic'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
 import Unregister from './Unregister'
@@ -20,7 +20,9 @@ function Profile({ onBack, onSignOut }) {
         try {
             onFlowStart()
 
-            await updateUserProfile(sessionStorage.token, data)
+            const { token } = sessionStorage
+
+            await modifyUser(token, data)
 
             onFlowEnd()
 
@@ -36,7 +38,9 @@ function Profile({ onBack, onSignOut }) {
         try {
             onFlowStart()
 
-            await unregisterUser(sessionStorage.token, password)
+            const { token } = sessionStorage
+
+            await unregisterUser(token, password)
 
             logger.info('User unregistered')
 

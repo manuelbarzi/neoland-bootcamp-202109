@@ -5,7 +5,7 @@ function registerSearch(search) {
     const { query, date } = search
     
     validateString(query)
-    validateDate(date)
+    validateString(date)
 
     return (async () => {
         try {

@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react'
-import { signUpUser, signInUser } from '../logic'
+import { registerUser, loginUser } from '../logic'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
 import SignUp from './SignUp'
@@ -20,7 +20,7 @@ function Account({ onBack }) {
         try {
             onFlowStart()
 
-            await signUpUser(name, username, email, password)
+            await registerUser(name, username, email, password)
 
             onFlowEnd()
 
@@ -38,7 +38,7 @@ function Account({ onBack }) {
         try {
             onFlowStart()
 
-            const token = await signInUser(username, password)
+            const token = await loginUser(username, password)
             
             sessionStorage.token = token
 

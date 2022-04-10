@@ -10,12 +10,14 @@ const {
     retrieveUser, 
     modifyUser,
     unregisterUser,
-    searchItems,
+    // searchItems,
     registerSubscription,
     retrieveItem,
     retrieveFavItems,
     retrieveTrendingItems
 } = require('./handlers')
+const { searchItems, registerSearch } = require('logical-echo-logic')
+const { handleError } = require('./handlers/helpers')
 const logger = require('./utils/my-logger')
 
 const { env: { PORT, MONGO_URI }, argv: [, , port = PORT || 8080] } = process
@@ -33,7 +35,7 @@ logger.info('starting server');
 
         const cache = (req, res, next) => {
             const { query: { q } } = req
-            const { item_id } = req.params
+            const { params: { item_id } } = req
 
             if (item_id) {
                 redis.get(item_id, (error, result) => {
@@ -78,16 +80,28 @@ logger.info('starting server');
 
         api.get('/items', cache, async (req, res) => {
             const { query: { q } } = req
-            
-            const items = await searchItems(q)
-
-            redis.set(q, JSON.stringify(items), "EX", 21600)
-
-            return res.json(items)
+        
+            try {
+                const search = {
+                    query: q,
+                    date: new Date().toLocaleString()
+                }
+        
+                await registerSearch(search)
+        
+                const items = await searchItems(q)
+                console.log(items)
+        
+                redis.set(q, JSON.stringify(items), "EX", 21600)
+        
+                res.json(items)
+            } catch (error) {
+                handleError(error, res)
+            }
         })
 
         api.get('/items/:item', cache, async (req, res) => {
-            const { item_id } = req.params
+            const { params: { item_id } } = req
 
             const item = await retrieveItem()
 
@@ -109,7 +123,7 @@ logger.info('starting server');
 
             const [, token] = authorization.split(' ')
 
-            const favs = await retrieveFavItems(token)
+            const favs = await retrieveFavItems()
 
             redis.set(token, JSON.stringify(favs), "EX", 21600)
         })

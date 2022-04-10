@@ -7,7 +7,7 @@ import logger from '../utils/logger'
 import Navbar from './Navbar'
 import Search from './Search'
 import Results from './Results'
-import Collection from './Collection'
+import Store from './Store'
 import Detail from './Detail'
 import Account from './Account'
 import Profile from './Profile'
@@ -86,7 +86,7 @@ function Home() {
         navigate('/search')
     }
 
-    const goToCollection = store => {
+    const goToStore = store => {
         setView('not-home')
 
         navigate(`/search/store?q=${store}`)
@@ -131,11 +131,11 @@ function Home() {
             {view === 'home' && 
             <>
             <div>
-                <button type='button' className="button button--medium button--dark" onClick={() => goToCollection('Zara')}>Zara</button>
+                <button type='button' className="button button--medium button--dark" onClick={() => goToStore('Zara')}>Zara</button>
 
-                <button type='button' className="button button--medium button--dark" onClick={() => goToCollection('HM')}>H&M</button>
+                <button type='button' className="button button--medium button--dark" onClick={() => goToStore('HM')}>H&M</button>
 
-                <button type='button' className="button button--medium button--dark" onClick={() => goToCollection('Mango')}>Mango</button>
+                <button type='button' className="button button--medium button--dark" onClick={() => goToStore('Mango')}>Mango</button>
 
             </div>
             <div>
@@ -151,7 +151,7 @@ function Home() {
 
                 <Route path="search/items/item" element={<Detail onBack={goToHome} onToggle={toggleFav} />} />
 
-                <Route path="search/store" element={<Collection onItem={goToItem} onToggle={toggleFav} />} />
+                <Route path="search/store" element={<Store onItem={goToItem} onToggle={toggleFav} />} />
 
                 <Route path="/account" element={<Account onBack={goToHome} />} />
                 <Route path="/profile" element={<Profile onBack={goToHome} onSignOut={resetToken} />} />

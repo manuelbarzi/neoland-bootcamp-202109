@@ -1,11 +1,11 @@
 import { useQueryParams } from '../hooks'
 import { useState, useEffect, useContext } from 'react'
-import { retrieveItemsCollection } from '../logic'
+import { searchItems } from '../logic'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
-// import './Collection.css'
+// import './Store.css'
 
-function Collection({ onItem, onToggle }) {
+function Store({ onItem, onToggle }) {
     logger.debug('Collection -> render')
 
     const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
@@ -25,7 +25,7 @@ function Collection({ onItem, onToggle }) {
             try {
                 onFlowStart()
 
-                const items = await retrieveItemsCollection(token, store)
+                const items = await searchItems(token, store)
 
                 onFlowEnd()
                     
@@ -37,7 +37,7 @@ function Collection({ onItem, onToggle }) {
                 onModal(message, 'warn')
             }
         })()
-    }, [store, token]);
+    }, [store, token, onFlowEnd, onFlowStart, onModal])
 
     return items && items.length ?
         <div>
@@ -62,4 +62,4 @@ function Collection({ onItem, onToggle }) {
         null
 }
 
-export default Collection
+export default Store

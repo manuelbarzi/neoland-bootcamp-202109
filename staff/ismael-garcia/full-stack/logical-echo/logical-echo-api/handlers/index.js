@@ -5,7 +5,6 @@ module.exports = {
     modifyUser: require('./modify-user'),
     unregisterUser: require('./unregister-user'),
     searchItems: require('./search-items'),
-    retrieveItemsByStore: require('./retrieve-items-by-store'),
     retrieveFavItems: require('./retrieve-fav-items'),
     registerSubscription: require('./register-subscription'),
     retrieveItem: require('./retrieve-item'),

@@ -7,12 +7,15 @@ module.exports = async (req, res) => {
     try {
         const search = {
             query: q,
-            date: new Date()
+            date: new Date().toLocaleString()
         }
 
         await registerSearch(search)
 
         const items = await searchItems(q)
+        console.log(items)
+
+        redis.set(q, JSON.stringify(items), "EX", 21600)
 
         res.json(items)
     } catch (error) {
