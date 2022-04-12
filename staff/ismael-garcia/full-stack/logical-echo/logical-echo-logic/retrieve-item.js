@@ -4,7 +4,8 @@ const { NotFoundError } = require('logical-echo-errors')
 const { sanitizeDocument } = require('./helpers/sanitizers')
 
 function retrieveItem(id, item_id) {
-    validateId(id)
+    if (id) 
+        validateId(id)
     validateItemId(item_id)
 
     return (async () => {

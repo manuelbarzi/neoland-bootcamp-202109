@@ -23,7 +23,6 @@ function Results({ onItem, onToggle }) {
             const { token } = sessionStorage
             
             try {
-
                 onFlowStart()
 
                 const items = await searchItems(token, query)
@@ -31,14 +30,13 @@ function Results({ onItem, onToggle }) {
                 onFlowEnd()
                     
                 setItems(items)
-
             } catch ({ message }) {
                 onFlowEnd()
 
                 onModal(message, 'warn')
             }
         })()
-    }, [query]);
+    }, [query, onFlowStart, onFlowEnd, onModal])
 
     return items && items.length ?
         <ul className="results container container--vertical">

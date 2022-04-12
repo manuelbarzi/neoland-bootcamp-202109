@@ -9,6 +9,8 @@ module.exports = async (req, res) => {
 
         const items = await retrieveTrendingItems(id)
 
+        req.redis.set('trend', JSON.stringify(trend_items), "EX", 21600)
+
         res.json(items)
     } catch (error) {
         handleError(error, res)

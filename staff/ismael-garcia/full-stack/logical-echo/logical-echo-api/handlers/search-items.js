@@ -13,9 +13,8 @@ module.exports = async (req, res) => {
         await registerSearch(search)
 
         const items = await searchItems(q)
-        console.log(items)
 
-        redis.set(q, JSON.stringify(items), "EX", 21600)
+        req.redis.set(q, JSON.stringify(items), "EX", 21600)
 
         res.json(items)
     } catch (error) {

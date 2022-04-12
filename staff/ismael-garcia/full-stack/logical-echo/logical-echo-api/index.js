@@ -4,20 +4,19 @@ const bodyParser = require('body-parser')
 const { mongoose } = require('logical-echo-data')
 const cors = require('cors')
 const Redis = require('ioredis')
+const cache = require('./cache')
 const { 
     registerUser, 
     authenticateUser, 
     retrieveUser, 
     modifyUser,
     unregisterUser,
-    // searchItems,
+    searchItems,
     registerSubscription,
     retrieveItem,
     retrieveFavItems,
     retrieveTrendingItems
 } = require('./handlers')
-const { searchItems, registerSearch } = require('logical-echo-logic')
-const { handleError } = require('./handlers/helpers')
 const logger = require('./utils/my-logger')
 
 const { env: { PORT, MONGO_URI }, argv: [, , port = PORT || 8080] } = process
@@ -33,36 +32,14 @@ logger.info('starting server');
             port: 6379
         })
 
-        const cache = (req, res, next) => {
-            const { query: { q } } = req
-            const { params: { item_id } } = req
-
-            if (item_id) {
-                redis.get(item_id, (error, result) => {
-                    if (error) throw error
-    
-                    if (result !== null) {
-                        return res.json(JSON.parse(result))
-                    } else {
-                        return next()
-                    }
-                })
-            } else {
-                redis.get(q, (error, result) => {
-                    if (error) throw error
-    
-                    if (result !== null) {
-                        return res.json(JSON.parse(result))
-                    } else {
-                        return next()
-                    }
-                })
-            }
-        }
-
         const server = express()
 
         server.use(cors())
+
+        server.use((req, res, next) => {
+            req.redis = redis
+            next()
+        })
 
         const api = express.Router()
 
@@ -78,55 +55,13 @@ logger.info('starting server');
 
         api.delete('/users', jsonBodyParser, unregisterUser)
 
-        api.get('/items', cache, async (req, res) => {
-            const { query: { q } } = req
-        
-            try {
-                const search = {
-                    query: q,
-                    date: new Date().toLocaleString()
-                }
-        
-                await registerSearch(search)
-        
-                const items = await searchItems(q)
-                console.log(items)
-        
-                redis.set(q, JSON.stringify(items), "EX", 21600)
-        
-                res.json(items)
-            } catch (error) {
-                handleError(error, res)
-            }
-        })
+        api.get('/items', cache, searchItems)
 
-        api.get('/items/:item', cache, async (req, res) => {
-            const { params: { item_id } } = req
+        api.get('/items/:item_id', cache, retrieveItem) 
 
-            const item = await retrieveItem()
+        api.get('/items/trend', cache, retrieveTrendingItems)
 
-            redis.set(item_id, JSON.stringify(item), "EX", 21600)
-
-            return res.json(item)
-        }) 
-
-        api.get('/items/trend', cache, async (req, res) => {            
-            const trend_items = await retrieveTrendingItems()
-
-            redis.set('trend', JSON.stringify(trend_items), "EX", 21600)
-
-            return res.json(trend_items)
-        })
-
-        api.get('/items/favs', cache, async (req, res) => {
-            const { headers: { authorization } } = req
-
-            const [, token] = authorization.split(' ')
-
-            const favs = await retrieveFavItems()
-
-            redis.set(token, JSON.stringify(favs), "EX", 21600)
-        })
+        api.get('/items/favs', cache, retrieveFavItems)
 
         api.post('/subscriptions', jsonBodyParser, registerSubscription)
 

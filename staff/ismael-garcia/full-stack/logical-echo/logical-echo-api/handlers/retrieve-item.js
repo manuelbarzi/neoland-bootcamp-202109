@@ -2,19 +2,26 @@ const { retrieveItem, registerClickedItem } = require('logical-echo-logic')
 const { handleError, validateAuthorizationAndExtractPayload } = require('./helpers')
 
 module.exports = async (req, res) => {
-    const { headers: { authorization }, query: { q } } = req
+    const { headers: { authorization }, params: { item_id } } = req
 
     try {
-        const { sub: id } = validateAuthorizationAndExtractPayload(authorization)
+        let id 
+        if (authorization) {
+            const { sub: _id } = validateAuthorizationAndExtractPayload(authorization)
+
+            id = _id
+        }
 
         const clickedItem = {
-            item_id: q,
-            date: new Date()
+            item_id,
+            date: new Date().toLocaleString()
         }
 
         await registerClickedItem(clickedItem)
 
-        const item = await retrieveItem(id, q)
+        const item = await retrieveItem(id, item_id)
+
+        req.redis.set(item_id, JSON.stringify(item), "EX", 21600)
 
         res.json(item)
     } catch (error) {
