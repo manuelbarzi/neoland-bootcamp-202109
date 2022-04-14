@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
 
         const item = await retrieveItem(id, item_id)
 
-        req.redis.set(item_id, JSON.stringify(item), "EX", 21600)
+        await req.redis.set(item_id, JSON.stringify(item), "EX", 21600)
 
         res.json(item)
     } catch (error) {

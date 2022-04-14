@@ -1,27 +1,26 @@
-const cache = (req, res, next) => {
-    const { query: { q } } = req
-    const { params: { item_id } } = req
+const { validateAuthorizationAndExtractPayload } = require('./handlers/helpers')
 
-    if (item_id) {
-        req.redis.get(item_id, (error, result) => {
-            if (error) throw error
+const cache = async (req, res, next) => {
+    const getValue = (error, result) => {
+        if (error) throw error
+    
+        if (result !== null) {
+            return res.json(JSON.parse(result))
+        } else {
+            return next()
+        }
+    }
 
-            if (result !== null) {
-                return res.json(JSON.parse(result))
-            } else {
-                return next()
-            }
-        })
-    } else {
-        req.redis.get(q, (error, result) => {
-            if (error) throw error
+    const { query: { q }, params: { item_id }, headers: { authorization } } = req
 
-            if (result !== null) {
-                return res.json(JSON.parse(result))
-            } else {
-                return next()
-            }
-        })
+    if (item_id)
+        await req.redis.get(item_id, getValue)
+    else if (q)
+        await req.redis.get(q, getValue)
+    else {
+        const { sub: id } = validateAuthorizationAndExtractPayload(authorization)
+
+        req.redis.get(id, getValue)
     }
 }
 

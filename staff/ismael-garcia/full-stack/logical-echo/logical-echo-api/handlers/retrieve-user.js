@@ -9,6 +9,8 @@ module.exports = async (req, res) => {
 
         const user = await retrieveUser(id)
 
+        await req.redis.set(id, JSON.stringify(user), "EX", 21600)
+
         res.json(user)
     } catch (error) {
         handleError(error, res)

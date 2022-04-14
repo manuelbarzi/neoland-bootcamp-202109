@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
 
         const items = await searchItems(q)
 
-        req.redis.set(q, JSON.stringify(items), "EX", 21600)
+        await req.redis.set(q, JSON.stringify(items), "EX", 21600)
 
         res.json(items)
     } catch (error) {

@@ -49,7 +49,7 @@ logger.info('starting server');
 
         api.post('/users/auth', jsonBodyParser, authenticateUser)
 
-        api.get('/users', retrieveUser)
+        api.get('/users', cache, retrieveUser)
 
         api.patch('/users', jsonBodyParser, modifyUser)
 

@@ -8,6 +8,8 @@ module.exports = async (req, res) => {
         const { sub: id } = validateAuthorizationAndExtractPayload(authorization)
 
         await modifyUser(id, data)
+
+        await req.redis.del(id)
         
         res.status(204).send()   
     } catch (error) {
