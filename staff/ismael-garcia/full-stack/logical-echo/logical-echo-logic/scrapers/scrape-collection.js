@@ -23,7 +23,7 @@ function scrapeCollection({ url, selector, infinite_scroll, button_selector, nam
             const hrefs = await scrapeHrefs(browser, scrape_hrefs_args)
             console.log(hrefs)
 
-            const hrefs_slice = hrefs.slice(0, 5) // To avoid being blocked by the website due to too many requests.
+            const hrefs_slice = hrefs.slice(0, 20) // To avoid being blocked by the website due to too many requests.
             
             const hrefs_map = hrefs_slice.map(async (href) => {
                 logger.debug(`scraping page ${href}`)

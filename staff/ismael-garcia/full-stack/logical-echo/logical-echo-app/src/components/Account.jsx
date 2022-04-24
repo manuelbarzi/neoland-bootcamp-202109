@@ -4,35 +4,19 @@ import AppContext from './AppContext'
 import logger from '../utils/logger'
 import SignUp from './SignUp'
 import SignIn from './SignIn'
+import { useNavigate } from 'react-router-dom'
 
-function Account({ onBack }) {
+function Account() {
     logger.debug('Account -> render')
 
     const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
 
+    const navigate = useNavigate()
+
     const [view, setView] = useState('signin')
 
     const goToSignUp = () => setView('signup')
-    
     const goToSignIn = () => setView('signin')
-
-    const signUp = async (name, username, email, password) => {
-        try {
-            onFlowStart()
-
-            await registerUser(name, username, email, password)
-
-            onFlowEnd()
-
-            onModal('Account created', 'success')
-
-            onBack()
-        } catch ({ message }) {
-            onFlowEnd()
-
-            onModal(message, 'warn')
-        }
-    }
 
     const signIn = async (username, password) => {
         try {
@@ -44,7 +28,7 @@ function Account({ onBack }) {
 
             onFlowEnd()
 
-            onBack()
+            navigate('/')
         } catch ({ message }) {
             onFlowEnd()
 
@@ -52,11 +36,30 @@ function Account({ onBack }) {
         }
     }
 
+    const signUp = async (name, username, email, password) => {
+        try {
+            onFlowStart()
+
+            await registerUser(name, username, email, password)
+
+            onFlowEnd()
+
+            onModal('Account created', 'success')
+
+            onFlowStart()
+
+            await signIn(username, password)
+        } catch ({ message }) {
+            onFlowEnd()
+
+            onModal(message, 'warn')
+        }
+    }
     
     return <>
-        {view === 'signin' && <SignIn onBack={onBack} onSignIn={signIn} onSignUp={goToSignUp} />}
+        {view === 'signin' && <SignIn onSignIn={signIn} onSignUp={goToSignUp} />}
 
-        {view === 'signup' && <SignUp onBack={onBack} onSignUp={signUp} onSignIn={goToSignIn} />}
+        {view === 'signup' && <SignUp onSignUp={signUp} onSignIn={goToSignIn} />}
     </>
 
 }

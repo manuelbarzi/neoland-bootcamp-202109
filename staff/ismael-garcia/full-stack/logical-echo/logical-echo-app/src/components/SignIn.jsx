@@ -1,6 +1,6 @@
 import logger from '../utils/logger'
 
-function SignIn({ onSignIn, onSignUp, onBack }) {
+function SignIn({ onSignIn, onSignUp }) {
     logger.debug('SignIn -> render')
 
     return <form className="login container container--vertical container--gapped" onSubmit={event => {
@@ -20,11 +20,6 @@ function SignIn({ onSignIn, onSignUp, onBack }) {
                 onSignUp()
             }}>Sign up</button>
             <button type="submit" className="button button--medium button--dark">Sign In</button>
-            <button type="button" className="button button--medium" onClick={(event) => {
-                event.preventDefault()
-                
-                onBack()
-            }}>Go Back</button>
         </div>
     </form>
 }

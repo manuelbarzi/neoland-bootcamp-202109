@@ -1,20 +1,29 @@
 import { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { modifyUser, unregisterUser } from '../logic'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
 import Unregister from './Unregister'
 import Update from './Update'
 
-function Profile({ onBack, onSignOut }) {
+function Profile() {
     logger.debug('Profile -> render')
 
     const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
 
     const [view, setView] = useState(null)
+
+    const navigate = useNavigate()
     
     const goToUnregister = () => setView('unregister')
     
     const goToUpdate = () => setView('update')
+
+    const signOut = () => {
+        delete sessionStorage.token
+
+        navigate('/')
+    }
 
     const update = async (data) => {
         try {
@@ -48,7 +57,7 @@ function Profile({ onBack, onSignOut }) {
 
             onModal('User unregistered', 'success')
 
-            onSignOut()
+            signOut()
         } catch ({ message }) {
             onFlowEnd()
 
@@ -58,15 +67,14 @@ function Profile({ onBack, onSignOut }) {
 
     return <>
         {!view && <div className="profile container" id="profile">
-            <button type="button" className="button button--medium" onClick={onBack}>Go Back</button>
             <button type="button" className="button button--medium button--dark" onClick={goToUpdate}>Update</button>
             <button type="button" className="button button--medium button--warning" onClick={goToUnregister}>Unregister</button>
-            <button type="button" className="button button--medium" onClick={onSignOut}>Sign out</button>
+            <button type="button" className="button button--medium" onClick={signOut}>Sign out</button>
         </div>}
 
-        {view === 'update' && <Update onBack={onBack} onUpdate={update} />}
+        {view === 'update' && <Update onUpdate={update} />}
 
-        {view === 'unregister' && <Unregister onBack={onBack} onUnregister={unregister} />}
+        {view === 'unregister' && <Unregister onUnregister={unregister} />}
     </>
 }
 

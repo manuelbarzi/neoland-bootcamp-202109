@@ -1,11 +1,11 @@
 import { useQueryParams } from '../hooks'
 import { useState, useEffect, useContext } from 'react'
-import { searchItems } from '../logic'
+import { searchItems, toggleFavItem } from '../logic'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
 import './Results.css'
 
-function Results({ onItem, onToggle }) {
+function Results({ onItem }) {
     logger.debug('Results -> render')
 
     const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
@@ -16,11 +16,11 @@ function Results({ onItem, onToggle }) {
 
     const query = queryParams.get('q')
 
+    const { token } = sessionStorage
+
     useEffect(() => {
         (async () => {
             logger.debug('Results -> useEffect')
-        
-            const { token } = sessionStorage
             
             try {
                 onFlowStart()
@@ -36,7 +36,33 @@ function Results({ onItem, onToggle }) {
                 onModal(message, 'warn')
             }
         })()
-    }, [query, onFlowStart, onFlowEnd, onModal])
+    }, [query])
+
+    const toggleFav = async (item_id) => {
+        try {
+            onFlowStart()
+
+            if (!token) {
+                onModal('Sign in to add favorites to your profile', 'warn')
+            } else {
+                await toggleFavItem(token, item_id)
+    
+                setItems(items.map(item => {
+                    if (item.item_id === item_id) {
+                        return { ...item, isFav: !item.isFav}
+                    }
+    
+                    return item
+                }))
+    
+                onFlowEnd()
+            }
+        } catch ({ message }) {
+            onFlowEnd()
+
+            onModal(message, 'warn')
+        }
+    }
 
     return items && items.length ?
         <ul className="results container container--vertical">
@@ -48,7 +74,7 @@ function Results({ onItem, onToggle }) {
                     <button className="button fav-button" onClick={event => {
                             event.stopPropagation()
 
-                            onToggle(item_id)
+                            toggleFav(item_id)
                         }}>{isFav ? '🧡' : '🤍'}</button>
                 </li>)
             }

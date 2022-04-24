@@ -31,8 +31,7 @@ function Detail({ onBack, onToggle }) {
 
                 onFlowEnd()
 
-                setItem(item)
-                
+                setItem(item)     
             } catch ({ message }) {
                 onFlowEnd()
 

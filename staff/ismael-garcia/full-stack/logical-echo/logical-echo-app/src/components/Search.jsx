@@ -1,16 +1,31 @@
 import logger from '../utils/logger'
+import { useQueryParams } from '../hooks'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 // import './Search.css';
 
-function Search({ onSearch, query }) {
+function Search() {
     logger.debug('Search -> render')
+
+    const queryParams = useQueryParams()
+
+    const [query, setQuery] = useState(queryParams.get('q'))
+
+    const navigate = useNavigate()
+
+    const search = query => {
+        setQuery(query)
+
+        navigate(`/items?q=${query}`)
+    }
 
     return <div>
         <form className="container" onSubmit={event => {
             event.preventDefault()
 
-            const query = event.target.query.value // DOM API
+            const query = event.target.query.value 
 
-            onSearch(query)
+            search(query)
         }}>
             <input className="field" type="text" placeholder="Search criteria" name="query" defaultValue={query} />
             <button type="submit" className="button button--medium button--dark">Search</button>
