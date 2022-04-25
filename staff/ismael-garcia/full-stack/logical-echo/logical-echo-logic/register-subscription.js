@@ -8,7 +8,6 @@ function registerSubscription(email) {
     return (async () => {
         try {
             await Subscription.create({ email })
-
         } catch (error) {
             if (error.code === 11000)
                 throw new ConflictError(`subscription with email ${email} already exists`)

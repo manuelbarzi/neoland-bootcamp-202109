@@ -28,42 +28,28 @@ import { validateToken } from './helpers/validators'
             const user = await res.json()
 
             const { favs = [] } = user
-            console.log(favs)
 
             if (favs.length) {
-                let count = 0 
-                let items = []
-
-                favs.forEach(async (item_id, index) => {
-                    const res2 = await fetch(`${context.API_URL}/items/favs`, {
-                        method: 'GET',
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        }
-                    })
-        
-                    const { status } = res2 
-        
-                    if (status === 200) {
-                        const item = await res2.json()
-
-                        if (!item) return new Error(`no item found with id ${item_id}`)
-
-                        count++
-
-                        items[index] = item
-
-                        if (count === favs.length) {
-                            items.forEach(item => item.isFav = true)
-
-                            return items
-                        }
-                    } else {
-                        const { error } = await res2.json()
-            
-                        throw new Error(error)
+                const res2 = await fetch(`${context.API_URL}/items/favs?ids=${favs}`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
                     }
                 })
+        
+                const { status } = res2 
+    
+                if (status === 200) {
+                    const items = await res2.json()
+                    
+                    items.forEach(item => item.isFav = true)
+
+                    return items
+                } else {
+                    const { error } = await res2.json()
+        
+                    throw new Error(error)
+                }
             } else throw new Error('No favorites found in your profile')
         } else throw new Error('Unknown error')
     })()

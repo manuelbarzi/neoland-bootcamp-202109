@@ -9,13 +9,17 @@ function retrieveItem(id, item_id) {
     validateItemId(item_id)
 
     return (async () => {
-        const item = await Item.findOne({ item_id }).lean()
-
-        if (!item) throw new NotFoundError('no item found')
-
-        sanitizeDocument(item)
-
-        return item 
+        try {
+            const item = await Item.findOne({ item_id }).lean()
+    
+            if (!item) throw new NotFoundError('no item found')
+    
+            sanitizeDocument(item)
+    
+            return item 
+        } catch (error) {
+            throw error
+        }
     })()
 }
 

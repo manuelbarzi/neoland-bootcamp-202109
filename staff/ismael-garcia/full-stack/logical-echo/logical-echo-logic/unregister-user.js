@@ -4,7 +4,7 @@ const { CredentialsError } = require('logical-echo-errors')
 const bcrypt = require('bcryptjs')
 
 /**
- * TODO doc me
+ * 
  * @param {*} id 
  * @param {*} password 
  */

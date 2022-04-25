@@ -9,7 +9,6 @@ function registerClickedItem(clickedItem) {
     return (async () => {
         try {
             await ClickedItem.create(clickedItem)
-
         } catch (error) {
             throw error 
         }

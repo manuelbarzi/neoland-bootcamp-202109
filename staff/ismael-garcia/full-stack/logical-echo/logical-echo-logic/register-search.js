@@ -1,4 +1,4 @@
-const { validateString, validateDate } = require('./helpers/validators')
+const { validateString } = require('./helpers/validators')
 const { models: { Search } } = require('logical-echo-data')
 
 function registerSearch(search) {

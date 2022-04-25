@@ -8,26 +8,29 @@ function retrieveTrendingItems(id) {
     validateId(id)
 
     return (async () => {
-        debugger
-        const itemsIds = await ClickedItem.find({}, { item_id: 1 }).lean()
-
-        if (!itemsIds.length) throw new NotFoundError('no trending items found')
-
-        let items
-
-        for (const itemId of itemsIds) {
-            const retrieves = await retrieveItem(id, itemId)
-            items = retrieves
+        try {
+            const itemsIds = await ClickedItem.find({}, { item_id: 1 }).lean()
+    
+            if (!itemsIds.length) throw new NotFoundError('no trending items found')
+    
+            let items
+    
+            for (const itemId of itemsIds) {
+                const retrieves = await retrieveItem(id, itemId)
+                items = retrieves
+            }
+    
+            // const items = await Promise.all(itemsIds.map(async (item_id) => {
+            //     const retrieves = await retrieveItem(id, item_id)
+            //     return retrieves
+            // }))
+    
+            items.forEach(sanitizeDocument)
+    
+            return items
+        } catch (error) {
+            throw error
         }
-
-        // const items = await Promise.all(itemsIds.map(async (item_id) => {
-        //     const retrieves = await retrieveItem(id, item_id)
-        //     return retrieves
-        // }))
-
-        items.forEach(sanitizeDocument)
-
-        return items
     })()
 }
 

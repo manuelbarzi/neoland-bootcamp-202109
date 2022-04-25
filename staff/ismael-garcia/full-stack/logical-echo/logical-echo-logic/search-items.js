@@ -7,13 +7,17 @@ function searchItems(query) {
     validateQuery(query)
 
     return (async () => {
-        const items = await Item.find({ $text: { $search: query }}).lean()
-        
-        if (!items.length) throw new NotFoundError('No items found for your query')
-
-        items.forEach(sanitizeDocument)
-
-        return items
+        try {
+            const items = await Item.find({ $text: { $search: query }}).lean()
+            
+            if (!items.length) throw new NotFoundError('No items found for your query')
+    
+            items.forEach(sanitizeDocument)
+    
+            return items
+        } catch (error) {
+            throw error
+        }
     })()
 }
 
