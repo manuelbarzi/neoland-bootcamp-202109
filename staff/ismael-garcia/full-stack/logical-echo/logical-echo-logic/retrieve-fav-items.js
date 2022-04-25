@@ -10,7 +10,7 @@ function retrieveFavItems(favs) {
         try {
             if (!favs.length) throw new NotFoundError('no fav items found for this user')
     
-            const items = await Item.find({ item_id: { $in: favs } }, 'item_id name images price').lean()
+            const items = await Item.find({ item_id: { $in: favs } }, 'item_id name images price')
     
             items.forEach(sanitizeDocument)
     

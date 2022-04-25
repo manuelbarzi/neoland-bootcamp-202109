@@ -1,7 +1,4 @@
 require('dotenv').config()
-
-const mocha = require('mocha')
-
 const { expect } = require('chai')
 const unregisterUser = require('./unregister-user')
 const { mongoose, models: { User } } = require('logical-echo-data')
@@ -9,10 +6,10 @@ const { Types: { ObjectId } } = mongoose
 const { CredentialsError, FormatError, NotFoundError } = require('logical-echo-errors')
 const bcrypt = require('bcryptjs')
 
-const { env: { MONGO_URL } } = process
+const { env: { MONGO_URI } } = process
 
 describe('unregisterUser', () => {
-    before(() => mongoose.connect(MONGO_URL))
+    before(() => mongoose.connect(MONGO_URI))
 
     beforeEach(() => User.deleteMany())
  

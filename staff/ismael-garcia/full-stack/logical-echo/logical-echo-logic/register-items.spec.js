@@ -4,10 +4,10 @@ const registerItems = require('./register-items')
 const { mongoose, models: { Item } } = require('logical-echo-data')
 const { ConflictError, FormatError } = require('logical-echo-errors')
 
-const { env: { MONGO_URL } } = process
+const { env: { MONGO_URI } } = process
 
 describe('registerItems', () => {
-    before(() => mongoose.connect(MONGO_URL))
+    before(() => mongoose.connect(MONGO_URI))
 
     beforeEach(() => Item.deleteMany())
 

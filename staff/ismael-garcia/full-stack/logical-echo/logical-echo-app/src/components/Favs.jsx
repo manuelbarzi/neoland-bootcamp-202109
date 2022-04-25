@@ -66,18 +66,16 @@ function Favs({ onItem }) {
     return <>
         {items && items.length ?
         <ul className="favs container container--vertical">
-            {
-                items.map(({ id, name, images, price, isFav }) => <li key={id}className="home__results-item" onClick={() => onItem(id)}>
-                    <h2>{name}</h2>
-                    <span>{price}</span>
-                    <img className="favs__image" src={images[0]} alt='' />
-                    <button className="button" onClick={event => {
-                            event.stopPropagation()
+            {items.map(({ id, name, images, price, isFav }) => <li key={id}className="home__results-item" onClick={() => onItem(id)}>
+                <h2>{name}</h2>
+                <span>{price}</span>
+                <img className="favs__image" src={images[0]} alt='' />
+                <button className="button" onClick={event => {
+                        event.stopPropagation()
 
-                            toggleFav(id)
-                        }}>{isFav ? '🧡' : '🤍'}</button>
-                </li>)
-            }
+                        toggleFav(id)
+                    }}>{isFav ? '🧡' : '🤍'}</button>
+            </li>)}
         </ul>
         :
         null}

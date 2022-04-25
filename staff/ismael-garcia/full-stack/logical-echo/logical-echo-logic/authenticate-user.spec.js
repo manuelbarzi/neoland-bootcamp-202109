@@ -5,10 +5,10 @@ const { mongoose, models: { User } } = require('logical-echo-data')
 const { CredentialsError, FormatError } = require('logical-echo-errors')
 const bcrypt = require('bcryptjs')
 
-const { env: { MONGO_URL } } = process
+const { env: { MONGO_URI } } = process
 
 describe('authenticateUser', () => {
-    before(() => mongoose.connect(MONGO_URL))
+    before(() => mongoose.connect(MONGO_URI))
 
     beforeEach(() => User.deleteMany())
     

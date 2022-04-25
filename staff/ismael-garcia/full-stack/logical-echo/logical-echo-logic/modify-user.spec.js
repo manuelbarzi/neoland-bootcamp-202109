@@ -6,10 +6,10 @@ const { Types: { ObjectId } } = mongoose
 const { CredentialsError, FormatError, ConflictError, NotFoundError } = require('logical-echo-errors')
 const bcrypt = require('bcryptjs')
 
-const { env: { MONGO_URL } } = process
+const { env: { MONGO_URI } } = process
 
 describe('modifyUser', () => {
-    before(() => mongoose.connect(MONGO_URL))
+    before(() => mongoose.connect(MONGO_URI))
 
     beforeEach(() => User.deleteMany())
  

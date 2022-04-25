@@ -1,14 +1,13 @@
 require('dotenv').config()
-
 const { expect } = require('chai')
 const registerSearch = require('./register-search')
 const { mongoose, models: { Search } } = require('logical-echo-data')
 const { ConflictError, FormatError } = require('logical-echo-errors')
 
-const { env: { MONGO_URL } } = process
+const { env: { MONGO_URI } } = process
 
 describe('registerSearch', () => {
-    before(() => mongoose.connect(MONGO_URL))
+    before(() => mongoose.connect(MONGO_URI))
 
     beforeEach(() => Search.deleteMany())
 
