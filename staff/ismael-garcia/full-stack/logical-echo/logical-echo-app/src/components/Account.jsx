@@ -32,7 +32,7 @@ function Account() {
         } catch ({ message }) {
             onFlowEnd()
 
-            onModal(message, 'warn')
+            onModal(message, 'error')
         }
     }
 
@@ -52,7 +52,7 @@ function Account() {
         } catch ({ message }) {
             onFlowEnd()
 
-            onModal(message, 'warn')
+            onModal(message, 'error')
         }
     }
     

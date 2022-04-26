@@ -18,11 +18,11 @@ function Detail({ onBack, onToggle }) {
 
     const item_id = queryParams.get('q')
 
+    const { token } = sessionStorage
+
     useEffect(() => {
         (async () => {
             logger.debug('Detail -> useEffect')
-
-            const { token } = sessionStorage
 
             try {
                 onFlowStart()
@@ -35,7 +35,7 @@ function Detail({ onBack, onToggle }) {
             } catch ({ message }) {
                 onFlowEnd()
 
-                onModal(message, 'warn')
+                onModal(message, 'error')
             }
         })()
     }, [item_id]);

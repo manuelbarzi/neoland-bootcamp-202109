@@ -20,7 +20,7 @@ function Newsletter() {
         } catch ({ message }) {
             onFlowEnd()
 
-            onModal(message, 'warn')
+            onModal(message, 'error')
         }
     }
 

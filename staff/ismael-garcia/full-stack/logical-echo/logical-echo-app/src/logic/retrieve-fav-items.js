@@ -30,7 +30,7 @@ import { validateToken } from './helpers/validators'
             const { favs = [] } = user
 
             if (favs.length) {
-                const res2 = await fetch(`${context.API_URL}/items/favs?favs=${favs}`, {
+                const res2 = await fetch(`${context.API_URL}/items/favs`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -41,6 +41,7 @@ import { validateToken } from './helpers/validators'
     
                 if (status === 200) {
                     const items = await res2.json()
+                    console.log(items)
                     
                     items.forEach(item => item.isFav = true)
 

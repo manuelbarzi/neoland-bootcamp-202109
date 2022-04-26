@@ -1,16 +1,16 @@
 require('dotenv').config()
 const { expect } = require('chai')
-const retrieveUser = require('./retrieve-user')
-const { mongoose, models: { User } } = require('logical-echo-data')
+const retrieveFavItems = require('./retrieve-fav-items')
+const { mongoose, models: { Item } } = require('logical-echo-data')
 const { Types: { ObjectId } } = mongoose  
 const { NotFoundError, FormatError } = require('logical-echo-errors')
 
 const { env: { MONGO_URI } } = process
 
-describe('retrieveUser', () => {
+describe('retrieveFavItems', () => {
     before(() => mongoose.connect(MONGO_URI))
 
-    beforeEach(() => User.deleteMany())
+    beforeEach(() => Item.deleteMany())
 
     let user, userId 
 

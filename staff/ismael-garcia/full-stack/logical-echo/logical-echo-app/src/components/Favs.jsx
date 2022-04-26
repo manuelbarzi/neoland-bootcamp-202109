@@ -32,7 +32,7 @@ function Favs({ onItem }) {
             } catch ({ message }) {
                 onFlowEnd()
 
-                onModal(message, 'warn')
+                onModal(message, 'error')
             }
         })()
     }, [])
@@ -63,23 +63,23 @@ function Favs({ onItem }) {
         }
     }
 
-    return <>
-        {items && items.length ?
+    return items && items.length ?
         <ul className="favs container container--vertical">
-            {items.map(({ id, name, images, price, isFav }) => <li key={id}className="home__results-item" onClick={() => onItem(id)}>
+            {
+                items.map(({ item_id, name, images, price, isFav }) => <li key={item_id}className="home__results-item" onClick={() => onItem(item_id)}>
+                <img src={images[0]} alt='' />
                 <h2>{name}</h2>
                 <span>{price}</span>
-                <img className="favs__image" src={images[0]} alt='' />
-                <button className="button" onClick={event => {
+                <button className="button fav-button" onClick={event => {
                         event.stopPropagation()
 
-                        toggleFav(id)
+                        toggleFav(item_id)
                     }}>{isFav ? '🧡' : '🤍'}</button>
-            </li>)}
+            </li>)
+            }
         </ul>
         :
-        null}
-    </>
+        null
 }
 
 export default Favs

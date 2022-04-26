@@ -28,7 +28,7 @@ function Trending({ onItem, onToggle }) {
             } catch ({ message }) {
                 onFlowEnd()
 
-                onModal(message, 'warn')
+                onModal(message, 'error')
             }
         })()
     }, [token]);

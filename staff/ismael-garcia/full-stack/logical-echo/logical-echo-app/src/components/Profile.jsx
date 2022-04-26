@@ -39,7 +39,7 @@ function Profile() {
         } catch ({ message }) {
             onFlowEnd()
 
-            onModal(message, 'warn')
+            onModal(message, 'error')
         }
     }
 
@@ -61,7 +61,7 @@ function Profile() {
         } catch ({ message }) {
             onFlowEnd()
 
-            onModal(message, 'warn')
+            onModal(message, 'error')
         }
     }
 

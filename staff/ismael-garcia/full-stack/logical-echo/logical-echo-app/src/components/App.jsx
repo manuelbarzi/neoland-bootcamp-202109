@@ -57,7 +57,7 @@ function App() {
                 <Route path="account" element={<Account />} />
                 <Route path="profile" element={<Profile />} />
 
-                <Route path="favs" element={<Favs onItem={goToItem} />} />
+                <Route path="items/favs" element={<Favs onItem={goToItem} />} />
 
                 <Route path="newsletter" element={<Newsletter />} />
             </Routes>

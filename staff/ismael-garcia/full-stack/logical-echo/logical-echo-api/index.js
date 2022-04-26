@@ -61,7 +61,7 @@ logger.info('starting server');
 
         api.get('/items/trend', cache, retrieveTrendingItems)
 
-        api.get('/items/favs', cache, retrieveFavItems)
+        api.get('/items/favs', retrieveFavItems)
 
         api.post('/subscriptions', jsonBodyParser, registerSubscription)
 

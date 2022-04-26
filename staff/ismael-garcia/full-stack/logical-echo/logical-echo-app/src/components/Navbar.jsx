@@ -17,7 +17,7 @@ function Navbar() {
     const goToAccount = () => navigate('/account')
     const goToProfile = () => navigate('/profile')
     const goToNewsletter = () => navigate('/newsletter')
-    const goToFavs = () => navigate('/favs')
+    const goToFavs = () => navigate('/items/favs')
     const goToHome = () => navigate('/')
 
     const { token } = sessionStorage

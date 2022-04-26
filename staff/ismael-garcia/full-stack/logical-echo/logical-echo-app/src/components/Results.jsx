@@ -33,7 +33,7 @@ function Results({ onItem }) {
             } catch ({ message }) {
                 onFlowEnd()
 
-                onModal(message, 'warn')
+                onModal(message, 'error')
             }
         })()
     }, [query])
