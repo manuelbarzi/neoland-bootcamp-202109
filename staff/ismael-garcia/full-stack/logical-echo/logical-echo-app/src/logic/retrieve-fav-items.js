@@ -25,32 +25,54 @@ import { validateToken } from './helpers/validators'
 
             throw new Error(error)
         } else if (status === 200) {
+            console.log('test chulo')
             const user = await res.json()
 
             const { favs = [] } = user
 
             if (favs.length) {
-                const res2 = await fetch(`${context.API_URL}/items/favs`, {
-                    method: 'GET',
-                    headers: {
-                        'Authorization': `Bearer ${token}`,
-                    }
-                })
-        
-                const { status } = res2 
-    
-                if (status === 200) {
-                    const items = await res2.json()
-                    console.log(items)
-                    
-                    items.forEach(item => item.isFav = true)
+                let items = []
 
-                    return items
-                } else {
-                    const { error } = await res2.json()
+                await Promise.all(favs.map(async (id, index) => {
+                    const res2 = await fetch(`${context.API_URL}/items/${id}`,{
+                        method: "GET"
+                      })
+          
+                    if (res2.ok) {
+                        const item = await res2.json()
+
+                        if (!item) return new Error(`no item found with id ${id}`)
+                                
+                        items[index] = item
+          
+                        if (index === favs.length - 1) {
+                            items = items.map(item => ( { ...item, isFav: true } ))
+                        }
+                    }
+                }))
+
+                return items
+                // const res2 = await fetch(`${context.API_URL}/items/favs`, {
+                //     method: 'GET',
+                //     headers: {
+                //         'Authorization': `Bearer ${token}`,
+                //     }
+                // })
         
-                    throw new Error(error)
-                }
+                // const { status } = res2 
+    
+                // if (status === 200) {
+                //     const items = await res2.json()
+                //     console.log(items)
+                    
+                //     items.forEach(item => item.isFav = true)
+
+                //     return items
+                // } else {
+                //     const { error } = await res2.json()
+        
+                //     throw new Error(error)
+                // }
             } else throw new Error('No favorites found in your profile')
         } else throw new Error('Unknown error')
     })()

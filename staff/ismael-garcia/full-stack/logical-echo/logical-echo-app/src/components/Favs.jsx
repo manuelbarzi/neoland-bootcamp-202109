@@ -1,8 +1,8 @@
 import { useState, useEffect, useContext } from 'react'
-import AppContext from './AppContext'
 import { retrieveFavItems, toggleFavItem } from '../logic'
+import AppContext from './AppContext'
 import logger from '../utils/logger.js'
-// import './Favs.css'
+import './Favs.css'
 
 function Favs({ onItem }) {
     logger.debug('Favs -> render')
@@ -13,6 +13,8 @@ function Favs({ onItem }) {
 
     const { token } = sessionStorage
 
+    console.log(items)
+
     useEffect(() => {
         (async () => {
             logger.debug('Favs -> useEffect')
@@ -20,15 +22,17 @@ function Favs({ onItem }) {
             try {
                 if (!token) {
                     onModal('Sign in to see your favorite items', 'warn')
-                } else {
-                    onFlowStart()
-    
-                    const items = await retrieveFavItems(token)
-    
-                    setItems(items)
-    
-                    onFlowEnd()
                 }
+                
+                onFlowStart()
+
+                const favs = await retrieveFavItems(token)
+
+                console.log(favs)
+                
+                onFlowEnd()
+
+                setItems(favs)
             } catch ({ message }) {
                 onFlowEnd()
 
@@ -36,6 +40,8 @@ function Favs({ onItem }) {
             }
         })()
     }, [])
+
+    console.log(items)
 
     const toggleFav = async (item_id) => {
         try {
@@ -59,7 +65,7 @@ function Favs({ onItem }) {
         } catch ({ message }) {
             onFlowEnd()
 
-            onModal(message, 'warn')
+            onModal(message, 'error')
         }
     }
 
@@ -67,15 +73,15 @@ function Favs({ onItem }) {
         <ul className="favs container container--vertical">
             {
                 items.map(({ item_id, name, images, price, isFav }) => <li key={item_id}className="home__results-item" onClick={() => onItem(item_id)}>
-                <img src={images[0]} alt='' />
-                <h2>{name}</h2>
-                <span>{price}</span>
-                <button className="button fav-button" onClick={event => {
-                        event.stopPropagation()
+                    <img src={images[0]} alt='' />
+                    <h2>{name}</h2>
+                    <span>{price}</span>
+                    <button className="button fav-button" onClick={event => {
+                            event.stopPropagation()
 
-                        toggleFav(item_id)
-                    }}>{isFav ? '🧡' : '🤍'}</button>
-            </li>)
+                            toggleFav(item_id)
+                        }}>{isFav ? '🧡' : '🤍'}</button>
+                </li>)
             }
         </ul>
         :

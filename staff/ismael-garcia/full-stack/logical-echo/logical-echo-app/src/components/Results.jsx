@@ -18,6 +18,8 @@ function Results({ onItem }) {
 
     const { token } = sessionStorage
 
+    console.log(items)
+
     useEffect(() => {
         (async () => {
             logger.debug('Results -> useEffect')
@@ -26,6 +28,8 @@ function Results({ onItem }) {
                 onFlowStart()
 
                 const items = await searchItems(token, query)
+
+                console.log(items)
 
                 onFlowEnd()
                     
@@ -37,6 +41,8 @@ function Results({ onItem }) {
             }
         })()
     }, [query])
+
+    console.log(items)
 
     const toggleFav = async (item_id) => {
         try {
