@@ -24,13 +24,79 @@ body {
   min-height: 100vh;
 }
 
+
+/* COLOR VARIABLES */
+/* 'vista-blue': {
+'50': '#fafdfc', 
+'100': '#f5fbf9', 
+'200': '#e5f5ef', 
+'300': '#d6efe5', 
+'400': '#b7e3d2', 
+'500': '#98d7bf', 
+'600': '#89c2ac', 
+'700': '#72a18f', 
+'800': '#5b8173', 
+'900': '#4a695e'
+}
+
+'amber': {
+'50': '#fffcf2', 
+'100': '#fff9e6', 
+'200': '#ffefbf', 
+'300': '#ffe599', 
+'400': '#ffd24d', 
+'500': '#ffbf00', 
+'600': '#e6ac00', 
+'700': '#bf8f00', 
+'800': '#997300', 
+'900': '#7d5e00'
+}
+
+'cerulean': {
+'50': '#f2fafc', 
+'100': '#e6f5fa', 
+'200': '#bfe6f2', 
+'300': '#99d6eb', 
+'400': '#4db8db', 
+'500': '#0099cc', 
+'600': '#008ab8', 
+'700': '#007399', 
+'800': '#005c7a', 
+'900': '#004b64'
+} */
+
+:root {
+  --primary-color: #ffbf00;
+  --secondary-color: #ffd24d;
+  --font-color: #424242;
+  --bg-color: #fffcf2;
+  --heading-color: #292922;
+}
+
+[data-theme="dark"] {
+  --primary-color: #ffbf00;
+  --secondary-color: #ffe599;
+  --font-color: #fffcf2;
+  --bg-color: #161625;
+  --heading-color: #818cab;
+}
+
+
 /* COMPONENTS */
+
+body {
+  background-color: var(--bg-color);
+  color: var(--font-color);
+}
+
 
 /* ----- titles ----- */
 h1 {
   font-family: 'Courier New', Courier, monospace;
   font-size: 1.2rem;
+  color: var(--heading-color);
 }
+
 
 /* ----- containers ----- */
 .container {
@@ -85,6 +151,7 @@ h1 {
   background-color: transparent;
   font-size: 1rem;
   cursor: pointer;
+  color: var(--heading-color);
 }
 
 .button--medium {
@@ -92,28 +159,31 @@ h1 {
 }
 
 .button--dark {
-  background-color: lightsalmon;
+  background-color: #ffbf00;
 }
 
 .button--dark:hover {
-  background-color: salmon;
+  background-color: #ffd24d;
 }
 
 .button--warning:hover {
-  background-color: red;
+  background-color: salmon;
 }
 
 .fav-button {
   border-style: none;
 }
 
+
 /* ----- lists ----- */
 ul {
   list-style-type: none;
 }
 
+
 /* ----- images ----- */
 img {
   border-radius: 10px;
 }
+
 

@@ -41,9 +41,11 @@ import { validateItemId, validateToken } from "./helpers/validators"
                 const { status } = res2 
     
                 if (status === 200) {
-                    const item = res2.json()
+                    const item = await res2.json()
     
-                    item.isFav = favs.includes(item.item_id)               
+                    item.isFav = favs.includes(item.item_id)
+                    
+                    console.log(item)
     
                     return item 
                 } else {

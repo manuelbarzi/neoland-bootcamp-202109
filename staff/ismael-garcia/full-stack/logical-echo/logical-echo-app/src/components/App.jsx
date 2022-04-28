@@ -52,7 +52,7 @@ function App() {
                 <Route path="search" element={<Search />} />
                 <Route path="items" element={<Results onItem={goToItem} />} />
 
-                <Route path="items/:item" element={<Detail />} />
+                <Route path="items/:item_id" element={<Detail />} />
 
                 <Route path="account" element={<Account />} />
                 <Route path="profile" element={<Profile />} />

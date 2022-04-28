@@ -5,6 +5,7 @@ import AppContext from './AppContext'
 import logger from '../utils/logger'
 import Unregister from './Unregister'
 import Update from './Update'
+import ThemeSwitch from './ThemeSwitch'
 
 function Profile() {
     logger.debug('Profile -> render')
@@ -66,11 +67,16 @@ function Profile() {
     }
 
     return <>
-        {!view && <div className="profile container" id="profile">
-            <button type="button" className="button button--medium button--dark" onClick={goToUpdate}>Update</button>
-            <button type="button" className="button button--medium button--warning" onClick={goToUnregister}>Unregister</button>
-            <button type="button" className="button button--medium" onClick={signOut}>Sign out</button>
-        </div>}
+        {!view && <>
+            <div className="profile container" id="profile">
+                <button type="button" className="button button--medium button--dark" onClick={goToUpdate}>Update</button>
+                <button type="button" className="button button--medium button--warning" onClick={goToUnregister}>Unregister</button>
+                <button type="button" className="button button--medium" onClick={signOut}>Sign out</button>
+            </div>
+
+            <ThemeSwitch />
+        </>
+        }
 
         {view === 'update' && <Update onUpdate={update} />}
 

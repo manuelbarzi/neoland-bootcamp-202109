@@ -1,22 +1,20 @@
 import { useState, useEffect, useContext } from 'react'
-// import { useParams } from 'react-router-dom'
-import { useQueryParams } from '../hooks'
-import { retrieveItem } from '../logic'
+import { useNavigate, useParams } from 'react-router-dom'
+import { retrieveItem, toggleFavItem } from '../logic'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
 import './Detail.css'
 
-function Detail({ onBack, onToggle }) { 
+function Detail() { 
     logger.debug('Detail -> render')
 
     const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
 
-    // const { id } = useParams()
     const [item, setItem] = useState()
 
-    const queryParams = useQueryParams()
+    const { item_id } = useParams()
 
-    const item_id = queryParams.get('q')
+    const navigate = useNavigate()
 
     const { token } = sessionStorage
 
@@ -38,10 +36,35 @@ function Detail({ onBack, onToggle }) {
                 onModal(message, 'error')
             }
         })()
-    }, [item_id]);
+    }, [])
+
+    console.log(item)
+
+    const toggleFav = async (item_id) => {
+        try {
+            if (!token) {
+                onModal('Sign in to add favorites to your profile', 'warn')
+            } else {
+                onFlowStart()
+                
+                await toggleFavItem(token, item_id)
+    
+                setItem({ ...item, isFav: !item.isFav })
+    
+                onFlowEnd()
+            }
+        } catch ({ message }) {
+            onFlowEnd()
+
+            onModal(message, 'error')
+        }
+    }
+
+    const goBack = () => navigate(-1)
 
     return <div className="container container--vertical">
-        <button type="button" className="button button--medium" onClick={onBack}>Back to Results</button>
+        <button type="button" className="button button--medium" onClick={() => goBack()}>Back to Results</button>
+        
         {item && <>
             <div class="card">
                 <img className="detail-image" src={item.images[0]} alt="" />
@@ -58,17 +81,9 @@ function Detail({ onBack, onToggle }) {
                 </div>
                 <div class="card-footer">
                     Save in Favs
-                    <button type='button' className='button fav-button' onClick={() => onToggle(item_id)}>{item.isFav ? '🧡' : '🤍'}</button>
+                    <button type='button' className='button fav-button' onClick={() => toggleFav(item.item_id)}>{item.isFav ? '🧡' : '🤍'}</button>
                 </div>
             </div>
-            {/* <button type="button" className="button button--medium" onClick={onBack}>Back to Results</button>
-            <h2>{item.name}</h2>
-            <img className="home__detail-image" src={item.images[0]} alt="" />
-            <p>{item.description}</p>
-            <span>{item.price}</span>
-            <button type='button' className='button' onClick={() => onToggle(item_id)}>{item.isFav ? '🧡' : '🤍'}</button>
-            <span>Colors: {item.colors}</span>
-            <a href={item.url}>Visit the store</a> */}
         </>}
     </div>
 }

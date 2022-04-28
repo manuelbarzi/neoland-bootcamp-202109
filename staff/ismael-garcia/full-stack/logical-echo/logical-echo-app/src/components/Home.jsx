@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import logger from '../utils/logger'
 import './Home.css'
@@ -6,6 +7,14 @@ function Home() {
     logger.debug('Home -> render')
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null
+    
+        if (currentTheme) {
+            document.documentElement.setAttribute('data-theme', currentTheme)
+        }
+    })
 
     const goToStore = store => navigate(`/items?q=${store}`)
 
