@@ -36,9 +36,7 @@ function Detail() {
                 onModal(message, 'error')
             }
         })()
-    }, [])
-
-    console.log(item)
+    }, [item_id])
 
     const toggleFav = async (item_id) => {
         try {
@@ -67,7 +65,9 @@ function Detail() {
         
         {item && <>
             <div class="card">
-                <img className="detail-image" src={item.images[0]} alt="" />
+                {
+                    item.images.map((image) => <img className="detail-image" src={image} alt="" />)
+                }
                 <h3 class="card__header">{item.name}</h3>
                 <div class="card__body">
                     <p class="card__body-description">{item.description}</p>

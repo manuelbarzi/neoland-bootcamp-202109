@@ -70,21 +70,25 @@ function Results({ onItem }) {
         }
     }
 
-    return items && items.length ?
-        <ul className="results container container--vertical">
-            {
-                items.map(({ item_id, name, images, price, isFav }) => <li key={item_id}className="home__results-item" onClick={() => onItem(item_id)}>
-                    <img src={images[0]} alt='' />
-                    <h2>{name}</h2>
-                    <span>{price}</span>
-                    <button className="button fav-button" onClick={event => {
-                            event.stopPropagation()
+    return items && items.length ? <>
+        <div className='container container--vertical'>
+            <p>{items.length} results</p>
+            <ul className='results container container--vertical'>
+                {
+                    items.map(({ item_id, name, images, price, isFav }) => <li key={item_id}className='home__results-item' onClick={() => onItem(item_id)}>
+                        <img src={images[0]} alt='' />
+                        <h2>{name}</h2>
+                        <span>{price}</span>
+                        <button className='button fav-button' onClick={event => {
+                                event.stopPropagation()
 
-                            toggleFav(item_id)
-                        }}>{isFav ? '🧡' : '🤍'}</button>
-                </li>)
-            }
-        </ul>
+                                toggleFav(item_id)
+                            }}>{isFav ? '🧡' : '🤍'}</button>
+                    </li>)
+                }
+            </ul>
+        </div>
+        </>
         :
         null
 }
