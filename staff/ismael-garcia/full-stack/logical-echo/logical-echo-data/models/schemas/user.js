@@ -1,4 +1,5 @@
 const { Schema } = require('mongoose')
+const Joi = require("joi")
 
 const user = new Schema({
     name: {
@@ -45,6 +46,10 @@ const user = new Schema({
             message: 'Please enter a valid email address.'
         }
     },
+    verified: {
+        type: Boolean,
+        default: false
+    },
     password: {
         type: String,
         required: true,
@@ -71,4 +76,15 @@ const user = new Schema({
     }
 })
 
-module.exports = user
+const validate = (user) => {
+    const schema = Joi.object({
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
+    });
+    return schema.validate(user);
+  };
+
+module.exports = {
+    user,
+    validate
+}

@@ -1,4 +1,4 @@
-const { validateEmail, validatePassword, validateName, validateUsername } = require('./helpers/validators')
+const { validateEmail, validatePassword, validateName, validateUsername } = require('../helpers/validators')
 const { ConflictError } = require('logical-echo-errors')
 const { models: { User } } = require('logical-echo-data')
 const bcrypt = require('bcryptjs')

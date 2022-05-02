@@ -6,6 +6,17 @@ module.exports = async (req, res) => {
 
     try {
         await registerUser(name, username, email, password)
+
+        // const user = User.findOne({ email })
+
+        // const token = await new Token({
+        //     user_id: user._id,
+        //     token: crypto.randomBytes(32).toString("hex")
+        // }).save()
+
+        // const url = `${process.env.BASE_URL}users/${user.id}/verify/${token.token}`
+
+        // await sendEmail(user.email, "Verify Email", url)
         
         res.status(201).send()
     } catch (error) {

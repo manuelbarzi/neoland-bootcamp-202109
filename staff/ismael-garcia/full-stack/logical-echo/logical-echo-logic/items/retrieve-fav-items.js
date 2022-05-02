@@ -1,8 +1,8 @@
 const { models: { User, Item }, mongoose } = require('logical-echo-data')
 // const { Types: { ObjectId } } = mongoose  
-const { validateId } = require('./helpers/validators')
+const { validateId } = require('../helpers/validators')
 const { NotFoundError } = require('logical-echo-errors')
-const { sanitizeDocument } = require('./helpers/sanitizers')
+const { sanitizeDocument } = require('../helpers/sanitizers')
 
 function retrieveFavItems(id) {
     validateId(id)

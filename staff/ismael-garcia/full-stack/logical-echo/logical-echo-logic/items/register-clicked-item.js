@@ -1,4 +1,4 @@
-const { validateItemId, validateString } = require('./helpers/validators')
+const { validateItemId, validateString } = require('../helpers/validators')
 const { models: { ClickedItem } } = require('logical-echo-data')
 
 function registerClickedItem(clickedItem) {

@@ -1,5 +1,5 @@
 const { models: { User } } = require('logical-echo-data')
-const { validateId, validatePassword } = require('./helpers/validators')
+const { validateId, validatePassword } = require('../helpers/validators')
 const { CredentialsError } = require('logical-echo-errors')
 const bcrypt = require('bcryptjs')
 

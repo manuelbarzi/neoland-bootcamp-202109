@@ -1,4 +1,4 @@
-const { validateEmail } = require('./helpers/validators')
+const { validateEmail } = require('../helpers/validators')
 const { models: { Subscription } } = require('logical-echo-data')
 const { ConflictError } = require('logical-echo-errors')
 

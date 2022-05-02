@@ -23,7 +23,6 @@
     "logical-echo-data": "file:../logical-echo-data",
     "logical-echo-errors": "file:../logical-echo-errors",
     "logical-echo-logic": "file:../logical-echo-logic",
-    "nodemailer": "^6.7.3",
     "redis": "^4.0.6",
     "winston": "^3.3.3"
   },
