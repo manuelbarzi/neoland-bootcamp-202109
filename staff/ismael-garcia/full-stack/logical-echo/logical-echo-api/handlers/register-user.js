@@ -1,5 +1,7 @@
-const { registerUser } = require('logical-echo-logic')
+require('dotenv').config()
+const { registerUser, sendEmail } = require('logical-echo-logic')
 const { handleError } = require('./helpers')
+const crypto = require('crypto')
 
 module.exports = async (req, res) => {
     const { body: { name, username, email, password } } = req 
@@ -7,16 +9,22 @@ module.exports = async (req, res) => {
     try {
         await registerUser(name, username, email, password)
 
-        // const user = User.findOne({ email })
+        const registration_token = crypto.randomBytes(32).toString("hex")
 
-        // const token = await new Token({
-        //     user_id: user._id,
-        //     token: crypto.randomBytes(32).toString("hex")
-        // }).save()
+        await req.redis.set(username, JSON.stringify(registration_token), "EX", 21600)
 
-        // const url = `${process.env.BASE_URL}users/${user.id}/verify/${token.token}`
+        const verify_email_url = `${process.env.BASE_URL}/users/${username}/verify/${registration_token}`
 
-        // await sendEmail(user.email, "Verify Email", url)
+        await sendEmail({
+            to: email,
+            from: process.env.SMTP_USER,
+            subject: "Verify Your Email Address",
+            template: "verify-email-address",
+            templateVars: {
+                name,
+                verify_email_url
+            }
+        })
         
         res.status(201).send()
     } catch (error) {

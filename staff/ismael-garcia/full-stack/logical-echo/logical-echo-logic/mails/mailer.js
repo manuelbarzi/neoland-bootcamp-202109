@@ -1,30 +1,53 @@
 require('dotenv').config()
-import nodemailer from "nodemailer"
-import fs from "fs"
-import ejs from "ejs"
-import { htmlToText } from "html-to-text"
-import juice from "juice"
+const nodemailer = require("nodemailer")
+const fs = require("fs")
+const ejs = require("ejs")
+const { htmlToText } = require("html-to-text")
+const juice = require("juice")
+const crypto = require('crypto')
 
-// const smtp = nodemailer.createTransport({
-//     host: settings?.smtp?.host,
-//     port: settings?.smtp?.port,
-//     secure: process.env.NODE_ENV !== "development",
+// let testAccount = await nodemailer.createTestAccount()
+
+// let transporter = nodemailer.createTransport({
+//     host: "smtp.ethereal.email",
+//     port: 587,
+//     secure: false, // true for 465, false for other ports
 //     auth: {
-//       user: settings?.smtp?.username,
-//       pass: settings?.smtp?.password,
+//         user: testAccount.user, // generated ethereal user
+//         pass: testAccount.pass // generated ethereal password
 //     }
 // })
-const smtp = nodemailer.createTransport({
-    host: 'smtp.mailgun.org',
-    port: 587,
-    secure: process.env.NODE_ENV !== "development",
-    auth: {
-        user: 'postmaster@sandboxe6849da5c8ac4ed7b7497b499d603d11.mailgun.org',
-        pass: 'f54a1cba47e1c9e5061c362b353def47-53ce4923-8266eb6f'
-    }
-})
+
+// const transporter = nodemailer.createTransport({
+//     host: process.env.SMTP_HOST,
+//     service: process.env.SMTP_SERVICE,
+//     port: process.env.SMTP_PORT,
+//     secure: process.env.NODE_ENV !== "development",
+//     auth: {
+//         user: process.env.SMTP_USER,
+//         pass: process.env.SMTP_PASS
+//     },
+//     // tls: {
+//     //     rejectUnauthorized: false
+//     // }
+// })
 
 function sendEmail({ template: templateName, templateVars, ...restOfOptions }) {
+    const transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        service: process.env.SMTP_SERVICE,
+        port: 587,
+        secure: process.env.NODE_ENV !== "development",
+        auth: {
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS
+        },
+        tls: {
+            rejectUnauthorized: false
+        }
+    })
+    console.log(transporter)
+
     const templatePath = `./templates/${templateName}.html`
     const options = {
         ...restOfOptions
@@ -35,15 +58,32 @@ function sendEmail({ template: templateName, templateVars, ...restOfOptions }) {
         const html = ejs.render(template, templateVars)
         const text = htmlToText(html)
         const htmlWithStylesInlined = juice(html)
+        console.log(htmlWithStylesInlined)
+        console.log(text)
 
         options.html = htmlWithStylesInlined
         options.text = text
     }
 
-    return smtp.sendMail(options)
+    return transporter.sendMail(options)
 }
 
-module.exports = sendEmail
+(async () => {
+    const registration_token = crypto.randomBytes(32).toString("hex")
+
+    await sendEmail({
+        to: 'igluit3@gmail.com',
+        from: process.env.SMTP_USER,
+        subject: "Verify Your Email Address",
+        template: "verify-email-address",
+        templateVars: {
+            name: 'Ismael García',
+            verify_email_url: `http://localhost:8000/api/igluit/verify/${registration_token}`
+        }
+    })
+})()
+
+// module.exports = sendEmail
 
 // const nodemailer = require("nodemailer")
 

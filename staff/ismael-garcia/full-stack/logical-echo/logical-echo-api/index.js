@@ -6,7 +6,8 @@ const cors = require('cors')
 const Redis = require('ioredis')
 const cache = require('./cache')
 const { 
-    registerUser, 
+    registerUser,
+    verifyEmail,
     authenticateUser, 
     retrieveUser, 
     modifyUser,
@@ -46,6 +47,8 @@ logger.info('starting server');
         const jsonBodyParser = bodyParser.json()
 
         api.post('/users', jsonBodyParser, registerUser)
+
+        api.get('/users/:username/verify/:registration_token', verifyEmail)
 
         api.post('/users/auth', jsonBodyParser, authenticateUser)
 

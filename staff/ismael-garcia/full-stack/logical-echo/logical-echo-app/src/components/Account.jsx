@@ -44,7 +44,7 @@ function Account() {
 
             onFlowEnd()
 
-            onModal('Account created', 'success')
+            onModal('Your account has been created. We have sent an email to your email address. Please access your email address and verify it.', 'success')
 
             onFlowStart()
 

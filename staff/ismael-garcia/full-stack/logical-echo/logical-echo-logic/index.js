@@ -1,4 +1,5 @@
 const registerUser = require('./users/register-user')
+const verifyEmail = require('./users/verify-email')
 const authenticateUser = require('./users/authenticate-user')
 const retrieveUser = require('./users/retrieve-user')
 const modifyUser = require('./users/modify-user')
@@ -11,11 +12,10 @@ const retrieveItem = require('./items/retrieve-item')
 const registerClickedItem = require('./items/register-clicked-item')
 const registerSearch = require('./items/register-search')
 const sendEmail = require('./mails/mailer')
-// import sendEmail from ('./mails/mailer')
-// const retrieveTrendingItems = require('./retrieve-trending-items')
 
 module.exports = {
     registerUser,
+    verifyEmail,
     authenticateUser,
     retrieveUser,
     modifyUser,
@@ -28,5 +28,4 @@ module.exports = {
     registerClickedItem,
     registerSearch,
     sendEmail
-    // retrieveTrendingItems
 }
