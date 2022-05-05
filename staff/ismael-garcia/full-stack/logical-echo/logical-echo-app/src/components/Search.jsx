@@ -28,7 +28,7 @@ function Search() {
             search(query)
         }}>
             <input className="field" type="text" placeholder="Search criteria" name="query" defaultValue={query} />
-            <button type="submit" className="button button--medium button--dark">Search</button>
+            <button type="submit" className="button button--medium button--emphasized clickable">Search</button>
         
         </form>
     </div>

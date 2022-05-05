@@ -14,12 +14,12 @@ function SignIn({ onSignIn, onSignUp }) {
         <input className="field" type="password" name="password" id="signin-password" placeholder="Password" required />
 
         <div className="container">
-            <button type="button" className="button button--medium" onClick={event => {
+            <button type="button" className="button button--medium clickable" onClick={event => {
                 event.preventDefault()
 
                 onSignUp()
             }}>Sign up</button>
-            <button type="submit" className="button button--medium button--dark">Sign In</button>
+            <button type="submit" className="button button--medium button--emphasized clickable">Sign In</button>
         </div>
     </form>
 }

@@ -13,6 +13,7 @@ import Profile from './Profile'
 import Favs from './Favs'
 import Newsletter from './Newsletter'
 import Navbar from './Navbar'
+import Cursor from './Cursor'
 
 function App() {
     logger.debug('App -> render')
@@ -43,9 +44,10 @@ function App() {
             onModal: showModal
         }}>
             {/* <Home /> */}
-            <div id="home" className="container container--vertical container--gapped">
-                <Navbar />
-            </div>
+            
+            <Navbar />
+
+            <Cursor />
 
             <Routes>
                 <Route path="/" element={<Home />} />

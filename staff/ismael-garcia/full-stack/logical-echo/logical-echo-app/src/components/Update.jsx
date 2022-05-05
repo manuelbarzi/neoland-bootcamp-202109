@@ -25,12 +25,12 @@ function Update({ onUpdate, onBack }) {
         <input className="field" type="password" name="password" id="register-password" placeholder="Password" required />
 
         <div className="container">
-            <button type="button" className="button button--medium" onClick={(event) => {
+            <button type="button" className="button button--medium clickable" onClick={(event) => {
                 event.preventDefault()
                 
                 onBack()
             }}>Go Back</button>
-            <button type="submit" className="button button--medium button--dark">Update</button>
+            <button type="submit" className="button button--medium button--emphasized clickable">Update</button>
         </div>
     </form>
 }

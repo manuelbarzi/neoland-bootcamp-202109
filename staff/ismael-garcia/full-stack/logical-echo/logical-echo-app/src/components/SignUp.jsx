@@ -21,7 +21,7 @@ function SignUp({ onSignUp, onSignIn }) {
 
                 onSignIn()
             }}>Sign in</button>
-            <button type="submit" className="button button--medium button--dark">Sign Up</button>
+            <button type="submit" className="button button--medium button--emphasized clickable">Sign Up</button>
         </div>
     </form>
 }

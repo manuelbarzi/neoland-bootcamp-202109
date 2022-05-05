@@ -61,7 +61,7 @@ function Detail() {
     const goBack = () => navigate(-1)
 
     return <div className="container container--vertical">
-        <button type="button" className="button button--medium" onClick={() => goBack()}>Back to Results</button>
+        <button type="button" className="button button--medium clickable" onClick={() => goBack()}>Back to Results</button>
         
         {item && <>
             <div class="card">
@@ -81,7 +81,7 @@ function Detail() {
                 </div>
                 <div class="card-footer">
                     Save in Favs
-                    <button type='button' className='button fav-button' onClick={() => toggleFav(item.item_id)}>{item.isFav ? '🧡' : '🤍'}</button>
+                    <button type='button' className='button fav-button clickable' onClick={() => toggleFav(item.item_id)}>{item.isFav ? '🧡' : '🤍'}</button>
                 </div>
             </div>
         </>}

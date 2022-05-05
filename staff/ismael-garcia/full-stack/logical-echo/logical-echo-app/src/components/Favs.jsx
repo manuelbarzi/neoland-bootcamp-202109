@@ -76,7 +76,7 @@ function Favs({ onItem }) {
                     <img src={images[0]} alt='' />
                     <h2>{name}</h2>
                     <span>{price}</span>
-                    <button className="button fav-button" onClick={event => {
+                    <button className="button fav-button clickable" onClick={event => {
                             event.stopPropagation()
 
                             toggleFav(item_id)

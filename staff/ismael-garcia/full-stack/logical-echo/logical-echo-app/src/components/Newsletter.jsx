@@ -34,7 +34,7 @@ function Newsletter() {
         <input className="field" type="email" name="email" id="register-email" placeholder="Email" required />
 
         <div className="container">
-            <button type="submit" className="button button--medium button--dark">Register for Newsletter</button>
+            <button type="submit" className="button button--medium button--emphasized clickable">Register for Newsletter</button>
         </div>
     </form>
 }

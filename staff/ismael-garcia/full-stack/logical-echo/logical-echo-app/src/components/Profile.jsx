@@ -69,9 +69,9 @@ function Profile() {
     return <>
         {!view && <>
             <div className="profile container" id="profile">
-                <button type="button" className="button button--medium button--dark" onClick={goToUpdate}>Update</button>
-                <button type="button" className="button button--medium button--warning" onClick={goToUnregister}>Unregister</button>
-                <button type="button" className="button button--medium" onClick={signOut}>Sign out</button>
+                <button type="button" className="button button--medium button--emphasized clickable" onClick={goToUpdate}>Update</button>
+                <button type="button" className="button button--medium button--warning clickable" onClick={goToUnregister}>Unregister</button>
+                <button type="button" className="button button--medium clickable" onClick={signOut}>Sign out</button>
             </div>
 
             <ThemeSwitch />

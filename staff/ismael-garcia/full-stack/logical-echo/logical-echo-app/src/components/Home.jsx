@@ -25,16 +25,16 @@ function Home() {
             </div>
 
             <div className='container container--gapped'>
-                <button type='button' className="button button--medium button--dark" onClick={() => goToStore('Zara')}>Zara</button>
+                <button type='button' className="button button--medium clickable" onClick={() => goToStore('Zara')}>Zara</button>
 
-                <button type='button' className="button button--medium button--dark" onClick={() => goToStore('HM')}>H&M</button>
+                <button type='button' className="button button--medium clickable" onClick={() => goToStore('HM')}>H&M</button>
 
-                <button type='button' className="button button--medium button--dark" onClick={() => goToStore('Mango')}>Mango</button>
+                <button type='button' className="button button--medium clickable" onClick={() => goToStore('Mango')}>Mango</button>
 
             </div>
 
             <div className='container container--gapped'>
-                <img className="home-image" src="//st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" />
+                <img className="home-image clickable" src="//st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" onClick={() => goToStore('Mango')} />
 
                 {/* <img className="home-image" src="//st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" />
 
