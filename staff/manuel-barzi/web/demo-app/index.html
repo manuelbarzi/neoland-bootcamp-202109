@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo App</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="landing container container--vertical container--gapped container--off">
+        <button class="button button--medium button--dark">Sign in</button>
+        <button class="button button--medium">Sign up</button>
+    </div>
+
+    <form class="signup container container--vertical container--gapped container--off">
+        <input class="field" type="text" name="name" id="name" placeholder="name">
+        <input class="field" type="text" name="username" id="username" placeholder="username">
+        <input class="field" type="password" name="password" id="password" placeholder="password">
+
+        <div class="container">
+            <button class="button button--medium">Sign in</button>
+            <button class="button button--medium button--dark">Sign up</button>
+        </div>
+    </form>
+
+    <form class="signin container container--vertical container--gapped container--off">
+        <input class="field" type="text" name="username" id="username" placeholder="username">
+        <input class="field" type="password" name="password" id="password" placeholder="password">
+
+        <div class="container">
+            <button class="button button--medium">Sign up</button>
+            <button class="button button--medium button--dark">Sign in</button>
+        </div>
+    </form>
+
+    <div class="post-signup container container--gapped container--vertical container--off">
+        User registered successfully, now you can proceed to <button class="button button--dark button--medium">Sign
+            in</button>
+    </div>
+
+    <div class="home container container--gapped container--vertical container--off">
+        <div class="container">
+            <p>Hello, <span class="name">World</span>!</p>
+            <button class="button button-medium button--dark">Profile</button>
+            <button class="button button-medium button">Sign out</button>
+        </div>
+
+        <form class="home__search container">
+            <input class="field" type="text" name="query" id="query" placeholder="criteria">
+            <button class="button button--medium button--dark">Search</button>
+        </form>
+
+        <ul class="home__results container container--vertical container--off"></ul>
+
+        <div class="home__detail container container--vertical container--off">
+            <h2>title</h2><button class="button button-medium button">Back</button>
+            <img class="home__detail-image" src="https://previews.123rf.com/images/wuk/wuk1710/wuk171000023/88766953-child-crash-test-dummy-sitting-in-a-car.jpg" alt="">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum quas sapiente veritatis, magni natus necessitatibus velit aliquam enim iste? Beatae velit explicabo temporibus et blanditiis! Deleniti nemo voluptatem cumque nam.</p>
+            <time>2021</time>
+            <span>100 $</span>
+            <span>color</span>
+            <span>style</span>
+            <span>collection</span>
+            <span>maker</span>
+            <a href="http://">original</a>
+        </div>
+    </div>
+
+    <div class="profile container container--vertical container--gapped container--off">
+        <form class="container container--vertical">
+            <input class="field" type="password" name="oldPassword" id="oldPassword" placeholder="old password">
+            <input class="field" type="password" name="password" id="password" placeholder="new password">
+
+            <div class="container">
+                <button class="button button--medium">Go back</button>
+                <button class="button button--medium button--dark">Update</button>
+            </div>
+        </form>
+
+        <button class="button button--medium button--dark">Unregister</button>
+    </div>
+
+    <div class="unregister container container--vertical container--gapped container--off">
+        <form class="container container--vertical">
+            <input class="field" type="password" name="password" id="password" placeholder="password">
+
+            <div class="container">
+                <button class="button button--medium">Go back</button>
+                <button class="button button--medium button--dark">Unregister</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="spinner container container--vertical container--gapped container--full">
+        <img class="spinner__image" src="https://c.tenor.com/I6kN-6X7nhAAAAAj/loading-buffering.gif" alt="">
+    </div>
+
+    <script src="logic.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
