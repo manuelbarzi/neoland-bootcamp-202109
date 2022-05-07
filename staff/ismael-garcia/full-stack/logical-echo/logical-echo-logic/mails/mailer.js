@@ -68,20 +68,20 @@ function sendEmail({ template: templateName, templateVars, ...restOfOptions }) {
     return transporter.sendMail(options)
 }
 
-(async () => {
-    const registration_token = crypto.randomBytes(32).toString("hex")
+// (async () => {
+//     const registration_token = crypto.randomBytes(32).toString("hex")
 
-    await sendEmail({
-        to: 'igluit3@gmail.com',
-        from: process.env.SMTP_USER,
-        subject: "Verify Your Email Address",
-        template: "verify-email-address",
-        templateVars: {
-            name: 'Ismael García',
-            verify_email_url: `http://localhost:8000/api/igluit/verify/${registration_token}`
-        }
-    })
-})()
+//     await sendEmail({
+//         to: 'igluit3@gmail.com',
+//         from: process.env.SMTP_USER,
+//         subject: "Verify Your Email Address",
+//         template: "verify-email-address",
+//         templateVars: {
+//             name: 'Ismael García',
+//             verify_email_url: `http://localhost:8000/api/igluit/verify/${registration_token}`
+//         }
+//     })
+// })()
 
 // module.exports = sendEmail
 

@@ -57,13 +57,13 @@ body {
     --heading-color: #292922;
 }
 
-[data-theme="dark"] {
+/* [data-theme="dark"] {
     --primary-color: #ffbf00;
     --secondary-color: #ffe599;
     --font-color: #fffcf2;
     --bg-color: #161625;
     --heading-color: #818cab;
-}
+} */
 
 
 /* COMPONENTS */
@@ -145,7 +145,8 @@ h1 {
 }
 
 .button:hover {
-    border-color: var(--heading-color);
+    /* border-color: var(--heading-color); */
+    color: #ffbf00;
 }
 
 .button--medium {
@@ -154,6 +155,11 @@ h1 {
 
 .button--emphasized {
     border-color: var(--heading-color);
+}
+
+.button--emphasized:hover {
+    border-color: var(--heading-color);
+    color: var(--heading-color);
 }
 
 .button--warning:hover {

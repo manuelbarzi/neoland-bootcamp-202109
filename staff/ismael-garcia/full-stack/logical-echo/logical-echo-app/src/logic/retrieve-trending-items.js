@@ -1,5 +1,6 @@
 import context from './context'
 import { validateToken } from "./helpers/validators"
+import retrieveUser from './retrieve-user'
 
 /**
  * Retrieves the details of the selected item.
@@ -7,26 +8,29 @@ import { validateToken } from "./helpers/validators"
  * @throws {TypeError} When any of the arguments does not match the correct type.
  */
  function retrieveTrendingItems(token) {
-    if (token)
-        validateToken(token)
+    // if (token)
+    //     validateToken(token)
         
     return (async () => {
         if (token) {
-            const res = await fetch(`${context.API_URL}/users`, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            })
+            const res = await retrieveUser(token)
+            
+            // await fetch(`${context.API_URL}/users`, {
+            //     method: 'GET',
+            //     headers: {
+            //         'Authorization': `Bearer ${token}`
+            //     }
+            // })
     
             const { status } = res 
     
             if (status === 401 || status === 404) {
-                const { error } = res.json()
+                // const { error } = res.json()
     
-                throw new Error(error)
+                throw new Error(res)
             } else if (status === 200) {
-                const user = await res.json()
+                // const user = await res.json()
+                const user = res
     
                 const { favs = [] } = user 
     

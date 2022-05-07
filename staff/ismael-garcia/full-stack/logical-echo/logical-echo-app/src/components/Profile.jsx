@@ -74,7 +74,7 @@ function Profile() {
                 <button type="button" className="button button--medium clickable" onClick={signOut}>Sign out</button>
             </div>
 
-            <ThemeSwitch />
+            {/* <ThemeSwitch /> */}
         </>
         }
 

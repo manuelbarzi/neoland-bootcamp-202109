@@ -1,10 +1,12 @@
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import logger from '../utils/logger'
 import './Home.css'
+import AppContext from './AppContext'
 
 function Home() {
     logger.debug('Home -> render')
+    const { onFlowStart, onFlowEnd } = useContext(AppContext)
 
     const navigate = useNavigate()
 
@@ -30,8 +32,10 @@ function Home() {
                 <button type='button' className="button button--medium clickable" onClick={() => goToStore('HM')}>H&M</button>
 
                 <button type='button' className="button button--medium clickable" onClick={() => goToStore('Mango')}>Mango</button>
-
             </div>
+
+            <button type='button' className="button button--medium clickable" onClick={() => onFlowStart()}>Show Spinner</button>
+            <button type='button' className="button button--medium clickable" onClick={() => onFlowEnd()}>Hide Spinner</button>
 
             <div className='container container--gapped'>
                 <img className="home-image clickable" src="//st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" onClick={() => goToStore('Mango')} />

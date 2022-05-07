@@ -10,10 +10,12 @@
 .modal__panel {
     width: fit-content;
     height: fit-content;
-    background-color: white;
+    background-color: transparent;
     padding: 1rem;
     color: black;
-    border-radius: 7px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .modal__title {
@@ -44,5 +46,5 @@
 
 .modal__button {
     color: inherit;
-    background-color: darkgrey!important;
+    background-color: transparent !important;
 }

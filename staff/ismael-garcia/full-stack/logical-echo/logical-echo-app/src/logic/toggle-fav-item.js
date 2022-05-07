@@ -1,5 +1,6 @@
 import context from './context'
 import { validateToken, validateItemId } from './helpers/validators'
+import retrieveUser from './retrieve-user'
 /**
  * Searches for items that meet the query criteria.
  * 
@@ -8,25 +9,28 @@ import { validateToken, validateItemId } from './helpers/validators'
  * @throws {TypeError} When any of the arguments does not match the correct type.
  */
  function toggleFavItem(token, item_id) {
-    validateToken(token)
+    // validateToken(token)
     validateItemId(item_id)
 
     return (async () => {
-        const res = await fetch(`${context.API_URL}/users`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        const res = await retrieveUser(token)
+        
+        // await fetch(`${context.API_URL}/users`, {
+        //     method: 'GET',
+        //     headers: {
+        //         'Authorization': `Bearer ${token}`
+        //     }
+        // })
 
         const { status } = res 
 
         if (status === 401 || status === 404) {
-            const { error } = res.json()
+            // const { error } = res.json()
 
-            throw new Error(error)
+            throw new Error(res)
         } else if (status === 200) {
-            const user = await res.json()
+            // const user = await res.json()
+            const user = res
 
             const { favs = [] } = user
 

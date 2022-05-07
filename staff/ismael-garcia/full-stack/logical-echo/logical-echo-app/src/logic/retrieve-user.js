@@ -23,7 +23,6 @@ import { validateToken } from './helpers/validators'
 
         if (status === 200)
             return await res.json()
-
         else if (status === 401 || status === 404) {
             const { error } = await res.json()
 

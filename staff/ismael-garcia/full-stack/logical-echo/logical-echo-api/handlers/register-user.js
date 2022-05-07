@@ -9,22 +9,22 @@ module.exports = async (req, res) => {
     try {
         await registerUser(name, username, email, password)
 
-        const registration_token = crypto.randomBytes(32).toString("hex")
+        // const registration_token = crypto.randomBytes(32).toString("hex")
 
-        await req.redis.set(username, JSON.stringify(registration_token), "EX", 21600)
+        // await req.redis.set(username, JSON.stringify(registration_token), "EX", 21600)
 
-        const verify_email_url = `${process.env.BASE_URL}/users/${username}/verify/${registration_token}`
+        // const verify_email_url = `${process.env.BASE_URL}/users/${username}/verify/${registration_token}`
 
-        await sendEmail({
-            to: email,
-            from: process.env.SMTP_USER,
-            subject: "Verify Your Email Address",
-            template: "verify-email-address",
-            templateVars: {
-                name,
-                verify_email_url
-            }
-        })
+        // await sendEmail({
+        //     to: email,
+        //     from: process.env.SMTP_USER,
+        //     subject: "Verify Your Email Address",
+        //     template: "verify-email-address",
+        //     templateVars: {
+        //         name,
+        //         verify_email_url
+        //     }
+        // })
         
         res.status(201).send()
     } catch (error) {
