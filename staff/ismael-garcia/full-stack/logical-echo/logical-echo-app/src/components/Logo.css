@@ -1,5 +1,54 @@
+@keyframes logo__slide-left {
+    to {
+        left: 7vw;
+    }
+}
+/* .logo__slide-left {
+    animation: logo__slide-left 1s ease 2.2s forwards;
+} */
+
+@keyframes translate-echo {
+    from {
+        transform: translateX(20%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.logo__container {
+    display: inline-flex;
+    flex-direction: column;
+    animation: logo__slide-left .8s ease-out 2.2s forwards, align-logo-spans 2s ease 3s backwards;
+    z-index: 100;
+}
+
 .logo__text {
-    font-family: 'Courier New', Courier, monospace;
+    font-family: var(--primary-font);
     font-size: 1rem;
-    margin-left: 0.7rem;
-  }
+}
+
+.logical {
+    animation: fade-in 1s ease 1s backwards;
+}
+
+.echo {
+    transform: translateX(0);
+    animation: fade-in .8s ease 1.2s backwards, translate-echo 1s ease 3.3s backwards;
+}
+
+.centered-axis-xy {
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+
+/* .fade-in.logo__container {
+    animation-delay: 1s;
+} */
+
+/* .slide-left.logo__container {
+    animation-delay: 3s;
+} */
+

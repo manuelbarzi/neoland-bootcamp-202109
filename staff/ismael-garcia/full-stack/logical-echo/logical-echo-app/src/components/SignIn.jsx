@@ -1,27 +1,35 @@
+// import { useNavigate, useLocation } from 'react-router-dom'
 import logger from '../utils/logger'
 
 function SignIn({ onSignIn, onSignUp }) {
     logger.debug('SignIn -> render')
 
-    return <form className="login container container--vertical container--gapped" onSubmit={event => {
-        event.preventDefault()
+    // const location = useLocation()
+    // const navigate = useNavigate()
 
-        const { target: { username: { value: username }, password: { value: password } } } = event
+    // const goToAccount = () => navigate('/account')
 
-        onSignIn(username, password)
-    }}>
-        <input className="field" type="text" name="username" id="signin-username" placeholder="Username" required />
-        <input className="field" type="password" name="password" id="signin-password" placeholder="Password" required />
+    return <div className='signin-wrapper container--vertical fade-in'> 
+        <form className="signin form container--vertical" onSubmit={event => {
+            event.preventDefault()
 
-        <div className="container">
-            <button type="button" className="button button--medium clickable" onClick={event => {
-                event.preventDefault()
+            const { target: { username: { value: username }, password: { value: password } } } = event
 
-                onSignUp()
-            }}>Sign up</button>
-            <button type="submit" className="button button--medium button--emphasized clickable">Sign In</button>
-        </div>
-    </form>
+            onSignIn(username, password)
+        }}>
+            <input className="field" type="text" name="username" id="signin-username" placeholder="Username" required />
+            <input className="field" type="password" name="password" id="signin-password" placeholder="Password" required />
+
+            <div className="container">
+                <button type="button" className="button button--medium clickable" onClick={event => {
+                    event.preventDefault()
+
+                    onSignUp()
+                }}>Sign up</button>
+                <button type="submit" className="button button--medium button--emphasized clickable">Sign In</button>
+            </div>
+        </form> 
+    </div>
 }
 
 export default SignIn

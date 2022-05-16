@@ -1,0 +1,8 @@
+/* .signin {
+    position: element(#search-button);
+    transform: translateY(-100%);
+} */
+
+.signin-wrapper {
+    display: inline-flex;
+}

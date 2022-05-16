@@ -1,11 +1,10 @@
 import { useState, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { modifyUser, unregisterUser } from '../logic'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
 import Unregister from './Unregister'
 import Update from './Update'
-import ThemeSwitch from './ThemeSwitch'
 
 function Profile() {
     logger.debug('Profile -> render')
@@ -14,10 +13,11 @@ function Profile() {
 
     const [view, setView] = useState(null)
 
+    const location = useLocation()
     const navigate = useNavigate()
-    
+
+    const goToFavs = () => navigate('/items/favs')
     const goToUnregister = () => setView('unregister')
-    
     const goToUpdate = () => setView('update')
 
     const signOut = () => {
@@ -69,12 +69,11 @@ function Profile() {
     return <>
         {!view && <>
             <div className="profile container" id="profile">
-                <button type="button" className="button button--medium button--emphasized clickable" onClick={goToUpdate}>Update</button>
+                <button type='button' className={`button button-medium clickable ${location.pathname === '/favs' && 'button--emphasized'}`} onClick={goToFavs}>Favs</button>
+                <button type="button" className="button button--medium clickable" onClick={goToUpdate}>Update</button>
                 <button type="button" className="button button--medium button--warning clickable" onClick={goToUnregister}>Unregister</button>
                 <button type="button" className="button button--medium clickable" onClick={signOut}>Sign out</button>
             </div>
-
-            {/* <ThemeSwitch /> */}
         </>
         }
 

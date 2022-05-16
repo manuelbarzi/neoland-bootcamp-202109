@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital@0;1&display=swap');
 
-/* RESETS */
+/* ----- RESETS ----- */
 * {
     box-sizing: border-box;
     padding: 0;
@@ -16,7 +16,7 @@
     tab-size: 0;
     padding-inline-end: 0;
     padding-inline-start: 0;
-    /* cursor: none; */
+    cursor: none;
     /* font-family: 'Courier New', Courier, monospace;
     font-weight: 600; */
 }
@@ -27,66 +27,75 @@ body {
     min-height: 100vh;
 }
 
-/* FONTS */
+
+/* ----- FONT VARIABLES ----- */
+
 :root {
     --primary-font: 'Courier Prime', Courier, monospace;
     --secondary-font: 'Courier New', Courier, monospace;
 }
 
 
-/* COLOR VARIABLES */
+/* ----- COLOR VARIABLES ----- */
 
-/* 'amber': {
-'50': '#fffcf2', 
-'100': '#fff9e6', 
-'200': '#ffefbf', 
-'300': '#ffe599', 
-'400': '#ffd24d', 
-'500': '#ffbf00', 
-'600': '#e6ac00', 
-'700': '#bf8f00', 
-'800': '#997300', 
-'900': '#7d5e00'
-} */
+/* 'amber': { '50': '#fffcf2', '100': '#fff9e6', '200': '#ffefbf', '300': '#ffe599', '400': '#ffd24d', '500': '#ffbf00', '600': '#e6ac00', '700': '#bf8f00', '800': '#997300', '900': '#7d5e00' } */
+
+/* 'burnt-sienna': {  DEFAULT: '#EE6C4D',  '50': '#F8C3B6',  '100': '#F7B9AA',  '200': '#F5A693',  '300': '#F2927C',  '400': '#F07F64',  '500': '#EE6C4D',  '600': '#E83E16',  '700': '#B02F11',  '800': '#78200B',  '900': '#401106'} */
 
 :root {
-    --primary-color: #ffbf00;
-    --secondary-color: #ffd24d;
     --font-color: #424242;
-    --bg-color: #fffcf2;
     --heading-color: #292922;
+    /* --bg-color: #fffcf2; */
+    --primary-color: #EE6C4D;
+    --secondary-color: #F2927C;
+    /* --amber-500: #ffbf00;
+    --amber-400: #ffd24d;
+    --amber-300: #ffe599;
+    --amber-200: #ffefbf;
+    --amber-100: #fff9e6;
+    --amber-50: #fffcf2; */
+    --burnt-sienna-600: #E83E16;
+    --burnt-sienna-500: #EE6C4D;
+    --burnt-sienna-400: #F07F64;
+    --burnt-sienna-300: #F2927C;
+    --burnt-sienna-200: #F5A693;
+    --burnt-sienna-100: #F7B9AA;
+    --burnt-sienna-50: #F8C3B6;
 }
 
-/* [data-theme="dark"] {
+[data-theme="dark"] {
     --primary-color: #ffbf00;
     --secondary-color: #ffe599;
     --font-color: #fffcf2;
     --bg-color: #161625;
     --heading-color: #818cab;
+}
+
+/* ----- GLOBAL CLASSES ----- */
+
+.visible {
+    visibility: visible;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+/* ----- COMPONENTS ----- */
+
+/* html {
+    cursor: none;
 } */
 
-
-/* COMPONENTS */
-
-html {
-    cursor: none;
-}
-
 body {
-    background-color: var(--bg-color);
     color: var(--font-color);
     font-family: var(--primary-font);
-}
-
-/* ----- titles ----- */
-h1 {
-    font-family: var(--primary-font);
-    font-size: 1.2rem;
-    color: var(--heading-color);
+    background-color: var(--bg-color);
 }
 
 
 /* ----- containers ----- */
+
 .container {
     display: flex;
     justify-content: center;
@@ -101,22 +110,21 @@ h1 {
     padding: 1rem;
 }
 
-.container--off {
+/* .container--off {
     display: none;
 }
 
 .container--full {
     height: 100%;
-}
-
-.logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+} */
 
 
 /* ----- forms ----- */
+
+.form {
+    display: inline-flex;
+}
+
 .field {
     border-radius: 5px;
     border-style: solid;
@@ -130,6 +138,7 @@ h1 {
 
 
 /* ----- buttons ----- */
+
 .button {
     border-radius: 5px;
     border-style: solid;
@@ -146,7 +155,7 @@ h1 {
 
 .button:hover {
     /* border-color: var(--heading-color); */
-    color: #ffbf00;
+    color: var(--secondary-color);
 }
 
 .button--medium {
@@ -163,7 +172,8 @@ h1 {
 }
 
 .button--warning:hover {
-    background-color: salmon;
+    background-color: var(--burnt-sienna-500);
+    color: var(--heading-color);
 }
 
 .fav-button {
@@ -172,14 +182,36 @@ h1 {
 
 
 /* ----- lists ----- */
+
 ul {
     list-style-type: none;
 }
 
 
-/* ----- images ----- */
-img {
-    border-radius: 10px;
+/* ----- GLOBAL ANIMATIONS ----- */
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.fade-in {
+    animation: fade-in 1s ease 1s backwards;
+}
+  
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+.fade-out {
+    animation: fade-out 0.5s ease forwards;
 }
 
 

@@ -24,7 +24,7 @@ function Newsletter() {
         }
     }
 
-    return <form className="register container container--vertical container--gapped" onSubmit={event => {
+    return <form className="newsletter container container--vertical container--gapped fade-in" onSubmit={event => {
         event.preventDefault()
 
         const { target: { email: { value: email } } } = event 

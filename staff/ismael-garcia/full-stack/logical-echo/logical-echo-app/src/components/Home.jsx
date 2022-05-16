@@ -1,13 +1,15 @@
-import { useEffect, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import logger from '../utils/logger'
 import './Home.css'
-import AppContext from './AppContext'
+import Navbar from './Navbar'
+import Logo from './Logo'
+import HamburgerLine from './HamburgerLine'
 
 function Home() {
     logger.debug('Home -> render')
-    const { onFlowStart, onFlowEnd } = useContext(AppContext)
 
+    const location = useLocation()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -16,35 +18,137 @@ function Home() {
         if (currentTheme) {
             document.documentElement.setAttribute('data-theme', currentTheme)
         }
-    })
+    }, [])
+
+    useEffect(() => {
+        const addEventListeners = () => {
+            document.addEventListener('scroll', () => {
+                horizontalScroll()
+                scaleCoverImage()
+            })
+        //     document.addEventListener('scroll', scaleCoverImage)
+        }
+
+        const removeEventListeners = () => {
+            document.removeEventListener('scroll', () => {
+                horizontalScroll()
+                scaleCoverImage()
+            })
+                
+            // document.removeEventListener('scroll', scaleCoverImage)
+        }
+
+        let sticky_parent = document.querySelector('.sticky-parent')
+        let sticky = document.querySelector('.sticky')
+
+        let scroll_width = sticky.scrollWidth
+        let vertical_scroll_height = sticky_parent.getBoundingClientRect().height - sticky.getBoundingClientRect().height
+
+        function horizontalScroll() {
+            //Checking whether the sticky element has entered into view or not
+            let sticky_position = sticky.getBoundingClientRect().top
+
+            if (sticky_position > 1) {
+                return
+            } else {
+                let scrolled = -sticky_parent.getBoundingClientRect().top // negative number negated to make it positive
+
+                sticky.scrollLeft = (scroll_width / vertical_scroll_height) * (scrolled) * 0.85
+            }
+        }
+
+        let cover_image = document.querySelector('.cover-image')
+
+        function scaleCoverImage() {
+            let scrolled = -sticky_parent.getBoundingClientRect().top
+
+            let scale_ratio = (100 - scrolled/8)/100
+            let scale_value = scale_ratio >= 0.5 ? scale_ratio : 0.5
+
+            cover_image.style.transform = 'scale(' + scale_value + ')'
+            cover_image.style.transformOrigin = '0 100%'
+        }
+
+        let navbar = document.querySelector('.nav__wrapper')
+        let hamburger_line = document.querySelector('.hamburger-line')
+        let hamburgerLine_label = document.querySelector('.hamburger-line__label')
+        let logo = document.querySelector('.logo__container')
+        let hidden_elements = document.querySelectorAll('.hidden')
+        let visible_elements = document.querySelectorAll('.visible')
+
+        function resetHomeElements() {
+            let scrolled = -sticky_parent.getBoundingClientRect().top
+
+            if (scrolled > 0) {
+                hidden_elements.forEach(elem => {
+                    elem.classList.remove('hidden')
+                    elem.style.animation = 'fade-in 1s ease 1s forwards;'
+                })
+                navbar.style.visibility = 'visible'
+                navbar.style.transition = 'visibility'
+            }
+        }
+
+
+        addEventListeners()
+        return () => removeEventListeners()
+    }, [])
 
     const goToStore = store => navigate(`/items?q=${store}`)
+    const goToNewsletter = () => navigate('/newsletter')
 
     return <>
-        <div id="home" className="container container--vertical container--gapped">
-            <div className='container container--gapped'>
-                <h1>Join conscious, committed life!</h1>
-            </div>
+        {/* <div classNameName="home-wrapper">
+            <h1 className='home__motto fade-in'>Be conscious! Be committed!</h1>
+            <h2 className='home__description fade-in'>Discover the sustainable collections of your beloved brands.</h2>
+            
+              
 
-            <div className='container container--gapped'>
-                <button type='button' className="button button--medium clickable" onClick={() => goToStore('Zara')}>Zara</button>
+            <button type='button' className={`button button--medium home__button--newsletter fade-in clickable ${location.pathname === '/newsletter' && 'button--emphasized'}`} onClick={goToNewsletter}>Subscribe to our Newsletter</button>
+        </div> */}
+        {/* <div className="vertical first">
+            
+        </div> */}
 
-                <button type='button' className="button button--medium clickable" onClick={() => goToStore('HM')}>H&M</button>
+        <div className="sticky-parent">
+            <div className="sticky">
+                <div className="horizontal">
+                    <Navbar />
+                    <Logo />
+                    <HamburgerLine />
 
-                <button type='button' className="button button--medium clickable" onClick={() => goToStore('Mango')}>Mango</button>
-            </div>
+                    <div className="dim one">
+                    
+                    </div>
 
-            <button type='button' className="button button--medium clickable" onClick={() => onFlowStart()}>Show Spinner</button>
-            <button type='button' className="button button--medium clickable" onClick={() => onFlowEnd()}>Hide Spinner</button>
+                    <div className="dif two">
+                        <img src="//st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" className="cover-image cover__slide-in clickable" onClick={() => goToStore('Mango')} />
+                        <img src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27054010_88.jpg?ts=1642070994249&imwidth=476&imdensity=2" alt="" className="home__image big mango hidden clickable" onClick={() => goToStore('Mango')} />
+                        <img src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27040091_56.jpg?ts=1636379500926&imwidth=360&imdensity=2" alt="" className="home__image small mango hidden clickable" onClick={() => goToStore('Mango')} />
+                    </div>
 
-            <div className='container container--gapped'>
-                <img className="home-image clickable" src="//st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" onClick={() => goToStore('Mango')} />
+                    <div className="dim three"></div>
 
-                {/* <img className="home-image" src="//st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" />
+                    <div className="dif four">
+                        <img src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fde%2Ff3%2Fdef33b7fc423c73869aab4bfaa03545eb06cbe97.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]" alt="" className="home__image big hm clickable" onClick={() => goToStore('HM')} />
+                        <img src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F0e%2F66%2F0e6697cc83741f06914b330f87070ebd98bf0e7f.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/main]" alt="" className="home__image medium hm clickable" onClick={() => goToStore('HM')} />
+                        <img src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F5d%2F15%2F5d15e6f0e77ff342a1e765a0ab3886db5d8f2284.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]" alt="" className="home__image small hm clickable" onClick={() => goToStore('HM')} />
+                    </div>
 
-                <img className="home-image" src="//st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" /> */}
+                    <div className="dim five"></div>
+
+                    <div className="dif six">
+                        <img src="https://static.zara.net/photos///2022/V/0/1/p/2183/049/500/2/w/1126/2183049500_2_1_1.jpg?ts=1645708543111" alt="" className="home__image big zara clickable" onClick={() => goToStore('Zara')} />
+                        <img src="https://static.zara.net/photos///2022/V/0/1/p/0034/042/621/2/w/1126/0034042621_2_1_1.jpg?ts=1649062243737" alt="" className="home__image medium zara clickable" onClick={() => goToStore('Zara')} />
+                        <img src="https://static.zara.net/photos///2022/V/0/2/p/5692/340/710/2/w/1126/5692340710_2_1_1.jpg?ts=1644943727722" alt="" className="home__image small zara clickable" onClick={() => goToStore('Zara')} />
+                    </div>
+                    
+                    <div className="dim seven"></div>
+                </div>
             </div>
         </div>
+
+        <div className="vertical last"></div>
     </>
 }
 
