@@ -1,13 +1,14 @@
-.navbar {
+.brand-footer {
     display: inline-flex;
     position: fixed;
-    top: 7vh;
+    bottom: 7vh;
     left: 2.8vw;
     align-items: center;
     z-index: 100;
     /* animation: fade-in 1s ease-out 3s backwards; */
 }
 
-.nav__logo {
-
+.brand-footer__text {
+    font-family: var(--primary-font);
+    font-size: 1rem;
 }

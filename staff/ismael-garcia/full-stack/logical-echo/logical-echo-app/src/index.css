@@ -46,21 +46,22 @@ body {
     --font-color: #424242;
     --heading-color: #292922;
     /* --bg-color: #fffcf2; */
-    --primary-color: #EE6C4D;
-    --secondary-color: #F2927C;
-    /* --amber-500: #ffbf00;
-    --amber-400: #ffd24d;
-    --amber-300: #ffe599;
-    --amber-200: #ffefbf;
-    --amber-100: #fff9e6;
-    --amber-50: #fffcf2; */
-    --burnt-sienna-600: #E83E16;
+    --primary-color: #ffbf00;
+    --secondary-color: #ffd24d;
+    --color-600: #e6ac00;
+    --color-500: #ffbf00;
+    --color-400: #ffd24d;
+    --color-300: #ffe599;
+    --color-200: #ffefbf;
+    --color-100: #fff9e6;
+    --color-50: #fffcf2;
+    /* --burnt-sienna-600: #E83E16;
     --burnt-sienna-500: #EE6C4D;
     --burnt-sienna-400: #F07F64;
     --burnt-sienna-300: #F2927C;
     --burnt-sienna-200: #F5A693;
     --burnt-sienna-100: #F7B9AA;
-    --burnt-sienna-50: #F8C3B6;
+    --burnt-sienna-50: #F8C3B6; */
 }
 
 [data-theme="dark"] {
@@ -79,6 +80,12 @@ body {
 
 .hidden {
     visibility: hidden;
+}
+
+.centered-axis-xy {
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
 }
 
 /* ----- COMPONENTS ----- */
@@ -155,7 +162,7 @@ body {
 
 .button:hover {
     /* border-color: var(--heading-color); */
-    color: var(--secondary-color);
+    color: var(--primary-color);
 }
 
 .button--medium {

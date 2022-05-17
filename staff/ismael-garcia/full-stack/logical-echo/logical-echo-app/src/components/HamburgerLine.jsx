@@ -5,7 +5,7 @@ function HamburgerLine() {
     logger.debug('HamburgerLine -> render')
     
     return <div className="hamburger-line">
-        <label htmlFor="" className='hamburger-line__label'>
+        <label htmlFor="">
             <span>Scroll</span>
         </label>
     </div>

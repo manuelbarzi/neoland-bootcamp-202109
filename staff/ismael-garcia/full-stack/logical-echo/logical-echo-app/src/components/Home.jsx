@@ -13,38 +13,33 @@ function Home() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null
-    
-        if (currentTheme) {
-            document.documentElement.setAttribute('data-theme', currentTheme)
-        }
-    }, [])
+        logger.debug('Home -> useEffect')
 
-    useEffect(() => {
         const addEventListeners = () => {
-            document.addEventListener('scroll', () => {
-                horizontalScroll()
-                scaleCoverImage()
-            })
-        //     document.addEventListener('scroll', scaleCoverImage)
+            document.addEventListener('scroll', scrollHorizontally)
+            document.addEventListener('scroll', scaleCoverImage)
+            document.addEventListener('scroll', toggleHomeElementsToShow)
         }
 
         const removeEventListeners = () => {
-            document.removeEventListener('scroll', () => {
-                horizontalScroll()
-                scaleCoverImage()
-            })
-                
-            // document.removeEventListener('scroll', scaleCoverImage)
+            document.removeEventListener('scroll', scrollHorizontally)
+            document.removeEventListener('scroll', scaleCoverImage)
+            document.removeEventListener('scroll', toggleHomeElementsToShow)
         }
+
+        let navbar = document.querySelector('.navbar')
+        let hamburger_line = document.querySelector('.hamburger-line')
+        let logo = document.querySelector('.logo')
+        let brand_footer = document.querySelector('.brand-footer')
+        let cover_image = document.querySelector('.cover-image')
 
         let sticky_parent = document.querySelector('.sticky-parent')
         let sticky = document.querySelector('.sticky')
 
-        let scroll_width = sticky.scrollWidth
-        let vertical_scroll_height = sticky_parent.getBoundingClientRect().height - sticky.getBoundingClientRect().height
+        const scroll_width = sticky.scrollWidth
+        const vertical_scroll_height = sticky_parent.getBoundingClientRect().height - sticky.getBoundingClientRect().height
 
-        function horizontalScroll() {
+        const scrollHorizontally = () => {
             //Checking whether the sticky element has entered into view or not
             let sticky_position = sticky.getBoundingClientRect().top
 
@@ -57,9 +52,7 @@ function Home() {
             }
         }
 
-        let cover_image = document.querySelector('.cover-image')
-
-        function scaleCoverImage() {
+        const scaleCoverImage = () => {
             let scrolled = -sticky_parent.getBoundingClientRect().top
 
             let scale_ratio = (100 - scrolled/8)/100
@@ -69,26 +62,39 @@ function Home() {
             cover_image.style.transformOrigin = '0 100%'
         }
 
-        let navbar = document.querySelector('.nav__wrapper')
-        let hamburger_line = document.querySelector('.hamburger-line')
-        let hamburgerLine_label = document.querySelector('.hamburger-line__label')
-        let logo = document.querySelector('.logo__container')
-        let hidden_elements = document.querySelectorAll('.hidden')
-        let visible_elements = document.querySelectorAll('.visible')
-
-        function resetHomeElements() {
+        const toggleHomeElementsToShow = () => {
             let scrolled = -sticky_parent.getBoundingClientRect().top
 
             if (scrolled > 0) {
-                hidden_elements.forEach(elem => {
-                    elem.classList.remove('hidden')
-                    elem.style.animation = 'fade-in 1s ease 1s forwards;'
-                })
-                navbar.style.visibility = 'visible'
-                navbar.style.transition = 'visibility'
+                navbar.classList.add('show')
+
+                brand_footer.classList.add('show')
+
+                hamburger_line.classList.remove('show')
+
+                logo.classList.remove('show')
+            } else {
+                navbar.classList.remove('show')
+
+                brand_footer.classList.remove('show')
+                
+                hamburger_line.classList.add('show')
+
+                logo.classList.add('show')
             }
         }
 
+        const addShowClass = () => {
+            hamburger_line.classList.add('show')
+
+            logo.classList.add('show')
+        }
+
+        function showHomeElements() {
+            window.setTimeout(addShowClass, 2000)
+        }
+
+        showHomeElements()
 
         addEventListeners()
         return () => removeEventListeners()
@@ -122,8 +128,8 @@ function Home() {
                     </div>
 
                     <div className="dif two">
-                        <img src="//st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" className="cover-image cover__slide-in clickable" onClick={() => goToStore('Mango')} />
-                        <img src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27054010_88.jpg?ts=1642070994249&imwidth=476&imdensity=2" alt="" className="home__image big mango hidden clickable" onClick={() => goToStore('Mango')} />
+                        <img src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27054010_88.jpg?ts=1642070994249&imwidth=476&imdensity=2" alt="" className="cover-image cover__slide-in clickable" onClick={() => goToStore('Mango')} />
+                        <img src="https://st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" className="home__image big mango hidden clickable" onClick={() => goToStore('Mango')} />
                         <img src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27040091_56.jpg?ts=1636379500926&imwidth=360&imdensity=2" alt="" className="home__image small mango hidden clickable" onClick={() => goToStore('Mango')} />
                     </div>
 
@@ -147,8 +153,6 @@ function Home() {
                 </div>
             </div>
         </div>
-
-        <div className="vertical last"></div>
     </>
 }
 

@@ -45,7 +45,7 @@
 /* ----- CONTAINERS ----- */
 
 .sticky-parent {
-    height: 900vh;
+    height: 600vh;
 }
 
 .sticky {
@@ -76,38 +76,39 @@
 
 .dim.one {
     min-width: 50vw;
-    background-color: var(--burnt-sienna-50);
+    background-color: var(--color-50);
 }
 
 .dif.two {
-    background-color: var(--burnt-sienna-100);
+    background-color: var(--color-50);
 }
 
 .dim.three {
-    background-color: var(--burnt-sienna-200);
+    background-color: var(--color-100);
 }
 
 .dif.four {
-    background-color: var(--burnt-sienna-300);
+    background-color: var(--color-200);
 }
 
 .dim.five {
-    background-color: var(--burnt-sienna-400);
+    background-color: var(--color-300);
 }
 
 .dif.six {
-    background-color: var(--burnt-sienna-500);
+    background-color: var(--color-400);
 }
 
 .dim.seven {
-    background-color: var(--burnt-sienna-400);
+    min-width: 75vw;
+    background-color: var(--color-500);
 }
 
-.vertical { 
+/* .vertical { 
     width: 100vw;
     height: 100vh;
     background-color: var(--burnt-sienna-300);
-}
+} */
 
 
 /* ----- IMAGES ----- */

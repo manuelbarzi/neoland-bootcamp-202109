@@ -11,7 +11,7 @@
 
 .cursor__ball--big circle {
     fill: transparent;
-    stroke: var(--burnt-sienna-600);
+    stroke: var(--color-500);
     stroke-width: 1px; 
 }
 

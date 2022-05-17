@@ -29,8 +29,8 @@ function Navbar() {
       }, [token]);
 
     return <>
-        <div className="nav__wrapper container--vertical hidden">
-            <h1>L E</h1>
+        <div className="navbar container--vertical hidden">
+            <h1 className='nav__logo'>L E</h1>
 
             <div className='nav__buttons-wrapper'>
                 {view === 'loggedOut' && <button type='button' className={`button button--medium clickable ${location.pathname === '/account' && 'button--emphasized'}`} onClick={goToAccount}>Login</button>}

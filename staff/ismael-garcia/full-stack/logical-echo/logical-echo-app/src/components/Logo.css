@@ -1,3 +1,12 @@
+@keyframes translateY-logo-spans {
+    from {
+        transform: translateY(-15px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
 @keyframes logo__slide-left {
     to {
         left: 7vw;
@@ -7,7 +16,7 @@
     animation: logo__slide-left 1s ease 2.2s forwards;
 } */
 
-@keyframes translate-echo {
+@keyframes translateX-echo {
     from {
         transform: translateX(20%);
     }
@@ -16,10 +25,11 @@
     }
 }
 
-.logo__container {
+.logo {
     display: inline-flex;
+    position: fixed;
     flex-direction: column;
-    animation: logo__slide-left .8s ease-out 2.2s forwards, align-logo-spans 2s ease 3s backwards;
+    animation: logo__slide-left .8s ease-out 2.2s forwards;
     z-index: 100;
 }
 
@@ -29,19 +39,12 @@
 }
 
 .logical {
-    animation: fade-in 1s ease 1s backwards;
+    animation: fade-in .91s cubic-bezier(.77,0,.175,1) 1s backwards, translateY-logo-spans .91s cubic-bezier(.77,0,.175,1) 1s backwards;
 }
 
 .echo {
-    transform: translateX(0);
-    animation: fade-in .8s ease 1.2s backwards, translate-echo 1s ease 3.3s backwards;
-}
-
-.centered-axis-xy {
-    position: fixed;
-    top: 50vh;
-    left: 50vw;
-    transform: translate(-50%, -50%);
+    /* transform: translateX(0); */
+    animation: fade-in .91s cubic-bezier(.77,0,.175,1) 1s backwards, translateY-logo-spans .91s cubic-bezier(.77,0,.175,1) 1s backwards, translateX-echo 1s ease 3.2s backwards;
 }
 
 /* .fade-in.logo__container {
