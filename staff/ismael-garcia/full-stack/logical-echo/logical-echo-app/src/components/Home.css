@@ -127,6 +127,16 @@
     bottom: 0;
 }
 
+.home__image.mango {
+    will-change: opacity;
+    opacity: 0;
+    transition: opacity .91s cubic-bezier(.77,0,.175,1);
+}
+
+.home__image.mango.show {
+    opacity: 1;
+}
+
 .big {
     height: 100vh;
     left: 20vw;

@@ -17,8 +17,6 @@
     padding-inline-end: 0;
     padding-inline-start: 0;
     cursor: none;
-    /* font-family: 'Courier New', Courier, monospace;
-    font-weight: 600; */
 }
 
 html,
@@ -73,14 +71,6 @@ body {
 }
 
 /* ----- GLOBAL CLASSES ----- */
-
-.visible {
-    visibility: visible;
-}
-
-.hidden {
-    visibility: hidden;
-}
 
 .centered-axis-xy {
     top: 50vh;

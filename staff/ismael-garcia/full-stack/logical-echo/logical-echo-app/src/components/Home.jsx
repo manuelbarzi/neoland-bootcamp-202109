@@ -5,6 +5,7 @@ import './Home.css'
 import Navbar from './Navbar'
 import Logo from './Logo'
 import HamburgerLine from './HamburgerLine'
+import BrandFooter from './BrandFooter'
 
 function Home() {
     logger.debug('Home -> render')
@@ -15,6 +16,7 @@ function Home() {
     useEffect(() => {
         logger.debug('Home -> useEffect')
 
+        // Event listeners
         const addEventListeners = () => {
             document.addEventListener('scroll', scrollHorizontally)
             document.addEventListener('scroll', scaleCoverImage)
@@ -27,12 +29,7 @@ function Home() {
             document.removeEventListener('scroll', toggleHomeElementsToShow)
         }
 
-        let navbar = document.querySelector('.navbar')
-        let hamburger_line = document.querySelector('.hamburger-line')
-        let logo = document.querySelector('.logo')
-        let brand_footer = document.querySelector('.brand-footer')
-        let cover_image = document.querySelector('.cover-image')
-
+        // Horizontal scroll
         let sticky_parent = document.querySelector('.sticky-parent')
         let sticky = document.querySelector('.sticky')
 
@@ -52,6 +49,9 @@ function Home() {
             }
         }
 
+        // Scaling cover image when scrolling
+        let cover_image = document.querySelector('.cover-image')
+
         const scaleCoverImage = () => {
             let scrolled = -sticky_parent.getBoundingClientRect().top
 
@@ -62,40 +62,126 @@ function Home() {
             cover_image.style.transformOrigin = '0 100%'
         }
 
+        // Toggling elements to show when scrolling
+        let navbar = document.querySelector('.navbar')
+        let hamburger_line = document.querySelector('.hamburger-line')
+        let logo = document.querySelector('.logo')
+        let brand_footer = document.querySelector('.brand-footer')
+        let home_images_cover = document.querySelectorAll('.home__image.mango')
+        let elems_to_show_on_scroll = [navbar, brand_footer, home_images_cover]
+        let elems_to_hide_on_scroll = [logo, hamburger_line]
+        // console.log(elems_to_show_on_scroll)
+        // console.log(elems_to_hide_on_scroll)
+
+        const checkIsArrayLike = (elem) => {
+            return elem instanceof Array || NodeList.prototype.isPrototypeOf(elem) || HTMLCollection.prototype.isPrototypeOf(elem)
+        }
+
         const toggleHomeElementsToShow = () => {
             let scrolled = -sticky_parent.getBoundingClientRect().top
 
             if (scrolled > 0) {
-                navbar.classList.add('show')
+                elems_to_show_on_scroll.forEach(elem => {
+                    if (checkIsArrayLike(elem)) {
+                        elem.forEach(el => {
+                            el.classList.add('show')
+                        })
+                    } else {
+                        elem.classList.add('show')
+                    }
+                })
 
-                brand_footer.classList.add('show')
-
-                hamburger_line.classList.remove('show')
-
-                logo.classList.remove('show')
+                elems_to_hide_on_scroll.forEach(elem => {
+                    if (checkIsArrayLike(elem)) {
+                        elem.forEach(el => {
+                            el.classList.remove('show')
+                        })
+                    } else {
+                        elem.classList.remove('show')
+                    }
+                })
             } else {
-                navbar.classList.remove('show')
+                elems_to_hide_on_scroll.forEach(elem => {
+                    if (checkIsArrayLike(elem)) {
+                        elem.forEach(el => {
+                            el.classList.add('show')
+                        })
+                    } else {
+                        elem.classList.add('show')
+                    }
+                })
 
-                brand_footer.classList.remove('show')
-                
-                hamburger_line.classList.add('show')
-
-                logo.classList.add('show')
+                elems_to_show_on_scroll.forEach(elem => {
+                    if (checkIsArrayLike(elem)) {
+                        elem.forEach(el => {
+                            el.classList.remove('show')
+                        })
+                    } else {
+                        elem.classList.remove('show')
+                    }
+                })
             }
         }
 
-        const addShowClass = () => {
-            hamburger_line.classList.add('show')
-
+        // Intro Home Page
+        const startLogo = () => {
             logo.classList.add('show')
         }
 
+        const startHamburgerLine = () => {
+            hamburger_line.classList.add('show')
+        }
+
         function showHomeElements() {
-            window.setTimeout(addShowClass, 2000)
+            startLogo()
+            window.setTimeout(startHamburgerLine, 3000)
         }
 
         showHomeElements()
 
+        // Creating Intersection Observer to change BrandFooter
+        let io_targets = [document.querySelector('.mango.small'), document.querySelector('.hm.medium')]
+        let text_to_change = document.querySelector('.brand-footer__text')
+        let brands = ['Mango', 'H&M', 'Zara']
+        let i = 0
+
+        const handleIntersection = (entries) => {
+            let entry = entries[0]
+
+            if (entry.boundingClientRect.right < 0 && entry.boundingClientRect.left < 0) {
+                i++         
+                brand_footer.classList.remove('show')
+                text_to_change.textContent = brands[i]
+                brand_footer.classList.add('show')
+            } 
+            
+            if (entry.boundingClientRect.right >= 0 && entry.boundingClientRect.left < 0) {
+                i--         
+                brand_footer.classList.remove('show')
+                text_to_change.textContent = brands[i]
+                brand_footer.classList.add('show')
+            }
+        }
+
+        function createObserver(target) {          
+            let options = {
+              root: null,
+              rootMargin: "0px",
+              threshold: 0
+            }
+          
+            let io = new IntersectionObserver(handleIntersection, options)
+
+            if (target instanceof Array) {
+                target.forEach(elem => io.observe(elem))
+            } else {
+                io.observe(target)
+            }
+        }
+
+        createObserver(io_targets)
+
+        // Adding and removing Event Listeners
         addEventListeners()
         return () => removeEventListeners()
     }, [])
@@ -122,15 +208,14 @@ function Home() {
                     <Navbar />
                     <Logo />
                     <HamburgerLine />
+                    <BrandFooter />
 
-                    <div className="dim one">
-                    
-                    </div>
+                    <div className="dim one"></div>
 
                     <div className="dif two">
                         <img src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27054010_88.jpg?ts=1642070994249&imwidth=476&imdensity=2" alt="" className="cover-image cover__slide-in clickable" onClick={() => goToStore('Mango')} />
-                        <img src="https://st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" className="home__image big mango hidden clickable" onClick={() => goToStore('Mango')} />
-                        <img src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27040091_56.jpg?ts=1636379500926&imwidth=360&imdensity=2" alt="" className="home__image small mango hidden clickable" onClick={() => goToStore('Mango')} />
+                        <img src="https://st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" className="home__image big mango clickable" onClick={() => goToStore('Mango')} />
+                        <img src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27040091_56.jpg?ts=1636379500926&imwidth=360&imdensity=2" alt="" className="home__image small mango clickable" onClick={() => goToStore('Mango')} />
                     </div>
 
                     <div className="dim three"></div>

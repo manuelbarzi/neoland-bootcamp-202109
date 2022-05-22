@@ -3,19 +3,37 @@
 }
     
 .cursor__ball {
-    position: absolute;
+    position: fixed;
+    transform: translate(0, 0);
     top: 0;
     left: 0;
+    will-change: top, left;
     z-index: 1000;
 }
 
-.cursor__ball--big circle {
-    fill: transparent;
-    stroke: var(--color-500);
-    stroke-width: 1px; 
+.ball--big {
+    transition: top .35s ease-out, left .4s ease-out, transform .3s ease-out;
 }
 
-.cursor__ball--small circle {
+.ball--small {
+    transition: top .1s ease-out, left .1s ease-out;
+}
+
+.ball--big circle {
+    fill: transparent;
+    stroke: var(--color-500);
+    stroke-width: 1px;
+}
+
+.ball--small circle {
     fill: var(--heading-color);
+}
+
+.on-hover {
+    transform: scale(3.5);
+}
+
+.on-click {
+    transform: scale(1.5);
 }
 

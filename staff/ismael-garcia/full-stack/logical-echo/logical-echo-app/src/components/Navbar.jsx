@@ -29,7 +29,7 @@ function Navbar() {
       }, [token]);
 
     return <>
-        <div className="navbar container--vertical hidden">
+        <div className="navbar container--vertical">
             <h1 className='nav__logo'>L E</h1>
 
             <div className='nav__buttons-wrapper'>
