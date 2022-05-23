@@ -9,8 +9,7 @@ function SignIn({ onSignIn, onSignUp }) {
 
     // const goToAccount = () => navigate('/account')
 
-    return <div className='signin-wrapper container--vertical fade-in'> 
-        <form className="signin form container--vertical" onSubmit={event => {
+    return <form className="signin form container--vertical" onSubmit={event => {
             event.preventDefault()
 
             const { target: { username: { value: username }, password: { value: password } } } = event
@@ -29,7 +28,6 @@ function SignIn({ onSignIn, onSignUp }) {
                 <button type="submit" className="button button--medium button--emphasized clickable">Sign In</button>
             </div>
         </form> 
-    </div>
 }
 
 export default SignIn

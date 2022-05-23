@@ -50,17 +50,17 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="search" element={<><Home /><Search /></>} />
+                {/* <Route path="search" element={<><Home /><Search /></>} /> */}
                 <Route path="items" element={<Results onItem={goToItem} />} />
 
                 <Route path="items/:item_id" element={<Detail />} />
 
-                <Route path="account" element={<><Home /><Account /></>} />
-                <Route path="profile" element={<><Home /><Profile /></>} />
+                {/* <Route path="account" element={<><Home /><Account /></>} />
+                <Route path="profile" element={<><Home /><Profile /></>} /> */}
 
                 <Route path="items/favs" element={<Favs onItem={goToItem} />} />
 
-                <Route path="newsletter" element={<><Home /><Newsletter /></>} />
+                {/* <Route path="newsletter" element={<><Home /><Newsletter /></>} /> */}
             </Routes>
 
             {spinner && <Spinner />}

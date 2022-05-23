@@ -6,8 +6,6 @@ function BrandFooter() {
     
     return <div className="brand-footer">
         <h1 className='brand-footer__text'>Mango</h1>
-        {/* <h1>H&M</h1>
-        <h1>Zara</h1> */}
     </div>
 }
 
