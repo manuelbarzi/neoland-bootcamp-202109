@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import logger from '../utils/logger'
+import changePageWheelSpeed from './helpers/change-page-wheel-speed'
+import checkIsArrayLike from './helpers/check-is-array-like'
 import './Home.css'
 import Navbar from './Navbar'
 import Logo from './Logo'
@@ -21,52 +23,72 @@ function Home() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        logger.debug('Home -> useEffect')
+        logger.debug('Home -> useEffect1')
 
-        // Event listeners
+        // Intro Home Page
+        let hamburger_line = document.querySelector('.hamburger-line')
+        let logo = document.querySelector('.logo')
+
+        const showElement = (DOMelem) => {
+            DOMelem.classList.add('show')
+        }
+
+        function showHomeElements() {
+            showElement(logo)
+            window.setTimeout(() => showElement(hamburger_line), 3000)
+        }
+
+        showHomeElements()
+    }, [])
+
+    useEffect(() => {
+        logger.debug('Home -> useEffect2')
+
+        // Event listeners: Scroll and Wheel
         const addEventListeners = () => {
             document.addEventListener('scroll', scrollHorizontally)
-            document.addEventListener('scroll', scaleCoverImage)
-            document.addEventListener('scroll', toggleHomeElementsToShow)
+            document.addEventListener('scroll', scaleOnScroll)
+            document.addEventListener('scroll', toggleElementsToShow)
+            // document.addEventListener('scroll', setScrollSpeed)
         }
 
         const removeEventListeners = () => {
             document.removeEventListener('scroll', scrollHorizontally)
-            document.removeEventListener('scroll', scaleCoverImage)
-            document.removeEventListener('scroll', toggleHomeElementsToShow)
+            document.removeEventListener('scroll', scaleOnScroll)
+            document.removeEventListener('scroll', toggleElementsToShow)
+            // document.removeEventListener('scroll', setScrollSpeed)
         }
 
         // Horizontal scroll
         let sticky_parent = document.querySelector('.sticky-parent')
         let sticky = document.querySelector('.sticky')
 
-        const scroll_width = sticky.scrollWidth
-        const vertical_scroll_height = sticky_parent.getBoundingClientRect().height - sticky.getBoundingClientRect().height
-
         const scrollHorizontally = () => {
-            //Checking whether the sticky element has entered into view or not
-            let sticky_position = sticky.getBoundingClientRect().top
-
+            const scroll_width = sticky.scrollWidth
+            const vertical_scroll_height = sticky_parent.getBoundingClientRect().height - sticky.getBoundingClientRect().height
+            let sticky_position = sticky.getBoundingClientRect().top 
+            
+            // Checking whether the sticky element has entered into view or not
             if (sticky_position > 1) {
                 return
             } else {
-                let scrolled = -sticky_parent.getBoundingClientRect().top // negative number negated to make it positive
+                let scrolled = window.scrollY
 
-                sticky.scrollLeft = (scroll_width / vertical_scroll_height) * (scrolled) * 0.85
+                sticky.scrollLeft = (scroll_width / vertical_scroll_height) * scrolled // * 0.85
             }
         }
 
-        // Scaling cover image when scrolling
-        let cover_image = document.querySelector('.cover-image')
+        // Scaling image when scrolling
+        let elem_to_scale = document.querySelector('.cover-image')
 
-        const scaleCoverImage = () => {
-            let scrolled = -sticky_parent.getBoundingClientRect().top
+        const scaleOnScroll = () => {
+            let scrolled = document.documentElement.scrollTop ?? document.body.scrollTop
 
-            let scale_ratio = (100 - scrolled/8)/100
-            let scale_value = scale_ratio >= 0.5 ? scale_ratio : 0.5
+            let scale_rate = (100 - scrolled/5)/100 
+            let scale_value = scale_rate >= 0.5 ? scale_rate : 0.5
 
-            cover_image.style.transform = 'scale(' + scale_value + ')'
-            cover_image.style.transformOrigin = '0 100%'
+            elem_to_scale.style.transform = 'scale(' + scale_value + ')'
+            elem_to_scale.style.transformOrigin = '0 100%'
         }
 
         // Toggling elements to show when scrolling
@@ -77,14 +99,8 @@ function Home() {
         let home_images_cover = document.querySelectorAll('.home__image.mango')
         let elems_to_show_on_scroll = [navbar, brand_footer, home_images_cover]
         let elems_to_hide_on_scroll = [logo, hamburger_line]
-        // console.log(elems_to_show_on_scroll)
-        // console.log(elems_to_hide_on_scroll)
 
-        const checkIsArrayLike = (elem) => {
-            return elem instanceof Array || NodeList.prototype.isPrototypeOf(elem) || HTMLCollection.prototype.isPrototypeOf(elem)
-        }
-
-        const toggleHomeElementsToShow = () => {
+        const toggleElementsToShow = () => {
             let scrolled = -sticky_parent.getBoundingClientRect().top
 
             if (scrolled > 0) {
@@ -130,25 +146,21 @@ function Home() {
             }
         }
 
-        // Intro Home Page
-        const startLogo = () => {
-            logo.classList.add('show')
-        }
+        // Changing page wheel speed
+        changePageWheelSpeed(1.5)
 
-        const startHamburgerLine = () => {
-            hamburger_line.classList.add('show')
-        }
+        // Adding and removing Event Listeners
+        addEventListeners()
+        return () => removeEventListeners()
+    }, [])
 
-        function showHomeElements() {
-            startLogo()
-            window.setTimeout(startHamburgerLine, 3000)
-        }
-
-        showHomeElements()
+    useEffect(() => {
+        logger.debug('Home -> useEffect3')
 
         // Creating Intersection Observer to change BrandFooter
         let io_targets = document.querySelectorAll('.io-target')
         let text_to_change = document.querySelector('.brand-footer__text')
+        let brand_footer = document.querySelector('.brand-footer')
         let brands = ['Mango', 'H&M', 'Zara']
         let i = 0
 
@@ -187,10 +199,6 @@ function Home() {
         }
 
         createObserver(io_targets)
-
-        // Adding and removing Event Listeners
-        addEventListeners()
-        return () => removeEventListeners()
     }, [])
 
     const goToStore = store => navigate(`/items?q=${store}`)
@@ -220,25 +228,25 @@ function Home() {
                     <div className="dim one"></div>
 
                     <div className="dif two">
-                        <img src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27054010_88.jpg?ts=1642070994249&imwidth=476&imdensity=2" alt="" className="cover-image cover__slide-in clickable" onClick={() => goToStore('Mango')} />
-                        <img src="https://st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" className="home__image big mango clickable" onClick={() => goToStore('Mango')} />
-                        <img src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27040091_56.jpg?ts=1636379500926&imwidth=360&imdensity=2" alt="" className="home__image small mango io-target clickable" onClick={() => goToStore('Mango')} />
+                        <img src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27054010_88.jpg?ts=1642070994249&imwidth=476&imdensity=2" alt="" className="cover-image cover__slide-in parallax clickable" onClick={() => goToStore('Mango')} />
+                        <img src="https://st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" className="home__image big mango parallax clickable" onClick={() => goToStore('Mango')} />
+                        <img src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27040091_56.jpg?ts=1636379500926&imwidth=360&imdensity=2" alt="" className="home__image small mango io-target parallax clickable" onClick={() => goToStore('Mango')} />
                     </div>
 
                     <div className="dim three"></div>
 
                     <div className="dif four">
-                        <img src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fde%2Ff3%2Fdef33b7fc423c73869aab4bfaa03545eb06cbe97.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]" alt="" className="home__image big hm clickable" onClick={() => goToStore('HM')} />
-                        <img src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F0e%2F66%2F0e6697cc83741f06914b330f87070ebd98bf0e7f.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/main]" alt="" className="home__image medium hm io-target clickable" onClick={() => goToStore('HM')} />
-                        <img src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F5d%2F15%2F5d15e6f0e77ff342a1e765a0ab3886db5d8f2284.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]" alt="" className="home__image small hm clickable" onClick={() => goToStore('HM')} />
+                        <img src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fde%2Ff3%2Fdef33b7fc423c73869aab4bfaa03545eb06cbe97.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]" alt="" className="home__image big hm parallax clickable" onClick={() => goToStore('HM')} />
+                        <img src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F0e%2F66%2F0e6697cc83741f06914b330f87070ebd98bf0e7f.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/main]" alt="" className="home__image medium hm io-target parallax clickable" onClick={() => goToStore('HM')} />
+                        <img src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F5d%2F15%2F5d15e6f0e77ff342a1e765a0ab3886db5d8f2284.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]" alt="" className="home__image small hm parallax clickable" onClick={() => goToStore('HM')} />
                     </div>
 
                     <div className="dim five"></div>
 
                     <div className="dif six">
-                        <img src="https://static.zara.net/photos///2022/V/0/1/p/2183/049/500/2/w/1126/2183049500_2_1_1.jpg?ts=1645708543111" alt="" className="home__image big zara clickable" onClick={() => goToStore('Zara')} />
-                        <img src="https://static.zara.net/photos///2022/V/0/1/p/0034/042/621/2/w/1126/0034042621_2_1_1.jpg?ts=1649062243737" alt="" className="home__image medium zara io-target clickable" onClick={() => goToStore('Zara')} />
-                        <img src="https://static.zara.net/photos///2022/V/0/2/p/5692/340/710/2/w/1126/5692340710_2_1_1.jpg?ts=1644943727722" alt="" className="home__image small zara clickable" onClick={() => goToStore('Zara')} />
+                        <img src="https://static.zara.net/photos///2022/V/0/1/p/2183/049/500/2/w/1126/2183049500_2_1_1.jpg?ts=1645708543111" alt="" className="home__image big zara parallax clickable" onClick={() => goToStore('Zara')} />
+                        <img src="https://static.zara.net/photos///2022/V/0/1/p/0034/042/621/2/w/1126/0034042621_2_1_1.jpg?ts=1649062243737" alt="" className="home__image medium zara io-target parallax clickable" onClick={() => goToStore('Zara')} />
+                        <img src="https://static.zara.net/photos///2022/V/0/2/p/5692/340/710/2/w/1126/5692340710_2_1_1.jpg?ts=1644943727722" alt="" className="home__image small zara parallax clickable" onClick={() => goToStore('Zara')} />
                     </div>
                     
                     <div className="dim seven">
