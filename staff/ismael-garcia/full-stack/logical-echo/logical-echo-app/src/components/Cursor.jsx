@@ -37,6 +37,10 @@ function Cursor() {
         const onMouseMove = (e) => {
             bigBall.setAttribute("style", "top: "+(e.pageY - window.pageYOffset - 15)+"px; left: "+(e.pageX - 15)+"px;")
             smallBall.setAttribute("style", "top: "+(e.pageY - window.pageYOffset - 7)+"px; left: "+(e.pageX - 5)+"px;")
+            // bigBall.style.top = `${e.pageY - window.pageYOffset - 15}px;`
+            // bigBall.style.left = `${e.pageX - 15}px;`
+            // smallBall.style.top = `${e.pageY - window.pageYOffset - 7}px;`
+            // smallBall.style.left = `${e.pageX - 5}px;`
         }
 
         const onMouseHover = () => {

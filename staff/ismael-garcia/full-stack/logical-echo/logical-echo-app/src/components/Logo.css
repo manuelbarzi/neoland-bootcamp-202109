@@ -29,17 +29,22 @@
     display: inline-flex;
     position: fixed;
     flex-direction: column;
-    animation: logo__slide-left .8s ease-out 2.2s forwards;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    /* animation: logo__slide-left .8s ease-out 2.2s forwards; */
     z-index: 100;
-    will-change: opacity, transform;
-    transform: translateX(-15px);
+    will-change: opacity, left;
     opacity: 0;
-    transition: transform .91s cubic-bezier(.77,0,.175,1), opacity .91s cubic-bezier(.77,0,.175,1);
+    transition: opacity .91s cubic-bezier(.77,0,.175,1), left .91s cubic-bezier(.77,0,.175,1);
 }
 
 .logo.show {
-    transform: translateX(0);
     opacity: 1;
+}
+
+.logo.left {
+    left: 7vw;
 }
 
 .logo__text {
@@ -48,12 +53,16 @@
 }
 
 .logical {
+
+}
+
+.logo.show.logical {
     animation: fade-in .91s cubic-bezier(.77,0,.175,1) 1s backwards, translateY-logo-spans .91s cubic-bezier(.77,0,.175,1) 1s backwards;
 }
 
-.echo {
+.logo.show.echo {
     /* transform: translateX(0); */
-    animation: fade-in .91s cubic-bezier(.77,0,.175,1) 1s backwards, translateY-logo-spans .91s cubic-bezier(.77,0,.175,1) 1s backwards, translateX-echo 1s ease 3.2s backwards;
+    animation: fade-in .91s cubic-bezier(.77,0,.175,1) 1s backwards, translateY-logo-spans .91s cubic-bezier(.77,0,.175,1) 1s backwards; /* translateX-echo 1s ease 3.2s backwards; */
 }
 
 /* .fade-in.logo__container {

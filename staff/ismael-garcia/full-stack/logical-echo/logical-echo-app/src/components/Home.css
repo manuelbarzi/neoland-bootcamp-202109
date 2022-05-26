@@ -1,22 +1,3 @@
-
-
-/* .fade-in.home__image {
-    animation-delay: 2s;
-}
-
-.fade-in.home__button--newsletter {
-    animation-delay: 2s;
-}
-
-.fade-in.home__motto {
-    animation-delay: 2s;
-}
-
-.fade-in.home__description {
-    animation-delay: 2s;
-} */
-
-
 /* ----- CONTAINERS ----- */
 
 .sticky-parent {
@@ -79,88 +60,90 @@
     background-color: var(--color-500);
 }
 
-/* .vertical { 
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--burnt-sienna-300);
-} */
-
 
 /* ----- IMAGES ----- */
 
-.cover-image {
+.cover-image--outer {
     height: 100vh;
+    width: 40vw;
     position: absolute;
     bottom: 0;
-    left: 15vw;
+    left: 60vw;
+    will-change: left, transform;
     z-index: 20;
     filter: grayscale(100%);
+    transition: left .91s cubic-bezier(.77,0,.175,1), transform cubic-bezier(.77,0,.175,1);
 }
 
-.home__image {
+.cover-image--outer.left {
+    left: 15vw;
+}
+
+.image--outer {
     position: absolute;
     bottom: 0;
 }
 
-.home__image.mango {
+.image--outer.type-a {
     will-change: opacity;
     opacity: 0;
     transition: opacity .91s cubic-bezier(.77,0,.175,1);
 }
 
-.home__image.mango.show {
+.image--outer.type-a.show {
     opacity: 1;
+}
+
+.image {
+    position: absolute;
+    /* top: 0;
+    left: 0; */
+    height: 100%;
+    width: 100%;
 }
 
 .big {
     height: 100vh;
+    width: 40vw;
     left: 20vw;
     z-index: 10;
 }
 
 .medium {
     height: 50vh;
+    width: 20vw;
     z-index: 20;
+    will-change: transform;
+    transition: transform .3s cubic-bezier(.77,0,.175,1);
 }
 
-.medium.hm {
+.medium.type-b {
     left: 54vw;
 }
 
-.medium.zara {
+.medium.type-c {
     left: 52vw;
 }
 
 .small {
     height: 30vh;
+    width: 12vw;
     z-index: 30;
+    will-change: transform;
+    transition: transform .3s cubic-bezier(.77,0,.175,1);
 }
 
-.small.mango {
+.small.type-a {
     left: 54vw;
 }
 
-.small.hm {
+.small.type-b {
     left: 15vw;
 }
 
-.small.zara {
+.small.type-c {
     left: 45vw;
 }
 
-
-/* ----- ANIMATIONS ----- */
-
-@keyframes cover__slide-in {
-    from {
-        left: 60vw;
-    }
-    to {
-        left: 15vw;
-    }
-}
-.cover__slide-in {
-    animation: cover__slide-in 0.75s ease-out 2.2s backwards;
-}
 
 

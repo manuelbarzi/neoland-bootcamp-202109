@@ -3,7 +3,7 @@ function changePageWheelSpeed(speedY) {
     let removed = false
 
 	const handleMouseWheel = (e) => {
-		e.preventDefault()
+		// e.preventDefault()
 
 		scrollY += speedY * e.deltaY
 

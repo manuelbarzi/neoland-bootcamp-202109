@@ -72,11 +72,11 @@ body {
 
 /* ----- GLOBAL CLASSES ----- */
 
-.centered-axis-xy {
+/* .centered-axis-xy {
     top: 50vh;
     left: 50vw;
     transform: translate(-50%, -50%);
-}
+} */
 
 /* ----- COMPONENTS ----- */
 
@@ -106,14 +106,6 @@ body {
 .container--gapped {
     padding: 1rem;
 }
-
-/* .container--off {
-    display: none;
-}
-
-.container--full {
-    height: 100%;
-} */
 
 
 /* ----- forms ----- */
@@ -182,6 +174,14 @@ body {
 
 ul {
     list-style-type: none;
+}
+
+
+/* ----- images ----- */
+
+img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 

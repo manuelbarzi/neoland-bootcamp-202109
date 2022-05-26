@@ -4,7 +4,7 @@ import './Logo.css'
 function Logo() {
     logger.debug('Logo -> render')
     
-    return <div className="logo centered-axis-xy clickable" >
+    return <div className="logo clickable" >
         <h1 className='logo__text logical'>Logical</h1>
         <h1 className='logo__text echo'>Echo</h1>
     </div>
