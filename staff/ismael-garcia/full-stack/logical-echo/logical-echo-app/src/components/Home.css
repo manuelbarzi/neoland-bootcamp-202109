@@ -1,7 +1,7 @@
 /* ----- CONTAINERS ----- */
 
 .sticky-parent {
-    height: 600vh;
+    height: 400vh;
 }
 
 .sticky {
@@ -17,14 +17,14 @@
 }
 
 .dim {
-    min-width: 30vw;
+    min-width: 25vw;
     height: 100vh;
     position: relative;
     z-index: 0;
 }
 
 .dif {
-    min-width: 100vw;
+    min-width: 75vw;
     height: 100vh;
     position: relative;
     z-index: 0;
@@ -40,24 +40,25 @@
 }
 
 .dim.three {
-    background-color: var(--color-100);
+    background-color: var(--color-50);
 }
 
 .dif.four {
-    background-color: var(--color-200);
+    background-color: var(--color-100);
 }
 
 .dim.five {
-    background-color: var(--color-300);
+    background-color: var(--color-100);
 }
 
 .dif.six {
-    background-color: var(--color-400);
+    min-width: 100vw;
+    background-color: var(--color-100);
 }
 
 .dim.seven {
     min-width: 75vw;
-    background-color: var(--color-500);
+    background-color: var(--color-400);
 }
 
 
@@ -113,8 +114,8 @@
     height: 50vh;
     width: 20vw;
     z-index: 20;
-    will-change: transform;
-    transition: transform .3s cubic-bezier(.77,0,.175,1);
+    will-change: transform, left;
+    transition: transform .3s cubic-bezier(.77,0,.175,1), left .3s cubic-bezier(.77,0,.175,1);
 }
 
 .medium.type-b {
@@ -129,8 +130,8 @@
     height: 30vh;
     width: 12vw;
     z-index: 30;
-    will-change: transform;
-    transition: transform .3s cubic-bezier(.77,0,.175,1);
+    will-change: transform, left;
+    transition: transform .3s cubic-bezier(.77,0,.175,1), left .3s cubic-bezier(.77,0,.175,1);
 }
 
 .small.type-a {

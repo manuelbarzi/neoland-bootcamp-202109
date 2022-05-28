@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import gsap from 'gsap'
 import logger from '../utils/logger'
 import scrollHorizontally from './helpers/scroll-horizontally'
 import changePageWheelSpeed from './helpers/change-page-wheel-speed'
@@ -25,7 +26,6 @@ function Home() {
     const brands = ['Mango', 'HM', 'Zara']
 
     // useEffect for Intro Home Page
-
     useEffect(() => {
         logger.debug('Home -> useEffect1')
 
@@ -47,7 +47,6 @@ function Home() {
 
 
     // useEffect for Scroll and Wheel
-
     useEffect(() => {
         logger.debug('Home -> useEffect2')
 
@@ -55,14 +54,14 @@ function Home() {
             document.addEventListener('scroll', setHorizontalScroll)
             document.addEventListener('scroll', scaleOnScroll)
             document.addEventListener('scroll', toggleElementsToShow)
-            // document.addEventListener('scroll', createParallax)
+            // document.addEventListener('scroll', delayMove)
         }
 
         const removeEventListeners = () => {
             document.removeEventListener('scroll', setHorizontalScroll)
             document.removeEventListener('scroll', scaleOnScroll)
             document.removeEventListener('scroll', toggleElementsToShow)
-            // document.removeEventListener('scroll', createParallax)
+            // document.removeEventListener('scroll', delayMove)
         }
 
         // Horizontal scroll
@@ -75,6 +74,7 @@ function Home() {
 
         // Scaling cover image on scroll
         let scale_target = document.querySelector('.cover-image--outer')
+        // let scale_target_inner = document.querySelector('.cover-image--outer div')
 
         const scaleOnScroll = () => {
             let scrolled = document.documentElement.scrollTop ?? document.body.scrollTop
@@ -84,6 +84,10 @@ function Home() {
 
             scale_target.style.transform = `scale(${scale_value})`
             scale_target.style.transformOrigin = '0 100%'
+
+            // if (scrolled < 1) {
+            //     scale_target_inner.transform = 'translate3d(0px, 0px, 0px);'
+            // }
         }
 
         // Toggling elements to show on scroll
@@ -149,7 +153,21 @@ function Home() {
             }
         }
 
-        // Creating images follow effect
+        // Creating Images Move Delay on scroll
+        // let move_delay_target = document.querySelectorAll('.cover-image--outer, .medium, .small')
+        // let fixed_references = document.querySelectorAll('.reference')
+        // // let vw_unit_pixels = window.innerWidth / 100
+
+        // const delayMove = () => {
+        //     move_delay_target.forEach((elem) => {
+        //         let fixed_reference_left = elem.parentElement.getBoundingClientRect().left
+
+        //         elem.setAttribute("style", `left: ${elem.getBoundingClientRect().left}px;`)
+        //     })
+        // }
+        
+        // gsap.to()
+
         // let parallax_target = document.querySelectorAll('.parallax')
 
         // const createParallax = () => {
@@ -176,7 +194,6 @@ function Home() {
 
 
     // useEffect for Intersection Observer
-
     useEffect(() => {
         logger.debug('Home -> useEffect3')
 
@@ -226,27 +243,27 @@ function Home() {
     }, [])
 
 
-    // useEffect for mouse move parallax
-
+    // useEffect for Mouse Move Parallax
     useEffect(() => {
         logger.debug('Home -> useEffect4')
 
         let translate_target = document.querySelectorAll('.image') 
         let mid_viewport = window.innerWidth / 2
+        let vw_unit_pixels = window.innerWidth / 100
         
         const translateOnMouseMove = (e) => {
             let offset = e.clientX - mid_viewport
-            let ratio = offset / 14.4 // offset divided by number of pixels for every 1% of a screen with 1440px innerWidth.
+            let ratio = offset / vw_unit_pixels 
             
             translate_target.forEach((elem, i) => {
                 let translate_x = ratio * elem.dataset.ratex
                 
                 if (i === 0) {
                     if (window.scrollY > 0) {
-                        elem.setAttribute("style", `transform: translate3d(${translate_x}px, 0px, 0px);`)
+                        elem.setAttribute("style", `transform: translate3d(${-translate_x}px, 0px, 0px);`)
                     }
                 } else {
-                    elem.setAttribute("style", `transform: translate3d(${translate_x}px, 0px, 0px);`)
+                    elem.setAttribute("style", `transform: translate3d(${-translate_x}px, 0px, 0px);`)
                 }
             })
         }

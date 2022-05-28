@@ -7,9 +7,7 @@ function scrollHorizontally(sticky, sticky_parent) {
     if (sticky_position > 1) {
         return
     } else {
-        let scrolled = window.scrollY
-
-        sticky.scrollLeft = (scroll_width / vertical_scroll_height) * scrolled // * 0.85
+        sticky.scrollLeft = (scroll_width / vertical_scroll_height) * window.scrollY * 0.78
     }
 }
 
