@@ -7,7 +7,7 @@ function scrollHorizontally(sticky, sticky_parent) {
     if (sticky_position > 1) {
         return
     } else {
-        sticky.scrollLeft = (scroll_width / vertical_scroll_height) * window.scrollY * 0.78
+        sticky.scrollLeft = (scroll_width / vertical_scroll_height) * window.scrollY * 0.77
     }
 }
 

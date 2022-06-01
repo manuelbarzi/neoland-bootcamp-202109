@@ -14,6 +14,7 @@
 
 .horizontal {
     display: flex;
+    position: relative;
 }
 
 .dim {
@@ -44,21 +45,21 @@
 }
 
 .dif.four {
-    background-color: var(--color-100);
+    background-color: var(--color-50);
 }
 
 .dim.five {
-    background-color: var(--color-100);
+    background-color: var(--color-50);
 }
 
 .dif.six {
     min-width: 100vw;
-    background-color: var(--color-100);
+    background-color: var(--color-50);
 }
 
 .dim.seven {
     min-width: 75vw;
-    background-color: var(--color-400);
+    background-color: var(--color-50);
 }
 
 
@@ -67,9 +68,11 @@
 .cover-image--outer {
     height: 100vh;
     width: 40vw;
-    position: absolute;
+    /* position: absolute; */
+    position: fixed;
     bottom: 0;
-    left: 60vw;
+    /* left: 60vw; */
+    left: 110vw;
     will-change: left, transform;
     z-index: 20;
     filter: grayscale(100%);
@@ -77,12 +80,19 @@
 }
 
 .cover-image--outer.left {
-    left: 15vw;
+    /* left: 15vw; */
+    left: 65vw;
 }
 
-.image--outer {
-    position: absolute;
+.image--outer:not(.big) {
+    /* position: absolute; */
+    position: fixed;
     bottom: 0;
+}
+
+.parallax:not(.cover-image--outer) {
+    will-change: transform;
+    transition: transform .1s ease-out;
 }
 
 .image--outer.type-a {
@@ -104,9 +114,10 @@
 }
 
 .big {
+    position: absolute;
     height: 100vh;
     width: 40vw;
-    left: 20vw;
+    /* left: 20vw; */
     z-index: 10;
 }
 
@@ -118,14 +129,6 @@
     transition: transform .3s cubic-bezier(.77,0,.175,1), left .3s cubic-bezier(.77,0,.175,1);
 }
 
-.medium.type-b {
-    left: 54vw;
-}
-
-.medium.type-c {
-    left: 52vw;
-}
-
 .small {
     height: 30vh;
     width: 12vw;
@@ -134,16 +137,43 @@
     transition: transform .3s cubic-bezier(.77,0,.175,1), left .3s cubic-bezier(.77,0,.175,1);
 }
 
+/* ----- placing ----- */
+.big.type-a {
+    left: 70vw;
+}
+
 .small.type-a {
-    left: 54vw;
+    /* left: 54vw; */
+    left: 104vw;
+}
+
+.big.type-b {
+    left: 170vw;
+}
+
+.medium.type-b {
+    /* left: 54vw; */
+    left: 204vw;
 }
 
 .small.type-b {
-    left: 15vw;
+    /* left: 15vw; */
+    left: 165vw;
 }
 
+.big.type-c {
+    left: 270vw;
+}
+
+.medium.type-c {
+    /* left: 52vw; */
+    left: 302vw;
+}
+
+
 .small.type-c {
-    left: 45vw;
+    /* left: 45vw; */
+    left: 295vw;
 }
 
 

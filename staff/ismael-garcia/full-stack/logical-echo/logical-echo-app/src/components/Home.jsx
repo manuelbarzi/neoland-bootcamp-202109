@@ -54,14 +54,14 @@ function Home() {
             document.addEventListener('scroll', setHorizontalScroll)
             document.addEventListener('scroll', scaleOnScroll)
             document.addEventListener('scroll', toggleElementsToShow)
-            // document.addEventListener('scroll', delayMove)
+            document.addEventListener('scroll', delayXOnScroll)
         }
 
         const removeEventListeners = () => {
             document.removeEventListener('scroll', setHorizontalScroll)
             document.removeEventListener('scroll', scaleOnScroll)
             document.removeEventListener('scroll', toggleElementsToShow)
-            // document.removeEventListener('scroll', delayMove)
+            document.removeEventListener('scroll', delayXOnScroll)
         }
 
         // Horizontal scroll
@@ -72,8 +72,8 @@ function Home() {
             scrollHorizontally(sticky, sticky_parent)
         }
 
-        // Scaling cover image on scroll
-        let scale_target = document.querySelector('.cover-image--outer')
+        // Scaling and translating cover image on scroll
+        // let scale_target = document.querySelector('.cover-image--outer')
         // let scale_target_inner = document.querySelector('.cover-image--outer div')
 
         const scaleOnScroll = () => {
@@ -82,8 +82,14 @@ function Home() {
             let scale_rate = (100 - scrolled/5)/100 
             let scale_value = scale_rate >= 0.5 ? scale_rate : 0.5
 
-            scale_target.style.transform = `scale(${scale_value})`
-            scale_target.style.transformOrigin = '0 100%'
+            gsap.to('.cover-image--outer', {
+                duration: .1,
+                scale: scale_value,
+                transformOrigin: '0 100%'
+            })
+
+            // scale_target.style.transform = `scale(${scale_value})`
+            // scale_target.style.transformOrigin = '0 100%'
 
             // if (scrolled < 1) {
             //     scale_target_inner.transform = 'translate3d(0px, 0px, 0px);'
@@ -104,9 +110,9 @@ function Home() {
 
             if (scrolled > 0) {
                 show_on_scroll_target.forEach(elem => {
-                    let isArrayLike = checkIsArrayLike(elem)
+                    let is_array_like = checkIsArrayLike(elem)
 
-                    if (isArrayLike) {
+                    if (is_array_like) {
                         elem.forEach(el => {
                             el.classList.add('show')
                         })
@@ -116,9 +122,9 @@ function Home() {
                 })
 
                 hide_on_scroll_target.forEach(elem => {
-                    let isArrayLike = checkIsArrayLike(elem)
+                    let is_array_like = checkIsArrayLike(elem)
 
-                    if (isArrayLike) {
+                    if (is_array_like) {
                         elem.forEach(el => {
                             el.classList.remove('show')
                         })
@@ -128,9 +134,9 @@ function Home() {
                 })
             } else {
                 hide_on_scroll_target.forEach(elem => {
-                    let isArrayLike = checkIsArrayLike(elem)
+                    let is_array_like = checkIsArrayLike(elem)
 
-                    if (isArrayLike) {
+                    if (is_array_like) {
                         elem.forEach(el => {
                             el.classList.add('show')
                         })
@@ -140,9 +146,9 @@ function Home() {
                 })
 
                 show_on_scroll_target.forEach(elem => {
-                    let isArrayLike = checkIsArrayLike(elem)
+                    let is_array_like = checkIsArrayLike(elem)
 
-                    if (isArrayLike) {
+                    if (is_array_like) {
                         elem.forEach(el => {
                             el.classList.remove('show')
                         })
@@ -153,34 +159,38 @@ function Home() {
             }
         }
 
-        // Creating Images Move Delay on scroll
-        // let move_delay_target = document.querySelectorAll('.cover-image--outer, .medium, .small')
-        // let fixed_references = document.querySelectorAll('.reference')
-        // // let vw_unit_pixels = window.innerWidth / 100
+        // Creating Images Scroll Parallax
+        const scroll_width = sticky.scrollWidth
+        const vertical_scroll_height = sticky_parent.getBoundingClientRect().height - sticky.getBoundingClientRect().height
+        const scroll_ratio = scroll_width / vertical_scroll_height
+        // const parallax_target = document.querySelectorAll('.parallax')
 
-        // const delayMove = () => {
-        //     move_delay_target.forEach((elem) => {
-        //         let fixed_reference_left = elem.parentElement.getBoundingClientRect().left
+        // GSAP Animation Library
+        const delayXOnScroll = () => {
+            let pos = -(window.scrollY * scroll_ratio * 0.77)
 
-        //         elem.setAttribute("style", `left: ${elem.getBoundingClientRect().left}px;`)
-        //     })
-        // }
+            gsap.to('.parallax', {
+                duration: .1,
+                x: pos,
+                ease: "power2.out"
+            })
+        }
         
-        // gsap.to()
+        // Vanilla JavaScript
+        // const delayXOnScroll = () => {
+        //     const parallax_target = document.querySelectorAll('.parallax')
+        //     const is_array_like = checkIsArrayLike(parallax_target)
 
-        // let parallax_target = document.querySelectorAll('.parallax')
+        //     if (is_array_like) {
+        //         parallax_target.forEach((elem) => {
+        //             let pos = -(window.scrollY * elem.dataset.ratex * scroll_ratio * 0.77)
 
-        // const createParallax = () => {
-        //     for (let i = 0; i < parallax_target.length; i++) {
-        //         // let scroll_top = document.documentElement.scrollTop || document.body.scrollTop
-        //         let posX = sticky.scrollLeft * parallax_target[i].dataset.ratex
-                
-        //         if (i === 0) {
-        //             // parallax_target[i].style.transform = 'translate3d('+posX+'px, 0px, 0px);'
-        //         } else {
-        //             // parallax_target[i].style.transform = `translate3d(${posX}px, 0px, 0px);`
-        //             parallax_target[i].setAttribute('style', `transform: translate3d(${posX}px, 0px, 0px);`)
-        //         }
+        //             elem.setAttribute("style", `transform: translate3d(${pos}px, 0px, 0px);`)
+        //         })
+        //     } else {
+        //         let pos = -(window.scrollY * parallax_target.dataset.ratex * scroll_ratio * 0.77)
+
+        //         parallax_target.setAttribute("style", `transform: translate3d(${pos}px, 0px, 0px);`)
         //     }
         // }
 
@@ -223,16 +233,16 @@ function Home() {
 
         function createObserver(target) {          
             let options = {
-              root: null,
-              rootMargin: "0px",
-              threshold: 0
+                root: null,
+                rootMargin: "0px",
+                threshold: 0
             }
           
             let io = new IntersectionObserver(handleIntersection, options)
 
-            let isArrayLike = checkIsArrayLike(target)
+            let is_array_like = checkIsArrayLike(target)
 
-            if (isArrayLike) {
+            if (is_array_like) {
                 target.forEach(elem => io.observe(elem))
             } else {
                 io.observe(target)
@@ -243,7 +253,7 @@ function Home() {
     }, [])
 
 
-    // useEffect for Mouse Move Parallax
+    // useEffect for Mouse Move Translate Parallax
     useEffect(() => {
         logger.debug('Home -> useEffect4')
 
@@ -278,73 +288,121 @@ function Home() {
         <div className="sticky-parent">
             <div className="sticky">
                 <div className="horizontal">
-                    <Navbar />
+                    {/* <Navbar /> */}
                     <Logo />
                     <HamburgerLine />
                     <BrandFooter />
-                    {location.pathname === '/search' && <Search />}
-                    {location.pathname === '/account' && <Account />}
-                    {location.pathname === '/profile' && <Profile />}
-                    {location.pathname === '/newsletter' && <Newsletter />}
+                    {/* {location.pathname === '/search' && <Search />} */}
+                    {/* {location.pathname === '/account' && <Account />} */}
+                    {/* {location.pathname === '/profile' && <Profile />} */}
+                    {/* {location.pathname === '/newsletter' && <Newsletter />} */}
+
+                    <div className="cover-image--outer parallax">
+                        <div className="image" data-ratex="0.5">
+                            <img className="clickable" src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27054010_88.jpg?ts=1642070994249&imwidth=476&imdensity=2" alt="" onClick={() => goToStore(brands[0])} />
+                        </div>
+                    </div>
+                    <div className="image--outer big type-a">
+                        <div className="image" data-ratex="1">
+                            <img className="clickable" src="https://st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" onClick={() => goToStore(brands[0])} /> 
+                        </div>
+                    </div>
+                    <div className="image--outer small type-a io-target parallax">
+                        <div className="image" data-ratex="0.3">
+                            <img className="clickable" src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27040091_56.jpg?ts=1636379500926&imwidth=360&imdensity=2" alt="" onClick={() => goToStore(brands[0])} />       
+                        </div>
+                    </div>
+
+                    <div className="image--outer big type-b">
+                        <div className="image" data-ratex="1">
+                            <img className="clickable" src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fde%2Ff3%2Fdef33b7fc423c73869aab4bfaa03545eb06cbe97.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]" alt="" onClick={() => goToStore(brands[1])} />
+                        </div>
+                    </div>
+                    <div className="image--outer medium type-b io-target parallax">
+                        <div className="image" data-ratex="0.5">
+                            <img className="clickable" src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F0e%2F66%2F0e6697cc83741f06914b330f87070ebd98bf0e7f.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/main]" alt="" onClick={() => goToStore(brands[1])} />   
+                        </div>
+                    </div>
+                    <div className="image--outer small type-b parallax">
+                        <div className="image" data-ratex="0.3">
+                            <img className="clickable" src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F5d%2F15%2F5d15e6f0e77ff342a1e765a0ab3886db5d8f2284.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]" alt="" onClick={() => goToStore(brands[1])} />
+                        </div>
+                    </div>
+
+                    <div className="image--outer big type-c">
+                        <div className="image" data-ratex="1">
+                            <img className="clickable" src="https://static.zara.net/photos///2022/V/0/1/p/2183/049/500/2/w/1126/2183049500_2_1_1.jpg?ts=1645708543111" alt="" onClick={() => goToStore(brands[2])} />
+                        </div>
+                    </div>
+                    <div className="image--outer medium type-c io-target parallax">
+                        <div className="image" data-ratex="0.5">
+                            <img className="clickable" src="https://static.zara.net/photos///2022/V/0/1/p/0034/042/621/2/w/1126/0034042621_2_1_1.jpg?ts=1649062243737" alt="" onClick={() => goToStore(brands[2])} />
+                        </div>
+                    </div>
+                    <div className="image--outer small type-c parallax">
+                        <div className="image" data-ratex="0.3">
+                            <img className="clickable" src="https://static.zara.net/photos///2022/V/0/2/p/5692/340/710/2/w/1126/5692340710_2_1_1.jpg?ts=1644943727722" alt="" onClick={() => goToStore(brands[2])} />     
+                        </div>
+                    </div>
 
                     <div className="dim one"></div>
 
                     <div className="dif two">
-                        <div className="cover-image--outer">
-                            <div className="image parallax" data-ratex="0.5">
+                        {/* <div className="cover-image--outer">
+                            <div className="image" data-ratex="0.5">
                                 <img className="clickable" src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27054010_88.jpg?ts=1642070994249&imwidth=476&imdensity=2" alt="" onClick={() => goToStore(brands[0])} />
                             </div>
-                        </div>
-                        <div className="image--outer big type-a">
-                            <div className="image parallax" data-ratex="1">
+                        </div> */}
+                        {/* <div className="image--outer big type-a">
+                            <div className="image" data-ratex="1">
                                 <img className="clickable" src="https://st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" onClick={() => goToStore(brands[0])} /> 
                             </div>
-                        </div>
-                        <div className="image--outer small type-a io-target">
-                            <div className="image parallax" data-ratex="0.3">
+                        </div> */}
+                        {/* <div className="image--outer small type-a io-target">
+                            <div className="image" data-ratex="0.3">
                                 <img className="clickable" src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27040091_56.jpg?ts=1636379500926&imwidth=360&imdensity=2" alt="" onClick={() => goToStore(brands[0])} />       
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="dim three"></div>
 
                     <div className="dif four">
-                        <div className="image--outer big type-b">
-                            <div className="image parallax" data-ratex="1">
+                        {/* <div className="image--outer big type-b">
+                            <div className="image" data-ratex="1">
                                 <img className="clickable" src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fde%2Ff3%2Fdef33b7fc423c73869aab4bfaa03545eb06cbe97.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]" alt="" onClick={() => goToStore(brands[1])} />
                             </div>
-                        </div>
-                        <div className="image--outer medium type-b io-target">
-                            <div className="image parallax" data-ratex="0.5">
+                        </div> */}
+                        {/* <div className="image--outer medium type-b io-target">
+                            <div className="image" data-ratex="0.5">
                                 <img className="clickable" src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F0e%2F66%2F0e6697cc83741f06914b330f87070ebd98bf0e7f.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/main]" alt="" onClick={() => goToStore(brands[1])} />   
                             </div>
-                        </div>
-                        <div className="image--outer small type-b">
-                            <div className="image parallax" data-ratex="0.3">
+                        </div> */}
+                        {/* <div className="image--outer small type-b">
+                            <div className="image" data-ratex="0.3">
                                 <img className="clickable" src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F5d%2F15%2F5d15e6f0e77ff342a1e765a0ab3886db5d8f2284.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]" alt="" onClick={() => goToStore(brands[1])} />
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="dim five"></div>
 
                     <div className="dif six">
-                        <div className="image--outer big type-c">
-                            <div className="image parallax" data-ratex="1">
+                        {/* <div className="image--outer big type-c">
+                            <div className="image" data-ratex="1">
                                 <img className="clickable" src="https://static.zara.net/photos///2022/V/0/1/p/2183/049/500/2/w/1126/2183049500_2_1_1.jpg?ts=1645708543111" alt="" onClick={() => goToStore(brands[2])} />
                             </div>
-                        </div>
-                        <div className="image--outer medium type-c io-target">
-                            <div className="image parallax" data-ratex="0.5">
+                        </div> */}
+                        {/* <div className="image--outer medium type-c io-target">
+                            <div className="image" data-ratex="0.5">
                                 <img className="clickable" src="https://static.zara.net/photos///2022/V/0/1/p/0034/042/621/2/w/1126/0034042621_2_1_1.jpg?ts=1649062243737" alt="" onClick={() => goToStore(brands[2])} />
                             </div>
-                        </div>
-                        <div className="image--outer small type-c">
-                            <div className="image parallax" data-ratex="0.3">
+                        </div> */}
+                        {/* <div className="image--outer small type-c">
+                            <div className="image" data-ratex="0.3">
                                 <img className="clickable" src="https://static.zara.net/photos///2022/V/0/2/p/5692/340/710/2/w/1126/5692340710_2_1_1.jpg?ts=1644943727722" alt="" onClick={() => goToStore(brands[2])} />     
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     
                     <div className="dim seven">

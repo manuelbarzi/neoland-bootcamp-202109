@@ -72,11 +72,11 @@ body {
 
 /* ----- GLOBAL CLASSES ----- */
 
-/* .centered-axis-xy {
+.centered-axis-xy {
     top: 50vh;
     left: 50vw;
     transform: translate(-50%, -50%);
-} */
+}
 
 /* ----- COMPONENTS ----- */
 
@@ -152,13 +152,14 @@ body {
 }
 
 .button--emphasized {
-    border-color: var(--heading-color);
+    /* border-color: var(--heading-color); */
+    color: var(--primary-color);
 }
 
-.button--emphasized:hover {
+/* .button--emphasized:hover {
     border-color: var(--heading-color);
     color: var(--heading-color);
-}
+} */
 
 .button--warning:hover {
     background-color: var(--burnt-sienna-500);
@@ -187,7 +188,7 @@ img {
 
 /* ----- GLOBAL ANIMATIONS ----- */
 
-@keyframes fade-in {
+/* @keyframes fade-in {
     from {
         opacity: 0;
     }
@@ -209,6 +210,6 @@ img {
 }
 .fade-out {
     animation: fade-out 0.5s ease forwards;
-}
+} */
 
 

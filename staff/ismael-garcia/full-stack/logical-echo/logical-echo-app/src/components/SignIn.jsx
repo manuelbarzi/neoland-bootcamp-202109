@@ -1,5 +1,7 @@
 // import { useNavigate, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import logger from '../utils/logger'
+import './SignIn.css'
 
 function SignIn({ onSignIn, onSignUp }) {
     logger.debug('SignIn -> render')
@@ -9,25 +11,40 @@ function SignIn({ onSignIn, onSignUp }) {
 
     // const goToAccount = () => navigate('/account')
 
-    return <form className="signin form container--vertical" onSubmit={event => {
-            event.preventDefault()
+    useEffect(() => {
+        let navbar = document.querySelector('.navbar')
+        let signin_form = document.querySelector('.signin-form')
+        // let reference = document.querySelector('.nav-button-login')
 
-            const { target: { username: { value: username }, password: { value: password } } } = event
+        // signin_form.setAttribute("style", `top: ${reference.getBoundingClientRect().top + 40}px; left: ${reference.getBoundingClientRect().left}px;`)
 
-            onSignIn(username, password)
-        }}>
-            <input className="field" type="text" name="username" id="signin-username" placeholder="Username" required />
-            <input className="field" type="password" name="password" id="signin-password" placeholder="Password" required />
+        navbar.classList.add('show')
+        signin_form.classList.add('show')
+    }, [])
 
-            <div className="container">
-                <button type="button" className="button button--medium clickable" onClick={event => {
-                    event.preventDefault()
+    return <>
+        <div className="signin container container--vertical">
+            <form className="signin-form centered-axis-xy form container--vertical" onSubmit={event => {
+                event.preventDefault()
 
-                    onSignUp()
-                }}>Sign up</button>
-                <button type="submit" className="button button--medium button--emphasized clickable">Sign In</button>
-            </div>
-        </form> 
+                const { target: { username: { value: username }, password: { value: password } } } = event
+
+                onSignIn(username, password)
+            }}>
+                <input className="field" type="text" name="username" id="signin-username" placeholder="Username" required />
+                <input className="field" type="password" name="password" id="signin-password" placeholder="Password" required />
+
+                <div className="container">
+                    <button type="button" className="button button--medium clickable" onClick={event => {
+                        event.preventDefault()
+
+                        onSignUp()
+                    }}>Sign up</button>
+                    <button type="submit" className="button button--medium button--emphasized clickable">Sign In</button>
+                </div>
+            </form>
+        </div>
+    </>
 }
 
 export default SignIn

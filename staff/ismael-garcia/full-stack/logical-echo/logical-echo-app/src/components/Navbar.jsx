@@ -33,10 +33,10 @@ function Navbar() {
             <h1 className='nav__logo clickable' onClick={goToHome}>L E</h1>
 
             <div className='nav__buttons-wrapper'>
-                {view === 'loggedOut' && <button type='button' className={`button button--medium clickable ${location.pathname === '/account' && 'button--emphasized'}`} onClick={goToAccount}>Login</button>}
-                {view === 'loggedIn' && <button type='button' className={`button button--medium clickable ${location.pathname === '/profile' && 'button--emphasized'}`} onClick={goToProfile}>Profile</button>}
+                {view === 'loggedOut' && <button type='button' className={`button nav-button-login button--medium clickable ${location.pathname === '/account' && 'button--emphasized'}`} onClick={goToAccount}>Login</button>}
+                {view === 'loggedIn' && <button type='button' className={`button nav-button-profile button--medium clickable ${location.pathname === '/profile' && 'button--emphasized'}`} onClick={goToProfile}>Profile</button>}
 
-                <button id='search-button' type='button' className={`button button--medium clickable ${location.pathname === '/search' && 'button--emphasized'}`} onClick={goToSearch}>Search</button>
+                <button id='search-button' type='button' className={`button nav-button-search button--medium clickable ${location.pathname === '/search' && 'button--emphasized'}`} onClick={goToSearch}>Search</button>
             </div>
         </div>
     </>
