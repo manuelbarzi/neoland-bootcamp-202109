@@ -50,15 +50,14 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<Home />} >
+                    <Route path="search" element={<Search />} >
+                        <Route path="items" element={<Results onItem={goToItem} />} />
+                    </Route>
                     <Route path="newsletter" element={<Newsletter />} />
                 </Route>
 
                 <Route path="account" element={<Account />} />
                 <Route path="profile" element={<Profile />} />
-
-                <Route path="search" element={<Search />} >
-                    <Route path="items" element={<Results onItem={goToItem} />} />
-                </Route>
                 
                 <Route path="items/:item_id" element={<Detail />} />
 

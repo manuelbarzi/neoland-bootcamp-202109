@@ -1,18 +1,25 @@
+.description {
+    position: absolute;
+}
+
 .description__motto {
     font-family: var(--primary-font);
-    font-size: 1.2rem;
-    font-style: italic;
+    font-size: 1.5rem;
     color: var(--heading-color);
-    position: absolute;
-    top: 60vh;
-    left: 40px;
+    /* position: absolute; */
+    /* top: 60vh;
+    left: 40px; */
+}
+
+.color--hover {
+    color: var(--color-500);
 }
 
 .description__text {
     font-family: var(--primary-font);
-    font-size: 1rem;
+    font-size: 1.2rem;
     color: var(--font-color);
-    position: absolute;
-    top: 65vh;
-    left: 40px;
+    /* position: absolute; */
+    /* top: 65vh;
+    left: 40px; */
 }
