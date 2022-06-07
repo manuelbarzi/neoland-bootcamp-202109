@@ -5,6 +5,7 @@ import AppContext from './AppContext'
 import logger from '../utils/logger'
 import Unregister from './Unregister'
 import Update from './Update'
+import './Profile.css'
 
 function Profile() {
     logger.debug('Profile -> render')
@@ -68,7 +69,7 @@ function Profile() {
 
     return <>
         {!view && <>
-            <div className="profile container" id="profile">
+            <div className="profile container container--vertical" id="profile">
                 <button type='button' className={`button button-medium clickable ${location.pathname === '/favs' && 'button--emphasized'}`} onClick={goToFavs}>Favs</button>
                 <button type="button" className="button button--medium clickable" onClick={goToUpdate}>Update</button>
                 <button type="button" className="button button--medium button--warning clickable" onClick={goToUnregister}>Unregister</button>

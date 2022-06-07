@@ -13,6 +13,7 @@ import Profile from './Profile'
 import Favs from './Favs'
 import Newsletter from './Newsletter'
 import LE from './LE'
+import Contact from './Contact'
 import Cursor from './Cursor'
 import NoMatch from './NoMatch'
 
@@ -50,14 +51,15 @@ function App() {
 
             <Routes>
                 <Route path="/" element={<Home />} >
-                    <Route path="search" element={<Search />} >
-                        <Route path="items" element={<Results onItem={goToItem} />} />
-                    </Route>
+                    <Route path="search" element={<Search />} />
+                    <Route path="account" element={<Account />} />
+                    <Route path="profile" element={<Profile />} />
                     <Route path="newsletter" element={<Newsletter />} />
                 </Route>
 
-                <Route path="account" element={<Account />} />
-                <Route path="profile" element={<Profile />} />
+                <Route path="contact" element={<Contact />} />
+
+                <Route path="items" element={<Results onItem={goToItem} />} />
                 
                 <Route path="items/:item_id" element={<Detail />} />
 

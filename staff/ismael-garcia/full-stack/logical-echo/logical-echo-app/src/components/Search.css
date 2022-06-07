@@ -1,51 +1,7 @@
-.search {
-    position: absolute;
-    top: 20vh;
-    left: 20vw;
-    background-color: transparent;
-    will-change: opacity;
-    opacity: 0;
-    transition: opacity .91s cubic-bezier(.77,0,.175,1);
-}
-
-.search.show {
-    opacity: 1;
-}
-
-/* .upper {
-    height: 30vh;
-    width: 100vw;
-} */
-
 .search-form {
     position: absolute;
-    /* transform: translate(-50%, -50%); */
+    top: 20vh;
+    left: 50vw;
+    background-color: transparent;
     z-index: 100;
 }
-
-/* .lower {
-    height: 70vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-} */
-
-/* .thumbnail {
-    height: 60vh;
-    will-change: opacity;
-    opacity: 0;
-    transition: opacity .91s cubic-bezier(.77,0,.175,1);
-    filter: grayscale(100%);
-}
-
-.thumbnail.show {
-    opacity: 1;
-}
-
-.thumbnail:hover {
-    filter: none;
-}
-
-.thumbnail span {
-    
-} */

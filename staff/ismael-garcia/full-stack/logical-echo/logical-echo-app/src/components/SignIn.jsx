@@ -11,20 +11,19 @@ function SignIn({ onSignIn, onSignUp }) {
 
     // const goToAccount = () => navigate('/account')
 
-    useEffect(() => {
-        let navbar = document.querySelector('.navbar')
-        let signin_form = document.querySelector('.signin-form')
-        // let reference = document.querySelector('.nav-button-login')
+    // useEffect(() => {
+    //     let navbar = document.querySelector('.navbar')
+    //     let signin_form = document.querySelector('.signin-form')
+    //     // let reference = document.querySelector('.nav-button-login')
 
-        // signin_form.setAttribute("style", `top: ${reference.getBoundingClientRect().top + 40}px; left: ${reference.getBoundingClientRect().left}px;`)
+    //     // signin_form.setAttribute("style", `top: ${reference.getBoundingClientRect().top + 40}px; left: ${reference.getBoundingClientRect().left}px;`)
 
-        navbar.classList.add('show')
-        signin_form.classList.add('show')
-    }, [])
+    //     navbar.classList.add('show')
+    //     signin_form.classList.add('show')
+    // }, [])
 
     return <>
-        <div className="signin container container--vertical">
-            <form className="signin-form centered-axis-xy form container--vertical" onSubmit={event => {
+            <form className="signin-form form container--vertical" onSubmit={event => {
                 event.preventDefault()
 
                 const { target: { username: { value: username }, password: { value: password } } } = event
@@ -43,7 +42,6 @@ function SignIn({ onSignIn, onSignUp }) {
                     <button type="submit" className="button button--medium button--emphasized clickable">Sign In</button>
                 </div>
             </form>
-        </div>
     </>
 }
 

@@ -1,9 +1,10 @@
 import logger from '../utils/logger'
+import './Update.css'
 
 function Update({ onUpdate, onBack }) {
     logger.debug('SignIn -> render')
 
-    return <form className="update container container--vertical container--gapped" onSubmit={event => {
+    return <form className="update-form form container--vertical" onSubmit={event => {
         event.preventDefault()
 
         const { target: { newName: { value: newName }, newUsername: { value: newUsername }, newEmail: { value: newEmail }, password: { value: password }, newPassword: { value: newPassword } } } = event
@@ -25,12 +26,12 @@ function Update({ onUpdate, onBack }) {
         <input className="field" type="password" name="password" id="register-password" placeholder="Password" required />
 
         <div className="container">
-            <button type="button" className="button button--medium clickable" onClick={(event) => {
+            {/* <button type="button" className="button button--medium clickable" onClick={(event) => {
                 event.preventDefault()
                 
                 onBack()
-            }}>Go Back</button>
-            <button type="submit" className="button button--medium button--emphasized clickable">Update</button>
+            }}>Go Back</button> */}
+            <button type="submit" className="button button--medium clickable">Update</button>
         </div>
     </form>
 }

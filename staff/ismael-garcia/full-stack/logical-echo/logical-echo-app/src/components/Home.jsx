@@ -314,7 +314,7 @@ function Home() {
                         {location.pathname === '/account' && <Account />}
                         {location.pathname === '/profile' && <Profile />}
                         {location.pathname === '/newsletter' && <Newsletter />}
-                        <Description />
+                        {location.pathname === '/' && <Description />}
                         <Footer />
                     </div>
                 </div>

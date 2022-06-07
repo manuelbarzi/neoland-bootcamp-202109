@@ -1,0 +1,7 @@
+.newsletter-form {
+    position: absolute;
+    bottom: 20vh;
+    left: 50vw;
+    background-color: transparent;
+    z-index: 100;
+}

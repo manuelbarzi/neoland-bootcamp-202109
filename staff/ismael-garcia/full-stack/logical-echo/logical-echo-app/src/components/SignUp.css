@@ -1,17 +1,8 @@
-.signup {
-    height: 100vh;
-    width: 100vw;
-    background-color: var(--color-50);
-}
-
 .signup-form {
     position: absolute;
-    opacity: 0;
-    will-change: opacity;
-    transition: opacity .91s cubic-bezier(.77,0,.175,1);
+    top: 20vh;
+    left: 50vw;
+    transform: translateX(-100%);
+    background-color: transparent;
     z-index: 100;
-}
-
-.signup-form.show {
-    opacity: 1;
 }

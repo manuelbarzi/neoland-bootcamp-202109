@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { registerSubscription } from '../logic'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
+import './Newsletter.css'
 
 function Newsletter() {
     logger.debug('Newsletter -> render')
@@ -24,7 +25,7 @@ function Newsletter() {
         }
     }
 
-    return <form className="newsletter container container--vertical container--gapped fade-in" onSubmit={event => {
+    return <form className="newsletter-form form" onSubmit={event => {
         event.preventDefault()
 
         const { target: { email: { value: email } } } = event 
@@ -34,7 +35,7 @@ function Newsletter() {
         <input className="field" type="email" name="email" id="register-email" placeholder="Email" required />
 
         <div className="container">
-            <button type="submit" className="button button--medium button--emphasized clickable">Register for Newsletter</button>
+            <button type="submit" className="button button--medium button--emphasized clickable">Join our Newsletter</button>
         </div>
     </form>
 }

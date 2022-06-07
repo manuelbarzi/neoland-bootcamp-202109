@@ -63,14 +63,6 @@
     opacity: 0;
 }
 
-.image {
-    position: absolute;
-    /* top: 0;
-    left: 0; */
-    height: 100%;
-    width: 100%;
-}
-
 .big {
     position: absolute;
     height: 100vh;
@@ -120,7 +112,6 @@
 .medium.type-c {
     left: 302vw;
 }
-
 
 .small.type-c {
     left: 295vw;

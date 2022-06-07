@@ -70,7 +70,7 @@ function Results({ onItem }) {
             
             <ul className='results container container--vertical'>
                 {
-                    items.map(({ item_id, name, images, price, isFav }) => <li key={item_id}className='home__results-item clickable' onClick={() => onItem(item_id)}>
+                    items.map(({ item_id, name, images, price, isFav }) => <li key={item_id}className='results__item clickable' onClick={() => onItem(item_id)}>
                         <img src={images[0]} alt='' />
                         <h2>{name}</h2>
                         <span>{price}</span>

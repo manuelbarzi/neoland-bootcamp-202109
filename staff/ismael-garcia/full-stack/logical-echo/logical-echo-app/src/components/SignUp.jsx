@@ -17,8 +17,7 @@ function SignUp({ onSignUp, onSignIn }) {
     }, [])
 
     return <>
-        <div className="signup container container--vertical">
-            <form className="signup-form centered-axis-xy form container--vertical" onSubmit={event => {
+            <form className="signup-form form container--vertical" onSubmit={event => {
                 event.preventDefault()
 
                 const { target: { name: { value: name }, username: { value: username }, email: { value: email }, password: { value: password } } } = event 
@@ -39,12 +38,6 @@ function SignUp({ onSignUp, onSignIn }) {
                     <button type="submit" className="button button--medium button--emphasized clickable">Sign Up</button>
                 </div>
             </form>
-            {/* <div className="cover-image--outer">
-                <div className="image parallax" data-ratex="0.5">
-                    <img className="clickable" src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27054010_88.jpg?ts=1642070994249&imwidth=476&imdensity=2" alt="" />
-                </div>
-            </div> */}
-        </div>
     </>
 }
 

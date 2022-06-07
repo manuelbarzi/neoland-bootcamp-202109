@@ -37,66 +37,50 @@ function Cursor() {
 
         const onMouseMove = (e) => {
             gsap.to(bigBall, {
-                duration: .35,
+                duration: .25,
                 x: e.pageX - 15,
                 y: e.pageY - window.scrollY - 15,
                 ease: "power2.out"
             })
 
             gsap.to(smallBall, {
-                duration: .1,
+                duration: .05,
                 x: e.pageX -5,
                 y: e.pageY - window.scrollY - 7,
                 ease: "power2.out"
             })
-
-            // Vanilla JS
-            // bigBall.setAttribute("style", "top: "+(e.pageY - window.scrollY - 15)+"px; left: "+(e.pageX - 15)+"px;")
-            // smallBall.setAttribute("style", "top: "+(e.pageY - window.scrollY - 7)+"px; left: "+(e.pageX - 5)+"px;")
-            // bigBall.style.top = `${e.pageY - window.pageYOffset - 15}px;`
-            // bigBall.style.left = `${e.pageX - 15}px;`
-            // smallBall.style.top = `${e.pageY - window.pageYOffset - 7}px;`
-            // smallBall.style.left = `${e.pageX - 5}px;`
         }
 
         const onMouseHover = () => {
             gsap.to(bigBall, {
-                duration: .3,
-                scale: 3.5
+                duration: .05,
+                scale: 3,
+                ease: "power2.out"
             })
-
-            // Vanilla JS
-            // bigBall.classList.add('on-hover')
         }
           
         const onMouseHoverOut = () => {
             gsap.to(bigBall, {
-                duration: .3,
-                scale: 1
+                duration: .05,
+                scale: 1,
+                ease: "power2.out"
             })
-
-            // Vanilla JS
-            // bigBall.classList.remove('on-hover')
         }
 
         const onMouseDown = () => {
             gsap.to(bigBall, {
-                duration: .3,
-                scale: 1.5
+                duration: .2,
+                scale: 1.5,
+                ease: "power2.out"
             })
-
-            // Vanilla JS
-            // bigBall.classList.add('on-click')
         }
 
         const onMouseUp = () => {
             gsap.to(bigBall, {
-                duration: .3,
-                scale: 3.5
+                duration: .2,
+                scale: 3,
+                ease: "power2.out"
             })
-
-            // Vanilla JS
-            // bigBall.classList.remove('on-click')
         }
 
         addEventListeners()
@@ -113,7 +97,7 @@ function Cursor() {
             
             <div className="cursor__ball ball--small">
                 <svg height="10" width="10">
-                    <circle cx="5" cy="5" r="3" strokeWidth='0'></circle>
+                    <circle cx="5" cy="5" r="5" strokeWidth='0'></circle>
                 </svg>
             </div>
         </div>
