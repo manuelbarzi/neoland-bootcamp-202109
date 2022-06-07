@@ -12,7 +12,7 @@ import Account from './Account'
 import Profile from './Profile'
 import Favs from './Favs'
 import Newsletter from './Newsletter'
-import Navbar from './Navbar'
+import LE from './LE'
 import Cursor from './Cursor'
 import NoMatch from './NoMatch'
 
@@ -46,7 +46,7 @@ function App() {
         }}>
             <Cursor />
             
-            <Navbar />
+            <LE />
 
             <Routes>
                 <Route path="/" element={<Home />} >

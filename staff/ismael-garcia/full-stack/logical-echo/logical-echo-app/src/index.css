@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 /* ----- RESETS ----- */
 * {
@@ -62,12 +64,8 @@ body {
     --burnt-sienna-50: #F8C3B6; */
 }
 
-[data-theme="dark"] {
-    --primary-color: #ffbf00;
-    --secondary-color: #ffe599;
-    --font-color: #fffcf2;
-    --bg-color: #161625;
-    --heading-color: #818cab;
+.color--hover {
+    color: var(--color-500);
 }
 
 /* ----- GLOBAL CLASSES ----- */
@@ -87,7 +85,7 @@ body {
 body {
     color: var(--font-color);
     font-family: var(--primary-font);
-    background-color: var(--bg-color);
+    background-color: var(--color-50);
 }
 
 

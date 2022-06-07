@@ -14,7 +14,6 @@ function Navbar() {
     const goToSearch = () => navigate('/search')
     const goToAccount = () => navigate('/account')
     const goToProfile = () => navigate('/profile')
-    const goToHome = () => navigate('/')
 
     const { token } = sessionStorage
 
@@ -30,7 +29,7 @@ function Navbar() {
 
     return <>
         <div className="navbar container--vertical">
-            <h1 className='nav__logo clickable' onClick={goToHome}>L E</h1>
+            {/* <h1 className='nav__logo clickable' onClick={goToHome}>L E</h1> */}
 
             <div className='nav__buttons-wrapper'>
                 {view === 'loggedOut' && <button type='button' className={`button nav-button-login button--medium clickable ${location.pathname === '/account' && 'button--emphasized'}`} onClick={goToAccount}>Login</button>}

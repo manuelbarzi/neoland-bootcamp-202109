@@ -4,7 +4,7 @@ import './Description.css'
 function Description() {
     logger.debug('Description -> render')
     
-    return <div className="description centered-axis-xy">
+    return <div className="description">
         <div className='description__motto'> 
             <span>Be</span> <span className='color--hover'><em>conscious</em>!</span> <span>Be</span> <span className='color--hover'><em>committed</em>!</span> <span>Join</span> <span>sustainable</span> <span>life!</span>
         </div>

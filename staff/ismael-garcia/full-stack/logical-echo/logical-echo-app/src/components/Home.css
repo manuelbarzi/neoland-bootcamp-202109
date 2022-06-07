@@ -17,49 +17,18 @@
     position: relative;
 }
 
-.dim {
-    min-width: 25vw;
-    height: 100vh;
+.home-intro {
     position: relative;
+    height: 100vh;
+    min-width: 325vw;
     z-index: 0;
 }
 
-.dif {
-    min-width: 75vw;
-    height: 100vh;
-    position: relative;
-    z-index: 0;
-}
-
-.dim.one {
-    min-width: 50vw;
-    background-color: var(--color-50);
-}
-
-.dif.two {
-    background-color: var(--color-50);
-}
-
-.dim.three {
-    background-color: var(--color-50);
-}
-
-.dif.four {
-    background-color: var(--color-50);
-}
-
-.dim.five {
-    background-color: var(--color-50);
-}
-
-.dif.six {
-    min-width: 75vw;
-    background-color: var(--color-50);
-}
-
-.dif.seven {
+.home-last {
     min-width: 100vw;
-    background-color: var(--color-50);
+    height: 100vh;
+    position: relative;
+    z-index: 0;
 }
 
 
@@ -68,28 +37,19 @@
 .cover-image--outer {
     height: 100vh;
     width: 40vw;
-    /* position: absolute; */
     position: fixed;
     bottom: 0;
-    /* left: 60vw; */
-    left: 110vw;
+    left: 65vw;
     will-change: left, transform;
     z-index: 20;
     filter: grayscale(100%);
-    transition: left .91s cubic-bezier(.77,0,.175,1), transform cubic-bezier(.77,0,.175,1);
 }
 
 .cover-image--outer:hover {
     filter: none;
 }
 
-.cover-image--outer.left {
-    /* left: 15vw; */
-    left: 65vw;
-}
-
 .image--outer:not(.big) {
-    /* position: absolute; */
     position: fixed;
     bottom: 0;
 }
@@ -101,11 +61,6 @@
 .image--outer.type-a {
     will-change: opacity;
     opacity: 0;
-    transition: opacity .91s cubic-bezier(.77,0,.175,1);
-}
-
-.image--outer.type-a.show {
-    opacity: 1;
 }
 
 .image {
@@ -114,18 +69,12 @@
     left: 0; */
     height: 100%;
     width: 100%;
-    /* filter: grayscale(100%); */
 }
-
-/* .image:hover {
-    filter: none;
-} */
 
 .big {
     position: absolute;
     height: 100vh;
     width: 40vw;
-    /* left: 20vw; */
     z-index: 10;
 }
 
@@ -134,7 +83,6 @@
     width: 20vw;
     z-index: 20;
     will-change: transform;
-    /* transition: transform .3s cubic-bezier(.77,0,.175,1); */
 }
 
 .small {
@@ -142,7 +90,6 @@
     width: 12vw;
     z-index: 30;
     will-change: transform;
-    /* transition: transform .3s cubic-bezier(.77,0,.175,1); */
 }
 
 /* ----- placing ----- */
@@ -151,7 +98,6 @@
 }
 
 .small.type-a {
-    /* left: 54vw; */
     left: 104vw;
 }
 
@@ -160,12 +106,10 @@
 }
 
 .medium.type-b {
-    /* left: 54vw; */
     left: 204vw;
 }
 
 .small.type-b {
-    /* left: 15vw; */
     left: 165vw;
 }
 
@@ -174,13 +118,11 @@
 }
 
 .medium.type-c {
-    /* left: 52vw; */
     left: 302vw;
 }
 
 
 .small.type-c {
-    /* left: 45vw; */
     left: 295vw;
 }
 
