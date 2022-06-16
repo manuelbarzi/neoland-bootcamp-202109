@@ -46,7 +46,6 @@ function App() {
             onModal: showModal
         }}>
             <Cursor />
-            
             <LE />
 
             <Routes>

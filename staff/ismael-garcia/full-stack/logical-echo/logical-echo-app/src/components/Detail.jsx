@@ -16,6 +16,8 @@ function Detail() {
 
     const navigate = useNavigate()
 
+    const goBack = () => navigate(-1)
+
     const { token } = sessionStorage
 
     useEffect(() => {
@@ -57,8 +59,6 @@ function Detail() {
             onModal(message, 'error')
         }
     }
-
-    const goBack = () => navigate(-1)
 
     return <div className="container container--vertical">
         <button type="button" className="button button--medium clickable" onClick={() => goBack()}>Back to Results</button>

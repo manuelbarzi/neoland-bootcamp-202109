@@ -13,9 +13,21 @@
 }
 
 .horizontal {
+    /* width: 425vw;
+    height: 100vh; */
     display: flex;
+    /* flex-wrap: nowrap; */
     position: relative;
 }
+
+/* .home {
+    position: relative;
+    height: 100vh;
+    min-width: 425vw;
+    z-index: 0;
+    display: flex;
+    flex-wrap: nowrap;
+} */
 
 .home-intro {
     position: relative;
@@ -49,25 +61,20 @@
     filter: none;
 }
 
-.image--outer:not(.big) {
+.image--outer {
     position: fixed;
     bottom: 0;
 }
 
-.parallax-home:not(.cover-image--outer) {
-    will-change: transform;
-}
-
 .image--outer.type-a {
-    will-change: opacity;
     opacity: 0;
 }
 
 .big {
-    position: absolute;
     height: 100vh;
     width: 40vw;
     z-index: 10;
+    will-change: transform;
 }
 
 .medium {

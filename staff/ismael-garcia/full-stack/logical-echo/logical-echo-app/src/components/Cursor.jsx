@@ -97,7 +97,7 @@ function Cursor() {
             
             <div className="cursor__ball ball--small">
                 <svg height="10" width="10">
-                    <circle cx="5" cy="5" r="5" strokeWidth='0'></circle>
+                    <circle cx="5" cy="5" r="4" strokeWidth='0'></circle>
                 </svg>
             </div>
         </div>

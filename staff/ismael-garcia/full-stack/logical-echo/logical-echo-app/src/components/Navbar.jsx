@@ -14,6 +14,8 @@ function Navbar() {
     const goToSearch = () => navigate('/search')
     const goToAccount = () => navigate('/account')
     const goToProfile = () => navigate('/profile')
+    const goToContact = () => navigate('/contact')
+    const goToNewsletter = () => navigate('/newsletter')
 
     const { token } = sessionStorage
 
@@ -36,6 +38,8 @@ function Navbar() {
                 {view === 'loggedIn' && <button type='button' className={`button nav-button-profile button--medium clickable ${location.pathname === '/profile' && 'button--emphasized'}`} onClick={goToProfile}>Profile</button>}
 
                 <button id='search-button' type='button' className={`button nav-button-search button--medium clickable ${location.pathname === '/search' && 'button--emphasized'}`} onClick={goToSearch}>Search</button>
+                <button type='button' className={`button-contact button button--medium clickable ${location.pathname === '/contact' && 'button--emphasized'}`} onClick={goToContact}>Contact</button> 
+                <button type='button' className={`button-newsletter button button--medium clickable ${location.pathname === '/newsletter' && 'button--emphasized'}`} onClick={goToNewsletter}>Newsletter</button>
             </div>
         </div>
     </>

@@ -9,31 +9,28 @@ import retrieveUser from './retrieve-user'
  * @throws {TypeError} When any of the arguments does not match the correct type.
  */
  function searchItems(token, query) {
-    // if (token)
-    //     validateToken(token)
+    if (token)
+        validateToken(token)
         
     validateQuery(query)
 
     return (async () => {
-        if (token) {
-            const res = await retrieveUser(token)
+        if (token) {   
+            const res = await fetch(`${context.API_URL}/users`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
             
-            // await fetch(`${context.API_URL}/users`, {
-            //     method: 'GET',
-            //     headers: {
-            //         'Authorization': `Bearer ${token}`
-            //     }
-            // })
-    
             const { status } = res 
     
             if (status === 401 || status === 404) {
-                // const { error } = res.json()
+                const { error } = res.json()
     
-                throw new Error(res)
+                throw new Error(error)
             } else if (status === 200) {
-                // const user = await res.json()
-                const user = res
+                const user = await res.json()
     
                 const { favs = [] } = user 
     

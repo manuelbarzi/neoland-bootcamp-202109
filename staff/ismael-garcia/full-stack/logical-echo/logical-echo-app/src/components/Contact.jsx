@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import gsap from 'gsap'
 import toPX from './helpers/to-px'
 import { CustomEase } from 'gsap/CustomEase'
@@ -9,6 +10,10 @@ gsap.registerPlugin(CustomEase)
 
 function Contact() {
     logger.debug('Contact -> render')
+
+    const navigate = useNavigate()
+
+    const goBack = () => navigate(-1)
 
     CustomEase.create('custom_one', '.77,0,.175,1')
 
@@ -47,6 +52,9 @@ function Contact() {
                 </p>
             </div>
         </article>
+
+        <button type="button" className="button button--medium clickable" onClick={() => goBack()}>Back to Results</button>
+        
         <div className="contact-image--outer big type-a">
             <div className="image" data-ratex="1">
                 <img className="contact-img" src="https://st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" /> 
