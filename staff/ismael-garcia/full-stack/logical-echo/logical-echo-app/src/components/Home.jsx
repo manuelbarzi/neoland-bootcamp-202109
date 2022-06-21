@@ -145,9 +145,9 @@ function Home() {
             let translate_x = -sticky.scrollLeft
 
             gsap.to(cover_ref.current, {
-                duration: .2,
+                duration: .3,
                 x: translate_x,
-                ease: "none"
+                ease: "power3.out"
             })
 
             gsap.to(q('.big'), {
@@ -157,15 +157,15 @@ function Home() {
             })
 
             gsap.to(q('.delayed-image.medium'), {
-                duration: .2,
+                duration: .3,
                 x: translate_x,
-                ease: "power2.out"
+                ease: "power3.out"
             })
 
             gsap.to(q('.delayed-image.small'), {
-                duration: .3,
+                duration: .5,
                 x: translate_x,
-                ease: "power2.out"
+                ease: "power3.out"
             })
         }
         
@@ -266,63 +266,63 @@ function Home() {
     return <>
         <div className="sticky-parent">
             <div className="sticky">
-                <div className="horizontal" ref={el}>
-                    <div className="home-intro">
+                <div className="home-horizontal" ref={el}>
+                    <div className="home__intro">
                         <Logo />
                         <HamburgerLine />
                         <BrandFooter type={type} />
 
                         <div className="cover-image--outer delayed-image" ref={cover_ref}>
-                            <div className="image" data-ratex="0.5">
+                            <div className="home-image" data-ratex="0.5">
                                 <img className="clickable" src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27054010_88.jpg?ts=1642070994249&imwidth=476&imdensity=2" alt="" onClick={() => goToStore(brands[0])} />
                             </div>
                         </div>
                         <div className="image--outer big type-a">
-                            <div className="image" data-ratex="1">
+                            <div className="home-image" data-ratex="1">
                                 <img className="clickable" src="https://st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" onClick={() => goToStore(brands[0])} /> 
                             </div>
                         </div>
                         <div className="image--outer small type-a io-target delayed-image">
-                            <div className="image" data-ratex="0.3">
+                            <div className="home-image" data-ratex="0.3">
                                 <img className="clickable" src="https://st.mngbcn.com/rcs/pics/static/T2/fotos/S20/27040091_56.jpg?ts=1636379500926&imwidth=360&imdensity=2" alt="" onClick={() => goToStore(brands[0])} />       
                             </div>
                         </div>
 
                         <div className="image--outer big type-b">
-                            <div className="image" data-ratex="1">
+                            <div className="home-image" data-ratex="1">
                                 <img className="clickable" src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2Fde%2Ff3%2Fdef33b7fc423c73869aab4bfaa03545eb06cbe97.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]" alt="" onClick={() => goToStore(brands[1])} />
                             </div>
                         </div>
                         <div className="image--outer medium type-b io-target delayed-image">
-                            <div className="image" data-ratex="0.5">
+                            <div className="home-image" data-ratex="0.5">
                                 <img className="clickable" src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F0e%2F66%2F0e6697cc83741f06914b330f87070ebd98bf0e7f.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B2%5D&call=url[file:/product/main]" alt="" onClick={() => goToStore(brands[1])} />   
                             </div>
                         </div>
                         <div className="image--outer small type-b delayed-image">
-                            <div className="image" data-ratex="0.3">
+                            <div className="home-image" data-ratex="0.3">
                                 <img className="clickable" src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F5d%2F15%2F5d15e6f0e77ff342a1e765a0ab3886db5d8f2284.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/main]" alt="" onClick={() => goToStore(brands[1])} />
                             </div>
                         </div>
 
                         <div className="image--outer big type-c">
-                            <div className="image" data-ratex="1">
+                            <div className="home-image" data-ratex="1">
                                 <img className="clickable" src="https://static.zara.net/photos///2022/V/0/1/p/2183/049/500/2/w/1126/2183049500_2_1_1.jpg?ts=1645708543111" alt="" onClick={() => goToStore(brands[2])} />
                             </div>
                         </div>
                         <div className="image--outer medium type-c io-target delayed-image">
-                            <div className="image" data-ratex="0.5">
+                            <div className="home-image" data-ratex="0.5">
                                 <img className="clickable" src="https://static.zara.net/photos///2022/V/0/1/p/0034/042/621/2/w/1126/0034042621_2_1_1.jpg?ts=1649062243737" alt="" onClick={() => goToStore(brands[2])} />
                             </div>
                         </div>
                         <div className="image--outer small type-c delayed-image">
-                            <div className="image" data-ratex="0.3">
+                            <div className="home-image" data-ratex="0.3">
                                 <img className="clickable" src="https://static.zara.net/photos///2022/V/0/2/p/5692/340/710/2/w/1126/5692340710_2_1_1.jpg?ts=1644943727722" alt="" onClick={() => goToStore(brands[2])} />     
                             </div>
                         </div>
                     
                     </div>
                         
-                    <div className="home-last">
+                    <div className="home__last">
                         <Navbar />
                         {location.pathname === '/search' && <Search />}
                         {location.pathname === '/account' && <Account />}

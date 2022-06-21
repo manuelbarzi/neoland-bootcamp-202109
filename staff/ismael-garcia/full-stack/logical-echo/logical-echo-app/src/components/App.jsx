@@ -57,13 +57,9 @@ function App() {
                 </Route>
 
                 <Route path="contact" element={<Contact />} />
-
                 <Route path="items" element={<Results onItem={goToItem} />} />
-                
                 <Route path="items/:item_id" element={<Detail />} />
-
                 <Route path="items/favs" element={<Favs onItem={goToItem} />} />
-
                 <Route path="*" element={<NoMatch />} />
             </Routes>
 
