@@ -1,7 +1,7 @@
-import { useState, useEffect, useContext, useRef } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { retrieveItem, toggleFavItem } from '../logic'
-import { gsap, ScrollTrigger, CustomEase } from '../gsap'
+import { gsap, CustomEase } from '../gsap'
 import AppContext from './AppContext'
 import logger from '../utils/logger'
 import './Detail.css'
@@ -12,9 +12,6 @@ function Detail() {
     const { onFlowStart, onFlowEnd, onModal } = useContext(AppContext)
 
     const [item, setItem] = useState()
-
-    // const images_refs = useRef([])
-    // console.log(images_refs)
 
     const { item_id } = useParams()
 
@@ -54,82 +51,63 @@ function Detail() {
         gsap.to('.le', {opacity: 1, x: 0, duration: .91, ease: 'custom_one'})
     }, [])
 
-    // useEffect 3: setting the layout based on refs
-    // useEffect(() => {
-    //     logger.debug('Detail -> useEffect3')
-
-    //     const first_image_left_vw = 65
-
-    //     images_refs.current.length ?? images_refs.current.forEach((image, i) => {
-    //         if (i === 0) {
-    //             image.setAttribute('left', `${first_image_left_vw}vw`)
-    //         } else {
-    //             image.setAttribute('left', `${first_image_left_vw + (i * 60)}vw`)
-    //         }
-    //     })
-    // }, [images_refs.current])
-
-    // const addToRefs = (el) => {
-    //     if (el && !images_refs.current.includes(el)) {
-    //         images_refs.current.push(el)
-    //     }
-    // }
-
     // useEffect 3: gsap scrollTrigger animation
     useEffect(() => {
         logger.debug('Detail -> useEffect3')
+
         let images = gsap.utils.toArray(".detail-image")
 
         let scrollTween = gsap.to('.detail__gallery', {
             xPercent: -100,
-            ease: "none", // <-- IMPORTANT!
+            ease: "none",
             scrollTrigger: {
                 trigger: ".detail__horizontal",
                 pin: true,
                 scrub: 0.1,
-                end: "+=3000"
+                end: "+=2500"
             }
         })
 
-        // ScrollTrigger.defaults({ markers: {startColor: "white", endColor: "white" }})
+        images.forEach((image, i) => {
+            if (i !== 0) 
+                gsap.set(image, { scale: .5, transformOrigin: '0 100%' })
+        })
+
+        console.log(images)
 
         images.forEach((image, i) => {
             if (i !== 0) {
-                gsap.set(image, { scale: .5 })
-
-                gsap.to(image, {
+                gsap.fromTo(image, { scale: .5 } ,{
                     scale: 1,
-                    duration: .1,
+                    duration: .2,
                     ease: "none",
                     transformOrigin: '0 100%',
                     scrollTrigger: {
                         trigger: image,
                         containerAnimation: scrollTween,
                         start: "left 90%",
-                        end: "left 10%",
+                        end: "left 65%",
                         scrub: true,
                         id: i
                     }
                 })
             }
 
-            gsap.to(image, {
+            gsap.fromTo(image, { scale: 1 }, {
                 scale: .5,
-                duration: .1,
+                duration: .2,
                 ease: "none",
                 transformOrigin: '0 100%',
                 immediateRender: false,
                 scrollTrigger: {
                     trigger: image,
                     containerAnimation: scrollTween,
-                    start: "left 10%",
-                    // end: "center 10%",
+                    start: "10% left",
                     scrub: true,
                     id: i
                 }
             })
         })
-
     }, [item])
 
     const toggleFav = async (item_id) => {
