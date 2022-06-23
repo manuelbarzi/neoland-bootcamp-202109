@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { retrieveItem, toggleFavItem } from '../logic'
 import { gsap, CustomEase } from '../gsap'
 import AppContext from './AppContext'
@@ -14,10 +14,6 @@ function Detail() {
     const [item, setItem] = useState()
 
     const { item_id } = useParams()
-
-    const navigate = useNavigate()
-
-    const goBack = () => navigate(-1)
 
     const { token } = sessionStorage
 
@@ -132,8 +128,6 @@ function Detail() {
 
     return item ? <>
         <div className="detail__horizontal">
-            {/* <button type="button" className="button button--medium clickable" onClick={() => goBack()}>Back to Results</button> */}
-    
             <div className="detail__gallery">
                 {
                     item.images.map((src, i) => <div className="detail-image" key={i}>

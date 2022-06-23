@@ -22,33 +22,6 @@
 	font-size: .9rem;
 }
 
-.back {
-	background: none;
-	border: 0;
-	padding: 0;
-	margin: auto 0 1.5rem 0;
-    opacity: 0;
-    pointer-events: none;
-    stroke: #000;
-    z-index: 1000;
-    cursor: pointer;
-    width: 50px;
-}
-
-.back svg {
-	stroke-linecap: round;
-}
-
-.back:hover,
-.back:focus {
-	outline: none;
-	stroke: #823725;
-}
-
-.content--open .back {
-	pointer-events: auto;
-}
-
 .results-fav-button {
     border-style: none;
 	position: absolute;
