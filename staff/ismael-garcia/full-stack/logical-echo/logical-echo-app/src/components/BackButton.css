@@ -1,7 +1,5 @@
 .back {
     position: absolute;
-    bottom: 7vh;
-    left: 4.8vw;
 	background: none;
 	margin: auto 0 1.5rem 0;
     stroke: var(--font-color);
@@ -17,4 +15,14 @@
 .back:focus {
 	outline: none;
 	stroke: var(--color-500);
+}
+
+.detail-back {
+    bottom: 7vh;
+    left: 4.8vw;
+}
+
+.contact-back {
+    bottom: 7vh;
+    left: 4.8vw;
 }

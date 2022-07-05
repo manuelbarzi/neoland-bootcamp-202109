@@ -65,8 +65,13 @@ function Detail() {
         })
 
         images.forEach((image, i) => {
-            if (i !== 0) 
+            if (i !== 0) {
+                // image.setAttribute('transform', 'scale(0.5)')
+
+                // image.setAttribute('transformOrigin', '0 100%')
+
                 gsap.set(image, { scale: .5, transformOrigin: '0 100%' })
+            }
         })
 
         console.log(images)

@@ -54,7 +54,7 @@ function Contact() {
             <img src="https://st.mngbcn.com/rcs/pics/static/T1/fotos/S20/17004072_05.jpg?ts=1629104683133&imwidth=476&imdensity=2" alt="" /> 
         </div>
 
-        <BackButton />
+        <BackButton page={'contact'} />
     </div>
 }
 
