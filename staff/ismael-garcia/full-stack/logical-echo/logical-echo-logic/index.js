@@ -11,7 +11,6 @@ const registerSubscription = require('./items/register-subscription')
 const retrieveItem = require('./items/retrieve-item')
 const registerClickedItem = require('./items/register-clicked-item')
 const registerSearch = require('./items/register-search')
-const sendEmail = require('./mails/mailer')
 
 module.exports = {
     registerUser,
@@ -26,6 +25,5 @@ module.exports = {
     registerSubscription,
     retrieveItem,
     registerClickedItem,
-    registerSearch,
-    sendEmail
+    registerSearch
 }

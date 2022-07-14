@@ -19,6 +19,7 @@ describe('unregisterUser', () => {
         user = {
             name: 'Wendy Pan',
             username: 'wendypan',
+            email: 'wendypan',
             password: '123123123'
         }
 

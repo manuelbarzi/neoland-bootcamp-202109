@@ -19,6 +19,7 @@ describe('modifyUser', () => {
         user = {
             name: 'Wendy Pan',
             username: 'wendypan',
+            email: 'wendypan@gmail.com',
             password: '123123123'
         }
 
